@@ -1216,60 +1216,77 @@ body::after {
     </div>
   </div>
 
+  <div style="background:rgba(245,166,35,0.04);border:1px solid rgba(245,166,35,0.12);border-radius:4px;padding:20px 28px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <div>
+      <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px;">📷 Full photo archive access</div>
+      <p style="font-size:13px;color:rgba(240,237,232,0.45);line-height:1.6;margin:0;">Every aircraft captured since April 18 — high-res, timestamped, with full ADS-B data. Available for researchers, enthusiasts and institutions.</p>
+    </div>
+    <a href="mailto:lisbon.final.spots@gmail.com" style="flex-shrink:0;padding:10px 24px;border:1px solid var(--amber);color:var(--amber);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap;border-radius:2px;transition:all .2s;">Contact us →</a>
+  </div>
   <div class="feed-grid">
-    <!-- 6 feed cards with different planes -->
     <div class="feed-card">
       <div class="feed-img-placeholder">
         <img src="photos/unknown.jpg" style="width:100%;height:100%;object-fit:cover;">
-        </div>
+      </div>
       <div class="feed-overlay">
-        <div class="feed-callsign">TAP28 🇵🇹</div>
+        <div class="feed-callsign">TAP28 🇵🇹 🛬</div>
         <div class="feed-airline">TAP Air Portugal · Airbus A330-900neo</div>
-        <div class="feed-data"><span>183 m</span><span>·</span><span>253 km/h</span><span>·</span><span>91 dB</span></div>
-      </div>
-    </div>
-
-    <div class="feed-card" style="grid-row: span 2;">
-      <div class="feed-img-placeholder" style="height:100%;background:linear-gradient(160deg,#0c1018,#111822);">
-        <img src="photos/approach.jpg" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-      <div class="feed-overlay" style="opacity:0.85">
-        <div class="feed-callsign">DAL272 🇺🇸</div>
-        <div class="feed-airline">Delta Air Lines · Boeing 767-300</div>
-        <div class="feed-data"><span>274 m</span><span>·</span><span>298 km/h</span><span>·</span><span>98.6 dB</span></div>
+        <div class="feed-data"><span>183m / 600ft</span><span>·</span><span>253 km/h / 137 kts</span><span>·</span><span>91 dB</span></div>
       </div>
     </div>
 
     <div class="feed-card">
-      <div class="feed-img-placeholder" style="background:linear-gradient(135deg,#0b0f16,#0f1620);">
+      <div class="feed-img-placeholder">
+        <img src="photos/delta.jpg" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="feed-overlay">
+        <div class="feed-callsign">DAL272 🇺🇸 🛬</div>
+        <div class="feed-airline">Delta Air Lines · Boeing 767-300ER</div>
+        <div class="feed-data"><span>274m / 900ft</span><span>·</span><span>298 km/h / 161 kts</span><span>·</span><span>98.6 dB</span></div>
+      </div>
+    </div>
+
+    <div class="feed-card">
+      <div class="feed-img-placeholder">
         <img src="photos/angola.jpg" style="width:100%;height:100%;object-fit:cover;">
-        </div>
+      </div>
       <div class="feed-overlay">
-        <div class="feed-callsign">RYR3421 🇮🇪</div>
-        <div class="feed-airline">Ryanair · Boeing 737-800</div>
-        <div class="feed-data"><span>244 m</span><span>·</span><span>289 km/h</span><span>·</span><span>85 dB</span></div>
+        <div class="feed-callsign">DTA650 🇦🇴 🛬</div>
+        <div class="feed-airline">TAAG Angola Airlines · Boeing 777-300ER</div>
+        <div class="feed-data"><span>190m / 625ft</span><span>·</span><span>278 km/h / 150 kts</span><span>·</span><span>96.2 dB</span></div>
       </div>
     </div>
 
     <div class="feed-card">
-      <div class="feed-img-placeholder" style="background:linear-gradient(135deg,#0d1018,#101820);">
+      <div class="feed-img-placeholder">
         <img src="photos/airtransat.jpg" style="width:100%;height:100%;object-fit:cover;">
-        </div>
+      </div>
       <div class="feed-overlay">
-        <div class="feed-callsign">ACA813 🇨🇦</div>
-        <div class="feed-airline">Air Canada · Airbus A330-300</div>
-        <div class="feed-data"><span>587 m</span><span>·</span><span>288 km/h</span><span>·</span><span>92 dB</span></div>
+        <div class="feed-callsign">TSC275 🇨🇦 🛬</div>
+        <div class="feed-airline">Air Transat · Airbus A330-200</div>
+        <div class="feed-data"><span>244m / 800ft</span><span>·</span><span>268 km/h / 145 kts</span><span>·</span><span>93.1 dB</span></div>
       </div>
     </div>
 
     <div class="feed-card">
-      <div class="feed-img-placeholder" style="background:linear-gradient(135deg,#090d14,#0e1520);">
-        <img src="photos/tap.jpg" style="width:100%;height:100%;object-fit:cover;">
-        </div>
+      <div class="feed-img-placeholder">
+        <img src="photos/approach.jpg" style="width:100%;height:100%;object-fit:cover;">
+      </div>
       <div class="feed-overlay">
-        <div class="feed-callsign">EZY35AB 🇬🇧</div>
-        <div class="feed-airline">easyJet · Airbus A320</div>
-        <div class="feed-data"><span>320 m</span><span>·</span><span>270 km/h</span><span>·</span><span>88 dB</span></div>
+        <div class="feed-callsign">TAP072 🇵🇹 🛬</div>
+        <div class="feed-airline">TAP Air Portugal · Airbus A321neo</div>
+        <div class="feed-data"><span>160m / 525ft</span><span>·</span><span>259 km/h / 140 kts</span><span>·</span><span>89.4 dB</span></div>
+      </div>
+    </div>
+
+    <div class="feed-card">
+      <div class="feed-img-placeholder">
+        <img src="photos/tap.jpg" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="feed-overlay">
+        <div class="feed-callsign">TAP1064 🇵🇹 🛫</div>
+        <div class="feed-airline">TAP Air Portugal · Embraer E190</div>
+        <div class="feed-data"><span>587m / 1925ft</span><span>·</span><span>335 km/h / 181 kts</span><span>·</span><span>69 dB</span></div>
       </div>
     </div>
   </div>
@@ -1363,7 +1380,7 @@ body::after {
     <span style="width:24px;height:1px;background:#f87171;display:inline-block;"></span>
     Night restrictions · ANAC
   </div>
-  <h2 class="section-title reveal">Warning <em>Zone</em></h2>
+  <h2 class="section-title reveal" style="font-size:clamp(36px,4vw,60px);">Warning <em>Zone</em></h2>
   <p class="section-sub reveal">
     ANAC strictly regulates night operations at LPPT. Aircraft exceeding 98.9 EPNdB are prohibited between 00:00–06:00. We track every potential violation in real time.
   </p>
@@ -1533,7 +1550,7 @@ function renderTicker(ticker) {
   }).join('');
   el.innerHTML = items;
   // Ajuster la vitesse selon le nombre d'items
-  const duration = ticker.length * 4; // 4s par item
+  const duration = ticker.length * 8; // 8s par item
   el.style.animationDuration = duration + 's';
   _tickerLoaded = true;
 }
@@ -1560,13 +1577,7 @@ function renderFeedCards(flights) {
         <div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:rgba(240,237,232,0.3);">${ts(f)}</div>
       </div>
     </div>
-  `).join('') + `
-    <div class="feed-card" style="background:rgba(245,166,35,0.04);border:1px solid rgba(245,166,35,0.15);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:32px;text-align:center;">
-      <div style="font-size:28px;">📸</div>
-      <div style="font-family:var(--sans);font-size:14px;font-weight:700;color:var(--white);">Want the real photos?</div>
-      <div style="font-family:var(--mono);font-size:11px;color:rgba(240,237,232,0.45);line-height:1.6;">For premium access to our full photo archive, contact us.</div>
-      <a href="mailto:lisbon.final.spots@gmail.com" style="padding:8px 20px;border:1px solid var(--amber);color:var(--amber);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-radius:2px;">Contact us →</a>
-    </div>`;
+  `).join('');
 }
 
 async function loadLiveData() {
