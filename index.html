@@ -1629,17 +1629,17 @@ async function loadLiveData() {
     const anacLoud = document.getElementById('anac-loud-night');
     if (anacLoud && s.loud_flights_95db !== undefined) anacLoud.textContent = s.loud_flights_95db.toLocaleString();
 
-    // Vols nocturnes cette semaine (entre 00h et 06h)
+    // Vols nocturnes cette semaine depuis Gist
     const anacNight = document.getElementById('anac-night-flights');
     const anacBar = document.getElementById('anac-progress-bar');
-    if (data.ticker) {
-      const nightFlights = data.ticker.filter(f => {
-        if (!f.timestamp) return false;
-        const h = parseInt(f.timestamp.substring(11,13));
-        return h >= 0 && h < 6;
-      }).length;
-      if (anacNight) anacNight.textContent = nightFlights;
-      if (anacBar) anacBar.style.width = Math.min((nightFlights / 91) * 100, 100) + '%';
+    if (s.night_flights_week !== undefined) {
+      if (anacNight) anacNight.textContent = s.night_flights_week;
+      if (anacBar) anacBar.style.width = Math.min((s.night_flights_week / 91) * 100, 100) + '%';
+      // Couleur selon quota
+      if (anacBar) {
+        const pct = s.night_flights_week / 91;
+        anacBar.style.background = pct > 0.8 ? '#f87171' : pct > 0.5 ? '#f5a623' : '#4ade80';
+      }
     }
 
     // Graphique bruit
