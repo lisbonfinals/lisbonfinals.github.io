@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lisbon Finals — Every plane over my Lisbon terrace</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
   --black: #07090d;
@@ -1617,24 +1617,25 @@ footer {
 .log-dispatch-meta { display:flex; align-items:center; gap:14px; margin-bottom:26px; flex-wrap:wrap; }
 .log-dispatch-coords { font-family:var(--mono); font-size:10px; color:#333; margin-left:auto; letter-spacing:.5px; }
 .log-dispatch-title {
-  font-family:'Playfair Display',serif;
-  font-size:34px; font-weight:600; color:#f5f0e8;
-  line-height:1.15; margin-bottom:24px; letter-spacing:-.5px;
+  font-family: var(--sans, 'Syne', sans-serif);
+  font-size: 26px; font-weight: 700; color: #f0ebe0;
+  line-height: 1.2; margin-bottom: 22px; letter-spacing: -.3px;
+  text-transform: none;
 }
-.log-dispatch-title em { font-style:italic; color:var(--amber); }
-.log-dispatch-divider { width:48px; height:1px; background:rgba(245,166,35,.5); margin-bottom:26px; }
+.log-dispatch-title em { font-style: normal; color: var(--amber); }
+.log-dispatch-divider { width: 40px; height: 1px; background: rgba(245,166,35,.5); margin-bottom: 22px; }
 .log-dispatch-body {
-  font-family:'Playfair Display',serif;
-  font-size:16px; line-height:1.85; color:#a89f90; font-weight:400;
+  font-family: var(--sans, 'Syne', sans-serif);
+  font-size: 14px; line-height: 1.9; color: #888; font-weight: 400;
 }
-.log-dispatch-body p { margin-bottom:14px; }
-.log-dispatch-body p:last-child { margin-bottom:0; }
+.log-dispatch-body p { margin-bottom: 12px; }
+.log-dispatch-body p:last-child { margin-bottom: 0; }
 .log-dispatch-sig {
-  margin-top:32px; padding-top:22px; border-top:1px solid #1e2128;
-  display:flex; align-items:center; justify-content:space-between;
+  margin-top: 28px; padding-top: 20px; border-top: 1px solid #1e2128;
+  display: flex; align-items: center; justify-content: space-between;
 }
-.log-dispatch-sig-name { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:#444; }
-.log-dispatch-sig-num  { font-family:var(--mono); font-size:10px; color:#2a2d35; letter-spacing:1px; }
+.log-dispatch-sig-name { font-family: var(--mono); font-size: 10px; color: #444; letter-spacing: .5px; font-style: italic; }
+.log-dispatch-sig-num  { font-family: var(--mono); font-size: 10px; color: #2a2d35; letter-spacing: 1px; }
 /* Pagination */
 .log-pagination {
   display:flex; border:1px solid #151820; border-top:none;
@@ -1649,20 +1650,25 @@ footer {
 .log-pag-title { font-family:'Playfair Display',serif; font-size:13px; color:#555; font-style:italic; }
 .log-pag-date  { font-family:var(--mono); font-size:9px; color:#222; }
 /* Archive strip */
-.log-archive { margin-top:36px; }
-.log-archive-label { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:#2a2d35; text-transform:uppercase; margin-bottom:10px; }
-.log-archive-list { display:flex; border:1px solid #151820; overflow-x:auto; }
+.log-archive { margin-top:32px; }
+.log-archive-label { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:#333; text-transform:uppercase; margin-bottom:10px; }
+.log-archive-list { display:flex; border:1px solid #1e2128; overflow-x:auto; }
 .log-archive-item {
-  flex:1; min-width:120px; padding:10px 14px;
-  border-right:1px solid #151820; cursor:pointer; transition:background .2s; background:transparent;
+  flex:1; min-width:140px; padding:14px 18px;
+  border-right:1px solid #1e2128; cursor:pointer; transition:background .2s, border-bottom .2s;
+  background:transparent; border-bottom:2px solid transparent;
 }
 .log-archive-item:last-child { border-right:none; }
 .log-archive-item:hover { background:#0f1218; }
-.log-archive-item.active { background:#0f1218; }
-.log-archive-date { font-family:var(--mono); font-size:8px; color:#2a2d35; margin-bottom:3px; }
+.log-archive-item.active { background:#0d1018; border-bottom:2px solid var(--amber); }
+.log-archive-date { font-family:var(--mono); font-size:9px; color:#444; margin-bottom:5px; }
 .log-archive-item.active .log-archive-date { color:var(--amber); }
-.log-archive-ttl { font-family:'Playfair Display',serif; font-size:11px; color:#3a3d45; font-style:italic; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.log-archive-item.active .log-archive-ttl { color:#666; }
+.log-archive-ttl {
+  font-family: var(--sans, 'Syne', sans-serif);
+  font-size:12px; font-weight:600; color:#444;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.log-archive-item.active .log-archive-ttl { color:#ccc; }
 
 /* legacy — keep for backward compat but unused */
 .log-entry {
