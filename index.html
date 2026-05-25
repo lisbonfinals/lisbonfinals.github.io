@@ -1669,6 +1669,7 @@ footer {
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .log-archive-item.active .log-archive-ttl { color:#ccc; }
+.log-pin { font-size:8px; opacity:0.7; vertical-align:middle; }
 
 /* legacy — keep for backward compat but unused */
 .log-entry {
@@ -3167,7 +3168,7 @@ setTimeout(loadLiveData, 300);
     const archiveList = document.getElementById('logArchiveList');
     archiveList.innerHTML = _entries.map((e, i) => `
       <div class="log-archive-item" data-idx="${i}">
-        <div class="log-archive-date">${esc(e.date)}</div>
+        <div class="log-archive-date">${e.pinned ? '<span class="log-pin">📌</span> ' : ''}${esc(e.date)}</div>
         <div class="log-archive-ttl">${esc(e.title)}</div>
       </div>`).join('');
     archiveList.querySelectorAll('.log-archive-item').forEach(el => {
