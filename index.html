@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lisbon Finals — Every plane over my Lisbon terrace</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 :root {
   --black: #07090d;
@@ -1598,11 +1598,73 @@ footer {
   vertical-align: middle;
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.log-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+/* ── DISPATCH (new single-entry design) ── */
+.log-dispatch { position: relative; }
+.log-dispatch-frame {
+  position: relative;
+  border: 1px solid #2a2d35;
+  background: #0d1018;
+  padding: 44px 52px 36px;
 }
+.log-dispatch-frame::before,.log-dispatch-frame::after,
+.log-dispatch-frame .corner-br,.log-dispatch-frame .corner-bl {
+  content:''; position:absolute; width:18px; height:18px;
+}
+.log-dispatch-frame::before { top:-1px;left:-1px; border-top:2px solid var(--amber); border-left:2px solid var(--amber); }
+.log-dispatch-frame::after  { top:-1px;right:-1px; border-top:2px solid var(--amber); border-right:2px solid var(--amber); }
+.log-dispatch-frame .corner-br { bottom:-1px;right:-1px; border-bottom:2px solid var(--amber); border-right:2px solid var(--amber); }
+.log-dispatch-frame .corner-bl { bottom:-1px;left:-1px; border-bottom:2px solid var(--amber); border-left:2px solid var(--amber); }
+.log-dispatch-meta { display:flex; align-items:center; gap:14px; margin-bottom:26px; flex-wrap:wrap; }
+.log-dispatch-coords { font-family:var(--mono); font-size:10px; color:#333; margin-left:auto; letter-spacing:.5px; }
+.log-dispatch-title {
+  font-family:'Playfair Display',serif;
+  font-size:34px; font-weight:600; color:#f5f0e8;
+  line-height:1.15; margin-bottom:24px; letter-spacing:-.5px;
+}
+.log-dispatch-title em { font-style:italic; color:var(--amber); }
+.log-dispatch-divider { width:48px; height:1px; background:rgba(245,166,35,.5); margin-bottom:26px; }
+.log-dispatch-body {
+  font-family:'Playfair Display',serif;
+  font-size:16px; line-height:1.85; color:#a89f90; font-weight:400;
+}
+.log-dispatch-body p { margin-bottom:14px; }
+.log-dispatch-body p:last-child { margin-bottom:0; }
+.log-dispatch-sig {
+  margin-top:32px; padding-top:22px; border-top:1px solid #1e2128;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.log-dispatch-sig-name { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:#444; }
+.log-dispatch-sig-num  { font-family:var(--mono); font-size:10px; color:#2a2d35; letter-spacing:1px; }
+/* Pagination */
+.log-pagination {
+  display:flex; border:1px solid #151820; border-top:none;
+}
+.log-pag-prev,.log-pag-next {
+  flex:1; padding:14px 20px; display:flex; flex-direction:column; gap:4px;
+  cursor:pointer; background:#090b0e; transition:background .2s; border:none; text-align:left;
+}
+.log-pag-prev:hover,.log-pag-next:hover { background:#0f1218; }
+.log-pag-next { align-items:flex-end; border-left:1px solid #151820; text-align:right; }
+.log-pag-label { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:#333; text-transform:uppercase; }
+.log-pag-title { font-family:'Playfair Display',serif; font-size:13px; color:#555; font-style:italic; }
+.log-pag-date  { font-family:var(--mono); font-size:9px; color:#222; }
+/* Archive strip */
+.log-archive { margin-top:36px; }
+.log-archive-label { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:#2a2d35; text-transform:uppercase; margin-bottom:10px; }
+.log-archive-list { display:flex; border:1px solid #151820; overflow-x:auto; }
+.log-archive-item {
+  flex:1; min-width:120px; padding:10px 14px;
+  border-right:1px solid #151820; cursor:pointer; transition:background .2s; background:transparent;
+}
+.log-archive-item:last-child { border-right:none; }
+.log-archive-item:hover { background:#0f1218; }
+.log-archive-item.active { background:#0f1218; }
+.log-archive-date { font-family:var(--mono); font-size:8px; color:#2a2d35; margin-bottom:3px; }
+.log-archive-item.active .log-archive-date { color:var(--amber); }
+.log-archive-ttl { font-family:'Playfair Display',serif; font-size:11px; color:#3a3d45; font-style:italic; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.log-archive-item.active .log-archive-ttl { color:#666; }
+
+/* legacy — keep for backward compat but unused */
 .log-entry {
   padding: 28px 32px;
   background: var(--dark2);
@@ -2276,9 +2338,28 @@ body::after {
     <span class="cursor-blink"></span>
   </div>
 
-  <!-- Entries grid -->
-  <div class="log-grid" id="logGrid">
-    <div class="log-empty-state">Loading captain's log…</div>
+  <!-- Dispatch frame -->
+  <div class="log-dispatch" id="logDispatch">
+    <div class="log-dispatch-frame" id="logFrame">
+      <div class="corner-br"></div><div class="corner-bl"></div>
+      <div class="log-empty-state">Loading captain's log…</div>
+    </div>
+    <div class="log-pagination" id="logPagination" style="display:none">
+      <button class="log-pag-prev" id="logPrev">
+        <span class="log-pag-label">← Previous</span>
+        <span class="log-pag-title" id="logPrevTitle">—</span>
+        <span class="log-pag-date"  id="logPrevDate">—</span>
+      </button>
+      <button class="log-pag-next" id="logNext">
+        <span class="log-pag-label">Next →</span>
+        <span class="log-pag-title" id="logNextTitle">—</span>
+        <span class="log-pag-date"  id="logNextDate">—</span>
+      </button>
+    </div>
+    <div class="log-archive" id="logArchive" style="display:none">
+      <div class="log-archive-label">All entries</div>
+      <div class="log-archive-list" id="logArchiveList"></div>
+    </div>
   </div>
 
   <!-- Footer row -->
@@ -3009,39 +3090,92 @@ setTimeout(loadLiveData, 300);
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
+  let _entries = [];
+  let _current = 0;
+
+  function renderEntry(idx) {
+    const e = _entries[idx];
+    if (!e) return;
+    _current = idx;
+
+    const frame = document.getElementById('logFrame');
+    const bodyParagraphs = (e.body || '')
+      .split(/\n\n|\n/)
+      .filter(p => p.trim())
+      .map(p => `<p>${esc(p)}</p>`)
+      .join('');
+
+    frame.innerHTML = `
+      <div class="corner-br"></div><div class="corner-bl"></div>
+      <div class="log-dispatch-meta">
+        <span class="log-cat log-cat-${esc(e.category)}">${esc(CAT_LABELS[e.category] || e.category)}</span>
+        <span class="log-ts">${esc(e.date)} ${esc(e.time)}</span>
+        <span class="log-dispatch-coords">38°46'N · 009°08'W · Lisbon</span>
+      </div>
+      <div class="log-dispatch-title">${esc(e.title)}</div>
+      <div class="log-dispatch-divider"></div>
+      <div class="log-dispatch-body">${bodyParagraphs || '<p>' + esc(e.title) + '</p>'}</div>
+      <div class="log-dispatch-sig">
+        <span class="log-dispatch-sig-name">— The Captain, Lisbon Finals HQ</span>
+        <span class="log-dispatch-sig-num">Entry #${String(_entries.length - idx).padStart(2,'0')} · ${esc(e.date)}</span>
+      </div>`;
+
+    // Pagination
+    const prev = _entries[idx + 1];
+    const next = _entries[idx - 1];
+    document.getElementById('logPrevTitle').textContent = prev ? prev.title : '—';
+    document.getElementById('logPrevDate').textContent  = prev ? prev.date  : 'no older entries';
+    document.getElementById('logNextTitle').textContent = next ? next.title : '—';
+    document.getElementById('logNextDate').textContent  = next ? next.date  : 'no newer entries';
+    document.getElementById('logPrev').style.opacity = prev ? '1' : '0.3';
+    document.getElementById('logNext').style.opacity = next ? '1' : '0.3';
+
+    // Archive highlight
+    document.querySelectorAll('.log-archive-item').forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
+    });
+  }
+
   function renderLog(entries) {
-    const grid = document.getElementById('logGrid');
-    const countEl = document.getElementById('logEntryCount');
+    const countEl  = document.getElementById('logEntryCount');
     const updatedEl = document.getElementById('logUpdated');
 
     if (!entries || !entries.length) {
-      grid.innerHTML = '<div class="log-empty-state">No entries yet — the first one is coming soon.</div>';
+      document.getElementById('logFrame').innerHTML =
+        '<div class="corner-br"></div><div class="corner-bl"></div><div class="log-empty-state">No entries yet — the first one is coming soon.</div>';
       countEl.textContent = '0 entries';
       return;
     }
 
-    // Pinned first, then chronological (newest first)
-    const sorted = [...entries].sort((a, b) => {
+    // Pinned first, then newest first
+    _entries = [...entries].sort((a, b) => {
       if (a.pinned && !b.pinned) return -1;
       if (!a.pinned && b.pinned) return 1;
       return 0;
     });
 
-    countEl.textContent = sorted.length + ' entr' + (sorted.length > 1 ? 'ies' : 'y');
-    updatedEl.textContent = 'Last entry: ' + (sorted[0] ? sorted[0].date + ' ' + sorted[0].time : '—');
+    countEl.textContent = _entries.length + ' entr' + (_entries.length > 1 ? 'ies' : 'y');
+    updatedEl.textContent = 'Last entry: ' + (_entries[0] ? _entries[0].date + ' ' + _entries[0].time : '—');
 
-    grid.innerHTML = sorted.map((e, i) => `
-      <div class="log-entry${e.pinned ? ' pinned' : ''}" style="opacity:1;transition-delay:${(i % 3) * 0.06}s">
-        <div class="log-entry-meta">
-          <span class="log-cat log-cat-${esc(e.category)}">${esc(CAT_LABELS[e.category] || e.category)}</span>
-          <span class="log-ts">${esc(e.date)} ${esc(e.time)}</span>
-          ${e.pinned ? '<span class="log-pin">📌</span>' : ''}
-        </div>
-        <div class="log-entry-title">${esc(e.title)}</div>
-        ${e.body ? `<div class="log-entry-body">${esc(e.body).replace(/\n/g, '<br>')}</div>` : ''}
-        <div class="log-entry-num">${String(i + 1).padStart(2, '0')}</div>
-      </div>
-    `).join('');
+    // Build archive strip
+    const archiveList = document.getElementById('logArchiveList');
+    archiveList.innerHTML = _entries.map((e, i) => `
+      <div class="log-archive-item" data-idx="${i}">
+        <div class="log-archive-date">${esc(e.date)}</div>
+        <div class="log-archive-ttl">${esc(e.title)}</div>
+      </div>`).join('');
+    archiveList.querySelectorAll('.log-archive-item').forEach(el => {
+      el.addEventListener('click', () => renderEntry(+el.dataset.idx));
+    });
+
+    // Pagination buttons
+    document.getElementById('logPrev').onclick = () => { if (_current < _entries.length - 1) renderEntry(_current + 1); };
+    document.getElementById('logNext').onclick = () => { if (_current > 0) renderEntry(_current - 1); };
+
+    document.getElementById('logPagination').style.display = 'flex';
+    document.getElementById('logArchive').style.display    = 'block';
+
+    renderEntry(0);
   }
 
   async function loadJournal() {
