@@ -3117,7 +3117,7 @@ setTimeout(loadLiveData, 300);
       <div class="log-dispatch-meta">
         <span class="log-cat log-cat-${esc(e.category)}">${esc(CAT_LABELS[e.category] || e.category)}</span>
         <span class="log-ts">${esc(e.date)} ${esc(e.time)}</span>
-        <span class="log-dispatch-coords">38°46'N · 009°08'W · Lisbon</span>
+        <span class="log-dispatch-coords">${e.pinned ? '📌 ' : ''}38°46'N · 009°08'W · Lisbon</span>
       </div>
       <div class="log-dispatch-title">${esc(e.title)}</div>
       <div class="log-dispatch-divider"></div>
