@@ -2845,9 +2845,12 @@ setTimeout(loadLiveData, 300);
     fetch('https://api.open-meteo.com/v1/forecast?latitude=' + LAT + '&longitude=' + LON
       + '&current=temperature_2m,wind_speed_10m,wind_direction_10m,weather_code'
       + '&wind_speed_unit=kmh&timezone=Europe/Lisbon')
-      .then(function(r) { return r.json(); })
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
       .then(function(d) {
-        if (!d.current) throw new Error('No current data');
+        if (!d.current) throw new Error('No current data: ' + JSON.stringify(Object.keys(d)));
         var c   = d.current;
         var temp = Math.round(c.temperature_2m);
         var wind = Math.round(c.wind_speed_10m);
@@ -2866,8 +2869,8 @@ setTimeout(loadLiveData, 300);
         updateCompass(dir);
         updateRunway(dir);
       })
-      .catch(function() {
-        set('w-cond', 'API unavailable');
+      .catch(function(err) {
+        set('w-cond', err.message || 'API unavailable');
         set('w-time', new Date().toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}));
       });
   }
