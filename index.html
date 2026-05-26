@@ -2847,6 +2847,7 @@ setTimeout(loadLiveData, 300);
       + '&wind_speed_unit=kmh&timezone=Europe/Lisbon')
       .then(function(r) { return r.json(); })
       .then(function(d) {
+        if (!d.current) throw new Error('No current data');
         var c   = d.current;
         var temp = Math.round(c.temperature_2m);
         var wind = Math.round(c.wind_speed_10m);
@@ -2865,7 +2866,10 @@ setTimeout(loadLiveData, 300);
         updateCompass(dir);
         updateRunway(dir);
       })
-      .catch(function() {});
+      .catch(function() {
+        set('w-cond', 'API unavailable');
+        set('w-time', new Date().toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}));
+      });
   }
 
   fetchWeather();
