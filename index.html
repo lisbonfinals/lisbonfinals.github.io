@@ -2013,7 +2013,7 @@ body::after {
         </div>
       </div>
       <div style="font-family:var(--mono);font-size:0.65rem;color:var(--gray2);margin-top:24px;">
-        Source: Open-Meteo · LPPT (38.78°N, 9.14°W) · Updates every 5 min
+        Source: wttr.in · LPPT (38.78°N, 9.14°W) · Updates every 5 min
       </div>
     </div>
 
@@ -2829,10 +2829,16 @@ setTimeout(loadLiveData, 300);
     line.setAttribute('y2', (cy - r * Math.cos(rad)).toFixed(1));
   }
 
-  function updateRunway(deg) {
+  function updateRunway(deg, spd) {
     var landing = document.getElementById('rwy-landing'); // N wind  → landing RWY 03
     var takeoff = document.getElementById('rwy-takeoff'); // SSW wind → takeoff RWY 03
     if (!landing || !takeoff) return;
+    if ((spd || 0) < 10) {
+      // Vent trop faible pour déterminer la piste active — les deux inactifs
+      landing.className = 'runway-config rwy-inactive';
+      takeoff.className = 'runway-config rwy-inactive';
+      return;
+    }
     var isNorth = (deg >= 330 || deg < 70);  // wind from north sector
     var isSSW   = (deg >= 150 && deg < 260); // wind from south/SW sector
     landing.className = 'runway-config ' + (isNorth ? 'rwy-active' : 'rwy-inactive');
@@ -2876,7 +2882,7 @@ setTimeout(loadLiveData, 300);
         var now = new Date();
         set('w-time', now.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}));
         updateCompass(dir);
-        updateRunway(dir);
+        updateRunway(dir, wind);
       })
       .catch(function(err) {
         set('w-cond', 'OFFLINE');
