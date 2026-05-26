@@ -2088,9 +2088,9 @@ body::after {
         '<img src="' + p.url + '" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.style.opacity=0">' +
       '</div>' +
       '<div class="feed-overlay">' +
-        (when ? '<div class="feed-timestamp">' + when + '</div>' : '') +
         '<div class="feed-callsign">' + p.callsign + ' ' + (p.airline_flag || '') + ' ' + icon + '</div>' +
         '<div class="feed-airline">' + sub + '</div>' +
+        (when ? '<div style="font-family:var(--mono);font-size:10px;color:rgba(240,165,35,0.75);letter-spacing:.05em;margin-bottom:6px;">' + when + '</div>' : '') +
         dataHtml +
       '</div>' +
     '</div>';
@@ -2633,12 +2633,12 @@ function renderFeedCards(flights) {
       <div class="feed-overlay">
         <div class="feed-callsign">${f.callsign} ${f.flag || ''} ${phaseIcon(f.phase)}</div>
         <div class="feed-airline">${f.airline || '—'} · ${f.aircraft || '—'}</div>
+        ${ts(f) ? `<div style="font-family:var(--mono);font-size:10px;color:rgba(240,165,35,0.75);letter-spacing:.05em;margin-bottom:6px;">${ts(f)}</div>` : ''}
         <div class="feed-data">
           <span>${f.alt_m}m / ${f.alt_ft}ft</span><span>·</span>
           <span>${Math.round(f.speed_kmh)} km/h / ${Math.round(f.speed_kts)} kts</span>
           ${f.noise_db ? `<span>·</span><span>${f.noise_db} dB</span>` : ''}
         </div>
-        <div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:rgba(240,237,232,0.3);">${ts(f)}</div>
       </div>
     </div>
   `).join('');
