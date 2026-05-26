@@ -2842,35 +2842,44 @@ setTimeout(loadLiveData, 300);
   function set(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
 
   function fetchWeather() {
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=' + LAT + '&longitude=' + LON
-      + '&current=temperature_2m,wind_speed_10m,wind_direction_10m,weather_code'
-      + '&wind_speed_unit=kmh&timezone=Europe/Lisbon')
+    fetch('https://wttr.in/' + LAT + ',' + LON + '?format=j1')
       .then(function(r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
       })
       .then(function(d) {
-        if (!d.current) throw new Error('No current data: ' + JSON.stringify(Object.keys(d)));
-        var c   = d.current;
-        var temp = Math.round(c.temperature_2m);
-        var wind = Math.round(c.wind_speed_10m);
-        var dir  = Math.round(c.wind_direction_10m);
-        var code = c.weather_code;
-
+        var c = d.current_condition && d.current_condition[0];
+        if (!c) throw new Error('No data');
+        var temp = parseInt(c.temp_C);
+        var wind = parseInt(c.windspeedKmph);
+        var dir  = parseInt(c.winddirDegree);
+        var desc = c.weatherDesc && c.weatherDesc[0] && c.weatherDesc[0].value || '';
+        // Map wttr condition to WMO-style icon
+        var code = parseInt(c.weatherCode) || 0;
+        var WTTR_ICON = {
+          113:'☀️', 116:'⛅', 119:'☁️', 122:'☁️',
+          143:'🌫', 176:'🌦', 179:'🌨', 182:'🌧', 185:'🌧',
+          200:'⛈', 227:'🌨', 230:'❄️', 248:'🌫', 260:'🌫',
+          263:'🌦', 266:'🌧', 281:'🌧', 284:'🌧', 293:'🌦',
+          296:'🌧', 299:'🌧', 302:'🌧', 305:'🌧', 308:'🌧',
+          311:'🌧', 314:'🌧', 317:'🌨', 320:'🌨', 323:'🌨',
+          326:'🌨', 329:'❄️', 332:'❄️', 335:'❄️', 338:'❄️',
+          350:'🌧', 353:'🌦', 356:'🌧', 359:'🌧', 362:'🌨',
+          365:'🌨', 368:'🌨', 371:'❄️', 374:'🌨', 377:'🌨',
+          386:'⛈', 389:'⛈', 392:'⛈', 395:'❄️'
+        };
         set('w-temp',       temp);
         set('w-wspd',       wind);
         set('w-wdir-label', dir + '° ' + cardinal(dir));
-        set('w-icon',       WMO_ICON[code] || '🌤');
-        set('w-cond',       WMO_DESC[code] || '');
-
+        set('w-icon',       WTTR_ICON[code] || '🌤');
+        set('w-cond',       desc.toUpperCase());
         var now = new Date();
         set('w-time', now.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}));
-
         updateCompass(dir);
         updateRunway(dir);
       })
       .catch(function(err) {
-        set('w-cond', err.message || 'API unavailable');
+        set('w-cond', 'OFFLINE');
         set('w-time', new Date().toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}));
       });
   }
