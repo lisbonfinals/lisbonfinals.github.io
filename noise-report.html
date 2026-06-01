@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noise Report — Lisbon Finals · LPPT Acoustic Monitoring</title>
+<meta name="description" content="Monthly noise monitoring report for Lisbon Airport (LPPT). Flight-by-flight acoustic data, airline rankings, night violation tracking.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #07090d;
+  --dark: #0a0d12;
+  --dark2: #0d1117;
+  --dark3: #111827;
+  --border: #1e2530;
+  --border2: #2a3544;
+  --amber: #f5a623;
+  --amber-dim: rgba(245,166,35,0.12);
+  --amber-glow: rgba(245,166,35,0.06);
+  --white: #f0ede8;
+  --gray: #6b7280;
+  --gray2: #374151;
+  --indigo: #6366f1;
+  --indigo-dim: rgba(99,102,241,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.1);
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.1);
+  --sans: 'Syne', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --serif: 'Instrument Serif', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: var(--white);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CURSOR ── */
+.cursor { position:fixed;width:8px;height:8px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .1s;mix-blend-mode:difference; }
+.cursor-ring { position:fixed;width:32px;height:32px;border:1px solid rgba(245,166,35,.5);border-radius:50%;pointer-events:none;z-index:9998;transition:all .15s ease; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  padding: 20px 48px;
+  display: flex; align-items:center; justify-content:space-between;
+  background: linear-gradient(to bottom, rgba(7,9,13,.95), transparent);
+  backdrop-filter: blur(2px);
+}
+.nav-logo { display:flex;align-items:center;gap:10px;text-decoration:none; }
+.nav-dot { width:28px;height:28px;border:1.5px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative; }
+.nav-dot::after { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);clip-path:polygon(50% 0%,65% 85%,50% 72%,35% 85%);width:10px;height:12px;background:var(--amber);border-radius:0; }
+.nav-wordmark { font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--white); }
+.nav-wordmark span { color:var(--amber); }
+.nav-links { display:flex;align-items:center;gap:32px;list-style:none; }
+.nav-links a { font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.5);text-decoration:none;transition:color .2s; }
+.nav-links a:hover, .nav-links a.active { color:var(--white); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction:column; justify-content:flex-end;
+  padding: 0 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset:0;
+  background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(245,166,35,.05) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 20% 80%, rgba(99,102,241,.04) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset:0;
+  background-image: linear-gradient(rgba(30,37,48,.4) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(30,37,48,.4) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+}
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+  display: flex; align-items:center; gap:10px;
+}
+.hero-tag::before { content:''; width:32px; height:1px; background:var(--amber); display:inline-block; }
+.hero-title {
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -.03em;
+  margin-bottom: 24px;
+}
+.hero-title .accent { color: var(--amber); }
+.hero-title .light { color: rgba(240,237,232,.25); font-weight:400; font-family:var(--serif); font-style:italic; }
+.hero-subtitle {
+  font-size: 14px;
+  color: var(--gray);
+  max-width: 500px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+.hero-stats {
+  display: flex; gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  max-width: 700px;
+  background: rgba(13,17,23,.8);
+  backdrop-filter: blur(12px);
+}
+.hero-stat {
+  flex: 1;
+  padding: 20px 24px;
+  border-right: 1px solid var(--border);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-val {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hero-stat-val .unit { font-size: 14px; color: var(--gray); }
+.hero-stat-lbl {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--gray);
+}
+.hero-stat.amber .hero-stat-val { color: var(--amber); }
+.hero-stat.red   .hero-stat-val { color: var(--red); }
+.hero-stat.indigo .hero-stat-val { color: var(--indigo); }
+
+/* ── MONTH SELECTOR ── */
+.month-bar {
+  position: sticky; top: 64px; z-index: 50;
+  background: rgba(10,13,18,.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 48px;
+  display: flex; align-items:center; gap: 12px;
+}
+.month-bar-label { font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:var(--gray); }
+.month-chips { display:flex;gap:6px;flex-wrap:wrap; }
+.month-chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--gray);
+  cursor: pointer;
+  transition: all .2s;
+}
+.month-chip:hover { color: var(--white); border-color: var(--border2); }
+.month-chip.active { background: var(--amber-dim); border-color: var(--amber); color: var(--amber); }
+
+/* ── SECTION ── */
+.section { padding: 80px 48px; }
+.section-header { margin-bottom: 48px; }
+.section-tag { font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);margin-bottom:12px; }
+.section-title { font-size: 32px; font-weight:800; letter-spacing:-.02em; }
+.section-title span { color:var(--amber); }
+
+/* ── REPORT CARD (featured month) ── */
+.report-featured {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 64px;
+}
+.report-featured-header {
+  padding: 32px 40px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+}
+.report-month-badge {
+  display: flex; align-items:baseline; gap:10px;
+}
+.report-month-name { font-size:28px; font-weight:800; letter-spacing:-.02em; }
+.report-year { font-family:var(--mono); font-size:14px; color:var(--gray); }
+.report-kpis {
+  display: flex; gap:32px; flex-wrap:wrap;
+}
+.report-kpi-val { font-family:var(--mono);font-size:20px;font-weight:500;color:var(--white);line-height:1; }
+.report-kpi-lbl { font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray);margin-top:3px; }
+.report-featured-body { padding: 32px 40px; }
+
+/* ── PODIUM ── */
+.podiums-grid { display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px; }
+.podium-section-title {
+  font-size: 10px; font-family:var(--mono); text-transform:uppercase;
+  letter-spacing:.15em; margin-bottom:16px;
+  display:flex; align-items:center; gap:8px;
+}
+.podium-section-title .dot { width:6px;height:6px;border-radius:50%;flex-shrink:0; }
+.podium-section-title.noisy .dot { background:var(--red); }
+.podium-section-title.quiet .dot { background:var(--green); }
+.podium-section-title.noisy { color:rgba(239,68,68,.7); }
+.podium-section-title.quiet { color:rgba(34,197,94,.7); }
+
+.podium { display:grid;grid-template-columns:repeat(3,1fr);gap:0 8px;align-items:end;margin-bottom:8px; }
+.pod {
+  border-radius:12px 12px 6px 6px;
+  text-align:center;
+  overflow:hidden;
+  transition: transform .2s;
+}
+.pod:hover { transform: translateY(-2px); }
+.pod-inner { padding: 14px 10px 12px; }
+.pod-medal { font-size:20px; display:block; margin-bottom:6px; }
+.pod-name { font-size:10.5px; font-weight:800; margin-bottom:5px; line-height:1.25; }
+.pod-db { font-family:var(--mono); font-size:20px; font-weight:500; line-height:1; margin-bottom:3px; }
+.pod-db span { font-size:11px; opacity:.6; }
+.pod-sub { font-size:8px; color:var(--gray); line-height:1.3; }
+.pod-bar { height:3px; margin-top:8px; border-radius:2px; }
+/* Heights */
+.pod-h1 { margin-top:0; }
+.pod-h2 { margin-top:18px; }
+.pod-h3 { margin-top:30px; }
+/* Noisy */
+.pod-n1 { background:linear-gradient(160deg,rgba(239,68,68,.14),rgba(239,68,68,.05));border:1.5px solid rgba(239,68,68,.35); }
+.pod-n2 { background:linear-gradient(160deg,rgba(239,68,68,.09),rgba(239,68,68,.03));border:1px solid rgba(239,68,68,.2); }
+.pod-n3 { background:linear-gradient(160deg,rgba(239,68,68,.05),rgba(239,68,68,.01));border:1px solid rgba(239,68,68,.12); }
+.pod-n1 .pod-db, .pod-n2 .pod-db, .pod-n3 .pod-db { color:var(--red); }
+.pod-n1 .pod-bar { background:var(--red); opacity:.5; }
+.pod-n2 .pod-bar { background:var(--red); opacity:.35; }
+.pod-n3 .pod-bar { background:var(--red); opacity:.2; }
+/* Quiet */
+.pod-q1 { background:linear-gradient(160deg,rgba(34,197,94,.14),rgba(34,197,94,.05));border:1.5px solid rgba(34,197,94,.35); }
+.pod-q2 { background:linear-gradient(160deg,rgba(34,197,94,.09),rgba(34,197,94,.03));border:1px solid rgba(34,197,94,.2); }
+.pod-q3 { background:linear-gradient(160deg,rgba(34,197,94,.05),rgba(34,197,94,.01));border:1px solid rgba(34,197,94,.12); }
+.pod-q1 .pod-db, .pod-q2 .pod-db, .pod-q3 .pod-db { color:var(--green); }
+.pod-q1 .pod-bar { background:var(--green); opacity:.5; }
+.pod-q2 .pod-bar { background:var(--green); opacity:.35; }
+.pod-q3 .pod-bar { background:var(--green); opacity:.2; }
+/* Manufacturer */
+.pod-m1 { background:linear-gradient(160deg,rgba(245,166,35,.12),rgba(245,166,35,.04));border:1.5px solid rgba(245,166,35,.3); }
+.pod-m2 { background:linear-gradient(160deg,rgba(245,166,35,.07),rgba(245,166,35,.02));border:1px solid rgba(245,166,35,.18); }
+.pod-m3 { background:linear-gradient(160deg,rgba(245,166,35,.04),rgba(245,166,35,.01));border:1px solid rgba(245,166,35,.1); }
+.pod-m1 .pod-db, .pod-m2 .pod-db, .pod-m3 .pod-db { color:var(--amber); }
+.pod-m1 .pod-bar { background:var(--amber); opacity:.5; }
+.pod-m2 .pod-bar { background:var(--amber); opacity:.35; }
+.pod-m3 .pod-bar { background:var(--amber); opacity:.2; }
+
+/* ── DOWNLOAD BUTTON ── */
+.download-row { display:flex;align-items:center;gap:16px;padding:24px 0;border-top:1px solid var(--border); }
+.btn-download {
+  display: inline-flex; align-items:center; gap:10px;
+  background: var(--amber);
+  color: #000;
+  font-family: var(--sans);
+  font-size: 13px; font-weight:700;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all .2s;
+  cursor: pointer; border:none;
+}
+.btn-download:hover { background: #fbbf24; transform: translateY(-1px); }
+.btn-download svg { width:16px;height:16px; }
+.download-meta { font-family:var(--mono); font-size:10px; color:var(--gray); line-height:1.6; }
+
+/* ── VIOLATIONS BADGE ── */
+.violations-row { display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap; }
+.vio-badge {
+  display: flex; align-items:center; gap:8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-family: var(--mono); font-size:11px;
+}
+.vio-badge.red { background:var(--red-dim); border:1px solid rgba(239,68,68,.25); }
+.vio-badge.yellow { background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.25); color:rgba(245,166,35,.9); }
+.vio-badge.night { background:var(--indigo-dim); border:1px solid rgba(99,102,241,.25); color:rgba(139,142,246,.9); }
+.vio-badge-num { font-size:16px; font-weight:700; }
+
+/* ── ARCHIVE ── */
+.archive-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px; }
+.archive-card {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  transition: all .2s;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+.archive-card:hover { border-color:var(--border2); transform:translateY(-2px); background:rgba(13,17,23,.9); }
+.archive-card-month { font-size:20px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px; }
+.archive-card-year { font-family:var(--mono); font-size:11px; color:var(--gray); margin-bottom:14px; }
+.archive-card-stats { display:flex;gap:16px;margin-bottom:16px; }
+.archive-stat-val { font-family:var(--mono); font-size:16px; font-weight:500; color:var(--white); }
+.archive-stat-lbl { font-size:8px; text-transform:uppercase; letter-spacing:.08em; color:var(--gray); }
+.archive-card-footer {
+  display: flex; align-items:center; justify-content:space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono); font-size:10px; color:var(--gray);
+}
+.archive-dl-btn {
+  display: inline-flex; align-items:center; gap:6px;
+  background: var(--amber-dim); border:1px solid rgba(245,166,35,.25);
+  color: var(--amber); font-family:var(--mono); font-size:10px; font-weight:600;
+  padding: 5px 10px; border-radius:6px; text-decoration:none;
+  transition: all .2s;
+}
+.archive-dl-btn:hover { background:var(--amber); color:#000; }
+
+/* ── INSIGHT BOX ── */
+.insight-box {
+  background: rgba(245,166,35,.04);
+  border: 1px solid rgba(245,166,35,.15);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+.insight-box-title { font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--amber);margin-bottom:10px; }
+.insight-box-text { font-size:13px; color:rgba(240,237,232,.65); line-height:1.7; }
+.insight-box-text strong { color:var(--white); }
+
+/* ── HARDWARE NOTE ── */
+.hardware-note {
+  background: rgba(245,158,11,.05);
+  border: 1px solid rgba(245,158,11,.15);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: var(--mono); font-size:10px;
+  color: rgba(245,166,35,.6);
+  margin-top: 24px;
+}
+
+/* ── LOADING STATE ── */
+.loading { text-align:center; padding:80px; color:var(--gray); font-family:var(--mono); font-size:12px; }
+.loading-dot { display:inline-block; width:6px;height:6px;border-radius:50%;background:var(--amber);margin:0 3px;animation:pulse 1.2s ease-in-out infinite; }
+.loading-dot:nth-child(2) { animation-delay:.2s; }
+.loading-dot:nth-child(3) { animation-delay:.4s; }
+@keyframes pulse { 0%,100%{opacity:.2} 50%{opacity:1} }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  display: flex; align-items:center; justify-content:space-between;
+  font-family:var(--mono); font-size:10px; color:var(--gray);
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display:none; }
+  .hero { padding: 0 24px 60px; }
+  .hero-title { font-size: 42px; }
+  .hero-stats { flex-direction:column; }
+  .hero-stat { border-right:none; border-bottom:1px solid var(--border); }
+  .hero-stat:last-child { border-bottom:none; }
+  .month-bar { padding: 12px 24px; overflow-x:auto; }
+  .section { padding: 48px 24px; }
+  .podiums-grid { grid-template-columns:1fr; }
+  .report-featured-header { padding: 20px 24px; }
+  .report-featured-body { padding: 20px 24px; }
+  footer { padding: 24px; flex-direction:column; gap:8px; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-wordmark">LISBON <span>FINALS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#flights">Live</a></li>
+    <li><a href="/#stats">Stats</a></li>
+    <li><a href="/noise-report.html" class="active">Noise Report</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag">LPPT Lisbon · Acoustic Monitoring</div>
+  <h1 class="hero-title">
+    Noise<br>
+    <span class="accent">Report</span><br>
+    <span class="light">by the numbers</span>
+  </h1>
+  <p class="hero-subtitle">
+    Every flight. Every decibel. Every night.<br>
+    Independent acoustic monitoring of Lisbon Airport — flight by flight, month by month.
+  </p>
+  <div class="hero-stats" id="hero-stats">
+    <div class="hero-stat amber">
+      <div class="hero-stat-val" id="h-flights">—</div>
+      <div class="hero-stat-lbl">Flights This Month</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val" id="h-avg"><span class="unit">— dB</span></div>
+      <div class="hero-stat-lbl">Avg Noise Level</div>
+    </div>
+    <div class="hero-stat red">
+      <div class="hero-stat-val" id="h-rouge">—</div>
+      <div class="hero-stat-lbl">Night Violations</div>
+    </div>
+    <div class="hero-stat indigo">
+      <div class="hero-stat-val" id="h-night">—<span class="unit">%</span></div>
+      <div class="hero-stat-lbl">Night Operations</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MONTH SELECTOR ── -->
+<div class="month-bar">
+  <span class="month-bar-label">Archive</span>
+  <div class="month-chips" id="month-chips">
+    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
+  </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<section class="section">
+
+  <!-- FEATURED REPORT -->
+  <div id="report-container">
+    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><br><br>Loading report data...</div>
+  </div>
+
+  <!-- ARCHIVE -->
+  <div class="section-header" style="margin-top:80px">
+    <div class="section-tag">All Reports</div>
+    <h2 class="section-title">Monthly <span>Archive</span></h2>
+  </div>
+  <div class="archive-grid" id="archive-grid">
+    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
+  </div>
+
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>© 2026 Lisbon Finals · Independent noise monitoring · LPPT Lisbon</span>
+  <span>Data captured from a private terrace · Not affiliated with ANA Aeroportos or ANAC</span>
+</footer>
+
+<script>
+// ── CURSOR ──────────────────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
+  if (cursor) { cursor.style.left = mx - 4 + 'px'; cursor.style.top = my - 4 + 'px'; }
+  if (ring)   { ring.style.left   = rx - 16 + 'px'; ring.style.top  = ry - 16 + 'px'; }
+  requestAnimationFrame(animCursor);
+})();
+document.querySelectorAll('a,button,[data-cursor]').forEach(el => {
+  el.addEventListener('mouseenter', () => { if(ring) ring.style.transform = 'scale(1.8)'; });
+  el.addEventListener('mouseleave', () => { if(ring) ring.style.transform = 'scale(1)'; });
+});
+
+// ── GIST URL ─────────────────────────────────────────────────────────────
+const GIST_URL = 'https://gist.githubusercontent.com/lisbonfinals/2edb053ac9f9c91047c1b36f706d302c/raw/lisbon_finals.json';
+
+const MONTHS = ['','January','February','March','April','May','June',
+                'July','August','September','October','November','December'];
+
+// ── PODIUM BUILDER ───────────────────────────────────────────────────────
+function buildPodium(items, kind) {
+  // kind = 'n' (noisy), 'q' (quiet), 'm' (manufacturer)
+  if (!items || !items.length) return '<p style="color:var(--gray);font-size:11px">No data</p>';
+  const ORDER = [1, 0, 2]; // 2nd left, 1st center, 3rd right
+  const MEDALS = ['🥇','🥈','🥉'];
+  const HEIGHTS = ['pod-h1','pod-h2','pod-h3'];
+  const maxDb = Math.max(...items.map(a => a.avg_db));
+
+  const slots = ORDER.map(idx => idx < items.length ? { idx, item: items[idx] } : null);
+  return '<div class="podium">' + slots.map(slot => {
+    if (!slot) return '<div></div>';
+    const { idx, item } = slot;
+    const barW = Math.round(item.avg_db / maxDb * 100);
+    const cls = `pod-${kind}${idx+1}`;
+    return `
+    <div class="pod ${cls} ${HEIGHTS[idx]}">
+      <div class="pod-inner">
+        <span class="pod-medal">${MEDALS[idx]}</span>
+        <div class="pod-name">${item.name}</div>
+        <div class="pod-db">${item.avg_db}<span> dB</span></div>
+        <div class="pod-sub">${item.count.toLocaleString()} flights</div>
+        <div class="pod-bar" style="width:${barW}%;margin:8px auto 0"></div>
+      </div>
+    </div>`;
+  }).join('') + '</div>';
+}
+
+// ── RENDER REPORT ─────────────────────────────────────────────────────────
+function renderReport(report) {
+  if (!report) {
+    document.getElementById('report-container').innerHTML =
+      '<p style="color:var(--gray);text-align:center;padding:40px">No report data available.</p>';
+    return;
+  }
+
+  const mn = MONTHS[report.month] || `Month ${report.month}`;
+
+  // Update hero stats
+  const hf = document.getElementById('h-flights');
+  const ha = document.getElementById('h-avg');
+  const hr = document.getElementById('h-rouge');
+  const hn = document.getElementById('h-night');
+  if (hf) hf.textContent = (report.total_flights || 0).toLocaleString();
+  if (ha) ha.innerHTML = `${report.avg_db || '—'}<span class="unit"> dB</span>`;
+  if (hr) hr.textContent = (report.rouge_count || 0) + (report.jaune_count ? ' + ' + report.jaune_count : '');
+  if (hn) hn.innerHTML = `${report.night_pct || '—'}<span class="unit">%</span>`;
+
+  const html = `
+  <div class="report-featured">
+    <div class="report-featured-header">
+      <div class="report-month-badge">
+        <span class="report-month-name">${mn}</span>
+        <span class="report-year">${report.year}</span>
+      </div>
+      <div class="report-kpis">
+        <div>
+          <div class="report-kpi-val">${(report.total_flights||0).toLocaleString()}</div>
+          <div class="report-kpi-lbl">Flights</div>
+        </div>
+        <div>
+          <div class="report-kpi-val">${report.avg_db||'—'} dB</div>
+          <div class="report-kpi-lbl">Avg Noise</div>
+        </div>
+        <div>
+          <div class="report-kpi-val" style="color:var(--indigo)">${(report.night_flights||0).toLocaleString()}</div>
+          <div class="report-kpi-lbl">Night Flights</div>
+        </div>
+        <div>
+          <div class="report-kpi-val" style="color:var(--red)">${(report.rouge_count||0) + (report.jaune_count||0)}</div>
+          <div class="report-kpi-lbl">Night Violations</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-featured-body">
+
+      <div class="insight-box">
+        <div class="insight-box-title">Expert Insight — ${mn} ${report.year}</div>
+        <div class="insight-box-text">${report.insight || '100% of night violations are arrivals — runway 03 approach path crosses Lisbon at 160m altitude. Business jets exceeded commercial noise levels, a regulatory gap worth flagging.'}</div>
+      </div>
+
+      <div class="violations-row">
+        <div class="vio-badge red">
+          <span class="vio-badge-num">${report.rouge_count||0}</span>
+          <span>🔴 Red Night Violations ≥ ${report.thresh_rouge||'—'} dB</span>
+        </div>
+        <div class="vio-badge yellow">
+          <span class="vio-badge-num">${report.jaune_count||0}</span>
+          <span>🟡 Yellow Warnings ≥ ${report.thresh_jaune||'—'} dB</span>
+        </div>
+        <div class="vio-badge night">
+          <span class="vio-badge-num">${report.night_pct||0}%</span>
+          <span>🌙 Night Operations</span>
+        </div>
+      </div>
+
+      <div class="podiums-grid">
+        <div>
+          <div class="podium-section-title noisy">
+            <span class="dot"></span>
+            Noisiest Airlines — Avg dB
+          </div>
+          ${buildPodium(report.top_airlines_noisy, 'n')}
+
+          <div class="podium-section-title noisy" style="margin-top:20px">
+            <span class="dot"></span>
+            Noisiest Manufacturers
+          </div>
+          ${buildPodium(report.top_mfr_noisy, 'm')}
+        </div>
+        <div>
+          <div class="podium-section-title quiet">
+            <span class="dot"></span>
+            Quietest Airlines — Avg dB
+          </div>
+          ${buildPodium(report.top_airlines_quiet, 'q')}
+        </div>
+      </div>
+
+      <div class="download-row">
+        ${report.pdf_url
+          ? `<a href="${report.pdf_url}" target="_blank" class="btn-download">
+               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v13M5 15l7 7 7-7"/><path d="M3 20h18"/></svg>
+               Download Full Report — ${mn} ${report.year}
+             </a>
+             <div class="download-meta">PDF · 9 pages · Includes full violation detail &amp; archive</div>`
+          : `<div style="color:var(--gray);font-family:var(--mono);font-size:11px">PDF not yet available — generate from admin dashboard</div>`
+        }
+      </div>
+
+      <div class="hardware-note">
+        ⚠ Current microphone capped at 100 dB — actual peak levels may exceed 99.9 dB shown.
+        New calibrated outdoor station coming June 2026.
+      </div>
+
+    </div>
+  </div>`;
+
+  document.getElementById('report-container').innerHTML = html;
+}
+
+// ── RENDER ARCHIVE ─────────────────────────────────────────────────────────
+function renderArchive(reports, activeIdx) {
+  const grid = document.getElementById('archive-grid');
+  if (!reports || !reports.length) {
+    grid.innerHTML = '<p style="color:var(--gray);font-family:var(--mono);font-size:11px">No archived reports yet.</p>';
+    return;
+  }
+  grid.innerHTML = reports.map((r, i) => {
+    const mn = MONTHS[r.month] || `Month ${r.month}`;
+    const isActive = i === activeIdx;
+    return `
+    <div class="archive-card${isActive ? ' active' : ''}" onclick="selectReport(${i})"
+         style="${isActive ? 'border-color:var(--amber);background:rgba(245,166,35,.04)' : ''}">
+      <div class="archive-card-month">${mn}</div>
+      <div class="archive-card-year">${r.year}</div>
+      <div class="archive-card-stats">
+        <div>
+          <div class="archive-stat-val">${(r.total_flights||0).toLocaleString()}</div>
+          <div class="archive-stat-lbl">Flights</div>
+        </div>
+        <div>
+          <div class="archive-stat-val">${r.avg_db||'—'} dB</div>
+          <div class="archive-stat-lbl">Avg</div>
+        </div>
+        <div>
+          <div class="archive-stat-val" style="color:var(--red)">${(r.rouge_count||0)+(r.jaune_count||0)}</div>
+          <div class="archive-stat-lbl">Violations</div>
+        </div>
+      </div>
+      <div class="archive-card-footer">
+        <span>${r.night_pct||0}% night operations</span>
+        ${r.pdf_url
+          ? `<a href="${r.pdf_url}" target="_blank" class="archive-dl-btn" onclick="event.stopPropagation()">
+               ↓ PDF
+             </a>`
+          : '<span style="opacity:.4">No PDF</span>'
+        }
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── MONTH CHIPS ──────────────────────────────────────────────────────────
+function renderChips(reports, activeIdx) {
+  const container = document.getElementById('month-chips');
+  container.innerHTML = reports.map((r, i) => {
+    const mn = (MONTHS[r.month] || '').substring(0, 3);
+    return `<button class="month-chip${i===activeIdx?' active':''}" onclick="selectReport(${i})">${mn} ${r.year}</button>`;
+  }).join('');
+}
+
+// ── SELECT REPORT ─────────────────────────────────────────────────────────
+let _reports = [];
+function selectReport(idx) {
+  if (!_reports[idx]) return;
+  renderReport(_reports[idx]);
+  renderChips(_reports, idx);
+  renderArchive(_reports, idx);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── LOAD DATA ────────────────────────────────────────────────────────────
+async function loadData() {
+  try {
+    const res = await fetch(GIST_URL + '?t=' + Date.now());
+    const data = await res.json();
+    const reports = (data.reports || []).sort((a, b) =>
+      (b.year * 12 + b.month) - (a.year * 12 + a.month)
+    );
+
+    _reports = reports;
+
+    if (!reports.length) {
+      document.getElementById('report-container').innerHTML =
+        '<div class="insight-box"><div class="insight-box-title">Coming Soon</div><div class="insight-box-text">The first monthly report will be published when the outdoor monitoring station is operational. Check back in June 2026.</div></div>';
+      document.getElementById('archive-grid').innerHTML = '';
+      document.getElementById('month-chips').innerHTML = '';
+      return;
+    }
+
+    renderReport(reports[0]);
+    renderChips(reports, 0);
+    renderArchive(reports, 0);
+
+  } catch(e) {
+    console.error('Failed to load data:', e);
+    document.getElementById('report-container').innerHTML =
+      '<div class="insight-box"><div class="insight-box-title">Data Unavailable</div><div class="insight-box-text">Unable to load report data. Please try again later.</div></div>';
+  }
+}
+
+loadData();
+</script>
+</body>
+</html>
