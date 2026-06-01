@@ -486,6 +486,29 @@ const GIST_URL = 'https://gist.githubusercontent.com/lisbonfinals/2edb053ac9f9c9
 const MONTHS = ['','January','February','March','April','May','June',
                 'July','August','September','October','November','December'];
 
+// ── MANUFACTURER TABLE ───────────────────────────────────────────────────
+function buildMfrTable(items) {
+  if (!items || !items.length) return '';
+  const colors = ['#f5a623','#22d3ee','#a78bfa','#4ade80','#f87171'];
+  const maxDb = items[0].avg_db || 1;
+  let html = '<div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;overflow:hidden">';
+  items.forEach(function(m, i) {
+    const w = Math.round(m.avg_db / maxDb * 100);
+    const c = colors[i] || '#94a3b8';
+    const border = i < items.length - 1 ? 'border-bottom:1px solid rgba(255,255,255,0.04);' : '';
+    html += '<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;' + border + '">'
+      + '<span style="font-family:var(--mono);font-size:9px;color:var(--gray);width:14px">' + (i+1) + '</span>'
+      + '<span style="font-weight:700;font-size:12px;flex:1">' + m.name + '</span>'
+      + '<div style="flex:2;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">'
+      + '<div style="height:100%;width:' + w + '%;background:' + c + ';border-radius:2px"></div></div>'
+      + '<span style="font-family:var(--mono);font-size:11px;color:' + c + ';width:52px;text-align:right">' + m.avg_db + ' dB</span>'
+      + '<span style="font-family:var(--mono);font-size:9px;color:var(--gray);width:52px;text-align:right">' + m.count.toLocaleString() + ' fl.</span>'
+      + '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
 // ── PODIUM BUILDER ───────────────────────────────────────────────────────
 function buildPodium(items, kind) {
   // kind = 'n' (noisy), 'q' (quiet), 'm' (manufacturer)
@@ -598,22 +621,7 @@ function renderReport(report) {
             <span class="dot"></span>
             Manufacturers — Noise Ranking
           </div>
-          <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;overflow:hidden">
-            ${(report.top_mfr_noisy||[]).map((m,i) => {
-              const maxDb = report.top_mfr_noisy[0]?.avg_db || 1;
-              const w = Math.round(m.avg_db / maxDb * 100);
-              const colors = ['#f5a623','#22d3ee','#a78bfa','#4ade80','#f87171'];
-              return `<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04)">
-                <span style="font-family:var(--mono);font-size:9px;color:var(--gray);width:14px">${i+1}</span>
-                <span style="font-weight:700;font-size:12px;flex:1">${m.name}</span>
-                <div style="flex:2;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">
-                  <div style="height:100%;width:${w}%;background:${colors[i]};border-radius:2px"></div>
-                </div>
-                <span style="font-family:var(--mono);font-size:11px;color:${colors[i]};width:52px;text-align:right">${m.avg_db} dB</span>
-                <span style="font-family:var(--mono);font-size:9px;color:var(--gray);width:52px;text-align:right">${m.count.toLocaleString()} fl.</span>
-              </div>`;
-            }).join('')}
-          </div>
+          ${buildMfrTable(report.top_mfr_noisy)}
         </div>
         <div>
           <div class="podium-section-title quiet">
