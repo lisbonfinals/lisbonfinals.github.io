@@ -421,6 +421,7 @@ footer {
     <div class="hero-stat red">
       <div class="hero-stat-val" id="h-rouge">—</div>
       <div class="hero-stat-lbl">Night Violations</div>
+      <div id="h-rouge-detail" style="font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.5);margin-top:3px"></div>
     </div>
     <div class="hero-stat indigo">
       <div class="hero-stat-val" id="h-night">—<span class="unit">%</span></div>
@@ -530,7 +531,10 @@ function renderReport(report) {
   const hn = document.getElementById('h-night');
   if (hf) hf.textContent = (report.total_flights || 0).toLocaleString();
   if (ha) ha.innerHTML = `${report.avg_db || '—'}<span class="unit"> dB</span>`;
-  if (hr) hr.textContent = (report.rouge_count || 0) + (report.jaune_count ? ' + ' + report.jaune_count : '');
+  const total_vio = (report.rouge_count || 0) + (report.jaune_count || 0);
+  if (hr) hr.textContent = total_vio;
+  const hrDetail = document.getElementById('h-rouge-detail');
+  if (hrDetail && report.rouge_count) hrDetail.textContent = `🔴 ${report.rouge_count} red · 🟡 ${report.jaune_count} yellow`;
   if (hn) hn.innerHTML = `${report.night_pct || '—'}<span class="unit">%</span>`;
 
   const html = `
@@ -592,9 +596,24 @@ function renderReport(report) {
 
           <div class="podium-section-title noisy" style="margin-top:20px">
             <span class="dot"></span>
-            Noisiest Manufacturers
+            Manufacturers — Noise Ranking
           </div>
-          ${buildPodium(report.top_mfr_noisy, 'm')}
+          <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+            ${(report.top_mfr_noisy||[]).map((m,i) => {
+              const maxDb = report.top_mfr_noisy[0]?.avg_db || 1;
+              const w = Math.round(m.avg_db / maxDb * 100);
+              const colors = ['#f5a623','#22d3ee','#a78bfa','#4ade80','#f87171'];
+              return `<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04)">
+                <span style="font-family:var(--mono);font-size:9px;color:var(--gray);width:14px">${i+1}</span>
+                <span style="font-weight:700;font-size:12px;flex:1">${m.name}</span>
+                <div style="flex:2;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">
+                  <div style="height:100%;width:${w}%;background:${colors[i]};border-radius:2px"></div>
+                </div>
+                <span style="font-family:var(--mono);font-size:11px;color:${colors[i]};width:52px;text-align:right">${m.avg_db} dB</span>
+                <span style="font-family:var(--mono);font-size:9px;color:var(--gray);width:52px;text-align:right">${m.count.toLocaleString()} fl.</span>
+              </div>`;
+            }).join('')}
+          </div>
         </div>
         <div>
           <div class="podium-section-title quiet">
