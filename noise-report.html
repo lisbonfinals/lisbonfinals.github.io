@@ -418,10 +418,10 @@ footer {
       <div class="hero-stat-val" id="h-avg"><span class="unit">— dB</span></div>
       <div class="hero-stat-lbl">Avg Noise Level</div>
     </div>
-    <div class="hero-stat red">
+    <div class="hero-stat red" style="min-width:160px">
       <div class="hero-stat-val" id="h-rouge">—</div>
       <div class="hero-stat-lbl">Night Violations</div>
-      <div id="h-rouge-detail" style="font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.5);margin-top:3px"></div>
+      <div id="h-rouge-detail" style="font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.5);margin-top:5px;line-height:1.5"></div>
     </div>
     <div class="hero-stat indigo">
       <div class="hero-stat-val" id="h-night">—<span class="unit">%</span></div>
@@ -489,7 +489,7 @@ const MONTHS = ['','January','February','March','April','May','June',
 // ── MANUFACTURER TABLE ───────────────────────────────────────────────────
 function buildMfrTable(items) {
   if (!items || !items.length) return '';
-  const colors = ['#f5a623','#22d3ee','#a78bfa','#4ade80','#f87171'];
+  const colors = ['#ef4444','#f5a623','#22c55e','#a78bfa','#94a3b8'];
   const maxDb = items[0].avg_db || 1;
   let html = '<div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;overflow:hidden">';
   items.forEach(function(m, i) {
