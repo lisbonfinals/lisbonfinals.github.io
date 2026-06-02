@@ -62,6 +62,44 @@ nav {
 .nav-links a { font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.5);text-decoration:none;transition:color .2s; }
 .nav-links a:hover, .nav-links a.active { color:var(--white); }
 
+/* ── HAMBURGER ── */
+.nav-burger {
+  display: none;
+  flex-direction: column; justify-content:center; align-items:center;
+  gap: 5px; width:36px; height:36px;
+  cursor: pointer; background:none; border:none; padding:0;
+}
+.nav-burger span {
+  display: block; width:22px; height:1.5px;
+  background: var(--white); border-radius:2px;
+  transition: all .25s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity:0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── MOBILE DRAWER ── */
+.nav-drawer {
+  display: none;
+  position: fixed; top:0; left:0; right:0; bottom:0; z-index:99;
+  background: rgba(7,9,13,.97);
+  backdrop-filter: blur(20px);
+  flex-direction:column; align-items:center; justify-content:center;
+  gap: 36px;
+  opacity:0; transition: opacity .25s;
+  pointer-events:none;
+}
+.nav-drawer.open {
+  display: flex; opacity:1; pointer-events:all;
+}
+.nav-drawer a {
+  font-size: 28px; font-weight:800; letter-spacing:-.01em;
+  color: rgba(240,237,232,.4); text-decoration:none;
+  transition: color .2s;
+}
+.nav-drawer a:hover, .nav-drawer a.active { color: var(--white); }
+.nav-drawer a.active { color: var(--amber); }
+
 /* ── HERO ── */
 .hero {
   min-height: 100vh;
@@ -119,19 +157,19 @@ nav {
 }
 .hero-stat {
   flex: 1;
-  padding: 20px 24px;
+  padding: 28px 32px;
   border-right: 1px solid var(--border);
 }
 .hero-stat:last-child { border-right: none; }
 .hero-stat-val {
   font-family: var(--mono);
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 500;
   color: var(--white);
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
-.hero-stat-val .unit { font-size: 14px; color: var(--gray); }
+.hero-stat-val .unit { font-size: 15px; color: var(--gray); }
 .hero-stat-lbl {
   font-size: 9px;
   text-transform: uppercase;
@@ -358,21 +396,30 @@ footer {
   font-family:var(--mono); font-size:10px; color:var(--gray);
 }
 
+/* ── TABLET ── */
+@media (max-width: 1024px) {
+  .nav-links { display:none; }
+  .nav-burger { display:flex; }
+  .podiums-grid { gap:20px; }
+}
+
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   nav { padding: 16px 24px; }
-  .nav-links { display:none; }
-  .hero { padding: 0 24px 60px; }
+  .hero { padding: 120px 24px 60px; }
   .hero-title { font-size: 42px; }
-  .hero-stats { flex-direction:column; }
-  .hero-stat { border-right:none; border-bottom:1px solid var(--border); }
+  .hero-stats { flex-direction:column; max-width:100%; }
+  .hero-stat { border-right:none; border-bottom:1px solid var(--border); padding:20px 24px; }
   .hero-stat:last-child { border-bottom:none; }
   .month-bar { padding: 12px 24px; overflow-x:auto; }
   .section { padding: 48px 24px; }
   .podiums-grid { grid-template-columns:1fr; }
-  .report-featured-header { padding: 20px 24px; }
+  .report-featured-header { padding: 20px 24px; flex-direction:column; align-items:flex-start; }
   .report-featured-body { padding: 20px 24px; }
+  .violations-row { flex-direction:column; }
+  .vio-badge { width:100%; }
   footer { padding: 24px; flex-direction:column; gap:8px; text-align:center; }
+  .report-kpis { gap:16px; }
 }
 </style>
 </head>
@@ -380,6 +427,14 @@ footer {
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- ── MOBILE DRAWER ── -->
+<div class="nav-drawer" id="nav-drawer">
+  <a href="/">Home</a>
+  <a href="/#flights">Live</a>
+  <a href="/#stats">Stats</a>
+  <a href="/noise-report.html" class="active">Noise Report</a>
+</div>
 
 <!-- ── NAV ── -->
 <nav>
@@ -393,6 +448,9 @@ footer {
     <li><a href="/#stats">Stats</a></li>
     <li><a href="/noise-report.html" class="active">Noise Report</a></li>
   </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- ── HERO ── -->
@@ -744,6 +802,22 @@ async function loadData() {
       '<div class="insight-box"><div class="insight-box-title">Data Unavailable</div><div class="insight-box-text">Unable to load report data. Please try again later.</div></div>';
   }
 }
+
+// ── MOBILE NAV ──────────────────────────────────────────────────────────
+const burger = document.getElementById('nav-burger');
+const drawer = document.getElementById('nav-drawer');
+burger && burger.addEventListener('click', () => {
+  const open = drawer.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+drawer && drawer.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
 
 loadData();
 </script>

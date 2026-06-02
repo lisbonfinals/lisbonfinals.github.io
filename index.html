@@ -137,6 +137,48 @@ nav {
   color: var(--black) !important;
 }
 
+/* ── HAMBURGER ── */
+.nav-burger {
+  display: none;
+  flex-direction: column; justify-content:center; align-items:center;
+  gap: 5px; width:36px; height:36px;
+  cursor: pointer; background:none; border:none; padding:0; margin-left:12px;
+}
+.nav-burger span {
+  display: block; width:22px; height:1.5px;
+  background: var(--white); border-radius:2px;
+  transition: all .25s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity:0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── MOBILE DRAWER ── */
+.nav-drawer {
+  display: none;
+  position: fixed; top:0; left:0; right:0; bottom:0; z-index:99;
+  background: rgba(7,9,13,.97);
+  backdrop-filter: blur(20px);
+  flex-direction:column; align-items:center; justify-content:center;
+  gap: 32px;
+  opacity:0; transition: opacity .25s;
+  pointer-events:none;
+}
+.nav-drawer.open { display:flex; opacity:1; pointer-events:all; }
+.nav-drawer a {
+  font-size: 26px; font-weight:800; letter-spacing:-.01em;
+  color: rgba(240,237,232,.4); text-decoration:none;
+  transition: color .2s;
+}
+.nav-drawer a:hover { color: var(--white); }
+.nav-drawer a.drawer-noise { color: var(--amber); opacity:.8; }
+.nav-drawer a.drawer-ig {
+  font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color: var(--amber); border:1px solid var(--amber);
+  padding: 10px 24px; border-radius:4px; margin-top:8px;
+}
+.nav-drawer a.drawer-warning { color: rgba(248,113,113,0.6); }
+
 /* LANG SWITCHER */
 .lang-switcher {
   background: none;
@@ -1178,9 +1220,12 @@ footer {
 
 
 /* ═══ MOBILE RESPONSIVE ═══ */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+}
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
-  .nav-links { display: none; }
 
   .hero { min-height: 100svh; align-items: flex-start; padding-top: 80px; }
   .hero-content { padding: 0 20px 60px; max-width: 100%; }
@@ -1779,6 +1824,17 @@ body::after {
 <div class="cursor-ring" id="cursor-ring"></div>
 
 <!-- NAV -->
+<!-- ── MOBILE DRAWER ── -->
+<div class="nav-drawer" id="nav-drawer">
+  <a href="#how" data-i18n="nav_how" onclick="closeDrawer()">How it works</a>
+  <a href="#feed" data-i18n="nav_feed" onclick="closeDrawer()">Live feed</a>
+  <a href="#stats" data-i18n="nav_stats" onclick="closeDrawer()">Stats</a>
+  <a href="#warning" class="drawer-warning" data-i18n="nav_warning" onclick="closeDrawer()">⚠ Warning</a>
+  <a href="#log" data-i18n="nav_log" onclick="closeDrawer()">Captain's Log</a>
+  <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
+  <a href="https://instagram.com/lisbon.finals" class="drawer-ig">@lisbon.finals</a>
+</div>
+
 <nav>
   <a href="#" class="nav-logo">
     <div class="nav-dot"></div>
@@ -1794,6 +1850,9 @@ body::after {
     <li><a href="https://instagram.com/lisbon.finals" class="nav-cta">@lisbon.finals</a></li>
   </ul>
   <button class="lang-switcher" id="lang-btn" onclick="toggleLang()">PT</button>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -3095,6 +3154,21 @@ setTimeout(loadLiveData, 300);
   }
 
   window.toggleLang = function() { setLang(currentLang === 'en' ? 'pt' : 'en'); };
+
+  // ── MOBILE NAV ──
+  const burger = document.getElementById('nav-burger');
+  const drawer = document.getElementById('nav-drawer');
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  window.closeDrawer = closeDrawer;
+  burger && burger.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
 
   // Init
   setLang(currentLang);
