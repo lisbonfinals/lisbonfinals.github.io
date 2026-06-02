@@ -65,8 +65,8 @@ nav {
 /* ── HERO ── */
 .hero {
   min-height: 100vh;
-  display: flex; flex-direction:column; justify-content:flex-end;
-  padding: 0 48px 80px;
+  display: flex; flex-direction:column; justify-content:flex-start;
+  padding: 140px 48px 80px;
   position: relative;
   overflow: hidden;
 }
@@ -275,17 +275,17 @@ nav {
 .download-meta { font-family:var(--mono); font-size:10px; color:var(--gray); line-height:1.6; }
 
 /* ── VIOLATIONS BADGE ── */
-.violations-row { display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap; }
+.violations-row { display:flex;gap:14px;margin-bottom:36px;flex-wrap:wrap; }
 .vio-badge {
-  display: flex; align-items:center; gap:8px;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-family: var(--mono); font-size:11px;
+  display: flex; align-items:center; gap:12px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-family: var(--mono); font-size:12px;
 }
 .vio-badge.red { background:var(--red-dim); border:1px solid rgba(239,68,68,.25); }
 .vio-badge.yellow { background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.25); color:rgba(245,166,35,.9); }
 .vio-badge.night { background:var(--indigo-dim); border:1px solid rgba(99,102,241,.25); color:rgba(139,142,246,.9); }
-.vio-badge-num { font-size:16px; font-weight:700; }
+.vio-badge-num { font-size:22px; font-weight:700; }
 
 /* ── ARCHIVE ── */
 .archive-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px; }
@@ -617,7 +617,7 @@ function renderReport(report) {
           </div>
           ${buildPodium(report.top_airlines_noisy, 'n')}
 
-          <div class="podium-section-title noisy" style="margin-top:20px">
+          <div class="podium-section-title noisy" style="margin-top:48px">
             <span class="dot"></span>
             Manufacturers — Noise Ranking
           </div>
