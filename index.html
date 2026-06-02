@@ -122,6 +122,10 @@ nav {
   font-family: var(--mono);
 }
 .nav-links a:hover { color: var(--amber); }
+.nav-links a.nav-warning { color: rgba(248,113,113,0.7); transition: color .2s; }
+.nav-links a.nav-warning:hover { color: #ef4444; text-shadow: 0 0 12px rgba(239,68,68,0.5); }
+.nav-links a.nav-noise { color: var(--amber); font-weight: 700; letter-spacing: .12em; transition: color .2s, text-shadow .2s; }
+.nav-links a.nav-noise:hover { color: #fff; text-shadow: 0 0 14px rgba(245,166,35,0.6); }
 
 .nav-cta {
   padding: 8px 20px;
@@ -1845,9 +1849,9 @@ body::after {
     <li><a href="#how" data-i18n="nav_how">How it works</a></li>
     <li><a href="#feed" data-i18n="nav_feed">Live feed</a></li>
     <li><a href="#stats" data-i18n="nav_stats">Stats</a></li>
-    <li><a href="#warning" style="color:rgba(248,113,113,0.7);" data-i18n="nav_warning">⚠ Warning</a></li>
+    <li><a href="#warning" class="nav-warning" data-i18n="nav_warning">⚠ Warning</a></li>
     <li><a href="#log" data-i18n="nav_log">Captain's Log</a></li>
-    <li><a href="/noise-report.html" style="color:var(--amber);font-weight:600">Noise Report</a></li>
+    <li><a href="/noise-report.html" class="nav-noise">Noise Report</a></li>
   </ul>
   <button class="lang-switcher" id="lang-btn" onclick="toggleLang()">PT</button>
   <button class="nav-burger" id="nav-burger" aria-label="Menu">
