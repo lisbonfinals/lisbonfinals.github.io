@@ -61,6 +61,20 @@ nav {
 .nav-links { display:flex;align-items:center;gap:32px;list-style:none; }
 .nav-links a { font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.5);text-decoration:none;transition:color .2s; }
 .nav-links a:hover, .nav-links a.active { color:var(--white); }
+.nav-links a.nav-warning { color:rgba(248,113,113,0.7); }
+.nav-links a.nav-warning:hover { color:#ef4444; text-shadow:0 0 12px rgba(239,68,68,0.5); }
+.nav-links a.nav-noise { color:var(--amber); font-weight:700; letter-spacing:.12em; }
+.nav-links a.nav-noise:hover { color:#fff; text-shadow:0 0 14px rgba(245,166,35,0.6); }
+.nav-drawer a.drawer-noise { color:var(--amber); opacity:.8; }
+.nav-drawer a.drawer-warning { color:rgba(248,113,113,0.6); }
+.nav-drawer a.drawer-ig { font-size:20px; color:rgba(240,237,232,.3); }
+.lang-switcher {
+  background:none; border:1px solid rgba(240,237,232,0.18); border-radius:2px;
+  color:rgba(240,237,232,0.45); font-family:var(--mono); font-size:10px;
+  letter-spacing:.14em; padding:6px 14px; cursor:pointer; transition:all .2s;
+  text-transform:uppercase; margin-left:8px; flex-shrink:0;
+}
+.lang-switcher:hover { border-color:var(--amber); color:var(--amber); }
 
 /* ── HAMBURGER ── */
 .nav-burger {
@@ -430,10 +444,13 @@ footer {
 
 <!-- ── MOBILE DRAWER ── -->
 <div class="nav-drawer" id="nav-drawer">
-  <a href="/">Home</a>
-  <a href="/#flights">Live</a>
-  <a href="/#stats">Stats</a>
-  <a href="/noise-report.html" class="active">Noise Report</a>
+  <a href="/#how" data-i18n="nav_how" onclick="closeDrawer()">How it works</a>
+  <a href="/#feed" data-i18n="nav_feed" onclick="closeDrawer()">Live feed</a>
+  <a href="/#stats" data-i18n="nav_stats" onclick="closeDrawer()">Stats</a>
+  <a href="/#warning" class="drawer-warning" data-i18n="nav_warning" onclick="closeDrawer()">⚠ Warning</a>
+  <a href="/#log" data-i18n="nav_log" onclick="closeDrawer()">Captain's Log</a>
+  <a href="/noise-report.html" class="drawer-noise active" onclick="closeDrawer()">Noise Report</a>
+  <a href="https://instagram.com/lisbon.finals" class="drawer-ig">@lisbon.finals</a>
 </div>
 
 <!-- ── NAV ── -->
@@ -443,11 +460,14 @@ footer {
     <span class="nav-wordmark">LISBON <span>FINALS</span></span>
   </a>
   <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/#flights">Live</a></li>
-    <li><a href="/#stats">Stats</a></li>
-    <li><a href="/noise-report.html" class="active">Noise Report</a></li>
+    <li><a href="/#how" data-i18n="nav_how">How it works</a></li>
+    <li><a href="/#feed" data-i18n="nav_feed">Live feed</a></li>
+    <li><a href="/#stats" data-i18n="nav_stats">Stats</a></li>
+    <li><a href="/#warning" class="nav-warning" data-i18n="nav_warning">⚠ Warning</a></li>
+    <li><a href="/#log" data-i18n="nav_log">Captain's Log</a></li>
+    <li><a href="/noise-report.html" class="nav-noise active">Noise Report</a></li>
   </ul>
+  <button class="lang-switcher" id="lang-btn" onclick="toggleLang()">PT</button>
   <button class="nav-burger" id="nav-burger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -457,40 +477,40 @@ footer {
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-tag">LPPT Lisbon · Acoustic Monitoring</div>
+  <div class="hero-tag" data-i18n="hero_tag">LPPT Lisbon · Acoustic Monitoring</div>
   <h1 class="hero-title">
-    Noise<br>
-    <span class="accent">Report</span><br>
-    <span class="light">by the numbers</span>
+    <span data-i18n="hero_title1">Noise</span><br>
+    <span class="accent" data-i18n="hero_title2">Report</span><br>
+    <span class="light" data-i18n="hero_title3">by the numbers</span>
   </h1>
   <p class="hero-subtitle">
-    Every flight. Every decibel. Every night.<br>
-    Independent acoustic monitoring of Lisbon Airport — flight by flight, month by month.
+    <span data-i18n="hero_sub1">Every flight. Every decibel. Every night.</span><br>
+    <span data-i18n="hero_sub2">Independent acoustic monitoring of Lisbon Airport — flight by flight, month by month.</span>
   </p>
   <div class="hero-stats" id="hero-stats">
     <div class="hero-stat amber">
       <div class="hero-stat-val" id="h-flights">—</div>
-      <div class="hero-stat-lbl">Flights This Month</div>
+      <div class="hero-stat-lbl" data-i18n="stat_flights">Flights This Month</div>
     </div>
     <div class="hero-stat">
       <div class="hero-stat-val" id="h-avg"><span class="unit">— dB</span></div>
-      <div class="hero-stat-lbl">Avg Noise Level</div>
+      <div class="hero-stat-lbl" data-i18n="stat_avg">Avg Noise Level</div>
     </div>
     <div class="hero-stat red" style="min-width:160px">
       <div class="hero-stat-val" id="h-rouge">—</div>
-      <div class="hero-stat-lbl">Night Violations</div>
+      <div class="hero-stat-lbl" data-i18n="stat_violations">Night Violations</div>
       <div id="h-rouge-detail" style="font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.5);margin-top:5px;line-height:1.5"></div>
     </div>
     <div class="hero-stat indigo">
       <div class="hero-stat-val" id="h-night">—<span class="unit">%</span></div>
-      <div class="hero-stat-lbl">Night Operations</div>
+      <div class="hero-stat-lbl" data-i18n="stat_night">Night Operations</div>
     </div>
   </div>
 </section>
 
 <!-- ── MONTH SELECTOR ── -->
 <div class="month-bar">
-  <span class="month-bar-label">Archive</span>
+  <span class="month-bar-label" data-i18n="archive_label">Archive</span>
   <div class="month-chips" id="month-chips">
     <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
   </div>
@@ -501,13 +521,13 @@ footer {
 
   <!-- FEATURED REPORT -->
   <div id="report-container">
-    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><br><br>Loading report data...</div>
+    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><br><br><span data-i18n="loading_txt">Loading report data...</span></div>
   </div>
 
   <!-- ARCHIVE -->
   <div class="section-header" style="margin-top:80px">
-    <div class="section-tag">All Reports</div>
-    <h2 class="section-title">Monthly <span>Archive</span></h2>
+    <div class="section-tag" data-i18n="archive_tag">All Reports</div>
+    <h2 class="section-title"><span data-i18n="archive_title">Monthly</span> <span><span data-i18n="archive_title2">Archive</span></span></h2>
   </div>
   <div class="archive-grid" id="archive-grid">
     <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
@@ -517,8 +537,8 @@ footer {
 
 <!-- ── FOOTER ── -->
 <footer>
-  <span>© 2026 Lisbon Finals · Independent noise monitoring · LPPT Lisbon</span>
-  <span>Data captured from a private terrace · Not affiliated with ANA Aeroportos or ANAC</span>
+  <span data-i18n="footer_left">© 2026 Lisbon Finals · Independent noise monitoring · LPPT Lisbon</span>
+  <span data-i18n="footer_right">Data captured from a private terrace · Not affiliated with ANA Aeroportos or ANAC</span>
 </footer>
 
 <script>
@@ -811,13 +831,57 @@ burger && burger.addEventListener('click', () => {
   burger.classList.toggle('open', open);
   document.body.style.overflow = open ? 'hidden' : '';
 });
-drawer && drawer.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    drawer.classList.remove('open');
-    burger.classList.remove('open');
-    document.body.style.overflow = '';
+function closeDrawer() {
+  drawer && drawer.classList.remove('open');
+  burger && burger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── I18N ────────────────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  en: {
+    nav_how: 'How it works', nav_feed: 'Live feed', nav_stats: 'Stats',
+    nav_warning: '⚠ Warning', nav_log: "Captain's Log",
+    hero_tag: 'LPPT Lisbon · Acoustic Monitoring',
+    hero_title1: 'Noise', hero_title2: 'Report', hero_title3: 'by the numbers',
+    hero_sub1: 'Every flight. Every decibel. Every night.',
+    hero_sub2: 'Independent acoustic monitoring of Lisbon Airport — flight by flight, month by month.',
+    stat_flights: 'Flights This Month', stat_avg: 'Avg Noise Level',
+    stat_violations: 'Night Violations', stat_night: 'Night Operations',
+    archive_label: 'Archive', loading_txt: 'Loading report data...',
+    archive_tag: 'All Reports', archive_title: 'Monthly', archive_title2: 'Archive',
+    footer_left: '© 2026 Lisbon Finals · Independent noise monitoring · LPPT Lisbon',
+    footer_right: 'Data captured from a private terrace · Not affiliated with ANA Aeroportos or ANAC',
+  },
+  pt: {
+    nav_how: 'Como funciona', nav_feed: 'Em direto', nav_stats: 'Estatísticas',
+    nav_warning: '⚠ Aviso', nav_log: 'Diário do Capitão',
+    hero_tag: 'LPPT Lisboa · Monitorização Acústica',
+    hero_title1: 'Relatório', hero_title2: 'de Ruído', hero_title3: 'pelos números',
+    hero_sub1: 'Cada voo. Cada decibel. Cada noite.',
+    hero_sub2: 'Monitorização acústica independente do Aeroporto de Lisboa — voo a voo, mês a mês.',
+    stat_flights: 'Voos Este Mês', stat_avg: 'Nível Médio de Ruído',
+    stat_violations: 'Infrações Noturnas', stat_night: 'Operações Noturnas',
+    archive_label: 'Arquivo', loading_txt: 'A carregar dados...',
+    archive_tag: 'Todos os Relatórios', archive_title: 'Arquivo', archive_title2: 'Mensal',
+    footer_left: '© 2026 Lisbon Finals · Monitorização de ruído independente · LPPT Lisboa',
+    footer_right: 'Dados captados de um terraço privado · Sem afiliação com ANA Aeroportos ou ANAC',
+  }
+};
+let currentLang = 'en';
+function applyLang(lang) {
+  const t = TRANSLATIONS[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
   });
-});
+  const btn = document.getElementById('lang-btn');
+  if (btn) btn.textContent = lang === 'en' ? 'PT' : 'EN';
+  currentLang = lang;
+}
+function toggleLang() {
+  applyLang(currentLang === 'en' ? 'pt' : 'en');
+}
 
 loadData();
 </script>
