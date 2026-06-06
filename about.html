@@ -114,6 +114,7 @@ nav {
   font-family: var(--serif); font-style: italic;
   font-weight: 400; color: rgba(240,237,232,.3);
 }
+.title-amber { color: var(--amber); }
 .about-hero-sub {
   font-size: 15px; line-height: 1.8; color: rgba(240,237,232,0.5);
   max-width: 620px;
@@ -395,14 +396,16 @@ nav {
 <!-- HERO -->
 <header class="about-hero">
   <div class="about-hero-eyebrow">The project</div>
-  <h1 class="about-hero-title">A terrace above Lisbon.<br><em>Every aircraft. Every decibel.</em></h1>
+  <h1 class="about-hero-title">A terrace above Lisbon.<br><span class="title-amber">Every aircraft.</span> <em>Every decibel.</em></h1>
   <p class="about-hero-sub">A Raspberry Pi on a Lisbon terrace listens for aircraft on final approach to Humberto Delgado Airport — combining ADS-B radar, acoustic sensors and AI vision to photograph, measure and publish every pass. Autonomously. 24 hours a day, without a single human trigger.</p>
 </header>
+
+<hr class="section-divider" style="margin-bottom:60px">
 
 <!-- HOW IT WORKS -->
 <section class="steps-section">
   <div class="section-label">How it works</div>
-  <h2 class="section-title-main">Six layers,<br><em>zero human triggers</em></h2>
+  <h2 class="section-title-main">Three layers,<br><em>zero human triggers</em></h2>
   <div class="steps">
     <div class="step">
       <span class="step-num">01</span>
@@ -582,9 +585,9 @@ fetch(GIST_URL + '?t=' + Date.now())
   .then(data => {
     const stats = data.stats || data;
     if (stats.total_flights)
-      document.getElementById('statFlights').textContent = stats.total_flights.toLocaleString();
+      document.getElementById('statFlights').textContent = stats.total_flights.toLocaleString('en-US');
     if (stats.total_photos)
-      document.getElementById('statPhotos').textContent = stats.total_photos.toLocaleString();
+      document.getElementById('statPhotos').textContent = stats.total_photos.toLocaleString('en-US');
   })
   .catch(() => {});
 
