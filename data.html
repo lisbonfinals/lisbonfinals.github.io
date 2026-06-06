@@ -84,9 +84,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 /* ── SECTION HEADERS (uniform across all pages) ── */
 .section-label{
-  font-family:var(--mono);font-size:9px;letter-spacing:.2em;
-  text-transform:uppercase;color:rgba(245,166,35,.5);margin-bottom:12px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
 }
+.section-label::before{
+  content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0;
+}
+#warning-zone .section-label{ color:var(--red); }
+#warning-zone .section-label::before{ background:var(--red); }
 .section-title{
   font-size:clamp(36px,5vw,60px);font-weight:800;
   line-height:1;letter-spacing:-.02em;color:var(--white);
@@ -185,6 +191,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .warning-val{font-family:var(--mono);font-size:48px;font-weight:500;line-height:1;color:var(--red);}
 .warning-val.ok{color:var(--green);}
 .warning-val.warn{color:var(--amber);}
+.warning-val.night{color:#5ea5f0;}
 .warning-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-top:8px;}
 .warning-sub{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.2);margin-top:4px;}
 
@@ -360,7 +367,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
           <div class="noise-mini-lbl" data-i18n="lbl_peak_today">Peak today</div>
         </div>
         <div class="noise-mini-stat">
-          <div class="noise-mini-val" id="n-avg-today">—</div>
+          <div class="noise-mini-val" id="n-avg-today" style="color:var(--red)">—</div>
           <div class="noise-mini-lbl" data-i18n="lbl_alltime_peak">All-time peak</div>
         </div>
         <div class="noise-mini-stat">
@@ -405,7 +412,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
   <div class="warning-hero-card">
     <div class="warning-stat">
-      <div class="warning-val" id="w-night-total">—</div>
+      <div class="warning-val night" id="w-night-total">—</div>
       <div class="warning-lbl" data-i18n="w_night_lbl">Night flights this week</div>
       <div class="warning-sub" id="w-week-from">since Monday</div>
     </div>
@@ -415,7 +422,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="warning-sub">&gt; 98.9 dB · absolute ban</div>
     </div>
     <div class="warning-stat">
-      <div class="warning-val" id="w-l2">—</div>
+      <div class="warning-val warn" id="w-l2">—</div>
       <div class="warning-lbl" data-i18n="w_l2_lbl">Level 2 violations</div>
       <div class="warning-sub">93–95.9 dB outside allowed slots</div>
     </div>
