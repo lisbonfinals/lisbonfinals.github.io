@@ -572,11 +572,12 @@ footer {
 .footer-insta:hover { color:var(--amber); }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  nav { padding:16px 20px; }
+@media (max-width: 1024px) {
   .nav-links { display:none; }
   .nav-burger { display:flex; }
-  .lang-switcher { display:none; }
+}
+@media (max-width: 900px) {
+  nav { padding:16px 20px; }
   .hero { padding:88px 20px 40px; }
   .hero-live-card { display:none; }
   .latest-shot { grid-template-columns:1fr; }
@@ -587,12 +588,18 @@ footer {
   .explore-band { grid-template-columns:1fr; }
   .explore-card { border-right:none; border-bottom:1px solid var(--border); }
   .runway-strip { padding:0 20px; }
-  .weather-section { padding:48px 20px; }
+  .weather-section { padding:48px 20px; flex-direction:column; }
   .stats-row { grid-template-columns:1fr 1fr; }
   .stat-cell { padding:20px 20px; }
   .section-header { padding:36px 20px 28px; }
   .footer-top { flex-wrap:wrap; }
   footer { padding:40px 20px; }
+}
+@media (max-width: 640px) {
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .gallery-strip { grid-template-columns:1fr; }
+  .rwy-cards { flex-direction:column; }
+  .hero-title { font-size:clamp(2.4rem,11vw,4.8rem); }
 }
 </style>
 </head>
@@ -1285,12 +1292,214 @@ fetch('https://wttr.in/38.7749,-9.1397?format=j1')
 })();
 
 // ── LANG TOGGLE ──
-var _lang = 'en';
-function toggleLang() {
-  _lang = _lang === 'en' ? 'pt' : 'en';
+var INDEX_TRANSLATIONS = {
+  en: {
+    hero_pill: 'Tracking live · LPPT approach path',
+    hero_sub: 'An autonomous station on a Lisbon terrace — photographing, measuring and publishing every aircraft on final approach to LPPT, without any human input.',
+    cta_data: 'Explore the data',
+    hlc_eyebrow: 'Latest detected',
+    stat_flights_lbl: 'Flights tracked',
+    stat_flights_sub: 'since May 3, 2026',
+    stat_photos_lbl: 'Photos published',
+    stat_photos_sub: 'by AI · zero human',
+    stat_peak_lbl: 'Peak noise recorded',
+    stat_days_lbl: 'Days running',
+    stat_days_sub: 'autonomous · 24/7',
+    sec_eyebrow: 'Latest captures',
+    sec_title: 'Live from <em>the terrace</em>',
+    ls_eyebrow: 'Latest shot',
+    ls_badge: 'Latest published',
+    ls_alt_lbl: 'Altitude',
+    ls_noise_lbl: 'Peak noise',
+    ls_speed_lbl: 'Ground speed',
+    ls_aircraft_lbl: 'Aircraft type',
+    ls_score_lbl: 'YOLO Score',
+    ls_published: 'Published to @lisbon.finals',
+    ls_today_lbl: 'Flights today',
+    ls_ig_link: 'View on Instagram',
+    ticker_lbl: 'Live Feed',
+    wx_eyebrow: 'Atmospheric conditions',
+    wx_title: 'The wind<br><em>decides everything.</em>',
+    wx_body: "LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 03, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 21, climbing towards the SSW, crossing the terrace before reaching the Tejo.",
+    rwy03_title: 'North wind — landing over the terrace ✶',
+    rwy03_desc: 'Planes approach from the south and land over my terrace. Close, slow, full-frame — most impactful shots.',
+    rwy21_title: 'South wind — takeoff over the terrace',
+    rwy21_desc: 'Planes take off and climb over my terrace heading north. Higher, faster — less impactful shots.',
+    wlive_source: 'LPPT · Live weather',
+    wlive_wind: 'Wind',
+    wlive_runway: 'Active runway',
+    wlive_wdir: 'Wind direction',
+    wlive_vis: 'Visibility',
+    ec1_lbl: 'The data',
+    ec1_title: 'Flight &amp; noise<br><em>intelligence</em>',
+    ec1_desc: 'Every flight tracked. Every decibel measured. Live ticker, ANAC warning zone, and full acoustic history.',
+    ec1_arrow: '→ Explore data',
+    ec2_lbl: "Captain’s Log",
+    ec2_title: 'The station<br><em>journal</em>',
+    ec2_desc: 'Operational notes, unusual events, maintenance logs, and observations from the terrace.',
+    ec2_arrow: '→ Read the log',
+    ec3_lbl: 'The project',
+    ec3_title: 'A personal<br><em>experiment</em>',
+    ec3_desc: 'RTL-SDR, YOLO, Real-ESRGAN, Raspberry Pi — how one autonomous station works end-to-end.',
+    ec3_arrow: '→ How it works',
+    footer_desc: 'An autonomous aircraft spotting and acoustic monitoring system operating 24/7 from a residential terrace in Lisbon, directly under the final approach path to LPPT.',
+    footer_proj: 'Project',
+    footer_connect: 'Connect',
+    footer_support: 'Support the project',
+    footer_copy: '© 2026 Lisbon Finals · Automated Aviation Intelligence · LPPT',
+  },
+  pt: {
+    hero_pill: 'Em directo · Rota de aproximação LPPT',
+    hero_sub: 'Uma estação autónoma numa varanda em Lisboa — fotografando, medindo e publicando cada aeronave em aproximação final ao LPPT, sem qualquer intervenção humana.',
+    cta_data: 'Explorar os dados',
+    hlc_eyebrow: 'Último detectado',
+    stat_flights_lbl: 'Voos registados',
+    stat_flights_sub: 'desde 3 de Maio de 2026',
+    stat_photos_lbl: 'Fotos publicadas',
+    stat_photos_sub: 'por IA · zero humano',
+    stat_peak_lbl: 'Pico de ruído registado',
+    stat_days_lbl: 'Dias em funcionamento',
+    stat_days_sub: 'autónomo · 24/7',
+    sec_eyebrow: 'Últimas capturas',
+    sec_title: 'Em directo <em>da varanda</em>',
+    ls_eyebrow: 'Última foto',
+    ls_badge: 'Última publicação',
+    ls_alt_lbl: 'Altitude',
+    ls_noise_lbl: 'Pico de ruído',
+    ls_speed_lbl: 'Velocidade solo',
+    ls_aircraft_lbl: 'Tipo de aeronave',
+    ls_score_lbl: 'YOLO Score',
+    ls_published: 'Publicado em @lisbon.finals',
+    ls_today_lbl: 'Voos hoje',
+    ls_ig_link: 'Ver no Instagram',
+    ticker_lbl: 'Feed em directo',
+    wx_eyebrow: 'Condições atmosféricas',
+    wx_title: 'O vento<br><em>decide tudo.</em>',
+    wx_body: 'A pista do LPPT corre de SSW a NNE. O vento decide o sentido do tráfego. Com vento norte, as aeronaves aproximam-se pelo sul — descendo sobre o Tejo e o centro da cidade antes de aterrar na RWY 03, passando directamente sobre a minha varanda. Com vento sul, descolam pela RWY 21, subindo para SSW e cruzando a varanda antes de atingirem o Tejo.',
+    rwy03_title: 'Vento norte — aterragem sobre a varanda ✶',
+    rwy03_desc: 'Os aviões aproximam-se pelo sul e aterram sobre a minha varanda. Perto, lentos, em plano completo — os melhores disparos.',
+    rwy21_title: 'Vento sul — descolagem sobre a varanda',
+    rwy21_desc: 'Os aviões descolam e sobem sobre a minha varanda em direcção a norte. Mais alto, mais rápido — disparos menos impactantes.',
+    wlive_source: 'LPPT · Tempo em directo',
+    wlive_wind: 'Vento',
+    wlive_runway: 'Pista activa',
+    wlive_wdir: 'Direcção do vento',
+    wlive_vis: 'Visibilidade',
+    ec1_lbl: 'Os dados',
+    ec1_title: 'Inteligência de voo<br><em>e ruído</em>',
+    ec1_desc: 'Cada voo registado. Cada decibel medido. Ticker ao vivo, zona de alerta ANAC e histórico acústico completo.',
+    ec1_arrow: '→ Explorar dados',
+    ec2_lbl: 'Diário de Bordo',
+    ec2_title: 'O diário<br><em>da estação</em>',
+    ec2_desc: 'Notas operacionais, eventos incomuns, registos de manutenção e observações da varanda.',
+    ec2_arrow: '→ Ler o diário',
+    ec3_lbl: 'O projecto',
+    ec3_title: 'Uma experiência<br><em>pessoal</em>',
+    ec3_desc: 'RTL-SDR, YOLO, Real-ESRGAN, Raspberry Pi — como uma estação autónoma funciona de ponta a ponta.',
+    ec3_arrow: '→ Como funciona',
+    footer_desc: 'Um sistema autónomo de observação de aeronaves e monitorização acústica em funcionamento 24/7 a partir de uma varanda residencial em Lisboa, directamente sob a rota de aproximação final ao LPPT.',
+    footer_proj: 'Projecto',
+    footer_connect: 'Contacto',
+    footer_support: 'Apoiar o projecto',
+    footer_copy: '© 2026 Lisbon Finals · Inteligência de Aviação Autónoma · LPPT',
+  }
+};
+
+var _lang = localStorage.getItem('lf_lang') || 'en';
+
+function applyLang(lang) {
+  _lang = lang;
+  localStorage.setItem('lf_lang', lang);
+  var t = INDEX_TRANSLATIONS[lang];
   var btn = document.getElementById('lang-btn');
-  if (btn) btn.textContent = _lang === 'en' ? 'PT' : 'EN';
+  if (btn) btn.textContent = lang === 'en' ? 'PT' : 'EN';
+
+  function q(s) { return document.querySelector(s); }
+  function qa(s) { return document.querySelectorAll(s); }
+  function el(id) { return document.getElementById(id); }
+
+  // Hero pill
+  var pill = q('.hero-live-pill');
+  if (pill) { var dot = pill.querySelector('.hero-live-dot'); pill.innerHTML = ''; if (dot) pill.appendChild(dot); pill.appendChild(document.createTextNode(' ' + t.hero_pill)); }
+  // Hero sub
+  var sub = q('.hero-sub'); if (sub) sub.textContent = t.hero_sub;
+  // CTA
+  var cta = q('.btn-primary'); if (cta) cta.textContent = t.cta_data;
+  // HLC eyebrow
+  var hlc = q('.hlc-eyebrow'); if (hlc) hlc.textContent = t.hlc_eyebrow;
+  // Stats labels
+  var statLbls = qa('.stats-row .stat-lbl');
+  if (statLbls[0]) statLbls[0].textContent = t.stat_flights_lbl;
+  if (statLbls[1]) statLbls[1].textContent = t.stat_photos_lbl;
+  if (statLbls[2]) statLbls[2].textContent = t.stat_peak_lbl;
+  if (statLbls[3]) statLbls[3].textContent = t.stat_days_lbl;
+  // Stats subs (skip index 2 — dynamic peak sub)
+  var statSubs = qa('.stats-row .stat-sub');
+  if (statSubs[0]) statSubs[0].textContent = t.stat_flights_sub;
+  if (statSubs[1]) statSubs[1].textContent = t.stat_photos_sub;
+  if (statSubs[3]) statSubs[3].textContent = t.stat_days_sub;
+  // Section header
+  var eyebrow = q('.section-eyebrow'); if (eyebrow) eyebrow.textContent = t.sec_eyebrow;
+  var sectTitle = q('.section-title'); if (sectTitle) sectTitle.innerHTML = t.sec_title;
+  // Latest shot card
+  var lsEyebrow = q('.ls-eyebrow'); if (lsEyebrow) lsEyebrow.textContent = t.ls_eyebrow;
+  var lsBadge = q('.ls-photo-badge'); if (lsBadge) lsBadge.textContent = t.ls_badge;
+  var lsStatLbls = qa('.ls-stat-lbl');
+  if (lsStatLbls[0]) lsStatLbls[0].textContent = t.ls_alt_lbl;
+  if (lsStatLbls[1]) lsStatLbls[1].textContent = t.ls_noise_lbl;
+  if (lsStatLbls[2]) lsStatLbls[2].textContent = t.ls_speed_lbl;
+  if (lsStatLbls[3]) lsStatLbls[3].textContent = t.ls_aircraft_lbl;
+  var yoloLbl = q('.ls-score-detail .ls-score-lbl'); if (yoloLbl) yoloLbl.textContent = t.ls_score_lbl;
+  var todayLbl = q('.ls-today-block .ls-score-lbl'); if (todayLbl) todayLbl.textContent = t.ls_today_lbl;
+  var lsPub = el('ls-published'); if (lsPub) lsPub.textContent = t.ls_published;
+  var igLink = q('.ls-ig-link'); if (igLink) igLink.textContent = t.ls_ig_link;
+  // Ticker label
+  var tickerLbl = q('.ticker-label');
+  if (tickerLbl) { var tdot = tickerLbl.querySelector('.ticker-live-dot'); tickerLbl.innerHTML = ''; if (tdot) tickerLbl.appendChild(tdot); tickerLbl.appendChild(document.createTextNode(t.ticker_lbl)); }
+  // Weather section
+  var wxEyebrow = q('.weather-eyebrow'); if (wxEyebrow) wxEyebrow.textContent = t.wx_eyebrow;
+  var wxTitle = q('.weather-title'); if (wxTitle) wxTitle.innerHTML = t.wx_title;
+  var wxBody = q('.weather-body'); if (wxBody) wxBody.textContent = t.wx_body;
+  var r03t = q('#rwy-card-03 .rwy-title'); if (r03t) r03t.textContent = t.rwy03_title;
+  var r03d = q('#rwy-card-03 .rwy-desc'); if (r03d) r03d.textContent = t.rwy03_desc;
+  var r21t = q('#rwy-card-21 .rwy-title'); if (r21t) r21t.textContent = t.rwy21_title;
+  var r21d = q('#rwy-card-21 .rwy-desc'); if (r21d) r21d.textContent = t.rwy21_desc;
+  var wlSrc = q('.wlive-source'); if (wlSrc) wlSrc.textContent = t.wlive_source;
+  var wlLbls = qa('.wlive-item-lbl');
+  if (wlLbls[0]) wlLbls[0].textContent = t.wlive_wind;
+  if (wlLbls[1]) wlLbls[1].textContent = t.wlive_runway;
+  if (wlLbls[2]) wlLbls[2].textContent = t.wlive_wdir;
+  if (wlLbls[3]) wlLbls[3].textContent = t.wlive_vis;
+  // Explore cards
+  var ecCards = qa('.explore-card');
+  var ecData = [
+    [t.ec1_lbl, t.ec1_title, t.ec1_desc, t.ec1_arrow],
+    [t.ec2_lbl, t.ec2_title, t.ec2_desc, t.ec2_arrow],
+    [t.ec3_lbl, t.ec3_title, t.ec3_desc, t.ec3_arrow]
+  ];
+  ecCards.forEach(function(card, i) {
+    if (!ecData[i]) return;
+    var lbl = card.querySelector('.ec-label');
+    var ttl = card.querySelector('.ec-title');
+    var dsc = card.querySelector('.ec-desc');
+    var arr = card.querySelector('.ec-arrow');
+    if (lbl) lbl.textContent = ecData[i][0];
+    if (ttl) ttl.innerHTML = ecData[i][1];
+    if (dsc) dsc.textContent = ecData[i][2];
+    if (arr) arr.textContent = ecData[i][3];
+  });
+  // Footer
+  var fDesc = q('.footer-desc'); if (fDesc) fDesc.textContent = t.footer_desc;
+  var fCols = qa('.footer-col-title');
+  if (fCols[0]) fCols[0].textContent = t.footer_proj;
+  if (fCols[1]) fCols[1].textContent = t.footer_connect;
+  var fKofi = q('.footer-kofi-label span'); if (fKofi) fKofi.textContent = t.footer_support;
+  var fCopy = q('.footer-copy'); if (fCopy) fCopy.textContent = t.footer_copy;
 }
+
+function toggleLang() { applyLang(_lang === 'en' ? 'pt' : 'en'); }
+
+document.addEventListener('DOMContentLoaded', function() { if (_lang !== 'en') applyLang(_lang); });
 
 // ── MOBILE BURGER ──
 (function(){
