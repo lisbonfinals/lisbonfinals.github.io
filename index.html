@@ -331,8 +331,16 @@ nav {
 .ls-stat-val.amber { color:var(--amber); }
 .ls-stat-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-top:4px; }
 .ls-score-row {
-  display:flex;align-items:baseline;gap:6px;
+  display:flex;align-items:center;gap:6px;
   border-top:1px solid var(--border);padding-top:24px;
+}
+.ls-today-block {
+  margin-left:auto;text-align:right;
+  padding-left:24px;border-left:1px solid var(--border);
+}
+.ls-today-num {
+  font-family:var(--mono);font-weight:500;font-size:22px;
+  color:rgba(147,180,220,.8);letter-spacing:.02em;margin-bottom:4px;
 }
 .ls-score-num { font-family:var(--mono);font-weight:500;font-size:36px;color:var(--amber);letter-spacing:.02em; }
 .ls-score-max { font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.22); }
@@ -707,6 +715,10 @@ footer {
         <div class="ls-score-lbl">YOLO Score</div>
         <div class="ls-score-sub" id="ls-published">Published to @lisbon.finals</div>
       </div>
+      <div class="ls-today-block">
+        <div class="ls-today-num" id="rs-today">—</div>
+        <div class="ls-score-lbl">Flights today</div>
+      </div>
     </div>
     <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="ls-ig-link" id="ls-ig-link">View on Instagram</a>
   </div>
@@ -783,38 +795,14 @@ footer {
   </div>
 </div>
 
-<!-- RUNWAY STRIP -->
-<div class="runway-strip">
-  <div class="rs-item">
-    <div class="rs-label">Active runway</div>
-    <div class="rs-value"><span class="rs-runway-badge" id="rs-runway">—</span></div>
-  </div>
-  <div class="rs-item">
-    <div class="rs-label">Wind</div>
-    <div class="rs-value" id="rs-wind">—</div>
-  </div>
-  <div class="rs-item">
-    <div class="rs-label">Direction</div>
-    <div class="rs-value" id="rs-dir">—</div>
-  </div>
-  <div class="rs-item">
-    <div class="rs-label">Temperature</div>
-    <div class="rs-value" id="rs-temp">—</div>
-  </div>
-  <div class="rs-item">
-    <div class="rs-label">Visibility</div>
-    <div class="rs-value" id="rs-vis">—</div>
-  </div>
-  <div class="rs-item">
-    <div class="rs-label">Peak today</div>
-    <div class="rs-value amber" id="rs-peak">—</div>
-  </div>
-  <div class="rs-item">
-    <div class="rs-label">Flights today</div>
-    <div class="rs-value muted" id="rs-today">—</div>
-  </div>
-  <div class="rs-updated" id="rs-updated">LPPT · —</div>
-</div>
+<!-- hidden elements kept for JS compat -->
+<span id="rs-runway" style="display:none"></span>
+<span id="rs-wind"   style="display:none"></span>
+<span id="rs-dir"    style="display:none"></span>
+<span id="rs-temp"   style="display:none"></span>
+<span id="rs-vis"    style="display:none"></span>
+<span id="rs-peak"   style="display:none"></span>
+<span id="rs-updated" style="display:none"></span>
 
 <!-- EXPLORE BAND -->
 <div class="explore-band">
