@@ -345,16 +345,22 @@ nav {
 /* ── GALLERY STRIP ── */
 .gallery-strip { display:grid;grid-template-columns:repeat(3,1fr);gap:3px; }
 .gallery-card {
-  position:relative;height:270px;overflow:hidden;
-  background:var(--dark);border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+  position:relative;height:380px;overflow:hidden;
+  background:var(--dark);cursor:none;
 }
-.gallery-card:last-child { border-right:none; }
 .gallery-card img { width:100%;height:100%;object-fit:cover;filter:none;transition:transform 5s ease; }
-.gallery-card:hover img { transform:scale(1.06); }
-.gallery-card-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(10,13,18,.88) 0%,transparent 55%); }
-.gallery-card-info { position:absolute;bottom:0;left:0;right:0;padding:16px 18px; }
-.gc-callsign { font-family:var(--sans);font-weight:800;font-size:17px;color:var(--white);margin-bottom:3px; }
-.gc-meta { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.32);letter-spacing:.08em; }
+.gallery-card:hover img { transform:scale(1.04); }
+.gallery-card-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(10,13,18,.92) 0%,rgba(10,13,18,.3) 50%,transparent 100%); }
+.gallery-card-info { position:absolute;bottom:0;left:0;right:0;padding:18px 20px; }
+.gc-callsign {
+  font-family:var(--sans);font-weight:800;font-size:22px;
+  color:var(--amber);letter-spacing:-.01em;margin-bottom:4px;
+  display:flex;align-items:center;gap:8px;
+}
+.gc-flag { font-size:16px; }
+.gc-airline { font-family:var(--mono);font-size:8.5px;color:rgba(240,237,232,.38);letter-spacing:.06em;margin-bottom:6px; }
+.gc-date-line { font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.7);letter-spacing:.06em;margin-bottom:5px; }
+.gc-tech { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.28);letter-spacing:.04em; }
 .gc-score { position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.75);background:rgba(10,13,18,.55);padding:3px 8px;letter-spacing:.04em; }
 .gc-date { position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.75);background:rgba(10,13,18,.55);padding:3px 8px;letter-spacing:.04em; }
 
@@ -718,6 +724,9 @@ footer {
   </div>
 </div>
 
+<!-- GALLERY STRIP -->
+<div class="gallery-strip" id="gallery-strip"></div>
+
 <!-- LIVE TICKER -->
 <div class="live-ticker">
   <div class="ticker-label"><div class="ticker-live-dot"></div>Live Feed</div>
@@ -727,9 +736,6 @@ footer {
     </div>
   </div>
 </div>
-
-<!-- GALLERY STRIP -->
-<div class="gallery-strip" id="gallery-strip"></div>
 
 <!-- EXPLORE BAND -->
 <div class="explore-band">
@@ -1030,18 +1036,30 @@ fetch('https://api.github.com/gists/' + GIST_ID)
       for(var i=1;i<max;i++){
         var g=recent[i];
         var gUrl=getPhotoUrl(g,700);
-        var gDb=fNoise(g)?Math.round(fNoise(g))+' dB':'';
+        var gDb=fNoise(g)?fNoise(g).toFixed(1)+' dB':'';
         var gAc=g.aircraft_type||'';
-        var gTs=''; var tsRaw=g.timestamp||g.published_at;
-        if(tsRaw){ var gd=new Date(tsRaw); gTs=gd.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+gd.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); }
+        var gReg=g.registration||'';
+        var gFlag=g.airline_flag||'';
+        var gAlt=g.altitude_ft?Math.round(g.altitude_ft)+' ft':'';
+        var gSpd=fSpeed(g)?Math.round(fSpeed(g))+' kts':'';
+        var gDateLine='',gTs='';
+        var tsRaw=g.timestamp||g.published_at;
+        if(tsRaw){
+          var gd=new Date(tsRaw);
+          gDateLine=gd.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+' · '+gd.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+        }
+        var gTechParts=[gAlt,gSpd,gDb].filter(Boolean);
+        var gTech=gTechParts.join(' · ');
+        var gMeta=[g.airline,gAc,gReg].filter(Boolean).join(' · ');
         ghtml+='<div class="gallery-card">'+
           (gUrl?'<img src="'+gUrl+'" alt="'+(g.callsign||'')+'" loading="lazy">':'')+
           '<div class="gallery-card-overlay"></div>'+
-          (gDb?'<div class="gc-score">'+gDb+'</div>':'')+
-          (gTs?'<div class="gc-date">'+gTs+'</div>':'')+
           '<div class="gallery-card-info">'+
-            '<div class="gc-callsign">'+(g.callsign||'—')+'</div>'+
-            '<div class="gc-meta">'+(g.airline||'')+(gAc?' · '+gAc:'')+'</div>'+
+            '<div class="gc-callsign">'+(gFlag?'<span class="gc-flag">'+gFlag+'</span>':'')+
+              (g.callsign||'—')+'</div>'+
+            (gMeta?'<div class="gc-airline">'+gMeta+'</div>':'')+
+            (gDateLine?'<div class="gc-date-line">'+gDateLine+'</div>':'')+
+            (gTech?'<div class="gc-tech">'+gTech+'</div>':'')+
           '</div></div>';
       }
       strip.innerHTML=ghtml;
