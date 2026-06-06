@@ -153,14 +153,14 @@ nav {
 }
 .hero-title em {
   font-family: var(--serif); font-style: italic; font-weight: 400;
-  color: rgba(240,237,232,.22); font-size: .83em;
+  color: rgba(240,237,232,.22); font-size: .80em;
 }
 .hero-title em.deci {
-  color: var(--amber); font-size: .87em;
+  color: var(--amber); font-size: .91em;
 }
 .hero-sub {
-  font-family: var(--mono); font-size: 11px; line-height: 1.8;
-  color: rgba(240,237,232,.72); max-width: 420px; margin-bottom: 32px;
+  font-family: var(--mono); font-size: 13px; line-height: 1.8;
+  color: rgba(240,237,232,.72); max-width: 460px; margin-bottom: 32px;
   letter-spacing: .02em;
 }
 .hero-ctas { display:flex;gap:12px; }
@@ -357,21 +357,61 @@ nav {
 
 /* ── WEATHER / STATION CONDITIONS ── */
 .weather-section {
-  padding: 64px 48px;
+  padding: 72px 48px;
   border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 480px; gap: 80px; align-items: start;
 }
 .weather-eyebrow {
   font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(240,237,232,.28);display:flex;align-items:center;gap:12px;margin-bottom:32px;
+  color:rgba(240,237,232,.28);display:flex;align-items:center;gap:12px;margin-bottom:28px;
 }
 .weather-eyebrow::before { content:'';width:20px;height:1px;background:rgba(245,166,35,.4); }
-.weather-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:2px; }
-.weather-card { background:var(--dark2);border:1px solid var(--border);padding:28px 24px; }
-.wc-icon { font-size:26px;margin-bottom:16px;display:block; }
-.wc-val { font-family:var(--mono);font-size:22px;font-weight:500;color:var(--white);margin-bottom:5px; }
-.wc-val.amber { color:var(--amber); }
-.wc-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.22); }
-.wc-sub { font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.25);margin-top:8px;line-height:1.6; }
+.weather-title {
+  font-family:var(--sans);font-weight:800;font-size:clamp(32px,3.6vw,52px);
+  color:var(--white);letter-spacing:-.02em;line-height:.92;margin-bottom:24px;
+}
+.weather-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.22);display:block; }
+.weather-body {
+  font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.45);
+  line-height:1.85;max-width:520px;margin-bottom:32px;
+}
+.rwy-cards { display:flex;flex-direction:column;gap:8px; }
+.rwy-card {
+  border:1px solid var(--border);padding:16px 20px;
+  display:flex;align-items:flex-start;gap:16px;opacity:.4;transition:opacity .3s;
+}
+.rwy-card.active { border-color:rgba(245,166,35,.35);opacity:1; }
+.rwy-badge {
+  font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.1em;
+  background:var(--border);color:var(--white);padding:4px 8px;white-space:nowrap;flex-shrink:0;
+}
+.rwy-card.active .rwy-badge { background:rgba(245,166,35,.15);color:var(--amber); }
+.rwy-title { font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);margin-bottom:4px; }
+.rwy-desc { font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.3);line-height:1.6; }
+/* weather live card */
+.wlive-card {
+  background:var(--dark2);border:1px solid var(--border);padding:32px;
+  position:sticky;top:80px;
+}
+.wlive-header {
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border);
+}
+.wlive-source { font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.25); }
+.wlive-time { font-family:var(--mono);font-size:10px;color:rgba(245,166,35,.6); }
+.wlive-temp { font-family:var(--sans);font-weight:800;font-size:64px;color:var(--white);letter-spacing:-.03em;line-height:1;margin-bottom:8px; }
+.wlive-cond { font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.4);margin-bottom:28px;display:flex;align-items:center;gap:8px; }
+.wlive-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px; }
+.wlive-item-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:6px; }
+.wlive-item-val { font-family:var(--mono);font-size:18px;font-weight:500;color:var(--white); }
+.wlive-item-val.amber { color:var(--amber); }
+.wlive-item-sub { font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);margin-top:3px; }
+.wlive-compass { position:relative;width:36px;height:36px;border:1px solid var(--border);border-radius:50%;margin-top:4px; }
+.wlive-compass-needle { position:absolute;width:2px;height:14px;background:var(--amber);left:50%;top:4px;transform-origin:bottom center;transform:translateX(-50%); }
+.wlive-footer { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.18);line-height:1.7;border-top:1px solid var(--border);padding-top:16px; }
+/* old 4-card grid — kept for compat but hidden */
+.weather-grid { display:none; }
+.weather-card,.wc-icon,.wc-val,.wc-lbl,.wc-sub { display:none; }
 
 /* ── EXPLORE BAND ── */
 .explore-band {
@@ -631,32 +671,59 @@ footer {
 
 <!-- STATION CONDITIONS -->
 <div class="weather-section">
-  <div class="weather-eyebrow">Station conditions</div>
-  <div class="weather-grid">
-    <div class="weather-card">
-      <span class="wc-icon" id="wc-icon">🌤</span>
-      <div class="wc-val" id="wc-temp">—</div>
-      <div class="wc-lbl">Temperature</div>
-      <div class="wc-sub" id="wc-cond">—</div>
+  <!-- LEFT: explanation -->
+  <div>
+    <div class="weather-eyebrow">Atmospheric conditions</div>
+    <h2 class="weather-title">The wind<br><em>decides everything.</em></h2>
+    <p class="weather-body">LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 03, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 21, climbing towards the SSW, crossing the terrace before reaching the Tejo.</p>
+    <div class="rwy-cards">
+      <div class="rwy-card" id="rwy-card-03">
+        <div class="rwy-badge">RWY 03</div>
+        <div>
+          <div class="rwy-title">North wind — landing over the terrace ✦</div>
+          <div class="rwy-desc">Planes approach from the south and land over my terrace. Close, slow, full-frame — most impactful shots.</div>
+        </div>
+      </div>
+      <div class="rwy-card" id="rwy-card-21">
+        <div class="rwy-badge">RWY 21</div>
+        <div>
+          <div class="rwy-title">South wind — takeoff over the terrace</div>
+          <div class="rwy-desc">Planes take off and climb over my terrace heading north. Higher, faster — less impactful shots.</div>
+        </div>
+      </div>
     </div>
-    <div class="weather-card">
-      <span class="wc-icon">💨</span>
-      <div class="wc-val" id="wc-wind">—</div>
-      <div class="wc-lbl">Wind speed</div>
-      <div class="wc-sub" id="wc-wdir">—</div>
+  </div>
+  <!-- RIGHT: live weather card -->
+  <div class="wlive-card">
+    <div class="wlive-header">
+      <div class="wlive-source">LPPT · Live weather</div>
+      <div class="wlive-time" id="wc-time">—</div>
     </div>
-    <div class="weather-card">
-      <span class="wc-icon">🛬</span>
-      <div class="wc-val amber" id="wc-runway">—</div>
-      <div class="wc-lbl">Active runway</div>
-      <div class="wc-sub" id="wc-rwyconf">—</div>
+    <div class="wlive-temp" id="wc-temp">—</div>
+    <div class="wlive-cond"><span id="wc-icon">🌤</span><span id="wc-cond">—</span></div>
+    <div class="wlive-grid">
+      <div>
+        <div class="wlive-item-lbl">Wind</div>
+        <div class="wlive-item-val" id="wc-wind">—</div>
+        <div class="wlive-item-sub" id="wc-wdir">—</div>
+      </div>
+      <div>
+        <div class="wlive-item-lbl">Active runway</div>
+        <div class="wlive-item-val amber" id="wc-runway">—</div>
+        <div class="wlive-item-sub" id="wc-rwyconf">—</div>
+      </div>
+      <div>
+        <div class="wlive-item-lbl">Peak noise today</div>
+        <div class="wlive-item-val amber" id="wc-peak">—</div>
+        <div class="wlive-item-sub">dB SPL</div>
+      </div>
+      <div>
+        <div class="wlive-item-lbl">Flights today</div>
+        <div class="wlive-item-val" id="wc-today">—</div>
+        <div class="wlive-item-sub">detected</div>
+      </div>
     </div>
-    <div class="weather-card">
-      <span class="wc-icon">📊</span>
-      <div class="wc-val amber" id="wc-peak">—</div>
-      <div class="wc-lbl">Peak noise today</div>
-      <div class="wc-sub" id="wc-loud">—</div>
-    </div>
+    <div class="wlive-footer">Source: wttr.in · LPPT (38.78°N, 9.14°W) · Updates every 5 min</div>
   </div>
 </div>
 
@@ -776,7 +843,8 @@ footer {
 })();
 
 /* ── CONSTANTS ── */
-var GIST_ID = '943998ff407a141792bcd5d2c5f3fc36';
+var GIST_ID       = '943998ff407a141792bcd5d2c5f3fc36'; /* latest.json — photos */
+var STATS_GIST_ID = '2edb053ac9f9c91047c1b36f706d302c'; /* lisbon_finals.json — stats */
 var CLOUD = 'https://res.cloudinary.com/dtjccssx1/image/upload';
 
 /* ── HELPERS ── */
@@ -845,10 +913,17 @@ function buildDots(){
 fetch('https://api.github.com/gists/' + GIST_ID)
   .then(function(r){ return r.json(); })
   .then(function(gist){
-    /* fetch lisbon_finals.json for accurate daily stats + last detected */
-    var fStats = gist.files && gist.files['lisbon_finals.json'];
-    if(fStats && fStats.raw_url){
-      fetch(fStats.raw_url).then(function(r){ return r.json(); }).then(function(d){
+    /* fetch lisbon_finals.json from stats Gist for accurate daily stats + last detected */
+    fetch('https://api.github.com/gists/' + STATS_GIST_ID)
+      .then(function(r){ return r.json(); })
+      .then(function(sg){
+        var fStats = sg.files && sg.files['lisbon_finals.json'];
+        if(!fStats || !fStats.raw_url) return;
+        return fetch(fStats.raw_url);
+      })
+      .then(function(r){ return r && r.json(); })
+      .then(function(d){
+        if(!d) return;
         var s = d.stats || {};
         if(s.active_today != null){ set('rs-today', s.active_today+' flights today'); }
         if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); set('wc-peak', s.peak_noise_db.toFixed(1)+' dB'); }
@@ -873,7 +948,6 @@ fetch('https://api.github.com/gists/' + GIST_ID)
             '</div>';
         }
       }).catch(function(){});
-    }
     var f = gist.files && gist.files['latest.json'];
     if(!f || !f.raw_url) throw new Error('latest.json absent');
     return fetch(f.raw_url);
@@ -993,13 +1067,17 @@ fetch('https://wttr.in/38.7749,-9.1397?format=j1')
     set('rs-vis',   vis+' km');
     set('rs-runway',rwy.rwy);
     set('rs-updated','LPPT · '+ts);
-    set('wc-temp',  temp+' °C');
+    set('wc-temp',  temp+'°C');
     set('wc-cond',  desc);
     set('wc-wind',  kt+' kt');
     set('wc-wdir',  dir+'° '+card);
     set('wc-runway','RWY '+rwy.rwy);
     set('wc-rwyconf',rwy.conf);
+    set('wc-time',  ts);
     var ico=el('wc-icon'); if(ico) ico.textContent=WTTR_ICON[code]||'🌤';
+    /* activate correct runway card */
+    var c03=el('rwy-card-03'), c21=el('rwy-card-21');
+    if(c03&&c21){ c03.classList.toggle('active',rwy.rwy==='03'); c21.classList.toggle('active',rwy.rwy==='21'); }
   })
   .catch(function(){});
 
