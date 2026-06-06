@@ -94,7 +94,7 @@ nav {
 
 /* ── HERO ── */
 .about-hero {
-  padding: 72px 48px 80px;
+  padding: 100px 48px 80px;
   max-width: 1200px; margin: 0 auto;
 }
 .about-hero-eyebrow {
@@ -857,16 +857,15 @@ document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyL
 // ── Sticky tab highlight on scroll ──
 const _tabs = document.querySelectorAll('.section-tab');
 const _sections = document.querySelectorAll('#the-project, #how-it-works, #hardware, #whats-next');
-const _io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      _tabs.forEach(t => t.classList.remove('active'));
-      const tab = document.querySelector(`.section-tab[href="#${e.target.id}"]`);
-      if (tab) tab.classList.add('active');
-    }
+function _updateActiveTab() {
+  let current = _sections[0] ? _sections[0].id : '';
+  _sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 160) current = s.id;
   });
-}, { rootMargin: '-120px 0px -50% 0px', threshold: 0 });
-_sections.forEach(s => _io.observe(s));
+  _tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + current));
+}
+window.addEventListener('scroll', _updateActiveTab, { passive: true });
+_updateActiveTab();
 </script>
 
 </body>
