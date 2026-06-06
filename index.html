@@ -156,7 +156,7 @@ nav {
   color: rgba(240,237,232,.22); font-size: .86em;
 }
 .hero-title em.deci {
-  color: var(--amber); font-size: .97em;
+  color: var(--amber); font-size: .86em;
 }
 .hero-sub {
   font-family: var(--mono); font-size: 11px; line-height: 1.8;
@@ -616,9 +616,9 @@ footer {
       </div>
     </div>
     <div class="ls-score-row">
-      <div class="ls-score-num" id="ls-score">—</div>
+      <div class="ls-score-num" id="ls-score">—</div><div class="ls-score-max"> / 5</div>
       <div class="ls-score-detail">
-        <div class="ls-score-lbl">Registration</div>
+        <div class="ls-score-lbl">YOLO Score</div>
         <div class="ls-score-sub" id="ls-published">Published to @lisbon.finals</div>
       </div>
     </div>
@@ -694,7 +694,7 @@ footer {
     <div class="footer-radar">
       <div class="footer-radar-label">Position</div>
       <div class="footer-radar-disc">
-        <img class="footer-radar-img" src="ressources/CARTE%20MAP.png" alt="Radar LPPT"/>
+        <img class="footer-radar-img" src="ressources/Imagewebsite1.png" alt="Radar LPPT"/>
         <svg class="footer-radar-svg" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <clipPath id="fr-clip"><circle cx="500" cy="500" r="455"/></clipPath>
@@ -875,7 +875,7 @@ fetch('https://api.github.com/gists/' + GIST_ID)
 
     /* ── strip stats ── */
     var peakDb = recent.reduce(function(mx, f){ return Math.max(mx, fNoise(f)||0); }, 0);
-    if(peakDb > 0){ set('rs-peak', peakDb.toFixed(1)+' dB'); }
+    if(peakDb > 0){ set('rs-peak', peakDb.toFixed(1)+' dB'); set('wc-peak', peakDb.toFixed(1)+' dB'); }
     /* count published today */
     var today = new Date().toISOString().slice(0,10);
     var todayCount = recent.filter(function(f){ return (f.published_at||f.timestamp||'').slice(0,10)===today; }).length;
@@ -904,7 +904,8 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     set('ls-db',       fNoise(lf) ? Math.round(fNoise(lf))+' dB' : '—');
     set('ls-speed',    fSpeed(lf) ? Math.round(fSpeed(lf))+' kt' : '—');
     set('ls-aircraft', lf.aircraft_type||'—');
-    set('ls-score',    lf.registration||'—');
+    var sc = lf.score || lf.yolo_score || lf.photo_score || null;
+    set('ls-score', sc ? (typeof sc==='number' ? sc.toFixed(1) : sc) : '—');
     var tsField = lf.published_at || lf.timestamp;
     if(tsField){
       var dt=new Date(tsField);
