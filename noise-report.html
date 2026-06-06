@@ -217,7 +217,7 @@ nav {
 .month-chip.active { background: var(--amber-dim); border-color: var(--amber); color: var(--amber); }
 
 /* ── SECTION ── */
-.section { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
+.section { padding: 56px 48px 80px; max-width: 1200px; margin: 0 auto; }
 .section-header { margin-bottom: 48px; }
 .section-tag {
   font-family:var(--mono); font-size:9px; letter-spacing:.25em; text-transform:uppercase;
@@ -227,6 +227,7 @@ nav {
 .section-tag::before { content:''; width:24px; height:1px; background:var(--amber); flex-shrink:0; }
 .section-title { font-size: 32px; font-weight:800; letter-spacing:-.02em; }
 .section-title span { color:var(--amber); }
+.section-title span.plain { color: var(--white); }
 
 /* ── REPORT CARD (featured month) ── */
 .report-featured {
@@ -590,7 +591,7 @@ footer {
   <!-- ARCHIVE -->
   <div class="section-header" style="margin-top:80px">
     <div class="section-tag" data-i18n="archive_tag">All Reports</div>
-    <h2 class="section-title"><span data-i18n="archive_title">Monthly</span> <span><span data-i18n="archive_title2">Archive</span></span></h2>
+    <h2 class="section-title"><span class="plain" data-i18n="archive_title">Monthly</span> <span><span data-i18n="archive_title2">Archive</span></span></h2>
   </div>
   <div class="archive-grid" id="archive-grid">
     <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
