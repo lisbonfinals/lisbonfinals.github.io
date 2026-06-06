@@ -201,6 +201,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .warning-stat.l2 .warning-val{color:var(--amber);}
 .warning-stat.l2 .warning-lbl{color:rgba(245,166,35,.65);}
 .warning-stat.l2 .warning-sub{color:rgba(245,166,35,.4);}
+/* ANAC rule cards */
+.anac-rules{display:flex;flex-direction:column;gap:0;margin-top:24px;}
+.anac-rule-card{display:flex;align-items:center;gap:20px;padding:18px 24px;background:var(--dark2);border:1px solid var(--border);border-bottom:none;}
+.anac-rule-card:first-child{border-radius:4px 4px 0 0;}
+.anac-rule-card:last-child{border-bottom:1px solid var(--border);border-radius:0 0 4px 4px;}
+.anac-rule-icon{font-size:22px;flex-shrink:0;width:36px;text-align:center;}
+.anac-rule-title{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--white);margin-bottom:3px;letter-spacing:-.01em;}
+.anac-rule-desc{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.35);line-height:1.6;}
 /* green override when compliant */
 .warning-val.ok{color:var(--green)!important;}
 /* night flights progress bar */
@@ -457,8 +465,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="legend-item"><div class="legend-dot" style="background:rgba(239,68,68,.3)"></div><span data-i18n="legend_restricted">Restricted (00h30–05h00)</span></div>
       <div class="legend-item"><div class="legend-dot" style="background:rgba(34,197,94,.2)"></div><span data-i18n="legend_allowed">Allowed (00h00–00h30 · 05h00–06h00)</span></div>
     </div>
-    <div style="margin-top:16px;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.25);line-height:1.7;" data-i18n="anac_note">
-      ANAC regulations apply to flights ≥ 93 dB SPL between midnight and 6am. Two allowed windows exist: 00h00–00h30 (last departures) and 05h00–06h00 (early arrivals). Critical violations ≥ 98.9 dB are unconditionally prohibited.
+    <div class="anac-rules">
+      <div class="anac-rule-card">
+        <div class="anac-rule-icon">🚫</div>
+        <div>
+          <div class="anac-rule-title">Curfew 00:00–06:00</div>
+          <div class="anac-rule-desc">Max 91 movements/week · 26/day. No scheduled flights during the night period.</div>
+        </div>
+      </div>
+      <div class="anac-rule-card">
+        <div class="anac-rule-icon">🔇</div>
+        <div>
+          <div class="anac-rule-title">Noisy Aircraft Ban</div>
+          <div class="anac-rule-desc">Aircraft &gt;98.9 EPNdB (Levels 8 &amp; 16) strictly prohibited at night.</div>
+        </div>
+      </div>
+      <div class="anac-rule-card">
+        <div class="anac-rule-icon">⚠️</div>
+        <div>
+          <div class="anac-rule-title">Level 2 Restriction</div>
+          <div class="anac-rule-desc">93–95.9 EPNdB aircraft: only 00:00–00:30 and 05:00–06:00 allowed.</div>
+        </div>
+      </div>
+      <div class="anac-rule-card">
+        <div class="anac-rule-icon">🔴</div>
+        <div>
+          <div class="anac-rule-title">Reverse Thrust Banned</div>
+          <div class="anac-rule-desc">Landing reverse thrust is strictly forbidden except in emergencies.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
