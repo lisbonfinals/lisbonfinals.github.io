@@ -583,6 +583,64 @@ footer {
   <div class="hero-photo-dots" id="photo-dots"></div>
 </section>
 
+<!-- STATION CONDITIONS -->
+<div class="weather-section">
+  <!-- LEFT: explanation -->
+  <div>
+    <div class="weather-eyebrow">Atmospheric conditions</div>
+    <h2 class="weather-title">The wind<br><em>decides everything.</em></h2>
+    <p class="weather-body">LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 03, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 21, climbing towards the SSW, crossing the terrace before reaching the Tejo.</p>
+    <div class="rwy-cards">
+      <div class="rwy-card" id="rwy-card-03">
+        <div class="rwy-badge">RWY 03</div>
+        <div>
+          <div class="rwy-title">North wind — landing over the terrace ✦</div>
+          <div class="rwy-desc">Planes approach from the south and land over my terrace. Close, slow, full-frame — most impactful shots.</div>
+        </div>
+      </div>
+      <div class="rwy-card" id="rwy-card-21">
+        <div class="rwy-badge">RWY 21</div>
+        <div>
+          <div class="rwy-title">South wind — takeoff over the terrace</div>
+          <div class="rwy-desc">Planes take off and climb over my terrace heading north. Higher, faster — less impactful shots.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- RIGHT: live weather card -->
+  <div class="wlive-card">
+    <div class="wlive-header">
+      <div class="wlive-source">LPPT · Live weather</div>
+      <div class="wlive-time" id="wc-time">—</div>
+    </div>
+    <div class="wlive-temp" id="wc-temp">—</div>
+    <div class="wlive-cond"><span id="wc-icon">🌤</span><span id="wc-cond">—</span></div>
+    <div class="wlive-grid">
+      <div>
+        <div class="wlive-item-lbl">Wind</div>
+        <div class="wlive-item-val" id="wc-wind">—</div>
+        <div class="wlive-item-sub" id="wc-wdir">—</div>
+      </div>
+      <div>
+        <div class="wlive-item-lbl">Active runway</div>
+        <div class="wlive-item-val amber" id="wc-runway">—</div>
+        <div class="wlive-item-sub" id="wc-rwyconf">—</div>
+      </div>
+      <div>
+        <div class="wlive-item-lbl">Peak noise today</div>
+        <div class="wlive-item-val amber" id="wc-peak">—</div>
+        <div class="wlive-item-sub">dB SPL</div>
+      </div>
+      <div>
+        <div class="wlive-item-lbl">Flights today</div>
+        <div class="wlive-item-val" id="wc-today">—</div>
+        <div class="wlive-item-sub">detected</div>
+      </div>
+    </div>
+    <div class="wlive-footer">Source: wttr.in · LPPT (38.78°N, 9.14°W) · Updates every 5 min</div>
+  </div>
+</div>
+
 <!-- RUNWAY STRIP -->
 <div class="runway-strip">
   <div class="rs-item">
@@ -668,64 +726,6 @@ footer {
 
 <!-- GALLERY STRIP -->
 <div class="gallery-strip" id="gallery-strip"></div>
-
-<!-- STATION CONDITIONS -->
-<div class="weather-section">
-  <!-- LEFT: explanation -->
-  <div>
-    <div class="weather-eyebrow">Atmospheric conditions</div>
-    <h2 class="weather-title">The wind<br><em>decides everything.</em></h2>
-    <p class="weather-body">LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 03, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 21, climbing towards the SSW, crossing the terrace before reaching the Tejo.</p>
-    <div class="rwy-cards">
-      <div class="rwy-card" id="rwy-card-03">
-        <div class="rwy-badge">RWY 03</div>
-        <div>
-          <div class="rwy-title">North wind — landing over the terrace ✦</div>
-          <div class="rwy-desc">Planes approach from the south and land over my terrace. Close, slow, full-frame — most impactful shots.</div>
-        </div>
-      </div>
-      <div class="rwy-card" id="rwy-card-21">
-        <div class="rwy-badge">RWY 21</div>
-        <div>
-          <div class="rwy-title">South wind — takeoff over the terrace</div>
-          <div class="rwy-desc">Planes take off and climb over my terrace heading north. Higher, faster — less impactful shots.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- RIGHT: live weather card -->
-  <div class="wlive-card">
-    <div class="wlive-header">
-      <div class="wlive-source">LPPT · Live weather</div>
-      <div class="wlive-time" id="wc-time">—</div>
-    </div>
-    <div class="wlive-temp" id="wc-temp">—</div>
-    <div class="wlive-cond"><span id="wc-icon">🌤</span><span id="wc-cond">—</span></div>
-    <div class="wlive-grid">
-      <div>
-        <div class="wlive-item-lbl">Wind</div>
-        <div class="wlive-item-val" id="wc-wind">—</div>
-        <div class="wlive-item-sub" id="wc-wdir">—</div>
-      </div>
-      <div>
-        <div class="wlive-item-lbl">Active runway</div>
-        <div class="wlive-item-val amber" id="wc-runway">—</div>
-        <div class="wlive-item-sub" id="wc-rwyconf">—</div>
-      </div>
-      <div>
-        <div class="wlive-item-lbl">Peak noise today</div>
-        <div class="wlive-item-val amber" id="wc-peak">—</div>
-        <div class="wlive-item-sub">dB SPL</div>
-      </div>
-      <div>
-        <div class="wlive-item-lbl">Flights today</div>
-        <div class="wlive-item-val" id="wc-today">—</div>
-        <div class="wlive-item-sub">detected</div>
-      </div>
-    </div>
-    <div class="wlive-footer">Source: wttr.in · LPPT (38.78°N, 9.14°W) · Updates every 5 min</div>
-  </div>
-</div>
 
 <!-- EXPLORE BAND -->
 <div class="explore-band">
