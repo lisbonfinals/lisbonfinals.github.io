@@ -858,14 +858,16 @@ document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyL
 const _tabs = document.querySelectorAll('.section-tab');
 const _sections = document.querySelectorAll('#the-project, #how-it-works, #hardware, #whats-next');
 function _updateActiveTab() {
-  let current = _sections[0] ? _sections[0].id : '';
+  let current = _sections.length ? _sections[0].id : '';
   _sections.forEach(s => {
-    if (s.getBoundingClientRect().top <= 160) current = s.id;
+    if (s.getBoundingClientRect().top <= 150) current = s.id;
   });
   _tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + current));
 }
 window.addEventListener('scroll', _updateActiveTab, { passive: true });
+window.addEventListener('hashchange', _updateActiveTab);
 _updateActiveTab();
+setTimeout(_updateActiveTab, 150); // rattrape la position après rendu
 </script>
 
 </body>
