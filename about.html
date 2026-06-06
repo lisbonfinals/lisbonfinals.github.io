@@ -94,31 +94,52 @@ nav {
 
 /* ── HERO ── */
 .about-hero {
-  padding: 140px 48px 80px;
-  max-width: 1100px; margin: 0 auto;
+  padding: 120px 48px 80px;
+  max-width: 1200px; margin: 0 auto;
 }
 .about-hero-eyebrow {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
-  color: rgba(245,166,35,0.6); text-transform: uppercase; margin-bottom: 18px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 12px;
 }
-.about-hero-eyebrow span {
-  display: inline-block; width: 24px; height: 1px;
-  background: rgba(245,166,35,0.4); vertical-align: middle; margin-right: 10px;
+.about-hero-eyebrow::before {
+  content: ''; width: 24px; height: 1px; background: var(--amber); flex-shrink: 0;
 }
 .about-hero-title {
-  font-family: var(--serif); font-size: clamp(48px, 7vw, 88px);
-  line-height: 1.05; color: var(--white); margin-bottom: 24px;
+  font-family: var(--sans); font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800; line-height: 1; letter-spacing: -.02em;
+  color: var(--white); margin-bottom: 24px;
 }
-.about-hero-title em { font-style: italic; color: rgba(240,237,232,.3); }
+.about-hero-title em {
+  font-family: var(--serif); font-style: italic;
+  font-weight: 400; color: rgba(240,237,232,.3);
+}
 .about-hero-sub {
-  font-size: 16px; line-height: 1.8; color: rgba(240,237,232,0.5);
+  font-size: 15px; line-height: 1.8; color: rgba(240,237,232,0.5);
   max-width: 620px;
 }
 
 /* ── STEPS ── */
 .steps-section {
   padding: 0 48px 80px;
-  max-width: 1100px; margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
+}
+.section-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::before {
+  content: ''; width: 24px; height: 1px; background: var(--amber); flex-shrink: 0;
+}
+.section-title-main {
+  font-family: var(--sans); font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800; line-height: 1; letter-spacing: -.02em;
+  color: var(--white); margin-bottom: 40px;
+}
+.section-title-main em {
+  font-family: var(--serif); font-style: italic;
+  font-weight: 400; color: rgba(240,237,232,.3);
 }
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .step {
@@ -147,7 +168,7 @@ nav {
 /* ── PIPELINE ── */
 .pipeline-section {
   padding: 0 48px 80px;
-  max-width: 1100px; margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
 }
 .pipeline-label {
   font-family: var(--mono); font-size: 9px; letter-spacing: .12em;
@@ -180,19 +201,24 @@ nav {
 /* ── HARDWARE ── */
 .hardware-section {
   padding: 0 48px 80px;
-  max-width: 1100px; margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
 }
 .section-eyebrow {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
-  color: rgba(245,166,35,0.6); text-transform: uppercase; margin-bottom: 20px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
 }
-.section-eyebrow span {
-  display: inline-block; width: 20px; height: 1px;
-  background: rgba(245,166,35,0.4); vertical-align: middle; margin-right: 8px;
+.section-eyebrow::before {
+  content: ''; width: 24px; height: 1px; background: var(--amber); flex-shrink: 0;
 }
 .section-heading {
-  font-family: var(--serif); font-size: 36px; font-style: italic;
+  font-family: var(--sans); font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800; letter-spacing: -.02em;
   color: var(--white); margin-bottom: 32px;
+}
+.section-heading em {
+  font-family: var(--serif); font-style: italic;
+  font-weight: 400; color: rgba(240,237,232,.3);
 }
 .hw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .hw-item {
@@ -213,7 +239,7 @@ nav {
 /* ── PROJECT CARD ── */
 .project-section {
   padding: 0 48px 80px;
-  max-width: 1100px; margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
 }
 .project-card {
   background: linear-gradient(135deg, #0d1117 0%, rgba(245,166,35,0.04) 100%);
@@ -222,8 +248,8 @@ nav {
   align-items: center;
 }
 .project-card-title {
-  font-family: var(--serif); font-size: 28px; font-style: italic;
-  color: var(--white); margin-bottom: 16px;
+  font-family: var(--sans); font-size: 28px; font-weight: 800;
+  letter-spacing: -.02em; color: var(--white); margin-bottom: 16px;
 }
 .project-card-body {
   font-size: 14px; line-height: 1.8; color: rgba(240,237,232,0.45);
@@ -243,7 +269,7 @@ nav {
 .about-footer {
   border-top: 1px solid var(--border);
   padding: 32px 48px;
-  max-width: 1100px; margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
 }
 .about-footer-left {
@@ -259,7 +285,7 @@ nav {
 
 /* ── DIVIDER ── */
 .section-divider {
-  max-width: 1100px; margin: 0 auto 60px;
+  max-width: 1200px; margin: 0 auto 60px;
   padding: 0 48px;
   border: none; border-top: 1px solid var(--border);
 }
@@ -368,13 +394,15 @@ nav {
 
 <!-- HERO -->
 <header class="about-hero">
-  <div class="about-hero-eyebrow"><span></span>The system</div>
+  <div class="about-hero-eyebrow">The system</div>
   <h1 class="about-hero-title">Automated<br><em>from detection<br>to post</em></h1>
   <p class="about-hero-sub">Six autonomous layers — from raw radio signals to 4K Instagram posts. No human in the loop. Real-time ADS-B decoding, AI vision scoring, neural upscaling and intelligent scheduling — all running 24/7 on a Raspberry Pi 4 under the Lisbon sky.</p>
 </header>
 
 <!-- HOW IT WORKS -->
 <section class="steps-section">
+  <div class="section-label">How it works</div>
+  <h2 class="section-title-main">Six layers,<br><em>zero human triggers</em></h2>
   <div class="steps">
     <div class="step">
       <span class="step-num">01</span>
@@ -448,7 +476,7 @@ nav {
 
 <!-- HARDWARE -->
 <section class="hardware-section">
-  <div class="section-eyebrow"><span></span>The station</div>
+  <div class="section-eyebrow">The station</div>
   <h2 class="section-heading">Hardware in service</h2>
   <div class="hw-grid">
     <div class="hw-item">
