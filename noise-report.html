@@ -432,6 +432,38 @@ footer {
   footer { padding: 24px; flex-direction:column; gap:8px; text-align:center; }
   .report-kpis { gap:16px; }
 }
+
+/* ── NAV DROPDOWN ── */
+.nav-has-dropdown { position: relative; }
+.nav-dropdown {
+  display: none; position: absolute;
+  top: calc(100% + 12px); left: 50%;
+  transform: translateX(-50%);
+  background: rgba(7,9,13,0.97);
+  border: 1px solid rgba(245,166,35,0.15);
+  border-radius: 4px; padding: 8px 0;
+  list-style: none; min-width: 160px;
+  backdrop-filter: blur(12px);
+  z-index: 200;
+}
+.nav-has-dropdown:hover .nav-dropdown { display: block; }
+.nav-dropdown li a {
+  display: block; padding: 9px 18px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(240,237,232,0.45); text-decoration: none;
+  transition: color .15s, background .15s;
+  white-space: nowrap;
+}
+.nav-dropdown li a:hover {
+  color: var(--amber);
+  background: rgba(245,166,35,0.05);
+}
+.nav-dropdown li a.dd-warning { color: rgba(248,113,113,0.6); }
+.nav-dropdown li a.dd-warning:hover { color: #ef4444; }
+.nav-dropdown li + li { border-top: 1px solid rgba(240,237,232,0.05); }
+.nav-data-trigger { cursor: default; }
+
 </style>
 </head>
 <body>
@@ -442,11 +474,12 @@ footer {
 <!-- ── MOBILE DRAWER ── -->
 <div class="nav-drawer" id="nav-drawer">
   <a href="/" onclick="closeDrawer()">Live</a>
+  <a href="/#stats" onclick="closeDrawer()">The Data</a>
+  <a href="/#warning" class="drawer-warning" onclick="closeDrawer()">Warning Zone</a>
+  <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
   <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
   <a href="/about.html" onclick="closeDrawer()">About</a>
-  <a href="/#warning" class="drawer-warning" onclick="closeDrawer()">⚠ Warning</a>
-  <a href="/noise-report.html" class="drawer-noise active" onclick="closeDrawer()">Noise Report</a>
-  <a href="https://instagram.com/lisbon.finals" class="drawer-ig">@lisbon.finals</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
 </div>
 
 <!-- ── NAV ── -->
@@ -457,10 +490,16 @@ footer {
   </a>
   <ul class="nav-links">
     <li><a href="/">Live</a></li>
+    <li class="nav-has-dropdown">
+      <a href="#" class="nav-data-trigger nav-active">Data ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/#stats">The Data</a></li>
+        <li><a href="/#warning" class="dd-warning">Warning Zone</a></li>
+        <li><a href="/noise-report.html" style="color:var(--amber)">Noise Report</a></li>
+      </ul>
+    </li>
     <li><a href="/log.html">Captain's Log</a></li>
     <li><a href="/about.html">About</a></li>
-    <li><a href="/#warning" class="nav-warning">⚠ Warning</a></li>
-    <li><a href="/noise-report.html" class="nav-noise active">Noise Report</a></li>
   </ul>
   <button class="lang-switcher" id="lang-btn" onclick="toggleLang()">PT</button>
   <button class="nav-burger" id="nav-burger" aria-label="Menu">
