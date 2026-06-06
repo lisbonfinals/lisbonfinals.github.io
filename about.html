@@ -94,7 +94,7 @@ nav {
 
 /* ── HERO ── */
 .about-hero {
-  padding: 120px 48px 80px;
+  padding: 72px 48px 80px;
   max-width: 1200px; margin: 0 auto;
 }
 .about-hero-eyebrow {
@@ -854,32 +854,19 @@ function toggleLang() {
 
 document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyLang(_lang); });
 
-/* ── SECTION TAB ACTIVE STATE ── */
-(function() {
-  const tabs = document.querySelectorAll('.section-tab');
-  const sectionIds = ['the-project','how-it-works','hardware','whats-next'];
-  const offset = 130; // nav + tab bar height
-
-  function setActive(id) {
-    tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + id));
-  }
-
-  function onScroll() {
-    const scrollY = window.scrollY;
-    let current = sectionIds[0];
-    for (const id of sectionIds) {
-      const el = document.getElementById(id);
-      if (!el) continue;
-      if (el.getBoundingClientRect().top + scrollY - offset <= scrollY + 10) {
-        current = id;
-      }
+// ── Sticky tab highlight on scroll ──
+const _tabs = document.querySelectorAll('.section-tab');
+const _sections = document.querySelectorAll('#the-project, #how-it-works, #hardware, #whats-next');
+const _io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      _tabs.forEach(t => t.classList.remove('active'));
+      const tab = document.querySelector(`.section-tab[href="#${e.target.id}"]`);
+      if (tab) tab.classList.add('active');
     }
-    setActive(current);
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
+  });
+}, { rootMargin: '-120px 0px -50% 0px', threshold: 0 });
+_sections.forEach(s => _io.observe(s));
 </script>
 
 </body>
