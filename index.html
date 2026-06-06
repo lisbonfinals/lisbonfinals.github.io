@@ -845,13 +845,33 @@ function buildDots(){
 fetch('https://api.github.com/gists/' + GIST_ID)
   .then(function(r){ return r.json(); })
   .then(function(gist){
-    /* fetch lisbon_finals.json for accurate daily stats */
+    /* fetch lisbon_finals.json for accurate daily stats + last detected */
     var fStats = gist.files && gist.files['lisbon_finals.json'];
     if(fStats && fStats.raw_url){
       fetch(fStats.raw_url).then(function(r){ return r.json(); }).then(function(d){
         var s = d.stats || {};
         if(s.active_today != null){ set('rs-today', s.active_today+' flights today'); }
         if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); set('wc-peak', s.peak_noise_db.toFixed(1)+' dB'); }
+        /* ── last detected card ── */
+        var ld = d.last_detected;
+        var lc = el('live-card');
+        if(ld && lc){
+          var altStr = ld.altitude_ft ? Math.round(ld.altitude_ft).toLocaleString('en-US')+' ft' : '—';
+          var spdStr = ld.speed_kts   ? Math.round(ld.speed_kts)+' kt' : '—';
+          var dbStr  = ld.spl_db      ? ld.spl_db.toFixed(1)+' dB' : '—';
+          var tsStr  = ld.timestamp   ? (function(){ var d=new Date(ld.timestamp); return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
+          lc.innerHTML =
+            '<div class="hlc-top">'+
+              '<div><div class="hlc-callsign">'+(ld.callsign||'—')+'</div>'+
+              '<div class="hlc-airline">'+(ld.airline||'')+(tsStr?' · '+tsStr:'')+'</div></div>'+
+              '<div class="hlc-score"><div class="hlc-score-num">'+(ld.aircraft_type||'—')+'</div><div class="hlc-score-lbl">TYPE</div></div>'+
+            '</div>'+
+            '<div class="hlc-metrics">'+
+              '<div><div class="hlc-m-val">'+altStr+'</div><div class="hlc-m-lbl">Altitude</div></div>'+
+              '<div><div class="hlc-m-val">'+spdStr+'</div><div class="hlc-m-lbl">Speed</div></div>'+
+              '<div><div class="hlc-m-val amber">'+dbStr+'</div><div class="hlc-m-lbl">Noise</div></div>'+
+            '</div>';
+        }
       }).catch(function(){});
     }
     var f = gist.files && gist.files['latest.json'];
@@ -862,25 +882,7 @@ fetch('https://api.github.com/gists/' + GIST_ID)
   .then(function(recent){
     if(!Array.isArray(recent) || !recent.length) return;
 
-    /* ── live card (most recent flight) ── */
-    var t = recent[0];
-    var lc = el('live-card');
-    if(lc){
-      var altStr = fAlt(t)   ? Math.round(fAlt(t)).toLocaleString('en-US')+' ft' : '—';
-      var spdStr = fSpeed(t) ? Math.round(fSpeed(t))+' kt' : '—';
-      var dbStr  = fNoise(t) ? Math.round(fNoise(t))+' dB' : '—';
-      lc.innerHTML =
-        '<div class="hlc-top">'+
-          '<div><div class="hlc-callsign">'+(t.callsign||'—')+'</div>'+
-          '<div class="hlc-airline">'+(t.airline||'Unknown airline')+'</div></div>'+
-          '<div class="hlc-score"><div class="hlc-score-num">'+(t.aircraft_type||'—')+'</div><div class="hlc-score-lbl">TYPE</div></div>'+
-        '</div>'+
-        '<div class="hlc-metrics">'+
-          '<div><div class="hlc-m-val">'+altStr+'</div><div class="hlc-m-lbl">Altitude</div></div>'+
-          '<div><div class="hlc-m-val">'+spdStr+'</div><div class="hlc-m-lbl">Speed</div></div>'+
-          '<div><div class="hlc-m-val amber">'+dbStr+'</div><div class="hlc-m-lbl">Noise</div></div>'+
-        '</div>';
-    }
+    /* live card now populated from lisbon_finals.json last_detected (above) */
 
     /* strip stats come from lisbon_finals.json (fetched above) — no override needed */
 
