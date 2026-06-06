@@ -437,16 +437,22 @@ footer {
 .nav-has-dropdown { position: relative; }
 .nav-dropdown {
   display: none; position: absolute;
-  top: calc(100% + 12px); left: 50%;
+  top: 100%; left: 50%;
   transform: translateX(-50%);
   background: rgba(7,9,13,0.97);
   border: 1px solid rgba(245,166,35,0.15);
-  border-radius: 4px; padding: 8px 0;
+  border-radius: 4px;
+  padding: 16px 0 8px; /* top padding bridges the gap to trigger */
   list-style: none; min-width: 160px;
   backdrop-filter: blur(12px);
   z-index: 200;
 }
 .nav-has-dropdown:hover .nav-dropdown { display: block; }
+/* Keep dropdown visible while moving mouse to it */
+.nav-has-dropdown .nav-dropdown::before {
+  content: ''; position: absolute;
+  top: -12px; left: 0; right: 0; height: 12px;
+}
 .nav-dropdown li a {
   display: block; padding: 9px 18px;
   font-family: var(--mono); font-size: 10px;

@@ -284,16 +284,22 @@ nav {
 .nav-has-dropdown { position: relative; }
 .nav-dropdown {
   display: none; position: absolute;
-  top: calc(100% + 12px); left: 50%;
+  top: 100%; left: 50%;
   transform: translateX(-50%);
   background: rgba(7,9,13,0.97);
   border: 1px solid rgba(245,166,35,0.15);
-  border-radius: 4px; padding: 8px 0;
+  border-radius: 4px;
+  padding: 16px 0 8px; /* top padding bridges the gap to trigger */
   list-style: none; min-width: 160px;
   backdrop-filter: blur(12px);
   z-index: 200;
 }
 .nav-has-dropdown:hover .nav-dropdown { display: block; }
+/* Keep dropdown visible while moving mouse to it */
+.nav-has-dropdown .nav-dropdown::before {
+  content: ''; position: absolute;
+  top: -12px; left: 0; right: 0; height: 12px;
+}
 .nav-dropdown li a {
   display: block; padding: 9px 18px;
   font-family: var(--mono); font-size: 10px;
@@ -310,6 +316,15 @@ nav {
 .nav-dropdown li a.dd-warning:hover { color: #ef4444; }
 .nav-dropdown li + li { border-top: 1px solid rgba(240,237,232,0.05); }
 .nav-data-trigger { cursor: default; }
+
+
+.lang-switcher {
+  background: none; border: 1px solid rgba(240,237,232,0.18); border-radius: 2px;
+  color: rgba(240,237,232,0.45); font-family: var(--mono); font-size: 10px;
+  letter-spacing: .14em; padding: 6px 14px; cursor: pointer; transition: all .2s;
+  text-transform: uppercase; margin-left: 8px; flex-shrink: 0;
+}
+.lang-switcher:hover { border-color: var(--amber); color: var(--amber); }
 
 </style>
 </head>
@@ -344,6 +359,7 @@ nav {
     <li><a href="/log.html">Captain's Log</a></li>
     <li><a href="/about.html" class="nav-active">About</a></li>
   </ul>
+  <button class="lang-switcher" id="lang-btn" onclick="toggleLang()">PT</button>
   <button class="nav-burger" id="nav-burger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -550,5 +566,104 @@ document.getElementById('nav-burger').addEventListener('click', () => {
   drawer.classList.toggle('open');
 });
 </script>
+
+<script>
+// ── i18n PT/EN ──
+const ABOUT_TRANSLATIONS = {
+  pt: {
+    eyebrow: 'O Sistema',
+    title_1: 'Automatizado',
+    title_2: 'da deteção<br><em>à publicação</em>',
+    sub: 'Seis camadas autónomas — do sinal rádio bruto à publicação 4K no Instagram. Sem intervenção humana. Descodificação ADS-B em tempo real, pontuação de visão IA, upscaling neuronal e agendamento inteligente — a funcionar 24/7 num Raspberry Pi 4 sob o céu de Lisboa.',
+    step1_title: 'Detetar & Medir',
+    step1_desc: 'Um pequeno recetor rádio capta os sinais que todos os aviões comerciais são obrigados a transmitir — dando-nos o número do voo, altitude, velocidade e posição exata em tempo real. Um microfone mede simultaneamente o nível de ruído na varanda. O sistema só dispara quando ambas as condições se verificam: um avião suficientemente perto, e suficientemente audível.',
+    step2_title: 'Capturar & Pontuar',
+    step2_desc: 'Uma câmara 4K transmite continuamente imagens do percurso de aproximação. Cada frame é avaliada instantaneamente por um sistema de pontuação inteligente — só os planos onde o avião é claramente visível passam a seleção. A melhor frame é depois associada aos dados do voo em tempo real e enviada a uma IA para escrever a legenda.',
+    step3_title: 'Melhorar & Publicar',
+    step3_desc: 'A foto escolhida é processada por um sistema de melhoria IA que reconstrói detalhes finos a 4× a resolução original — cerca de 15 minutos no pequeno computador de bordo da estação. É depois agendada automaticamente, evitando o horário noturno (23h–7h). Tudo vai ao ar no @lisbon.finals com a legenda escrita por IA e os dados do voo — sem intervenção humana.',
+    hw_title: 'Hardware em serviço',
+    project_title: 'Uma experiência pessoal acima de Lisboa',
+    project_body: 'Lisbon Finals começou com uma pergunta simples: conseguiria um Raspberry Pi numa varanda fotografar automaticamente todos os aviões que passam — e publicar no Instagram sem qualquer intervenção humana?<br><br>A resposta, após meses de iteração, é sim. O que começou como um projeto de fim-de-semana tornou-se uma estação de monitorização autónoma completa — seguindo níveis de ruído, rotas de voo, padrões de companhias e dados atmosféricos, 24 horas por dia, a partir de uma varanda em Lisboa voltada para a trajetória de aproximação ao LPPT.',
+    pipeline_label: 'Pipeline de automação completo · fim ao fim · zero gatilho humano',
+    footer_ig: 'Seguir no Instagram →',
+    stat_flights: 'Voos registados',
+    stat_photos: 'Fotos publicadas',
+    stat_auto: 'Funcionamento autónomo',
+    stat_human: 'Gatilhos humanos por publicação',
+  },
+  en: {
+    eyebrow: 'The system',
+    title_1: 'Automated',
+    title_2: 'from detection<br><em>to post</em>',
+    sub: 'Six autonomous layers — from raw radio signals to 4K Instagram posts. No human in the loop. Real-time ADS-B decoding, AI vision scoring, neural upscaling and intelligent scheduling — all running 24/7 on a Raspberry Pi 4 under the Lisbon sky.',
+    step1_title: 'Detect & Measure',
+    step1_desc: 'A small radio receiver picks up the signals every commercial aircraft is required to broadcast — giving us the flight number, altitude, speed and exact position in real time. A microphone simultaneously measures the noise level on the terrace. The system only triggers when both conditions are true: a plane is close enough, and loud enough.',
+    step2_title: 'Capture & Score',
+    step2_desc: 'A 4K camera continuously streams footage of the approach path. Every frame is instantly rated by an intelligent scoring system — only shots where a plane is clearly and sharply visible make the cut. The best frame is then paired with live flight data and sent to an AI to write the caption.',
+    step3_title: 'Enhance & Publish',
+    step3_desc: 'The chosen photo is processed by an AI image enhancer that reconstructs fine detail at 4× the original resolution — about 15 minutes on the station's small onboard computer. It is then automatically scheduled, avoiding quiet hours at night (11pm–7am). Everything goes live on @lisbon.finals with the AI-written caption and flight data — no human involved.',
+    hw_title: 'Hardware in service',
+    project_title: 'A personal experiment above Lisbon',
+    project_body: 'Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.',
+    pipeline_label: 'Full automation pipeline · end to end · zero human trigger',
+    footer_ig: 'Follow on Instagram →',
+    stat_flights: 'Flights tracked',
+    stat_photos: 'Photos published',
+    stat_auto: 'Autonomous operation',
+    stat_human: 'Human triggers per post',
+  }
+};
+
+let _lang = localStorage.getItem('lf_lang') || 'en';
+
+function applyLang(lang) {
+  _lang = lang;
+  localStorage.setItem('lf_lang', lang);
+  const t = ABOUT_TRANSLATIONS[lang];
+  const btn = document.getElementById('lang-btn');
+  if (btn) btn.textContent = lang === 'en' ? 'PT' : 'EN';
+
+  const sel = (s) => document.querySelector(s);
+  const selAll = (s) => document.querySelectorAll(s);
+
+  const eyebrow = sel('.about-hero-eyebrow');
+  if (eyebrow) eyebrow.innerHTML = `<span></span>${t.eyebrow}`;
+  const title = sel('.about-hero-title');
+  if (title) title.innerHTML = `${t.title_1}<br>${t.title_2}`;
+  const sub = sel('.about-hero-sub');
+  if (sub) sub.textContent = t.sub;
+  const pipeLabel = sel('.pipeline-label');
+  if (pipeLabel) pipeLabel.textContent = t.pipeline_label;
+  const hwTitle = sel('.section-heading');
+  if (hwTitle) hwTitle.textContent = t.hw_title;
+  const projTitle = sel('.project-card-title');
+  if (projTitle) projTitle.innerHTML = t.project_title.replace('\n', '<br>');
+  const projBody = sel('.project-card-body');
+  if (projBody) projBody.innerHTML = t.project_body;
+  const footerIg = sel('.about-footer-ig');
+  if (footerIg) footerIg.textContent = t.footer_ig;
+
+  const steps = selAll('.step');
+  const stepKeys = ['1','2','3'];
+  steps.forEach((step, i) => {
+    const k = stepKeys[i];
+    const titleEl = step.querySelector('.step-title');
+    const descEl = step.querySelector('.step-desc');
+    if (titleEl) titleEl.textContent = t[`step${k}_title`] || titleEl.textContent;
+    if (descEl) descEl.textContent = t[`step${k}_desc`] || descEl.textContent;
+  });
+
+  const statLabels = selAll('.project-stat-label');
+  const labelKeys = ['stat_flights','stat_photos','stat_auto','stat_human'];
+  statLabels.forEach((el, i) => { if (labelKeys[i]) el.textContent = t[labelKeys[i]]; });
+}
+
+function toggleLang() {
+  applyLang(_lang === 'en' ? 'pt' : 'en');
+}
+
+document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyLang(_lang); });
+</script>
+
 </body>
 </html>

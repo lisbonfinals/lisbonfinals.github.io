@@ -342,16 +342,22 @@ nav {
 .nav-has-dropdown { position: relative; }
 .nav-dropdown {
   display: none; position: absolute;
-  top: calc(100% + 12px); left: 50%;
+  top: 100%; left: 50%;
   transform: translateX(-50%);
   background: rgba(7,9,13,0.97);
   border: 1px solid rgba(245,166,35,0.15);
-  border-radius: 4px; padding: 8px 0;
+  border-radius: 4px;
+  padding: 16px 0 8px; /* top padding bridges the gap to trigger */
   list-style: none; min-width: 160px;
   backdrop-filter: blur(12px);
   z-index: 200;
 }
 .nav-has-dropdown:hover .nav-dropdown { display: block; }
+/* Keep dropdown visible while moving mouse to it */
+.nav-has-dropdown .nav-dropdown::before {
+  content: ''; position: absolute;
+  top: -12px; left: 0; right: 0; height: 12px;
+}
 .nav-dropdown li a {
   display: block; padding: 9px 18px;
   font-family: var(--mono); font-size: 10px;
@@ -368,6 +374,15 @@ nav {
 .nav-dropdown li a.dd-warning:hover { color: #ef4444; }
 .nav-dropdown li + li { border-top: 1px solid rgba(240,237,232,0.05); }
 .nav-data-trigger { cursor: default; }
+
+
+.lang-switcher {
+  background: none; border: 1px solid rgba(240,237,232,0.18); border-radius: 2px;
+  color: rgba(240,237,232,0.45); font-family: var(--mono); font-size: 10px;
+  letter-spacing: .14em; padding: 6px 14px; cursor: pointer; transition: all .2s;
+  text-transform: uppercase; margin-left: 8px; flex-shrink: 0;
+}
+.lang-switcher:hover { border-color: var(--amber); color: var(--amber); }
 
 </style>
 </head>
@@ -402,6 +417,7 @@ nav {
     <li><a href="/log.html" class="nav-active">Captain's Log</a></li>
     <li><a href="/about.html">About</a></li>
   </ul>
+  <button class="lang-switcher" id="lang-btn" onclick="toggleLang()">PT</button>
   <button class="nav-burger" id="nav-burger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -438,7 +454,7 @@ nav {
 
 <!-- FOOTER -->
 <footer class="log-footer">
-  <span class="log-footer-left">LISBON FINALS · Captain's Log · lisbonfinals.github.io</span>
+  <span class="log-footer-left" id="footerLeft">LISBON FINALS · Captain's Log · lisbonfinals.github.io</span>
   <span class="log-footer-right" id="footerUpdated"></span>
 </footer>
 
@@ -573,5 +589,70 @@ document.getElementById('nav-burger').addEventListener('click', () => {
   drawer.classList.toggle('open');
 });
 </script>
+
+<script>
+// ── i18n PT/EN ──
+const LOG_TRANSLATIONS = {
+  pt: {
+    eyebrow: 'Diário de Campo',
+    hero_title_1: 'Diário de',
+    hero_title_2: 'Bordo',
+    hero_sub: 'Actualizações técnicas, capturas raras, alterações de hardware — escritas da varanda em tempo real.',
+    filter_all: 'Todos',
+    filter_capture: '📸 Captura',
+    filter_fix: '🛠️ Fix',
+    filter_hardware: '⚙️ Hardware',
+    filter_rare: '✈️ Raro',
+    filter_stats: '📊 Stats',
+    filter_note: '📝 Nota',
+    footer_left: 'LISBON FINALS · Diário de Bordo · lisbonfinals.github.io',
+  },
+  en: {
+    eyebrow: 'Field Journal',
+    hero_title_1: "Captain's",
+    hero_title_2: 'Log',
+    hero_sub: 'Technical updates, rare catches, hardware changes, bug fixes — written from the terrace in real time.',
+    filter_all: 'All',
+    filter_capture: '📸 Capture',
+    filter_fix: '🛠️ Fix',
+    filter_hardware: '⚙️ Hardware',
+    filter_rare: '✈️ Rare Find',
+    filter_stats: '📊 Stats',
+    filter_note: '📝 Note',
+    footer_left: "LISBON FINALS · Captain's Log · lisbonfinals.github.io",
+  }
+};
+
+let _lang = localStorage.getItem('lf_lang') || 'en';
+
+function applyLang(lang) {
+  _lang = lang;
+  localStorage.setItem('lf_lang', lang);
+  const t = LOG_TRANSLATIONS[lang];
+  const btn = document.getElementById('lang-btn');
+  if (btn) btn.textContent = lang === 'en' ? 'PT' : 'EN';
+  const eyebrow = document.querySelector('.log-hero-eyebrow');
+  if (eyebrow) eyebrow.innerHTML = `<span></span>${t.eyebrow}`;
+  const title = document.querySelector('.log-hero-title');
+  if (title) title.innerHTML = `${t.hero_title_1}<br><em>${t.hero_title_2}</em>`;
+  const sub = document.querySelector('.log-hero-sub');
+  if (sub) sub.textContent = t.hero_sub;
+  const footerLeft = document.getElementById('footerLeft');
+  if (footerLeft) footerLeft.textContent = t.footer_left;
+  // Filters
+  const filterLabels = [t.filter_all, t.filter_capture, t.filter_fix, t.filter_hardware, t.filter_rare, t.filter_stats, t.filter_note];
+  document.querySelectorAll('.log-filter-btn').forEach((btn, i) => {
+    if (filterLabels[i]) btn.textContent = filterLabels[i];
+  });
+}
+
+function toggleLang() {
+  applyLang(_lang === 'en' ? 'pt' : 'en');
+}
+
+// Apply on load
+document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyLang(_lang); });
+</script>
+
 </body>
 </html>
