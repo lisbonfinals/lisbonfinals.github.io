@@ -237,7 +237,7 @@ nav {
 /* ── LIVE TICKER ── */
 .live-ticker {
   background: rgba(10,13,18,1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-  overflow: hidden; position: relative; height: 52px;
+  overflow: hidden; position: relative; height: 62px;
   display: flex; align-items: center;
 }
 .live-ticker::before,.live-ticker::after {
@@ -424,25 +424,26 @@ nav {
 
 /* ── EXPLORE BAND ── */
 .explore-band {
+  border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   display:grid;grid-template-columns:repeat(3,1fr);
 }
 .explore-card {
-  padding:36px 40px;border-right:1px solid var(--border);background:var(--dark);
+  padding:64px 48px;border-right:1px solid var(--border);background:var(--dark);
   text-decoration:none;display:block;transition:background .25s;position:relative;overflow:hidden;
 }
 .explore-card:last-child { border-right:none; }
 .explore-card::before {
   content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(to right,rgba(245,166,35,.2),transparent);
+  background:linear-gradient(to right,rgba(245,166,35,.25),transparent);
 }
 .explore-card:hover { background:rgba(13,17,23,.8); }
 .explore-card:hover .ec-arrow { transform:translateX(4px); }
-.ec-label { font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:14px; }
-.ec-title { font-family:var(--sans);font-weight:800;font-size:22px;color:var(--white);letter-spacing:-.01em;margin-bottom:8px; }
+.ec-label { font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:18px; }
+.ec-title { font-family:var(--sans);font-weight:800;font-size:22px;color:var(--white);letter-spacing:-.01em;margin-bottom:12px; }
 .ec-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.28); }
-.ec-desc { font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);line-height:1.7; }
-.ec-arrow { display:inline-block;margin-top:20px;font-family:var(--mono);font-size:11px;color:var(--amber);transition:transform .2s; }
+.ec-desc { font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);line-height:1.85; }
+.ec-arrow { display:inline-block;margin-top:32px;font-family:var(--mono);font-size:11px;color:var(--amber);transition:transform .2s; }
 
 /* ── FOOTER ── */
 footer {
