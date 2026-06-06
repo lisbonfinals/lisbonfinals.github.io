@@ -761,10 +761,11 @@ document.getElementById('nav-burger').addEventListener('click', () => {
 // ── i18n PT/EN ──
 const ABOUT_TRANSLATIONS = {
   pt: {
-    eyebrow: 'O Sistema',
-    title_1: 'Automatizado',
-    title_2: 'da deteção<br><em>à publicação</em>',
-    sub: 'Seis camadas autónomas — do sinal rádio bruto à publicação 4K no Instagram. Sem intervenção humana. Descodificação ADS-B em tempo real, pontuação de visão IA, upscaling neuronal e agendamento inteligente — a funcionar 24/7 num Raspberry Pi 4 sob o céu de Lisboa.',
+    eyebrow: 'O projecto',
+    title_1: 'Uma experiência',
+    title_2: '<em>pessoal</em>',
+    subtitle_html: '<span style="color:rgba(240,237,232,.3)">sobre</span> Lisboa',
+    sub: 'O Lisbon Finals começou com uma pergunta simples: conseguiria um Raspberry Pi numa varanda fotografar automaticamente todos os aviões que passam por cima — e publicar no Instagram sem qualquer intervenção humana?<br><br>A resposta, após meses de iteração, é sim. O que começou como um projeto de fim-de-semana tornou-se uma estação de monitorização autónoma completa — seguindo níveis de ruído, rotas de voo, padrões de companhias e dados atmosféricos, 24 horas por dia, a partir de uma varanda em Lisboa voltada para a trajetória de aproximação ao LPPT.',
     step1_title: 'Detetar & Medir',
     step1_desc: 'Um pequeno recetor rádio capta os sinais que todos os aviões comerciais são obrigados a transmitir — dando-nos o número do voo, altitude, velocidade e posição exata em tempo real. Um microfone mede simultaneamente o nível de ruído na varanda. O sistema só dispara quando ambas as condições se verificam: um avião suficientemente perto, e suficientemente audível.',
     step2_title: 'Capturar & Pontuar',
@@ -782,16 +783,17 @@ const ABOUT_TRANSLATIONS = {
     stat_human: 'Gatilhos humanos por publicação',
   },
   en: {
-    eyebrow: 'The system',
-    title_1: 'Automated',
-    title_2: 'from detection<br><em>to post</em>',
-    sub: 'Six autonomous layers — from raw radio signals to 4K Instagram posts. No human in the loop. Real-time ADS-B decoding, AI vision scoring, neural upscaling and intelligent scheduling — all running 24/7 on a Raspberry Pi 4 under the Lisbon sky.',
+    eyebrow: 'The project',
+    title_1: 'A personal',
+    title_2: '<em>experiment</em>',
+    sub: 'Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.',
     step1_title: 'Detect & Measure',
     step1_desc: 'A small radio receiver picks up the signals every commercial aircraft is required to broadcast — giving us the flight number, altitude, speed and exact position in real time. A microphone simultaneously measures the noise level on the terrace. The system only triggers when both conditions are true: a plane is close enough, and loud enough.',
     step2_title: 'Capture & Score',
     step2_desc: 'A 4K camera continuously streams footage of the approach path. Every frame is instantly rated by an intelligent scoring system — only shots where a plane is clearly and sharply visible make the cut. The best frame is then paired with live flight data and sent to an AI to write the caption.',
     step3_title: 'Enhance & Publish',
     step3_desc: 'The chosen photo is processed by an AI image enhancer that reconstructs fine detail at 4× the original resolution — about 15 minutes on the station’s small onboard computer. It is then automatically scheduled, avoiding quiet hours at night (11pm–7am). Everything goes live on @lisbon.finals with the AI-written caption and flight data — no human involved.',
+    subtitle_html: '<span style="color:rgba(240,237,232,.3)">above</span> Lisbon',
     hw_title: 'Hardware in service',
     project_title: 'A personal experiment above Lisbon',
     project_body: 'Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.',
@@ -820,8 +822,10 @@ function applyLang(lang) {
   if (eyebrow) eyebrow.innerHTML = `<span></span>${t.eyebrow}`;
   const title = sel('.about-hero-title');
   if (title) title.innerHTML = `${t.title_1}<br>${t.title_2}`;
+  const subtitle = sel('.about-hero-subtitle');
+  if (subtitle) subtitle.innerHTML = t.subtitle_html;
   const sub = sel('.about-hero-sub');
-  if (sub) sub.textContent = t.sub;
+  if (sub) sub.innerHTML = t.sub;
   const pipeLabel = sel('.pipeline-label');
   if (pipeLabel) pipeLabel.textContent = t.pipeline_label;
   const hwTitle = sel('.section-heading');
@@ -843,16 +847,16 @@ function applyLang(lang) {
     if (descEl) descEl.textContent = t[`step${k}_desc`] || descEl.textContent;
   });
 
-  const statLabels = selAll('.project-stat-label');
   const labelKeys = ['stat_flights','stat_photos','stat_auto','stat_human'];
-  statLabels.forEach((el, i) => { if (labelKeys[i]) el.textContent = t[labelKeys[i]]; });
+  selAll('.about-stat-label').forEach((el, i) => { if (labelKeys[i]) el.textContent = t[labelKeys[i]]; });
+  selAll('.project-stat-label').forEach((el, i) => { if (labelKeys[i]) el.textContent = t[labelKeys[i]]; });
 }
 
 function toggleLang() {
   applyLang(_lang === 'en' ? 'pt' : 'en');
 }
 
-document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyLang(_lang); });
+document.addEventListener('DOMContentLoaded', () => { applyLang(_lang); });
 
 // ── Sticky tab highlight on scroll ──
 (function(){
