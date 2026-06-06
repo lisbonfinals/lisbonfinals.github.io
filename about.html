@@ -693,7 +693,7 @@ nav {
 
 
 <!-- UPGRADES IN PROGRESS -->
-<section class="coming-section" id="whats-next" style="scroll-margin-top:140px">
+<section class="coming-section" id="whats-next" style="scroll-margin-top:20px">
 <div class="coming-inner">
   <div class="section-label">What's next</div>
   <h2 class="section-title">Upgrades<br><em>in progress</em></h2>
@@ -857,22 +857,28 @@ document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyL
 /* ── SECTION TAB ACTIVE STATE ── */
 (function() {
   const tabs = document.querySelectorAll('.section-tab');
-  const sections = ['the-project','how-it-works','hardware','whats-next']
-    .map(id => document.getElementById(id)).filter(Boolean);
+  const sectionIds = ['the-project','how-it-works','hardware','whats-next'];
+  const offset = 130; // nav + tab bar height
 
   function setActive(id) {
-    tabs.forEach(t => {
-      t.classList.toggle('active', t.getAttribute('href') === '#' + id);
-    });
+    tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + id));
   }
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) setActive(entry.target.id);
-    });
-  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+  function onScroll() {
+    const scrollY = window.scrollY;
+    let current = sectionIds[0];
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      if (el.getBoundingClientRect().top + scrollY - offset <= scrollY + 10) {
+        current = id;
+      }
+    }
+    setActive(current);
+  }
 
-  sections.forEach(s => observer.observe(s));
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 })();
 </script>
 
