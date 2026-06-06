@@ -153,10 +153,10 @@ nav {
 }
 .hero-title em {
   font-family: var(--serif); font-style: italic; font-weight: 400;
-  color: rgba(240,237,232,.22); font-size: .86em;
+  color: rgba(240,237,232,.22); font-size: .83em;
 }
 .hero-title em.deci {
-  color: var(--amber); font-size: .86em;
+  color: var(--amber); font-size: .87em;
 }
 .hero-sub {
   font-family: var(--mono); font-size: 11px; line-height: 1.8;
@@ -352,7 +352,7 @@ nav {
 .gallery-card-info { position:absolute;bottom:0;left:0;right:0;padding:16px 18px; }
 .gc-callsign { font-family:var(--sans);font-weight:800;font-size:17px;color:var(--white);margin-bottom:3px; }
 .gc-meta { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.32);letter-spacing:.08em; }
-.gc-score { position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:12px;color:var(--amber);font-weight:500; }
+.gc-score { position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.75);background:rgba(10,13,18,.55);padding:3px 8px;letter-spacing:.04em; }
 .gc-date { position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.75);background:rgba(10,13,18,.55);padding:3px 8px;letter-spacing:.04em; }
 
 /* ── WEATHER / STATION CONDITIONS ── */
@@ -845,6 +845,15 @@ function buildDots(){
 fetch('https://api.github.com/gists/' + GIST_ID)
   .then(function(r){ return r.json(); })
   .then(function(gist){
+    /* fetch lisbon_finals.json for accurate daily stats */
+    var fStats = gist.files && gist.files['lisbon_finals.json'];
+    if(fStats && fStats.raw_url){
+      fetch(fStats.raw_url).then(function(r){ return r.json(); }).then(function(d){
+        var s = d.stats || {};
+        if(s.active_today != null){ set('rs-today', s.active_today+' flights today'); }
+        if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); set('wc-peak', s.peak_noise_db.toFixed(1)+' dB'); }
+      }).catch(function(){});
+    }
     var f = gist.files && gist.files['latest.json'];
     if(!f || !f.raw_url) throw new Error('latest.json absent');
     return fetch(f.raw_url);
@@ -873,13 +882,7 @@ fetch('https://api.github.com/gists/' + GIST_ID)
         '</div>';
     }
 
-    /* ── strip stats ── */
-    var peakDb = recent.reduce(function(mx, f){ return Math.max(mx, fNoise(f)||0); }, 0);
-    if(peakDb > 0){ set('rs-peak', peakDb.toFixed(1)+' dB'); set('wc-peak', peakDb.toFixed(1)+' dB'); }
-    /* count published today */
-    var today = new Date().toISOString().slice(0,10);
-    var todayCount = recent.filter(function(f){ return (f.published_at||f.timestamp||'').slice(0,10)===today; }).length;
-    if(todayCount > 0){ set('rs-today', todayCount+'+ published'); }
+    /* strip stats come from lisbon_finals.json (fetched above) — no override needed */
 
     /* ── hero photos ── */
     _photos = recent.reduce(function(acc, f){
@@ -904,12 +907,12 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     set('ls-db',       fNoise(lf) ? Math.round(fNoise(lf))+' dB' : '—');
     set('ls-speed',    fSpeed(lf) ? Math.round(fSpeed(lf))+' kt' : '—');
     set('ls-aircraft', lf.aircraft_type||'—');
-    var sc = lf.score || lf.yolo_score || lf.photo_score || null;
-    set('ls-score', sc ? (typeof sc==='number' ? sc.toFixed(1) : sc) : '—');
-    var tsField = lf.published_at || lf.timestamp;
+    var sc = lf.score != null ? lf.score : (lf.yolo_score != null ? lf.yolo_score : null);
+    set('ls-score', sc !== null ? parseFloat(sc).toFixed(1) : '—');
+    var tsField = lf.timestamp || lf.published_at;
     if(tsField){
       var dt=new Date(tsField);
-      set('ls-badge','Published · '+dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}));
+      set('ls-badge', dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}));
     }
 
     /* ── live ticker ── */
