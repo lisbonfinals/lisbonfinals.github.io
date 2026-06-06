@@ -153,7 +153,10 @@ nav {
 }
 .hero-title em {
   font-family: var(--serif); font-style: italic; font-weight: 400;
-  color: rgba(240,237,232,.22); font-size: .9em;
+  color: rgba(240,237,232,.22); font-size: .86em;
+}
+.hero-title em.deci {
+  color: var(--amber); font-size: .97em;
 }
 .hero-sub {
   font-family: var(--mono); font-size: 11px; line-height: 1.8;
@@ -221,6 +224,7 @@ nav {
 .rs-label { font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.22); }
 .rs-value { font-family:var(--mono);font-size:14px;font-weight:500;color:var(--white); }
 .rs-value.amber { color:var(--amber); }
+.rs-value.muted { color:rgba(147,180,220,.7); }
 .rs-runway-badge {
   font-family:var(--mono);font-size:13px;color:var(--amber);
   border:1px solid rgba(245,166,35,.35);padding:4px 10px;display:inline-block;letter-spacing:.06em;
@@ -265,11 +269,13 @@ nav {
   padding:0 36px; border-right:1px solid rgba(240,237,232,.05);
   font-family:var(--mono); font-size:11px;
 }
-.ti-cs  { color:var(--amber); font-weight:600; letter-spacing:.08em; font-size:12px; }
-.ti-sep { color:rgba(240,237,232,.15); }
-.ti-val { color:rgba(240,237,232,.5); }
-.ti-db  { color:var(--amber); font-weight:500; }
-.ti-ts  { color:rgba(240,237,232,.25); font-size:10px; }
+.ti-cs   { color:var(--amber); font-weight:600; letter-spacing:.08em; font-size:12px; }
+.ti-sep  { color:rgba(240,237,232,.15); }
+.ti-val  { color:rgba(240,237,232,.5); }
+.ti-ac   { color:rgba(240,237,232,.35); font-style:italic; }
+.ti-db   { color:var(--amber); font-weight:500; }
+.ti-ts   { color:rgba(240,237,232,.25); font-size:10px; }
+.ti-flag { font-size:14px; line-height:1; }
 
 /* ── LATEST SHOT ── */
 .latest-shot {
@@ -347,7 +353,7 @@ nav {
 .gc-callsign { font-family:var(--sans);font-weight:800;font-size:17px;color:var(--white);margin-bottom:3px; }
 .gc-meta { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.32);letter-spacing:.08em; }
 .gc-score { position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:12px;color:var(--amber);font-weight:500; }
-.gc-date { position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.5);background:rgba(10,13,18,.55);padding:3px 8px;letter-spacing:.04em; }
+.gc-date { position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.75);background:rgba(10,13,18,.55);padding:3px 8px;letter-spacing:.04em; }
 
 /* ── WEATHER / STATION CONDITIONS ── */
 .weather-section {
@@ -516,7 +522,7 @@ footer {
     </div>
     <h1 class="hero-title">
       Every <span style="color:var(--amber)">plane.</span><br>
-      <em style="font-style:italic;color:var(--amber)">Every decibel.</em><br>
+      Every <em class="deci">decibel.</em><br>
       <em>Every second.</em>
     </h1>
     <p class="hero-sub">An autonomous station on a Lisbon terrace — photographing, measuring and publishing every aircraft on final approach to LPPT, without any human input.</p>
@@ -565,7 +571,7 @@ footer {
   </div>
   <div class="rs-item">
     <div class="rs-label">Flights today</div>
-    <div class="rs-value" id="rs-today">—</div>
+    <div class="rs-value muted" id="rs-today">—</div>
   </div>
   <div class="rs-updated" id="rs-updated">LPPT · —</div>
 </div>
@@ -611,9 +617,8 @@ footer {
     </div>
     <div class="ls-score-row">
       <div class="ls-score-num" id="ls-score">—</div>
-      <div class="ls-score-max">/ 5.0</div>
       <div class="ls-score-detail">
-        <div class="ls-score-lbl">YOLO score</div>
+        <div class="ls-score-lbl">Registration</div>
         <div class="ls-score-sub" id="ls-published">Published to @lisbon.finals</div>
       </div>
     </div>
@@ -689,7 +694,7 @@ footer {
     <div class="footer-radar">
       <div class="footer-radar-label">Position</div>
       <div class="footer-radar-disc">
-        <img class="footer-radar-img" src="ressources/Imagewebsite1.png" alt="Radar LPPT"/>
+        <img class="footer-radar-img" src="ressources/CARTE%20MAP.png" alt="Radar LPPT"/>
         <svg class="footer-radar-svg" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <clipPath id="fr-clip"><circle cx="500" cy="500" r="455"/></clipPath>
@@ -871,6 +876,10 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     /* ── strip stats ── */
     var peakDb = recent.reduce(function(mx, f){ return Math.max(mx, fNoise(f)||0); }, 0);
     if(peakDb > 0){ set('rs-peak', peakDb.toFixed(1)+' dB'); }
+    /* count published today */
+    var today = new Date().toISOString().slice(0,10);
+    var todayCount = recent.filter(function(f){ return (f.published_at||f.timestamp||'').slice(0,10)===today; }).length;
+    if(todayCount > 0){ set('rs-today', todayCount+'+ published'); }
 
     /* ── hero photos ── */
     _photos = recent.reduce(function(acc, f){
@@ -906,16 +915,20 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     var track = el('ticker-track');
     if(track && recent.length){
       function tickerItem(t){
-        var cs  = t.callsign || '—';
-        var al  = t.airline  || '';
-        var alt = fAlt(t)    ? Math.round(fAlt(t)).toLocaleString('en-US')+' ft' : '—';
-        var spd = fSpeed(t)  ? Math.round(fSpeed(t))+' kt' : '—';
-        var db  = fNoise(t)  ? Math.round(fNoise(t))+' dB' : '—';
-        var ts  = (t.timestamp||t.published_at) ? (function(){ var d=new Date(t.timestamp||t.published_at); return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
+        var cs   = t.callsign     || '—';
+        var flag = t.airline_flag || '';
+        var al   = t.airline      || '';
+        var ac   = t.aircraft_type|| '';
+        var alt  = fAlt(t)   ? Math.round(fAlt(t)).toLocaleString('en-US')+' ft' : '—';
+        var spd  = fSpeed(t) ? Math.round(fSpeed(t))+' kt' : '—';
+        var db   = fNoise(t) ? Math.round(fNoise(t))+' dB' : '—';
+        var ts   = (t.timestamp||t.published_at) ? (function(){ var d=new Date(t.timestamp||t.published_at); return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
         return '<span class="ticker-item">'+
           (ts?'<span class="ti-ts">'+ts+'</span><span class="ti-sep">·</span>':'')+
+          (flag?'<span class="ti-flag">'+flag+'</span>':'')+
           '<span class="ti-cs">'+cs+'</span>'+
           (al?'<span class="ti-sep">·</span><span class="ti-val">'+al+'</span>':'')+
+          (ac?'<span class="ti-sep">·</span><span class="ti-val ti-ac">'+ac+'</span>':'')+
           '<span class="ti-sep">·</span><span class="ti-val">'+alt+'</span>'+
           '<span class="ti-sep">·</span><span class="ti-val">'+spd+'</span>'+
           '<span class="ti-sep">·</span><span class="ti-db">'+db+'</span>'+
