@@ -113,9 +113,9 @@ nav {
 
 /* ── HERO ── */
 .hero {
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex; flex-direction:column; justify-content:flex-start;
-  padding: 140px 48px 80px;
+  padding: 120px 48px 80px;
   position: relative;
   overflow: hidden;
 }
@@ -217,9 +217,14 @@ nav {
 .month-chip.active { background: var(--amber-dim); border-color: var(--amber); color: var(--amber); }
 
 /* ── SECTION ── */
-.section { padding: 80px 48px; }
+.section { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
 .section-header { margin-bottom: 48px; }
-.section-tag { font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);margin-bottom:12px; }
+.section-tag {
+  font-family:var(--mono); font-size:9px; letter-spacing:.25em; text-transform:uppercase;
+  color:var(--amber); margin-bottom:12px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-tag::before { content:''; width:24px; height:1px; background:var(--amber); flex-shrink:0; }
 .section-title { font-size: 32px; font-weight:800; letter-spacing:-.02em; }
 .section-title span { color:var(--amber); }
 
@@ -411,26 +416,38 @@ footer {
 @media (max-width: 1024px) {
   .nav-links { display:none; }
   .nav-burger { display:flex; }
+  .hero { padding: 110px 36px 64px; }
+  .section { padding: 64px 36px; }
   .podiums-grid { gap:20px; }
+  .month-bar { padding: 12px 36px; }
+  footer { padding: 24px 36px; }
 }
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
-  nav { padding: 16px 24px; }
-  .hero { padding: 120px 24px 60px; }
-  .hero-title { font-size: 42px; }
-  .hero-stats { flex-direction:column; max-width:100%; }
-  .hero-stat { border-right:none; border-bottom:1px solid var(--border); padding:20px 24px; }
+  nav { padding: 16px 20px; }
+  .hero { padding: 100px 20px 48px; min-height: 60vh; }
+  .hero-title { font-size: clamp(36px, 10vw, 52px); }
+  .hero-subtitle { font-size: 13px; max-width: 100%; }
+  .hero-stats { flex-direction:column; max-width:100%; border-radius:10px; }
+  .hero-stat { border-right:none; border-bottom:1px solid var(--border); padding:18px 20px; }
   .hero-stat:last-child { border-bottom:none; }
-  .month-bar { padding: 12px 24px; overflow-x:auto; }
-  .section { padding: 48px 24px; }
-  .podiums-grid { grid-template-columns:1fr; }
-  .report-featured-header { padding: 20px 24px; flex-direction:column; align-items:flex-start; }
-  .report-featured-body { padding: 20px 24px; }
+  .month-bar { padding: 12px 20px; overflow-x:auto; gap:8px; }
+  .month-chips { flex-wrap:nowrap; }
+  .section { padding: 40px 20px; }
+  .section-title { font-size: 24px; }
+  .podiums-grid { grid-template-columns:1fr; gap:16px; }
+  .podium { gap: 0 6px; }
+  .pod-db { font-size: 16px; }
+  .report-featured { border-radius:12px; }
+  .report-featured-header { padding: 18px 20px; flex-direction:column; align-items:flex-start; gap:12px; }
+  .report-featured-body { padding: 18px 20px; }
+  .report-kpis { gap:12px; flex-wrap:wrap; }
+  .report-kpi-val { font-size: 16px; }
   .violations-row { flex-direction:column; }
   .vio-badge { width:100%; }
-  footer { padding: 24px; flex-direction:column; gap:8px; text-align:center; }
-  .report-kpis { gap:16px; }
+  .archive-grid { grid-template-columns: 1fr; }
+  footer { padding: 20px; flex-direction:column; gap:8px; text-align:center; }
 }
 
 /* ── NAV DROPDOWN ── */
@@ -562,6 +579,10 @@ footer {
 <section class="section">
 
   <!-- FEATURED REPORT -->
+  <div class="section-header" style="margin-bottom:40px">
+    <div class="section-tag">MONTHLY REPORT</div>
+    <h2 class="section-title">Latest <span>Analysis</span></h2>
+  </div>
   <div id="report-container">
     <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><br><br><span data-i18n="loading_txt">Loading report data...</span></div>
   </div>
