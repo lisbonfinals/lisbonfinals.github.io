@@ -292,9 +292,13 @@ nav {
 
 /* ── UPGRADES / COMING SOON ── */
 .coming-section {
-  padding: 120px 48px;
   background: var(--dark2);
   border-top: 1px solid var(--border);
+}
+.coming-section .coming-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 48px;
 }
 .coming-section .section-label { margin-bottom: 12px; }
 .coming-section .section-title {
@@ -360,7 +364,7 @@ nav {
   text-transform: uppercase;
 }
 @media (max-width: 900px) {
-  .coming-section { padding: 64px 20px; }
+  .coming-section .coming-inner { padding: 64px 20px; }
   .coming-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 480px) {
@@ -656,6 +660,7 @@ nav {
 
 <!-- UPGRADES IN PROGRESS -->
 <section class="coming-section">
+<div class="coming-inner">
   <div class="section-label">What's next</div>
   <h2 class="section-title">Upgrades<br><em>in progress</em></h2>
   <p class="section-sub">The station is continuously evolving. New hardware and sensors are being integrated to capture even more — from vibration analysis and industrial-grade acoustics to live ATC communications and air quality monitoring.</p>
@@ -686,6 +691,7 @@ nav {
       <span class="coming-tag">RTL-SDR · 118.1 MHz</span>
     </div>
   </div>
+</div>
 </section>
 
 <!-- FOOTER -->
