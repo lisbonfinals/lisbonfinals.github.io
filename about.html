@@ -371,6 +371,30 @@ nav {
   .coming-grid { grid-template-columns: 1fr; }
 }
 
+/* ── SECTION TAB BAR ── */
+.section-tabs {
+  background: rgba(10,13,18,.95);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 68px; z-index: 50;
+  backdrop-filter: blur(8px);
+}
+.section-tabs-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 48px; display: flex; gap: 0;
+}
+.section-tab {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(240,237,232,.35);
+  text-decoration: none; padding: 16px 24px;
+  border-bottom: 2px solid transparent; transition: all .2s; display: block;
+}
+.section-tab:hover { color: rgba(240,237,232,.7); }
+.section-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+@media (max-width: 600px) {
+  .section-tabs-inner { padding: 0 12px; }
+  .section-tab { padding: 14px 12px; font-size: 9px; }
+}
+
 /* ── FOOTER ── */
 .about-footer {
   border-top: 1px solid var(--border);
@@ -498,8 +522,18 @@ nav {
   </button>
 </nav>
 
+<!-- SECTION TAB BAR -->
+<div class="section-tabs">
+  <div class="section-tabs-inner">
+    <a href="#the-project" class="section-tab active">The Project</a>
+    <a href="#how-it-works" class="section-tab">How it works</a>
+    <a href="#hardware" class="section-tab">Hardware</a>
+    <a href="#whats-next" class="section-tab">What's next</a>
+  </div>
+</div>
+
 <!-- HERO -->
-<header class="about-hero">
+<header class="about-hero" id="the-project">
   <div class="about-hero-eyebrow">The project</div>
   <h1 class="about-hero-title">A personal<br>experiment</h1>
   <div class="about-hero-subtitle"><span style="color:rgba(240,237,232,.3)">above</span> Lisbon</div>
@@ -527,7 +561,7 @@ nav {
 <hr class="section-divider" style="margin-bottom:60px">
 
 <!-- HOW IT WORKS -->
-<section class="steps-section">
+<section class="steps-section" id="how-it-works" style="scroll-margin-top:112px">
   <div class="section-label">How it works</div>
   <h2 class="section-title-main">Three layers,<br><em>zero human triggers</em></h2>
   <div class="steps">
@@ -602,7 +636,7 @@ nav {
 <hr class="section-divider">
 
 <!-- HARDWARE -->
-<section class="hardware-section">
+<section class="hardware-section" id="hardware" style="scroll-margin-top:112px">
   <div class="section-eyebrow">The station</div>
   <h2 class="section-heading">Hardware<br><em>in service</em></h2>
   <div class="hw-grid">
@@ -659,7 +693,7 @@ nav {
 
 
 <!-- UPGRADES IN PROGRESS -->
-<section class="coming-section">
+<section class="coming-section" id="whats-next" style="scroll-margin-top:112px">
 <div class="coming-inner">
   <div class="section-label">What's next</div>
   <h2 class="section-title">Upgrades<br><em>in progress</em></h2>
@@ -819,6 +853,27 @@ function toggleLang() {
 }
 
 document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyLang(_lang); });
+
+/* ── SECTION TAB ACTIVE STATE ── */
+(function() {
+  const tabs = document.querySelectorAll('.section-tab');
+  const sections = ['the-project','how-it-works','hardware','whats-next']
+    .map(id => document.getElementById(id)).filter(Boolean);
+
+  function setActive(id) {
+    tabs.forEach(t => {
+      t.classList.toggle('active', t.getAttribute('href') === '#' + id);
+    });
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+})();
 </script>
 
 </body>
