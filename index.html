@@ -160,6 +160,8 @@ nav {
 }
 .hero-title em.second {
   font-size: .56em;
+  display: block;
+  margin-top: -.18em;
 }
 .hero-sub {
   font-family: var(--mono); font-size: 13px; line-height: 1.8;
@@ -371,10 +373,10 @@ nav {
   display: grid; grid-template-columns: 1fr 480px; gap: 80px; align-items: start;
 }
 .weather-eyebrow {
-  font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(240,237,232,.28);display:flex;align-items:center;gap:12px;margin-bottom:28px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:28px;
 }
-.weather-eyebrow::before { content:'';width:20px;height:1px;background:rgba(245,166,35,.4); }
+.weather-eyebrow::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
 .weather-title {
   font-family:var(--sans);font-weight:800;font-size:clamp(32px,3.6vw,52px);
   color:var(--white);letter-spacing:-.02em;line-height:.92;margin-bottom:24px;
