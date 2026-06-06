@@ -533,7 +533,7 @@ nav {
 </div>
 
 <!-- HERO -->
-<header class="about-hero" id="the-project">
+<header class="about-hero about-section" id="the-project">
   <div class="about-hero-eyebrow">The project</div>
   <h1 class="about-hero-title">A personal<br>experiment</h1>
   <div class="about-hero-subtitle"><span style="color:rgba(240,237,232,.3)">above</span> Lisbon</div>
@@ -561,7 +561,7 @@ nav {
 <hr class="section-divider" style="margin-bottom:60px">
 
 <!-- HOW IT WORKS -->
-<section class="steps-section" id="how-it-works" style="scroll-margin-top:140px">
+<section class="steps-section about-section" id="how-it-works" style="scroll-margin-top:140px">
   <div class="section-label">How it works</div>
   <h2 class="section-title-main">Three layers,<br><em>zero human triggers</em></h2>
   <div class="steps">
@@ -636,7 +636,7 @@ nav {
 <hr class="section-divider">
 
 <!-- HARDWARE -->
-<section class="hardware-section" id="hardware" style="scroll-margin-top:140px">
+<section class="hardware-section about-section" id="hardware" style="scroll-margin-top:140px">
   <div class="section-eyebrow">The station</div>
   <h2 class="section-heading">Hardware<br><em>in service</em></h2>
   <div class="hw-grid">
@@ -693,7 +693,7 @@ nav {
 
 
 <!-- UPGRADES IN PROGRESS -->
-<section class="coming-section" id="whats-next" style="scroll-margin-top:20px">
+<section class="coming-section about-section" id="whats-next" style="scroll-margin-top:140px">
 <div class="coming-inner">
   <div class="section-label">What's next</div>
   <h2 class="section-title">Upgrades<br><em>in progress</em></h2>
@@ -854,21 +854,19 @@ function toggleLang() {
 
 document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyLang(_lang); });
 
-// ── Sticky tab highlight on scroll ──
+// ── Sticky tab highlight on scroll (same as data.html) ──
 const _tabs = document.querySelectorAll('.section-tab');
-const _sections = document.querySelectorAll('#the-project, #how-it-works, #hardware, #whats-next');
-function _updateActiveTab() {
-  const scrollY = window.scrollY || window.pageYOffset;
-  let current = _sections.length ? _sections[0].id : '';
-  _sections.forEach(s => {
-    if (s.offsetTop - 160 <= scrollY) current = s.id;
+const _sections = document.querySelectorAll('.about-section');
+const _io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      _tabs.forEach(t => t.classList.remove('active'));
+      const tab = document.querySelector(`.section-tab[href="#${e.target.id}"]`);
+      if (tab) tab.classList.add('active');
+    }
   });
-  _tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + current));
-}
-window.addEventListener('scroll', _updateActiveTab, { passive: true });
-window.addEventListener('hashchange', _updateActiveTab);
-window.addEventListener('load', _updateActiveTab);
-_updateActiveTab();
+}, { rootMargin: '-120px 0px -50% 0px', threshold: 0 });
+_sections.forEach(s => _io.observe(s));
 </script>
 
 </body>
