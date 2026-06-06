@@ -148,9 +148,14 @@ nav {
 .hero-title {
   font-family: var(--sans); font-weight: 800;
   font-size: clamp(52px, 6.8vw, 88px);
-  line-height: .9; letter-spacing: -.03em;
+  line-height: 1; letter-spacing: -.03em;
   color: var(--white); margin-bottom: 20px;
 }
+.hero-title .line {
+  display: block;
+  margin-bottom: .22em;
+}
+.hero-title .line:last-child { margin-bottom: 0; }
 .hero-title em {
   font-family: var(--serif); font-style: italic; font-weight: 400;
   color: rgba(240,237,232,.22); font-size: .80em;
@@ -160,8 +165,6 @@ nav {
 }
 .hero-title em.second {
   font-size: .56em;
-  display: block;
-  margin-top: -.18em;
 }
 .hero-sub {
   font-family: var(--mono); font-size: 13px; line-height: 1.8;
@@ -617,9 +620,9 @@ footer {
       Tracking live · LPPT approach path
     </div>
     <h1 class="hero-title">
-      Every <span style="color:var(--amber)">plane.</span><br>
-      <em style="color:var(--white)">Every </em><em class="deci">decibel.</em><br>
-      <em class="second">Every second.</em>
+      <span class="line">Every <span style="color:var(--amber)">plane.</span></span>
+      <span class="line"><em style="color:var(--white)">Every </em><em class="deci">decibel.</em></span>
+      <span class="line"><em class="second">Every second.</em></span>
     </h1>
     <p class="hero-sub">An autonomous station on a Lisbon terrace — photographing, measuring and publishing every aircraft on final approach to LPPT, without any human input.</p>
   </div>
@@ -1019,8 +1022,9 @@ fetch('https://api.github.com/gists/' + GIST_ID)
           var tf = s.total_flights.toLocaleString('en-US');
           set('stat-flights', tf);
         }
-        if(s.photos_published > 0){
-          set('stat-photos', s.photos_published.toLocaleString('en-US'));
+        var photoCount = s.total_photos || s.photos_published || 0;
+        if(photoCount > 0){
+          set('stat-photos', photoCount.toLocaleString('en-US'));
         }
         if(s.peak_noise_db > 0){
           set('stat-peak', s.peak_noise_db.toFixed(1)+' dB');
