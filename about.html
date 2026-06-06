@@ -115,6 +115,23 @@ nav {
   font-weight: 400; color: rgba(240,237,232,.3);
 }
 .title-amber { color: var(--amber); }
+.about-hero-subtitle {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(32px, 5vw, 64px); color: var(--amber);
+  line-height: 1.1; margin-bottom: 28px; margin-top: 2px;
+}
+.about-hero-stats {
+  display: flex; gap: 48px; flex-wrap: wrap;
+  border-top: 1px solid var(--border); margin-top: 40px; padding-top: 32px;
+}
+.about-stat-val {
+  font-family: var(--mono); font-size: 28px; font-weight: 500;
+  color: var(--amber); line-height: 1;
+}
+.about-stat-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(240,237,232,0.25); margin-top: 6px;
+}
 .about-hero-sub {
   font-size: 15px; line-height: 1.8; color: rgba(240,237,232,0.5);
   max-width: 620px;
@@ -403,8 +420,27 @@ nav {
 <!-- HERO -->
 <header class="about-hero">
   <div class="about-hero-eyebrow">The project</div>
-  <h1 class="about-hero-title">A terrace above Lisbon.<br><span class="title-amber">Every aircraft.</span> <em>Every decibel.</em></h1>
-  <p class="about-hero-sub">A Raspberry Pi on a Lisbon terrace listens for aircraft on final approach to Humberto Delgado Airport — combining ADS-B radar, acoustic sensors and AI vision to photograph, measure and publish every pass. Autonomously. 24 hours a day, without a single human trigger.</p>
+  <h1 class="about-hero-title">A personal experiment</h1>
+  <div class="about-hero-subtitle">above Lisbon</div>
+  <p class="about-hero-sub">Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.</p>
+  <div class="about-hero-stats">
+    <div>
+      <div class="about-stat-val" id="statFlights">—</div>
+      <div class="about-stat-label">Flights tracked</div>
+    </div>
+    <div>
+      <div class="about-stat-val" id="statPhotos">—</div>
+      <div class="about-stat-label">Photos published</div>
+    </div>
+    <div>
+      <div class="about-stat-val">24/7</div>
+      <div class="about-stat-label">Autonomous operation</div>
+    </div>
+    <div>
+      <div class="about-stat-val">0</div>
+      <div class="about-stat-label">Human triggers per post</div>
+    </div>
+  </div>
 </header>
 
 <hr class="section-divider" style="margin-bottom:60px">
@@ -540,37 +576,6 @@ nav {
   </div>
 </section>
 
-<hr class="section-divider">
-
-<!-- PROJECT -->
-<section class="project-section">
-  <div class="project-card">
-    <div class="project-card-title">A personal experiment</div>
-    <div class="project-card-subtitle">above Lisbon</div>
-    <p class="project-card-body">
-      Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>
-      The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.
-    </p>
-    <div class="project-stats-bar">
-      <div>
-        <div class="project-stat-val" id="statFlights">—</div>
-        <div class="project-stat-label">Flights tracked</div>
-      </div>
-      <div>
-        <div class="project-stat-val" id="statPhotos">—</div>
-        <div class="project-stat-label">Photos published</div>
-      </div>
-      <div>
-        <div class="project-stat-val">24/7</div>
-        <div class="project-stat-label">Autonomous operation</div>
-      </div>
-      <div>
-        <div class="project-stat-val">0</div>
-        <div class="project-stat-label">Human triggers per post</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- FOOTER -->
 <footer class="about-footer">
@@ -586,10 +591,10 @@ fetch(GIST_URL + '?t=' + Date.now())
   .then(r => r.json())
   .then(data => {
     const stats = data.stats || data;
-    if (stats.total_flights)
-      document.getElementById('statFlights').textContent = stats.total_flights.toLocaleString('en-US');
-    if (stats.total_photos)
-      document.getElementById('statPhotos').textContent = stats.total_photos.toLocaleString('en-US');
+    const f = document.getElementById('statFlights');
+    const p = document.getElementById('statPhotos');
+    if (f && stats.total_flights) f.textContent = stats.total_flights.toLocaleString('en-US');
+    if (p && stats.total_photos) p.textContent = stats.total_photos.toLocaleString('en-US');
   })
   .catch(() => {});
 
