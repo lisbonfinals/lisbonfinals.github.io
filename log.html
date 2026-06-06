@@ -152,6 +152,30 @@ nav {
   letter-spacing: .08em;
 }
 
+/* ── CAPTAIN PORTRAIT ── */
+.log-captain-portrait {
+  position: absolute;
+  right: -48px;
+  top: 0;
+  bottom: -20px;
+  width: 420px;
+  pointer-events: none;
+  overflow: hidden;
+}
+.log-captain-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  opacity: 0.13;
+  -webkit-mask-image: linear-gradient(to left, black 0%, black 20%, transparent 75%);
+  mask-image: linear-gradient(to left, black 0%, black 20%, transparent 75%);
+  filter: grayscale(20%) sepia(10%);
+}
+@media (max-width: 900px) {
+  .log-captain-portrait { display: none; }
+}
+
 /* ── FILTERS ── */
 .log-filters {
   padding: 0 48px 32px;
@@ -502,6 +526,9 @@ nav {
 
 <!-- HERO -->
 <header class="log-hero">
+  <div class="log-captain-portrait">
+    <img src="https://lisbonfinals.github.io/ressources/captain.png" alt="The Captain">
+  </div>
   <div class="log-hero-eyebrow"><span></span>Field Journal</div>
   <h1 class="log-hero-title">Captain's<br><em>Log</em></h1>
   <p class="log-hero-sub">Technical updates, rare catches, hardware changes, bug fixes — written from the terrace in real time.</p>
