@@ -424,6 +424,47 @@ nav {
 .weather-grid { display:none; }
 .weather-card,.wc-icon,.wc-val,.wc-lbl,.wc-sub { display:none; }
 
+/* ── STATS ROW ── */
+.stats-row {
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--border);
+  background:var(--dark2);
+}
+.stat-cell {
+  padding:28px 36px;
+  border-right:1px solid var(--border);
+}
+.stat-cell:last-child { border-right:none; }
+.stat-num {
+  font-family:var(--mono);font-weight:500;
+  font-size:clamp(28px,3vw,42px);
+  color:var(--white);letter-spacing:-.01em;line-height:1;
+  margin-bottom:8px;
+}
+.stat-num.amber { color:var(--amber); }
+.stat-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:3px; }
+.stat-sub { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.14);letter-spacing:.06em; }
+
+/* ── SECTION HEADER ── */
+.section-header {
+  padding:52px 48px 44px;
+  border-bottom:1px solid var(--border);
+  background:var(--dark);
+}
+.section-eyebrow {
+  font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:16px;
+}
+.section-eyebrow::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
+.section-title {
+  font-family:var(--sans);font-weight:800;font-size:clamp(24px,2.8vw,38px);
+  color:var(--white);letter-spacing:-.02em;line-height:1;
+}
+.section-title em {
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  color:rgba(240,237,232,.22);
+}
+
 /* ── EXPLORE BAND ── */
 .explore-band {
   border-top: 1px solid var(--border);
@@ -513,6 +554,9 @@ footer {
   .explore-card { border-right:none; border-bottom:1px solid var(--border); }
   .runway-strip { padding:0 20px; }
   .weather-section { padding:48px 20px; }
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .stat-cell { padding:20px 20px; }
+  .section-header { padding:36px 20px 28px; }
   .footer-top { flex-wrap:wrap; }
   footer { padding:40px 20px; }
 }
@@ -595,6 +639,89 @@ footer {
 
   <div class="hero-photo-dots" id="photo-dots"></div>
 </section>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-cell">
+    <div class="stat-lbl">Flights tracked</div>
+    <div class="stat-num" id="stat-flights">—</div>
+    <div class="stat-sub">since May 3, 2026</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-lbl">Photos published</div>
+    <div class="stat-num" id="stat-photos">—</div>
+    <div class="stat-sub">by AI · zero human</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-lbl">Peak noise recorded</div>
+    <div class="stat-num amber" id="stat-peak">—</div>
+    <div class="stat-sub" id="stat-peak-sub">—</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-lbl">Days running</div>
+    <div class="stat-num" id="stat-days">—</div>
+    <div class="stat-sub">autonomous · 24/7</div>
+  </div>
+</div>
+
+<!-- SECTION HEADER: LATEST CAPTURES -->
+<div class="section-header">
+  <div class="section-eyebrow">Latest captures</div>
+  <div class="section-title">Live from <em>the terrace</em></div>
+</div>
+
+<!-- LATEST SHOT -->
+<div class="latest-shot">
+  <div class="ls-photo">
+    <img id="ls-img" src="" alt="Latest flight photo" />
+    <div class="ls-photo-overlay"></div>
+    <div class="ls-photo-badge" id="ls-badge">Latest published</div>
+  </div>
+  <div class="ls-info">
+    <div class="ls-eyebrow">Latest shot</div>
+    <div class="ls-callsign" id="ls-callsign">—</div>
+    <div class="ls-airline" id="ls-airline">—</div>
+    <div class="ls-stats">
+      <div>
+        <div class="ls-stat-val" id="ls-alt">—</div>
+        <div class="ls-stat-lbl">Altitude</div>
+      </div>
+      <div>
+        <div class="ls-stat-val amber" id="ls-db">—</div>
+        <div class="ls-stat-lbl">Peak noise</div>
+      </div>
+      <div>
+        <div class="ls-stat-val" id="ls-speed">—</div>
+        <div class="ls-stat-lbl">Ground speed</div>
+      </div>
+      <div>
+        <div class="ls-stat-val" id="ls-aircraft">—</div>
+        <div class="ls-stat-lbl">Aircraft type</div>
+      </div>
+    </div>
+    <div class="ls-score-row">
+      <div class="ls-score-num" id="ls-score">—</div><div class="ls-score-max"> / 5</div>
+      <div class="ls-score-detail">
+        <div class="ls-score-lbl">YOLO Score</div>
+        <div class="ls-score-sub" id="ls-published">Published to @lisbon.finals</div>
+      </div>
+    </div>
+    <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="ls-ig-link" id="ls-ig-link">View on Instagram</a>
+  </div>
+</div>
+
+<!-- GALLERY STRIP -->
+<div class="gallery-strip" id="gallery-strip"></div>
+
+<!-- LIVE TICKER -->
+<div class="live-ticker">
+  <div class="ticker-label"><div class="ticker-live-dot"></div>Live Feed</div>
+  <div class="ticker-scroll">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item"><span class="ti-val">Loading…</span></span>
+    </div>
+  </div>
+</div>
 
 <!-- STATION CONDITIONS -->
 <div class="weather-section">
@@ -685,59 +812,6 @@ footer {
     <div class="rs-value muted" id="rs-today">—</div>
   </div>
   <div class="rs-updated" id="rs-updated">LPPT · —</div>
-</div>
-
-<!-- LATEST SHOT -->
-<div class="latest-shot">
-  <div class="ls-photo">
-    <img id="ls-img" src="" alt="Latest flight photo" />
-    <div class="ls-photo-overlay"></div>
-    <div class="ls-photo-badge" id="ls-badge">Latest published</div>
-  </div>
-  <div class="ls-info">
-    <div class="ls-eyebrow">Latest shot</div>
-    <div class="ls-callsign" id="ls-callsign">—</div>
-    <div class="ls-airline" id="ls-airline">—</div>
-    <div class="ls-stats">
-      <div>
-        <div class="ls-stat-val" id="ls-alt">—</div>
-        <div class="ls-stat-lbl">Altitude</div>
-      </div>
-      <div>
-        <div class="ls-stat-val amber" id="ls-db">—</div>
-        <div class="ls-stat-lbl">Peak noise</div>
-      </div>
-      <div>
-        <div class="ls-stat-val" id="ls-speed">—</div>
-        <div class="ls-stat-lbl">Ground speed</div>
-      </div>
-      <div>
-        <div class="ls-stat-val" id="ls-aircraft">—</div>
-        <div class="ls-stat-lbl">Aircraft type</div>
-      </div>
-    </div>
-    <div class="ls-score-row">
-      <div class="ls-score-num" id="ls-score">—</div><div class="ls-score-max"> / 5</div>
-      <div class="ls-score-detail">
-        <div class="ls-score-lbl">YOLO Score</div>
-        <div class="ls-score-sub" id="ls-published">Published to @lisbon.finals</div>
-      </div>
-    </div>
-    <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="ls-ig-link" id="ls-ig-link">View on Instagram</a>
-  </div>
-</div>
-
-<!-- GALLERY STRIP -->
-<div class="gallery-strip" id="gallery-strip"></div>
-
-<!-- LIVE TICKER -->
-<div class="live-ticker">
-  <div class="ticker-label"><div class="ticker-live-dot"></div>Live Feed</div>
-  <div class="ticker-scroll">
-    <div class="ticker-track" id="ticker-track">
-      <span class="ticker-item"><span class="ti-val">Loading…</span></span>
-    </div>
-  </div>
 </div>
 
 <!-- EXPLORE BAND -->
@@ -940,6 +1014,22 @@ fetch('https://api.github.com/gists/' + GIST_ID)
         var s = d.stats || {};
         if(s.active_today != null){ set('rs-today', s.active_today+' flights today'); }
         if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); }
+        /* ── stats row big numbers ── */
+        if(s.total_flights > 0){
+          var tf = s.total_flights.toLocaleString('en-US');
+          set('stat-flights', tf);
+        }
+        if(s.photos_published > 0){
+          set('stat-photos', s.photos_published.toLocaleString('en-US'));
+        }
+        if(s.peak_noise_db > 0){
+          set('stat-peak', s.peak_noise_db.toFixed(1)+' dB');
+          if(s.peak_callsign){ set('stat-peak-sub', s.peak_callsign); }
+        }
+        /* days since May 3 */
+        var startMs = new Date('2026-05-03').getTime();
+        var daysActive = Math.floor((Date.now() - startMs) / 86400000);
+        if(daysActive > 0){ set('stat-days', daysActive); }
         /* ── live ticker from lisbon_finals.json ── */
         var tdata = d.ticker;
         var track = el('ticker-track');
