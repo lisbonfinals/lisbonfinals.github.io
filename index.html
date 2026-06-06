@@ -30,31 +30,65 @@ body { background: var(--dark); color: var(--white); font-family: var(--sans); o
 
 /* ── NAV ── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   padding: 20px 48px;
   display: flex; align-items: center; justify-content: space-between;
-  background: rgba(10,13,18,.95);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(8px);
+  background: linear-gradient(to bottom, rgba(7,9,13,0.98), transparent);
+  backdrop-filter: blur(4px);
 }
-.nav-logo { display:flex;align-items:center;gap:10px;text-decoration:none; }
-.nav-dot   { width:28px;height:28px;border:1.5px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
-.nav-dot::before { content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);animation:ndot 2.4s infinite; }
-@keyframes ndot { 0%,100%{opacity:1;} 50%{opacity:.3;} }
-.nav-wordmark { font-family:var(--sans);font-weight:800;font-size:14px;letter-spacing:.06em;color:var(--white); }
-.nav-wordmark span { color:var(--amber); }
-.nav-links { display:flex;gap:32px;list-style:none;align-items:center; }
-.nav-links a { font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.4);text-decoration:none;transition:color .2s;cursor:none; }
-.nav-links a:hover { color:var(--white); }
-.nav-links a.nav-active { color:var(--amber); }
-.nav-has-dropdown { position:relative; }
-.nav-dropdown { display:none;position:absolute;top:calc(100% + 12px);left:0;background:rgba(10,13,18,.97);border:1px solid var(--border);min-width:180px;z-index:300; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-dot {
+  width: 28px; height: 28px; border: 1.5px solid var(--amber);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative;
+}
+.nav-dot::after {
+  content: ''; width: 10px; height: 12px; background: var(--amber); border-radius: 0;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -60%) rotate(-20deg);
+  clip-path: polygon(50% 0%, 65% 85%, 50% 72%, 35% 85%);
+}
+.nav-wordmark {
+  font-size: 13px; font-family: var(--mono); font-weight: 500;
+  letter-spacing: .12em; color: var(--white); text-transform: uppercase;
+}
+.nav-wordmark span { color: var(--amber); }
+.nav-links { display: flex; gap: 36px; list-style: none; margin-left: auto; }
+.nav-links a {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(240,237,232,0.55); text-decoration: none; transition: color .2s; cursor: none;
+}
+.nav-links a:hover { color: var(--amber); }
+.nav-links a.nav-active { color: var(--amber); }
+.nav-has-dropdown { position: relative; }
+.nav-dropdown { display:none;position:absolute;top:calc(100% + 12px);left:0;background:rgba(7,9,13,.98);border:1px solid var(--border);min-width:180px;z-index:300; }
 .nav-has-dropdown:hover .nav-dropdown { display:block; }
 .nav-dropdown li { list-style:none; }
 .nav-dropdown li a { display:block;padding:12px 16px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.4);text-decoration:none;transition:all .2s;cursor:none; }
-.nav-dropdown li a:hover { color:var(--white);background:rgba(245,166,35,.05); }
-.lang-btn { font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid var(--border);background:transparent;color:rgba(240,237,232,.35);padding:6px 12px;cursor:none;transition:all .2s; }
-.lang-btn:hover { color:var(--white);border-color:rgba(240,237,232,.3); }
+.nav-dropdown li a:hover { color:var(--amber);background:rgba(245,166,35,.05); }
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px; margin-left: 12px;
+}
+.nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--white); border-radius: 2px; }
+.nav-drawer {
+  display: none; flex-direction: column; gap: 32px;
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(7,9,13,0.97); backdrop-filter: blur(12px);
+  align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.nav-drawer.open { display: flex; opacity: 1; pointer-events: all; }
+.nav-drawer a {
+  font-family: var(--mono); font-size: 14px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(240,237,232,0.6); text-decoration: none; transition: color .2s;
+}
+.nav-drawer a:hover, .nav-drawer a.drawer-active { color: var(--white); }
+.lang-switcher { font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid var(--border);background:transparent;color:rgba(240,237,232,.35);padding:6px 12px;cursor:none;transition:all .2s;margin-left:24px; }
+.lang-switcher:hover { color:var(--white);border-color:rgba(240,237,232,.3); }
+.nav-dropdown li a.dd-warning { color: rgba(248,113,113,0.6); }
+.nav-dropdown li a.dd-warning:hover { color: #ef4444; }
+.nav-dropdown li + li { border-top: 1px solid rgba(240,237,232,0.05); }
 
 /* ── HERO ── */
 .hero {
@@ -123,7 +157,7 @@ nav {
 }
 .hero-sub {
   font-family: var(--mono); font-size: 11px; line-height: 1.8;
-  color: rgba(240,237,232,.3); max-width: 420px; margin-bottom: 32px;
+  color: rgba(240,237,232,.72); max-width: 420px; margin-bottom: 32px;
   letter-spacing: .02em;
 }
 .hero-ctas { display:flex;gap:12px; }
@@ -403,6 +437,8 @@ footer {
 @media (max-width: 900px) {
   nav { padding:16px 20px; }
   .nav-links { display:none; }
+  .nav-burger { display:flex; }
+  .lang-switcher { display:none; }
   .hero { padding:88px 20px 40px; }
   .hero-live-card { display:none; }
   .latest-shot { grid-template-columns:1fr; }
@@ -437,15 +473,27 @@ footer {
       <ul class="nav-dropdown">
         <li><a href="/data.html#the-data">The Data</a></li>
         <li><a href="/data.html#noise-data">Noise Data</a></li>
-        <li><a href="/data.html#warning-zone">Warning Zone</a></li>
+        <li><a href="/data.html#warning-zone" class="dd-warning">Warning Zone</a></li>
         <li><a href="/noise-report.html">Noise Report</a></li>
       </ul>
     </li>
     <li><a href="/log.html">Captain's Log</a></li>
     <li><a href="/about.html">About</a></li>
   </ul>
-  <button class="lang-btn" id="lang-btn">PT</button>
+  <button class="lang-switcher" onclick="toggleLang()" id="lang-btn">PT</button>
+  <button class="nav-burger" id="nav-burger" onclick="document.getElementById('nav-drawer').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- NAV DRAWER (mobile) -->
+<div class="nav-drawer" id="nav-drawer">
+  <a href="/" class="drawer-active">Live</a>
+  <a href="/data.html">Data</a>
+  <a href="/log.html">Captain's Log</a>
+  <a href="/about.html">About</a>
+  <a href="/noise-report.html">Noise Report</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -739,7 +787,9 @@ function getPhotoUrl(f, w){
   if(f.photo_url && f.photo_url.startsWith('http')) return f.photo_url;
   var fname = f.filename || f.photo_filename || '';
   if(!fname) return '';
-  return CLOUD + '/w_'+(w||900)+',q_auto,f_auto/photos/' + fname;
+  /* normalize: spaces → underscore, strip extension */
+  var pid = fname.replace(/\s+/g,'_').replace(/\.[^.]+$/, '');
+  return CLOUD + '/w_'+(w||900)+',q_auto,f_auto/photos/' + pid;
 }
 
 /* ── HERO PHOTO ROTATOR ── */
@@ -957,6 +1007,25 @@ fetch('https://wttr.in/38.7749,-9.1397?format=j1')
     if(ents[0].isIntersecting){obs.disconnect();setTimeout(function(){requestAnimationFrame(tick);},200);}
   },{threshold:.3});
   obs.observe(el2);
+})();
+
+// ── LANG TOGGLE ──
+var _lang = 'en';
+function toggleLang() {
+  _lang = _lang === 'en' ? 'pt' : 'en';
+  var btn = document.getElementById('lang-btn');
+  if (btn) btn.textContent = _lang === 'en' ? 'PT' : 'EN';
+}
+
+// ── MOBILE BURGER ──
+(function(){
+  var burger = document.getElementById('nav-burger');
+  var drawer = document.getElementById('nav-drawer');
+  if (burger && drawer) {
+    document.addEventListener('click', function(e){
+      if (!drawer.contains(e.target) && !burger.contains(e.target)) drawer.classList.remove('open');
+    });
+  }
 })();
 </script>
 
