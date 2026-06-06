@@ -188,12 +188,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 /* ── WARNING ZONE ── */
 .warning-hero-card{background:linear-gradient(135deg,rgba(239,68,68,.06) 0%,rgba(7,9,13,0) 60%);border:1px solid rgba(239,68,68,.2);border-radius:4px;padding:36px;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
 .warning-stat{text-align:center;}
-.warning-val{font-family:var(--mono);font-size:48px;font-weight:500;line-height:1;color:var(--red);}
-.warning-val.ok{color:var(--green);}
-.warning-val.warn{color:var(--amber);}
-.warning-val.night{color:#5ea5f0;}
-.warning-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-top:8px;}
-.warning-sub{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.2);margin-top:4px;}
+.warning-val{font-family:var(--mono);font-size:48px;font-weight:500;line-height:1;}
+.warning-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-top:8px;}
+.warning-sub{font-family:var(--mono);font-size:9px;margin-top:4px;}
+/* stat-level color theming */
+.warning-stat.night .warning-val{color:#5ea5f0;}
+.warning-stat.night .warning-lbl{color:rgba(94,165,240,.65);}
+.warning-stat.night .warning-sub{color:rgba(94,165,240,.4);}
+.warning-stat.critical .warning-val{color:var(--red);}
+.warning-stat.critical .warning-lbl{color:rgba(239,68,68,.65);}
+.warning-stat.critical .warning-sub{color:rgba(239,68,68,.4);}
+.warning-stat.l2 .warning-val{color:var(--amber);}
+.warning-stat.l2 .warning-lbl{color:rgba(245,166,35,.65);}
+.warning-stat.l2 .warning-sub{color:rgba(245,166,35,.4);}
+/* green override when compliant */
+.warning-val.ok{color:var(--green)!important;}
+/* night flights progress bar */
+.warning-progress{height:2px;background:rgba(255,255,255,.07);border-radius:1px;margin-top:14px;overflow:hidden;}
+.warning-progress-fill{height:100%;border-radius:1px;width:0;transition:width .8s ease;}
+.warning-progress-fill.over{background:var(--red);}
+.warning-progress-fill.safe{background:#4ade80;}
+.warning-limit{font-family:var(--mono);font-size:9px;margin-top:5px;}
 
 .violation-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:20px 24px;display:flex;align-items:center;gap:16px;margin-bottom:12px;transition:border-color .2s;}
 .violation-card.critical{border-color:rgba(239,68,68,.3);}
@@ -411,18 +426,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   </div>
 
   <div class="warning-hero-card">
-    <div class="warning-stat">
-      <div class="warning-val night" id="w-night-total">—</div>
+    <div class="warning-stat night">
+      <div class="warning-val" id="w-night-total">—</div>
       <div class="warning-lbl" data-i18n="w_night_lbl">Night flights this week</div>
       <div class="warning-sub" id="w-week-from">since Monday</div>
+      <div class="warning-progress"><div class="warning-progress-fill" id="w-night-fill"></div></div>
+      <div class="warning-limit" id="w-night-limit">Limit: 91/week</div>
     </div>
-    <div class="warning-stat">
+    <div class="warning-stat critical">
       <div class="warning-val" id="w-critical">—</div>
       <div class="warning-lbl" data-i18n="w_critical_lbl">Critical violations</div>
       <div class="warning-sub">&gt; 98.9 dB · absolute ban</div>
     </div>
-    <div class="warning-stat">
-      <div class="warning-val warn" id="w-l2">—</div>
+    <div class="warning-stat l2">
+      <div class="warning-val" id="w-l2">—</div>
       <div class="warning-lbl" data-i18n="w_l2_lbl">Level 2 violations</div>
       <div class="warning-sub">93–95.9 dB outside allowed slots</div>
     </div>
@@ -578,12 +595,38 @@ fetch(GIST_URL + '?t=' + Date.now())
     const wNight = document.getElementById('w-night-total');
     const wCrit = document.getElementById('w-critical');
     const wL2 = document.getElementById('w-l2');
-    wNight.textContent = fmt(s.night_flights_week);
-    wCrit.textContent = fmt(s.night_infraction_critical);
-    wL2.textContent = fmt(s.night_infraction_l2);
-    if ((s.night_infraction_critical || 0) === 0) wCrit.classList.add('ok');
-    if ((s.night_infraction_l2 || 0) === 0) wL2.classList.add('ok');
+    const nightCount = s.night_flights_week || 0;
+    const critCount  = s.night_infraction_critical || 0;
+    const l2Count    = s.night_infraction_l2 || 0;
+    wNight.textContent = fmt(nightCount);
+    wCrit.textContent  = fmt(critCount);
+    wL2.textContent    = fmt(l2Count);
+    if (critCount === 0) wCrit.classList.add('ok');
+    if (l2Count   === 0) wL2.classList.add('ok');
     if (s.night_week_from) document.getElementById('w-week-from').textContent = 'since ' + s.night_week_from;
+
+    // Night flights — progress bar vs 91/week limit
+    const NIGHT_LIMIT = 91;
+    const isOver = nightCount > NIGHT_LIMIT;
+    const fill = document.getElementById('w-night-fill');
+    if (fill) {
+      fill.style.width = Math.min((nightCount / NIGHT_LIMIT) * 100, 100) + '%';
+      fill.className = 'warning-progress-fill ' + (isOver ? 'over' : 'safe');
+    }
+    const limitEl = document.getElementById('w-night-limit');
+    if (limitEl) {
+      limitEl.style.color = 'rgba(94,165,240,.45)';
+      limitEl.textContent = isOver
+        ? 'Limit: ' + NIGHT_LIMIT + '/week · exceeded by ' + (nightCount - NIGHT_LIMIT)
+        : 'Limit: ' + NIGHT_LIMIT + '/week · within quota';
+    }
+
+    // Dynamic sub-text for critical & L2 (green ✓ when compliant)
+    const critSub = document.querySelector('.warning-stat.critical .warning-sub');
+    if (critSub) critSub.textContent = critCount === 0 ? '✓ compliant this week' : '> 98.9 dB · absolute ban';
+    const l2Sub = document.querySelector('.warning-stat.l2 .warning-sub');
+    if (l2Sub) l2Sub.textContent = l2Count === 0 ? '✓ compliant this week' : '93–95.9 dB outside allowed slots';
+
     buildLastInfraction(s);
 
     // Ticker
