@@ -302,7 +302,8 @@ nav {
 .ls-photo:hover img { transform: scale(1.03); }
 .ls-photo-overlay {
   position:absolute;inset:0;
-  background:linear-gradient(to right, transparent 50%, rgba(10,13,18,.65) 100%);
+  background:linear-gradient(to bottom, transparent 40%, rgba(10,13,18,.88) 100%),
+             linear-gradient(to right, transparent 50%, rgba(10,13,18,.5) 100%);
   pointer-events:none;
 }
 .ls-photo-badge {
@@ -311,6 +312,26 @@ nav {
   background:rgba(10,13,18,.75);border:1px solid rgba(30,37,48,.8);
   padding:5px 10px;color:rgba(240,237,232,.4);
 }
+/* photo bottom overlay — callsign + date */
+.ls-photo-bottom {
+  position:absolute;bottom:0;left:0;right:0;padding:20px 24px;
+}
+.ls-photo-cs {
+  font-family:var(--mono);font-weight:500;font-size:22px;
+  color:var(--amber);letter-spacing:.06em;margin-bottom:5px;
+  display:flex;align-items:center;gap:8px;
+}
+.ls-photo-dateline {
+  font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.45);letter-spacing:.06em;
+}
+/* monthly ranking badge */
+.ls-rank-badge {
+  position:absolute;top:22px;right:22px;
+  font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 12px;border:1px solid;display:none;
+}
+.ls-rank-badge.quietest { color:#4ade80;border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.08); }
+.ls-rank-badge.noisiest { color:#f87171;border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.08); }
 .ls-info {
   background: var(--dark2); padding: 52px 48px;
   display:flex;flex-direction:column;justify-content:center;
@@ -686,6 +707,11 @@ footer {
     <img id="ls-img" src="" alt="Latest flight photo" />
     <div class="ls-photo-overlay"></div>
     <div class="ls-photo-badge" id="ls-badge">Latest published</div>
+    <div class="ls-rank-badge" id="ls-rank-badge"></div>
+    <div class="ls-photo-bottom">
+      <div class="ls-photo-cs"><span id="ls-photo-flag"></span><span id="ls-photo-cs">—</span></div>
+      <div class="ls-photo-dateline" id="ls-photo-date">—</div>
+    </div>
   </div>
   <div class="ls-info">
     <div class="ls-eyebrow">Latest shot</div>
@@ -922,6 +948,27 @@ footer {
 /* ── CONSTANTS ── */
 var GIST_ID       = '943998ff407a141792bcd5d2c5f3fc36'; /* latest.json — photos */
 var STATS_GIST_ID = '2edb053ac9f9c91047c1b36f706d302c'; /* lisbon_finals.json — stats */
+window._monthlyQuietest = '';
+window._monthlyNoisiest = '';
+window._lsAirline = '';
+function _applyRankBadge(){
+  var badge = el('ls-rank-badge');
+  if(!badge) return;
+  var airline = window._lsAirline;
+  if(!airline){ badge.style.display='none'; return; }
+  var q = window._monthlyQuietest, n = window._monthlyNoisiest;
+  if(q && airline.toLowerCase().indexOf(q.toLowerCase()) !== -1){
+    badge.textContent = '🟢 Quietest this month';
+    badge.className = 'ls-rank-badge quietest';
+    badge.style.display = '';
+  } else if(n && airline.toLowerCase().indexOf(n.toLowerCase()) !== -1){
+    badge.textContent = '🔴 Noisiest this month';
+    badge.className = 'ls-rank-badge noisiest';
+    badge.style.display = '';
+  } else {
+    badge.style.display = 'none';
+  }
+}
 var CLOUD = 'https://res.cloudinary.com/dtjccssx1/image/upload';
 
 /* ── HELPERS ── */
@@ -1002,6 +1049,10 @@ fetch('https://api.github.com/gists/' + GIST_ID)
       .then(function(d){
         if(!d) return;
         var s = d.stats || {};
+        /* store monthly rankings for badge */
+        window._monthlyQuietest = (d.monthly && d.monthly.quietest_airline) || s.quietest_airline || '';
+        window._monthlyNoisiest = (d.monthly && d.monthly.noisiest_airline) || s.noisiest_airline || '';
+        _applyRankBadge();
         if(s.active_today != null){ set('rs-today', s.active_today+' flights today'); }
         if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); }
         /* ── stats row big numbers ── */
@@ -1110,8 +1161,17 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     var tsField = lf.timestamp || lf.published_at;
     if(tsField){
       var dt=new Date(tsField);
-      set('ls-badge', dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}));
+      var dateStr = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+      set('ls-badge', dateStr);
+      set('ls-photo-date', dateStr);
     }
+    /* photo overlay — flag + callsign */
+    var flagEl = el('ls-photo-flag');
+    if(flagEl) flagEl.textContent = lf.airline_flag || '';
+    set('ls-photo-cs', lf.callsign || '—');
+    /* monthly ranking badge — cross-ref with stats */
+    window._lsAirline = lf.airline || '';
+    _applyRankBadge();
 
     /* ticker now populated from lisbon_finals.json (d.ticker) in stats fetch above */
 
