@@ -343,7 +343,7 @@ nav {
 .ls-ig-link:hover { color:var(--amber); }
 
 /* ── GALLERY STRIP ── */
-.gallery-strip { display:grid;grid-template-columns:repeat(3,1fr); }
+.gallery-strip { display:grid;grid-template-columns:repeat(3,1fr);gap:3px; }
 .gallery-card {
   position:relative;height:270px;overflow:hidden;
   background:var(--dark);border-right:1px solid var(--border);border-bottom:1px solid var(--border);
@@ -678,16 +678,6 @@ footer {
   <div class="rs-updated" id="rs-updated">LPPT · —</div>
 </div>
 
-<!-- LIVE TICKER -->
-<div class="live-ticker">
-  <div class="ticker-label"><div class="ticker-live-dot"></div>Live Feed</div>
-  <div class="ticker-scroll">
-    <div class="ticker-track" id="ticker-track">
-      <span class="ticker-item"><span class="ti-val">Loading…</span></span>
-    </div>
-  </div>
-</div>
-
 <!-- LATEST SHOT -->
 <div class="latest-shot">
   <div class="ls-photo">
@@ -725,6 +715,16 @@ footer {
       </div>
     </div>
     <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="ls-ig-link" id="ls-ig-link">View on Instagram</a>
+  </div>
+</div>
+
+<!-- LIVE TICKER -->
+<div class="live-ticker">
+  <div class="ticker-label"><div class="ticker-live-dot"></div>Live Feed</div>
+  <div class="ticker-scroll">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item"><span class="ti-val">Loading…</span></span>
+    </div>
   </div>
 </div>
 
