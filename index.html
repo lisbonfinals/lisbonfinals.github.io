@@ -940,6 +940,34 @@ fetch('https://api.github.com/gists/' + GIST_ID)
         var s = d.stats || {};
         if(s.active_today != null){ set('rs-today', s.active_today+' flights today'); }
         if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); }
+        /* ── live ticker from lisbon_finals.json ── */
+        var tdata = d.ticker;
+        var track = el('ticker-track');
+        if(track && tdata && tdata.length){
+          function mkTick(t){
+            var cs  = t.callsign || '—';
+            var flag= t.flag || '';
+            var al  = t.airline  || '';
+            var ac  = t.aircraft || '';
+            var alt = t.alt_ft   ? Math.round(t.alt_ft)+' ft' : '—';
+            var spd = t.speed_kts? Math.round(t.speed_kts)+' kt' : '—';
+            var db  = t.noise_db ? Math.round(t.noise_db)+' dB' : '—';
+            var ts  = t.timestamp ? (function(){ var d=new Date(t.timestamp); return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
+            return '<span class="ticker-item">'+
+              (ts?'<span class="ti-ts">'+ts+'</span><span class="ti-sep">·</span>':'')+
+              (flag?'<span class="ti-flag">'+flag+'</span>':'')+
+              '<span class="ti-cs">'+cs+'</span>'+
+              (al?'<span class="ti-sep">·</span><span class="ti-val">'+al+'</span>':'')+
+              (ac?'<span class="ti-sep">·</span><span class="ti-val ti-ac">'+ac+'</span>':'')+
+              '<span class="ti-sep">·</span><span class="ti-val">'+alt+'</span>'+
+              '<span class="ti-sep">·</span><span class="ti-val">'+spd+'</span>'+
+              '<span class="ti-sep">·</span><span class="ti-db">'+db+'</span>'+
+            '</span>';
+          }
+          var html = tdata.map(mkTick).join('');
+          track.innerHTML = html + html;
+          track.style.animationDuration = (tdata.length * 4) + 's';
+        }
         /* ── last detected card ── */
         var ld = d.last_detected;
         var lc = el('live-card');
@@ -1004,33 +1032,7 @@ fetch('https://api.github.com/gists/' + GIST_ID)
       set('ls-badge', dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}));
     }
 
-    /* ── live ticker ── */
-    var track = el('ticker-track');
-    if(track && recent.length){
-      function tickerItem(t){
-        var cs   = t.callsign     || '—';
-        var flag = t.airline_flag || '';
-        var al   = t.airline      || '';
-        var ac   = t.aircraft_type|| '';
-        var alt  = fAlt(t)   ? Math.round(fAlt(t)).toLocaleString('en-US')+' ft' : '—';
-        var spd  = fSpeed(t) ? Math.round(fSpeed(t))+' kt' : '—';
-        var db   = fNoise(t) ? Math.round(fNoise(t))+' dB' : '—';
-        var ts   = (t.timestamp||t.published_at) ? (function(){ var d=new Date(t.timestamp||t.published_at); return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
-        return '<span class="ticker-item">'+
-          (ts?'<span class="ti-ts">'+ts+'</span><span class="ti-sep">·</span>':'')+
-          (flag?'<span class="ti-flag">'+flag+'</span>':'')+
-          '<span class="ti-cs">'+cs+'</span>'+
-          (al?'<span class="ti-sep">·</span><span class="ti-val">'+al+'</span>':'')+
-          (ac?'<span class="ti-sep">·</span><span class="ti-val ti-ac">'+ac+'</span>':'')+
-          '<span class="ti-sep">·</span><span class="ti-val">'+alt+'</span>'+
-          '<span class="ti-sep">·</span><span class="ti-val">'+spd+'</span>'+
-          '<span class="ti-sep">·</span><span class="ti-db">'+db+'</span>'+
-        '</span>';
-      }
-      var html = recent.map(tickerItem).join('');
-      track.innerHTML = html + html;
-      track.style.animationDuration = (recent.length * 5) + 's';
-    }
+    /* ticker now populated from lisbon_finals.json (d.ticker) in stats fetch above */
 
     /* ── gallery strip (flights 1..3) ── */
     var strip = el('gallery-strip');
