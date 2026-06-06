@@ -551,6 +551,7 @@ footer {
     <div class="hero-stat amber">
       <div class="hero-stat-val" id="h-flights">—</div>
       <div class="hero-stat-lbl" data-i18n="stat_flights">Flights This Month</div>
+      <div id="h-flights-period" style="font-family:var(--mono);font-size:9px;color:rgba(245,166,35,0.5);margin-top:4px;letter-spacing:.08em"></div>
     </div>
     <div class="hero-stat">
       <div class="hero-stat-val" id="h-avg"><span class="unit">— dB</span></div>
@@ -695,6 +696,8 @@ function renderReport(report) {
   const hr = document.getElementById('h-rouge');
   const hn = document.getElementById('h-night');
   if (hf) hf.textContent = (report.total_flights || 0).toLocaleString();
+  const hfPeriod = document.getElementById('h-flights-period');
+  if (hfPeriod) hfPeriod.textContent = mn + ' ' + report.year;
   if (ha) ha.innerHTML = `${report.avg_db || '—'}<span class="unit"> dB</span>`;
   const total_vio = (report.rouge_count || 0) + (report.jaune_count || 0);
   if (hr) hr.textContent = total_vio;
