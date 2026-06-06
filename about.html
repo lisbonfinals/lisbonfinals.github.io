@@ -854,19 +854,19 @@ function toggleLang() {
 
 document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyLang(_lang); });
 
-// ── Sticky tab highlight on scroll (same as data.html) ──
-const _tabs = document.querySelectorAll('.section-tab');
-const _sections = document.querySelectorAll('.about-section');
-const _io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      _tabs.forEach(t => t.classList.remove('active'));
-      const tab = document.querySelector(`.section-tab[href="#${e.target.id}"]`);
-      if (tab) tab.classList.add('active');
-    }
-  });
-}, { rootMargin: '-120px 0px -50% 0px', threshold: 0 });
-_sections.forEach(s => _io.observe(s));
+// ── Sticky tab highlight on scroll ──
+(function(){
+  const THR = 160;
+  function updateActive(){
+    const sects = document.querySelectorAll('.about-section');
+    const tabs  = document.querySelectorAll('.section-tab');
+    let activeId = sects.length ? sects[0].id : null;
+    sects.forEach(s => { if(s.getBoundingClientRect().top <= THR) activeId = s.id; });
+    tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + activeId));
+  }
+  window.addEventListener('scroll', updateActive, {passive:true});
+  updateActive();
+})();
 </script>
 
 </body>
