@@ -527,7 +527,7 @@ nav {
   <div class="section-tabs-inner">
     <a href="#the-project" class="section-tab active">The Project</a>
     <a href="#how-it-works" class="section-tab">How it works</a>
-    <a href="#hardware" class="section-tab">Hardware</a>
+    <a href="#hardware" class="section-tab">The Station</a>
     <a href="#whats-next" class="section-tab">What's next</a>
   </div>
 </div>
@@ -858,16 +858,17 @@ document.addEventListener('DOMContentLoaded', () => { if (_lang !== 'en') applyL
 const _tabs = document.querySelectorAll('.section-tab');
 const _sections = document.querySelectorAll('#the-project, #how-it-works, #hardware, #whats-next');
 function _updateActiveTab() {
+  const scrollY = window.scrollY || window.pageYOffset;
   let current = _sections.length ? _sections[0].id : '';
   _sections.forEach(s => {
-    if (s.getBoundingClientRect().top <= 150) current = s.id;
+    if (s.offsetTop - 160 <= scrollY) current = s.id;
   });
   _tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + current));
 }
 window.addEventListener('scroll', _updateActiveTab, { passive: true });
 window.addEventListener('hashchange', _updateActiveTab);
+window.addEventListener('load', _updateActiveTab);
 _updateActiveTab();
-setTimeout(_updateActiveTab, 150); // rattrape la position après rendu
 </script>
 
 </body>
