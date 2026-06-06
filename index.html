@@ -229,21 +229,25 @@ nav {
 
 /* ── LIVE TICKER ── */
 .live-ticker {
-  background: var(--dark); border-bottom: 1px solid var(--border);
-  overflow: hidden; position: relative; height: 36px;
+  background: rgba(10,13,18,1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  overflow: hidden; position: relative; height: 52px;
   display: flex; align-items: center;
 }
 .live-ticker::before,.live-ticker::after {
-  content:''; position:absolute; top:0; bottom:0; z-index:2; width:80px;
+  content:''; position:absolute; top:0; bottom:0; z-index:2; width:120px;
   pointer-events:none;
 }
-.live-ticker::before { left:0; background:linear-gradient(to right, var(--dark), transparent); }
-.live-ticker::after  { right:0; background:linear-gradient(to left,  var(--dark), transparent); }
+.live-ticker::before { left:0; background:linear-gradient(to right, rgba(10,13,18,1), transparent); }
+.live-ticker::after  { right:0; background:linear-gradient(to left, rgba(10,13,18,1), transparent); }
 .ticker-label {
-  flex-shrink:0; padding:0 18px; font-family:var(--mono); font-size:8px;
+  flex-shrink:0; padding:0 22px; font-family:var(--mono); font-size:9px;
   letter-spacing:.2em; text-transform:uppercase; color:var(--amber);
   border-right:1px solid var(--border); white-space:nowrap; z-index:3;
-  background:var(--dark); height:100%; display:flex; align-items:center;
+  background:rgba(10,13,18,1); height:100%; display:flex; align-items:center; gap:8px;
+}
+.ticker-live-dot {
+  width:7px; height:7px; border-radius:50%; background:var(--amber);
+  animation: ndot 2s infinite; flex-shrink:0;
 }
 .ticker-scroll { flex:1; overflow:hidden; }
 .ticker-track {
@@ -257,15 +261,15 @@ nav {
   100% { transform:translateX(-50%); }
 }
 .ticker-item {
-  display:inline-flex; align-items:center; gap:10px;
-  padding:0 28px; border-right:1px solid rgba(30,37,48,.6);
-  font-family:var(--mono); font-size:9px;
+  display:inline-flex; align-items:center; gap:12px;
+  padding:0 36px; border-right:1px solid rgba(240,237,232,.05);
+  font-family:var(--mono); font-size:11px;
 }
-.ti-cs  { color:var(--amber); font-weight:500; letter-spacing:.06em; }
-.ti-sep { color:rgba(240,237,232,.12); }
-.ti-val { color:rgba(240,237,232,.38); }
-.ti-db  { color:rgba(245,166,35,.7); }
-.ti-ts  { color:rgba(240,237,232,.18); font-size:8px; }
+.ti-cs  { color:var(--amber); font-weight:600; letter-spacing:.08em; font-size:12px; }
+.ti-sep { color:rgba(240,237,232,.15); }
+.ti-val { color:rgba(240,237,232,.5); }
+.ti-db  { color:var(--amber); font-weight:500; }
+.ti-ts  { color:rgba(240,237,232,.25); font-size:10px; }
 
 /* ── LATEST SHOT ── */
 .latest-shot {
@@ -567,7 +571,7 @@ footer {
 
 <!-- LIVE TICKER -->
 <div class="live-ticker">
-  <div class="ticker-label">● Live</div>
+  <div class="ticker-label"><div class="ticker-live-dot"></div>Live Feed</div>
   <div class="ticker-scroll">
     <div class="ticker-track" id="ticker-track">
       <span class="ticker-item"><span class="ti-val">Loading…</span></span>
@@ -766,7 +770,7 @@ footer {
 })();
 
 /* ── CONSTANTS ── */
-var GIST = 'https://gist.githubusercontent.com/lisbonfinals/2edb053ac9f9c91047c1b36f706d302c/raw/lisbon_finals.json';
+var GIST_ID = '943998ff407a141792bcd5d2c5f3fc36';
 var CLOUD = 'https://res.cloudinary.com/dtjccssx1/image/upload';
 
 /* ── HELPERS ── */
@@ -783,14 +787,19 @@ function calcRunway(deg,spd){
 }
 function getPhotoUrl(f, w){
   if(!f) return '';
+  /* direct Cloudinary URL (from latest.json 'url' field) */
+  if(f.url && f.url.startsWith('http')) return f.url;
   if(f.cloudinary_url && f.cloudinary_url.startsWith('http')) return f.cloudinary_url;
   if(f.photo_url && f.photo_url.startsWith('http')) return f.photo_url;
   var fname = f.filename || f.photo_filename || '';
   if(!fname) return '';
-  /* normalize: spaces → underscore, strip extension */
   var pid = fname.replace(/\s+/g,'_').replace(/\.[^.]+$/, '');
   return CLOUD + '/w_'+(w||900)+',q_auto,f_auto/photos/' + pid;
 }
+/* field helpers for latest.json data structure */
+function fNoise(f){ return f.spl_db || f.noise_db || null; }
+function fSpeed(f){ return f.speed_kts || f.ground_speed || null; }
+function fAlt(f)  { return f.altitude_ft || f.altitude || null; }
 
 /* ── HERO PHOTO ROTATOR ── */
 var _photos = [], _photoIdx = 0, _imgA = el('hero-img-a'), _imgB = el('hero-img-b');
@@ -828,42 +837,42 @@ function buildDots(){
 }
 
 /* ── GIST DATA ── */
-fetch(GIST, {cache:'no-store'})
+fetch('https://api.github.com/gists/' + GIST_ID)
   .then(function(r){ return r.json(); })
-  .then(function(d){
-    var s = d.stats || {};
-    var ticker = d.ticker || [];
-    var recent = d.recent_flights || [];
+  .then(function(gist){
+    var f = gist.files && gist.files['latest.json'];
+    if(!f || !f.raw_url) throw new Error('latest.json absent');
+    return fetch(f.raw_url);
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(recent){
+    if(!Array.isArray(recent) || !recent.length) return;
 
-    /* strip stats */
-    if(s.peak_noise_db){ set('rs-peak', s.peak_noise_db+' dB'); set('wc-peak', s.peak_noise_db+' dB'); }
-    if(s.active_today) set('rs-today', Number(s.active_today).toLocaleString('en-US'));
-    if(s.loud_flights_95db!=null) set('wc-loud', s.loud_flights_95db+' loud events (cumul. since May 3)');
-
-    /* live card */
-    if(ticker.length){
-      var t = ticker[0];
-      var lc = el('live-card');
-      if(lc){
-        var scoreStr = t.photo_score ? parseFloat(t.photo_score).toFixed(1) : '—';
-        var altStr   = t.altitude     ? Math.round(t.altitude).toLocaleString('en-US')+' ft' : '—';
-        var spdStr   = t.ground_speed ? Math.round(t.ground_speed)+' kt' : '—';
-        var dbStr    = t.noise_db     ? Math.round(t.noise_db)+' dB' : '—';
-        lc.innerHTML =
-          '<div class="hlc-top">'+
-            '<div><div class="hlc-callsign">'+(t.callsign||'—')+'</div>'+
-            '<div class="hlc-airline">'+(t.airline||t.operator||'Unknown airline')+'</div></div>'+
-            '<div class="hlc-score"><div class="hlc-score-num">'+scoreStr+'</div><div class="hlc-score-lbl">YOLO</div></div>'+
-          '</div>'+
-          '<div class="hlc-metrics">'+
-            '<div><div class="hlc-m-val">'+altStr+'</div><div class="hlc-m-lbl">Altitude</div></div>'+
-            '<div><div class="hlc-m-val">'+spdStr+'</div><div class="hlc-m-lbl">Speed</div></div>'+
-            '<div><div class="hlc-m-val amber">'+dbStr+'</div><div class="hlc-m-lbl">Noise</div></div>'+
-          '</div>';
-      }
+    /* ── live card (most recent flight) ── */
+    var t = recent[0];
+    var lc = el('live-card');
+    if(lc){
+      var altStr = fAlt(t)   ? Math.round(fAlt(t)).toLocaleString('en-US')+' ft' : '—';
+      var spdStr = fSpeed(t) ? Math.round(fSpeed(t))+' kt' : '—';
+      var dbStr  = fNoise(t) ? Math.round(fNoise(t))+' dB' : '—';
+      lc.innerHTML =
+        '<div class="hlc-top">'+
+          '<div><div class="hlc-callsign">'+(t.callsign||'—')+'</div>'+
+          '<div class="hlc-airline">'+(t.airline||'Unknown airline')+'</div></div>'+
+          '<div class="hlc-score"><div class="hlc-score-num">'+(t.aircraft_type||'—')+'</div><div class="hlc-score-lbl">TYPE</div></div>'+
+        '</div>'+
+        '<div class="hlc-metrics">'+
+          '<div><div class="hlc-m-val">'+altStr+'</div><div class="hlc-m-lbl">Altitude</div></div>'+
+          '<div><div class="hlc-m-val">'+spdStr+'</div><div class="hlc-m-lbl">Speed</div></div>'+
+          '<div><div class="hlc-m-val amber">'+dbStr+'</div><div class="hlc-m-lbl">Noise</div></div>'+
+        '</div>';
     }
 
-    /* collect hero photos from recent_flights (all with photos) */
+    /* ── strip stats ── */
+    var peakDb = recent.reduce(function(mx, f){ return Math.max(mx, fNoise(f)||0); }, 0);
+    if(peakDb > 0){ set('rs-peak', peakDb.toFixed(1)+' dB'); }
+
+    /* ── hero photos ── */
     _photos = recent.reduce(function(acc, f){
       var url = getPhotoUrl(f, 1600);
       if(url) acc.push(url);
@@ -876,72 +885,66 @@ fetch(GIST, {cache:'no-store'})
       if(_photos.length > 1) setInterval(nextPhoto, 6000);
     }
 
-    /* latest shot */
-    if(recent.length){
-      var f = recent[0];
-      var imgUrl = getPhotoUrl(f, 900);
-      if(imgUrl){ var li=el('ls-img'); if(li){ li.src=imgUrl; li.alt=f.callsign||''; } }
-      set('ls-callsign', f.callsign||'—');
-      set('ls-airline',  f.airline||f.operator||'—');
-      set('ls-alt',      f.altitude    ? Math.round(f.altitude).toLocaleString('en-US')+' ft' : '—');
-      set('ls-db',       f.noise_db    ? Math.round(f.noise_db)+' dB' : '—');
-      set('ls-speed',    f.ground_speed? Math.round(f.ground_speed)+' kt' : '—');
-      set('ls-aircraft', f.aircraft_type||f.icao_type||'—');
-      set('ls-score',    f.photo_score ? parseFloat(f.photo_score).toFixed(1) : '—');
-      if(f.timestamp){
-        var dt=new Date(f.timestamp);
-        set('ls-badge','Published · '+dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}));
-      }
-      if(f.instagram_url){ var ig=el('ls-ig-link'); if(ig) ig.href=f.instagram_url; }
+    /* ── latest shot ── */
+    var lf = recent[0];
+    var imgUrl = getPhotoUrl(lf, 900);
+    if(imgUrl){ var li=el('ls-img'); if(li){ li.src=imgUrl; li.alt=lf.callsign||''; } }
+    set('ls-callsign', lf.callsign||'—');
+    set('ls-airline',  lf.airline||'—');
+    set('ls-alt',      fAlt(lf)   ? Math.round(fAlt(lf)).toLocaleString('en-US')+' ft' : '—');
+    set('ls-db',       fNoise(lf) ? Math.round(fNoise(lf))+' dB' : '—');
+    set('ls-speed',    fSpeed(lf) ? Math.round(fSpeed(lf))+' kt' : '—');
+    set('ls-aircraft', lf.aircraft_type||'—');
+    set('ls-score',    lf.registration||'—');
+    var tsField = lf.published_at || lf.timestamp;
+    if(tsField){
+      var dt=new Date(tsField);
+      set('ls-badge','Published · '+dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}));
     }
 
-    /* live ticker */
-    if(ticker.length){
-      var track = el('ticker-track');
-      if(track){
-        function tickerItem(t){
-          var cs   = t.callsign    || '—';
-          var al   = t.airline     || t.operator || '';
-          var alt  = t.altitude    ? Math.round(t.altitude).toLocaleString('en-US')+' ft' : '—';
-          var spd  = t.ground_speed? Math.round(t.ground_speed)+' kt' : '—';
-          var db   = t.noise_db    ? Math.round(t.noise_db)+' dB' : '—';
-          var ts   = t.timestamp   ? (function(){ var d=new Date(t.timestamp); return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
-          return '<span class="ticker-item">'+
-            (ts?'<span class="ti-ts">'+ts+'</span><span class="ti-sep">·</span>':'')+
-            '<span class="ti-cs">'+cs+'</span>'+
-            (al?'<span class="ti-sep">·</span><span class="ti-val">'+al+'</span>':'')+
-            '<span class="ti-sep">·</span><span class="ti-val">'+alt+'</span>'+
-            '<span class="ti-sep">·</span><span class="ti-val">'+spd+'</span>'+
-            '<span class="ti-sep">·</span><span class="ti-db">'+db+'</span>'+
-          '</span>';
-        }
-        var html = ticker.map(tickerItem).join('');
-        /* duplicate for seamless loop */
-        track.innerHTML = html + html;
-        /* adjust animation duration based on item count */
-        track.style.animationDuration = (ticker.length * 3.5) + 's';
+    /* ── live ticker ── */
+    var track = el('ticker-track');
+    if(track && recent.length){
+      function tickerItem(t){
+        var cs  = t.callsign || '—';
+        var al  = t.airline  || '';
+        var alt = fAlt(t)    ? Math.round(fAlt(t)).toLocaleString('en-US')+' ft' : '—';
+        var spd = fSpeed(t)  ? Math.round(fSpeed(t))+' kt' : '—';
+        var db  = fNoise(t)  ? Math.round(fNoise(t))+' dB' : '—';
+        var ts  = (t.timestamp||t.published_at) ? (function(){ var d=new Date(t.timestamp||t.published_at); return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
+        return '<span class="ticker-item">'+
+          (ts?'<span class="ti-ts">'+ts+'</span><span class="ti-sep">·</span>':'')+
+          '<span class="ti-cs">'+cs+'</span>'+
+          (al?'<span class="ti-sep">·</span><span class="ti-val">'+al+'</span>':'')+
+          '<span class="ti-sep">·</span><span class="ti-val">'+alt+'</span>'+
+          '<span class="ti-sep">·</span><span class="ti-val">'+spd+'</span>'+
+          '<span class="ti-sep">·</span><span class="ti-db">'+db+'</span>'+
+        '</span>';
       }
+      var html = recent.map(tickerItem).join('');
+      track.innerHTML = html + html;
+      track.style.animationDuration = (recent.length * 5) + 's';
     }
 
-    /* gallery (flights 1..3) */
+    /* ── gallery strip (flights 1..3) ── */
     var strip = el('gallery-strip');
     if(strip && recent.length > 1){
-      var html=''; var max=Math.min(4,recent.length);
+      var ghtml=''; var max=Math.min(4,recent.length);
       for(var i=1;i<max;i++){
         var g=recent[i];
         var gUrl=getPhotoUrl(g,700);
-        var gScore=g.photo_score?parseFloat(g.photo_score).toFixed(1):'';
-        var gDb=g.noise_db?Math.round(g.noise_db)+' dB':'';
-        html+='<div class="gallery-card">'+
+        var gDb=fNoise(g)?Math.round(fNoise(g))+' dB':'';
+        var gAc=g.aircraft_type||'';
+        ghtml+='<div class="gallery-card">'+
           (gUrl?'<img src="'+gUrl+'" alt="'+(g.callsign||'')+'" loading="lazy">':'')+
           '<div class="gallery-card-overlay"></div>'+
-          (gScore?'<div class="gc-score">'+gScore+'</div>':'')+
+          (gDb?'<div class="gc-score">'+gDb+'</div>':'')+
           '<div class="gallery-card-info">'+
             '<div class="gc-callsign">'+(g.callsign||'—')+'</div>'+
-            '<div class="gc-meta">'+(g.airline||g.operator||'')+(gDb?' · '+gDb:'')+'</div>'+
+            '<div class="gc-meta">'+(g.airline||'')+(gAc?' · '+gAc:'')+'</div>'+
           '</div></div>';
       }
-      strip.innerHTML=html;
+      strip.innerHTML=ghtml;
     }
   })
   .catch(function(e){ console.warn('Gist error',e); });
