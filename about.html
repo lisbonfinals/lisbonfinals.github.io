@@ -290,6 +290,83 @@ nav {
   color: rgba(240,237,232,0.25); margin-top: 6px; text-transform: uppercase;
 }
 
+/* ── UPGRADES / COMING SOON ── */
+.coming-section {
+  padding: 120px 48px;
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+}
+.coming-section .section-label { margin-bottom: 12px; }
+.coming-section .section-title {
+  font-family: var(--sans); font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800; letter-spacing: -.02em; color: var(--white);
+  margin-bottom: 12px; line-height: 1.05;
+}
+.coming-section .section-title em {
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  color: rgba(240,237,232,.3);
+}
+.coming-section .section-sub {
+  font-size: 14px; color: rgba(240,237,232,0.35); line-height: 1.7;
+  max-width: 600px;
+}
+.coming-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 64px;
+}
+.coming-card {
+  padding: 40px 32px;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s;
+}
+.coming-card:hover { border-color: rgba(245,166,35,0.25); }
+.coming-card::after {
+  content: 'SOON';
+  position: absolute;
+  top: 18px; right: 18px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: .15em;
+  color: rgba(245,166,35,0.35);
+  border: 1px solid rgba(245,166,35,0.15);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+.coming-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, rgba(245,166,35,0.2), transparent);
+}
+.coming-icon { font-size: 28px; margin-bottom: 20px; display: block; }
+.coming-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--white); }
+.coming-desc { font-size: 13px; color: rgba(240,237,232,0.4); line-height: 1.7; }
+.coming-tag {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .08em;
+  padding: 3px 8px;
+  border: 1px solid rgba(245,166,35,0.2);
+  border-radius: 2px;
+  color: rgba(245,166,35,0.5);
+  text-transform: uppercase;
+}
+@media (max-width: 900px) {
+  .coming-section { padding: 64px 20px; }
+  .coming-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .coming-grid { grid-template-columns: 1fr; }
+}
+
 /* ── FOOTER ── */
 .about-footer {
   border-top: 1px solid var(--border);
@@ -420,8 +497,8 @@ nav {
 <!-- HERO -->
 <header class="about-hero">
   <div class="about-hero-eyebrow">The project</div>
-  <h1 class="about-hero-title">A personal experiment</h1>
-  <div class="about-hero-subtitle">above Lisbon</div>
+  <h1 class="about-hero-title">A personal<br>experiment</h1>
+  <div class="about-hero-subtitle"><span style="color:rgba(240,237,232,.3)">above</span> Lisbon</div>
   <p class="about-hero-sub">Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.</p>
   <div class="about-hero-stats">
     <div>
@@ -576,6 +653,40 @@ nav {
   </div>
 </section>
 
+
+<!-- UPGRADES IN PROGRESS -->
+<section class="coming-section">
+  <div class="section-label">What's next</div>
+  <h2 class="section-title">Upgrades<br><em>in progress</em></h2>
+  <p class="section-sub">The station is continuously evolving. New hardware and sensors are being integrated to capture even more — from vibration analysis and industrial-grade acoustics to live ATC communications and air quality monitoring.</p>
+
+  <div class="coming-grid">
+    <div class="coming-card">
+      <span class="coming-icon">🔊</span>
+      <div class="coming-title">130 dB Sound Sensor</div>
+      <p class="coming-desc">An industrial-grade sound meter will replace the current microphone. The new sensor handles up to 130 dB without maxing out — capturing the full impact of a low-flying aircraft as real numbers, not just a ceiling.</p>
+      <span class="coming-tag">Hardware · Ordered</span>
+    </div>
+    <div class="coming-card" style="transition-delay:.08s">
+      <span class="coming-icon">🌀</span>
+      <div class="coming-title">Dual IMU Vibration</div>
+      <p class="coming-desc">Two motion sensors mounted on the terrace will detect the physical vibration caused by passing aircraft — the kind you feel in your chest but a microphone can't fully capture. A new dimension of impact, beyond sound.</p>
+      <span class="coming-tag">Hardware · I²C</span>
+    </div>
+    <div class="coming-card" style="transition-delay:.16s">
+      <span class="coming-icon">🌬</span>
+      <div class="coming-title">Air Quality Station</div>
+      <p class="coming-desc">Two environmental sensors will measure fine particles and air pollutants over the terrace in real time — correlating each aircraft passage with a concrete air quality reading. A first for a private monitoring station in Lisbon.</p>
+      <span class="coming-tag">Environmental · SGP30 · PMS5003</span>
+    </div>
+    <div class="coming-card" style="transition-delay:.24s">
+      <span class="coming-icon">📡</span>
+      <div class="coming-title">Live ATC Listening</div>
+      <p class="coming-desc">A second radio receiver tuned to Lisbon tower's frequency will capture live communications between pilots and air traffic control — linking each aircraft to the exact instructions they received in real time.</p>
+      <span class="coming-tag">RTL-SDR · 118.1 MHz</span>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer class="about-footer">
