@@ -708,10 +708,9 @@ footer {
     <div class="ls-photo-overlay"></div>
     <div class="ls-photo-badge" id="ls-badge">Latest published</div>
     <div class="ls-rank-badge" id="ls-rank-badge"></div>
-    <div class="ls-photo-bottom">
-      <div class="ls-photo-cs"><span id="ls-photo-flag"></span><span id="ls-photo-cs">—</span></div>
-      <div class="ls-photo-dateline" id="ls-photo-date">—</div>
-    </div>
+    <span id="ls-photo-flag" style="display:none"></span>
+    <span id="ls-photo-cs"   style="display:none"></span>
+    <span id="ls-photo-date" style="display:none"></span>
   </div>
   <div class="ls-info">
     <div class="ls-eyebrow">Latest shot</div>
@@ -960,11 +959,11 @@ function _applyRankBadge(){
   if(q && airline.toLowerCase().indexOf(q.toLowerCase()) !== -1){
     badge.textContent = '🟢 Quietest this month';
     badge.className = 'ls-rank-badge quietest';
-    badge.style.display = '';
+    badge.style.display = 'block';
   } else if(n && airline.toLowerCase().indexOf(n.toLowerCase()) !== -1){
     badge.textContent = '🔴 Noisiest this month';
     badge.className = 'ls-rank-badge noisiest';
-    badge.style.display = '';
+    badge.style.display = 'block';
   } else {
     badge.style.display = 'none';
   }
