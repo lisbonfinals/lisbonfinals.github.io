@@ -536,7 +536,6 @@ nav {
 <header class="about-hero about-section" id="the-project">
   <div class="about-hero-eyebrow">The project</div>
   <h1 class="about-hero-title">A personal<br>experiment</h1>
-  <div class="about-hero-subtitle"><span style="color:rgba(240,237,232,.3)">above</span> Lisbon</div>
   <p class="about-hero-sub">Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.</p>
   <div class="about-hero-stats">
     <div>
@@ -781,6 +780,37 @@ const ABOUT_TRANSLATIONS = {
     stat_photos: 'Fotos publicadas',
     stat_auto: 'Funcionamento autónomo',
     stat_human: 'Gatilhos humanos por publicação',
+    tab_1: 'O Projecto',
+    tab_2: 'Como funciona',
+    tab_3: 'A Estação',
+    tab_4: 'O que vem aí',
+    howit_label: 'Como funciona',
+    howit_title: 'Três camadas,<br><em>zero gatilhos humanos</em>',
+    hw_eyebrow: 'A estação',
+    hw_title: 'Hardware<br><em>em serviço</em>',
+    hw_status_on: '● EM SERVIÇO',
+    hw_status_plan: '◐ EM CURSO — Junho 2026',
+    hw_desc_1: 'Cérebro central — corre todos os serviços 24/7: descodificação ADS-B, gatilho de captura, pontuação YOLO, agendador, servidor admin Flask.',
+    hw_desc_2: 'Dongle RTL-SDR a receber sinais ADS-B a 1090 MHz. Substituído em Junho de 2026 após falha térmica — agora equipado com dissipadores de calor.',
+    hw_desc_3: 'Câmara 4K em streaming via RTSP. Apontada para a trajetória de aproximação do LPPT — cada frame analisada pelo YOLO v8 em tempo real.',
+    hw_desc_4: 'Medidor de nível sonoro profissional (30–130 dB). Saída DC ligada ao ADC ADS1115 → I²C → Pi. Dispara a captura quando o SPL excede o limiar.',
+    hw_desc_5: 'Monitorização de eCO₂ e TVOC na varanda. Contexto ambiental para os dados de voo.',
+    hw_desc_6: 'Caixa PMMA de 4mm cortada à medida (20×40×30cm) com tampa inclinada, furos de ventilação, prensa-cabo e prateleira interna. Cortada a laser no Fab Lab Lisboa.',
+    coming_label: "O que vem aí",
+    coming_title: 'Melhorias<br><em>em curso</em>',
+    coming_sub: 'A estação está em evolução contínua. Novo hardware e sensores estão a ser integrados para capturar ainda mais — desde análise de vibração e acústica industrial até comunicações ATC em directo e monitorização da qualidade do ar.',
+    coming1_title: 'Sensor de Som 130 dB',
+    coming1_desc: 'Um medidor de som industrial irá substituir o microfone actual. O novo sensor suporta até 130 dB sem saturar — capturando o impacto total de uma aeronave a baixa altitude como números reais, não apenas um limite máximo.',
+    coming1_tag: 'Hardware · Encomendado',
+    coming2_title: 'Vibração IMU Dupla',
+    coming2_desc: 'Dois sensores de movimento montados na varanda vão detectar a vibração física causada pelas aeronaves — o tipo que se sente no peito mas que um microfone não consegue capturar completamente. Uma nova dimensão de impacto, para além do som.',
+    coming2_tag: 'Hardware · I²C',
+    coming3_title: 'Estação de Qualidade do Ar',
+    coming3_desc: 'Dois sensores ambientais vão medir partículas finas e poluentes atmosféricos sobre a varanda em tempo real — correlacionando cada passagem de aeronave com uma leitura concreta de qualidade do ar. Uma primeira para uma estação privada de monitorização em Lisboa.',
+    coming3_tag: 'Ambiental · SGP30 · PMS5003',
+    coming4_title: 'Escuta ATC em Directo',
+    coming4_desc: 'Um segundo receptor rádio sintonizado na frequência da torre de Lisboa vai capturar as comunicações em directo entre pilotos e o controlo de tráfego aéreo — ligando cada aeronave às instruções exactas que recebeu em tempo real.',
+    coming4_tag: 'RTL-SDR · 118.1 MHz',
   },
   en: {
     eyebrow: 'The project',
@@ -794,7 +824,7 @@ const ABOUT_TRANSLATIONS = {
     step3_title: 'Enhance & Publish',
     step3_desc: 'The chosen photo is processed by an AI image enhancer that reconstructs fine detail at 4× the original resolution — about 15 minutes on the station’s small onboard computer. It is then automatically scheduled, avoiding quiet hours at night (11pm–7am). Everything goes live on @lisbon.finals with the AI-written caption and flight data — no human involved.',
     subtitle_html: '<span style="color:rgba(240,237,232,.3)">above</span> Lisbon',
-    hw_title: 'Hardware in service',
+    hw_title: 'Hardware<br><em>in service</em>',
     project_title: 'A personal experiment above Lisbon',
     project_body: 'Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.',
     pipeline_label: 'Full automation pipeline · end to end · zero human trigger',
@@ -803,6 +833,36 @@ const ABOUT_TRANSLATIONS = {
     stat_photos: 'Photos published',
     stat_auto: 'Autonomous operation',
     stat_human: 'Human triggers per post',
+    tab_1: 'The Project',
+    tab_2: 'How it works',
+    tab_3: 'The Station',
+    tab_4: "What's next",
+    howit_label: 'How it works',
+    howit_title: 'Three layers,<br><em>zero human triggers</em>',
+    hw_eyebrow: 'The station',
+    hw_status_on: '● IN SERVICE',
+    hw_status_plan: '◐ IN PROGRESS — June 2026',
+    hw_desc_1: 'Central brain — runs all services 24/7: ADS-B decode, capture trigger, YOLO scoring, scheduler, Flask admin server.',
+    hw_desc_2: 'RTL-SDR dongle receiving ADS-B signals at 1090 MHz. Replaced June 2026 after thermal failure — now fitted with heatsinks.',
+    hw_desc_3: '4K camera streaming over RTSP. Aimed at the LPPT approach path — every frame analyzed by YOLO v8 in real time.',
+    hw_desc_4: 'Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Triggers capture when SPL exceeds threshold.',
+    hw_desc_5: 'eCO₂ and TVOC monitoring on the terrace. Environmental context for flight data.',
+    hw_desc_6: 'Custom-cut 4mm PMMA box (20×40×30cm) with angled lid, ventilation holes, cable gland and internal shelf. Laser-cut at Fab Lab Lisbon.',
+    coming_label: "What's next",
+    coming_title: 'Upgrades<br><em>in progress</em>',
+    coming_sub: 'The station is continuously evolving. New hardware and sensors are being integrated to capture even more — from vibration analysis and industrial-grade acoustics to live ATC communications and air quality monitoring.',
+    coming1_title: '130 dB Sound Sensor',
+    coming1_desc: "An industrial-grade sound meter will replace the current microphone. The new sensor handles up to 130 dB without maxing out — capturing the full impact of a low-flying aircraft as real numbers, not just a ceiling.",
+    coming1_tag: 'Hardware · Ordered',
+    coming2_title: 'Dual IMU Vibration',
+    coming2_desc: "Two motion sensors mounted on the terrace will detect the physical vibration caused by passing aircraft — the kind you feel in your chest but a microphone can't fully capture. A new dimension of impact, beyond sound.",
+    coming2_tag: 'Hardware · I²C',
+    coming3_title: 'Air Quality Station',
+    coming3_desc: 'Two environmental sensors will measure fine particles and air pollutants over the terrace in real time — correlating each aircraft passage with a concrete air quality reading. A first for a private monitoring station in Lisbon.',
+    coming3_tag: 'Environmental · SGP30 · PMS5003',
+    coming4_title: 'Live ATC Listening',
+    coming4_desc: "A second radio receiver tuned to Lisbon tower's frequency will capture live communications between pilots and air traffic control — linking each aircraft to the exact instructions they received in real time.",
+    coming4_tag: 'RTL-SDR · 118.1 MHz',
   }
 };
 
@@ -822,14 +882,12 @@ function applyLang(lang) {
   if (eyebrow) eyebrow.innerHTML = `<span></span>${t.eyebrow}`;
   const title = sel('.about-hero-title');
   if (title) title.innerHTML = `${t.title_1}<br>${t.title_2}`;
-  const subtitle = sel('.about-hero-subtitle');
-  if (subtitle) subtitle.innerHTML = t.subtitle_html;
   const sub = sel('.about-hero-sub');
   if (sub) sub.innerHTML = t.sub;
   const pipeLabel = sel('.pipeline-label');
   if (pipeLabel) pipeLabel.textContent = t.pipeline_label;
   const hwTitle = sel('.section-heading');
-  if (hwTitle) hwTitle.textContent = t.hw_title;
+  if (hwTitle) hwTitle.innerHTML = t.hw_title;
   const projTitle = sel('.project-card-title');
   if (projTitle) projTitle.innerHTML = t.project_title.replace('\n', '<br>');
   const projBody = sel('.project-card-body');
@@ -850,6 +908,49 @@ function applyLang(lang) {
   const labelKeys = ['stat_flights','stat_photos','stat_auto','stat_human'];
   selAll('.about-stat-label').forEach((el, i) => { if (labelKeys[i]) el.textContent = t[labelKeys[i]]; });
   selAll('.project-stat-label').forEach((el, i) => { if (labelKeys[i]) el.textContent = t[labelKeys[i]]; });
+
+  // Tabs
+  const tabs = selAll('.section-tab');
+  [t.tab_1, t.tab_2, t.tab_3, t.tab_4].forEach((lbl, i) => {
+    if (tabs[i] && lbl) tabs[i].textContent = lbl;
+  });
+
+  // How it works section
+  const howitLabel = sel('#how-it-works .section-label');
+  if (howitLabel) howitLabel.textContent = t.howit_label;
+  const howitTitle = sel('.section-title-main');
+  if (howitTitle) howitTitle.innerHTML = t.howit_title;
+
+  // Hardware section
+  const hwEyebrow = sel('.section-eyebrow');
+  if (hwEyebrow) hwEyebrow.textContent = t.hw_eyebrow;
+  selAll('.hw-status.on').forEach(el => { el.textContent = t.hw_status_on; });
+  const hwPlan = sel('.hw-status.plan');
+  if (hwPlan) hwPlan.textContent = t.hw_status_plan;
+  const hwDescs = selAll('.hw-desc');
+  ['hw_desc_1','hw_desc_2','hw_desc_3','hw_desc_4','hw_desc_5','hw_desc_6'].forEach((k, i) => {
+    if (hwDescs[i] && t[k]) hwDescs[i].textContent = t[k];
+  });
+
+  // What's next section
+  const comingLabel = sel('#whats-next .section-label');
+  if (comingLabel) comingLabel.textContent = t.coming_label;
+  const comingTitle = sel('#whats-next .section-title');
+  if (comingTitle) comingTitle.innerHTML = t.coming_title;
+  const comingSub = sel('.section-sub');
+  if (comingSub) comingSub.textContent = t.coming_sub;
+  const comingTitles = selAll('.coming-title');
+  const comingDescs = selAll('.coming-desc');
+  const comingTags = selAll('.coming-tag');
+  ['coming1_title','coming2_title','coming3_title','coming4_title'].forEach((k, i) => {
+    if (comingTitles[i] && t[k]) comingTitles[i].textContent = t[k];
+  });
+  ['coming1_desc','coming2_desc','coming3_desc','coming4_desc'].forEach((k, i) => {
+    if (comingDescs[i] && t[k]) comingDescs[i].textContent = t[k];
+  });
+  ['coming1_tag','coming2_tag','coming3_tag','coming4_tag'].forEach((k, i) => {
+    if (comingTags[i] && t[k]) comingTags[i].textContent = t[k];
+  });
 }
 
 function toggleLang() {
