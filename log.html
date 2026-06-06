@@ -669,6 +669,10 @@ function renderGrid(entries) {
 function openModal(idx) {
   const e = _allEntries[idx];
   if (!e) return;
+  // Update active strip item
+  document.querySelectorAll('.log-all-item').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
   const entryNum = String(_allEntries.length - idx).padStart(2, '0');
   const bodyParagraphs = (e.body || '')
     .split(/\n\n|\n/).filter(p => p.trim())
