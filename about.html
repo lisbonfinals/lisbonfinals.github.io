@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Lisbon Finals</title>
+<meta name="description" content="How Lisbon Finals works: RTL-SDR, YOLO, Real-ESRGAN, and a Raspberry Pi — automated from detection to Instagram post.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #07090d;
+  --dark: #0a0d12;
+  --dark2: #0d1117;
+  --border: #1e2530;
+  --amber: #f5a623;
+  --amber-dim: rgba(245,166,35,0.12);
+  --white: #f0ede8;
+  --gray: #6b7280;
+  --sans: 'Syne', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --serif: 'Instrument Serif', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: var(--white);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(7,9,13,0.98), transparent);
+  backdrop-filter: blur(4px);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-dot {
+  width: 28px; height: 28px; border: 1.5px solid var(--amber);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative;
+}
+.nav-dot::after {
+  content: ''; width: 10px; height: 12px; background: var(--amber); border-radius: 0;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -60%) rotate(-20deg);
+  clip-path: polygon(50% 0%, 65% 85%, 50% 72%, 35% 85%);
+}
+.nav-wordmark {
+  font-size: 13px; font-family: var(--mono); font-weight: 500;
+  letter-spacing: .12em; color: var(--white); text-transform: uppercase;
+}
+.nav-wordmark span { color: var(--amber); }
+.nav-links { display: flex; gap: 36px; list-style: none; margin-left: auto; }
+.nav-links a {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(240,237,232,0.55); text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--amber); }
+.nav-links a.nav-active { color: var(--amber); }
+.nav-links a.nav-warning { color: rgba(248,113,113,0.7); }
+.nav-links a.nav-warning:hover { color: #ef4444; }
+.nav-links a.nav-noise { color: var(--amber); font-weight: 700; }
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px; margin-left: 12px;
+}
+.nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--white); border-radius: 2px; }
+.nav-drawer {
+  display: none; flex-direction: column; gap: 32px;
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(7,9,13,0.97); backdrop-filter: blur(12px);
+  align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.nav-drawer.open { display: flex; opacity: 1; pointer-events: all; }
+.nav-drawer a {
+  font-family: var(--mono); font-size: 14px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(240,237,232,0.6); text-decoration: none; transition: color .2s;
+}
+.nav-drawer a:hover, .nav-drawer a.drawer-active { color: var(--white); }
+.nav-drawer a.drawer-noise { color: var(--amber); opacity: .8; }
+.nav-drawer a.drawer-warning { color: rgba(248,113,113,0.6); }
+.nav-drawer a.drawer-ig {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; border: 1px solid rgba(245,166,35,0.4);
+  padding: 10px 20px; border-radius: 4px; color: var(--amber) !important;
+  font-size: 11px; margin-top: 8px;
+}
+
+/* ── HERO ── */
+.about-hero {
+  padding: 140px 48px 80px;
+  max-width: 1100px; margin: 0 auto;
+}
+.about-hero-eyebrow {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+  color: rgba(245,166,35,0.6); text-transform: uppercase; margin-bottom: 18px;
+}
+.about-hero-eyebrow span {
+  display: inline-block; width: 24px; height: 1px;
+  background: rgba(245,166,35,0.4); vertical-align: middle; margin-right: 10px;
+}
+.about-hero-title {
+  font-family: var(--serif); font-size: clamp(48px, 7vw, 88px);
+  line-height: 1.05; color: var(--white); margin-bottom: 24px;
+}
+.about-hero-title em { font-style: italic; color: var(--amber); }
+.about-hero-sub {
+  font-size: 16px; line-height: 1.8; color: rgba(240,237,232,0.5);
+  max-width: 620px;
+}
+
+/* ── STEPS ── */
+.steps-section {
+  padding: 0 48px 80px;
+  max-width: 1100px; margin: 0 auto;
+}
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.step {
+  background: #0d1117; border: 1px solid var(--border);
+  border-radius: 4px; padding: 32px 28px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.step-num {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+  color: rgba(245,166,35,0.4);
+}
+.step-icon { font-size: 28px; }
+.step-title {
+  font-size: 18px; font-weight: 700; letter-spacing: .02em; color: var(--white);
+}
+.step-desc {
+  font-size: 13px; line-height: 1.8; color: rgba(240,237,232,0.45); flex: 1;
+}
+.step-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tech-tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .08em;
+  border: 1px solid rgba(245,166,35,0.2); color: rgba(245,166,35,0.5);
+  padding: 3px 9px; border-radius: 3px;
+}
+
+/* ── PIPELINE ── */
+.pipeline-section {
+  padding: 0 48px 80px;
+  max-width: 1100px; margin: 0 auto;
+}
+.pipeline-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .12em;
+  color: rgba(240,237,232,0.2); text-transform: uppercase;
+  text-align: center; margin-bottom: 24px;
+}
+.pipeline-wrap {
+  background: #0d1117; border: 1px solid var(--border);
+  border-radius: 4px; padding: 32px 24px; overflow-x: auto;
+}
+.pipeline {
+  display: flex; align-items: center; gap: 8px;
+  min-width: max-content; margin: 0 auto;
+}
+.pipeline-node {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .08em;
+  text-align: center; line-height: 1.5;
+  border: 1px solid rgba(240,237,232,0.1); color: rgba(240,237,232,0.35);
+  padding: 8px 14px; border-radius: 3px; white-space: nowrap;
+}
+.pipeline-node.hl {
+  border-color: rgba(245,166,35,0.3); color: rgba(245,166,35,0.7);
+  background: rgba(245,166,35,0.04);
+}
+.pipeline-arrow {
+  font-family: var(--mono); font-size: 11px;
+  color: rgba(240,237,232,0.15);
+}
+
+/* ── HARDWARE ── */
+.hardware-section {
+  padding: 0 48px 80px;
+  max-width: 1100px; margin: 0 auto;
+}
+.section-eyebrow {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+  color: rgba(245,166,35,0.6); text-transform: uppercase; margin-bottom: 20px;
+}
+.section-eyebrow span {
+  display: inline-block; width: 20px; height: 1px;
+  background: rgba(245,166,35,0.4); vertical-align: middle; margin-right: 8px;
+}
+.section-heading {
+  font-family: var(--serif); font-size: 36px; font-style: italic;
+  color: var(--white); margin-bottom: 32px;
+}
+.hw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.hw-item {
+  background: #0d1117; border: 1px solid var(--border);
+  border-radius: 4px; padding: 20px 24px;
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.hw-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.hw-name { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+.hw-desc { font-size: 12px; color: rgba(240,237,232,0.35); line-height: 1.6; }
+.hw-status {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .1em;
+  margin-top: 8px; display: inline-block;
+}
+.hw-status.on  { color: #4ade80; }
+.hw-status.plan { color: rgba(245,166,35,0.5); }
+
+/* ── PROJECT CARD ── */
+.project-section {
+  padding: 0 48px 80px;
+  max-width: 1100px; margin: 0 auto;
+}
+.project-card {
+  background: linear-gradient(135deg, #0d1117 0%, rgba(245,166,35,0.04) 100%);
+  border: 1px solid rgba(245,166,35,0.2); border-radius: 4px;
+  padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  align-items: center;
+}
+.project-card-title {
+  font-family: var(--serif); font-size: 28px; font-style: italic;
+  color: var(--white); margin-bottom: 16px;
+}
+.project-card-body {
+  font-size: 14px; line-height: 1.8; color: rgba(240,237,232,0.45);
+}
+.project-stats { display: flex; flex-direction: column; gap: 20px; }
+.project-stat-val {
+  font-family: var(--mono); font-size: 32px; font-weight: 500;
+  color: var(--amber); line-height: 1;
+}
+.project-stat-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+  color: rgba(240,237,232,0.25); margin-top: 4px;
+}
+.project-stat-row { display: flex; gap: 32px; }
+
+/* ── FOOTER ── */
+.about-footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.about-footer-left {
+  font-family: var(--mono); font-size: 9px; color: rgba(240,237,232,0.2); letter-spacing: .08em;
+}
+.about-footer-ig {
+  font-family: var(--mono); font-size: 10px; color: rgba(245,166,35,0.5);
+  text-decoration: none; letter-spacing: .08em;
+  border: 1px solid rgba(245,166,35,0.2); padding: 6px 14px; border-radius: 3px;
+  transition: all .2s;
+}
+.about-footer-ig:hover { color: var(--amber); border-color: rgba(245,166,35,0.5); }
+
+/* ── DIVIDER ── */
+.section-divider {
+  max-width: 1100px; margin: 0 auto 60px;
+  padding: 0 48px;
+  border: none; border-top: 1px solid var(--border);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .steps { grid-template-columns: 1fr; }
+  .hw-grid { grid-template-columns: 1fr; }
+  .project-card { grid-template-columns: 1fr; gap: 28px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+}
+@media (max-width: 640px) {
+  nav { padding: 16px 20px; }
+  .about-hero, .steps-section, .pipeline-section, .hardware-section, .project-section { padding-left: 20px; padding-right: 20px; }
+  .about-hero { padding-top: 100px; }
+  .about-footer { padding: 24px 20px; }
+  .section-divider { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- DRAWER MOBILE -->
+<div class="nav-drawer" id="nav-drawer">
+  <a href="/index.html" onclick="closeDrawer()">Live</a>
+  <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
+  <a href="/about.html" class="drawer-active" onclick="closeDrawer()">About</a>
+  <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
+  <a href="/index.html#warning" class="drawer-warning" onclick="closeDrawer()">⚠ Warning</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="drawer-ig" onclick="closeDrawer()">
+    Follow @lisbon.finals
+  </a>
+</div>
+
+<nav>
+  <a href="/index.html" class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-wordmark">LISBON <span>FINALS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/index.html">Live</a></li>
+    <li><a href="/log.html">Captain's Log</a></li>
+    <li><a href="/about.html" class="nav-active">About</a></li>
+    <li><a href="/index.html#warning" class="nav-warning">⚠ Warning</a></li>
+    <li><a href="/noise-report.html" class="nav-noise">Noise Report</a></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<header class="about-hero">
+  <div class="about-hero-eyebrow"><span></span>The system</div>
+  <h1 class="about-hero-title">Automated<br><em>from detection<br>to post</em></h1>
+  <p class="about-hero-sub">Six autonomous layers — from raw radio signals to 4K Instagram posts. No human in the loop. Real-time ADS-B decoding, AI vision scoring, neural upscaling and intelligent scheduling — all running 24/7 on a Raspberry Pi 4 under the Lisbon sky.</p>
+</header>
+
+<!-- HOW IT WORKS -->
+<section class="steps-section">
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01</span>
+      <span class="step-icon">📡</span>
+      <div class="step-title">Detect & Measure</div>
+      <p class="step-desc">A small radio receiver picks up the signals every commercial aircraft is required to broadcast — giving us the flight number, altitude, speed and exact position in real time. A microphone simultaneously measures the noise level on the terrace. The system only triggers when both conditions are true: a plane is close enough, and loud enough.</p>
+      <div class="step-tech">
+        <span class="tech-tag">RTL-SDR</span>
+        <span class="tech-tag">ADS-B 1090 MHz</span>
+        <span class="tech-tag">readsb</span>
+        <span class="tech-tag">dB SPL</span>
+        <span class="tech-tag">5 km · 5,000 ft</span>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">02</span>
+      <span class="step-icon">👁</span>
+      <div class="step-title">Capture & Score</div>
+      <p class="step-desc">A 4K camera continuously streams footage of the approach path. Every frame is instantly rated by an intelligent scoring system — only shots where a plane is clearly and sharply visible make the cut. The best frame is then paired with live flight data and sent to an AI to write the caption.</p>
+      <div class="step-tech">
+        <span class="tech-tag">Reolink 4K</span>
+        <span class="tech-tag">RTSP</span>
+        <span class="tech-tag">YOLO v8</span>
+        <span class="tech-tag">Claude Haiku</span>
+        <span class="tech-tag">0.30 threshold</span>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">03</span>
+      <span class="step-icon">✦</span>
+      <div class="step-title">Enhance & Publish</div>
+      <p class="step-desc">The chosen photo is processed by an AI image enhancer that reconstructs fine detail at 4× the original resolution — about 15 minutes on the station's small onboard computer. It is then automatically scheduled, avoiding quiet hours at night (11pm–7am). Everything goes live on @lisbon.finals with the AI-written caption and flight data — no human involved.</p>
+      <div class="step-tech">
+        <span class="tech-tag">Real-ESRGAN ×4</span>
+        <span class="tech-tag">ONNX Runtime</span>
+        <span class="tech-tag">Cloudinary</span>
+        <span class="tech-tag">Meta Graph API</span>
+        <span class="tech-tag">Raspberry Pi 4</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="pipeline-section">
+  <div class="pipeline-wrap">
+    <div class="pipeline-label">Full automation pipeline · end to end · zero human trigger</div>
+    <div class="pipeline">
+      <div class="pipeline-node hl">RTL-SDR<br>1090 MHz</div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-node">ADS-B<br>decode</div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-node">Acoustic<br>trigger</div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-node hl">RTSP<br>capture</div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-node hl">YOLO v8<br>scoring</div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-node">Telegram<br>validation</div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-node hl">Real-ESRGAN<br>4K upscale</div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-node">Haiku<br>caption</div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-node hl">Instagram<br>Graph API</div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- HARDWARE -->
+<section class="hardware-section">
+  <div class="section-eyebrow"><span></span>The station</div>
+  <h2 class="section-heading">Hardware in service</h2>
+  <div class="hw-grid">
+    <div class="hw-item">
+      <span class="hw-icon">🖥</span>
+      <div>
+        <div class="hw-name">Raspberry Pi 4 — 2GB</div>
+        <div class="hw-desc">Central brain — runs all services 24/7: ADS-B decode, capture trigger, YOLO scoring, scheduler, Flask admin server.</div>
+        <span class="hw-status on">● EN SERVICE</span>
+      </div>
+    </div>
+    <div class="hw-item">
+      <span class="hw-icon">📡</span>
+      <div>
+        <div class="hw-name">Nooelec NESDR Smart v5</div>
+        <div class="hw-desc">RTL-SDR dongle receiving ADS-B signals at 1090 MHz. Replaced June 2026 after thermal failure — now fitted with heatsinks.</div>
+        <span class="hw-status on">● EN SERVICE</span>
+      </div>
+    </div>
+    <div class="hw-item">
+      <span class="hw-icon">📷</span>
+      <div>
+        <div class="hw-name">Reolink 4K PTZ TrackMix</div>
+        <div class="hw-desc">4K camera streaming over RTSP. Aimed at the LPPT approach path — every frame analyzed by YOLO v8 in real time.</div>
+        <span class="hw-status on">● EN SERVICE</span>
+      </div>
+    </div>
+    <div class="hw-item">
+      <span class="hw-icon">🔊</span>
+      <div>
+        <div class="hw-name">GAIN EXPRESS SPL Meter + ADS1115</div>
+        <div class="hw-desc">Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Triggers capture when SPL exceeds threshold.</div>
+        <span class="hw-status on">● EN SERVICE</span>
+      </div>
+    </div>
+    <div class="hw-item">
+      <span class="hw-icon">🌬</span>
+      <div>
+        <div class="hw-name">GY-SGP30 Air Quality Sensor</div>
+        <div class="hw-desc">eCO₂ and TVOC monitoring on the terrace. Environmental context for flight data.</div>
+        <span class="hw-status on">● EN SERVICE</span>
+      </div>
+    </div>
+    <div class="hw-item">
+      <span class="hw-icon">📦</span>
+      <div>
+        <div class="hw-name">Outdoor Plexiglass Enclosure</div>
+        <div class="hw-desc">Custom-cut 4mm PMMA box (20×40×30cm) with angled lid, ventilation holes, cable gland and internal shelf. Laser-cut at Fab Lab Lisbon.</div>
+        <span class="hw-status plan">◐ IN PROGRESS — June 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PROJECT -->
+<section class="project-section">
+  <div class="project-card">
+    <div>
+      <div class="project-card-title">A personal experiment<br>above Lisbon</div>
+      <p class="project-card-body">
+        Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>
+        The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.
+      </p>
+    </div>
+    <div class="project-stats">
+      <div>
+        <div class="project-stat-row">
+          <div>
+            <div class="project-stat-val" id="statFlights">—</div>
+            <div class="project-stat-label">Flights tracked</div>
+          </div>
+          <div>
+            <div class="project-stat-val" id="statPhotos">—</div>
+            <div class="project-stat-label">Photos published</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="project-stat-val">24/7</div>
+        <div class="project-stat-label">Autonomous operation</div>
+      </div>
+      <div>
+        <div class="project-stat-val">0</div>
+        <div class="project-stat-label">Human triggers per post</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="about-footer">
+  <span class="about-footer-left">LISBON FINALS · lisbonfinals.github.io · @lisbon.finals</span>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="about-footer-ig">Follow on Instagram →</a>
+</footer>
+
+<script>
+// Load live stats from Gist
+const GIST_URL = 'https://gist.githubusercontent.com/lisbonfinals/943998ff2083a3ec8069f7a48f3e2cfa/raw/lisbon_finals.json';
+
+fetch(GIST_URL + '?t=' + Date.now())
+  .then(r => r.json())
+  .then(data => {
+    const stats = data.stats || data;
+    if (stats.total_flights)
+      document.getElementById('statFlights').textContent = stats.total_flights.toLocaleString();
+    if (stats.instagram_posted)
+      document.getElementById('statPhotos').textContent = stats.instagram_posted.toLocaleString();
+  })
+  .catch(() => {});
+
+// Nav drawer
+const drawer = document.getElementById('nav-drawer');
+function closeDrawer() { drawer.classList.remove('open'); }
+document.getElementById('nav-burger').addEventListener('click', () => {
+  drawer.classList.toggle('open');
+});
+</script>
+</body>
+</html>
