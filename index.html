@@ -1364,10 +1364,12 @@ var INDEX_TRANSLATIONS = {
     footer_proj: 'Project',
     footer_connect: 'Connect',
     footer_support: 'Support the project',
+    hero_w1: 'Every', hero_w2: 'plane.', hero_w3: 'Every ', hero_w4: 'And so much more.',
     footer_copy: '© 2026 Lisbon Finals · Automated Aviation Intelligence · LPPT',
   },
   pt: {
     hero_pill: 'Em directo · Rota de aproximação LPPT',
+    hero_w1: 'Cada', hero_w2: 'avião.', hero_w3: 'Cada ', hero_w4: 'E muito mais.',
     hero_sub: 'Uma estação autónoma numa varanda em Lisboa — fotografando, medindo e publicando cada aeronave em aproximação final ao LPPT, sem qualquer intervenção humana.',
     cta_data: 'Explorar os dados',
     hlc_eyebrow: 'Último detectado',
@@ -1439,6 +1441,24 @@ function applyLang(lang) {
   // Hero pill
   var pill = q('.hero-live-pill');
   if (pill) { var dot = pill.querySelector('.hero-live-dot'); pill.innerHTML = ''; if (dot) pill.appendChild(dot); pill.appendChild(document.createTextNode(' ' + t.hero_pill)); }
+  // Hero title — target text nodes directly, never touch the HTML structure
+  var ht = q('.hero-title');
+  if (ht) {
+    var lines = ht.querySelectorAll('.line');
+    if (lines[0]) {
+      // line 1 : "Every plane." → first text node + amber span
+      var tn1 = lines[0].firstChild;
+      if (tn1 && tn1.nodeType === 3) tn1.textContent = t.hero_w1 + ' ';
+      var amb = lines[0].querySelector('span');
+      if (amb) amb.textContent = t.hero_w2;
+    }
+    if (lines[1]) {
+      // line 2 : first em ("Every ") + second em "decibel." (unchanged) + third em "And so much more."
+      var ems = lines[1].querySelectorAll('em');
+      if (ems[0]) ems[0].textContent = t.hero_w3;
+      if (ems[2]) ems[2].textContent = t.hero_w4;
+    }
+  }
   // Hero sub
   var sub = q('.hero-sub'); if (sub) sub.textContent = t.hero_sub;
   // CTA
