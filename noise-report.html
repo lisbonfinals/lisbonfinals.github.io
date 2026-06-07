@@ -52,7 +52,6 @@ nav {
   display: flex; align-items:center; justify-content:space-between;
   background: linear-gradient(to bottom, rgba(7,9,13,.98), transparent);
   backdrop-filter: blur(4px);
-  border-bottom: 1px solid rgba(245,166,35,.08);
 }
 .nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
 .nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
@@ -72,13 +71,11 @@ nav {
 .nav-drawer a.drawer-noise { color:var(--amber); opacity:.8; }
 .nav-drawer a.drawer-warning { color:rgba(248,113,113,0.6); }
 .nav-drawer a.drawer-ig { font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);border:1px solid var(--amber);padding:10px 24px;border-radius:4px;margin-top:8px; }
-.lang-switcher {
-  background:none; border:1px solid rgba(240,237,232,0.18); border-radius:2px;
-  color:rgba(240,237,232,0.45); font-family:var(--mono); font-size:10px;
-  letter-spacing:.14em; padding:6px 14px; cursor:pointer; transition:all .2s;
-  text-transform:uppercase; margin-left:0; flex-shrink:0;
-}
-.lang-switcher:hover { border-color:var(--amber); color:var(--amber); }
+.lang-group{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+.lang-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.35);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn:hover{color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.3);}
+.lang-btn.active{color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06);}
+.lang-switcher{display:none;}
 
 /* ── HAMBURGER ── */
 .nav-burger {
@@ -535,7 +532,11 @@ footer {
   </ul>
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
-    <button class="lang-switcher" id="lang-btn" onclick="toggleLang()">PT</button>
+    <div class="lang-group">
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr">FR</button>
+    </div>
   </div>
   <button class="nav-burger" id="nav-burger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -942,24 +943,34 @@ const TRANSLATIONS = {
     archive_tag: 'Todos os Relatórios', archive_title: 'Arquivo', archive_title2: 'Mensal',
     footer_left: '© 2026 Lisbon Finals · Monitorização de ruído independente · LPPT Lisboa',
     footer_right: 'Dados captados de um terraço privado · Sem afiliação com ANA Aeroportos ou ANAC',
+  },
+  fr: {
+    hero_eyebrow: 'Rapport de bruit',
+    hero_title: 'Chaque décibel,<br><em>enregistré.</em>',
+    hero_sub: 'Données acoustiques mensuelles complètes de l\'Aéroport de Lisbonne — vol par vol, mois par mois.',
+    hero_sub2: 'Surveillance acoustique indépendante de l\'Aéroport de Lisbonne — vol par vol, mois par mois.',
+    stat_flights: 'Vols ce mois', stat_avg: 'Niveau sonore moyen',
+    stat_violations: 'Infractions nocturnes', stat_night: 'Opérations nocturnes',
+    archive_label: 'Archives', loading_txt: 'Chargement des données...',
+    archive_tag: 'Tous les rapports', archive_title: 'Archive', archive_title2: 'Mensuelle',
+    footer_left: '© 2026 Lisbon Finals · Surveillance sonore indépendante · LPPT Lisbonne',
+    footer_right: 'Données captées depuis une terrasse privée · Sans affiliation avec ANA Aeroportos ou ANAC',
   }
 };
 let currentLang = localStorage.getItem('lf_lang') || 'en';
 function applyLang(lang) {
+  if (!TRANSLATIONS[lang]) return;
   const t = TRANSLATIONS[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) el.textContent = t[key];
   });
-  const btn = document.getElementById('lang-btn');
-  if (btn) btn.textContent = lang === 'en' ? 'PT' : 'EN';
+  ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
   currentLang = lang;
   localStorage.setItem('lf_lang', lang);
 }
-function toggleLang() {
-  applyLang(currentLang === 'en' ? 'pt' : 'en');
-}
-if (currentLang !== 'en') applyLang(currentLang);
+function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[currentLang]||'en'); }
+applyLang(currentLang);
 
 loadData();
 

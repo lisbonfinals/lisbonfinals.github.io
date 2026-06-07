@@ -37,7 +37,6 @@ nav {
   display: flex; align-items: center; justify-content: space-between;
   background: linear-gradient(to bottom, rgba(7,9,13,0.98), transparent);
   backdrop-filter: blur(4px);
-  border-bottom: 1px solid rgba(245,166,35,.08);
 }
 .nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
 .nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
@@ -479,13 +478,11 @@ nav {
 .nav-data-trigger { cursor: default; }
 
 
-.lang-switcher {
-  background: none; border: 1px solid rgba(240,237,232,0.18); border-radius: 2px;
-  color: rgba(240,237,232,0.45); font-family: var(--mono); font-size: 10px;
-  letter-spacing: .14em; padding: 6px 14px; cursor: pointer; transition: all .2s;
-  text-transform: uppercase; margin-left: 0; flex-shrink: 0;
-}
-.lang-switcher:hover { border-color: var(--amber); color: var(--amber); }
+.lang-group{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+.lang-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.35);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn:hover{color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.3);}
+.lang-btn.active{color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06);}
+.lang-switcher{display:none;}
 
 </style>
 </head>
@@ -524,7 +521,11 @@ nav {
   </ul>
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
-    <button class="lang-switcher" id="lang-btn" onclick="toggleLang()">PT</button>
+    <div class="lang-group">
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr">FR</button>
+    </div>
   </div>
   <button class="nav-burger" id="nav-burger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -931,17 +932,66 @@ const ABOUT_TRANSLATIONS = {
     coming4_title: 'Live ATC Listening',
     coming4_desc: "A second radio receiver tuned to Lisbon tower's frequency will capture live communications between pilots and air traffic control — linking each aircraft to the exact instructions they received in real time.",
     coming4_tag: 'RTL-SDR · 118.1 MHz',
+  },
+  fr: {
+    eyebrow: 'Le projet',
+    title_1: 'Une expérience',
+    title_2: '<em>personnelle</em>',
+    subtitle_html: '<span style="color:rgba(240,237,232,.3)">sur</span> Lisbonne',
+    sub: 'Lisbon Finals a commencé par une question simple : un Raspberry Pi sur une terrasse pourrait-il photographier automatiquement chaque avion qui passe — et le publier sur Instagram sans aucune intervention humaine ?<br><br>La réponse, après des mois d\'itération, est oui. Ce qui a commencé comme un projet de week-end est devenu une station de surveillance autonome complète — suivant les niveaux sonores, les routes de vol, les habitudes des compagnies et les données atmosphériques, 24 heures par jour, depuis une terrasse à Lisbonne face à la trajectoire d\'approche de LPPT.',
+    step1_title: 'Détecter & Mesurer',
+    step1_desc: 'Un petit récepteur radio capte les signaux que tous les avions commerciaux sont tenus d\'émettre — nous donnant le numéro de vol, l\'altitude, la vitesse et la position exacte en temps réel. Un microphone mesure simultanément le niveau sonore sur la terrasse. Le système ne se déclenche que lorsque les deux conditions sont réunies : un avion suffisamment proche, et suffisamment audible.',
+    step2_title: 'Capturer & Évaluer',
+    step2_desc: 'Une caméra 4K diffuse en continu des images de la trajectoire d\'approche. Chaque image est évaluée instantanément par un système de notation intelligent — seuls les plans où l\'avion est clairement visible passent la sélection. La meilleure image est ensuite associée aux données de vol en temps réel et envoyée à une IA pour rédiger la légende.',
+    step3_title: 'Améliorer & Publier',
+    step3_desc: 'La photo choisie est traitée par un système d\'amélioration IA qui reconstruit les détails fins à 4× la résolution originale — environ 15 minutes sur le petit ordinateur embarqué de la station. Elle est ensuite automatiquement planifiée, en évitant les heures calmes la nuit (23h–7h). Tout est publié sur @lisbon.finals avec la légende écrite par IA et les données de vol — sans intervention humaine.',
+    hw_title: 'Matériel en service',
+    project_title: 'Une expérience personnelle au-dessus de Lisbonne',
+    project_body: 'Lisbon Finals a commencé par une question simple : un Raspberry Pi sur une terrasse pourrait-il photographier automatiquement chaque avion — et le publier sur Instagram sans aucune intervention humaine ?<br><br>La réponse, après des mois d\'itération, est oui.',
+    pipeline_label: 'Pipeline d\'automatisation complet · bout en bout · zéro déclencheur humain',
+    footer_ig: 'Suivre sur Instagram →',
+    kofi_label: 'Soutenir le projet',
+    kofi_desc: 'Tout le matériel est autofinancé. Si ce projet vous est utile ou si vous aimez simplement regarder les avions, un café contribue beaucoup au prochain capteur.',
+    stat_since_val: '3 mai 2026',
+    stat_since_lbl: 'En service depuis',
+    stat_flights: 'Vols enregistrés',
+    stat_photos: 'Photos publiées',
+    stat_auto: 'Fonctionnement autonome',
+    stat_human: 'Déclencheurs humains par post',
+    tab_1: 'Le Projet',
+    tab_2: 'Comment ça marche',
+    tab_3: 'La Station',
+    tab_4: 'À venir',
+    howit_label: 'Comment ça marche',
+    hw_status_on: '● EN SERVICE',
+    hw_status_soon: '◎ TESTÉ · BIENTÔT EN SERVICE',
+    hw_status_plan: '◐ EN COURS',
+    coming_label: 'Prochaines améliorations',
+    coming_title: 'Améliorations<br><em>en cours</em>',
+    coming_sub: 'La station évolue en permanence. De nouveaux matériels et capteurs sont intégrés pour capturer encore plus — de l\'analyse vibratoire à l\'acoustique industrielle, en passant par les communications ATC en direct et la surveillance de la qualité de l\'air.',
+    coming1_title: 'Capteur sonore 130 dB',
+    coming1_desc: 'Un sonomètre industriel remplacera le microphone actuel. Le nouveau capteur gère jusqu\'à 130 dB sans saturer — capturant l\'impact réel d\'un avion en basse altitude.',
+    coming1_tag: 'Matériel · Commandé',
+    coming2_title: 'Double IMU Vibration',
+    coming2_desc: 'Deux capteurs de mouvement sur la terrasse détecteront les vibrations physiques causées par les avions qui passent — une dimension au-delà du son.',
+    coming2_tag: 'Matériel · I²C',
+    coming3_title: 'Station qualité de l\'air',
+    coming3_desc: 'Deux capteurs environnementaux mesureront les particules fines et les polluants atmosphériques au-dessus de la terrasse en temps réel — corrélant chaque passage d\'avion avec une lecture concrète de la qualité de l\'air.',
+    coming3_tag: 'Environnemental · SGP30 · PMS5003',
+    coming4_title: 'Écoute ATC en direct',
+    coming4_desc: 'Un second récepteur radio réglé sur la fréquence de la tour de Lisbonne capturera les communications en direct entre pilotes et contrôleurs — reliant chaque aéronef aux instructions exactes reçues en temps réel.',
+    coming4_tag: 'RTL-SDR · 118.1 MHz',
   }
 };
 
 let _lang = localStorage.getItem('lf_lang') || 'en';
 
 function applyLang(lang) {
+  if (!ABOUT_TRANSLATIONS[lang]) return;
   _lang = lang;
   localStorage.setItem('lf_lang', lang);
   const t = ABOUT_TRANSLATIONS[lang];
-  const btn = document.getElementById('lang-btn');
-  if (btn) btn.textContent = lang === 'en' ? 'PT' : 'EN';
+  ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
 
   const sel = (s) => document.querySelector(s);
   const selAll = (s) => document.querySelectorAll(s);
@@ -1028,10 +1078,7 @@ function applyLang(lang) {
   });
 }
 
-function toggleLang() {
-  applyLang(_lang === 'en' ? 'pt' : 'en');
-}
-
+function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[_lang]||'en'); }
 document.addEventListener('DOMContentLoaded', () => { applyLang(_lang); });
 
 // ── Sticky tab highlight on scroll ──

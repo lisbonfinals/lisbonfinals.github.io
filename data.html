@@ -22,7 +22,7 @@ html{scroll-behavior:smooth;}
 body{background:var(--dark);color:var(--white);font-family:var(--sans);overflow-x:hidden;}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,9,13,.98),transparent);backdrop-filter:blur(4px);border-bottom:1px solid rgba(245,166,35,.08);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,9,13,.98),transparent);backdrop-filter:blur(4px);}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-dot{width:28px;height:28px;border:1.5px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
 .nav-dot::after{content:'';width:10px;height:12px;background:var(--amber);border-radius:0;position:absolute;top:50%;left:50%;transform:translate(-50%,-60%) rotate(-20deg);clip-path:polygon(50% 0%,65% 85%,50% 72%,35% 85%);}
@@ -35,7 +35,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
 .nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
 .nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px;}
-.lang-switcher{background:none;border:1px solid rgba(240,237,232,.18);border-radius:2px;color:rgba(240,237,232,.45);font-family:var(--mono);font-size:10px;letter-spacing:.14em;padding:6px 14px;cursor:pointer;transition:all .2s;text-transform:uppercase;margin-left:0;flex-shrink:0;}
+.lang-group{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+.lang-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.35);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn:hover{color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.3);}
+.lang-btn.active{color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06);}
+.lang-switcher{display:none;}
 .lang-switcher:hover{border-color:var(--amber);color:var(--amber);}
 .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:12px;}
 .nav-burger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;}
@@ -366,7 +370,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   </ul>
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
-    <button class="lang-switcher" id="lang-btn" onclick="toggleLang()">PT</button>
+    <div class="lang-group">
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr">FR</button>
+    </div>
   </div>
   <button class="nav-burger" id="nav-burger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -845,16 +853,39 @@ const T = {
     legend_restricted:'Restrito (00h30–05h00)', legend_allowed:'Permitido (00h00–00h30 · 05h00–06h00)',
     anac_note:'A regulamentação ANAC aplica-se a voos ≥ 93 dB SPL entre meia-noite e as 6h. Duas janelas permitidas: 00h00–00h30 (últimas partidas) e 05h00–06h00 (primeiras chegadas). Infrações críticas ≥ 98.9 dB são incondicionalmente proibidas.',
     footer:'LISBON FINALS · Dados · lisbonfinals.github.io'
+  },
+  fr: {
+    s1_label:'Vols détectés', s1_title:'Chaque <em>aéronef</em>',
+    s1_desc:'Chaque aéronef détecté au-dessus de notre terrasse depuis le 3 mai 2026 — télémétrie ADS-B combinée avec des mesures acoustiques en temps réel.',
+    ticker_title:'Détections récentes', ticker_live:'En direct',
+    lbl_total:'Vols totaux', lbl_today:'Vols aujourd\'hui', lbl_loud:'Vols au-dessus de 95 dB',
+    lbl_loud_sub:'cumul depuis le 3 mai', lbl_photos:'Photos publiées',
+    s2_label:'Surveillance acoustique', s2_title:'Chaque <em>décibel</em>',
+    s2_desc:'Mesures SPL réelles au niveau du sol sur la terrasse face à la piste 03. Chaque passage, chaque décibel, horodaté.',
+    chart_title:'dB moyen par heure (aujourd\'hui) · SPL',
+    lbl_peak_today:'Pic aujourd\'hui', lbl_avg_today:'Moyenne aujourd\'hui',
+    lbl_alltime_peak:'Pic historique',
+    lbl_peak_all:'Pic historique', lbl_loud_total:'Vols >95 dB au total',
+    lbl_avg_night:'dB moyen nocturne (cette semaine)',
+    ref_conversation:'Conversation normale', ref_traffic:'Circulation urbaine',
+    ref_anac:'Seuil couvre-feu ANAC', ref_critical:'Violation critique',
+    s3_label:'Surveillance ANAC', s3_title:'⚠ Zone<br><em>d\'alerte</em>',
+    s3_desc:'Les vols entre minuit et 6h dépassant certains seuils dB constituent des infractions. Bilan de la semaine :',
+    w_night_lbl:'Vols nocturnes cette semaine', w_critical_lbl:'Infractions critiques', w_l2_lbl:'Infractions niveau 2',
+    timeline_title:'Couvre-feu ANAC · 00h–06h · créneaux autorisés en vert',
+    legend_restricted:'Interdit (00h30–05h00)', legend_allowed:'Autorisé (00h00–00h30 · 05h00–06h00)',
+    anac_note:'La réglementation ANAC s\'applique aux vols ≥ 93 dB SPL entre minuit et 6h. Deux créneaux autorisés : 00h00–00h30 (derniers départs) et 05h00–06h00 (premières arrivées). Les infractions critiques ≥ 98.9 dB sont inconditionnellement interdites.',
+    footer:'LISBON FINALS · Données · lisbonfinals.github.io'
   }
 };
 
 let _lang = localStorage.getItem('lf_lang') || 'en';
 function applyLang(lang) {
+  if (!T[lang]) return;
   _lang = lang;
   localStorage.setItem('lf_lang', lang);
   const t = T[lang];
-  const btn = document.getElementById('lang-btn');
-  if (btn) btn.textContent = lang === 'en' ? 'PT' : 'EN';
+  ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
   document.querySelectorAll('[data-i18n]').forEach(el => {
     if (t[el.dataset.i18n] != null) el.textContent = t[el.dataset.i18n];
   });
@@ -864,8 +895,8 @@ function applyLang(lang) {
   const fl = document.getElementById('footerLeft');
   if (fl) fl.textContent = t.footer;
 }
-function toggleLang() { applyLang(_lang === 'en' ? 'pt' : 'en'); }
-if (_lang !== 'en') applyLang(_lang);
+function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[_lang]||'en'); }
+applyLang(_lang);
 
 // ── Lisbon clock ──
 (function navClock(){
