@@ -481,6 +481,7 @@ nav {
 .stat-cell {
   padding:28px 36px;
   border-right:1px solid var(--border);
+  display:flex; flex-direction:column; align-items:center; text-align:center;
 }
 .stat-cell:last-child { border-right:none; }
 .stat-num {
@@ -493,11 +494,11 @@ nav {
 .stat-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:3px; }
 .stat-sub { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.14);letter-spacing:.06em; }
 .stats-disclaimer {
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(240,237,232,.18);text-align:center;
-  padding:28px 48px 18px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;
+  color:rgba(240,237,232,.28);text-align:center;
+  padding:22px 80px 16px;
   border-top:1px solid var(--border);
-  line-height:1.8;
+  line-height:2;
 }
 @media (max-width:900px) { .stats-disclaimer { padding:16px 20px 24px; font-size:8px; } }
 
