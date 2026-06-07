@@ -548,6 +548,11 @@ nav {
   <p class="about-hero-sub">Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.</p>
   <div class="about-hero-stats">
     <div>
+      <div class="about-stat-val" style="color:rgba(240,237,232,.4);font-size:18px;letter-spacing:.04em;" data-i18n="stat_since_val">3 May 2026</div>
+      <div class="about-stat-label" data-i18n="stat_since_lbl">Recording since</div>
+    </div>
+    <div style="width:1px;background:var(--border);align-self:stretch;flex-shrink:0;"></div>
+    <div>
       <div class="about-stat-val" id="statFlights">—</div>
       <div class="about-stat-label">Flights tracked</div>
     </div>
@@ -725,8 +730,8 @@ nav {
 
   <div style="display:flex;align-items:center;gap:20px;margin-top:40px;margin-bottom:40px;padding:20px 24px;background:rgba(245,166,35,.04);border:1px solid rgba(245,166,35,.15);border-radius:4px;flex-wrap:wrap;">
     <div>
-      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,166,35,.6);margin-bottom:6px;">Support the project</div>
-      <div style="font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.45);line-height:1.6;max-width:520px;">All hardware is self-funded. If you find this project useful or just enjoy watching planes, a coffee goes a long way toward the next sensor.</div>
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,166,35,.6);margin-bottom:6px;" data-i18n="kofi_label">Support the project</div>
+      <div style="font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.45);line-height:1.6;max-width:520px;" data-i18n="kofi_desc">All hardware is self-funded. If you find this project useful or just enjoy watching planes, a coffee goes a long way toward the next sensor.</div>
     </div>
     <a href="https://ko-fi.com/O5O01ZPUX0" target="_blank" style="flex-shrink:0;margin-left:auto;">
       <img height="36" style="border:0;height:36px;opacity:.9;transition:opacity .2s;" src="https://storage.ko-fi.com/cdn/kofi2.png?v=6" alt="Buy Me a Coffee at ko-fi.com" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.9"/>
@@ -825,6 +830,10 @@ const ABOUT_TRANSLATIONS = {
     project_body: 'Lisbon Finals começou com uma pergunta simples: conseguiria um Raspberry Pi numa varanda fotografar automaticamente todos os aviões que passam — e publicar no Instagram sem qualquer intervenção humana?<br><br>A resposta, após meses de iteração, é sim. O que começou como um projeto de fim-de-semana tornou-se uma estação de monitorização autónoma completa — seguindo níveis de ruído, rotas de voo, padrões de companhias e dados atmosféricos, 24 horas por dia, a partir de uma varanda em Lisboa voltada para a trajetória de aproximação ao LPPT.',
     pipeline_label: 'Pipeline de automação completo · fim ao fim · zero gatilho humano',
     footer_ig: 'Seguir no Instagram →',
+    kofi_label: 'Apoiar o projecto',
+    kofi_desc: 'Todo o hardware é autofinanciado. Se este projecto te é útil ou simplesmente gostas de ver aviões, um café contribui muito para o próximo sensor.',
+    stat_since_val: '3 Maio 2026',
+    stat_since_lbl: 'A registar desde',
     stat_flights: 'Voos registados',
     stat_photos: 'Fotos publicadas',
     stat_auto: 'Funcionamento autónomo',
@@ -881,6 +890,10 @@ const ABOUT_TRANSLATIONS = {
     project_body: 'Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became a full autonomous monitoring station — tracking noise levels, flight routes, airline patterns and atmospheric data, 24 hours a day, from a Lisbon terrace facing the LPPT approach path.',
     pipeline_label: 'Full automation pipeline · end to end · zero human trigger',
     footer_ig: 'Follow on Instagram →',
+    kofi_label: 'Support the project',
+    kofi_desc: 'All hardware is self-funded. If you find this project useful or just enjoy watching planes, a coffee goes a long way toward the next sensor.',
+    stat_since_val: '3 May 2026',
+    stat_since_lbl: 'Recording since',
     stat_flights: 'Flights tracked',
     stat_photos: 'Photos published',
     stat_auto: 'Autonomous operation',
@@ -960,8 +973,14 @@ function applyLang(lang) {
     if (descEl) descEl.textContent = t[`step${k}_desc`] || descEl.textContent;
   });
 
+  // Ko-fi support box
+  selAll('[data-i18n="kofi_label"]').forEach(el => { el.textContent = t.kofi_label; });
+  selAll('[data-i18n="kofi_desc"]').forEach(el => { el.textContent = t.kofi_desc; });
+  // "Recording since" date + label
+  selAll('[data-i18n="stat_since_val"]').forEach(el => { el.textContent = t.stat_since_val; });
+  selAll('[data-i18n="stat_since_lbl"]').forEach(el => { el.textContent = t.stat_since_lbl; });
   const labelKeys = ['stat_flights','stat_photos','stat_auto','stat_human'];
-  selAll('.about-stat-label').forEach((el, i) => { if (labelKeys[i]) el.textContent = t[labelKeys[i]]; });
+  selAll('.about-stat-label:not([data-i18n])').forEach((el, i) => { if (labelKeys[i]) el.textContent = t[labelKeys[i]]; });
   selAll('.project-stat-label').forEach((el, i) => { if (labelKeys[i]) el.textContent = t[labelKeys[i]]; });
 
   // Tabs
