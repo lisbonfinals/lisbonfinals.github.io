@@ -173,7 +173,24 @@ nav {
   filter: grayscale(20%) sepia(10%);
 }
 @media (max-width: 900px) {
-  .log-captain-portrait { display: none; }
+  .log-hero { display: flex; flex-direction: column; }
+  .log-hero-eyebrow { order: 1; }
+  .log-hero-title   { order: 2; }
+  .log-captain-portrait {
+    order: 3;
+    position: relative; right: auto; top: auto; bottom: auto;
+    width: 100%; height: 220px;
+    margin: 24px 0 4px;
+    border-radius: 8px; overflow: hidden;
+  }
+  .log-captain-portrait img {
+    opacity: 0.35;
+    object-position: center 10%;
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+  .log-hero-sub  { order: 4; }
+  .log-hero-meta { order: 5; }
 }
 
 /* ── FILTERS ── */
