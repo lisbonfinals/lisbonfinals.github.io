@@ -166,8 +166,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-db.loud{color:var(--red);}
 .ticker-db.normal{color:rgba(240,237,232,.35);}
 .ticker-empty{padding:24px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.2);}
+/* ── TABLET : carte 2 lignes ── */
+@media(max-width:1040px) and (min-width:480px){
+  .ticker-col-heads{display:none;}
+  .ticker-row{
+    display:flex;flex-wrap:wrap;align-items:baseline;
+    gap:0;padding:12px 20px;
+    border-bottom:1px solid rgba(30,37,48,.6);
+    position:relative;
+  }
+  /* ligne 1 : heure · flag · vol · compagnie */
+  .ticker-time{order:1;margin-right:10px;flex-shrink:0;}
+  .ticker-time strong{display:inline;font-size:11px;}
+  .ticker-time-date{display:inline;margin-left:4px;font-size:9px;color:rgba(240,237,232,.25);}
+  .ticker-flag{order:2;margin-right:6px;font-size:14px;}
+  .ticker-callsign{order:3;margin-right:10px;font-size:12px;}
+  .ticker-airline{order:4;flex:1;font-size:11px;min-width:0;}
+  /* ligne 2 : route · phase · altitude · dB */
+  .ticker-route{order:5;width:100%;margin-top:4px;font-size:9px;color:rgba(240,237,232,.22);}
+  .ticker-route::before{content:'';display:inline-block;width:0;}
+  .ticker-phase{order:6;font-size:8px;color:rgba(240,237,232,.2);margin-right:12px;margin-top:4px;}
+  .ticker-alt{order:7;text-align:left;margin-right:12px;margin-top:4px;line-height:1.3;}
+  .ticker-alt strong{display:inline;font-size:10px;}
+  .ticker-alt-m{display:inline;margin-left:4px;font-size:9px;color:rgba(240,237,232,.2);}
+  .ticker-db{order:8;margin-top:4px;font-size:11px;}
+  /* route + meta sur une seule ligne 2 */
+  .ticker-phase,.ticker-alt,.ticker-db{flex-shrink:0;}
+}
 /* mobile: collapse to essential columns */
-@media(max-width:700px){
+@media(max-width:480px){
   .ticker-col-heads,
   .ticker-row{grid-template-columns:72px 22px 64px 1fr 54px;}
   .ticker-col-head.hide-sm,.ticker-time-date,
