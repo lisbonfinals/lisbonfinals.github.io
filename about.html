@@ -489,8 +489,9 @@ nav {
 <!-- DRAWER MOBILE -->
 <div class="nav-drawer" id="nav-drawer">
   <a href="/" onclick="closeDrawer()">Live</a>
-  <a href="/#stats" onclick="closeDrawer()">The Data</a>
-  <a href="/#warning" class="drawer-warning" onclick="closeDrawer()">Warning Zone</a>
+  <a href="/data.html#the-data" onclick="closeDrawer()">The Data</a>
+  <a href="/data.html#noise-data" onclick="closeDrawer()">Noise Data</a>
+  <a href="/data.html#warning-zone" class="drawer-warning" onclick="closeDrawer()">Warning Zone</a>
   <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
   <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
   <a href="/about.html" onclick="closeDrawer()">About</a>
@@ -750,9 +751,13 @@ fetch(GIST_URL + '?t=' + Date.now())
 
 // Nav drawer
 const drawer = document.getElementById('nav-drawer');
-function closeDrawer() { drawer.classList.remove('open'); }
+function closeDrawer() {
+  drawer.classList.remove('open');
+  document.body.style.overflow = '';
+}
 document.getElementById('nav-burger').addEventListener('click', () => {
-  drawer.classList.toggle('open');
+  const open = drawer.classList.toggle('open');
+  document.body.style.overflow = open ? 'hidden' : '';
 });
 </script>
 

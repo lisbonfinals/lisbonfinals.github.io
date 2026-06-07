@@ -84,8 +84,16 @@ nav {
   color: rgba(240,237,232,0.6); text-decoration: none; transition: color .2s;
 }
 .nav-drawer a:hover, .nav-drawer a.drawer-active { color: var(--white); }
-.lang-switcher { font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid var(--border);background:transparent;color:rgba(240,237,232,.35);padding:6px 12px;cursor:none;transition:all .2s;margin-left:24px; }
-.lang-switcher:hover { color:var(--white);border-color:rgba(240,237,232,.3); }
+.nav-drawer a.drawer-noise { color: var(--amber); opacity: .8; }
+.nav-drawer a.drawer-warning { color: rgba(248,113,113,0.6); }
+.nav-drawer a.drawer-ig {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; border: 1px solid rgba(245,166,35,0.4);
+  padding: 10px 20px; border-radius: 4px; color: var(--amber) !important;
+  font-size: 11px; margin-top: 8px;
+}
+.lang-switcher { font-family:var(--mono);font-size:10px;letter-spacing:.14em;border:1px solid rgba(240,237,232,.18);border-radius:2px;background:transparent;color:rgba(240,237,232,.45);padding:6px 14px;cursor:pointer;transition:all .2s;margin-left:8px;flex-shrink:0;text-transform:uppercase; }
+.lang-switcher:hover { color:var(--amber);border-color:var(--amber); }
 .nav-dropdown li a.dd-warning { color: rgba(248,113,113,0.6); }
 .nav-dropdown li a.dd-warning:hover { color: #ef4444; }
 .nav-dropdown li + li { border-top: 1px solid rgba(240,237,232,0.05); }
@@ -588,7 +596,7 @@ footer {
   .explore-band { grid-template-columns:1fr; }
   .explore-card { border-right:none; border-bottom:1px solid var(--border); }
   .runway-strip { padding:0 20px; }
-  .weather-section { padding:48px 20px; flex-direction:column; }
+  .weather-section { padding:48px 20px; grid-template-columns:1fr; }
   .stats-row { grid-template-columns:1fr 1fr; }
   .stat-cell { padding:20px 20px; }
   .section-header { padding:36px 20px 28px; }
@@ -637,10 +645,13 @@ footer {
 <!-- NAV DRAWER (mobile) -->
 <div class="nav-drawer" id="nav-drawer">
   <a href="/" class="drawer-active">Live</a>
-  <a href="/data.html">Data</a>
+  <a href="/data.html#the-data">The Data</a>
+  <a href="/data.html#noise-data">Noise Data</a>
+  <a href="/data.html#warning-zone" class="drawer-warning">Warning Zone</a>
+  <a href="/noise-report.html" class="drawer-noise">Noise Report</a>
   <a href="/log.html">Captain's Log</a>
   <a href="/about.html">About</a>
-  <a href="/noise-report.html">Noise Report</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="drawer-ig">Follow @lisbon.finals</a>
 </div>
 
 <!-- HERO -->
