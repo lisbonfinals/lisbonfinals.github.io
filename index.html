@@ -492,6 +492,14 @@ nav {
 .stat-num.amber { color:var(--amber); }
 .stat-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:3px; }
 .stat-sub { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.14);letter-spacing:.06em; }
+.stats-disclaimer {
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(240,237,232,.18);text-align:center;
+  padding:18px 48px 28px;
+  border-bottom:1px solid var(--border);
+  line-height:1.8;
+}
+@media (max-width:900px) { .stats-disclaimer { padding:16px 20px 24px; font-size:8px; } }
 
 /* ── SECTION HEADER ── */
 .section-header {
@@ -592,7 +600,11 @@ footer {
 }
 @media (max-width: 900px) {
   nav { padding:16px 20px; }
-  .hero { padding:88px 20px 40px; }
+  .hero { padding:88px 20px 80px; justify-content:flex-end; }
+  .hero-content { max-width:100%; text-align:right; }
+  .hero-sub { max-width:100%; margin-left:auto; }
+  .hero-live-pill { justify-content:flex-end; }
+  .hero-ctas { left:auto; right:20px; bottom:20px; }
   .hero-live-card { display:none; }
   .latest-shot { grid-template-columns:1fr; }
   .ls-photo { height:280px; }
@@ -727,6 +739,7 @@ footer {
     <div class="stat-sub">autonomous · 24/7</div>
   </div>
 </div>
+<div class="stats-disclaimer" data-i18n="stats_disclaimer">Depending on wind direction, this station captures either landing approaches or takeoffs — whichever phase passes over the terrace. One phase at a time. These figures reflect observed traffic, not total airport volume.</div>
 
 <!-- SECTION HEADER: LATEST CAPTURES -->
 <div class="section-header">
@@ -1371,6 +1384,7 @@ var INDEX_TRANSLATIONS = {
     footer_connect: 'Connect',
     footer_support: 'Support the project',
     hero_w1: 'Every', hero_w2: 'plane.', hero_w3: 'Every ', hero_w4: 'And so much more.',
+    stats_disclaimer: 'Depending on wind direction, this station captures either landing approaches or takeoffs — whichever phase passes over the terrace. One phase at a time. These figures reflect observed traffic, not total airport volume.',
     footer_copy: '© 2026 Lisbon Finals · Automated Aviation Intelligence · LPPT',
   },
   pt: {
@@ -1427,6 +1441,7 @@ var INDEX_TRANSLATIONS = {
     footer_proj: 'Projecto',
     footer_connect: 'Contacto',
     footer_support: 'Apoiar o projecto',
+    stats_disclaimer: 'Dependendo da direção do vento, esta estação capta aproximações ou descolagens — a fase que passa sobre a varanda. Uma fase de cada vez. Estes valores refletem o tráfego observado, não o volume total do aeroporto.',
     footer_copy: '© 2026 Lisbon Finals · Inteligência de Aviação Autónoma · LPPT',
   },
   fr: {
@@ -1483,6 +1498,7 @@ var INDEX_TRANSLATIONS = {
     footer_proj: 'Projet',
     footer_connect: 'Contact',
     footer_support: 'Soutenir le projet',
+    stats_disclaimer: 'Selon la direction du vent, cette station capte les approches ou les décollages — la phase qui survole la terrasse. Une seule phase à la fois. Ces chiffres reflètent le trafic observé, pas le volume total de l\'aéroport.',
     footer_copy: '© 2026 Lisbon Finals · Intelligence Aviation Autonome · LPPT',
   }
 };
@@ -1599,6 +1615,8 @@ function applyLang(lang) {
   if (fCols[1]) fCols[1].textContent = t.footer_connect;
   var fKofi = q('.footer-kofi-label span'); if (fKofi) fKofi.textContent = t.footer_support;
   var fCopy = q('.footer-copy'); if (fCopy) fCopy.textContent = t.footer_copy;
+  // generic data-i18n sweep
+  qa('[data-i18n]').forEach(function(el) { var k = el.getAttribute('data-i18n'); if (t[k]) el.textContent = t[k]; });
 }
 
 function toggleLang() { var cycle = {en:'pt',pt:'fr',fr:'en'}; applyLang(cycle[_lang] || 'en'); }
