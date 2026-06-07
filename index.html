@@ -165,9 +165,8 @@ nav {
 }
 .hero-title em.second {
   font-size: .44em;
-  display: block;
-  margin-top: -14px;
-  text-align: right;
+  align-self: flex-end;
+  margin-top: -10px;
 }
 .hero-sub {
   font-family: var(--mono); font-size: 13px; line-height: 1.8;
@@ -660,7 +659,7 @@ footer {
     </div>
     <h1 class="hero-title">
       <span class="line">Every <span style="color:var(--amber)">plane.</span></span>
-      <span class="line"><em style="color:var(--white)">Every </em><em class="deci">decibel.</em><br><em class="second">And so much more.</em></span>
+      <span class="line" style="display:inline-flex;flex-direction:column;"><span><em style="color:var(--white)">Every </em><em class="deci">decibel.</em></span><em class="second">And so much more.</em></span>
     </h1>
     <p class="hero-sub">An autonomous station on a Lisbon terrace — photographing, measuring and publishing every aircraft on final approach to LPPT, without any human input.</p>
   </div>
