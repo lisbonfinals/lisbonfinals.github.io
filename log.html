@@ -423,6 +423,19 @@ nav {
 }
 
 /* ── FOOTER ── */
+.log-contact-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 28px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(245,166,35,.7); text-decoration: none;
+  border: 1px solid rgba(245,166,35,.25); border-radius: 2px;
+  padding: 10px 20px;
+  transition: all .2s;
+}
+.log-contact-btn:hover {
+  color: var(--amber); border-color: var(--amber);
+  background: rgba(245,166,35,.05);
+}
 .log-footer {
   border-top: 1px solid var(--border);
   padding: 32px 48px;
@@ -557,6 +570,10 @@ nav {
   <div class="log-hero-eyebrow"><span></span>Field Journal</div>
   <h1 class="log-hero-title">Captain's<br><em>Log</em></h1>
   <p class="log-hero-sub">Technical updates, rare catches, hardware changes, bug fixes — written from the terrace in real time.</p>
+  <a href="mailto:lisbon.final.spots@gmail.com" class="log-contact-btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    Contact the Captain
+  </a>
   <div class="log-hero-meta">
     <span class="log-hero-count" id="entryCount">— entries</span>
     <span class="log-hero-coords">38°46'N · 009°08'W · Lisbon, Portugal</span>
