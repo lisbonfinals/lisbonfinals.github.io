@@ -35,7 +35,11 @@ nav {
   display: flex; align-items: center; justify-content: space-between;
   background: linear-gradient(to bottom, rgba(7,9,13,0.98), transparent);
   backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(245,166,35,.08);
 }
+.nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
+.nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
+.nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px;}
 .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 .nav-dot {
   width: 28px; height: 28px; border: 1.5px solid var(--amber);
@@ -92,7 +96,7 @@ nav {
   padding: 10px 20px; border-radius: 4px; color: var(--amber) !important;
   font-size: 11px; margin-top: 8px;
 }
-.lang-switcher { font-family:var(--mono);font-size:10px;letter-spacing:.14em;border:1px solid rgba(240,237,232,.18);border-radius:2px;background:transparent;color:rgba(240,237,232,.45);padding:6px 14px;cursor:pointer;transition:all .2s;margin-left:8px;flex-shrink:0;text-transform:uppercase; }
+.lang-switcher { font-family:var(--mono);font-size:10px;letter-spacing:.14em;border:1px solid rgba(240,237,232,.18);border-radius:2px;background:transparent;color:rgba(240,237,232,.45);padding:6px 14px;cursor:pointer;transition:all .2s;margin-left:0;flex-shrink:0;text-transform:uppercase; }
 .lang-switcher:hover { color:var(--amber);border-color:var(--amber); }
 .nav-dropdown li a.dd-warning { color: rgba(248,113,113,0.6); }
 .nav-dropdown li a.dd-warning:hover { color: #ef4444; }
@@ -636,7 +640,10 @@ footer {
     <li><a href="/log.html">Captain's Log</a></li>
     <li><a href="/about.html">About</a></li>
   </ul>
-  <button class="lang-switcher" onclick="toggleLang()" id="lang-btn">PT</button>
+  <div class="nav-clock-wrap">
+    <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
+    <button class="lang-switcher" onclick="toggleLang()" id="lang-btn">PT</button>
+  </div>
   <button class="nav-burger" id="nav-burger" onclick="document.getElementById('nav-drawer').classList.toggle('open')">
     <span></span><span></span><span></span>
   </button>
@@ -1521,6 +1528,17 @@ document.addEventListener('DOMContentLoaded', function() { if (_lang !== 'en') a
       if (!drawer.contains(e.target) && !burger.contains(e.target)) drawer.classList.remove('open');
     });
   }
+})();
+
+// ── Lisbon clock ──
+(function navClock(){
+  const el = document.getElementById('nav-clock');
+  if (!el) return;
+  function tick(){
+    const s = new Date().toLocaleTimeString('pt-PT',{timeZone:'Europe/Lisbon',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    el.innerHTML = s + '<span class="nav-clock-tz">LIS</span>';
+  }
+  tick(); setInterval(tick, 1000);
 })();
 </script>
 
