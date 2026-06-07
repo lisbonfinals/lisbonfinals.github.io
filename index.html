@@ -495,8 +495,8 @@ nav {
 .stats-disclaimer {
   font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
   color:rgba(240,237,232,.18);text-align:center;
-  padding:18px 48px 28px;
-  border-bottom:1px solid var(--border);
+  padding:28px 48px 18px;
+  border-top:1px solid var(--border);
   line-height:1.8;
 }
 @media (max-width:900px) { .stats-disclaimer { padding:16px 20px 24px; font-size:8px; } }
@@ -717,6 +717,7 @@ footer {
 </section>
 
 <!-- STATS ROW -->
+<div class="stats-disclaimer" data-i18n="stats_disclaimer">Depending on wind direction, this station captures either landing approaches or takeoffs — whichever phase passes over the terrace. One phase at a time. These figures reflect observed traffic, not total airport volume.</div>
 <div class="stats-row">
   <div class="stat-cell">
     <div class="stat-lbl">Flights tracked</div>
@@ -739,7 +740,6 @@ footer {
     <div class="stat-sub">autonomous · 24/7</div>
   </div>
 </div>
-<div class="stats-disclaimer" data-i18n="stats_disclaimer">Depending on wind direction, this station captures either landing approaches or takeoffs — whichever phase passes over the terrace. One phase at a time. These figures reflect observed traffic, not total airport volume.</div>
 
 <!-- SECTION HEADER: LATEST CAPTURES -->
 <div class="section-header">
