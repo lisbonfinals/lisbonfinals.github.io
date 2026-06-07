@@ -128,18 +128,52 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-live{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--green);display:flex;align-items:center;gap:6px;}
 .ticker-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-.ticker-list{max-height:360px;overflow-y:auto;}
-.ticker-row{display:flex;align-items:center;gap:12px;padding:10px 20px;border-bottom:1px solid rgba(30,37,48,.6);transition:background .15s;}
+/* ticker — no scroll trap, page scrolls naturally */
+.ticker-list{}
+.ticker-col-heads{
+  display:grid;
+  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px;
+  gap:0;
+  padding:8px 20px;
+  background:rgba(245,166,35,.04);
+  border-bottom:1px solid var(--border);
+}
+.ticker-col-head{
+  font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(245,166,35,.35);
+}
+.ticker-col-head.right{text-align:right;}
+.ticker-row{
+  display:grid;
+  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px;
+  gap:0;
+  align-items:center;
+  padding:9px 20px;
+  border-bottom:1px solid rgba(30,37,48,.6);
+  transition:background .15s;
+}
 .ticker-row:hover{background:rgba(245,166,35,.03);}
-.ticker-flag{font-size:14px;flex-shrink:0;}
-.ticker-callsign{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);min-width:80px;}
-.ticker-airline{font-size:11px;color:rgba(240,237,232,.4);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.ticker-alt{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.25);text-align:right;min-width:60px;}
-.ticker-db{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;min-width:52px;}
+.ticker-time{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.3);line-height:1.35;}
+.ticker-time strong{display:block;color:rgba(240,237,232,.55);font-size:10px;font-weight:500;}
+.ticker-flag{font-size:13px;}
+.ticker-callsign{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);}
+.ticker-airline{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px;}
+.ticker-route{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.25);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ticker-phase{font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:rgba(240,237,232,.2);}
+.ticker-alt{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.25);text-align:right;line-height:1.4;}
+.ticker-alt strong{display:block;color:rgba(240,237,232,.45);font-size:10px;font-weight:500;}
+.ticker-db{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;}
 .ticker-db.loud{color:var(--red);}
 .ticker-db.normal{color:rgba(240,237,232,.35);}
-.ticker-phase{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.2);min-width:48px;text-align:right;}
 .ticker-empty{padding:24px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.2);}
+/* mobile: collapse to essential columns */
+@media(max-width:700px){
+  .ticker-col-heads,
+  .ticker-row{grid-template-columns:72px 22px 64px 1fr 54px;}
+  .ticker-col-head.hide-sm,.ticker-time-date,
+  .ticker-route,.ticker-phase,.ticker-alt-m{display:none;}
+  .ticker-alt strong{font-size:9px;}
+}
 
 /* ── NOISE SECTION — SPLIT LAYOUT ── */
 .noise-split{display:grid;grid-template-columns:2fr 3fr;gap:56px;align-items:start;}
@@ -352,6 +386,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <span class="ticker-title" data-i18n="ticker_title">Recent detections</span>
       <span class="ticker-live" data-i18n="ticker_live">Live</span>
     </div>
+    <div class="ticker-col-heads">
+      <span class="ticker-col-head">Date / Heure</span>
+      <span class="ticker-col-head"></span>
+      <span class="ticker-col-head">Vol</span>
+      <span class="ticker-col-head">Compagnie</span>
+      <span class="ticker-col-head hide-sm">Route</span>
+      <span class="ticker-col-head hide-sm">Phase</span>
+      <span class="ticker-col-head right hide-sm">Altitude</span>
+      <span class="ticker-col-head right">dB</span>
+    </div>
     <div class="ticker-list" id="tickerList">
       <div class="ticker-empty">Loading…</div>
     </div>
@@ -541,16 +585,23 @@ function buildTicker(ticker) {
     el.innerHTML = '<div class="ticker-empty">No recent detections</div>';
     return;
   }
-  el.innerHTML = ticker.slice(0, 25).map(f => {
+  el.innerHTML = ticker.slice(0, 40).map(f => {
     const db = f.noise_db || 0;
     const dbCls = db > 95 ? 'loud' : 'normal';
-    const ts = f.timestamp ? f.timestamp.slice(11, 16) : '—';
+    const ts = f.timestamp || '';
+    const dateStr = ts.length >= 10 ? ts.slice(8,10) + '/' + ts.slice(5,7) : '—';
+    const timeStr = ts.length >= 16 ? ts.slice(11,16) : (ts.length >= 19 ? ts.slice(11,16) : '—');
+    const altFt = f.alt_ft ? Math.round(f.alt_ft) : null;
+    const altM  = altFt ? Math.round(altFt * 0.3048) : null;
+    const route = f.route || (f.origin && f.destination ? f.origin + ' → ' + f.destination : (f.origin || f.destination || '—'));
     return `<div class="ticker-row">
+      <span class="ticker-time"><strong>${timeStr}</strong><span class="ticker-time-date">${dateStr}</span></span>
       <span class="ticker-flag">${f.flag || '✈️'}</span>
       <span class="ticker-callsign">${f.callsign || '—'}</span>
-      <span class="ticker-airline">${f.airline || ''} ${f.aircraft ? '· ' + f.aircraft : ''}</span>
-      <span class="ticker-phase">${f.phase || ''}</span>
-      <span class="ticker-alt">${f.alt_ft ? Math.round(f.alt_ft).toLocaleString() + ' ft' : '—'}</span>
+      <span class="ticker-airline">${f.airline || '—'}</span>
+      <span class="ticker-route hide-sm">${route}</span>
+      <span class="ticker-phase hide-sm">${f.phase || '—'}</span>
+      <span class="ticker-alt hide-sm">${altFt ? '<strong>' + altFt.toLocaleString() + ' ft</strong><span class="ticker-alt-m">' + altM.toLocaleString() + ' m</span>' : '—'}</span>
       <span class="ticker-db ${dbCls}">${db ? db.toFixed(1) + ' dB' : '—'}</span>
     </div>`;
   }).join('');
