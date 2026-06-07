@@ -251,7 +251,8 @@ nav {
   font-family: var(--mono); font-size: 9px; letter-spacing: .1em;
   margin-top: 8px; display: inline-block;
 }
-.hw-status.on  { color: #4ade80; }
+.hw-status.on   { color: #4ade80; }
+.hw-status.soon { color: #60a5fa; }
 .hw-status.plan { color: rgba(245,166,35,0.5); }
 
 /* ── PROJECT CARD ── */
@@ -668,16 +669,32 @@ nav {
       <span class="hw-icon">🔊</span>
       <div>
         <div class="hw-name">GAIN EXPRESS SPL Meter + ADS1115</div>
-        <div class="hw-desc">Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Triggers capture when SPL exceeds threshold.</div>
-        <span class="hw-status on">● EN SERVICE</span>
+        <div class="hw-desc">Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Tested on bench — outdoor deployment pending enclosure.</div>
+        <span class="hw-status soon">◎ TESTED · SOON IN SERVICE</span>
       </div>
     </div>
     <div class="hw-item">
       <span class="hw-icon">🌬</span>
       <div>
         <div class="hw-name">GY-SGP30 Air Quality Sensor</div>
-        <div class="hw-desc">eCO₂ and TVOC monitoring on the terrace. Environmental context for flight data.</div>
-        <span class="hw-status on">● EN SERVICE</span>
+        <div class="hw-desc">eCO₂ and TVOC monitoring. I²C → Pi. Tested and calibrated — will go live with the outdoor enclosure.</div>
+        <span class="hw-status soon">◎ TESTED · SOON IN SERVICE</span>
+      </div>
+    </div>
+    <div class="hw-item">
+      <span class="hw-icon">🌀</span>
+      <div>
+        <div class="hw-name">MPU-6050 Dual IMU — Vibration</div>
+        <div class="hw-desc">Two accelerometers (AD0→GND + AD0→VCC, addresses 0x68/0x69) on the same I²C bus. Detects ground vibration from passing aircraft — a dimension beyond sound.</div>
+        <span class="hw-status soon">◎ TESTED · SOON IN SERVICE</span>
+      </div>
+    </div>
+    <div class="hw-item">
+      <span class="hw-icon">🏭</span>
+      <div>
+        <div class="hw-name">PMS5003 — Fine Particle Sensor</div>
+        <div class="hw-desc">Laser particle counter measuring PM1.0, PM2.5 and PM10 in real time. UART → Pi. Correlates each aircraft pass with a concrete air quality reading.</div>
+        <span class="hw-status soon">◎ TESTED · SOON IN SERVICE</span>
       </div>
     </div>
     <div class="hw-item">
@@ -699,6 +716,15 @@ nav {
   <h2 class="section-title">Upgrades<br><em>in progress</em></h2>
   <p class="section-sub">The station is continuously evolving. New hardware and sensors are being integrated to capture even more — from vibration analysis and industrial-grade acoustics to live ATC communications and air quality monitoring.</p>
 
+  <div style="display:flex;align-items:center;gap:20px;margin-bottom:40px;padding:20px 24px;background:rgba(245,166,35,.04);border:1px solid rgba(245,166,35,.15);border-radius:4px;flex-wrap:wrap;">
+    <div>
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,166,35,.6);margin-bottom:6px;">Support the project</div>
+      <div style="font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.45);line-height:1.6;max-width:520px;">All hardware is self-funded. If you find this project useful or just enjoy watching planes, a coffee goes a long way toward the next sensor.</div>
+    </div>
+    <a href="https://ko-fi.com/O5O01ZPUX0" target="_blank" style="flex-shrink:0;margin-left:auto;">
+      <img height="36" style="border:0;height:36px;opacity:.9;transition:opacity .2s;" src="https://storage.ko-fi.com/cdn/kofi2.png?v=6" alt="Buy Me a Coffee at ko-fi.com" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.9"/>
+    </a>
+  </div>
   <div class="coming-grid">
     <div class="coming-card">
       <span class="coming-icon">🔊</span>
@@ -794,13 +820,16 @@ const ABOUT_TRANSLATIONS = {
     hw_eyebrow: 'A estação',
     hw_title: 'Hardware<br><em>em serviço</em>',
     hw_status_on: '● EM SERVIÇO',
+    hw_status_soon: '◎ TESTADO · BREVEMENTE EM SERVIÇO',
     hw_status_plan: '◐ EM CURSO — Junho 2026',
     hw_desc_1: 'Cérebro central — corre todos os serviços 24/7: descodificação ADS-B, gatilho de captura, pontuação YOLO, agendador, servidor admin Flask.',
     hw_desc_2: 'Dongle RTL-SDR a receber sinais ADS-B a 1090 MHz. Substituído em Junho de 2026 após falha térmica — agora equipado com dissipadores de calor.',
     hw_desc_3: 'Câmara 4K em streaming via RTSP. Apontada para a trajetória de aproximação do LPPT — cada frame analisada pelo YOLO v8 em tempo real.',
-    hw_desc_4: 'Medidor de nível sonoro profissional (30–130 dB). Saída DC ligada ao ADC ADS1115 → I²C → Pi. Dispara a captura quando o SPL excede o limiar.',
-    hw_desc_5: 'Monitorização de eCO₂ e TVOC na varanda. Contexto ambiental para os dados de voo.',
-    hw_desc_6: 'Caixa PMMA de 4mm cortada à medida (20×40×30cm) com tampa inclinada, furos de ventilação, prensa-cabo e prateleira interna. Cortada a laser no Fab Lab Lisboa.',
+    hw_desc_4: 'Medidor de nível sonoro profissional (30–130 dB). Testado em bancada — instalação exterior aguarda a caixa de proteção.',
+    hw_desc_5: 'Monitorização de eCO₂ e TVOC. I²C → Pi. Testado e calibrado — entra em serviço com a caixa exterior.',
+    hw_desc_6: 'Dois acelerómetros (AD0→GND + AD0→VCC, endereços 0x68/0x69) no mesmo barramento I²C. Deteta vibração provocada pelas aeronaves — uma dimensão para além do som.',
+    hw_desc_7: 'Contador de partículas laser medindo PM1.0, PM2.5 e PM10 em tempo real. UART → Pi. Correlaciona cada passagem de aeronave com uma leitura concreta de qualidade do ar.',
+    hw_desc_8: 'Caixa PMMA de 4mm cortada à medida (20×40×30cm) com tampa inclinada, furos de ventilação, prensa-cabo e prateleira interna. Cortada a laser no Fab Lab Lisboa.',
     coming_label: "O que vem aí",
     coming_title: 'Melhorias<br><em>em curso</em>',
     coming_sub: 'A estação está em evolução contínua. Novo hardware e sensores estão a ser integrados para capturar ainda mais — desde análise de vibração e acústica industrial até comunicações ATC em directo e monitorização da qualidade do ar.',
@@ -846,13 +875,16 @@ const ABOUT_TRANSLATIONS = {
     howit_title: 'Three layers,<br><em>zero human triggers</em>',
     hw_eyebrow: 'The station',
     hw_status_on: '● IN SERVICE',
+    hw_status_soon: '◎ TESTED · SOON IN SERVICE',
     hw_status_plan: '◐ IN PROGRESS — June 2026',
     hw_desc_1: 'Central brain — runs all services 24/7: ADS-B decode, capture trigger, YOLO scoring, scheduler, Flask admin server.',
     hw_desc_2: 'RTL-SDR dongle receiving ADS-B signals at 1090 MHz. Replaced June 2026 after thermal failure — now fitted with heatsinks.',
     hw_desc_3: '4K camera streaming over RTSP. Aimed at the LPPT approach path — every frame analyzed by YOLO v8 in real time.',
-    hw_desc_4: 'Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Triggers capture when SPL exceeds threshold.',
-    hw_desc_5: 'eCO₂ and TVOC monitoring on the terrace. Environmental context for flight data.',
-    hw_desc_6: 'Custom-cut 4mm PMMA box (20×40×30cm) with angled lid, ventilation holes, cable gland and internal shelf. Laser-cut at Fab Lab Lisbon.',
+    hw_desc_4: 'Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Tested on bench — outdoor deployment pending enclosure.',
+    hw_desc_5: 'eCO₂ and TVOC monitoring. I²C → Pi. Tested and calibrated — will go live with the outdoor enclosure.',
+    hw_desc_6: 'Two accelerometers (AD0→GND + AD0→VCC, addresses 0x68/0x69) on the same I²C bus. Detects ground vibration from passing aircraft — a dimension beyond sound.',
+    hw_desc_7: 'Laser particle counter measuring PM1.0, PM2.5 and PM10 in real time. UART → Pi. Correlates each aircraft pass with a concrete air quality reading.',
+    hw_desc_8: 'Custom-cut 4mm PMMA box (20×40×30cm) with angled lid, ventilation holes, cable gland and internal shelf. Laser-cut at Fab Lab Lisbon.',
     coming_label: "What's next",
     coming_title: 'Upgrades<br><em>in progress</em>',
     coming_sub: 'The station is continuously evolving. New hardware and sensors are being integrated to capture even more — from vibration analysis and industrial-grade acoustics to live ATC communications and air quality monitoring.',
@@ -930,10 +962,11 @@ function applyLang(lang) {
   const hwEyebrow = sel('.section-eyebrow');
   if (hwEyebrow) hwEyebrow.textContent = t.hw_eyebrow;
   selAll('.hw-status.on').forEach(el => { el.textContent = t.hw_status_on; });
+  selAll('.hw-status.soon').forEach(el => { el.textContent = t.hw_status_soon; });
   const hwPlan = sel('.hw-status.plan');
   if (hwPlan) hwPlan.textContent = t.hw_status_plan;
   const hwDescs = selAll('.hw-desc');
-  ['hw_desc_1','hw_desc_2','hw_desc_3','hw_desc_4','hw_desc_5','hw_desc_6'].forEach((k, i) => {
+  ['hw_desc_1','hw_desc_2','hw_desc_3','hw_desc_4','hw_desc_5','hw_desc_6','hw_desc_7','hw_desc_8'].forEach((k, i) => {
     if (hwDescs[i] && t[k]) hwDescs[i].textContent = t[k];
   });
 
