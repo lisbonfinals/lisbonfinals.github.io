@@ -139,7 +139,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-list{}
 .ticker-col-heads{
   display:grid;
-  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px;
+  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px 72px;
   gap:0;
   padding:8px 20px;
   background:rgba(245,166,35,.04);
@@ -152,7 +152,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-col-head.right{text-align:right;}
 .ticker-row{
   display:grid;
-  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px;
+  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px 72px;
   gap:0;
   align-items:center;
   padding:9px 20px;
@@ -172,6 +172,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-db{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;}
 .ticker-db.loud{color:var(--red);}
 .ticker-db.normal{color:rgba(240,237,232,.35);}
+.ticker-vib{display:flex;flex-direction:column;align-items:flex-end;gap:3px;padding-left:8px;}
+.ticker-vib-bar-wrap{width:48px;height:3px;background:rgba(240,237,232,.07);border-radius:2px;overflow:hidden;}
+.ticker-vib-bar{height:100%;background:var(--amber);border-radius:2px;opacity:.7;transition:width .3s;}
+.ticker-vib-val{font-family:var(--mono);font-size:8px;color:rgba(245,166,35,.45);letter-spacing:.04em;}
+.ticker-vib.no-data .ticker-vib-val{color:rgba(240,237,232,.15);}
 .ticker-empty{padding:24px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.2);}
 /* ── TABLET : carte 2 lignes ── */
 @media(max-width:1040px) and (min-width:480px){
@@ -436,6 +441,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <span class="ticker-col-head hide-sm">Phase</span>
       <span class="ticker-col-head right hide-sm">Altitude</span>
       <span class="ticker-col-head right">dB</span>
+      <span class="ticker-col-head right hide-sm">Vib</span>
     </div>
     <div class="ticker-list" id="tickerList">
       <div class="ticker-empty">Loading…</div>
@@ -644,6 +650,12 @@ function buildTicker(ticker) {
       <span class="ticker-phase hide-sm">${f.phase || '—'}</span>
       <span class="ticker-alt hide-sm">${altFt ? '<strong>' + altFt.toLocaleString() + ' ft</strong><span class="ticker-alt-m">' + altM.toLocaleString() + ' m</span>' : '—'}</span>
       <span class="ticker-db ${dbCls}">${db ? db.toFixed(1) + ' dB' : '—'}</span>
+      ${(() => {
+        const vib = f.vibration_peak;
+        if (vib == null) return '<span class="ticker-vib no-data hide-sm"><span class="ticker-vib-bar-wrap"><span class="ticker-vib-bar" style="width:0%"></span></span><span class="ticker-vib-val">—</span></span>';
+        const pct = Math.min(100, Math.round((vib / 1023) * 100));
+        return `<span class="ticker-vib hide-sm"><span class="ticker-vib-bar-wrap"><span class="ticker-vib-bar" style="width:${pct}%"></span></span><span class="ticker-vib-val">${vib}</span></span>`;
+      })()}
     </div>`;
   }).join('');
 }
