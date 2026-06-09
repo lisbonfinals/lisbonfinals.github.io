@@ -333,7 +333,37 @@ nav {
 .log-cat-hardware { border-color: rgba(251,146,60,.3);  color: #fdb57a; }
 .log-cat-rare     { border-color: rgba(245,166,35,.4);  color: var(--amber); }
 .log-cat-stats    { border-color: rgba(167,139,250,.3); color: #c4b5fd; }
-.log-cat-note     { border-color: rgba(240,237,232,.15); color: rgba(240,237,232,.45); }
+.log-cat-note      { border-color: rgba(240,237,232,.15); color: rgba(240,237,232,.45); }
+.log-cat-milestone {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: #000;
+  font-weight: 800;
+  letter-spacing: .18em;
+  box-shadow: 0 0 12px rgba(245,166,35,.6), 0 0 24px rgba(245,166,35,.25);
+  animation: milestone-pulse 2.4s ease-in-out infinite;
+}
+@keyframes milestone-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(245,166,35,.6), 0 0 24px rgba(245,166,35,.25); }
+  50%       { box-shadow: 0 0 18px rgba(245,166,35,.9), 0 0 36px rgba(245,166,35,.4); }
+}
+
+/* Featured card gets a golden halo when it's a milestone */
+.log-featured-card.milestone {
+  border-color: rgba(245,166,35,.5);
+  background: linear-gradient(135deg, rgba(245,166,35,.06) 0%, rgba(7,9,13,0) 55%);
+  box-shadow: 0 0 60px rgba(245,166,35,.14), inset 0 0 40px rgba(245,166,35,.04);
+}
+.log-featured-card.milestone:hover {
+  border-color: rgba(245,166,35,.8);
+  box-shadow: 0 4px 80px rgba(245,166,35,.2), inset 0 0 40px rgba(245,166,35,.06);
+}
+
+/* Secondary card glow for milestone */
+.log-card.milestone {
+  border-left: 2px solid rgba(245,166,35,.6);
+  box-shadow: 0 0 24px rgba(245,166,35,.08);
+}
 .log-ts {
   font-family: var(--mono); font-size: 9px;
   color: rgba(240,237,232,0.25); margin-left: auto;
@@ -591,6 +621,7 @@ nav {
   <button class="log-filter-btn" data-cat="rare">✈️ Rare Find</button>
   <button class="log-filter-btn" data-cat="stats">📊 Stats</button>
   <button class="log-filter-btn" data-cat="note">📝 Note</button>
+  <button class="log-filter-btn" data-cat="milestone">🏆 Milestone</button>
 </div>
 
 <!-- GRID -->
@@ -623,7 +654,8 @@ const CAT_LABELS = {
   hardware: '⚙️ Hardware',
   rare:     '✈️ Rare Find',
   stats:    '📊 Stats',
-  note:     '📝 Note'
+  note:     '📝 Note',
+  milestone: '🏆 Milestone'
 };
 
 function esc(s) {
@@ -652,7 +684,7 @@ function renderGrid(entries) {
   const featExcerpt = (feat.body || feat.title || '').slice(0, 420);
   const featHtml = `
     <div class="log-featured-wrap">
-      <div class="log-featured-card${feat.pinned ? ' pinned' : ''}" onclick="openModal(${featIdx})">
+      <div class="log-featured-card${feat.pinned ? ' pinned' : ''}${feat.category === 'milestone' ? ' milestone' : ''}" onclick="openModal(${featIdx})">
         <div>
           <div class="log-card-top">
             <span class="log-cat log-cat-${esc(feat.category)}">${esc(CAT_LABELS[feat.category] || feat.category)}</span>
@@ -677,7 +709,7 @@ function renderGrid(entries) {
         ${secondary.map(e => {
           const ex = (e.body || e.title || '').slice(0, 200);
           const entryNum = String(_allEntries.length - _allEntries.indexOf(e)).padStart(2, '0');
-          return `<div class="log-card${e.pinned ? ' pinned' : ''}" onclick="openModal(${_allEntries.indexOf(e)})">
+          return `<div class="log-card${e.pinned ? ' pinned' : ''}${e.category === 'milestone' ? ' milestone' : ''}" onclick="openModal(${_allEntries.indexOf(e)})">
             <div class="log-card-top">
               <span class="log-cat log-cat-${esc(e.category)}">${esc(CAT_LABELS[e.category] || e.category)}</span>
               <span class="log-ts">${esc(e.date)}</span>
