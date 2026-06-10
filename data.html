@@ -655,7 +655,8 @@ function buildTicker(ticker) {
         if (vib == null) return '<span class="ticker-vib no-data hide-sm"><span class="ticker-vib-bar-wrap"><span class="ticker-vib-bar" style="width:0%"></span></span><span class="ticker-vib-val">—</span></span>';
         const pct = Math.min(100, Math.round((vib / 120) * 100)); // 120mg = échelle max
         const vibColor = vib >= 80 ? 'var(--red)' : vib >= 50 ? '#fb923c' : vib >= 20 ? 'var(--amber)' : 'var(--green)';
-        return `<span class="ticker-vib hide-sm"><span class="ticker-vib-bar-wrap"><span class="ticker-vib-bar" style="width:${pct}%;background:${vibColor}"></span></span><span class="ticker-vib-val" style="color:${vibColor}">${Math.round(vib)}mg</span></span>`;
+        const vibLbl  = vib >= 80 ? 'strong' : vib >= 50 ? 'shook' : vib >= 20 ? 'felt' : 'soft';
+        return `<span class="ticker-vib hide-sm"><span class="ticker-vib-bar-wrap"><span class="ticker-vib-bar" style="width:${pct}%;background:${vibColor}"></span></span><span class="ticker-vib-val" style="color:${vibColor}">${vibLbl}</span></span>`;
       })()}
     </div>`;
   }).join('');
