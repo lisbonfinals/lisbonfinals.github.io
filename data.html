@@ -172,10 +172,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-db{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;}
 .ticker-db.loud{color:var(--red);}
 .ticker-db.normal{color:rgba(240,237,232,.35);}
-.ticker-vib{display:flex;flex-direction:column;align-items:flex-end;gap:3px;padding-left:8px;}
-.ticker-vib-bar-wrap{width:48px;height:3px;background:rgba(240,237,232,.07);border-radius:2px;overflow:hidden;}
-.ticker-vib-bar{height:100%;background:var(--amber);border-radius:2px;opacity:.7;transition:width .3s;}
-.ticker-vib-val{font-family:var(--mono);font-size:8px;color:rgba(245,166,35,.45);letter-spacing:.04em;}
+.ticker-vib{display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-left:8px;min-width:64px;}
+.ticker-vib-bars{font-family:monospace;font-size:11px;letter-spacing:1px;line-height:1;}
+.ticker-vib-row{display:flex;align-items:center;gap:4px;}
+.ticker-vib-emoji{font-size:10px;line-height:1;}
+.ticker-vib-val{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.04em;}
 .ticker-vib.no-data .ticker-vib-val{color:rgba(240,237,232,.15);}
 .ticker-empty{padding:24px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.2);}
 /* ── TABLET : carte 2 lignes ── */
@@ -652,11 +653,19 @@ function buildTicker(ticker) {
       <span class="ticker-db ${dbCls}">${db ? db.toFixed(1) + ' dB' : '—'}</span>
       ${(() => {
         const vib = f.vibration_peak;
-        if (vib == null) return '<span class="ticker-vib no-data hide-sm"><span class="ticker-vib-bar-wrap"><span class="ticker-vib-bar" style="width:0%"></span></span><span class="ticker-vib-val">—</span></span>';
-        const pct = Math.min(100, Math.round((vib / 120) * 100)); // 120mg = échelle max
-        const vibColor = vib >= 80 ? 'var(--red)' : vib >= 50 ? '#fb923c' : vib >= 20 ? 'var(--amber)' : 'var(--green)';
-        const vibLbl  = vib >= 80 ? 'strong' : vib >= 50 ? 'shook' : vib >= 20 ? 'felt' : 'soft';
-        return `<span class="ticker-vib hide-sm"><span class="ticker-vib-bar-wrap"><span class="ticker-vib-bar" style="width:${pct}%;background:${vibColor}"></span></span><span class="ticker-vib-val" style="color:${vibColor}">${vibLbl}</span></span>`;
+        if (vib == null) return '<span class="ticker-vib no-data hide-sm"><span class="ticker-vib-val">—</span></span>';
+        const VIB_LABELS = {
+          en: ['soft','soft','felt','shook','strong'],
+          pt: ['suave','suave','sentido','forte','intenso'],
+          fr: ['doux','doux','ressenti','fort','intense']
+        };
+        const lvl   = vib >= 80 ? 4 : vib >= 50 ? 3 : vib >= 20 ? 2 : 1;
+        const emoji = ['','🟢','🟡','🟠','🔴'][lvl];
+        const color = ['','#4ade80','#fbbf24','#fb923c','#f87171'][lvl];
+        const lbl   = (VIB_LABELS[_lang] || VIB_LABELS.en)[lvl];
+        const filled = '█'.repeat(lvl);
+        const empty  = '░'.repeat(4 - lvl);
+        return `<span class="ticker-vib hide-sm"><span class="ticker-vib-row"><span class="ticker-vib-emoji">${emoji}</span><span class="ticker-vib-bars" style="color:${color}">${filled}<span style="color:rgba(240,237,232,.15)">${empty}</span></span></span><span class="ticker-vib-val" style="color:${color}">${lbl}</span></span>`;
       })()}
     </div>`;
   }).join('');
