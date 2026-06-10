@@ -257,6 +257,19 @@ nav {
 .hw-status.on   { color: #4ade80; }
 .hw-status.soon { color: #60a5fa; }
 .hw-status.plan { color: rgba(245,166,35,0.5); }
+.hw-status.done { color: #a78bfa; }
+.hw-item--new {
+  border-color: rgba(245,166,35,0.35);
+  background: rgba(245,166,35,0.03);
+  position: relative;
+}
+.hw-item--new::after {
+  content: 'NEW ✦';
+  position: absolute; top: 10px; right: 12px;
+  font-family: var(--mono); font-size: 8px; letter-spacing: .12em;
+  color: var(--amber); background: rgba(245,166,35,0.12);
+  padding: 2px 7px; border-radius: 3px;
+}
 
 /* ── PROJECT CARD ── */
 .project-section {
@@ -678,12 +691,12 @@ nav {
         <span class="hw-status on">● EN SERVICE</span>
       </div>
     </div>
-    <div class="hw-item">
+    <div class="hw-item hw-item--new">
       <span class="hw-icon">🔊</span>
       <div>
         <div class="hw-name">GAIN EXPRESS SPL Meter + ADS1115</div>
-        <div class="hw-desc">Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Tested on bench — outdoor deployment pending enclosure.</div>
-        <span class="hw-status soon">◎ TESTED · SOON IN SERVICE</span>
+        <div class="hw-desc">Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Live outdoors since June 2026 — measuring real SPL peaks during every aircraft pass.</div>
+        <span class="hw-status on">● EN SERVICE</span>
       </div>
     </div>
     <div class="hw-item">
@@ -694,12 +707,12 @@ nav {
         <span class="hw-status soon">◎ TESTED · SOON IN SERVICE</span>
       </div>
     </div>
-    <div class="hw-item">
+    <div class="hw-item hw-item--new">
       <span class="hw-icon">🌀</span>
       <div>
         <div class="hw-name">MPU-6050 Dual IMU — Vibration</div>
         <div class="hw-desc">Two accelerometers (AD0→GND + AD0→VCC, addresses 0x68/0x69) on the same I²C bus. Detects ground vibration from passing aircraft — a dimension beyond sound.</div>
-        <span class="hw-status soon">◎ TESTED · SOON IN SERVICE</span>
+        <span class="hw-status on">● EN SERVICE</span>
       </div>
     </div>
     <div class="hw-item">
@@ -714,8 +727,8 @@ nav {
       <span class="hw-icon">📦</span>
       <div>
         <div class="hw-name">Outdoor Plexiglass Enclosure</div>
-        <div class="hw-desc">Custom-cut 4mm PMMA box (20×40×30cm) with angled lid, ventilation holes, cable gland and internal shelf. Laser-cut at Fab Lab Lisbon.</div>
-        <span class="hw-status plan">◐ IN PROGRESS — June 2026</span>
+        <div class="hw-desc">Custom-cut 4mm PMMA box (20×40×30cm) with angled lid, ventilation holes, cable gland and internal shelf. Laser-cut at Fab Lab Lisbon — laser-engraved logo included.</div>
+        <span class="hw-status done">✓ COMPLETED — June 2026</span>
       </div>
     </div>
   </div>
@@ -850,14 +863,15 @@ const ABOUT_TRANSLATIONS = {
     hw_status_on: '● EM SERVIÇO',
     hw_status_soon: '◎ TESTADO · BREVEMENTE EM SERVIÇO',
     hw_status_plan: '◐ EM CURSO — Junho 2026',
+    hw_status_done: '✓ CONCLUÍDO — Junho 2026',
     hw_desc_1: 'Cérebro central — corre todos os serviços 24/7: descodificação ADS-B, gatilho de captura, pontuação YOLO, agendador, servidor admin Flask.',
     hw_desc_2: 'Dongle RTL-SDR a receber sinais ADS-B a 1090 MHz. Substituído em Junho de 2026 após falha térmica — agora equipado com dissipadores de calor.',
     hw_desc_3: 'Câmara 4K em streaming via RTSP. Apontada para a trajetória de aproximação do LPPT — cada frame analisada pelo YOLO v8 em tempo real.',
-    hw_desc_4: 'Medidor de nível sonoro profissional (30–130 dB). Testado em bancada — instalação exterior aguarda a caixa de proteção.',
+    hw_desc_4: 'Medidor de nível sonoro profissional (30–130 dB). Saída DC ligada ao ADS1115 ADC → I²C → Pi. Em serviço no exterior desde junho 2026 — mede picos SPL reais em cada passagem.',
     hw_desc_5: 'Monitorização de eCO₂ e TVOC. I²C → Pi. Testado e calibrado — entra em serviço com a caixa exterior.',
     hw_desc_6: 'Dois acelerómetros (AD0→GND + AD0→VCC, endereços 0x68/0x69) no mesmo barramento I²C. Deteta vibração provocada pelas aeronaves — uma dimensão para além do som.',
     hw_desc_7: 'Contador de partículas laser medindo PM1.0, PM2.5 e PM10 em tempo real. UART → Pi. Correlaciona cada passagem de aeronave com uma leitura concreta de qualidade do ar.',
-    hw_desc_8: 'Caixa PMMA de 4mm cortada à medida (20×40×30cm) com tampa inclinada, furos de ventilação, prensa-cabo e prateleira interna. Cortada a laser no Fab Lab Lisboa.',
+    hw_desc_8: 'Caixa PMMA de 4mm cortada à medida (20×40×30cm) com tampa inclinada, furos de ventilação, prensa-cabo e prateleira interna. Cortada e gravada a laser no Fab Lab Lisboa — concluída em junho 2026.',
     coming_label: "O que vem aí",
     coming_title: 'Melhorias<br><em>em curso</em>',
     coming_sub: 'A estação está em evolução contínua. Novo hardware e sensores estão a ser integrados para capturar ainda mais — desde análise de vibração e acústica industrial até comunicações ATC em directo e monitorização da qualidade do ar.',
@@ -909,14 +923,15 @@ const ABOUT_TRANSLATIONS = {
     hw_status_on: '● IN SERVICE',
     hw_status_soon: '◎ TESTED · SOON IN SERVICE',
     hw_status_plan: '◐ IN PROGRESS — June 2026',
+    hw_status_done: '✓ COMPLETED — June 2026',
     hw_desc_1: 'Central brain — runs all services 24/7: ADS-B decode, capture trigger, YOLO scoring, scheduler, Flask admin server.',
     hw_desc_2: 'RTL-SDR dongle receiving ADS-B signals at 1090 MHz. Replaced June 2026 after thermal failure — now fitted with heatsinks.',
     hw_desc_3: '4K camera streaming over RTSP. Aimed at the LPPT approach path — every frame analyzed by YOLO v8 in real time.',
-    hw_desc_4: 'Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Tested on bench — outdoor deployment pending enclosure.',
+    hw_desc_4: 'Professional sound level meter (30–130 dB). DC output wired to ADS1115 ADC → I²C → Pi. Live outdoors since June 2026 — measuring real SPL peaks during every aircraft pass.',
     hw_desc_5: 'eCO₂ and TVOC monitoring. I²C → Pi. Tested and calibrated — will go live with the outdoor enclosure.',
     hw_desc_6: 'Two accelerometers (AD0→GND + AD0→VCC, addresses 0x68/0x69) on the same I²C bus. Detects ground vibration from passing aircraft — a dimension beyond sound.',
     hw_desc_7: 'Laser particle counter measuring PM1.0, PM2.5 and PM10 in real time. UART → Pi. Correlates each aircraft pass with a concrete air quality reading.',
-    hw_desc_8: 'Custom-cut 4mm PMMA box (20×40×30cm) with angled lid, ventilation holes, cable gland and internal shelf. Laser-cut at Fab Lab Lisbon.',
+    hw_desc_8: 'Custom-cut 4mm PMMA box (20×40×30cm) with angled lid, ventilation holes, cable gland and internal shelf. Laser-cut and engraved at Fab Lab Lisbon — completed June 2026.',
     coming_label: "What's next",
     coming_title: 'Upgrades<br><em>in progress</em>',
     coming_sub: 'The station is continuously evolving. New hardware and sensors are being integrated to capture even more — from vibration analysis and industrial-grade acoustics to live ATC communications and air quality monitoring.',
@@ -951,11 +966,11 @@ const ABOUT_TRANSLATIONS = {
     hw_desc_1: 'Cerveau central — fait tourner tous les services 24/7 : décodage ADS-B, déclencheur de capture, scoring YOLO, planificateur, serveur admin Flask.',
     hw_desc_2: 'Dongle RTL-SDR recevant les signaux ADS-B à 1090 MHz. Remplacé en juin 2026 après une défaillance thermique — équipé de dissipateurs de chaleur.',
     hw_desc_3: 'Caméra 4K en streaming RTSP. Pointée sur la trajectoire d\'approche de LPPT — chaque image analysée par YOLO v8 en temps réel.',
-    hw_desc_4: 'Sonomètre professionnel (30–130 dB). Testé en laboratoire — déploiement extérieur en attente du boîtier de protection.',
+    hw_desc_4: 'Sonomètre professionnel (30–130 dB). Sortie DC câblée vers ADS1115 ADC → I²C → Pi. En service à l\'extérieur depuis juin 2026 — mesure les pics SPL réels à chaque passage.',
     hw_desc_5: 'Surveillance eCO₂ et TVOC. I²C → Pi. Testé et calibré — entre en service avec le boîtier extérieur.',
     hw_desc_6: 'Deux accéléromètres (AD0→GND + AD0→VCC, adresses 0x68/0x69) sur le même bus I²C. Détecte les vibrations au sol causées par les aéronefs — une dimension au-delà du son.',
     hw_desc_7: 'Compteur de particules laser mesurant PM1.0, PM2.5 et PM10 en temps réel. UART → Pi. Corrèle chaque passage d\'aéronef avec une mesure concrète de qualité de l\'air.',
-    hw_desc_8: 'Boîtier PMMA 4mm découpé sur mesure (20×40×30cm) avec couvercle incliné, orifices de ventilation, presse-étoupe et étagère interne. Découpé au laser au Fab Lab Lisboa.',
+    hw_desc_8: 'Boîtier PMMA 4mm découpé sur mesure (20×40×30cm) avec couvercle incliné, orifices de ventilation, presse-étoupe et étagère interne. Découpé et gravé au laser au Fab Lab Lisboa — terminé en juin 2026.',
     project_title: 'Une expérience personnelle au-dessus de Lisbonne',
     project_body: 'Lisbon Finals a commencé par une question simple : un Raspberry Pi sur une terrasse pourrait-il photographier automatiquement chaque avion — et le publier sur Instagram sans aucune intervention humaine ?<br><br>La réponse, après des mois d\'itération, est oui.',
     pipeline_label: 'Pipeline d\'automatisation complet · bout en bout · zéro déclencheur humain',
@@ -976,6 +991,7 @@ const ABOUT_TRANSLATIONS = {
     hw_status_on: '● EN SERVICE',
     hw_status_soon: '◎ TESTÉ · BIENTÔT EN SERVICE',
     hw_status_plan: '◐ EN COURS',
+    hw_status_done: '✓ TERMINÉ — Juin 2026',
     coming_label: 'Prochaines améliorations',
     coming_title: 'Améliorations<br><em>en cours</em>',
     coming_sub: 'La station évolue en permanence. De nouveaux matériels et capteurs sont intégrés pour capturer encore plus — de l\'analyse vibratoire à l\'acoustique industrielle, en passant par les communications ATC en direct et la surveillance de la qualité de l\'air.',
@@ -1062,6 +1078,8 @@ function applyLang(lang) {
   selAll('.hw-status.soon').forEach(el => { el.textContent = t.hw_status_soon; });
   const hwPlan = sel('.hw-status.plan');
   if (hwPlan) hwPlan.textContent = t.hw_status_plan;
+  const hwDone = sel('.hw-status.done');
+  if (hwDone) hwDone.textContent = t.hw_status_done;
   const hwDescs = selAll('.hw-desc');
   ['hw_desc_1','hw_desc_2','hw_desc_3','hw_desc_4','hw_desc_5','hw_desc_6','hw_desc_7','hw_desc_8'].forEach((k, i) => {
     if (hwDescs[i] && t[k]) hwDescs[i].textContent = t[k];
