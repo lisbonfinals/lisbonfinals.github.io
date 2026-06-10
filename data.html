@@ -160,18 +160,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   transition:background .15s;
 }
 .ticker-row:hover{background:rgba(245,166,35,.03);}
-.ticker-time{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.3);line-height:1.35;}
+.ticker-time{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.55);line-height:1.35;}
 .ticker-time strong{display:block;color:rgba(240,237,232,.55);font-size:10px;font-weight:500;}
 .ticker-flag{font-size:13px;}
 .ticker-callsign{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);}
-.ticker-airline{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px;}
-.ticker-route{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.25);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.ticker-phase{font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:rgba(240,237,232,.2);}
-.ticker-alt{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.25);text-align:right;line-height:1.4;}
-.ticker-alt strong{display:block;color:rgba(240,237,232,.45);font-size:10px;font-weight:500;}
+.ticker-airline{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.65);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px;}
+.ticker-route{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.45);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ticker-phase{font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:rgba(240,237,232,.45);}
+.ticker-alt{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.5);text-align:right;line-height:1.4;}
+.ticker-alt strong{display:block;color:rgba(240,237,232,.75);font-size:10px;font-weight:500;}
 .ticker-db{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;}
 .ticker-db.loud{color:var(--red);}
-.ticker-db.normal{color:rgba(240,237,232,.35);}
+.ticker-db.normal{color:rgba(240,237,232,.6);}
 .ticker-vib{display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-left:8px;min-width:64px;}
 .ticker-vib-bars{font-family:monospace;font-size:11px;letter-spacing:1px;line-height:1;}
 .ticker-vib-row{display:flex;align-items:center;gap:4px;}
@@ -660,12 +660,11 @@ function buildTicker(ticker) {
           fr: ['doux','doux','ressenti','fort','intense']
         };
         const lvl   = vib >= 80 ? 4 : vib >= 50 ? 3 : vib >= 20 ? 2 : 1;
-        const emoji = ['','🟢','🟡','🟠','🔴'][lvl];
-        const color = ['','#4ade80','#fbbf24','#fb923c','#f87171'][lvl];
+        const color = ['','rgba(74,222,128,.6)','rgba(251,191,36,.6)','rgba(251,146,60,.6)','rgba(248,113,113,.6)'][lvl];
         const lbl   = (VIB_LABELS[_lang] || VIB_LABELS.en)[lvl];
         const filled = '█'.repeat(lvl);
         const empty  = '░'.repeat(4 - lvl);
-        return `<span class="ticker-vib hide-sm"><span class="ticker-vib-row"><span class="ticker-vib-emoji">${emoji}</span><span class="ticker-vib-bars" style="color:${color}">${filled}<span style="color:rgba(240,237,232,.15)">${empty}</span></span></span><span class="ticker-vib-val" style="color:${color}">${lbl}</span></span>`;
+        return `<span class="ticker-vib hide-sm"><span class="ticker-vib-bars" style="color:${color}">${filled}<span style="color:rgba(240,237,232,.12)">${empty}</span></span><span class="ticker-vib-val" style="color:${color}">${lbl}</span></span>`;
       })()}
     </div>`;
   }).join('');
