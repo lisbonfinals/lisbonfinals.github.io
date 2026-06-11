@@ -469,6 +469,83 @@ nav {
 .wlive-compass { position:relative;width:36px;height:36px;border:1px solid var(--border);border-radius:50%;margin-top:4px; }
 .wlive-compass-needle { position:absolute;width:2px;height:14px;background:var(--amber);left:50%;top:4px;transform-origin:bottom center;transform:translateX(-50%); }
 .wlive-footer { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.18);line-height:1.7;border-top:1px solid var(--border);padding-top:16px; }
+
+/* ── AIR QUALITY SECTION ── */
+.aq-section {
+  padding:72px 48px; border-bottom:1px solid var(--border);
+  display:grid; grid-template-columns:1fr 480px; gap:80px; align-items:start;
+}
+.aq-eyebrow {
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:28px;
+}
+.aq-eyebrow::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
+.aq-title {
+  font-family:var(--sans);font-weight:800;font-size:clamp(26px,3vw,42px);
+  color:var(--white);letter-spacing:-.02em;line-height:1;margin-bottom:20px;
+}
+.aq-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.22);display:block; }
+.aq-body { font-size:14px;color:rgba(240,237,232,.38);line-height:1.75;margin-bottom:28px; }
+.aq-thresholds { display:flex;flex-direction:column;gap:6px;margin-top:4px; }
+.aq-thresh-row { display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28); }
+.aq-thresh-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+/* card */
+.aq-card {
+  background:#0d1117;border:1px solid var(--border);border-radius:4px;
+  padding:28px;position:relative;overflow:hidden;
+}
+.aq-card-header { display:flex;justify-content:space-between;align-items:center;margin-bottom:24px; }
+.aq-source { font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.25); }
+.aq-live-dot {
+  width:6px;height:6px;border-radius:50%;background:#4ade80;
+  box-shadow:0 0 6px #4ade80;animation:pulse-dot 2s ease-in-out infinite;
+}
+.aq-live-dot.pending { background:rgba(240,237,232,.2);box-shadow:none;animation:none; }
+.aq-hero-lbl { font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:6px; }
+.aq-hero { font-family:var(--mono);font-weight:400;font-size:58px;color:var(--white);letter-spacing:-.01em;line-height:1;margin-bottom:4px; }
+.aq-hero-unit { font-size:14px;color:rgba(240,237,232,.3);margin-left:4px; }
+.aq-index-badge {
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  padding:4px 10px;border-radius:3px;margin-bottom:24px;
+  background:rgba(240,237,232,.06);color:rgba(240,237,232,.4);
+}
+.aq-index-badge .aq-idx-dot { width:6px;height:6px;border-radius:50%; }
+/* AQI bar */
+.aq-bar-wrap { position:relative;margin-bottom:28px; }
+.aq-bar {
+  height:4px;border-radius:2px;
+  background:linear-gradient(to right,#4ade80 0%,#facc15 25%,#fb923c 50%,#ef4444 72%,#a855f7 100%);
+  opacity:.5;
+}
+.aq-needle {
+  position:absolute;top:-4px;width:2px;height:12px;background:var(--white);
+  border-radius:1px;transform:translateX(-50%);transition:left .6s ease;
+  box-shadow:0 0 4px rgba(255,255,255,.4);
+}
+.aq-bar-labels { display:flex;justify-content:space-between;margin-top:5px; }
+.aq-bar-lbl { font-family:var(--mono);font-size:7px;color:rgba(240,237,232,.2);letter-spacing:.05em; }
+/* grid PM1 PM2.5 PM10 */
+.aq-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px; }
+.aq-item-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:6px; }
+.aq-item-val { font-family:var(--mono);font-size:22px;font-weight:500;color:var(--white); }
+.aq-item-val.amber { color:var(--amber); }
+.aq-item-sub { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.22);margin-top:2px; }
+/* pending overlay */
+.aq-pending {
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;border-radius:3px;
+  background:rgba(245,166,35,.05);border:1px solid rgba(245,166,35,.12);
+  margin-top:0;
+}
+.aq-pending-dot {
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(245,166,35,.5);flex-shrink:0;
+  animation:pulse-dot 1.8s ease-in-out infinite;
+}
+.aq-pending-txt { font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:rgba(245,166,35,.6); }
+.aq-footer { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.18);line-height:1.7;border-top:1px solid var(--border);padding-top:14px;margin-top:20px; }
+
 /* old 4-card grid — kept for compat but hidden */
 .weather-grid { display:none; }
 .weather-card,.wc-icon,.wc-val,.wc-lbl,.wc-sub { display:none; }
@@ -618,6 +695,7 @@ footer {
   .explore-card { border-right:none; border-bottom:1px solid var(--border); }
   .runway-strip { padding:0 20px; }
   .weather-section { padding:48px 20px; grid-template-columns:1fr; }
+  .aq-section { padding:48px 20px; grid-template-columns:1fr; }
   .stats-row { grid-template-columns:1fr 1fr; }
   .stat-cell { padding:20px 20px; }
   .section-header { padding:36px 20px 28px; }
@@ -879,6 +957,66 @@ footer {
 <span id="rs-peak"   style="display:none"></span>
 <span id="rs-updated" style="display:none"></span>
 
+<!-- AIR QUALITY SECTION -->
+<section class="aq-section" id="air-quality">
+  <div>
+    <div class="aq-eyebrow">Outdoor monitoring</div>
+    <h2 class="aq-title">Air quality<br><em>at the terrace.</em></h2>
+    <p class="aq-body">Every aircraft that passes over this terrace burns Jet A-1 fuel — releasing ultrafine particles directly into the approach corridor. The PMS5003 laser particle counter measures PM1.0, PM2.5 and PM10 in real time, correlating each reading with the passing flight. A concrete answer to a question nobody else is asking here.</p>
+    <div class="aq-thresholds">
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#4ade80"></div>Good · 0–10 µg/m³</div>
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#facc15"></div>Fair · 10–20 µg/m³</div>
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#fb923c"></div>Moderate · 20–25 µg/m³</div>
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#ef4444"></div>Poor · 25–50 µg/m³</div>
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#a855f7"></div>Very poor · &gt;50 µg/m³</div>
+    </div>
+  </div>
+  <div class="aq-card">
+    <div class="aq-card-header">
+      <div class="aq-source">PMS5003 · Outdoor station</div>
+      <div class="aq-live-dot pending" id="aq-dot"></div>
+    </div>
+    <div class="aq-hero-lbl">PM2.5 — Fine particles</div>
+    <div class="aq-hero"><span id="aq-pm25-hero">—</span><span class="aq-hero-unit">µg/m³</span></div>
+    <div class="aq-index-badge" id="aq-badge">
+      <div class="aq-idx-dot" id="aq-badge-dot" style="background:rgba(240,237,232,.2)"></div>
+      <span id="aq-badge-lbl">Sensor pending</span>
+    </div>
+    <div class="aq-bar-wrap">
+      <div class="aq-bar"></div>
+      <div class="aq-needle" id="aq-needle" style="left:0%"></div>
+    </div>
+    <div class="aq-bar-labels">
+      <span class="aq-bar-lbl">0</span>
+      <span class="aq-bar-lbl">25</span>
+      <span class="aq-bar-lbl">50</span>
+      <span class="aq-bar-lbl">75+</span>
+    </div>
+    <div class="aq-grid">
+      <div>
+        <div class="aq-item-lbl">PM1.0</div>
+        <div class="aq-item-val" id="aq-pm1">—</div>
+        <div class="aq-item-sub">µg/m³</div>
+      </div>
+      <div>
+        <div class="aq-item-lbl">PM2.5</div>
+        <div class="aq-item-val amber" id="aq-pm25">—</div>
+        <div class="aq-item-sub">µg/m³</div>
+      </div>
+      <div>
+        <div class="aq-item-lbl">PM10</div>
+        <div class="aq-item-val" id="aq-pm10">—</div>
+        <div class="aq-item-sub">µg/m³</div>
+      </div>
+    </div>
+    <div class="aq-pending" id="aq-pending">
+      <div class="aq-pending-dot"></div>
+      <div class="aq-pending-txt">Sensor coming online — PMS5003 installation in progress</div>
+    </div>
+    <div class="aq-footer">Source: PMS5003 · LPPT approach corridor · Lisbon, Portugal</div>
+  </div>
+</section>
+
 <!-- EXPLORE BAND -->
 <div class="explore-band">
   <a href="/data.html" class="explore-card">
@@ -1082,6 +1220,54 @@ function buildDots(){
   });
 }
 
+/* ── AIR QUALITY ── */
+function _updateAirQuality(d){
+  var aq = d.air_quality || {};
+  var pm1  = aq.pm1  != null ? aq.pm1  : (d.pm1  != null ? d.pm1  : null);
+  var pm25 = aq.pm25 != null ? aq.pm25 : (d.pm25 != null ? d.pm25 : null);
+  var pm10 = aq.pm10 != null ? aq.pm10 : (d.pm10 != null ? d.pm10 : null);
+  var pending = pm25 == null;
+  var dot  = document.getElementById('aq-dot');
+  var pend = document.getElementById('aq-pending');
+  if(pending){
+    if(dot)  { dot.classList.add('pending'); }
+    if(pend) { pend.style.display='flex'; }
+    return;
+  }
+  if(pend) pend.style.display='none';
+  if(dot)  dot.classList.remove('pending');
+  /* PM values */
+  var h = document.getElementById('aq-pm25-hero');
+  if(h) h.textContent = pm25.toFixed(1);
+  var p1 = document.getElementById('aq-pm1');
+  if(p1) p1.textContent = pm1 != null ? pm1.toFixed(1) : '—';
+  var p25 = document.getElementById('aq-pm25');
+  if(p25) p25.textContent = pm25.toFixed(1);
+  var p10 = document.getElementById('aq-pm10');
+  if(p10) p10.textContent = pm10 != null ? pm10.toFixed(1) : '—';
+  /* AQI label + colour */
+  var lvls = [
+    {max:10,  lbl:'Good',      col:'#4ade80'},
+    {max:20,  lbl:'Fair',      col:'#facc15'},
+    {max:25,  lbl:'Moderate',  col:'#fb923c'},
+    {max:50,  lbl:'Poor',      col:'#ef4444'},
+    {max:75,  lbl:'Very poor', col:'#a855f7'},
+    {max:9999,lbl:'Hazardous', col:'#1e1e2e'}
+  ];
+  var lvl = lvls[lvls.length-1];
+  for(var i=0;i<lvls.length;i++){ if(pm25 <= lvls[i].max){ lvl=lvls[i]; break; } }
+  var badge = document.getElementById('aq-badge');
+  var bdot  = document.getElementById('aq-badge-dot');
+  var blbl  = document.getElementById('aq-badge-lbl');
+  if(bdot) bdot.style.background = lvl.col;
+  if(blbl) blbl.textContent = lvl.lbl;
+  if(badge) badge.style.borderColor = lvl.col+'44';
+  /* needle position — scale 0..75+ → 0..100% (clamped) */
+  var pct = Math.min(100, pm25 / 75 * 100);
+  var needle = document.getElementById('aq-needle');
+  if(needle) needle.style.left = pct.toFixed(1) + '%';
+}
+
 /* ── GIST DATA ── */
 fetch('https://api.github.com/gists/' + GIST_ID)
   .then(function(r){ return r.json(); })
@@ -1097,6 +1283,7 @@ fetch('https://api.github.com/gists/' + GIST_ID)
       .then(function(r){ return r && r.json(); })
       .then(function(d){
         if(!d) return;
+        _updateAirQuality(d);
         var s = d.stats || {};
         /* store monthly rankings for badge */
         window._monthlyQuietest = (d.monthly && d.monthly.quietest_airline) || s.quietest_airline || '';
