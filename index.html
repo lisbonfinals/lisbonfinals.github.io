@@ -550,6 +550,26 @@ nav {
 .weather-grid { display:none; }
 .weather-card,.wc-icon,.wc-val,.wc-lbl,.wc-sub { display:none; }
 
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  position: relative;
+  height: 1px;
+  margin: 0 80px;
+  background: linear-gradient(to right, transparent, rgba(240,237,232,.08) 25%, rgba(240,237,232,.08) 75%, transparent);
+}
+.section-divider::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 1px;
+  background: var(--amber);
+  opacity: .35;
+}
+@media(max-width:768px){ .section-divider { margin: 0 24px; } }
+
 /* ── STATS ROW ── */
 .stats-row {
   display:grid;grid-template-columns:repeat(4,1fr);
@@ -822,6 +842,8 @@ footer {
     <div class="stat-sub">autonomous · 24/7</div>
   </div>
 </div>
+
+<div class="section-divider"></div>
 
 <!-- STATION CONDITIONS -->
 <div class="weather-section">
