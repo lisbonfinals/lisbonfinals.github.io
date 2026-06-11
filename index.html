@@ -981,10 +981,10 @@ footer {
 <!-- AIR QUALITY SECTION -->
 <section class="aq-section" id="air-quality">
   <div>
-    <div class="aq-eyebrow">Outdoor monitoring</div>
-    <h2 class="aq-title">Air quality<br><em>at the terrace.</em></h2>
-    <p class="aq-body">Every aircraft that passes over this terrace burns Jet A-1 fuel — releasing ultrafine particles directly into the approach corridor. The PMS5003 laser particle counter measures PM1.0, PM2.5 and PM10 in real time, correlating each reading with the passing flight. A concrete answer to a question nobody else is asking here.</p>
-    <div class="aq-thresholds">
+    <div class="aq-eyebrow" id="aq-eyebrow">Outdoor monitoring</div>
+    <h2 class="aq-title" id="aq-title-el">Air quality<br><em>at the terrace.</em></h2>
+    <p class="aq-body" id="aq-body-el">Every aircraft that passes over this terrace burns Jet A-1 fuel — releasing ultrafine particles directly into the approach corridor. The PMS5003 laser particle counter measures PM1.0, PM2.5 and PM10 in real time, correlating each reading with the passing flight. A concrete answer to a question nobody else is asking here.</p>
+    <div class="aq-thresholds" id="aq-thresholds">
       <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#4ade80"></div>Good · 0–10 µg/m³</div>
       <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#facc15"></div>Fair · 10–20 µg/m³</div>
       <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#fb923c"></div>Moderate · 20–25 µg/m³</div>
@@ -994,10 +994,10 @@ footer {
   </div>
   <div class="aq-card">
     <div class="aq-card-header">
-      <div class="aq-source">PMS5003 · Outdoor station</div>
+      <div class="aq-source" id="aq-source-el">PMS5003 · Outdoor station</div>
       <div class="aq-live-dot pending" id="aq-dot"></div>
     </div>
-    <div class="aq-hero-lbl">PM2.5 — Fine particles</div>
+    <div class="aq-hero-lbl" id="aq-hero-lbl">PM2.5 — Fine particles</div>
     <div class="aq-hero"><span id="aq-pm25-hero">—</span><span class="aq-hero-unit">µg/m³</span></div>
     <div class="aq-index-badge" id="aq-badge">
       <div class="aq-idx-dot" id="aq-badge-dot" style="background:rgba(240,237,232,.2)"></div>
@@ -1032,9 +1032,9 @@ footer {
     </div>
     <div class="aq-pending" id="aq-pending">
       <div class="aq-pending-dot"></div>
-      <div class="aq-pending-txt">Sensor coming online — PMS5003 installation in progress</div>
+      <div class="aq-pending-txt" id="aq-pending-txt">Sensor coming online — PMS5003 installation in progress</div>
     </div>
-    <div class="aq-footer">Source: PMS5003 · LPPT approach corridor · Lisbon, Portugal</div>
+    <div class="aq-footer" id="aq-footer-el">Source: PMS5003 · LPPT approach corridor · Lisbon, Portugal</div>
   </div>
 </section>
 
@@ -1267,13 +1267,14 @@ function _updateAirQuality(d){
   var p10 = document.getElementById('aq-pm10');
   if(p10) p10.textContent = pm10 != null ? pm10.toFixed(1) : '—';
   /* AQI label + colour */
+  var _tl = (typeof INDEX_TRANSLATIONS !== 'undefined' && typeof _lang !== 'undefined') ? (INDEX_TRANSLATIONS[_lang] || INDEX_TRANSLATIONS['en']) : INDEX_TRANSLATIONS['en'];
   var lvls = [
-    {max:10,  lbl:'Good',      col:'#4ade80'},
-    {max:20,  lbl:'Fair',      col:'#facc15'},
-    {max:25,  lbl:'Moderate',  col:'#fb923c'},
-    {max:50,  lbl:'Poor',      col:'#ef4444'},
-    {max:75,  lbl:'Very poor', col:'#a855f7'},
-    {max:9999,lbl:'Hazardous', col:'#1e1e2e'}
+    {max:10,  lbl:_tl.aq_good||'Good',           col:'#4ade80'},
+    {max:20,  lbl:_tl.aq_fair||'Fair',            col:'#facc15'},
+    {max:25,  lbl:_tl.aq_moderate||'Moderate',    col:'#fb923c'},
+    {max:50,  lbl:_tl.aq_poor||'Poor',            col:'#ef4444'},
+    {max:75,  lbl:_tl.aq_very_poor||'Very poor',  col:'#a855f7'},
+    {max:9999,lbl:_tl.aq_hazardous||'Hazardous',  col:'#1e1e2e'}
   ];
   var lvl = lvls[lvls.length-1];
   for(var i=0;i<lvls.length;i++){ if(pm25 <= lvls[i].max){ lvl=lvls[i]; break; } }
@@ -1598,6 +1599,16 @@ var INDEX_TRANSLATIONS = {
     hero_w1: 'Every', hero_w2: 'plane.', hero_w3: 'Every ', hero_w4: 'And so much more.',
     stats_disclaimer: 'Depending on wind direction, this station captures either landing approaches or takeoffs — whichever phase passes over the terrace. One phase at a time. These figures reflect observed traffic, not total airport volume.',
     footer_copy: '© 2026 Lisbon Finals · Automated Aviation Intelligence · LPPT',
+    aq_eyebrow: 'Outdoor monitoring',
+    aq_title: 'Air quality<br><em>at the terrace.</em>',
+    aq_body: 'Every aircraft that passes over this terrace burns Jet A-1 fuel — releasing ultrafine particles directly into the approach corridor. The PMS5003 laser particle counter measures PM1.0, PM2.5 and PM10 in real time, correlating each reading with the passing flight. A concrete answer to a question nobody else is asking here.',
+    aq_thresh: ['Good · 0–10 µg/m³','Fair · 10–20 µg/m³','Moderate · 20–25 µg/m³','Poor · 25–50 µg/m³','Very poor · >50 µg/m³'],
+    aq_source: 'PMS5003 · Outdoor station',
+    aq_hero_lbl: 'PM2.5 — Fine particles',
+    aq_sensor_pending: 'Sensor pending',
+    aq_pending_txt: 'Sensor coming online — PMS5003 installation in progress',
+    aq_footer: 'Source: PMS5003 · LPPT approach corridor · Lisbon, Portugal',
+    aq_good: 'Good', aq_fair: 'Fair', aq_moderate: 'Moderate', aq_poor: 'Poor', aq_very_poor: 'Very poor', aq_hazardous: 'Hazardous',
   },
   pt: {
     hero_pill: 'Em directo · Rota de aproximação LPPT',
@@ -1655,6 +1666,16 @@ var INDEX_TRANSLATIONS = {
     footer_support: 'Apoiar o projecto',
     stats_disclaimer: 'Dependendo da direção do vento, esta estação capta aproximações ou descolagens — a fase que passa sobre a varanda. Uma fase de cada vez. Estes valores refletem o tráfego observado, não o volume total do aeroporto.',
     footer_copy: '© 2026 Lisbon Finals · Inteligência de Aviação Autónoma · LPPT',
+    aq_eyebrow: 'Monitorização exterior',
+    aq_title: 'Qualidade do ar<br><em>na varanda.</em>',
+    aq_body: 'Cada aeronave que passa sobre esta varanda queima combustível Jet A-1 — libertando partículas ultrafinas directamente no corredor de aproximação. O contador de partículas laser PMS5003 mede PM1.0, PM2.5 e PM10 em tempo real, correlacionando cada leitura com o voo que passa. Uma resposta concreta a uma pergunta que mais ninguém faz aqui.',
+    aq_thresh: ['Bom · 0–10 µg/m³','Razoável · 10–20 µg/m³','Moderado · 20–25 µg/m³','Mau · 25–50 µg/m³','Muito mau · >50 µg/m³'],
+    aq_source: 'PMS5003 · Estação exterior',
+    aq_hero_lbl: 'PM2.5 — Partículas finas',
+    aq_sensor_pending: 'Sensor pendente',
+    aq_pending_txt: 'Sensor a iniciar — instalação PMS5003 em curso',
+    aq_footer: 'Fonte: PMS5003 · Corredor de aproximação LPPT · Lisboa, Portugal',
+    aq_good: 'Bom', aq_fair: 'Razoável', aq_moderate: 'Moderado', aq_poor: 'Mau', aq_very_poor: 'Muito mau', aq_hazardous: 'Perigoso',
   },
   fr: {
     hero_pill: 'En direct · Trajectoire d\'approche LPPT',
@@ -1712,6 +1733,16 @@ var INDEX_TRANSLATIONS = {
     footer_support: 'Soutenir le projet',
     stats_disclaimer: 'Selon la direction du vent, cette station capte les approches ou les décollages — la phase qui survole la terrasse. Une seule phase à la fois. Ces chiffres reflètent le trafic observé, pas le volume total de l\'aéroport.',
     footer_copy: '© 2026 Lisbon Finals · Intelligence Aviation Autonome · LPPT',
+    aq_eyebrow: 'Surveillance extérieure',
+    aq_title: 'Qualité de l\'air<br><em>sur la terrasse.</em>',
+    aq_body: 'Chaque aéronef qui passe au-dessus de cette terrasse brûle du carburant Jet A-1 — libérant des particules ultrafines directement dans le couloir d\'approche. Le compteur de particules laser PMS5003 mesure PM1.0, PM2.5 et PM10 en temps réel, corrélant chaque lecture avec le vol en cours. Une réponse concrète à une question que personne d\'autre ne pose ici.',
+    aq_thresh: ['Bon · 0–10 µg/m³','Correct · 10–20 µg/m³','Modéré · 20–25 µg/m³','Mauvais · 25–50 µg/m³','Très mauvais · >50 µg/m³'],
+    aq_source: 'PMS5003 · Station extérieure',
+    aq_hero_lbl: 'PM2.5 — Particules fines',
+    aq_sensor_pending: 'Capteur en attente',
+    aq_pending_txt: 'Capteur en cours d\'initialisation — installation PMS5003 en cours',
+    aq_footer: 'Source : PMS5003 · Couloir d\'approche LPPT · Lisbonne, Portugal',
+    aq_good: 'Bon', aq_fair: 'Correct', aq_moderate: 'Modéré', aq_poor: 'Mauvais', aq_very_poor: 'Très mauvais', aq_hazardous: 'Dangereux',
   }
 };
 
@@ -1802,6 +1833,22 @@ function applyLang(lang) {
   if (wlLbls[1]) wlLbls[1].textContent = t.wlive_runway;
   if (wlLbls[2]) wlLbls[2].textContent = t.wlive_wdir;
   if (wlLbls[3]) wlLbls[3].textContent = t.wlive_vis;
+  // Air quality section
+  var aqEyebrow = el('aq-eyebrow'); if (aqEyebrow) aqEyebrow.textContent = t.aq_eyebrow;
+  var aqTitle = el('aq-title-el'); if (aqTitle) aqTitle.innerHTML = t.aq_title;
+  var aqBody = el('aq-body-el'); if (aqBody) aqBody.textContent = t.aq_body;
+  var aqThresh = el('aq-thresholds');
+  if (aqThresh && t.aq_thresh) {
+    var colors = ['#4ade80','#facc15','#fb923c','#ef4444','#a855f7'];
+    aqThresh.innerHTML = t.aq_thresh.map(function(lbl, i) {
+      return '<div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:'+colors[i]+'"></div>'+lbl+'</div>';
+    }).join('');
+  }
+  var aqSrc = el('aq-source-el'); if (aqSrc) aqSrc.textContent = t.aq_source;
+  var aqHeroLbl = el('aq-hero-lbl'); if (aqHeroLbl) aqHeroLbl.textContent = t.aq_hero_lbl;
+  var aqBadgeLbl = el('aq-badge-lbl'); if (aqBadgeLbl && aqBadgeLbl.textContent === INDEX_TRANSLATIONS['en'].aq_sensor_pending || (aqBadgeLbl && aqBadgeLbl.textContent === INDEX_TRANSLATIONS['pt'].aq_sensor_pending) || (aqBadgeLbl && aqBadgeLbl.textContent === INDEX_TRANSLATIONS['fr'].aq_sensor_pending)) aqBadgeLbl.textContent = t.aq_sensor_pending;
+  var aqPendTxt = el('aq-pending-txt'); if (aqPendTxt) aqPendTxt.textContent = t.aq_pending_txt;
+  var aqFooter = el('aq-footer-el'); if (aqFooter) aqFooter.textContent = t.aq_footer;
   // Explore cards
   var ecCards = qa('.explore-card');
   var ecData = [
