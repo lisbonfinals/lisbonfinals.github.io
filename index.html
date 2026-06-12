@@ -381,7 +381,7 @@ nav {
   font-family:var(--mono);font-weight:500;font-size:22px;
   color:rgba(147,180,220,.8);letter-spacing:.02em;margin-bottom:4px;
 }
-.ls-score-num { font-family:var(--mono);font-weight:500;font-size:36px;color:var(--amber);letter-spacing:.02em; }
+.ls-score-num { font-family:var(--mono);font-weight:500;font-size:22px;color:var(--amber);letter-spacing:.02em; }
 .ls-score-max { font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.22); }
 .ls-score-detail { margin-left:12px; }
 .ls-score-lbl { font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.28); }
@@ -393,6 +393,23 @@ nav {
 }
 .ls-ig-link::after { content:'→'; }
 .ls-ig-link:hover { color:var(--amber); }
+
+/* ── SECTION SENSORS LEGEND ── */
+.section-sensors { display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px; }
+.ss-item { display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.32);letter-spacing:.06em; }
+.ss-dot { width:6px;height:6px;border-radius:50%;flex-shrink:0; }
+.ss-photo { background:rgba(147,180,220,.75); }
+.ss-db    { background:var(--amber); }
+.ss-vib   { background:#4ade80; }
+.ss-sep   { color:rgba(240,237,232,.15);font-family:var(--mono);font-size:9px; }
+
+/* ── VIBRATION BAR (latest shot) ── */
+.ls-vib-row { border-top:1px solid var(--border);padding-top:18px;margin-bottom:0; }
+.ls-vib-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:8px; }
+.ls-vib-inner { display:flex;align-items:center;gap:10px; }
+.ls-vib-bar-wrap { flex:1;height:7px;background:rgba(240,237,232,.06);border-radius:2px;overflow:hidden; }
+.ls-vib-bar { height:100%;background:var(--amber);border-radius:2px;transition:width .6s ease;width:0%; }
+.ls-vib-val { font-family:var(--mono);font-size:11px;font-weight:500;color:var(--amber);min-width:56px;text-align:right; }
 
 /* ── GALLERY STRIP ── */
 .gallery-strip { display:grid;grid-template-columns:repeat(3,1fr);gap:3px; }
@@ -915,6 +932,13 @@ footer {
 <div class="section-header">
   <div class="section-eyebrow">Latest captures</div>
   <div class="section-title">Live<em>from the terrace</em></div>
+  <div class="section-sensors">
+    <span class="ss-item"><span class="ss-dot ss-photo"></span><span id="ss-photo-lbl">Photo — YOLO scored by AI</span></span>
+    <span class="ss-sep">·</span>
+    <span class="ss-item"><span class="ss-dot ss-db"></span><span id="ss-db-lbl">Sound — peak in dB</span></span>
+    <span class="ss-sep">·</span>
+    <span class="ss-item"><span class="ss-dot ss-vib"></span><span id="ss-vib-lbl">Vibration — MPU-6050 accelerometer</span></span>
+  </div>
 </div>
 
 <!-- LATEST SHOT -->
@@ -948,6 +972,13 @@ footer {
       <div>
         <div class="ls-stat-val" id="ls-aircraft">—</div>
         <div class="ls-stat-lbl">Aircraft type</div>
+      </div>
+    </div>
+    <div class="ls-vib-row" id="ls-vib-row" style="display:none;margin-bottom:20px;">
+      <div class="ls-vib-lbl" id="ls-vib-lbl">Vibration peak</div>
+      <div class="ls-vib-inner">
+        <div class="ls-vib-bar-wrap"><div class="ls-vib-bar" id="ls-vib-bar"></div></div>
+        <div class="ls-vib-val" id="ls-vib-val">—</div>
       </div>
     </div>
     <div class="ls-score-row">
@@ -1414,6 +1445,15 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     set('ls-db',       fNoise(lf) ? Math.round(fNoise(lf))+' dB' : '—');
     set('ls-speed',    fSpeed(lf) ? Math.round(fSpeed(lf))+' kt' : '—');
     set('ls-aircraft', lf.aircraft_type||'—');
+    /* vibration bar */
+    var vib = lf.vibration_peak != null ? lf.vibration_peak : null;
+    var vibRow = el('ls-vib-row');
+    if (vib != null && vibRow) {
+      var vibPct = Math.min(100, (vib / 1023) * 100).toFixed(1);
+      var vibBar = el('ls-vib-bar'); if (vibBar) vibBar.style.width = vibPct + '%';
+      var vibVal = el('ls-vib-val'); if (vibVal) vibVal.textContent = Math.round(vib) + ' mg';
+      vibRow.style.display = 'block';
+    }
     var sc = lf.score != null ? lf.score : (lf.yolo_score != null ? lf.yolo_score : null);
     set('ls-score', sc !== null ? parseFloat(sc).toFixed(1) : '—');
     var tsField = lf.timestamp || lf.published_at;
@@ -1567,6 +1607,10 @@ var INDEX_TRANSLATIONS = {
     ls_published: 'Published to @lisbon.finals',
     ls_today_lbl: 'Flights today',
     ls_ig_link: 'View on Instagram',
+    ls_vib_lbl: 'Vibration peak',
+    ss_photo: 'Photo — YOLO scored by AI',
+    ss_db: 'Sound — peak in dB',
+    ss_vib: 'Vibration — MPU-6050 accelerometer',
     ticker_lbl: 'Live Feed',
     wx_eyebrow: 'Atmospheric conditions',
     wx_title: 'The wind<br><em>decides everything.</em>',
@@ -1635,6 +1679,10 @@ var INDEX_TRANSLATIONS = {
     ls_published: 'Publicado em @lisbon.finals',
     ls_today_lbl: 'Voos hoje',
     ls_ig_link: 'Ver no Instagram',
+    ls_vib_lbl: 'Pico de vibração',
+    ss_photo: 'Foto — avaliada por IA',
+    ss_db: 'Som — pico em dB',
+    ss_vib: 'Vibração — acelerómetro MPU-6050',
     ticker_lbl: 'Feed em directo',
     wx_eyebrow: 'Condições atmosféricas',
     wx_title: 'O vento<br><em>decide tudo.</em>',
@@ -1702,6 +1750,10 @@ var INDEX_TRANSLATIONS = {
     ls_published: 'Publié sur @lisbon.finals',
     ls_today_lbl: 'Vols aujourd\'hui',
     ls_ig_link: 'Voir sur Instagram',
+    ls_vib_lbl: 'Pic de vibration',
+    ss_photo: 'Photo — scorée par IA',
+    ss_db: 'Son — pic en dB',
+    ss_vib: 'Vibration — accéléromètre MPU-6050',
     ticker_lbl: 'Flux en direct',
     wx_eyebrow: 'Conditions atmosphériques',
     wx_title: 'Le vent<br><em>décide de tout.</em>',
@@ -1816,6 +1868,10 @@ function applyLang(lang) {
   var todayLbl = q('.ls-today-block .ls-score-lbl'); if (todayLbl) todayLbl.textContent = t.ls_today_lbl;
   var lsPub = el('ls-published'); if (lsPub) lsPub.textContent = t.ls_published;
   var igLink = q('.ls-ig-link'); if (igLink) igLink.textContent = t.ls_ig_link;
+  var vibLbl = el('ls-vib-lbl'); if (vibLbl) vibLbl.textContent = t.ls_vib_lbl;
+  var ssPhoto = el('ss-photo-lbl'); if (ssPhoto) ssPhoto.textContent = t.ss_photo;
+  var ssDb = el('ss-db-lbl'); if (ssDb) ssDb.textContent = t.ss_db;
+  var ssVib = el('ss-vib-lbl'); if (ssVib) ssVib.textContent = t.ss_vib;
   // Ticker label
   var tickerLbl = q('.ticker-label');
   if (tickerLbl) { var tdot = tickerLbl.querySelector('.ticker-live-dot'); tickerLbl.innerHTML = ''; if (tdot) tickerLbl.appendChild(tdot); tickerLbl.appendChild(document.createTextNode(t.ticker_lbl)); }
