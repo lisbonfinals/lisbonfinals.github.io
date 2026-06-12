@@ -379,7 +379,7 @@ nav {
 }
 .ls-today-num {
   font-family:var(--mono);font-weight:500;font-size:22px;
-  color:rgba(147,180,220,.8);letter-spacing:.02em;margin-bottom:4px;
+  color:rgba(240,237,232,.55);letter-spacing:.02em;margin-bottom:4px;
 }
 .ls-score-num { font-family:var(--mono);font-weight:500;font-size:22px;color:var(--amber);letter-spacing:.02em; }
 .ls-score-max { font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.22); }
@@ -394,11 +394,17 @@ nav {
 .ls-ig-link::after { content:'→'; }
 .ls-ig-link:hover { color:var(--amber); }
 
+/* ── SECTION BODY ── */
+.section-body {
+  font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.4);
+  line-height:1.85;max-width:640px;margin-top:18px;letter-spacing:.01em;
+}
+
 /* ── SECTION SENSORS LEGEND ── */
 .section-sensors { display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px; }
 .ss-item { display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.32);letter-spacing:.06em; }
 .ss-dot { width:6px;height:6px;border-radius:50%;flex-shrink:0; }
-.ss-photo { background:rgba(147,180,220,.75); }
+.ss-photo { background:var(--amber); }
 .ss-db    { background:var(--amber); }
 .ss-vib   { background:#4ade80; }
 .ss-sep   { color:rgba(240,237,232,.15);font-family:var(--mono);font-size:9px; }
@@ -932,13 +938,7 @@ footer {
 <div class="section-header">
   <div class="section-eyebrow">Latest captures</div>
   <div class="section-title">Live<em>from the terrace</em></div>
-  <div class="section-sensors">
-    <span class="ss-item"><span class="ss-dot ss-photo"></span><span id="ss-photo-lbl">Photo — YOLO scored by AI</span></span>
-    <span class="ss-sep">·</span>
-    <span class="ss-item"><span class="ss-dot ss-db"></span><span id="ss-db-lbl">Sound — peak in dB</span></span>
-    <span class="ss-sep">·</span>
-    <span class="ss-item"><span class="ss-dot ss-vib"></span><span id="ss-vib-lbl">Vibration — MPU-6050 accelerometer</span></span>
-  </div>
+  <p class="section-body" id="section-body-el">Each detected aircraft triggers the full pipeline. A YOLO-trained model evaluates every frame and scores the photo from 1 to 5 — only the best make it to Instagram, without any human input. Two sensors capture what the eye can't see: an ADS1115 circuit measures the peak decibel level as the aircraft passes, and an MPU-6050 accelerometer records the vibration pulse transmitted through the building structure. One plane. Three data points.</p>
 </div>
 
 <!-- LATEST SHOT -->
@@ -993,6 +993,13 @@ footer {
       </div>
     </div>
     <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="ls-ig-link" id="ls-ig-link">View on Instagram</a>
+    <div class="section-sensors" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+      <span class="ss-item"><span class="ss-dot ss-photo"></span><span id="ss-photo-lbl">Photo — YOLO scored by AI</span></span>
+      <span class="ss-sep">·</span>
+      <span class="ss-item"><span class="ss-dot ss-db"></span><span id="ss-db-lbl">Sound — peak in dB</span></span>
+      <span class="ss-sep">·</span>
+      <span class="ss-item"><span class="ss-dot ss-vib"></span><span id="ss-vib-lbl">Vibration — MPU-6050 accelerometer</span></span>
+    </div>
   </div>
 </div>
 
@@ -1611,6 +1618,7 @@ var INDEX_TRANSLATIONS = {
     ss_photo: 'Photo — YOLO scored by AI',
     ss_db: 'Sound — peak in dB',
     ss_vib: 'Vibration — MPU-6050 accelerometer',
+    section_body: 'Each detected aircraft triggers the full pipeline. A YOLO-trained model evaluates every frame and scores the photo from 1 to 5 — only the best make it to Instagram, without any human input. Two sensors capture what the eye can\'t see: an ADS1115 circuit measures the peak decibel level as the aircraft passes, and an MPU-6050 accelerometer records the vibration pulse transmitted through the building structure. One plane. Three data points.',
     ticker_lbl: 'Live Feed',
     wx_eyebrow: 'Atmospheric conditions',
     wx_title: 'The wind<br><em>decides everything.</em>',
@@ -1683,6 +1691,7 @@ var INDEX_TRANSLATIONS = {
     ss_photo: 'Foto — avaliada por IA',
     ss_db: 'Som — pico em dB',
     ss_vib: 'Vibração — acelerómetro MPU-6050',
+    section_body: 'Cada aeronave detectada desencadeia o pipeline completo. Um modelo treinado em YOLO avalia cada fotograma e atribui uma pontuação de 1 a 5 — só as melhores chegam ao Instagram, sem qualquer intervenção humana. Dois sensores capturam o que o olho não vê: um circuito ADS1115 mede o pico de decibéis no momento da passagem, e um acelerómetro MPU-6050 regista o pulso de vibração transmitido pela estrutura do edifício. Um avião. Três dados.',
     ticker_lbl: 'Feed em directo',
     wx_eyebrow: 'Condições atmosféricas',
     wx_title: 'O vento<br><em>decide tudo.</em>',
@@ -1754,6 +1763,7 @@ var INDEX_TRANSLATIONS = {
     ss_photo: 'Photo — scorée par IA',
     ss_db: 'Son — pic en dB',
     ss_vib: 'Vibration — accéléromètre MPU-6050',
+    section_body: 'Chaque aéronef détecté déclenche le pipeline complet. Un modèle entraîné sur YOLO évalue chaque image et attribue un score de 1 à 5 — seules les meilleures atteignent Instagram, sans aucune intervention humaine. Deux capteurs saisissent ce que l\'œil ne voit pas : un circuit ADS1115 mesure le pic en décibels au passage de l\'appareil, et un accéléromètre MPU-6050 enregistre le pulse de vibration transmis par la structure du bâtiment. Un avion. Trois données.',
     ticker_lbl: 'Flux en direct',
     wx_eyebrow: 'Conditions atmosphériques',
     wx_title: 'Le vent<br><em>décide de tout.</em>',
@@ -1856,6 +1866,7 @@ function applyLang(lang) {
   // Section header
   var eyebrow = q('.section-eyebrow'); if (eyebrow) eyebrow.textContent = t.sec_eyebrow;
   var sectTitle = q('.section-title'); if (sectTitle) sectTitle.innerHTML = t.sec_title;
+  var sectBody = el('section-body-el'); if (sectBody) sectBody.textContent = t.section_body;
   // Latest shot card
   var lsEyebrow = q('.ls-eyebrow'); if (lsEyebrow) lsEyebrow.textContent = t.ls_eyebrow;
   var lsBadge = q('.ls-photo-badge'); if (lsBadge) lsBadge.textContent = t.ls_badge;
