@@ -409,13 +409,19 @@ nav {
 .ss-vib   { background:#4ade80; }
 .ss-sep   { color:rgba(240,237,232,.15);font-family:var(--mono);font-size:9px; }
 
-/* ── VIBRATION BAR (latest shot) ── */
-.ls-vib-row { border-top:1px solid var(--border);padding-top:18px;margin-bottom:0; }
-.ls-vib-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.22);margin-bottom:8px; }
-.ls-vib-inner { display:flex;align-items:center;gap:10px; }
-.ls-vib-bar-wrap { flex:1;height:7px;background:rgba(240,237,232,.06);border-radius:2px;overflow:hidden; }
-.ls-vib-bar { height:100%;background:var(--amber);border-radius:2px;transition:width .6s ease;width:0%; }
-.ls-vib-val { font-family:var(--mono);font-size:11px;font-weight:500;color:var(--amber);min-width:56px;text-align:right; }
+/* ── VIBRATION PULSE (latest shot) ── */
+.ls-vib-row { border-top:1px solid var(--border);padding-top:16px;margin-bottom:18px; }
+.ls-vib-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:10px; }
+.ls-vib-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.28); }
+.ls-vib-badge { font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:3px; }
+.ls-vib-badge.soft   { color:#4ade80;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.25); }
+.ls-vib-badge.felt   { color:#f5a623;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3); }
+.ls-vib-badge.strong { color:#fb923c;background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.3); }
+.ls-vib-badge.intense{ color:#f87171;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.3); }
+.ls-vib-inner { display:flex;align-items:center;gap:12px; }
+.ls-vib-bar-wrap { flex:1;height:10px;background:rgba(240,237,232,.06);border-radius:3px;overflow:hidden; }
+.ls-vib-bar { height:100%;border-radius:3px;transition:width .8s cubic-bezier(.4,0,.2,1),background .8s ease;width:0%; }
+.ls-vib-val { font-family:var(--mono);font-size:14px;font-weight:600;min-width:62px;text-align:right; }
 
 /* ── GALLERY STRIP ── */
 .gallery-strip { display:grid;grid-template-columns:repeat(3,1fr);gap:3px; }
@@ -974,8 +980,11 @@ footer {
         <div class="ls-stat-lbl">Aircraft type</div>
       </div>
     </div>
-    <div class="ls-vib-row" id="ls-vib-row" style="display:none;margin-bottom:20px;">
-      <div class="ls-vib-lbl" id="ls-vib-lbl">Vibration peak</div>
+    <div class="ls-vib-row" id="ls-vib-row" style="display:none;">
+      <div class="ls-vib-header">
+        <div class="ls-vib-lbl">Vibration pulse — MPU-6050</div>
+        <span class="ls-vib-badge" id="ls-vib-badge">—</span>
+      </div>
       <div class="ls-vib-inner">
         <div class="ls-vib-bar-wrap"><div class="ls-vib-bar" id="ls-vib-bar"></div></div>
         <div class="ls-vib-val" id="ls-vib-val">—</div>
@@ -1452,14 +1461,27 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     set('ls-db',       fNoise(lf) ? Math.round(fNoise(lf))+' dB' : '—');
     set('ls-speed',    fSpeed(lf) ? Math.round(fSpeed(lf))+' kt' : '—');
     set('ls-aircraft', lf.aircraft_type||'—');
-    /* vibration bar */
+    /* vibration pulse */
     var vib = lf.vibration_peak != null ? lf.vibration_peak : null;
     var vibRow = el('ls-vib-row');
-    if (vib != null && vibRow) {
-      var vibPct = Math.min(100, (vib / 1023) * 100).toFixed(1);
-      var vibBar = el('ls-vib-bar'); if (vibBar) vibBar.style.width = vibPct + '%';
-      var vibVal = el('ls-vib-val'); if (vibVal) vibVal.textContent = Math.round(vib) + ' mg';
+    if (vib != null && vib > 0 && vibRow) {
+      // Échelle 0–150mg → 0–100% (cap à 100)
+      var vibPct = Math.min(100, (vib / 150) * 100);
+      // Seuils : soft <20 / felt 20-60 / strong 60-120 / intense >120
+      var vibLevel, vibColor;
+      if      (vib < 20)  { vibLevel='soft';    vibColor='#4ade80'; }
+      else if (vib < 60)  { vibLevel='felt';    vibColor='#f5a623'; }
+      else if (vib < 120) { vibLevel='strong';  vibColor='#fb923c'; }
+      else                { vibLevel='intense'; vibColor='#f87171'; }
+      var vibBar   = el('ls-vib-bar');
+      var vibVal   = el('ls-vib-val');
+      var vibBadge = el('ls-vib-badge');
+      if (vibBar)   { vibBar.style.width = vibPct + '%'; vibBar.style.background = vibColor; }
+      if (vibVal)   { vibVal.textContent = Math.round(vib) + ' mg'; vibVal.style.color = vibColor; }
+      if (vibBadge) { vibBadge.textContent = vibLevel; vibBadge.className = 'ls-vib-badge ' + vibLevel; }
       vibRow.style.display = 'block';
+    } else if (vibRow) {
+      vibRow.style.display = 'none';
     }
     var sc = lf.score != null ? lf.score : (lf.yolo_score != null ? lf.yolo_score : null);
     set('ls-score', sc !== null ? parseFloat(sc).toFixed(1) : '—');
