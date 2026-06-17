@@ -5,6 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lisbon Finals — Every plane over my Lisbon terrace</title>
 <meta name="description" content="An autonomous station on a Lisbon rooftop — photographing and measuring every aircraft on final approach to LPPT, 24/7.">
+<link rel="canonical" href="https://www.lisbonfinals.com/">
+
+<!-- Social sharing / OpenGraph — vignette au partage (WhatsApp, X, Instagram, etc.) -->
+<!-- og:image = photo Cloudinary représentative (1200×630). À remplacer par une cover fixe curatée si souhaité. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="Lisbon Finals — Every plane over my Lisbon terrace">
+<meta property="og:description" content="An autonomous station on a Lisbon rooftop — photographing and measuring every aircraft on final approach to LPPT, 24/7.">
+<meta property="og:url" content="https://www.lisbonfinals.com/">
+<meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lisbon Finals — Every plane over my Lisbon terrace">
+<meta name="twitter:description" content="Autonomous rooftop station photographing & measuring every aircraft on final approach to Lisbon Airport (LPPT).">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/","description":"An autonomous station on a Lisbon rooftop photographing and measuring every aircraft on final approach to Lisbon Airport (LPPT), 24/7.","inLanguage":["en","pt","fr"]}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -857,7 +880,7 @@ footer {
   <div class="stat-cell">
     <div class="stat-lbl">Photos captured</div>
     <div class="stat-num" id="stat-photos">—</div>
-    <div class="stat-sub">by AI · zero human</div>
+    <div class="stat-sub"><span id="stat-posts">—</span> <span class="stat-photos-subword">published · zero human</span></div>
   </div>
   <div class="stat-cell">
     <div class="stat-lbl">Peak noise recorded</div>
@@ -1361,14 +1384,13 @@ fetch('https://api.github.com/gists/' + GIST_ID)
         if(s.active_today != null){ set('rs-today', s.active_today+' flights today'); }
         if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); }
         /* ── stats row big numbers ── */
-        if(s.total_flights > 0){
-          var tf = s.total_flights.toLocaleString('en-US');
-          set('stat-flights', tf);
-        }
         var photoCount = s.total_photos || s.photos_published || 0;
-        if(photoCount > 0){
-          set('stat-photos', photoCount.toLocaleString('en-US'));
-        }
+        var postCount  = s.total_posts || 0;
+        // Valeurs brutes mémorisées → reformatées lors d'un changement de langue
+        window._rawStats = { flights: s.total_flights || 0, photos: photoCount, posts: postCount };
+        if(s.total_flights > 0){ set('stat-flights', nfmt(s.total_flights)); }
+        if(photoCount > 0){ set('stat-photos', nfmt(photoCount)); }
+        if(postCount > 0){ set('stat-posts', nfmt(postCount)); }
         if(s.peak_noise_db > 0){
           set('stat-peak', s.peak_noise_db.toFixed(1)+' dB');
           if(s.peak_callsign){ set('stat-peak-sub', s.peak_callsign); }
@@ -1620,7 +1642,7 @@ var INDEX_TRANSLATIONS = {
     stat_flights_lbl: 'Flights tracked',
     stat_flights_sub: 'since May 3, 2026',
     stat_photos_lbl: 'Photos captured',
-    stat_photos_sub: 'by AI · zero human',
+    stat_photos_sub: 'published · zero human',
     stat_peak_lbl: 'Peak noise recorded',
     stat_days_lbl: 'Days running',
     stat_days_sub: 'autonomous · 24/7',
@@ -1693,7 +1715,7 @@ var INDEX_TRANSLATIONS = {
     stat_flights_lbl: 'Voos registados',
     stat_flights_sub: 'desde 3 de Maio de 2026',
     stat_photos_lbl: 'Fotos capturadas',
-    stat_photos_sub: 'por IA · zero humano',
+    stat_photos_sub: 'publicadas · zero humano',
     stat_peak_lbl: 'Pico de ruído registado',
     stat_days_lbl: 'Dias em funcionamento',
     stat_days_sub: 'autónomo · 24/7',
@@ -1765,7 +1787,7 @@ var INDEX_TRANSLATIONS = {
     stat_flights_lbl: 'Vols enregistrés',
     stat_flights_sub: 'depuis le 3 mai 2026',
     stat_photos_lbl: 'Photos capturées',
-    stat_photos_sub: 'par IA · zéro humain',
+    stat_photos_sub: 'publiées · zéro humain',
     stat_peak_lbl: 'Pic sonore enregistré',
     stat_days_lbl: 'Jours en service',
     stat_days_sub: 'autonome · 24/7',
@@ -1832,6 +1854,13 @@ var INDEX_TRANSLATIONS = {
 
 var _lang = localStorage.getItem('lf_lang') || 'en';
 
+// Formatage des nombres selon la langue active : 10,715 (en) · 10 715 (pt/fr)
+var _NUM_LOCALE = { en: 'en-US', pt: 'pt-PT', fr: 'fr-FR' };
+function nfmt(n) {
+  try { return Number(n).toLocaleString(_NUM_LOCALE[_lang] || 'en-US'); }
+  catch (e) { return '' + n; }
+}
+
 function applyLang(lang) {
   if (!INDEX_TRANSLATIONS[lang]) return;
   _lang = lang;
@@ -1842,6 +1871,14 @@ function applyLang(lang) {
     var b = document.getElementById('lang-' + l);
     if (b) b.classList.toggle('active', l === lang);
   });
+
+  // Reformater les grands nombres dans la langue choisie (10,715 ↔ 10 715)
+  if (window._rawStats) {
+    var _rf = function(id, v){ var e = document.getElementById(id); if (e && v) e.textContent = nfmt(v); };
+    _rf('stat-flights', window._rawStats.flights);
+    _rf('stat-photos',  window._rawStats.photos);
+    _rf('stat-posts',   window._rawStats.posts);
+  }
 
   function q(s) { return document.querySelector(s); }
   function qa(s) { return document.querySelectorAll(s); }
@@ -1883,7 +1920,8 @@ function applyLang(lang) {
   // Stats subs (skip index 2 — dynamic peak sub)
   var statSubs = qa('.stats-row .stat-sub');
   if (statSubs[0]) statSubs[0].textContent = t.stat_flights_sub;
-  if (statSubs[1]) statSubs[1].textContent = t.stat_photos_sub;
+  // index 1 : ne pas écraser (contient le nombre #published) — on traduit juste le mot
+  var photoSubWord = q('.stat-photos-subword'); if (photoSubWord) photoSubWord.textContent = t.stat_photos_sub;
   if (statSubs[3]) statSubs[3].textContent = t.stat_days_sub;
   // Section header
   var eyebrow = q('.section-eyebrow'); if (eyebrow) eyebrow.textContent = t.sec_eyebrow;
