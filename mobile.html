@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Lisbon Finals · Mobile</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #060810;
+  --surface:   #0b0f18;
+  --surface2:  #111827;
+  --border:    #1c2a3a;
+  --amber:     #f5a623;
+  --amber-dim: rgba(245,166,35,.12);
+  --green:     #00ff88;
+  --green-dim: #003d20;
+  --red:       #ff3b5c;
+  --red-dim:   #4d0018;
+  --cyan:      #00d4ff;
+  --text:      #c8d8e8;
+  --text-dim:  #3d5a70;
+  --mono:      'JetBrains Mono', monospace;
+  --sans:      'Syne', sans-serif;
+  --nav-h:     64px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); }
+
+/* ── HEADER ── */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px; height: 52px;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+}
+.logo { font-size: 17px; font-weight: 800; color: #fff; }
+.logo span { color: var(--amber); }
+.logo-sub { font-size: 8px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-top: 1px; }
+.conn-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.conn-dot.online { background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* ── SCROLL CONTAINER ── */
+.pages { position: fixed; top: 52px; bottom: var(--nav-h); left: 0; right: 0; overflow: hidden; }
+.page { display: none; height: 100%; overflow-y: auto; padding: 14px 14px 8px; -webkit-overflow-scrolling: touch; }
+.page.active { display: block; }
+
+/* ── BOTTOM NAV ── */
+.nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  display: flex; height: var(--nav-h);
+  background: var(--surface); border-top: 1px solid var(--border);
+}
+.nav-btn {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; border: none; background: none; cursor: pointer; color: var(--text-dim);
+  font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: .5px;
+  text-transform: uppercase; transition: color .2s;
+}
+.nav-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.nav-btn.active { color: var(--amber); }
+
+/* ── SHARED COMPONENTS ── */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+.card-title { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.card-title::before { content: ''; width: 3px; height: 11px; background: var(--amber); border-radius: 2px; flex-shrink: 0; }
+.mono { font-family: var(--mono); }
+.amber { color: var(--amber); }
+.green { color: var(--green); }
+.red { color: var(--red); }
+.dim { color: var(--text-dim); }
+.row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+.row:last-child { border-bottom: none; padding-bottom: 0; }
+.row-label { font-size: 12px; font-weight: 600; }
+.row-val { font-family: var(--mono); font-size: 13px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+.badge-landing { background: rgba(0,212,255,.12); color: var(--cyan); }
+.badge-takeoff  { background: rgba(245,166,35,.12); color: var(--amber); }
+.btn { width: 100%; padding: 13px; border-radius: 10px; border: none; font-family: var(--sans); font-size: 14px; font-weight: 700; cursor: pointer; transition: all .15s; margin-bottom: 8px; letter-spacing: .3px; }
+.btn-amber { background: var(--amber); color: #000; }
+.btn-amber:active { background: #ffc84a; }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-outline:active { background: var(--surface2); }
+.btn-danger { background: var(--red-dim); color: var(--red); border: 1px solid rgba(255,59,92,.2); }
+.section-gap { height: 8px; }
+
+/* ── DASHBOARD ── */
+.spl-hero {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  padding: 20px 16px 16px; margin-bottom: 12px; text-align: center;
+}
+.spl-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+.spl-value { font-family: var(--mono); font-size: 56px; font-weight: 700; line-height: 1; color: var(--green); transition: color .3s; }
+.spl-value.warn { color: var(--amber); }
+.spl-value.danger { color: var(--red); }
+.spl-unit { font-size: 18px; color: var(--text-dim); margin-left: 4px; }
+.spl-bar-wrap { margin-top: 12px; height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+.spl-bar { height: 100%; border-radius: 2px; background: var(--green); transition: width .3s, background .3s; }
+
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; }
+.stat-value { font-family: var(--mono); font-size: 24px; font-weight: 700; color: #fff; }
+.stat-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-top: 4px; }
+
+.last-flight-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; margin-bottom: 12px;
+}
+.lf-photo { width: 100%; height: 160px; object-fit: cover; display: block; background: var(--surface2); }
+.lf-photo-placeholder { width: 100%; height: 120px; background: var(--surface2); display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-size: 11px; letter-spacing: 1px; }
+.lf-body { padding: 14px; }
+.lf-callsign { font-size: 22px; font-weight: 800; color: #fff; }
+.lf-airline { font-size: 12px; color: var(--text-dim); margin-top: 2px; margin-bottom: 10px; }
+.lf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.lf-item { background: var(--surface2); border-radius: 8px; padding: 8px; text-align: center; }
+.lf-item-val { font-family: var(--mono); font-size: 14px; font-weight: 600; color: #fff; }
+.lf-item-val.amber { color: var(--amber); }
+.lf-item-label { font-size: 8px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); margin-top: 3px; }
+
+/* ── GALLERY ── */
+.photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.photo-item { position: relative; border-radius: 10px; overflow: hidden; background: var(--surface2); cursor: pointer; }
+.photo-item img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+.photo-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 8px; background: linear-gradient(transparent, rgba(0,0,0,.8)); }
+.photo-callsign { font-size: 11px; font-weight: 700; color: #fff; }
+.photo-db { font-family: var(--mono); font-size: 10px; color: var(--amber); }
+.photo-modal { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.95); flex-direction: column; }
+.photo-modal.open { display: flex; }
+.photo-modal-img { flex: 1; object-fit: contain; width: 100%; }
+.photo-modal-info { padding: 16px; background: var(--surface); border-top: 1px solid var(--border); }
+.photo-modal-callsign { font-size: 20px; font-weight: 800; }
+.photo-modal-meta { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+.photo-modal-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; background: rgba(0,0,0,.6); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-size: 18px; }
+
+/* ── CAPTAIN'S LOG ── */
+.log-entry { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+.log-entry-date { font-family: var(--mono); font-size: 10px; color: var(--text-dim); margin-bottom: 6px; }
+.log-entry-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.log-entry-body { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+.log-entry-actions { display: flex; gap: 8px; margin-top: 10px; }
+.log-entry-btn { flex: 1; padding: 8px; border-radius: 8px; border: none; font-family: var(--sans); font-size: 11px; font-weight: 700; cursor: pointer; }
+.log-edit-btn { background: var(--surface2); color: var(--text); }
+.log-del-btn { background: var(--red-dim); color: var(--red); }
+.log-new-btn { width: 52px; height: 52px; border-radius: 50%; background: var(--amber); color: #000; border: none; font-size: 28px; font-weight: 300; cursor: pointer; position: fixed; bottom: calc(var(--nav-h) + 16px); right: 16px; z-index: 50; box-shadow: 0 4px 20px rgba(245,166,35,.4); display: flex; align-items: center; justify-content: center; }
+
+/* ── MODAL LOG EDITOR ── */
+.modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.8); align-items: flex-end; }
+.modal-overlay.open { display: flex; }
+.modal-sheet { background: var(--surface); border-radius: 20px 20px 0 0; padding: 20px 16px 32px; width: 100%; max-height: 85vh; overflow-y: auto; border-top: 1px solid var(--border); }
+.modal-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 20px; }
+.modal-title { font-size: 16px; font-weight: 800; margin-bottom: 16px; }
+.field-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; margin-top: 14px; }
+.field-input { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; color: var(--text); font-family: var(--sans); font-size: 14px; outline: none; -webkit-appearance: none; }
+.field-input:focus { border-color: var(--amber); }
+textarea.field-input { min-height: 100px; resize: vertical; }
+select.field-input { cursor: pointer; }
+
+/* ── ANALYTICS ── */
+.analytics-tabs { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+.analytics-tabs::-webkit-scrollbar { display: none; }
+.analytics-tab { flex-shrink: 0; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--border); background: none; color: var(--text-dim); font-family: var(--sans); font-size: 11px; font-weight: 600; cursor: pointer; transition: all .2s; }
+.analytics-tab.active { background: var(--amber); color: #000; border-color: var(--amber); }
+.chart-bar-wrap { margin-bottom: 6px; }
+.chart-bar-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px; }
+.chart-bar-label .dim { font-family: var(--mono); }
+.chart-bar-track { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+.chart-bar-fill { height: 100%; border-radius: 3px; background: var(--amber); transition: width .4s; }
+.big-num { font-family: var(--mono); font-size: 38px; font-weight: 700; color: #fff; }
+.big-num-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-top: 4px; }
+
+/* ── SETTINGS ── */
+.settings-section { margin-bottom: 6px; }
+.settings-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); padding: 10px 0 6px; }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 13px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 6px; }
+.toggle-title { font-size: 14px; font-weight: 600; }
+.toggle-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+.toggle { position: relative; width: 46px; height: 26px; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; inset: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 13px; cursor: pointer; transition: .3s; }
+.toggle-slider::before { content:''; position:absolute; width:20px; height:20px; left:2px; top:2px; background:#fff; border-radius:50%; transition:.3s; }
+.toggle input:checked + .toggle-slider { background: var(--amber); border-color: var(--amber); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(20px); background: #000; }
+.slider-row { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px; }
+.slider-row-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.slider-title { font-size: 13px; font-weight: 600; }
+.slider-val { font-family: var(--mono); font-size: 16px; font-weight: 600; color: var(--amber); }
+input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; background: var(--surface2); border-radius: 2px; outline: none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--amber); cursor: pointer; box-shadow: 0 0 8px rgba(245,166,35,.5); }
+.mode-selector { display: flex; gap: 6px; margin-bottom: 6px; }
+.mode-btn { flex: 1; padding: 11px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--text-dim); font-family: var(--sans); font-size: 12px; font-weight: 700; cursor: pointer; transition: all .2s; text-align: center; }
+.mode-btn.active { background: var(--amber-dim); color: var(--amber); border-color: var(--amber); }
+.save-feedback { text-align: center; font-size: 12px; color: var(--green); min-height: 20px; margin-top: 4px; font-family: var(--mono); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="logo">LISBON <span>FINALS</span></div>
+    <div class="logo-sub">LPPT · Station</div>
+  </div>
+  <div id="connDot" class="conn-dot"></div>
+</div>
+
+<!-- PAGES -->
+<div class="pages">
+
+  <!-- ── DASHBOARD ── -->
+  <div id="page-dash" class="page active">
+
+    <div class="spl-hero">
+      <div class="spl-label">Son live · dB SPL</div>
+      <div>
+        <span id="splVal" class="spl-value">—</span>
+        <span class="spl-unit">dB</span>
+      </div>
+      <div class="spl-bar-wrap">
+        <div id="splBar" class="spl-bar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div id="statFlights" class="stat-value">—</div>
+        <div class="stat-label">Vols aujourd'hui</div>
+      </div>
+      <div class="stat-card">
+        <div id="statPhotos" class="stat-value">—</div>
+        <div class="stat-label">Photos</div>
+      </div>
+      <div class="stat-card">
+        <div id="statArr" class="stat-value">—</div>
+        <div class="stat-label">Arrivées</div>
+      </div>
+      <div class="stat-card">
+        <div id="statDep" class="stat-value">—</div>
+        <div class="stat-label">Départs</div>
+      </div>
+    </div>
+
+    <div class="last-flight-card">
+      <div id="lfPhotoWrap">
+        <div class="lf-photo-placeholder">Aucune photo récente</div>
+      </div>
+      <div class="lf-body">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
+          <div id="lfCallsign" class="lf-callsign">—</div>
+          <span id="lfBadge" class="badge badge-landing">landing</span>
+          <span id="lfFlag" style="font-size:20px"></span>
+        </div>
+        <div id="lfAirline" class="lf-airline">—</div>
+        <div class="lf-grid">
+          <div class="lf-item">
+            <div id="lfAlt" class="lf-item-val">—</div>
+            <div class="lf-item-label">Altitude</div>
+          </div>
+          <div class="lf-item">
+            <div id="lfSpd" class="lf-item-val">—</div>
+            <div class="lf-item-label">Vitesse</div>
+          </div>
+          <div class="lf-item">
+            <div id="lfDb" class="lf-item-val amber">—</div>
+            <div class="lf-item-label">dB SPL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── GALLERY ── -->
+  <div id="page-gallery" class="page">
+    <div id="photoGrid" class="photo-grid"></div>
+    <div id="galleryLoader" style="text-align:center;padding:20px;color:var(--text-dim);font-size:12px;">Chargement...</div>
+  </div>
+
+  <!-- ── CAPTAIN'S LOG ── -->
+  <div id="page-log" class="page">
+    <div id="logList"></div>
+    <div id="logLoader" style="text-align:center;padding:20px;color:var(--text-dim);font-size:12px;">Chargement...</div>
+  </div>
+
+  <!-- ── ANALYTICS ── -->
+  <div id="page-analytics" class="page">
+    <div class="analytics-tabs">
+      <button class="analytics-tab active" onclick="switchAnalytics('today')">Aujourd'hui</button>
+      <button class="analytics-tab" onclick="switchAnalytics('week')">7 jours</button>
+      <button class="analytics-tab" onclick="switchAnalytics('month')">30 jours</button>
+    </div>
+    <div id="analyticsContent"></div>
+  </div>
+
+  <!-- ── SETTINGS ── -->
+  <div id="page-settings" class="page">
+
+    <div class="settings-label">Publication Instagram</div>
+    <div class="toggle-row">
+      <div>
+        <div class="toggle-title">Instagram</div>
+        <div class="toggle-sub" id="igStatusText">Chargement...</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="igToggle" onchange="toggleInstagram()">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="settings-label">Mode de publication</div>
+    <div class="mode-selector">
+      <button class="mode-btn" id="modeAuto" onclick="setMode('auto')">🤖 Auto</button>
+      <button class="mode-btn" id="modeValidation" onclick="setMode('validation')">✋ Validation</button>
+    </div>
+
+    <div class="section-gap"></div>
+    <div class="settings-label">Déclenchement sonore</div>
+
+    <div class="slider-row">
+      <div class="slider-row-header">
+        <div class="slider-title">✈ Seuil atterrissage</div>
+        <div class="slider-val"><span id="landingVal">—</span> dB</div>
+      </div>
+      <input type="range" id="landingSlider" min="43" max="110" step="1"
+             oninput="document.getElementById('landingVal').textContent=this.value">
+    </div>
+
+    <div class="slider-row">
+      <div class="slider-row-header">
+        <div class="slider-title">🛫 Seuil décollage</div>
+        <div class="slider-val"><span id="takeoffVal">—</span> dB</div>
+      </div>
+      <input type="range" id="takeoffSlider" min="43" max="110" step="1"
+             oninput="document.getElementById('takeoffVal').textContent=this.value">
+    </div>
+
+    <div class="slider-row">
+      <div class="slider-row-header">
+        <div class="slider-title">⏱ Fenêtre d'écoute</div>
+        <div class="slider-val"><span id="windowVal">—</span> s</div>
+      </div>
+      <input type="range" id="windowSlider" min="5" max="35" step="0.5"
+             oninput="document.getElementById('windowVal').textContent=this.value">
+    </div>
+
+    <button class="btn btn-amber" onclick="saveSettings()">Sauvegarder</button>
+    <div id="saveFeedback" class="save-feedback"></div>
+
+    <div class="section-gap"></div>
+    <div class="settings-label">Danger zone</div>
+    <button class="btn btn-danger" onclick="confirmRestart()">Redémarrer lisbon-main</button>
+
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="nav">
+  <button class="nav-btn active" id="nav-dash" onclick="goTo('dash')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12h2M20 12h2M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    Live
+  </button>
+  <button class="nav-btn" id="nav-gallery" onclick="goTo('gallery')">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    Galerie
+  </button>
+  <button class="nav-btn" id="nav-log" onclick="goTo('log')">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    Log
+  </button>
+  <button class="nav-btn" id="nav-analytics" onclick="goTo('analytics')">
+    <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    Stats
+  </button>
+  <button class="nav-btn" id="nav-settings" onclick="goTo('settings')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    Réglages
+  </button>
+</nav>
+
+<!-- PHOTO MODAL -->
+<div id="photoModal" class="photo-modal">
+  <span class="photo-modal-close" onclick="closePhotoModal()">×</span>
+  <img id="photoModalImg" class="photo-modal-img" src="" alt="">
+  <div class="photo-modal-info">
+    <div id="photoModalCallsign" class="photo-modal-callsign"></div>
+    <div id="photoModalMeta" class="photo-modal-meta"></div>
+  </div>
+</div>
+
+<!-- LOG EDITOR MODAL -->
+<div id="logModal" class="modal-overlay" onclick="closeLogModal(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div id="logModalTitle" class="modal-title">Nouvelle entrée</div>
+    <div class="field-label">Titre</div>
+    <input id="logTitle" class="field-input" type="text" placeholder="Titre de l'entrée">
+    <div class="field-label">Catégorie</div>
+    <select id="logCat" class="field-input">
+      <option value="ops">⚙️ Ops</option>
+      <option value="obs">🔭 Observation</option>
+      <option value="milestone">🏆 Milestone</option>
+      <option value="tech">🔧 Tech</option>
+      <option value="weather">🌦️ Météo</option>
+    </select>
+    <div class="field-label">Contenu</div>
+    <textarea id="logBody" class="field-input" placeholder="Contenu de l'entrée..."></textarea>
+    <div style="height:14px"></div>
+    <button class="btn btn-amber" onclick="saveLogEntry()">Enregistrer</button>
+    <button class="btn btn-outline" onclick="closeLogModal()">Annuler</button>
+  </div>
+</div>
+
+<!-- FAB Captain's Log -->
+<button class="log-new-btn" id="logFab" onclick="openLogModal()" style="display:none">+</button>
+
+<script>
+const PI = 'http://192.168.1.209:5000';
+let _currentPage = 'dash';
+let _editingLogId = null;
+let _analyticsRange = 'today';
+let _allFlights = [];
+
+// ── NAV ──────────────────────────────────────────────────────────────
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.getElementById('nav-' + page).classList.add('active');
+  document.getElementById('logFab').style.display = page === 'log' ? 'flex' : 'none';
+  _currentPage = page;
+  if (page === 'gallery' && !_galleryLoaded) loadGallery();
+  if (page === 'log' && !_logLoaded) loadLog();
+  if (page === 'analytics') loadAnalytics();
+  if (page === 'settings') loadSettings();
+}
+
+// ── API ───────────────────────────────────────────────────────────────
+async function api(path, method='GET', body=null) {
+  const opts = { method, headers: {'Content-Type':'application/json'} };
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(PI + path, opts);
+  return r.json();
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────────
+async function loadDash() {
+  try {
+    const [sound, stats, lastFlight] = await Promise.all([
+      api('/api/sound'),
+      api('/api/stats'),
+      api('/api/last-flight')
+    ]);
+    document.getElementById('connDot').classList.add('online');
+
+    // SPL depuis sound_live.json (ADS1115)
+    const spl = parseFloat(sound.spl_db || 0);
+    const splEl = document.getElementById('splVal');
+    splEl.textContent = spl.toFixed(1);
+    const pct = Math.max(0, Math.min(100, (spl - 34) / 96 * 100));
+    document.getElementById('splBar').style.width = pct + '%';
+    splEl.className = 'spl-value' + (spl >= 90 ? ' danger' : spl >= 75 ? ' warn' : '');
+    document.getElementById('splBar').style.background = spl >= 90 ? 'var(--red)' : spl >= 75 ? 'var(--amber)' : 'var(--green)';
+
+    // Stats du jour
+    const tod = stats.today || {};
+    document.getElementById('statFlights').textContent = tod.flights    ?? '—';
+    document.getElementById('statPhotos').textContent  = tod.photos     ?? '—';
+    document.getElementById('statArr').textContent     = tod.arrivals   ?? '—';
+    document.getElementById('statDep').textContent     = tod.departures ?? '—';
+
+    // Dernier vol depuis flights_db
+    const lf = lastFlight.flight;
+    if (lf) {
+      document.getElementById('lfCallsign').textContent = lf.callsign || '—';
+      const airline = lf.airline || lf.airline_name || '';
+      const acType  = lf.aircraft_type || '';
+      document.getElementById('lfAirline').textContent = [airline, acType].filter(Boolean).join(' · ') || '—';
+      document.getElementById('lfFlag').textContent    = lf.country_flag || lf.flag || '';
+      const altFt = lf.altitude_ft || lf.altitude;
+      document.getElementById('lfAlt').textContent = altFt ? Math.round(altFt * 0.3048) + 'm' : '—';
+      const spdKt = lf.speed_kt || lf.speed;
+      document.getElementById('lfSpd').textContent = spdKt ? Math.round(spdKt * 1.852) + 'km/h' : '—';
+      const db = lf.spl_db || lf.sound_db || lf.last_flight_db;
+      document.getElementById('lfDb').textContent = db ? Math.round(db) : '—';
+      const dir = lf.direction || lf.phase || '';
+      const isDepart = dir === 'depart' || dir.includes('takeoff') || dir.includes('climb');
+      const badge = document.getElementById('lfBadge');
+      badge.textContent = isDepart ? 'takeoff' : 'landing';
+      badge.className = 'badge ' + (isDepart ? 'badge-takeoff' : 'badge-landing');
+
+      // Photo du dernier vol
+      if (lf.photo_path) {
+        const fname = lf.photo_path.split('/').pop();
+        document.getElementById('lfPhotoWrap').innerHTML =
+          `<img class="lf-photo" src="${PI}/photos/${fname}" onerror="this.style.display='none'">`;
+      }
+    }
+  } catch(e) {
+    document.getElementById('connDot').classList.remove('online');
+  }
+}
+
+// ── GALLERY ───────────────────────────────────────────────────────────
+let _galleryLoaded = false;
+async function loadGallery() {
+  try {
+    const data = await api('/api/photos');
+    _galleryLoaded = true;
+    const photos = (data.photos || []).reverse().slice(0, 40);
+    _allFlights = photos;
+    const grid = document.getElementById('photoGrid');
+    document.getElementById('galleryLoader').style.display = 'none';
+    grid.innerHTML = photos.map((p, i) => `
+      <div class="photo-item" onclick="openPhoto(${i})">
+        <img src="${PI}/photos/${p.filename}" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-overlay">
+          <div class="photo-callsign">${p.callsign || '—'}</div>
+          <div class="photo-db">${p.spl_db ? Math.round(p.spl_db) + ' dB' : ''}</div>
+        </div>
+      </div>`).join('');
+  } catch(e) {
+    document.getElementById('galleryLoader').textContent = 'Erreur chargement';
+  }
+}
+
+function openPhoto(i) {
+  const p = _allFlights[i];
+  document.getElementById('photoModalImg').src = PI + '/photos/' + p.filename;
+  document.getElementById('photoModalCallsign').textContent = (p.callsign || '—') + ' ' + (p.airline_flag || '');
+  document.getElementById('photoModalMeta').textContent =
+    [p.airline, p.aircraft_type, p.spl_db ? Math.round(p.spl_db) + ' dB SPL' : '', p.altitude_m ? p.altitude_m + 'm' : ''].filter(Boolean).join(' · ');
+  document.getElementById('photoModal').classList.add('open');
+}
+function closePhotoModal() { document.getElementById('photoModal').classList.remove('open'); }
+
+// ── CAPTAIN'S LOG ─────────────────────────────────────────────────────
+let _logLoaded = false;
+let _logEntries = [];
+
+async function loadLog() {
+  try {
+    const data = await api('/api/journal');
+    _logLoaded = true;
+    _logEntries = data.entries || [];
+    document.getElementById('logLoader').style.display = 'none';
+    renderLog();
+  } catch(e) {
+    document.getElementById('logLoader').textContent = 'Erreur chargement';
+  }
+}
+
+function renderLog() {
+  const list = document.getElementById('logList');
+  if (!_logEntries.length) { list.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-dim);font-size:12px;">Aucune entrée</div>'; return; }
+  list.innerHTML = _logEntries.map(e => `
+    <div class="log-entry">
+      <div class="log-entry-date">${e.date || ''} · ${e.category || ''}</div>
+      <div class="log-entry-title">${e.title || ''}</div>
+      <div class="log-entry-body">${(e.body || '').substring(0, 120)}${(e.body||'').length > 120 ? '…' : ''}</div>
+      <div class="log-entry-actions">
+        <button class="log-entry-btn log-edit-btn" onclick="editLog('${e.id}')">✏️ Modifier</button>
+        <button class="log-entry-btn log-del-btn" onclick="deleteLog('${e.id}')">🗑 Supprimer</button>
+      </div>
+    </div>`).join('');
+}
+
+function openLogModal() {
+  _editingLogId = null;
+  document.getElementById('logModalTitle').textContent = 'Nouvelle entrée';
+  document.getElementById('logTitle').value = '';
+  document.getElementById('logBody').value = '';
+  document.getElementById('logCat').value = 'obs';
+  document.getElementById('logModal').classList.add('open');
+}
+
+function editLog(id) {
+  const e = _logEntries.find(x => x.id === id);
+  if (!e) return;
+  _editingLogId = id;
+  document.getElementById('logModalTitle').textContent = 'Modifier';
+  document.getElementById('logTitle').value = e.title || '';
+  document.getElementById('logBody').value = e.body || '';
+  document.getElementById('logCat').value = e.category || 'obs';
+  document.getElementById('logModal').classList.add('open');
+}
+
+function closeLogModal(e) {
+  if (!e || e.target === document.getElementById('logModal'))
+    document.getElementById('logModal').classList.remove('open');
+}
+
+async function saveLogEntry() {
+  const title = document.getElementById('logTitle').value.trim();
+  const body  = document.getElementById('logBody').value.trim();
+  const cat   = document.getElementById('logCat').value;
+  if (!title) return;
+  try {
+    if (_editingLogId) {
+      await api('/api/journal/' + _editingLogId, 'PUT', { title, body, category: cat });
+    } else {
+      await api('/api/journal', 'POST', { title, body, category: cat });
+    }
+    document.getElementById('logModal').classList.remove('open');
+    _logLoaded = false;
+    loadLog();
+  } catch(e) { alert('Erreur sauvegarde'); }
+}
+
+async function deleteLog(id) {
+  if (!confirm('Supprimer cette entrée ?')) return;
+  try {
+    await api('/api/journal/' + id, 'DELETE');
+    _logLoaded = false;
+    loadLog();
+  } catch(e) { alert('Erreur suppression'); }
+}
+
+// ── ANALYTICS ─────────────────────────────────────────────────────────
+async function loadAnalytics() {
+  try {
+    const stats = await api('/api/stats');
+    renderAnalytics(stats);
+  } catch(e) {}
+}
+
+function switchAnalytics(range) {
+  _analyticsRange = range;
+  document.querySelectorAll('.analytics-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  loadAnalytics();
+}
+
+function renderAnalytics(s) {
+  const src = _analyticsRange === 'today' ? (s.today || {}) : (s.total || {});
+  const total      = src.flights    || 0;
+  const arrivals   = src.arrivals   || 0;
+  const departures = src.departures || 0;
+  const photos     = src.photos     || 0;
+  const posts      = src.posts      || 0;
+  const tot = s.total || {};
+  const avgDb = tot.avg_db ? tot.avg_db.toFixed(1) : '—';
+  const maxDb = tot.max_db ? tot.max_db.toFixed(1) : '—';
+
+  const airlines = s.top_airlines || [];
+  const airlinesBars = airlines.slice(0, 6).map(a => {
+    const pct = airlines[0] ? Math.round(a.count / airlines[0].count * 100) : 0;
+    return `<div class="chart-bar-wrap">
+      <div class="chart-bar-label"><span>${a.name || a.airline || '—'}</span><span class="dim">${a.count}</span></div>
+      <div class="chart-bar-track"><div class="chart-bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('analyticsContent').innerHTML = `
+    <div class="card">
+      <div class="card-title">Totaux</div>
+      <div class="row"><span class="row-label">Vols total</span><span class="row-val">${total}</span></div>
+      <div class="row"><span class="row-label">Arrivées</span><span class="row-val">${arrivals}</span></div>
+      <div class="row"><span class="row-label">Départs</span><span class="row-val">${departures}</span></div>
+      <div class="row"><span class="row-label">Photos</span><span class="row-val">${photos}</span></div>
+      <div class="row"><span class="row-label">Posts Instagram</span><span class="row-val">${posts}</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Acoustique</div>
+      <div class="row"><span class="row-label">SPL moyen</span><span class="row-val amber">${avgDb} dB</span></div>
+      <div class="row"><span class="row-label">SPL max enregistré</span><span class="row-val amber">${maxDb} dB</span></div>
+    </div>
+    ${airlines.length ? `<div class="card"><div class="card-title">Top compagnies</div>${airlinesBars}</div>` : ''}
+  `;
+}
+
+// ── SETTINGS ──────────────────────────────────────────────────────────
+async function loadSettings() {
+  try {
+    const s = await api('/api/status');
+    // Instagram toggle
+    document.getElementById('igToggle').checked = s.instagram_enabled !== false;
+    document.getElementById('igStatusText').textContent = s.instagram_enabled !== false ? 'Publications actives' : 'Publications en pause';
+    // Mode
+    const mode = s.instagram_mode || 'auto';
+    document.getElementById('modeAuto').classList.toggle('active', mode === 'auto');
+    document.getElementById('modeValidation').classList.toggle('active', mode === 'validation');
+    // Sliders
+    const landing = parseFloat(s.landing_spl_threshold || 75);
+    const takeoff = parseFloat(s.takeoff_spl_threshold || 75);
+    const win     = parseFloat(s.rtsp_window || 25);
+    document.getElementById('landingSlider').value = landing;
+    document.getElementById('landingVal').textContent = landing;
+    document.getElementById('takeoffSlider').value = takeoff;
+    document.getElementById('takeoffVal').textContent = takeoff;
+    document.getElementById('windowSlider').value = win;
+    document.getElementById('windowVal').textContent = win;
+  } catch(e) {}
+}
+
+async function toggleInstagram() {
+  const on = document.getElementById('igToggle').checked;
+  document.getElementById('igStatusText').textContent = on ? 'Publications actives' : 'Publications en pause';
+  await api('/api/pause', 'POST');
+}
+
+async function setMode(mode) {
+  document.getElementById('modeAuto').classList.toggle('active', mode === 'auto');
+  document.getElementById('modeValidation').classList.toggle('active', mode === 'validation');
+  await api('/api/settings', 'POST', { instagram_mode: mode });
+}
+
+async function saveSettings() {
+  const payload = {
+    landing_spl_threshold: parseFloat(document.getElementById('landingSlider').value),
+    takeoff_spl_threshold: parseFloat(document.getElementById('takeoffSlider').value),
+    rtsp_window:           parseFloat(document.getElementById('windowSlider').value),
+  };
+  try {
+    await api('/api/capture-config', 'POST', payload);
+    const fb = document.getElementById('saveFeedback');
+    fb.textContent = '✓ Sauvegardé';
+    setTimeout(() => fb.textContent = '', 2500);
+  } catch(e) {
+    document.getElementById('saveFeedback').textContent = 'Erreur';
+  }
+}
+
+async function confirmRestart() {
+  if (!confirm('Redémarrer lisbon-main ?')) return;
+  await api('/api/process/lisbon-main/restart', 'POST');
+}
+
+// ── POLLING ───────────────────────────────────────────────────────────
+loadDash();
+setInterval(() => { if (_currentPage === 'dash') loadDash(); }, 3000);
+</script>
+</body>
+</html>

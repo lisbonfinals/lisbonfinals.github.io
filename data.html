@@ -36,8 +36,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
 .nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px;}
 .lang-group{display:flex;align-items:center;gap:2px;flex-shrink:0;}
-.lang-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.35);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
-.lang-btn:hover{color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.3);}
+.lang-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.43);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn:hover{color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.38);}
 .lang-btn.active{color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06);}
 .lang-switcher{display:none;}
 .lang-switcher:hover{border-color:var(--amber);color:var(--amber);}
@@ -65,7 +65,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   top:100%;left:0;right:0;height:16px;
 }
 .nav-has-dropdown:hover .nav-dropdown{display:block;}
-.nav-dropdown li a{display:block;padding:9px 18px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.45);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;}
+.nav-dropdown li a{display:block;padding:9px 18px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.5);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;}
 .nav-dropdown li a:hover{color:var(--amber);background:rgba(245,166,35,.05);}
 .nav-dropdown li a.dd-warning{color:rgba(248,113,113,.6);}
 .nav-dropdown li a.dd-warning:hover{color:#ef4444;}
@@ -80,7 +80,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   backdrop-filter:blur(8px);
 }
 .section-tabs-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;gap:0;}
-.section-tab{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.35);text-decoration:none;padding:16px 24px;border-bottom:2px solid transparent;transition:all .2s;display:block;}
+.section-tab{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.43);text-decoration:none;padding:16px 24px;border-bottom:2px solid transparent;transition:all .2s;display:block;}
 .section-tab:hover{color:rgba(240,237,232,.7);}
 .section-tab.active{color:var(--amber);border-bottom-color:var(--amber);}
 
@@ -107,9 +107,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 /* em in titles: Instrument Serif italic, muted gray — NEVER amber */
 .section-title em{
   font-family:var(--serif);font-weight:400;
-  font-style:italic;color:rgba(240,237,232,.3);
+  font-style:italic;color:rgba(240,237,232,.38);
 }
-.section-desc{font-family:var(--sans);font-size:14px;line-height:1.8;color:rgba(240,237,232,.35);max-width:520px;margin-top:14px;}
+.section-desc{font-family:var(--sans);font-size:14px;line-height:1.8;color:rgba(240,237,232,.43);max-width:520px;margin-top:14px;}
 
 /* ── STAT CARDS ── */
 .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;}
@@ -125,13 +125,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .stat-card.red .stat-val{color:var(--red);}
 .stat-card.green .stat-val{color:var(--green);}
 .stat-card.blue .stat-val{color:var(--blue);}
-.stat-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.3);}
-.stat-sub{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.2);margin-top:6px;}
+.stat-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.38);}
+.stat-sub{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);margin-top:6px;}
 
 /* ── TICKER ── */
 .ticker-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
 .ticker-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.ticker-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.3);}
+.ticker-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);}
 .ticker-live{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--green);display:flex;align-items:center;gap:6px;}
 .ticker-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
@@ -165,8 +165,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-flag{font-size:13px;}
 .ticker-callsign{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);}
 .ticker-airline{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.65);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px;}
-.ticker-route{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.45);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.ticker-phase{font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:rgba(240,237,232,.45);}
+.ticker-route{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.5);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ticker-phase{font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:rgba(240,237,232,.5);}
 .ticker-alt{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.5);text-align:right;line-height:1.4;}
 .ticker-alt strong{display:block;color:rgba(240,237,232,.75);font-size:10px;font-weight:500;}
 .ticker-db{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;}
@@ -178,7 +178,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-vib-emoji{font-size:10px;line-height:1;}
 .ticker-vib-val{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.04em;}
 .ticker-vib.no-data .ticker-vib-val{color:rgba(240,237,232,.15);}
-.ticker-empty{padding:24px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.2);}
+.ticker-empty{padding:24px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);}
 /* ── TABLET : carte 2 lignes ── */
 @media(max-width:1040px) and (min-width:480px){
   .ticker-col-heads{display:none;}
@@ -191,17 +191,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   /* ligne 1 : heure · flag · vol · compagnie */
   .ticker-time{order:1;margin-right:10px;flex-shrink:0;}
   .ticker-time strong{display:inline;font-size:11px;}
-  .ticker-time-date{display:inline;margin-left:4px;font-size:9px;color:rgba(240,237,232,.25);}
+  .ticker-time-date{display:inline;margin-left:4px;font-size:9px;color:rgba(240,237,232,.33);}
   .ticker-flag{order:2;margin-right:6px;font-size:14px;}
   .ticker-callsign{order:3;margin-right:10px;font-size:12px;}
   .ticker-airline{order:4;flex:1;font-size:11px;min-width:0;}
   /* ligne 2 : route · phase · altitude · dB */
-  .ticker-route{order:5;width:100%;margin-top:4px;font-size:9px;color:rgba(240,237,232,.22);}
+  .ticker-route{order:5;width:100%;margin-top:4px;font-size:9px;color:rgba(240,237,232,.3);}
   .ticker-route::before{content:'';display:inline-block;width:0;}
-  .ticker-phase{order:6;font-size:8px;color:rgba(240,237,232,.2);margin-right:12px;margin-top:4px;}
+  .ticker-phase{order:6;font-size:8px;color:rgba(240,237,232,.28);margin-right:12px;margin-top:4px;}
   .ticker-alt{order:7;text-align:left;margin-right:12px;margin-top:4px;line-height:1.3;}
   .ticker-alt strong{display:inline;font-size:10px;}
-  .ticker-alt-m{display:inline;margin-left:4px;font-size:9px;color:rgba(240,237,232,.2);}
+  .ticker-alt-m{display:inline;margin-left:4px;font-size:9px;color:rgba(240,237,232,.28);}
   .ticker-db{order:8;margin-top:4px;font-size:11px;}
   /* route + meta sur une seule ligne 2 */
   .ticker-phase,.ticker-alt,.ticker-db{flex-shrink:0;}
@@ -231,14 +231,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 .noise-split-right{}
 .noise-chart-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px 20px 14px;margin-bottom:16px;}
-.noise-chart-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-bottom:16px;}
+.noise-chart-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:16px;}
 .noise-chart{display:flex;align-items:flex-end;gap:3px;height:100px;}
 .noise-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;}
 .noise-bar{width:100%;border-radius:2px 2px 0 0;transition:height .6s ease;min-height:2px;background:rgba(245,166,35,.2);}
 .noise-bar.night{background:rgba(99,102,241,.4);}
 .noise-bar.active{background:var(--amber);}
 .noise-chart-legend{display:flex;gap:16px;margin-top:10px;}
-.legend-item{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.3);display:flex;align-items:center;gap:6px;}
+.legend-item{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.38);display:flex;align-items:center;gap:6px;}
 .legend-dot{width:8px;height:8px;border-radius:2px;}
 
 /* 4 mini-stats below the chart */
@@ -246,15 +246,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .noise-mini-stat{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:16px 18px;}
 .noise-mini-val{font-family:var(--mono);font-size:24px;font-weight:500;color:var(--amber);line-height:1;margin-bottom:4px;}
 .noise-mini-val.blue{color:var(--blue);}
-.noise-mini-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.3);}
+.noise-mini-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);}
 
 /* ── INFO CARDS ── */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px;}
 .info-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px;}
-.info-card-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-bottom:16px;}
+.info-card-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:16px;}
 .info-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(240,237,232,.04);}
 .info-row:last-child{border-bottom:none;}
-.info-row-lbl{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.35);}
+.info-row-lbl{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.43);}
 .info-row-val{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);}
 .info-row-val.red{color:var(--red);}
 .info-row-val.amber{color:var(--amber);}
@@ -282,7 +282,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .anac-rule-card:last-child{border-bottom:1px solid var(--border);border-radius:0 0 4px 4px;}
 .anac-rule-icon{font-size:22px;flex-shrink:0;width:36px;text-align:center;}
 .anac-rule-title{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--white);margin-bottom:3px;letter-spacing:-.01em;}
-.anac-rule-desc{font-family:var(--sans);font-size:12px;color:rgba(240,237,232,.35);line-height:1.6;}
+.anac-rule-desc{font-family:var(--sans);font-size:12px;color:rgba(240,237,232,.43);line-height:1.6;}
 /* green override when compliant */
 .warning-val.ok{color:var(--green)!important;}
 /* night flights progress bar */
@@ -301,28 +301,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .violation-badge.ok{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.25);}
 .violation-info{flex:1;}
 .violation-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:3px;}
-.violation-desc{font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.3);line-height:1.5;}
+.violation-desc{font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.38);line-height:1.5;}
 .violation-db{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--red);text-align:right;}
 .violation-db.ok{color:var(--green);}
-.violation-db-lbl{font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.2);text-align:right;}
+.violation-db-lbl{font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.28);text-align:right;}
 
 .night-window{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px;margin-top:24px;}
-.night-window-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-bottom:16px;}
+.night-window-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:16px;}
 .night-timeline{display:flex;gap:2px;height:32px;align-items:stretch;}
 .night-slot{flex:1;border-radius:2px;}
 .night-slot.restricted{background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.15);}
 .night-slot.allowed{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.1);}
 .night-labels{display:flex;gap:2px;margin-top:4px;}
-.night-labels span{flex:1;font-family:var(--mono);font-size:7px;color:rgba(240,237,232,.2);text-align:center;}
+.night-labels span{flex:1;font-family:var(--mono);font-size:7px;color:rgba(240,237,232,.28);text-align:center;}
 .night-legend{display:flex;gap:16px;margin-top:12px;}
 
 /* ── FOOTER ── */
 .page-footer{border-top:1px solid var(--border);padding:32px 48px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-.footer-left{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.2);letter-spacing:.08em;}
+.footer-left{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);letter-spacing:.08em;}
 .footer-updated{font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.3);letter-spacing:.08em;}
 
 /* ── ERROR STATE ── */
-.data-error{padding:20px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.2);border:1px dashed rgba(240,237,232,.08);border-radius:4px;}
+.data-error{padding:20px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);border:1px dashed rgba(240,237,232,.08);border-radius:4px;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
@@ -466,7 +466,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="noise-chart-wrap">
         <div class="noise-chart-title" data-i18n="chart_title">Average dB by hour (today) · SPL</div>
         <div class="noise-chart" id="noiseChart">
-          <div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.2);margin:auto;">Loading…</div>
+          <div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);margin:auto;">Loading…</div>
         </div>
         <div class="noise-chart-legend">
           <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span data-i18n="legend_day">Day (06h–22h)</span></div>
@@ -605,7 +605,7 @@ function fmtDb(db) { return (db && db > 0) ? db.toFixed(1) + ' dB' : '—'; }
 function buildNoiseChart(byHour) {
   const chart = document.getElementById('noiseChart');
   if (!byHour || !byHour.length) {
-    chart.innerHTML = '<div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.2);margin:auto;">No data yet</div>';
+    chart.innerHTML = '<div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);margin:auto;">No data yet</div>';
     return;
   }
   const max = Math.max(...byHour, 1);
