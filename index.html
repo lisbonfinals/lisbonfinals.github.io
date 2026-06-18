@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lisbon Finals — Every plane over my Lisbon terrace</title>
-<meta name="description" content="An autonomous station on a Lisbon rooftop — photographing and measuring every aircraft on final approach to LPPT, 24/7.">
+<meta name="description" content="An autonomous station on a Lisbon terrace — photographing and measuring every aircraft on final approach to LPPT, 24/7.">
 <link rel="canonical" href="https://www.lisbonfinals.com/">
 
 <!-- Social sharing / OpenGraph — vignette au partage (WhatsApp, X, Instagram, etc.) -->
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lisbon Finals">
 <meta property="og:title" content="Lisbon Finals — Every plane over my Lisbon terrace">
-<meta property="og:description" content="An autonomous station on a Lisbon rooftop — photographing and measuring every aircraft on final approach to LPPT, 24/7.">
+<meta property="og:description" content="An autonomous station on a Lisbon terrace — photographing and measuring every aircraft on final approach to LPPT, 24/7.">
 <meta property="og:url" content="https://www.lisbonfinals.com/">
 <meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
 <meta property="og:image:width" content="1200">
@@ -22,10 +22,10 @@
 <meta property="og:locale:alternate" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Lisbon Finals — Every plane over my Lisbon terrace">
-<meta name="twitter:description" content="Autonomous rooftop station photographing & measuring every aircraft on final approach to Lisbon Airport (LPPT).">
+<meta name="twitter:description" content="Autonomous terrace station photographing & measuring every aircraft on final approach to Lisbon Airport (LPPT).">
 <meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/","description":"An autonomous station on a Lisbon rooftop photographing and measuring every aircraft on final approach to Lisbon Airport (LPPT), 24/7.","inLanguage":["en","pt","fr"]}
+{"@context":"https://schema.org","@type":"WebSite","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/","description":"An autonomous station on a Lisbon terrace photographing and measuring every aircraft on final approach to Lisbon Airport (LPPT), 24/7.","inLanguage":["en","pt","fr"]}
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -243,6 +243,18 @@ nav {
   background: rgba(13,17,23,.9); border: 1px solid rgba(30,37,48,.9);
   padding: 18px 20px; backdrop-filter: blur(10px);
 }
+.hlc-next {
+  display:flex; align-items:center; gap:8px; margin-top:9px;
+  padding:9px 14px; background:rgba(13,17,23,.7);
+  border:1px solid rgba(30,37,48,.7); border-left:2px solid rgba(245,166,35,.5);
+  font-family:var(--mono); backdrop-filter:blur(10px);
+}
+.hlc-next-dot { width:5px;height:5px;border-radius:50%;background:var(--amber);flex:none;
+  box-shadow:0 0 6px rgba(245,166,35,.7); animation:hlcNextPulse 2s ease-in-out infinite; }
+@keyframes hlcNextPulse { 0%,100%{opacity:.35;} 50%{opacity:1;} }
+.hlc-next-lbl { font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,166,35,.7);flex:none; }
+.hlc-next-body { font-size:10px;letter-spacing:.03em;color:rgba(240,237,232,.62);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
 .hlc-top { display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px; }
 .hlc-callsign { font-family:var(--mono);font-weight:500;font-size:20px;color:var(--white);letter-spacing:.04em; }
 .hlc-airline { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.28);margin-top:3px;letter-spacing:.06em; }
@@ -864,6 +876,12 @@ footer {
     <div class="hlc-card" id="live-card">
       <div class="hlc-empty">Loading…</div>
     </div>
+    <!-- Next expected arrival (from LPPT schedule) -->
+    <div class="hlc-next" id="next-arrival" style="display:none;">
+      <span class="hlc-next-dot"></span>
+      <span class="hlc-next-lbl" id="next-arr-lbl">Next expected</span>
+      <span class="hlc-next-body" id="next-arr-body"></span>
+    </div>
   </div>
 
   <div class="hero-photo-dots" id="photo-dots"></div>
@@ -1376,6 +1394,8 @@ fetch('https://api.github.com/gists/' + GIST_ID)
       .then(function(d){
         if(!d) return;
         _updateAirQuality(d);
+        window._nextArrivals = d.next_arrivals || [];
+        _renderNextArrival();
         var s = d.stats || {};
         /* store monthly rankings for badge */
         window._monthlyQuietest = (d.monthly && d.monthly.quietest_airline) || s.quietest_airline || '';
@@ -1646,6 +1666,7 @@ var INDEX_TRANSLATIONS = {
     stat_peak_lbl: 'Peak noise recorded',
     stat_days_lbl: 'Days running',
     stat_days_sub: 'autonomous · 24/7',
+    na_label: 'Next expected', na_in: 'in', na_min: 'min', na_now: 'landing now', na_from: 'from',
     sec_eyebrow: 'Latest captures',
     sec_title: 'Live<em>from the terrace</em>',
     ls_eyebrow: 'Latest shot',
@@ -1719,6 +1740,7 @@ var INDEX_TRANSLATIONS = {
     stat_peak_lbl: 'Pico de ruído registado',
     stat_days_lbl: 'Dias em funcionamento',
     stat_days_sub: 'autónomo · 24/7',
+    na_label: 'Próxima chegada', na_in: 'em', na_min: 'min', na_now: 'a aterrar', na_from: 'de',
     sec_eyebrow: 'Últimas capturas',
     sec_title: 'Em directo<em>da varanda</em>',
     ls_eyebrow: 'Última foto',
@@ -1791,6 +1813,7 @@ var INDEX_TRANSLATIONS = {
     stat_peak_lbl: 'Pic sonore enregistré',
     stat_days_lbl: 'Jours en service',
     stat_days_sub: 'autonome · 24/7',
+    na_label: 'Prochaine arrivée', na_in: 'dans', na_min: 'min', na_now: 'à l’atterrissage', na_from: 'de',
     sec_eyebrow: 'Dernières captures',
     sec_title: 'En direct<em>depuis la terrasse</em>',
     ls_eyebrow: 'Dernière photo',
@@ -1861,6 +1884,44 @@ function nfmt(n) {
   catch (e) { return '' + n; }
 }
 
+// ── Next expected arrival (depuis le planning LPPT exporté dans le gist) ──
+function _lisbonNowMin() {
+  var s = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Lisbon', hour: '2-digit', minute: '2-digit', hour12: false });
+  var p = s.split(':'); return (parseInt(p[0], 10) || 0) * 60 + (parseInt(p[1], 10) || 0);
+}
+function _naDelta(a) {
+  var p = (a.eta || '').split(':');
+  if (p.length !== 2) return a.eta_in_min;
+  var d = (parseInt(p[0], 10) * 60 + parseInt(p[1], 10)) - _lisbonNowMin();
+  if (d < -90) d += 1440;   // wrap minuit
+  return d;
+}
+function _renderNextArrival() {
+  var wrap = document.getElementById('next-arrival');
+  if (!wrap) return;
+  var list = window._nextArrivals || [];
+  var a = null, delta = 0;
+  for (var i = 0; i < list.length; i++) {           // 1ère arrivée pas encore passée (>5 min de retard → suivante)
+    var d = _naDelta(list[i]); if (d >= -5) { a = list[i]; delta = d; break; }
+  }
+  if (!a) { wrap.style.display = 'none'; return; }
+  var t = (typeof INDEX_TRANSLATIONS !== 'undefined' && INDEX_TRANSLATIONS[_lang]) ? INDEX_TRANSLATIONS[_lang] : {};
+  var inTxt;
+  if (delta <= 0)      inTxt = (t.na_now || 'landing now');
+  else if (delta < 90) inTxt = (t.na_in || 'in') + ' ~' + delta + ' ' + (t.na_min || 'min');
+  else                 inTxt = (t.na_in || 'in') + ' ~' + Math.round(delta / 60) + ' h';
+  var airline = (a.airline || '').replace(/\s*\(.*?\)\s*/g, '').trim();
+  var origin = a.origin_city || a.origin_iata || '';
+  var parts = [a.callsign];
+  if (airline) parts.push(airline);
+  if (origin) parts.push((t.na_from || 'from') + ' ' + origin);
+  parts.push(a.eta + ' (' + inTxt + ')');
+  var lbl = document.getElementById('next-arr-lbl'); if (lbl) lbl.textContent = t.na_label || 'Next expected';
+  var body = document.getElementById('next-arr-body'); if (body) body.textContent = parts.join(' · ');
+  wrap.style.display = '';
+}
+setInterval(_renderNextArrival, 30000);
+
 function applyLang(lang) {
   if (!INDEX_TRANSLATIONS[lang]) return;
   _lang = lang;
@@ -1922,6 +1983,7 @@ function applyLang(lang) {
   if (statSubs[0]) statSubs[0].textContent = t.stat_flights_sub;
   // index 1 : ne pas écraser (contient le nombre #published) — on traduit juste le mot
   var photoSubWord = q('.stat-photos-subword'); if (photoSubWord) photoSubWord.textContent = t.stat_photos_sub;
+  if (typeof _renderNextArrival === 'function') _renderNextArrival();   // ré-libellé "Next expected" dans la langue
   if (statSubs[3]) statSubs[3].textContent = t.stat_days_sub;
   // Section header
   var eyebrow = q('.section-eyebrow'); if (eyebrow) eyebrow.textContent = t.sec_eyebrow;
