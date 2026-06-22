@@ -715,12 +715,12 @@ nav {
         <span class="hw-status on">● EN SERVICE</span>
       </div>
     </div>
-    <div class="hw-item">
+    <div class="hw-item hw-item--new">
       <span class="hw-icon">🏭</span>
       <div>
         <div class="hw-name">PMS5003 — Fine Particle Sensor</div>
         <div class="hw-desc">Laser particle counter measuring PM1.0, PM2.5 and PM10 in real time. UART → Pi. Correlates each aircraft pass with a concrete air quality reading.</div>
-        <span class="hw-status soon">◎ TESTED · SOON IN SERVICE</span>
+        <span class="hw-status on">● EN SERVICE</span>
       </div>
     </div>
     <div class="hw-item">
@@ -759,18 +759,12 @@ nav {
       <span class="coming-tag">Hardware · Ordered</span>
     </div>
     <div class="coming-card" style="transition-delay:.08s">
-      <span class="coming-icon">🌀</span>
-      <div class="coming-title">Dual IMU Vibration</div>
-      <p class="coming-desc">Two motion sensors mounted on the terrace will detect the physical vibration caused by passing aircraft — the kind you feel in your chest but a microphone can't fully capture. A new dimension of impact, beyond sound.</p>
-      <span class="coming-tag">Hardware · I²C</span>
-    </div>
-    <div class="coming-card" style="transition-delay:.16s">
       <span class="coming-icon">🌬</span>
       <div class="coming-title">Air Quality Station</div>
-      <p class="coming-desc">Two environmental sensors will measure fine particles and air pollutants over the terrace in real time — correlating each aircraft passage with a concrete air quality reading. A first for a private monitoring station in Lisbon.</p>
-      <span class="coming-tag">Environmental · SGP30 · PMS5003</span>
+      <p class="coming-desc">An environmental sensor will measure CO₂ and volatile organic compounds over the terrace in real time — correlating each aircraft passage with a concrete air quality reading. A first for a private monitoring station in Lisbon.</p>
+      <span class="coming-tag">Environmental · SGP30</span>
     </div>
-    <div class="coming-card" style="transition-delay:.24s">
+    <div class="coming-card" style="transition-delay:.16s">
       <span class="coming-icon">📡</span>
       <div class="coming-title">Live ATC Listening</div>
       <p class="coming-desc">A second radio receiver tuned to Lisbon tower's frequency will capture live communications between pilots and air traffic control — linking each aircraft to the exact instructions they received in real time.</p>
@@ -878,15 +872,12 @@ const ABOUT_TRANSLATIONS = {
     coming1_title: 'Sensor de Som 130 dB',
     coming1_desc: 'Um medidor de som industrial irá substituir o microfone actual. O novo sensor suporta até 130 dB sem saturar — capturando o impacto total de uma aeronave a baixa altitude como números reais, não apenas um limite máximo.',
     coming1_tag: 'Hardware · Encomendado',
-    coming2_title: 'Vibração IMU Dupla',
-    coming2_desc: 'Dois sensores de movimento montados na varanda vão detectar a vibração física causada pelas aeronaves — o tipo que se sente no peito mas que um microfone não consegue capturar completamente. Uma nova dimensão de impacto, para além do som.',
-    coming2_tag: 'Hardware · I²C',
-    coming3_title: 'Estação de Qualidade do Ar',
-    coming3_desc: 'Dois sensores ambientais vão medir partículas finas e poluentes atmosféricos sobre a varanda em tempo real — correlacionando cada passagem de aeronave com uma leitura concreta de qualidade do ar. Uma primeira para uma estação privada de monitorização em Lisboa.',
-    coming3_tag: 'Ambiental · SGP30 · PMS5003',
-    coming4_title: 'Escuta ATC em Directo',
-    coming4_desc: 'Um segundo receptor rádio sintonizado na frequência da torre de Lisboa vai capturar as comunicações em directo entre pilotos e o controlo de tráfego aéreo — ligando cada aeronave às instruções exactas que recebeu em tempo real.',
-    coming4_tag: 'RTL-SDR · 118.1 MHz',
+    coming2_title: 'Estação de Qualidade do Ar',
+    coming2_desc: 'Um sensor ambiental vai medir CO₂ e compostos orgânicos voláteis sobre a varanda em tempo real — correlacionando cada passagem de aeronave com uma leitura concreta de qualidade do ar. Uma primeira para uma estação privada de monitorização em Lisboa.',
+    coming2_tag: 'Ambiental · SGP30',
+    coming3_title: 'Escuta ATC em Directo',
+    coming3_desc: 'Um segundo receptor rádio sintonizado na frequência da torre de Lisboa vai capturar as comunicações em directo entre pilotos e o controlo de tráfego aéreo — ligando cada aeronave às instruções exactas que recebeu em tempo real.',
+    coming3_tag: 'RTL-SDR · 118.1 MHz',
   },
   en: {
     eyebrow: 'The project',
@@ -938,15 +929,12 @@ const ABOUT_TRANSLATIONS = {
     coming1_title: '130 dB Sound Sensor',
     coming1_desc: "An industrial-grade sound meter will replace the current microphone. The new sensor handles up to 130 dB without maxing out — capturing the full impact of a low-flying aircraft as real numbers, not just a ceiling.",
     coming1_tag: 'Hardware · Ordered',
-    coming2_title: 'Dual IMU Vibration',
-    coming2_desc: "Two motion sensors mounted on the terrace will detect the physical vibration caused by passing aircraft — the kind you feel in your chest but a microphone can't fully capture. A new dimension of impact, beyond sound.",
-    coming2_tag: 'Hardware · I²C',
-    coming3_title: 'Air Quality Station',
-    coming3_desc: 'Two environmental sensors will measure fine particles and air pollutants over the terrace in real time — correlating each aircraft passage with a concrete air quality reading. A first for a private monitoring station in Lisbon.',
-    coming3_tag: 'Environmental · SGP30 · PMS5003',
-    coming4_title: 'Live ATC Listening',
-    coming4_desc: "A second radio receiver tuned to Lisbon tower's frequency will capture live communications between pilots and air traffic control — linking each aircraft to the exact instructions they received in real time.",
-    coming4_tag: 'RTL-SDR · 118.1 MHz',
+    coming2_title: 'Air Quality Station',
+    coming2_desc: 'An environmental sensor will measure CO₂ and volatile organic compounds over the terrace in real time — correlating each aircraft passage with a concrete air quality reading. A first for a private monitoring station in Lisbon.',
+    coming2_tag: 'Environmental · SGP30',
+    coming3_title: 'Live ATC Listening',
+    coming3_desc: "A second radio receiver tuned to Lisbon tower's frequency will capture live communications between pilots and air traffic control — linking each aircraft to the exact instructions they received in real time.",
+    coming3_tag: 'RTL-SDR · 118.1 MHz',
   },
   fr: {
     eyebrow: 'Le projet',
@@ -998,15 +986,12 @@ const ABOUT_TRANSLATIONS = {
     coming1_title: 'Capteur sonore 130 dB',
     coming1_desc: 'Un sonomètre industriel remplacera le microphone actuel. Le nouveau capteur gère jusqu\'à 130 dB sans saturer — capturant l\'impact réel d\'un avion en basse altitude.',
     coming1_tag: 'Matériel · Commandé',
-    coming2_title: 'Double IMU Vibration',
-    coming2_desc: 'Deux capteurs de mouvement sur la terrasse détecteront les vibrations physiques causées par les avions qui passent — une dimension au-delà du son.',
-    coming2_tag: 'Matériel · I²C',
-    coming3_title: 'Station qualité de l\'air',
-    coming3_desc: 'Deux capteurs environnementaux mesureront les particules fines et les polluants atmosphériques au-dessus de la terrasse en temps réel — corrélant chaque passage d\'avion avec une lecture concrète de la qualité de l\'air.',
-    coming3_tag: 'Environnemental · SGP30 · PMS5003',
-    coming4_title: 'Écoute ATC en direct',
-    coming4_desc: 'Un second récepteur radio réglé sur la fréquence de la tour de Lisbonne capturera les communications en direct entre pilotes et contrôleurs — reliant chaque aéronef aux instructions exactes reçues en temps réel.',
-    coming4_tag: 'RTL-SDR · 118.1 MHz',
+    coming2_title: 'Station qualité de l\'air',
+    coming2_desc: 'Un capteur environnemental mesurera le CO₂ et les composés organiques volatils au-dessus de la terrasse en temps réel — corrélant chaque passage d\'avion avec une lecture concrète de la qualité de l\'air.',
+    coming2_tag: 'Environnemental · SGP30',
+    coming3_title: 'Écoute ATC en direct',
+    coming3_desc: 'Un second récepteur radio réglé sur la fréquence de la tour de Lisbonne capturera les communications en direct entre pilotes et contrôleurs — reliant chaque aéronef aux instructions exactes reçues en temps réel.',
+    coming3_tag: 'RTL-SDR · 118.1 MHz',
   }
 };
 
@@ -1095,13 +1080,13 @@ function applyLang(lang) {
   const comingTitles = selAll('.coming-title');
   const comingDescs = selAll('.coming-desc');
   const comingTags = selAll('.coming-tag');
-  ['coming1_title','coming2_title','coming3_title','coming4_title'].forEach((k, i) => {
+  ['coming1_title','coming2_title','coming3_title'].forEach((k, i) => {
     if (comingTitles[i] && t[k]) comingTitles[i].textContent = t[k];
   });
-  ['coming1_desc','coming2_desc','coming3_desc','coming4_desc'].forEach((k, i) => {
+  ['coming1_desc','coming2_desc','coming3_desc'].forEach((k, i) => {
     if (comingDescs[i] && t[k]) comingDescs[i].textContent = t[k];
   });
-  ['coming1_tag','coming2_tag','coming3_tag','coming4_tag'].forEach((k, i) => {
+  ['coming1_tag','coming2_tag','coming3_tag'].forEach((k, i) => {
     if (comingTags[i] && t[k]) comingTags[i].textContent = t[k];
   });
 }
