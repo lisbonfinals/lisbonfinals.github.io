@@ -763,11 +763,11 @@ nav {
 
 /* ── START HERE ── */
 .start-section {
-  padding:64px 48px 56px;background:var(--dark);
-  border-top:1px solid var(--border);
+  padding:56px 48px;background:var(--dark);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
 }
 .start-inner {
-  display:grid;grid-template-columns:360px 1fr;gap:48px;align-items:start;
+  display:grid;grid-template-columns:minmax(280px,390px) 1fr;gap:64px;align-items:end;
 }
 .start-kicker {
   font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
@@ -780,36 +780,42 @@ nav {
 }
 .start-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.34); }
 .start-copy { font-size:13px;line-height:1.85;color:rgba(240,237,232,.48); }
-.start-steps { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border); }
-.start-step { background:var(--dark2);padding:26px 24px;text-decoration:none;display:flex;flex-direction:column;min-height:220px;transition:background .2s; }
-.start-step:hover { background:rgba(13,17,23,.82); }
-.start-num { font-family:var(--mono);font-size:10px;color:rgba(245,166,35,.58);margin-bottom:22px; }
-.start-step-title { font-size:18px;font-weight:800;color:var(--white);line-height:1.1;margin-bottom:12px; }
-.start-step-desc { font-size:12px;line-height:1.75;color:rgba(240,237,232,.44);flex:1; }
-.start-step-arrow { font-family:var(--mono);font-size:10px;color:var(--amber);margin-top:24px;letter-spacing:.08em;text-transform:uppercase; }
+.start-steps { display:grid;grid-template-columns:repeat(3,1fr);gap:26px;background:transparent;border:0; }
+.start-step {
+  position:relative;text-decoration:none;display:flex;flex-direction:column;min-height:auto;
+  padding:0 0 0 18px;border-left:1px solid rgba(245,166,35,.34);transition:border-color .2s,transform .2s;
+}
+.start-step::before {
+  content:'';position:absolute;left:-4px;top:4px;width:7px;height:7px;border-radius:50%;
+  background:var(--amber);box-shadow:0 0 0 8px rgba(245,166,35,.06);
+}
+.start-step:hover { border-color:rgba(245,166,35,.75);transform:translateY(-2px); }
+.start-step-title { font-size:20px;font-weight:800;color:var(--white);line-height:1.05;margin-bottom:10px;max-width:260px; }
+.start-step-desc { font-size:12px;line-height:1.75;color:rgba(240,237,232,.44);max-width:260px; }
+.start-step-arrow { font-family:var(--mono);font-size:10px;color:var(--amber);margin-top:14px;letter-spacing:.08em;text-transform:uppercase; }
 
 /* ── EXPLORE BAND ── */
 .explore-band {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  display:grid;grid-template-columns:repeat(3,1fr);
+  display:block;padding:0 48px;background:var(--dark);
 }
 .explore-card {
-  padding:64px 48px;border-right:1px solid var(--border);background:var(--dark);
-  text-decoration:none;display:block;transition:background .25s;position:relative;overflow:hidden;
+  padding:30px 0;text-decoration:none;display:grid;grid-template-columns:170px minmax(220px,300px) minmax(280px,1fr) auto;
+  gap:32px;align-items:center;transition:background .25s;position:relative;overflow:hidden;border-bottom:1px solid var(--border);
 }
-.explore-card:last-child { border-right:none; }
+.explore-card:last-child { border-bottom:none; }
 .explore-card::before {
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(to right,rgba(245,166,35,.25),transparent);
+  content:'';position:absolute;left:-48px;top:0;bottom:0;width:2px;
+  background:var(--amber);opacity:0;transition:opacity .2s;
 }
-.explore-card:hover { background:rgba(13,17,23,.8); }
+.explore-card:hover::before { opacity:.75; }
 .explore-card:hover .ec-arrow { transform:translateX(4px); }
-.ec-label { font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-bottom:18px; }
-.ec-title { font-family:var(--sans);font-weight:800;font-size:22px;color:var(--white);letter-spacing:-.01em;margin-bottom:12px; }
+.ec-label { font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.3); }
+.ec-title { font-family:var(--sans);font-weight:800;font-size:22px;color:var(--white);letter-spacing:-.01em;margin-bottom:0;line-height:1.05; }
 .ec-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.36); }
 .ec-desc { font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.36);line-height:1.85; }
-.ec-arrow { display:inline-block;margin-top:32px;font-family:var(--mono);font-size:11px;color:var(--amber);transition:transform .2s; }
+.ec-arrow { display:inline-block;font-family:var(--mono);font-size:11px;color:var(--amber);transition:transform .2s;white-space:nowrap; }
 
 /* ── FOOTER ── */
 footer {
@@ -881,8 +887,9 @@ footer {
   .ls-info { padding:32px 20px; }
   .gallery-strip { grid-template-columns:1fr 1fr; }
   .weather-grid { grid-template-columns:1fr 1fr; }
-  .explore-band { grid-template-columns:1fr; }
-  .explore-card { border-right:none; border-bottom:1px solid var(--border); }
+  .explore-band { padding:0 20px; }
+  .explore-card { grid-template-columns:1fr; gap:10px; padding:28px 0; }
+  .explore-card::before { left:-20px; }
   .runway-strip { padding:0 20px; }
   .weather-section { padding:48px 20px; grid-template-columns:1fr; }
   .aq-section { padding:48px 20px; grid-template-columns:1fr; }
@@ -1337,19 +1344,16 @@ footer {
     </div>
     <div class="start-steps">
       <a href="#latest-captures" class="start-step">
-        <div class="start-num">01</div>
         <div class="start-step-title" data-i18n="start_s1_t">Watch the station live</div>
         <div class="start-step-desc" data-i18n="start_s1_d">Latest capture, sound peak, vibration pulse and today’s observed traffic.</div>
         <div class="start-step-arrow" data-i18n="start_s1_a">Jump to live</div>
       </a>
       <a href="/data.html#noise-data" class="start-step">
-        <div class="start-num">02</div>
         <div class="start-step-title" data-i18n="start_s2_t">Understand the measurements</div>
         <div class="start-step-desc" data-i18n="start_s2_d">How flight telemetry, dB peaks and local sensor readings become public data.</div>
         <div class="start-step-arrow" data-i18n="start_s2_a">Open data</div>
       </a>
       <a href="/noise-report.html" class="start-step">
-        <div class="start-num">03</div>
         <div class="start-step-title" data-i18n="start_s3_t">Read the monthly signal</div>
         <div class="start-step-desc" data-i18n="start_s3_d">Noise reports, night operations, outliers and the limits of the current station.</div>
         <div class="start-step-arrow" data-i18n="start_s3_a">View reports</div>
