@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Lisbon Finals</title>
 <meta name="description" content="How Lisbon Finals works: RTL-SDR, YOLO, Real-ESRGAN, and a Raspberry Pi — automated from detection to Instagram post.">
+<meta name="theme-color" content="#0a0d12">
+<link rel="canonical" href="https://www.lisbonfinals.com/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="About — Lisbon Finals">
+<meta property="og:description" content="How Lisbon Finals works: RTL-SDR, YOLO, Real-ESRGAN, Raspberry Pi and an autonomous terrace station.">
+<meta property="og:url" content="https://www.lisbonfinals.com/about.html">
+<meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About — Lisbon Finals">
+<meta name="twitter:description" content="The autonomous aircraft spotting and acoustic monitoring station behind Lisbon Finals.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://gist.githubusercontent.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -28,6 +44,10 @@ body {
   color: var(--white);
   font-family: var(--sans);
   overflow-x: hidden;
+}
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
 }
 
 /* ── NAV ── */
@@ -408,7 +428,9 @@ nav {
 .section-tab:hover { color: rgba(240,237,232,.7); }
 .section-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
 @media (max-width: 600px) {
-  .section-tabs-inner { padding: 0 12px; }
+  .section-tabs { overflow-x:auto; scrollbar-width:none; }
+  .section-tabs::-webkit-scrollbar { display:none; }
+  .section-tabs-inner { padding: 0 12px; min-width:max-content; }
   .section-tab { padding: 14px 12px; font-size: 9px; }
 }
 
@@ -447,10 +469,20 @@ nav {
 }
 @media (max-width: 640px) {
   nav { padding: 16px 20px; }
+  .nav-clock-wrap { margin-left:auto; padding-left:14px; gap:8px; }
+  .nav-clock { display:none; }
   .about-hero, .steps-section, .pipeline-section, .hardware-section, .project-section { padding-left: 20px; padding-right: 20px; }
   .about-hero { padding-top: 100px; }
   .about-footer { padding: 24px 20px; }
   .section-divider { padding: 0 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after {
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
 }
 
 /* ── NAV DROPDOWN ── */
@@ -502,7 +534,7 @@ nav {
 <body>
 
 <!-- DRAWER MOBILE -->
-<div class="nav-drawer" id="nav-drawer">
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
   <a href="/" onclick="closeDrawer()">Live</a>
   <a href="/data.html#the-data" onclick="closeDrawer()">The Data</a>
   <a href="/data.html#noise-data" onclick="closeDrawer()">Noise Data</a>
@@ -510,10 +542,10 @@ nav {
   <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
   <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
   <a href="/about.html" onclick="closeDrawer()">About</a>
-  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
 </div>
 
-<nav>
+<nav aria-label="Primary navigation">
   <a href="/index.html" class="nav-logo">
     <div class="nav-dot"></div>
     <span class="nav-wordmark">LISBON <span>FINALS</span></span>
@@ -535,18 +567,18 @@ nav {
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
     <div class="lang-group">
-      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en">EN</button>
-      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt">PT</button>
-      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr">FR</button>
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
     </div>
   </div>
-  <button class="nav-burger" id="nav-burger" aria-label="Menu">
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 <!-- SECTION TAB BAR -->
-<div class="section-tabs">
+<div class="section-tabs" aria-label="About page sections">
   <div class="section-tabs-inner">
     <a href="#the-project" class="section-tab active">The Project</a>
     <a href="#how-it-works" class="section-tab">How it works</a>
@@ -747,8 +779,8 @@ nav {
       <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,166,35,.6);margin-bottom:6px;" data-i18n="kofi_label">Support the project</div>
       <div style="font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.5);line-height:1.6;max-width:520px;" data-i18n="kofi_desc">All hardware is self-funded. If you find this project useful or just enjoy watching planes, a coffee goes a long way toward the next sensor.</div>
     </div>
-    <a href="https://ko-fi.com/O5O01ZPUX0" target="_blank" style="flex-shrink:0;margin-left:auto;">
-      <img height="36" style="border:0;height:36px;opacity:.9;transition:opacity .2s;" src="https://storage.ko-fi.com/cdn/kofi2.png?v=6" alt="Buy Me a Coffee at ko-fi.com" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.9"/>
+    <a href="https://ko-fi.com/O5O01ZPUX0" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;margin-left:auto;">
+      <img height="36" style="border:0;height:36px;opacity:.9;transition:opacity .2s;" src="https://storage.ko-fi.com/cdn/kofi2.png?v=6" alt="Buy Me a Coffee at ko-fi.com" loading="lazy" decoding="async" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.9"/>
     </a>
   </div>
   <div class="coming-grid">
@@ -771,7 +803,7 @@ nav {
 <!-- FOOTER -->
 <footer class="about-footer">
   <span class="about-footer-left">LISBON FINALS · lisbonfinals.github.io · @lisbon.finals</span>
-  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="about-footer-ig">Follow on Instagram →</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="about-footer-ig">Follow on Instagram →</a>
 </footer>
 
 <script>
@@ -793,10 +825,12 @@ fetch(GIST_URL + '?t=' + Date.now())
 const drawer = document.getElementById('nav-drawer');
 function closeDrawer() {
   drawer.classList.remove('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
 document.getElementById('nav-burger').addEventListener('click', () => {
   const open = drawer.classList.toggle('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', open ? 'true' : 'false');
   document.body.style.overflow = open ? 'hidden' : '';
 });
 

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lisbon Finals — Every plane over my Lisbon terrace</title>
 <meta name="description" content="An autonomous station on a Lisbon terrace — photographing and measuring every aircraft on final approach to LPPT, 24/7.">
+<meta name="theme-color" content="#0a0d12">
 <link rel="canonical" href="https://www.lisbonfinals.com/">
 
 <!-- Social sharing / OpenGraph — vignette au partage (WhatsApp, X, Instagram, etc.) -->
@@ -24,6 +25,11 @@
 <meta name="twitter:title" content="Lisbon Finals — Every plane over my Lisbon terrace">
 <meta name="twitter:description" content="Autonomous terrace station photographing & measuring every aircraft on final approach to Lisbon Airport (LPPT).">
 <meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://gist.githubusercontent.com">
+<link rel="dns-prefetch" href="https://api.github.com">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/","description":"An autonomous station on a Lisbon terrace photographing and measuring every aircraft on final approach to Lisbon Airport (LPPT), 24/7.","inLanguage":["en","pt","fr"]}
 </script>
@@ -46,6 +52,10 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { background: var(--dark); color: var(--white); font-family: var(--sans); overflow-x: hidden; cursor: none; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+}
 
 /* ── CURSOR ── */
 .cursor      { position:fixed;width:8px;height:8px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .1s;mix-blend-mode:difference; }
@@ -209,10 +219,26 @@ nav {
 }
 .hero-sub {
   font-family: var(--sans); font-size: 13px; line-height: 1.8;
-  color: rgba(240,237,232,.72); max-width: 460px; margin-top: 24px; margin-bottom: 32px;
+  color: rgba(240,237,232,.72); max-width: 500px; margin-top: 24px; margin-bottom: 32px;
   letter-spacing: .02em;
 }
-.hero-ctas { display:flex;gap:12px;position:absolute;bottom:52px;left:48px;z-index:3; }
+.hero-proof {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;
+  max-width: 520px; margin-top: 22px;
+}
+.hero-proof-item {
+  border-top: 1px solid rgba(245,166,35,.22);
+  padding-top: 9px;
+}
+.hero-proof-k {
+  font-family: var(--mono); font-size: 8px; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(240,237,232,.34); margin-bottom: 4px;
+}
+.hero-proof-v {
+  font-family: var(--mono); font-size: 11px; line-height: 1.45;
+  color: rgba(240,237,232,.72);
+}
+.hero-ctas { display:flex;gap:12px;position:absolute;bottom:28px;left:48px;z-index:3; }
 .btn-primary {
   font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
   background: var(--amber); color: var(--dark);
@@ -269,6 +295,27 @@ nav {
 .hlc-m-val.amber { color:var(--amber); }
 .hlc-m-lbl { font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-top:3px; }
 .hlc-empty { font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);text-align:center;padding:12px; }
+
+.hero-mobile-live {
+  display:none;
+  position:absolute; left:20px; right:20px; bottom:88px; z-index:3;
+  background:rgba(13,17,23,.84); border:1px solid rgba(245,166,35,.24);
+  backdrop-filter:blur(12px); padding:13px 14px;
+}
+.hml-top { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px; }
+.hml-label {
+  font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(245,166,35,.72);
+}
+.hml-time { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.36);white-space:nowrap; }
+.hml-main { display:flex;align-items:flex-end;justify-content:space-between;gap:14px; }
+.hml-callsign { font-family:var(--mono);font-size:20px;font-weight:500;letter-spacing:.05em;color:var(--white);line-height:1; }
+.hml-airline { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.38);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px; }
+.hml-metrics { display:flex;gap:12px;flex-shrink:0; }
+.hml-metric { text-align:right; }
+.hml-val { font-family:var(--mono);font-size:13px;color:var(--white);white-space:nowrap; }
+.hml-val.noise { color:#f87171; }
+.hml-key { font-family:var(--mono);font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-top:3px; }
 
 /* ── RUNWAY STRIP ── */
 .runway-strip {
@@ -683,6 +730,64 @@ nav {
   color:rgba(240,237,232,.3);display:block;
 }
 
+/* ── PROJECT POSITION ── */
+.position-band {
+  display:grid;grid-template-columns:1fr 1.25fr;gap:64px;
+  padding:64px 48px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(245,166,35,.035),rgba(13,17,23,.35) 48%,rgba(10,13,18,1));
+}
+.position-kicker {
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.position-kicker::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
+.position-title {
+  font-family:var(--sans);font-weight:800;font-size:clamp(30px,3.4vw,48px);
+  line-height:.98;letter-spacing:-.02em;color:var(--white);
+}
+.position-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.34); }
+.position-copy {
+  font-size:14px;line-height:1.9;color:rgba(240,237,232,.58);max-width:680px;
+}
+.position-points {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px;
+}
+.position-point {
+  border-top:1px solid rgba(245,166,35,.22);padding-top:12px;
+}
+.position-point-k {
+  font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(245,166,35,.62);margin-bottom:6px;
+}
+.position-point-v { font-family:var(--mono);font-size:10px;line-height:1.6;color:rgba(240,237,232,.48); }
+
+/* ── START HERE ── */
+.start-section {
+  padding:64px 48px 56px;background:var(--dark);
+  border-top:1px solid var(--border);
+}
+.start-inner {
+  display:grid;grid-template-columns:360px 1fr;gap:48px;align-items:start;
+}
+.start-kicker {
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.start-kicker::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
+.start-title {
+  font-size:clamp(30px,3.2vw,46px);font-weight:800;line-height:.98;letter-spacing:-.02em;
+  color:var(--white);margin-bottom:18px;
+}
+.start-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.34); }
+.start-copy { font-size:13px;line-height:1.85;color:rgba(240,237,232,.48); }
+.start-steps { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border); }
+.start-step { background:var(--dark2);padding:26px 24px;text-decoration:none;display:flex;flex-direction:column;min-height:220px;transition:background .2s; }
+.start-step:hover { background:rgba(13,17,23,.82); }
+.start-num { font-family:var(--mono);font-size:10px;color:rgba(245,166,35,.58);margin-bottom:22px; }
+.start-step-title { font-size:18px;font-weight:800;color:var(--white);line-height:1.1;margin-bottom:12px; }
+.start-step-desc { font-size:12px;line-height:1.75;color:rgba(240,237,232,.44);flex:1; }
+.start-step-arrow { font-family:var(--mono);font-size:10px;color:var(--amber);margin-top:24px;letter-spacing:.08em;text-transform:uppercase; }
+
 /* ── EXPLORE BAND ── */
 .explore-band {
   border-top: 1px solid var(--border);
@@ -762,13 +867,15 @@ footer {
 }
 @media (max-width: 900px) {
   nav { padding:16px 20px; }
-  .hero { padding:88px 20px 80px; justify-content:flex-end; }
-  .hero-content { max-width:100%; text-align:right; }
-  .hero-sub { max-width:100%; margin-left:auto; }
+  .hero { min-height:720px; padding:88px 20px 196px; justify-content:flex-end; }
+  .hero-content { max-width:100%; text-align:left; }
+  .hero-sub { max-width:100%; margin-left:0; margin-bottom:0; }
+  .hero-proof { grid-template-columns:1fr 1fr 1fr; max-width:100%; }
   .hero-content { position:static; }
   .hero-live-pill { position:absolute; top:76px; left:20px; z-index:3; display:flex; margin:0; }
   .hero-ctas { left:auto; right:20px; bottom:20px; }
   .hero-live-card { display:none; }
+  .hero-mobile-live { display:block; }
   .latest-shot { grid-template-columns:1fr; }
   .ls-photo { height:280px; }
   .ls-info { padding:32px 20px; }
@@ -779,6 +886,12 @@ footer {
   .runway-strip { padding:0 20px; }
   .weather-section { padding:48px 20px; grid-template-columns:1fr; }
   .aq-section { padding:48px 20px; grid-template-columns:1fr; }
+  .position-band { grid-template-columns:1fr; gap:28px; padding:48px 20px; }
+  .position-points { grid-template-columns:1fr; }
+  .start-section { padding:48px 20px; }
+  .start-inner { grid-template-columns:1fr; gap:28px; }
+  .start-steps { grid-template-columns:1fr; }
+  .start-step { min-height:auto; }
   .stats-row { grid-template-columns:1fr 1fr; }
   .stat-cell { padding:20px 20px; }
   .section-header { padding:36px 20px 28px; }
@@ -791,6 +904,32 @@ footer {
   .gallery-strip { grid-template-columns:1fr; }
   .rwy-cards { flex-direction:column; }
   .hero-title { font-size:clamp(2.4rem,11vw,4.8rem); }
+  .hero-title .line { margin-bottom:.12em; }
+  .hero-title em.second {
+    font-family:var(--mono); font-style:normal; font-size:10px; line-height:1.4;
+    letter-spacing:.14em; text-transform:uppercase; margin-top:8px;
+    color:rgba(240,237,232,.42);
+  }
+  .hero-proof { grid-template-columns:1fr; gap:7px; }
+  .hero-proof-item { display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-top:7px; }
+  .hero-proof-k { margin-bottom:0; }
+  .hero-proof-v { text-align:right; }
+  .hero-ctas { left:20px; right:20px; }
+  .hero-ctas a { flex:1; text-align:center; padding-left:10px; padding-right:10px; }
+  .nav-clock-wrap { margin-left:12px; padding-left:12px; gap:8px; }
+  .nav-clock { display:none; }
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  body, .nav-links a, .nav-dropdown li a, .btn-primary, .btn-ghost, .gallery-card, .footer-col a, .footer-insta, .ls-ig-link { cursor:auto; }
+  .cursor, .cursor-ring { display:none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after {
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
 }
 </style>
 </head>
@@ -800,7 +939,7 @@ footer {
 <div class="cursor-ring" id="cursor-ring"></div>
 
 <!-- NAV -->
-<nav>
+<nav aria-label="Primary navigation">
   <a href="/" class="nav-logo">
     <div class="nav-dot"></div>
     <span class="nav-wordmark">LISBON <span>FINALS</span></span>
@@ -822,18 +961,18 @@ footer {
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
     <div class="lang-group">
-      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en">EN</button>
-      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt">PT</button>
-      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr">FR</button>
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
     </div>
   </div>
-  <button class="nav-burger" id="nav-burger" onclick="document.getElementById('nav-drawer').classList.toggle('open')">
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 <!-- NAV DRAWER (mobile) -->
-<div class="nav-drawer" id="nav-drawer">
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
   <a href="/" class="drawer-active">Live</a>
   <a href="/data.html#the-data">The Data</a>
   <a href="/data.html#noise-data">Noise Data</a>
@@ -841,7 +980,7 @@ footer {
   <a href="/noise-report.html" class="drawer-noise">Noise Report</a>
   <a href="/log.html">Captain's Log</a>
   <a href="/about.html">About</a>
-  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="drawer-ig">Follow @lisbon.finals</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig">Follow @lisbon.finals</a>
 </div>
 
 <!-- HERO -->
@@ -862,12 +1001,26 @@ footer {
       <span class="line">Every <span style="color:var(--amber)">plane.</span></span>
       <span class="line" style="display:inline-flex;flex-direction:column;"><span><em style="color:var(--white)">Every </em><em class="deci">decibel.</em></span><em class="second">And so much more.</em></span>
     </h1>
-    <p class="hero-sub">An autonomous station on a Lisbon terrace — photographing, measuring and publishing every aircraft on final approach to LPPT, without any human input.</p>
+    <p class="hero-sub">A real terrace station under Lisbon Airport's approach path. It photographs each passing aircraft, measures noise and vibration, then publishes the best captures without human input.</p>
+    <div class="hero-proof" aria-label="Station summary">
+      <div class="hero-proof-item">
+        <div class="hero-proof-k" data-i18n="proof_where_k">Where</div>
+        <div class="hero-proof-v" data-i18n="proof_where_v">2.6 km from RWY 03</div>
+      </div>
+      <div class="hero-proof-item">
+        <div class="hero-proof-k" data-i18n="proof_measures_k">Measures</div>
+        <div class="hero-proof-v" data-i18n="proof_measures_v">Photo · dB · vibration</div>
+      </div>
+      <div class="hero-proof-item">
+        <div class="hero-proof-k" data-i18n="proof_mode_k">Mode</div>
+        <div class="hero-proof-v" data-i18n="proof_mode_v">Autonomous · 24/7</div>
+      </div>
+    </div>
   </div>
 
   <div class="hero-ctas">
     <a href="/data.html" class="btn-primary">Explore the data</a>
-    <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="btn-ghost">@lisbon.finals</a>
+    <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="btn-ghost">@lisbon.finals</a>
   </div>
 
   <!-- Live flight card -->
@@ -881,6 +1034,29 @@ footer {
       <span class="hlc-next-dot"></span>
       <span class="hlc-next-lbl" id="next-arr-lbl">Next expected</span>
       <span class="hlc-next-body" id="next-arr-body"></span>
+    </div>
+  </div>
+
+  <div class="hero-mobile-live" aria-live="polite">
+    <div class="hml-top">
+      <div class="hml-label" data-i18n="mobile_live_label">Latest aircraft</div>
+      <div class="hml-time" id="hml-time">Loading</div>
+    </div>
+    <div class="hml-main">
+      <div>
+        <div class="hml-callsign" id="hml-callsign">—</div>
+        <div class="hml-airline" id="hml-airline">Waiting for station data</div>
+      </div>
+      <div class="hml-metrics">
+        <div class="hml-metric">
+          <div class="hml-val noise" id="hml-noise">—</div>
+          <div class="hml-key">dB</div>
+        </div>
+        <div class="hml-metric">
+          <div class="hml-val" id="hml-alt">—</div>
+          <div class="hml-key">FT</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -981,8 +1157,33 @@ footer {
 <span id="rs-peak"   style="display:none"></span>
 <span id="rs-updated" style="display:none"></span>
 
+<!-- PROJECT POSITION -->
+<section class="position-band" aria-labelledby="position-title">
+  <div>
+    <div class="position-kicker" data-i18n="position_kicker">Project stance</div>
+    <h2 class="position-title" id="position-title" data-i18n-html="position_title">Not anti-aviation.<br><em>Pro-measurement.</em></h2>
+  </div>
+  <div>
+    <p class="position-copy" data-i18n="position_copy">Lisbon Finals exists in the space between fascination and accountability. Aircraft are beautiful machines, but their passage over the city also leaves measurable traces: sound, vibration, particles, timing and repetition. The point is not to dramatize the sky. It is to make the invisible parts of it visible.</p>
+    <div class="position-points">
+      <div class="position-point">
+        <div class="position-point-k" data-i18n="position_p1_k">Approach</div>
+        <div class="position-point-v" data-i18n="position_p1_v">Observe first, claim second.</div>
+      </div>
+      <div class="position-point">
+        <div class="position-point-k" data-i18n="position_p2_k">Scope</div>
+        <div class="position-point-v" data-i18n="position_p2_v">One terrace, one corridor, continuous logging.</div>
+      </div>
+      <div class="position-point">
+        <div class="position-point-k" data-i18n="position_p3_k">Use</div>
+        <div class="position-point-v" data-i18n="position_p3_v">Public data for curious residents and aviation people.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SECTION HEADER: LATEST CAPTURES -->
-<div class="section-header">
+<div class="section-header" id="latest-captures">
   <div class="section-eyebrow">Latest captures</div>
   <div class="section-title">Live<em>from the terrace</em></div>
   <p class="section-body" id="section-body-el">Each detected aircraft triggers the full pipeline. A YOLO-trained model evaluates every frame and scores the photo from 1 to 5 — only the best make it to Instagram, without any human input. Two sensors capture what the eye can't see: an ADS1115 circuit measures the peak decibel level as the aircraft passes, and an MPU-6050 accelerometer records the vibration pulse transmitted through the building structure. One plane. Three data points.</p>
@@ -1042,7 +1243,7 @@ footer {
         <div class="ls-score-lbl">Flights today</div>
       </div>
     </div>
-    <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="ls-ig-link" id="ls-ig-link">View on Instagram</a>
+    <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="ls-ig-link" id="ls-ig-link">View on Instagram</a>
     <div class="section-sensors" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
       <span class="ss-item"><span class="ss-dot ss-photo"></span><span id="ss-photo-lbl">Photo — YOLO scored by AI</span></span>
       <span class="ss-sep">·</span>
@@ -1126,6 +1327,37 @@ footer {
   </div>
 </section>
 
+<!-- START HERE -->
+<section class="start-section" aria-labelledby="start-title">
+  <div class="start-inner">
+    <div>
+      <div class="start-kicker" data-i18n="start_kicker">Start here</div>
+      <h2 class="start-title" id="start-title" data-i18n-html="start_title">New to Lisbon Finals?<br><em>Follow the signal.</em></h2>
+      <p class="start-copy" data-i18n="start_copy">The fastest way in: see what the station is catching now, understand how the measurements work, then read the reports and field notes behind the numbers.</p>
+    </div>
+    <div class="start-steps">
+      <a href="#latest-captures" class="start-step">
+        <div class="start-num">01</div>
+        <div class="start-step-title" data-i18n="start_s1_t">Watch the station live</div>
+        <div class="start-step-desc" data-i18n="start_s1_d">Latest capture, sound peak, vibration pulse and today’s observed traffic.</div>
+        <div class="start-step-arrow" data-i18n="start_s1_a">Jump to live</div>
+      </a>
+      <a href="/data.html#noise-data" class="start-step">
+        <div class="start-num">02</div>
+        <div class="start-step-title" data-i18n="start_s2_t">Understand the measurements</div>
+        <div class="start-step-desc" data-i18n="start_s2_d">How flight telemetry, dB peaks and local sensor readings become public data.</div>
+        <div class="start-step-arrow" data-i18n="start_s2_a">Open data</div>
+      </a>
+      <a href="/noise-report.html" class="start-step">
+        <div class="start-num">03</div>
+        <div class="start-step-title" data-i18n="start_s3_t">Read the monthly signal</div>
+        <div class="start-step-desc" data-i18n="start_s3_d">Noise reports, night operations, outliers and the limits of the current station.</div>
+        <div class="start-step-arrow" data-i18n="start_s3_a">View reports</div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- EXPLORE BAND -->
 <div class="explore-band">
   <a href="/data.html" class="explore-card">
@@ -1160,7 +1392,7 @@ footer {
     <div class="footer-radar">
       <div class="footer-radar-label">Position</div>
       <div class="footer-radar-disc">
-        <img class="footer-radar-img" src="ressources/Imagewebsite1.png" alt="Radar LPPT"/>
+        <img class="footer-radar-img" src="ressources/Imagewebsite1.png" alt="Radar LPPT" loading="lazy" decoding="async"/>
         <svg class="footer-radar-svg" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <clipPath id="fr-clip"><circle cx="500" cy="500" r="455"/></clipPath>
@@ -1220,8 +1452,8 @@ footer {
   <div class="footer-kofi">
     <div class="footer-kofi-label"><span>Support the project</span></div>
     <p id="footer-matrix" class="footer-kofi-matrix"></p>
-    <a href='https://ko-fi.com/O5O01ZPUX0' target='_blank'>
-      <img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+    <a href='https://ko-fi.com/O5O01ZPUX0' target='_blank' rel='noopener noreferrer'>
+      <img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' loading='lazy' decoding='async' />
     </a>
   </div>
 
@@ -1294,6 +1526,17 @@ function getPhotoUrl(f, w){
 function fNoise(f){ return f.spl_db || f.noise_db || null; }
 function fSpeed(f){ return f.speed_kts || f.ground_speed || null; }
 function fAlt(f)  { return f.altitude_ft || f.altitude || null; }
+function updateMobileLiveFlight(ld){
+  if(!ld) return;
+  set('hml-callsign', ld.callsign || '—');
+  set('hml-airline', ld.airline || ld.aircraft_type || 'Station data live');
+  set('hml-noise', ld.spl_db ? Math.round(ld.spl_db) : '—');
+  set('hml-alt', ld.altitude_ft ? Math.round(ld.altitude_ft).toLocaleString('en-US') : '—');
+  if(ld.timestamp){
+    var d = new Date(ld.timestamp);
+    set('hml-time', d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}));
+  }
+}
 
 /* ── HERO PHOTO ROTATOR ── */
 var _photos = [], _photoIdx = 0, _imgA = el('hero-img-a'), _imgB = el('hero-img-b');
@@ -1466,6 +1709,7 @@ fetch('https://api.github.com/gists/' + GIST_ID)
               '<div><div class="hlc-m-val">'+spdStr+'</div><div class="hlc-m-lbl">Speed</div></div>'+
               '<div><div class="hlc-m-val amber">'+dbStr+'</div><div class="hlc-m-lbl">Noise</div></div>'+
             '</div>';
+          updateMobileLiveFlight(ld);
         }
       }).catch(function(){});
     var f = gist.files && gist.files['latest.json'];
@@ -1503,6 +1747,14 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     set('ls-db',       fNoise(lf) ? Math.round(fNoise(lf))+' dB' : '—');
     set('ls-speed',    fSpeed(lf) ? Math.round(fSpeed(lf))+' kt / '+Math.round(fSpeed(lf)*1.852)+' km/h' : '—');
     set('ls-aircraft', lf.aircraft_type||'—');
+    updateMobileLiveFlight({
+      callsign: lf.callsign,
+      airline: lf.airline,
+      aircraft_type: lf.aircraft_type,
+      altitude_ft: fAlt(lf),
+      spl_db: fNoise(lf),
+      timestamp: lf.timestamp || lf.published_at
+    });
     /* vibration pulse */
     var vib = lf.vibration_peak != null ? lf.vibration_peak : null;
     var vibRow = el('ls-vib-row');
@@ -1656,7 +1908,35 @@ fetch('https://wttr.in/38.7749,-9.1397?format=j1')
 var INDEX_TRANSLATIONS = {
   en: {
     hero_pill: 'Tracking live · LPPT approach path',
-    hero_sub: 'An autonomous station on a Lisbon terrace — photographing, measuring and publishing every aircraft on final approach to LPPT, without any human input.',
+    hero_sub: "A real terrace station under Lisbon Airport's approach path. It photographs each passing aircraft, measures noise and vibration, then publishes the best captures without human input.",
+    proof_where_k: 'Where',
+    proof_where_v: '2.6 km from RWY 03',
+    proof_measures_k: 'Measures',
+    proof_measures_v: 'Photo · dB · vibration',
+    proof_mode_k: 'Mode',
+    proof_mode_v: 'Autonomous · 24/7',
+    mobile_live_label: 'Latest aircraft',
+    position_kicker: 'Project stance',
+    position_title: 'Not anti-aviation.<br><em>Pro-measurement.</em>',
+    position_copy: 'Lisbon Finals exists in the space between fascination and accountability. Aircraft are beautiful machines, but their passage over the city also leaves measurable traces: sound, vibration, particles, timing and repetition. The point is not to dramatize the sky. It is to make the invisible parts of it visible.',
+    position_p1_k: 'Approach',
+    position_p1_v: 'Observe first, claim second.',
+    position_p2_k: 'Scope',
+    position_p2_v: 'One terrace, one corridor, continuous logging.',
+    position_p3_k: 'Use',
+    position_p3_v: 'Public data for curious residents and aviation people.',
+    start_kicker: 'Start here',
+    start_title: 'New to Lisbon Finals?<br><em>Follow the signal.</em>',
+    start_copy: 'The fastest way in: see what the station is catching now, understand how the measurements work, then read the reports and field notes behind the numbers.',
+    start_s1_t: 'Watch the station live',
+    start_s1_d: 'Latest capture, sound peak, vibration pulse and today’s observed traffic.',
+    start_s1_a: 'Jump to live',
+    start_s2_t: 'Understand the measurements',
+    start_s2_d: 'How flight telemetry, dB peaks and local sensor readings become public data.',
+    start_s2_a: 'Open data',
+    start_s3_t: 'Read the monthly signal',
+    start_s3_d: 'Noise reports, night operations, outliers and the limits of the current station.',
+    start_s3_a: 'View reports',
     cta_data: 'Explore the data',
     hlc_eyebrow: 'Latest detected',
     stat_flights_lbl: 'Flights tracked',
@@ -1730,7 +2010,35 @@ var INDEX_TRANSLATIONS = {
   pt: {
     hero_pill: 'Em directo · Rota de aproximação LPPT',
     hero_w1: 'Cada', hero_w2: 'avião.', hero_w3: 'Cada ', hero_w4: 'E muito mais.',
-    hero_sub: 'Uma estação autónoma numa varanda em Lisboa — fotografando, medindo e publicando cada aeronave em aproximação final ao LPPT, sem qualquer intervenção humana.',
+    hero_sub: 'Uma estação real numa varanda sob a rota de aproximação do Aeroporto de Lisboa. Fotografa cada aeronave, mede ruído e vibração, e publica as melhores capturas sem intervenção humana.',
+    proof_where_k: 'Onde',
+    proof_where_v: '2,6 km da RWY 03',
+    proof_measures_k: 'Mede',
+    proof_measures_v: 'Foto · dB · vibração',
+    proof_mode_k: 'Modo',
+    proof_mode_v: 'Autónomo · 24/7',
+    mobile_live_label: 'Última aeronave',
+    position_kicker: 'Posição do projecto',
+    position_title: 'Não é anti-aviação.<br><em>É pró-medição.</em>',
+    position_copy: 'Lisbon Finals existe entre o fascínio e a responsabilidade. As aeronaves são máquinas bonitas, mas a sua passagem sobre a cidade também deixa sinais mensuráveis: som, vibração, partículas, horários e repetição. O objectivo não é dramatizar o céu. É tornar visível a parte invisível dele.',
+    position_p1_k: 'Abordagem',
+    position_p1_v: 'Observar primeiro, afirmar depois.',
+    position_p2_k: 'Âmbito',
+    position_p2_v: 'Uma varanda, um corredor, registo contínuo.',
+    position_p3_k: 'Utilidade',
+    position_p3_v: 'Dados públicos para residentes curiosos e pessoas da aviação.',
+    start_kicker: 'Começar aqui',
+    start_title: 'Novo no Lisbon Finals?<br><em>Siga o sinal.</em>',
+    start_copy: 'A entrada mais rápida: veja o que a estação está a captar agora, compreenda como as medições funcionam e leia os relatórios e notas por trás dos números.',
+    start_s1_t: 'Ver a estação em directo',
+    start_s1_d: 'Última captura, pico sonoro, pulso de vibração e tráfego observado hoje.',
+    start_s1_a: 'Ir para o live',
+    start_s2_t: 'Compreender as medições',
+    start_s2_d: 'Como telemetria de voo, picos em dB e sensores locais se tornam dados públicos.',
+    start_s2_a: 'Abrir dados',
+    start_s3_t: 'Ler o sinal mensal',
+    start_s3_d: 'Relatórios de ruído, operações nocturnas, anomalias e limites da estação actual.',
+    start_s3_a: 'Ver relatórios',
     cta_data: 'Explorar os dados',
     hlc_eyebrow: 'Último detectado',
     stat_flights_lbl: 'Voos registados',
@@ -1803,7 +2111,35 @@ var INDEX_TRANSLATIONS = {
   fr: {
     hero_pill: 'En direct · Trajectoire d\'approche LPPT',
     hero_w1: 'Chaque', hero_w2: 'avion.', hero_w3: 'Chaque ', hero_w4: 'Et bien plus encore.',
-    hero_sub: 'Une station autonome sur une terrasse à Lisbonne — photographiant, mesurant et publiant chaque aéronef en approche finale vers LPPT, sans aucune intervention humaine.',
+    hero_sub: 'Une vraie station de terrasse sous la trajectoire d\'approche de l\'aéroport de Lisbonne. Elle photographie chaque avion, mesure le bruit et les vibrations, puis publie les meilleures captures sans intervention humaine.',
+    proof_where_k: 'Lieu',
+    proof_where_v: '2,6 km de la RWY 03',
+    proof_measures_k: 'Mesures',
+    proof_measures_v: 'Photo · dB · vibration',
+    proof_mode_k: 'Mode',
+    proof_mode_v: 'Autonome · 24/7',
+    mobile_live_label: 'Dernier avion',
+    position_kicker: 'Position du projet',
+    position_title: 'Pas anti-aviation.<br><em>Pro-mesure.</em>',
+    position_copy: 'Lisbon Finals existe entre fascination et responsabilité. Les avions sont de belles machines, mais leur passage au-dessus de la ville laisse aussi des traces mesurables : son, vibration, particules, horaires et répétition. Le but n’est pas de dramatiser le ciel. C’est de rendre visible sa part invisible.',
+    position_p1_k: 'Approche',
+    position_p1_v: 'Observer d’abord, conclure ensuite.',
+    position_p2_k: 'Périmètre',
+    position_p2_v: 'Une terrasse, un couloir, un relevé continu.',
+    position_p3_k: 'Usage',
+    position_p3_v: 'Des données publiques pour riverains curieux et passionnés d’aviation.',
+    start_kicker: 'Commencer ici',
+    start_title: 'Nouveau sur Lisbon Finals ?<br><em>Suivez le signal.</em>',
+    start_copy: 'L’entrée la plus rapide : voir ce que la station capte maintenant, comprendre comment les mesures fonctionnent, puis lire les rapports et notes derrière les chiffres.',
+    start_s1_t: 'Voir la station en direct',
+    start_s1_d: 'Dernière capture, pic sonore, vibration et trafic observé aujourd’hui.',
+    start_s1_a: 'Aller au live',
+    start_s2_t: 'Comprendre les mesures',
+    start_s2_d: 'Comment télémétrie, pics dB et capteurs locaux deviennent des données publiques.',
+    start_s2_a: 'Ouvrir les données',
+    start_s3_t: 'Lire le signal mensuel',
+    start_s3_d: 'Rapports bruit, opérations nocturnes, anomalies et limites de la station actuelle.',
+    start_s3_a: 'Voir les rapports',
     cta_data: 'Explorer les données',
     hlc_eyebrow: 'Dernier détecté',
     stat_flights_lbl: 'Vols enregistrés',
@@ -2063,6 +2399,7 @@ function applyLang(lang) {
   if (fCols[1]) fCols[1].textContent = t.footer_connect;
   var fKofi = q('.footer-kofi-label span'); if (fKofi) fKofi.textContent = t.footer_support;
   var fCopy = q('.footer-copy'); if (fCopy) fCopy.textContent = t.footer_copy;
+  qa('[data-i18n-html]').forEach(function(el) { var k = el.getAttribute('data-i18n-html'); if (t[k]) el.innerHTML = t[k]; });
   // generic data-i18n sweep
   qa('[data-i18n]').forEach(function(el) { var k = el.getAttribute('data-i18n'); if (t[k]) el.textContent = t[k]; });
 }
@@ -2076,8 +2413,18 @@ document.addEventListener('DOMContentLoaded', function() { applyLang(_lang); });
   var burger = document.getElementById('nav-burger');
   var drawer = document.getElementById('nav-drawer');
   if (burger && drawer) {
+    function setDrawer(open){
+      drawer.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    burger.addEventListener('click', function(){
+      setDrawer(!drawer.classList.contains('open'));
+    });
     document.addEventListener('click', function(e){
-      if (!drawer.contains(e.target) && !burger.contains(e.target)) drawer.classList.remove('open');
+      if (!drawer.contains(e.target) && !burger.contains(e.target)) setDrawer(false);
+    });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setDrawer(false); });
     });
   }
 })();

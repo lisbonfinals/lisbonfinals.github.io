@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Data — Lisbon Finals · LPPT Intelligence</title>
 <meta name="description" content="Live flight data, noise measurements and ANAC violation tracking above Lisbon Airport LPPT.">
+<meta name="theme-color" content="#0a0d12">
+<link rel="canonical" href="https://www.lisbonfinals.com/data.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="Data — Lisbon Finals · LPPT Intelligence">
+<meta property="og:description" content="Live flight data, noise measurements and ANAC violation tracking above Lisbon Airport LPPT.">
+<meta property="og:url" content="https://www.lisbonfinals.com/data.html">
+<meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Data — Lisbon Finals · LPPT Intelligence">
+<meta name="twitter:description" content="Live flight, noise and warning-zone data from the Lisbon Finals terrace station.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://gist.githubusercontent.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -20,6 +36,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--dark);color:var(--white);font-family:var(--sans);overflow-x:hidden;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:4px;}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,9,13,.98),transparent);backdrop-filter:blur(4px);}
@@ -110,6 +127,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   font-style:italic;color:rgba(240,237,232,.38);
 }
 .section-desc{font-family:var(--sans);font-size:14px;line-height:1.8;color:rgba(240,237,232,.43);max-width:520px;margin-top:14px;}
+
+/* ── METHODOLOGY STRIP ── */
+.method-strip{
+  display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:0;
+  background:var(--dark2);border:1px solid var(--border);border-radius:4px;
+  margin:-12px 0 40px;overflow:hidden;
+}
+.method-intro{padding:22px 24px;border-right:1px solid var(--border);}
+.method-kicker{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.method-copy{font-size:13px;line-height:1.75;color:rgba(240,237,232,.56);}
+.method-step{padding:22px 20px;border-right:1px solid var(--border);}
+.method-step:last-child{border-right:none;}
+.method-step-num{font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.55);margin-bottom:10px;}
+.method-step-title{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--white);margin-bottom:8px;}
+.method-step-text{font-size:12px;line-height:1.7;color:rgba(240,237,232,.43);}
 
 /* ── STAT CARDS ── */
 .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;}
@@ -328,6 +360,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:1024px){
   .stat-grid{grid-template-columns:repeat(2,1fr);}
   .warning-hero-card{grid-template-columns:1fr;}
+  .method-strip{grid-template-columns:1fr 1fr;}
+  .method-intro{border-right:none;border-bottom:1px solid var(--border);grid-column:1/-1;}
+  .method-step:nth-child(3){border-right:none;}
   .noise-split{grid-template-columns:1fr;}
   .two-col{grid-template-columns:1fr;}
   .nav-links{display:none;}
@@ -335,16 +370,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 }
 @media(max-width:640px){
   nav,.data-section,.section-tabs-inner,.page-footer{padding-left:20px;padding-right:20px;}
+  .nav-clock-wrap{margin-left:auto;padding-left:14px;gap:8px;}
+  .nav-clock{display:none;}
+  .section-tabs{overflow-x:auto;scrollbar-width:none;}
+  .section-tabs::-webkit-scrollbar{display:none;}
+  .section-tabs-inner{min-width:max-content;}
   .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .method-strip{grid-template-columns:1fr;}
+  .method-step,.method-intro{border-right:none;border-bottom:1px solid var(--border);}
+  .method-step:last-child{border-bottom:none;}
   .section-tab{padding:12px 14px;font-size:9px;}
   .noise-mini-grid{grid-template-columns:1fr 1fr;}
+}
+@media (prefers-reduced-motion: reduce) {
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
 }
 </style>
 </head>
 <body>
 
 <!-- DRAWER -->
-<div class="nav-drawer" id="nav-drawer">
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
   <a href="/" onclick="closeDrawer()">Live</a>
   <a href="/data.html" style="color:var(--amber)" onclick="closeDrawer()">The Data</a>
   <a href="/data.html#noise-data" onclick="closeDrawer()">Noise Data</a>
@@ -352,10 +403,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
   <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
   <a href="/about.html" onclick="closeDrawer()">About</a>
-  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
 </div>
 
-<nav>
+<nav aria-label="Primary navigation">
   <a href="/" class="nav-logo">
     <div class="nav-dot"></div>
     <span class="nav-wordmark">LISBON <span>FINALS</span></span>
@@ -377,18 +428,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
     <div class="lang-group">
-      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en">EN</button>
-      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt">PT</button>
-      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr">FR</button>
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
     </div>
   </div>
-  <button class="nav-burger" id="nav-burger" aria-label="Menu">
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 <!-- SECTION TABS — sits right below fixed nav -->
-<div class="section-tabs">
+<div class="section-tabs" aria-label="Data page sections">
   <div class="section-tabs-inner">
     <a href="#the-data" class="section-tab active" data-i18n="tab_data">The Data</a>
     <a href="#noise-data" class="section-tab" data-i18n="tab_noise">Noise Data</a>
@@ -400,7 +451,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 <section class="data-section" id="the-data">
   <div style="margin-bottom:40px;">
     <div class="section-label" data-i18n="s1_label">Flight intelligence</div>
-    <h2 class="section-title" data-i18n-html="s1_title">The data<br><em>speaks for itself</em></h2>
+    <h1 class="section-title" data-i18n-html="s1_title">The data<br><em>speaks for itself</em></h1>
     <p class="section-desc" data-i18n="s1_desc">Every aircraft detected over our terrace since May 3, 2026 — ADS-B telemetry combined with real-time acoustic measurements.</p>
   </div>
 
@@ -424,6 +475,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="stat-val" id="s1-loud">—</div>
       <div class="stat-lbl" data-i18n="lbl_loud">Flights above 95 dB</div>
       <div class="stat-sub" data-i18n="lbl_loud_sub">cumul. since May 3</div>
+    </div>
+  </div>
+
+  <div class="method-strip" aria-label="Data methodology">
+    <div class="method-intro">
+      <div class="method-kicker" data-i18n="method_kicker">Methodology</div>
+      <div class="method-copy" data-i18n="method_copy">These numbers are station observations, not official airport totals. They describe what crosses this terrace, under this approach corridor, with consistent local sensors.</div>
+    </div>
+    <div class="method-step">
+      <div class="method-step-num">01</div>
+      <div class="method-step-title" data-i18n="method_s1_t">Detect</div>
+      <div class="method-step-text" data-i18n="method_s1_d">ADS-B traffic identifies aircraft, altitude, speed, route and timing.</div>
+    </div>
+    <div class="method-step">
+      <div class="method-step-num">02</div>
+      <div class="method-step-title" data-i18n="method_s2_t">Measure</div>
+      <div class="method-step-text" data-i18n="method_s2_d">Sound and vibration peaks are captured locally as the aircraft passes.</div>
+    </div>
+    <div class="method-step">
+      <div class="method-step-num">03</div>
+      <div class="method-step-title" data-i18n="method_s3_t">Publish</div>
+      <div class="method-step-text" data-i18n="method_s3_d">The best photo and structured data are stored, scored and surfaced publicly.</div>
     </div>
   </div>
 
@@ -813,10 +886,12 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(
 const drawer = document.getElementById('nav-drawer');
 function closeDrawer() {
   drawer.classList.remove('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
 document.getElementById('nav-burger').addEventListener('click', () => {
   const open = drawer.classList.toggle('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', open ? 'true' : 'false');
   document.body.style.overflow = open ? 'hidden' : '';
 });
 
@@ -826,6 +901,11 @@ const T = {
     tab_data:'The Data', tab_noise:'Noise Data', tab_warning:'⚠ Warning Zone',
     s1_label:'Flight intelligence', s1_title:'The data<br><em>speaks for itself</em>',
     s1_desc:'Every aircraft detected over our terrace since May 3, 2026 — ADS-B telemetry combined with real-time acoustic measurements.',
+    method_kicker:'Methodology',
+    method_copy:'These numbers are station observations, not official airport totals. They describe what crosses this terrace, under this approach corridor, with consistent local sensors.',
+    method_s1_t:'Detect', method_s1_d:'ADS-B traffic identifies aircraft, altitude, speed, route and timing.',
+    method_s2_t:'Measure', method_s2_d:'Sound and vibration peaks are captured locally as the aircraft passes.',
+    method_s3_t:'Publish', method_s3_d:'The best photo and structured data are stored, scored and surfaced publicly.',
     lbl_flights:'Flights tracked', lbl_since:'since May 3, 2026',
     lbl_photos:'Photos captured', lbl_today:'Flights today',
     lbl_loud:'Flights above 95 dB', lbl_loud_sub:'cumul. since May 3',
@@ -866,6 +946,11 @@ const T = {
     tab_data:'Os Dados', tab_noise:'Dados de Ruído', tab_warning:'⚠ Zona de Aviso',
     s1_label:'Inteligência de voo', s1_title:'Os dados<br><em>falam por si</em>',
     s1_desc:'Cada aeronave detetada sobre a varanda desde 3 de maio de 2026 — telemetria ADS-B combinada com medições acústicas em tempo real.',
+    method_kicker:'Metodologia',
+    method_copy:'Estes números são observações da estação, não totais oficiais do aeroporto. Descrevem o que passa sobre esta varanda, neste corredor de aproximação, com sensores locais consistentes.',
+    method_s1_t:'Detectar', method_s1_d:'O tráfego ADS-B identifica aeronave, altitude, velocidade, rota e horário.',
+    method_s2_t:'Medir', method_s2_d:'Picos de som e vibração são captados localmente no momento da passagem.',
+    method_s3_t:'Publicar', method_s3_d:'A melhor foto e os dados estruturados são guardados, pontuados e apresentados publicamente.',
     lbl_flights:'Voos registados', lbl_since:'desde 3 de maio de 2026',
     lbl_photos:'Fotos capturadas', lbl_today:'Voos hoje',
     lbl_loud:'Voos acima de 95 dB', lbl_loud_sub:'acumul. desde 3 maio',
@@ -905,9 +990,15 @@ const T = {
   fr: {
     s1_label:'Vols détectés', s1_title:'Les données<br><em>parlent d\'elles-mêmes</em>',
     s1_desc:'Chaque aéronef détecté au-dessus de notre terrasse depuis le 3 mai 2026 — télémétrie ADS-B combinée avec des mesures acoustiques en temps réel.',
+    method_kicker:'Méthodologie',
+    method_copy:'Ces chiffres sont des observations de station, pas les totaux officiels de l’aéroport. Ils décrivent ce qui passe au-dessus de cette terrasse, dans ce couloir d’approche, avec des capteurs locaux constants.',
+    method_s1_t:'Détecter', method_s1_d:'Le trafic ADS-B identifie avion, altitude, vitesse, route et horaire.',
+    method_s2_t:'Mesurer', method_s2_d:'Les pics de son et de vibration sont captés localement au passage de l’appareil.',
+    method_s3_t:'Publier', method_s3_d:'La meilleure photo et les données structurées sont stockées, scorées et rendues publiques.',
     ticker_title:'Détections récentes', ticker_live:'En direct',
-    lbl_total:'Vols totaux', lbl_today:'Vols aujourd\'hui', lbl_loud:'Vols au-dessus de 95 dB',
-    lbl_loud_sub:'cumul depuis le 3 mai', lbl_photos:'Photos publiées',
+    lbl_total:'Vols totaux', lbl_flights:'Vols suivis', lbl_since:'depuis le 3 mai 2026',
+    lbl_today:'Vols aujourd\'hui', lbl_loud:'Vols au-dessus de 95 dB',
+    lbl_loud_sub:'cumul depuis le 3 mai', lbl_photos:'Photos capturées',
     s2_label:'Surveillance acoustique', s2_title:'Données acoustiques<br><em>pour tous</em>',
     s2_desc:'Mesures SPL réelles au niveau du sol sur la terrasse face à la piste 03. Chaque passage, chaque décibel, horodaté.',
     chart_title:'dB moyen par heure (aujourd\'hui) · SPL',

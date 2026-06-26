@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Captain's Log — Lisbon Finals</title>
 <meta name="description" content="Field journal from the Lisbon Finals monitoring station. Technical updates, rare catches, hardware changes — written from the terrace in real time.">
+<meta name="theme-color" content="#0a0d12">
+<link rel="canonical" href="https://www.lisbonfinals.com/log.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="Captain's Log — Lisbon Finals">
+<meta property="og:description" content="Field journal from the Lisbon Finals monitoring station: technical updates, rare catches, hardware changes and terrace notes.">
+<meta property="og:url" content="https://www.lisbonfinals.com/log.html">
+<meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Captain's Log — Lisbon Finals">
+<meta name="twitter:description" content="Operational notes and field journal from the Lisbon Finals terrace station.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://gist.githubusercontent.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -29,6 +45,10 @@ body {
   color: var(--white);
   font-family: var(--sans);
   overflow-x: hidden;
+}
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
 }
 
 /* ── NAV ── */
@@ -493,6 +513,8 @@ nav {
 }
 @media (max-width: 640px) {
   nav { padding: 16px 20px; }
+  .nav-clock-wrap { margin-left:auto; padding-left:14px; gap:8px; }
+  .nav-clock { display:none; }
   .log-hero { padding: 100px 20px 40px; }
   .log-filters { padding: 0 20px 24px; }
   .log-featured-wrap, .log-secondary-wrap { padding: 0 20px; }
@@ -500,6 +522,14 @@ nav {
   .log-secondary-grid { grid-template-columns: 1fr; }
   .log-featured-title { font-size: 26px; }
   .log-footer { padding: 24px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after {
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
 }
 
 /* ── NAV DROPDOWN ── */
@@ -551,7 +581,7 @@ nav {
 <body>
 
 <!-- DRAWER MOBILE -->
-<div class="nav-drawer" id="nav-drawer">
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
   <a href="/" onclick="closeDrawer()">Live</a>
   <a href="/data.html#the-data" onclick="closeDrawer()">The Data</a>
   <a href="/data.html#noise-data" onclick="closeDrawer()">Noise Data</a>
@@ -559,10 +589,10 @@ nav {
   <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
   <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
   <a href="/about.html" onclick="closeDrawer()">About</a>
-  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
 </div>
 
-<nav>
+<nav aria-label="Primary navigation">
   <a href="/index.html" class="nav-logo">
     <div class="nav-dot"></div>
     <span class="nav-wordmark">LISBON <span>FINALS</span></span>
@@ -584,12 +614,12 @@ nav {
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
     <div class="lang-group">
-      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en">EN</button>
-      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt">PT</button>
-      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr">FR</button>
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
     </div>
   </div>
-  <button class="nav-burger" id="nav-burger" aria-label="Menu">
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -597,7 +627,7 @@ nav {
 <!-- HERO -->
 <header class="log-hero">
   <div class="log-captain-portrait">
-    <img src="https://lisbonfinals.github.io/ressources/captain.png" alt="The Captain">
+    <img src="https://lisbonfinals.github.io/ressources/captain.png" alt="The Captain" decoding="async" fetchpriority="high">
   </div>
   <div class="log-hero-eyebrow"><span></span>Field Journal</div>
   <h1 class="log-hero-title">Captain's<br><em>Log</em></h1>
@@ -613,15 +643,15 @@ nav {
 </header>
 
 <!-- FILTERS -->
-<div class="log-filters" id="filters">
-  <button class="log-filter-btn active" data-cat="all">All</button>
-  <button class="log-filter-btn" data-cat="capture">📸 Capture</button>
-  <button class="log-filter-btn" data-cat="fix">🛠️ Fix</button>
-  <button class="log-filter-btn" data-cat="hardware">⚙️ Hardware</button>
-  <button class="log-filter-btn" data-cat="rare">✈️ Rare Find</button>
-  <button class="log-filter-btn" data-cat="stats">📊 Stats</button>
-  <button class="log-filter-btn" data-cat="note">📝 Note</button>
-  <button class="log-filter-btn" data-cat="milestone">🏆 Milestone</button>
+<div class="log-filters" id="filters" role="toolbar" aria-label="Filter log entries">
+  <button type="button" class="log-filter-btn active" data-cat="all" aria-pressed="true">All</button>
+  <button type="button" class="log-filter-btn" data-cat="capture" aria-pressed="false">📸 Capture</button>
+  <button type="button" class="log-filter-btn" data-cat="fix" aria-pressed="false">🛠️ Fix</button>
+  <button type="button" class="log-filter-btn" data-cat="hardware" aria-pressed="false">⚙️ Hardware</button>
+  <button type="button" class="log-filter-btn" data-cat="rare" aria-pressed="false">✈️ Rare Find</button>
+  <button type="button" class="log-filter-btn" data-cat="stats" aria-pressed="false">📊 Stats</button>
+  <button type="button" class="log-filter-btn" data-cat="note" aria-pressed="false">📝 Note</button>
+  <button type="button" class="log-filter-btn" data-cat="milestone" aria-pressed="false">🏆 Milestone</button>
 </div>
 
 <!-- GRID -->
@@ -785,8 +815,12 @@ document.addEventListener('keydown', e => {
 document.getElementById('filters').addEventListener('click', e => {
   const btn = e.target.closest('.log-filter-btn');
   if (!btn) return;
-  document.querySelectorAll('.log-filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.log-filter-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false');
+  });
   btn.classList.add('active');
+  btn.setAttribute('aria-pressed', 'true');
   _activeFilter = btn.dataset.cat;
   renderGrid(_allEntries);
 });
@@ -803,7 +837,8 @@ fetch(JOURNAL_URL + '?t=' + Date.now())
     });
     document.getElementById('entryCount').textContent = `${_allEntries.length} entr${_allEntries.length !== 1 ? 'ies' : 'y'}`;
     if (_allEntries[0]) {
-      document.getElementById('footerUpdated').textContent = 'Last entry: ' + _allEntries.find(e => !e.pinned)?.date || _allEntries[0].date;
+      const lastEntryDate = (_allEntries.find(e => !e.pinned) || _allEntries[0]).date;
+      document.getElementById('footerUpdated').textContent = 'Last entry: ' + lastEntryDate;
     }
     renderGrid(_allEntries);
   })
@@ -816,10 +851,12 @@ fetch(JOURNAL_URL + '?t=' + Date.now())
 const drawer = document.getElementById('nav-drawer');
 function closeDrawer() {
   drawer.classList.remove('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
 document.getElementById('nav-burger').addEventListener('click', () => {
   const open = drawer.classList.toggle('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', open ? 'true' : 'false');
   document.body.style.overflow = open ? 'hidden' : '';
 });
 </script>
@@ -840,6 +877,7 @@ const LOG_TRANSLATIONS = {
     filter_rare: '✈️ Raro',
     filter_stats: '📊 Stats',
     filter_note: '📝 Nota',
+    filter_milestone: '🏆 Marco',
     footer_left: 'LISBON FINALS · Diário do Capitão · lisbonfinals.github.io',
   },
   en: {
@@ -855,6 +893,7 @@ const LOG_TRANSLATIONS = {
     filter_rare: '✈️ Rare Find',
     filter_stats: '📊 Stats',
     filter_note: '📝 Note',
+    filter_milestone: '🏆 Milestone',
     footer_left: "LISBON FINALS · Captain's Log · lisbonfinals.github.io",
   },
   fr: {
@@ -870,6 +909,7 @@ const LOG_TRANSLATIONS = {
     filter_rare: '✈️ Rare',
     filter_stats: '📊 Stats',
     filter_note: '📝 Note',
+    filter_milestone: '🏆 Étape',
     footer_left: 'LISBON FINALS · Journal de bord · lisbonfinals.github.io',
   }
 };
@@ -892,7 +932,7 @@ function applyLang(lang) {
   const footerLeft = document.getElementById('footerLeft');
   if (footerLeft) footerLeft.textContent = t.footer_left;
   // Filters
-  const filterLabels = [t.filter_all, t.filter_capture, t.filter_fix, t.filter_hardware, t.filter_rare, t.filter_stats, t.filter_note];
+  const filterLabels = [t.filter_all, t.filter_capture, t.filter_fix, t.filter_hardware, t.filter_rare, t.filter_stats, t.filter_note, t.filter_milestone];
   document.querySelectorAll('.log-filter-btn').forEach((btn, i) => {
     if (filterLabels[i]) btn.textContent = filterLabels[i];
   });

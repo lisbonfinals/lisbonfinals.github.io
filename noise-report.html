@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Noise Report — Lisbon Finals · LPPT Acoustic Monitoring</title>
 <meta name="description" content="Monthly noise monitoring report for Lisbon Airport (LPPT). Flight-by-flight acoustic data, airline rankings, night violation tracking.">
+<meta name="theme-color" content="#0a0d12">
+<link rel="canonical" href="https://www.lisbonfinals.com/noise-report.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="Noise Report — Lisbon Finals · LPPT Acoustic Monitoring">
+<meta property="og:description" content="Monthly independent noise monitoring report for Lisbon Airport: flight-by-flight acoustic data, airline rankings and night tracking.">
+<meta property="og:url" content="https://www.lisbonfinals.com/noise-report.html">
+<meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Noise Report — Lisbon Finals">
+<meta name="twitter:description" content="Independent acoustic monitoring reports from the Lisbon Finals terrace station.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://gist.githubusercontent.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -39,6 +55,10 @@ body {
   font-family: var(--sans);
   overflow-x: hidden;
   cursor: none;
+}
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
 }
 
 /* ── CURSOR ── */
@@ -390,6 +410,29 @@ nav {
 .insight-box-text { font-size:13px; color:rgba(240,237,232,.65); line-height:1.7; }
 .insight-box-text strong { color:var(--white); }
 
+/* ── REPORT METHODOLOGY ── */
+.report-method {
+  display:grid;grid-template-columns:1.15fr 1fr;gap:28px;
+  background:rgba(13,17,23,.72);border:1px solid var(--border);
+  border-left:2px solid rgba(245,166,35,.58);border-radius:12px;
+  padding:24px 28px;margin-bottom:36px;
+}
+.report-method-title {
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:12px;
+}
+.report-method-copy { font-size:13px;line-height:1.8;color:rgba(240,237,232,.62); }
+.report-method-list { display:grid;gap:10px; }
+.report-method-item {
+  display:grid;grid-template-columns:92px 1fr;gap:16px;
+  border-top:1px solid rgba(240,237,232,.06);padding-top:10px;
+}
+.report-method-k {
+  font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(240,237,232,.34);
+}
+.report-method-v { font-family:var(--mono);font-size:10px;line-height:1.6;color:rgba(240,237,232,.54); }
+
 /* ── HARDWARE NOTE ── */
 .hardware-note {
   background: rgba(245,158,11,.05);
@@ -430,6 +473,8 @@ footer {
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
+  .nav-clock-wrap { margin-left:auto; padding-left:14px; gap:8px; }
+  .nav-clock { display:none; }
   .hero { padding: 100px 20px 48px; min-height: 60vh; }
   .hero-title { font-size: clamp(36px, 10vw, 52px); }
   .hero-subtitle { font-size: 13px; max-width: 100%; }
@@ -446,12 +491,26 @@ footer {
   .report-featured { border-radius:12px; }
   .report-featured-header { padding: 18px 20px; flex-direction:column; align-items:flex-start; gap:12px; }
   .report-featured-body { padding: 18px 20px; }
+  .report-method { grid-template-columns:1fr;padding:20px; }
+  .report-method-item { grid-template-columns:1fr;gap:5px; }
   .report-kpis { gap:12px; flex-wrap:wrap; }
   .report-kpi-val { font-size: 16px; }
   .violations-row { flex-direction:column; }
   .vio-badge { width:100%; }
   .archive-grid { grid-template-columns: 1fr; }
   footer { padding: 20px; flex-direction:column; gap:8px; text-align:center; }
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  body, a, button { cursor:auto; }
+  .cursor, .cursor-ring { display:none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after {
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
 }
 
 /* ── NAV DROPDOWN ── */
@@ -499,7 +558,7 @@ footer {
 <div class="cursor-ring" id="cursor-ring"></div>
 
 <!-- ── MOBILE DRAWER ── -->
-<div class="nav-drawer" id="nav-drawer">
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
   <a href="/" onclick="closeDrawer()">Live</a>
   <a href="/data.html#the-data" onclick="closeDrawer()">The Data</a>
   <a href="/data.html#noise-data" onclick="closeDrawer()">Noise Data</a>
@@ -507,11 +566,11 @@ footer {
   <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
   <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
   <a href="/about.html" onclick="closeDrawer()">About</a>
-  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
 </div>
 
 <!-- ── NAV ── -->
-<nav>
+<nav aria-label="Primary navigation">
   <a href="/" class="nav-logo">
     <div class="nav-dot"></div>
     <span class="nav-wordmark">LISBON <span>FINALS</span></span>
@@ -533,12 +592,12 @@ footer {
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
     <div class="lang-group">
-      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en">EN</button>
-      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt">PT</button>
-      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr">FR</button>
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
     </div>
   </div>
-  <button class="nav-burger" id="nav-burger" aria-label="Menu">
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -597,6 +656,27 @@ footer {
   </div>
   <div id="report-container">
     <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><br><br><span data-i18n="loading_txt">Loading report data...</span></div>
+  </div>
+
+  <div class="report-method" aria-label="Report methodology">
+    <div>
+      <div class="report-method-title" data-i18n="method_title">How to read this report</div>
+      <div class="report-method-copy" data-i18n="method_copy">This is independent residential monitoring from one fixed terrace below the LPPT approach corridor. It is designed to show repeatable local exposure, not to replace certified airport noise mapping.</div>
+    </div>
+    <div class="report-method-list">
+      <div class="report-method-item">
+        <div class="report-method-k" data-i18n="method_k1">Source</div>
+        <div class="report-method-v" data-i18n="method_v1">ADS-B flight data paired with station SPL readings.</div>
+      </div>
+      <div class="report-method-item">
+        <div class="report-method-k" data-i18n="method_k2">Limit</div>
+        <div class="report-method-v" data-i18n="method_v2">Current microphone can cap near 100 dB; peaks may be understated.</div>
+      </div>
+      <div class="report-method-item">
+        <div class="report-method-k" data-i18n="method_k3">Purpose</div>
+        <div class="report-method-v" data-i18n="method_v3">A public record for patterns, outliers and night-time disturbance.</div>
+      </div>
+    </div>
   </div>
 
   <!-- ARCHIVE -->
@@ -789,7 +869,7 @@ function renderReport(report) {
 
       <div class="download-row">
         ${report.pdf_url
-          ? `<a href="${report.pdf_url}" target="_blank" class="btn-download">
+          ? `<a href="${report.pdf_url}" target="_blank" rel="noopener noreferrer" class="btn-download">
                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v13M5 15l7 7 7-7"/><path d="M3 20h18"/></svg>
                Download Full Report — ${mn} ${report.year}
              </a>
@@ -841,7 +921,7 @@ function renderArchive(reports, activeIdx) {
       <div class="archive-card-footer">
         <span>${r.night_pct||0}% night operations</span>
         ${r.pdf_url
-          ? `<a href="${r.pdf_url}" target="_blank" class="archive-dl-btn" onclick="event.stopPropagation()">
+          ? `<a href="${r.pdf_url}" target="_blank" rel="noopener noreferrer" class="archive-dl-btn" onclick="event.stopPropagation()">
                ↓ PDF
              </a>`
           : '<span style="opacity:.4">No PDF</span>'
@@ -906,11 +986,13 @@ const drawer = document.getElementById('nav-drawer');
 burger && burger.addEventListener('click', () => {
   const open = drawer.classList.toggle('open');
   burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
   document.body.style.overflow = open ? 'hidden' : '';
 });
 function closeDrawer() {
   drawer && drawer.classList.remove('open');
   burger && burger.classList.remove('open');
+  burger && burger.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
 
@@ -923,6 +1005,11 @@ const TRANSLATIONS = {
     hero_title1: 'Noise', hero_title2: 'Report', hero_title3: 'by the numbers',
     hero_sub1: 'Every flight. Every decibel. Every night.',
     hero_sub2: 'Independent acoustic monitoring of Lisbon Airport — flight by flight, month by month.',
+    method_title: 'How to read this report',
+    method_copy: 'This is independent residential monitoring from one fixed terrace below the LPPT approach corridor. It is designed to show repeatable local exposure, not to replace certified airport noise mapping.',
+    method_k1: 'Source', method_v1: 'ADS-B flight data paired with station SPL readings.',
+    method_k2: 'Limit', method_v2: 'Current microphone can cap near 100 dB; peaks may be understated.',
+    method_k3: 'Purpose', method_v3: 'A public record for patterns, outliers and night-time disturbance.',
     stat_flights: 'Flights This Month', stat_avg: 'Avg Noise Level',
     stat_violations: 'Night Violations', stat_night: 'Night Operations',
     archive_label: 'Archive', loading_txt: 'Loading report data...',
@@ -938,6 +1025,11 @@ const TRANSLATIONS = {
     hero_title1: 'Relatório', hero_title2: 'de Ruído', hero_title3: 'pelos números',
     hero_sub1: 'Cada voo. Cada decibel. Cada noite.',
     hero_sub2: 'Monitorização acústica independente do Aeroporto de Lisboa — voo a voo, mês a mês.',
+    method_title: 'Como ler este relatório',
+    method_copy: 'Esta é uma monitorização residencial independente a partir de uma varanda fixa sob o corredor de aproximação LPPT. Serve para mostrar exposição local repetível, não para substituir mapas acústicos aeroportuários certificados.',
+    method_k1: 'Fonte', method_v1: 'Dados ADS-B de voo cruzados com leituras SPL da estação.',
+    method_k2: 'Limite', method_v2: 'O microfone actual pode limitar perto de 100 dB; alguns picos podem estar subestimados.',
+    method_k3: 'Objectivo', method_v3: 'Um registo público de padrões, anomalias e perturbação nocturna.',
     stat_flights: 'Voos Este Mês', stat_avg: 'Nível Médio de Ruído',
     stat_violations: 'Infrações Noturnas', stat_night: 'Operações Noturnas',
     archive_label: 'Arquivo', loading_txt: 'A carregar dados...',
@@ -951,6 +1043,11 @@ const TRANSLATIONS = {
     hero_title1: 'Rapport', hero_title2: 'Bruit', hero_title3: 'en chiffres',
     hero_sub1: 'Chaque vol. Chaque décibel. Chaque nuit.',
     hero_sub2: 'Surveillance acoustique indépendante de l\'Aéroport de Lisbonne — vol par vol, mois par mois.',
+    method_title: 'Comment lire ce rapport',
+    method_copy: 'Il s’agit d’une surveillance résidentielle indépendante depuis une terrasse fixe sous le couloir d’approche LPPT. Elle montre une exposition locale répétable, sans remplacer une cartographie acoustique aéroportuaire certifiée.',
+    method_k1: 'Source', method_v1: 'Données ADS-B des vols associées aux mesures SPL de la station.',
+    method_k2: 'Limite', method_v2: 'Le microphone actuel peut plafonner près de 100 dB ; certains pics peuvent être sous-estimés.',
+    method_k3: 'But', method_v3: 'Un registre public des tendances, anomalies et nuisances nocturnes.',
     stat_flights: 'Vols ce mois', stat_avg: 'Niveau sonore moyen',
     stat_violations: 'Infractions nocturnes', stat_night: 'Opérations nocturnes',
     archive_label: 'Archives', loading_txt: 'Chargement des données...',
