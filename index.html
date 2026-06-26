@@ -479,7 +479,7 @@ nav {
 /* ── SECTION BODY ── */
 .section-body {
   font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.47);
-  line-height:1.85;max-width:640px;margin-top:18px;letter-spacing:.01em;
+  line-height:1.9;max-width:760px;margin:5px 0 0;letter-spacing:.01em;
 }
 
 /* ── SECTION SENSORS LEGEND ── */
@@ -712,10 +712,13 @@ nav {
 
 /* ── SECTION HEADER ── */
 .section-header {
-  padding:32px 48px 44px;
+  padding:52px 48px 56px;
   border-bottom:1px solid var(--border);
   background:var(--dark);
+  display:grid;grid-template-columns:minmax(320px,.82fr) minmax(420px,1.18fr);
+  gap:72px;align-items:start;
 }
+.section-heading { min-width:0; }
 .section-eyebrow {
   font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:16px;
@@ -732,7 +735,7 @@ nav {
 
 /* ── PROJECT POSITION ── */
 .position-band {
-  display:grid;grid-template-columns:1fr 1.25fr;gap:64px;
+  display:grid;grid-template-columns:minmax(320px,.82fr) minmax(420px,1.18fr);gap:72px;
   padding:64px 48px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
   background:linear-gradient(135deg,rgba(245,166,35,.035),rgba(13,17,23,.35) 48%,rgba(10,13,18,1));
 }
@@ -783,39 +786,16 @@ nav {
 .start-steps { display:grid;grid-template-columns:repeat(3,1fr);gap:26px;background:transparent;border:0; }
 .start-step {
   position:relative;text-decoration:none;display:flex;flex-direction:column;min-height:auto;
-  padding:0 0 0 18px;border-left:1px solid rgba(245,166,35,.34);transition:border-color .2s,transform .2s;
+  padding:0 0 0 18px;border-left:1px solid rgba(245,166,35,.34);transition:border-color .2s;
 }
 .start-step::before {
   content:'';position:absolute;left:-4px;top:4px;width:7px;height:7px;border-radius:50%;
   background:var(--amber);box-shadow:0 0 0 8px rgba(245,166,35,.06);
 }
-.start-step:hover { border-color:rgba(245,166,35,.75);transform:translateY(-2px); }
+.start-step:hover { border-color:rgba(245,166,35,.75); }
 .start-step-title { font-size:20px;font-weight:800;color:var(--white);line-height:1.05;margin-bottom:10px;max-width:260px; }
 .start-step-desc { font-size:12px;line-height:1.75;color:rgba(240,237,232,.44);max-width:260px; }
 .start-step-arrow { font-family:var(--mono);font-size:10px;color:var(--amber);margin-top:14px;letter-spacing:.08em;text-transform:uppercase; }
-
-/* ── EXPLORE BAND ── */
-.explore-band {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  display:block;padding:0 48px;background:var(--dark);
-}
-.explore-card {
-  padding:30px 0;text-decoration:none;display:grid;grid-template-columns:170px minmax(220px,300px) minmax(280px,1fr) auto;
-  gap:32px;align-items:center;transition:background .25s;position:relative;overflow:hidden;border-bottom:1px solid var(--border);
-}
-.explore-card:last-child { border-bottom:none; }
-.explore-card::before {
-  content:'';position:absolute;left:-48px;top:0;bottom:0;width:2px;
-  background:var(--amber);opacity:0;transition:opacity .2s;
-}
-.explore-card:hover::before { opacity:.75; }
-.explore-card:hover .ec-arrow { transform:translateX(4px); }
-.ec-label { font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.3); }
-.ec-title { font-family:var(--sans);font-weight:800;font-size:22px;color:var(--white);letter-spacing:-.01em;margin-bottom:0;line-height:1.05; }
-.ec-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.36); }
-.ec-desc { font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.36);line-height:1.85; }
-.ec-arrow { display:inline-block;font-family:var(--mono);font-size:11px;color:var(--amber);transition:transform .2s;white-space:nowrap; }
 
 /* ── FOOTER ── */
 footer {
@@ -887,9 +867,6 @@ footer {
   .ls-info { padding:32px 20px; }
   .gallery-strip { grid-template-columns:1fr 1fr; }
   .weather-grid { grid-template-columns:1fr 1fr; }
-  .explore-band { padding:0 20px; }
-  .explore-card { grid-template-columns:1fr; gap:10px; padding:28px 0; }
-  .explore-card::before { left:-20px; }
   .runway-strip { padding:0 20px; }
   .weather-section { padding:48px 20px; grid-template-columns:1fr; }
   .aq-section { padding:48px 20px; grid-template-columns:1fr; }
@@ -901,7 +878,8 @@ footer {
   .start-step { min-height:auto; }
   .stats-row { grid-template-columns:1fr 1fr; }
   .stat-cell { padding:20px 20px; }
-  .section-header { padding:36px 20px 28px; }
+  .section-header { grid-template-columns:1fr; gap:22px; padding:36px 20px 32px; }
+  .section-body { max-width:100%; margin-top:0; }
   .footer-top { flex-wrap:wrap; }
   footer { padding:40px 20px; }
   .footer-radar { width:100%; align-items:center; }
@@ -1191,8 +1169,10 @@ footer {
 
 <!-- SECTION HEADER: LATEST CAPTURES -->
 <div class="section-header" id="latest-captures">
-  <div class="section-eyebrow">Latest captures</div>
-  <div class="section-title">Live<em>from the terrace</em></div>
+  <div class="section-heading">
+    <div class="section-eyebrow">Latest captures</div>
+    <div class="section-title">Live<em>from the terrace</em></div>
+  </div>
   <p class="section-body" id="section-body-el">Each detected aircraft triggers the full pipeline. A YOLO-trained model evaluates every frame and scores the photo from 1 to 5 — only the best make it to Instagram, without any human input. Two sensors capture what the eye can't see: an ADS1115 circuit measures the peak decibel level as the aircraft passes, and an MPU-6050 accelerometer records the vibration pulse transmitted through the building structure. One plane. Three data points.</p>
 </div>
 
@@ -1348,7 +1328,7 @@ footer {
         <div class="start-step-desc" data-i18n="start_s1_d">Latest capture, sound peak, vibration pulse and today’s observed traffic.</div>
         <div class="start-step-arrow" data-i18n="start_s1_a">Jump to live</div>
       </a>
-      <a href="/data.html#noise-data" class="start-step">
+      <a href="/data.html" class="start-step">
         <div class="start-step-title" data-i18n="start_s2_t">Understand the measurements</div>
         <div class="start-step-desc" data-i18n="start_s2_d">How flight telemetry, dB peaks and local sensor readings become public data.</div>
         <div class="start-step-arrow" data-i18n="start_s2_a">Open data</div>
@@ -1361,28 +1341,6 @@ footer {
     </div>
   </div>
 </section>
-
-<!-- EXPLORE BAND -->
-<div class="explore-band">
-  <a href="/data.html" class="explore-card">
-    <div class="ec-label">The data</div>
-    <div class="ec-title">Flight &amp; noise<br><em>intelligence</em></div>
-    <div class="ec-desc">Every flight tracked. Every decibel measured. Live ticker, ANAC warning zone, and full acoustic history.</div>
-    <span class="ec-arrow">→ Explore data</span>
-  </a>
-  <a href="/log.html" class="explore-card">
-    <div class="ec-label">Captain's Log</div>
-    <div class="ec-title">The station<br><em>journal</em></div>
-    <div class="ec-desc">Operational notes, unusual events, maintenance logs, and observations from the terrace.</div>
-    <span class="ec-arrow">→ Read the log</span>
-  </a>
-  <a href="/about.html" class="explore-card">
-    <div class="ec-label">The project</div>
-    <div class="ec-title">A personal<br><em>experiment</em></div>
-    <div class="ec-desc">RTL-SDR, YOLO, Real-ESRGAN, Raspberry Pi — how one autonomous station works end-to-end.</div>
-    <span class="ec-arrow">→ How it works</span>
-  </a>
-</div>
 
 <!-- FOOTER -->
 <footer>
@@ -2378,24 +2336,6 @@ function applyLang(lang) {
   var aqBadgeLbl = el('aq-badge-lbl'); if (aqBadgeLbl && aqBadgeLbl.textContent === INDEX_TRANSLATIONS['en'].aq_sensor_pending || (aqBadgeLbl && aqBadgeLbl.textContent === INDEX_TRANSLATIONS['pt'].aq_sensor_pending) || (aqBadgeLbl && aqBadgeLbl.textContent === INDEX_TRANSLATIONS['fr'].aq_sensor_pending)) aqBadgeLbl.textContent = t.aq_sensor_pending;
   var aqPendTxt = el('aq-pending-txt'); if (aqPendTxt) aqPendTxt.textContent = t.aq_pending_txt;
   var aqFooter = el('aq-footer-el'); if (aqFooter) aqFooter.textContent = t.aq_footer;
-  // Explore cards
-  var ecCards = qa('.explore-card');
-  var ecData = [
-    [t.ec1_lbl, t.ec1_title, t.ec1_desc, t.ec1_arrow],
-    [t.ec2_lbl, t.ec2_title, t.ec2_desc, t.ec2_arrow],
-    [t.ec3_lbl, t.ec3_title, t.ec3_desc, t.ec3_arrow]
-  ];
-  ecCards.forEach(function(card, i) {
-    if (!ecData[i]) return;
-    var lbl = card.querySelector('.ec-label');
-    var ttl = card.querySelector('.ec-title');
-    var dsc = card.querySelector('.ec-desc');
-    var arr = card.querySelector('.ec-arrow');
-    if (lbl) lbl.textContent = ecData[i][0];
-    if (ttl) ttl.innerHTML = ecData[i][1];
-    if (dsc) dsc.textContent = ecData[i][2];
-    if (arr) arr.textContent = ecData[i][3];
-  });
   // Footer
   var fDesc = q('.footer-desc'); if (fDesc) fDesc.textContent = t.footer_desc;
   var fCols = qa('.footer-col-title');
