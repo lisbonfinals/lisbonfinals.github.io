@@ -384,6 +384,8 @@ nav {
 .ti-db   { color:var(--amber); font-weight:500; }
 .ti-ts   { color:rgba(240,237,232,.33); font-size:10px; }
 .ti-flag { font-size:14px; line-height:1; }
+.ti-unit { color:rgba(240,237,232,.3); font-size:9.5px; margin-left:2px; }
+.ti-vib  { display:inline-flex; align-items:center; gap:4px; font-size:10px; }
 
 /* ── LATEST SHOT ── */
 .latest-shot {
@@ -1639,10 +1641,24 @@ fetch('https://api.github.com/gists/' + GIST_ID)
             var flag= t.flag || '';
             var al  = t.airline  || '';
             var ac  = t.aircraft || '';
-            var alt = t.alt_ft   ? Math.round(t.alt_ft)+' ft' : '—';
-            var spd = t.speed_kts? Math.round(t.speed_kts)+' kt' : '—';
+            var altFt = t.alt_ft ? Math.round(t.alt_ft) : null;
+            var alt = altFt ? altFt+' ft<span class="ti-unit">/ '+Math.round(altFt*0.3048)+' m</span>' : '—';
+            var spdKt = t.speed_kts ? Math.round(t.speed_kts) : null;
+            var spd = spdKt ? spdKt+' kt<span class="ti-unit">/ '+Math.round(spdKt*1.852)+' km/h</span>' : '—';
             var db  = t.noise_db ? Math.round(t.noise_db)+' dB' : '—';
             var ts  = t.timestamp ? (function(){ var d=new Date(t.timestamp); return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
+            /* vibration indicator */
+            var vibHtml = '';
+            var vp = t.vibration_peak != null ? t.vibration_peak : null;
+            if(vp != null){
+              var vlvl = vp>=80?4:vp>=50?3:vp>=20?2:1;
+              var VIB_LABELS={en:['','soft','felt','strong','intense'],pt:['','suave','sentido','forte','intenso'],fr:['','léger','senti','fort','intense']};
+              var VIB_COLORS=['','rgba(74,222,128,.85)','rgba(251,191,36,.85)','rgba(251,146,60,.85)','rgba(248,113,113,.85)'];
+              var vlbl=(VIB_LABELS[_lang]||VIB_LABELS.en)[vlvl];
+              var vcol=VIB_COLORS[vlvl];
+              var vbars='█'.repeat(vlvl)+'<span style="color:rgba(240,237,232,.12)">'+'░'.repeat(4-vlvl)+'</span>';
+              vibHtml='<span class="ti-sep">·</span><span class="ti-vib" style="color:'+vcol+'">'+vbars+' '+vlbl+'</span>';
+            }
             return '<span class="ticker-item">'+
               (ts?'<span class="ti-ts">'+ts+'</span><span class="ti-sep">·</span>':'')+
               (flag?'<span class="ti-flag">'+flag+'</span>':'')+
@@ -1652,6 +1668,7 @@ fetch('https://api.github.com/gists/' + GIST_ID)
               '<span class="ti-sep">·</span><span class="ti-val">'+alt+'</span>'+
               '<span class="ti-sep">·</span><span class="ti-val">'+spd+'</span>'+
               '<span class="ti-sep">·</span><span class="ti-db">'+db+'</span>'+
+              vibHtml+
             '</span>';
           }
           var html = tdata.map(mkTick).join('');
