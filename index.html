@@ -806,10 +806,11 @@ footer {
   padding: 60px 48px 40px;
 }
 .footer-top {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 40px; margin-bottom: 48px;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 40px; margin-bottom: 48px;
 }
 .footer-brand { max-width: 320px; }
+.footer-links { justify-self: end; }
 .footer-brand-name { font-size:18px;font-weight:800;letter-spacing:.05em;margin-bottom:12px; }
 .footer-brand-name span { color:var(--amber); }
 .footer-desc { font-size:13px;color:rgba(240,237,232,.43);line-height:1.7; }
@@ -1405,16 +1406,16 @@ footer {
 
     <div class="footer-links">
       <div class="footer-col">
-        <div class="footer-col-title">Project</div>
-        <a href="/about.html">How it works</a>
-        <a href="/data.html">Statistics</a>
-        <a href="/data.html#noise-data">Noise data</a>
+        <div class="footer-col-title">Station</div>
+        <a href="about.html">How it works</a>
+        <a href="data.html">Statistics</a>
+        <a href="data.html#noise-data">Noise data</a>
+        <a href="noise-report.html">Noise Report</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Connect</div>
-        <a href="https://instagram.com/lisbon.finals">@lisbon.finals</a>
-        <a href="mailto:lisbon.final.spots@gmail.com">Contact</a>
-        <a href="/noise-report.html">Noise Report</a>
+        <a href="https://instagram.com/lisbon.finals" target="_blank" rel="noopener">@lisbon.finals</a>
+        <a href="mailto:chronos@lisbonfinals.com">Contact</a>
       </div>
     </div>
   </div>
