@@ -364,7 +364,7 @@ nav {
 .ticker-scroll { flex:1; overflow:hidden; }
 .ticker-track {
   display:inline-flex; align-items:center;
-  animation: tickermove 55s linear infinite;
+  animation: tickermove 120s linear infinite;
   white-space:nowrap;
 }
 .ticker-track:hover { animation-play-state:paused; }
@@ -510,19 +510,23 @@ nav {
 /* ── GALLERY STRIP ── */
 .gallery-strip { overflow:hidden; position:relative; }
 .gallery-strip::before,.gallery-strip::after {
-  content:''; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none;
+  content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none;
 }
 .gallery-strip::before { left:0; background:linear-gradient(to right,var(--dark),transparent); }
 .gallery-strip::after  { right:0; background:linear-gradient(to left,var(--dark),transparent); }
 .gallery-track {
   display:flex; gap:3px;
-  transition: transform .7s cubic-bezier(.4,0,.2,1);
-  will-change: transform;
+  animation: gallery-scroll 40s linear infinite;
+  width:max-content;
+}
+.gallery-strip:hover .gallery-track { animation-play-state:paused; }
+@keyframes gallery-scroll {
+  0%   { transform:translateX(0); }
+  100% { transform:translateX(-50%); }
 }
 .gallery-card {
-  position:relative; height:360px; flex:none; overflow:hidden;
+  position:relative; height:360px; width:480px; flex:none; overflow:hidden;
   background:var(--dark); cursor:none;
-  width:calc((100vw - 6px) / 3);
 }
 .gallery-card img { width:100%;height:100%;object-fit:cover;filter:none;transition:transform 5s ease; }
 .gallery-card:hover img { transform:scale(1.04); }
@@ -1827,20 +1831,8 @@ fetch('https://api.github.com/gists/' + GIST_ID)
             (gTech?'<div class="gc-tech">'+gTech+'</div>':'')+
           '</div></div>';
       }
-      /* carousel: 3 visible at a time, auto-advance every 4s */
-      strip.innerHTML='<div class="gallery-track" id="gallery-track">'+ghtml+ghtml+'</div>';
-      var _gTrack=document.getElementById('gallery-track');
-      var _gCount=max-1; /* number of real cards */
-      var _gIdx=0;
-      function _gAdvance(){
-        _gIdx+=3;
-        if(_gIdx>=_gCount) _gIdx=0;
-        var cardW=strip.offsetWidth/3+1; /* +1 for gap */
-        _gTrack.style.transform='translateX(-'+(_gIdx*cardW)+'px)';
-      }
-      var _gTimer=setInterval(_gAdvance,4000);
-      strip.addEventListener('mouseenter',function(){ clearInterval(_gTimer); });
-      strip.addEventListener('mouseleave',function(){ _gTimer=setInterval(_gAdvance,4000); });
+      /* infinite scroll: duplicate cards for seamless loop */
+      strip.innerHTML='<div class="gallery-track">'+ghtml+ghtml+'</div>';
     }
   })
   .catch(function(e){ console.warn('Gist error',e); });
