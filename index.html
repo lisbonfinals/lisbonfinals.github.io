@@ -509,11 +509,7 @@ nav {
 
 /* ── GALLERY STRIP ── */
 .gallery-strip { overflow:hidden; position:relative; }
-.gallery-strip::before,.gallery-strip::after {
-  content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none;
-}
-.gallery-strip::before { left:0; background:linear-gradient(to right,var(--dark),transparent); }
-.gallery-strip::after  { right:0; background:linear-gradient(to left,var(--dark),transparent); }
+.gallery-strip::before,.gallery-strip::after { display:none; }
 .gallery-track {
   display:flex; gap:3px;
   animation: gallery-scroll 40s linear infinite;
