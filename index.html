@@ -1489,7 +1489,10 @@ function cardinal(d){
   return dirs[Math.round(d/22.5)%16];
 }
 function calcRunway(deg,spd){
-  if(spd<3) return {rwy:'—',conf:'Calm / variable winds'};
+  // Sous 10kt, le vent est trop faible pour imposer un sens de piste fiable
+  // (observé le 1er juillet : 8kt WNW affiché "takeoff" alors que la station
+  // enregistrait des atterrissages sur RWY 03) — on reste non-committal.
+  if(spd<10) return {rwy:'—',conf:'Calm / variable winds'};
   if(deg>=315||deg<135) return {rwy:'03',conf:'NNE config — landing over terrace'};
   return {rwy:'21',conf:'SSW config — takeoff over terrace'};
 }
@@ -1685,7 +1688,14 @@ fetch('https://api.github.com/gists/' + GIST_ID)
           }
           var html = tdata.map(mkTick).join('');
           track.innerHTML = html + html;
-          track.style.animationDuration = (tdata.length * 4) + 's';
+          /* Reset complet de l'animation (pas juste la durée) : sur certains
+             navigateurs, changer animationDuration seul pendant que l'animation
+             tourne déjà (démarrée par le CSS au chargement de la page) reste
+             figé jusqu'à un repaint externe — d'où le besoin de survoler pour
+             que ça "démarre". void offsetWidth force le reflow entre les deux. */
+          track.style.animation = 'none';
+          void track.offsetWidth;
+          track.style.animation = 'tickermove ' + (tdata.length * 4) + 's linear infinite';
         }
         /* ── last detected card ── */
         var ld = d.last_detected;
