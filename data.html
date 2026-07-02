@@ -358,6 +358,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .data-error{padding:20px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);border:1px dashed rgba(240,237,232,.08);border-radius:4px;}
 
 /* ── RESPONSIVE ── */
+/* nav-links overflow with the "Noise Report" item before the 1024px grid breakpoint kicks in */
+@media (max-width: 1150px) {
+  .nav-links { display:none; }
+  .nav-burger { display:flex; }
+}
 @media(max-width:1024px){
   .stat-grid{grid-template-columns:repeat(2,1fr);}
   .warning-hero-card{grid-template-columns:1fr;}

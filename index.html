@@ -870,6 +870,11 @@ footer {
   .nav-links { display:none; }
   .nav-burger { display:flex; }
 }
+/* nav-links overflow with the "Noise Report" badge before the 1024px grid breakpoint kicks in */
+@media (max-width: 1150px) {
+  .nav-links { display:none; }
+  .nav-burger { display:flex; }
+}
 @media (max-width: 1120px) {
   .start-inner { grid-template-columns:1fr; gap:34px; }
   .start-title { max-width:620px; }

@@ -461,6 +461,11 @@ nav {
 }
 
 /* ── RESPONSIVE ── */
+/* nav-links overflow with the "Noise Report" item before the 1024px grid breakpoint kicks in */
+@media (max-width: 1150px) {
+  .nav-links { display:none; }
+  .nav-burger { display:flex; }
+}
 @media (max-width: 1024px) {
   .steps { grid-template-columns: 1fr; }
   .hw-grid { grid-template-columns: 1fr; }
