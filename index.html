@@ -96,6 +96,11 @@ nav {
 }
 .nav-links a:hover { color: var(--amber); }
 .nav-links a.nav-active { color: var(--amber); }
+.nav-links a.nav-noise { color: var(--amber); font-weight: 700; display: inline-flex; align-items: center; }
+.nav-links a.nav-noise:hover { color: #fff; text-shadow: 0 0 14px rgba(245,166,35,.6); }
+.nav-noise-badge { font-family: var(--mono); font-size: 9px; letter-spacing: .04em; color: rgba(240,237,232,.4); margin-left: 7px; font-weight: 500; text-transform: none; }
+.nav-noise-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); margin-left: 6px; box-shadow: 0 0 0 3px rgba(245,166,35,.18); animation: navNewPulse 2.4s infinite; }
+@keyframes navNewPulse { 0%,100%{box-shadow:0 0 0 3px rgba(245,166,35,.18);} 50%{box-shadow:0 0 0 7px rgba(245,166,35,.05);} }
 .nav-has-dropdown { position: relative; }
 .nav-dropdown { display:none;position:absolute;top:calc(100% + 12px);left:0;background:rgba(7,9,13,.98);border:1px solid var(--border);min-width:180px;z-index:300; }
 .nav-has-dropdown:hover .nav-dropdown { display:block; }
@@ -957,9 +962,9 @@ footer {
         <li><a href="/data.html#the-data">The Data</a></li>
         <li><a href="/data.html#noise-data">Noise Data</a></li>
         <li><a href="/data.html#warning-zone" class="dd-warning">Warning Zone</a></li>
-        <li><a href="/noise-report.html">Noise Report</a></li>
       </ul>
     </li>
+    <li><a href="/noise-report.html" class="nav-noise">Noise Report<span class="nav-noise-badge" id="nav-noise-badge"></span><span class="nav-noise-dot" id="nav-noise-dot" hidden></span></a></li>
     <li><a href="/log.html">Captain's Log</a></li>
     <li><a href="/about.html">About</a></li>
   </ul>
@@ -1624,6 +1629,21 @@ fetch('https://api.github.com/gists/' + GIST_ID)
         _updateAirQuality(d);
         window._nextArrivals = d.next_arrivals || [];
         _renderNextArrival();
+        /* ── nav noise report badge ── */
+        var reports = d.reports || [];
+        if(reports.length){
+          var latest = reports[0];
+          var badgeEl = el('nav-noise-badge');
+          if(badgeEl){
+            var mn = (latest.month_name || '').slice(0,3).toUpperCase();
+            var dbTxt = latest.avg_db != null ? latest.avg_db.toFixed(1)+'dB' : '';
+            badgeEl.textContent = (mn ? mn+' ' : '') + dbTxt;
+          }
+          var genMs = latest.generated_at ? new Date(latest.generated_at).getTime() : 0;
+          var isNew = genMs > 0 && (Date.now() - genMs) < 10*86400000;
+          var dotEl = el('nav-noise-dot');
+          if(dotEl) dotEl.hidden = !isNew;
+        }
         var s = d.stats || {};
         /* store monthly rankings for badge */
         window._monthlyQuietest = (d.monthly && d.monthly.quietest_airline) || s.quietest_airline || '';

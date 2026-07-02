@@ -49,6 +49,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .nav-links a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.55);text-decoration:none;transition:color .2s;}
 .nav-links a:hover{color:var(--amber);}
 .nav-links a.nav-active{color:var(--amber);}
+.nav-links a.nav-noise{color:var(--amber);font-weight:700;}
+.nav-links a.nav-noise:hover{color:#fff;text-shadow:0 0 14px rgba(245,166,35,.6);}
 .nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
 .nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
 .nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px;}
@@ -417,9 +419,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
         <li><a href="/data.html#the-data" style="color:var(--amber)">The Data</a></li>
         <li><a href="/data.html#noise-data">Noise Data</a></li>
         <li><a href="/data.html#warning-zone" class="dd-warning">Warning Zone</a></li>
-        <li><a href="/noise-report.html">Noise Report</a></li>
       </ul>
     </li>
+    <li><a href="/noise-report.html" class="nav-noise">Noise Report</a></li>
     <li><a href="/log.html">Captain's Log</a></li>
     <li><a href="/about.html">About</a></li>
   </ul>
