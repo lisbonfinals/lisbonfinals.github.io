@@ -806,6 +806,41 @@ nav {
 </div>
 </section>
 
+<hr class="section-divider">
+
+<!-- GET INVOLVED -->
+<section class="hardware-section about-section" id="get-involved" style="scroll-margin-top:140px">
+  <div class="section-eyebrow">Open data</div>
+  <h2 class="section-heading">Get involved<br><em>in the record</em></h2>
+  <div class="hw-grid">
+    <div class="hw-item">
+      <span class="hw-icon">🔍</span>
+      <div>
+        <div class="hw-name">Flag an error</div>
+        <div class="hw-desc">Spotted a wrong flight ID or a noise reading that looks off? Every correction helps validate the automated pipeline.</div>
+      </div>
+    </div>
+    <div class="hw-item">
+      <span class="hw-icon">📡</span>
+      <div>
+        <div class="hw-name">Host a node</div>
+        <div class="hw-desc">Live under a flight path yourself? The build is documented and designed to be replicated — even partially, starting with just a sound meter. Get in touch to join the network.</div>
+      </div>
+    </div>
+    <div class="hw-item">
+      <span class="hw-icon">📊</span>
+      <div>
+        <div class="hw-name">Request the raw data</div>
+        <div class="hw-desc">Beyond the public dashboards and monthly reports, the full flight-level dataset is available on request to researchers and citizens who reach out directly.</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:18px 24px;background:rgba(245,166,35,.04);border:1px solid rgba(245,166,35,.15);border-radius:4px;">
+    <div class="gi-license" style="font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.5);line-height:1.7;max-width:560px;">All published data (dashboards, monthly reports, imagery) is released under <strong style="color:rgba(240,237,232,.75)">CC BY 4.0</strong> — free to reuse, including commercially, with attribution.</div>
+    <a href="mailto:chronos@lisbonfinals.com" class="gi-contact" style="flex-shrink:0;margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);white-space:nowrap;text-decoration:none;border:1px solid rgba(245,166,35,.3);padding:8px 14px;border-radius:3px;">Contact the Captain →</a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="about-footer">
   <span class="about-footer-left">LISBON FINALS · lisbonfinals.github.io · @lisbon.finals</span>
@@ -909,6 +944,16 @@ const ABOUT_TRANSLATIONS = {
     coming2_title: 'Escuta ATC em Directo',
     coming2_desc: 'Um segundo receptor rádio sintonizado na frequência da torre de Lisboa vai capturar as comunicações em directo entre pilotos e o controlo de tráfego aéreo — ligando cada aeronave às instruções exactas que recebeu em tempo real.',
     coming2_tag: 'RTL-SDR · 118.1 MHz',
+    gi_eyebrow: 'Dados abertos',
+    gi_heading: 'Participa<br><em>no registo</em>',
+    gi_name_1: 'Reportar um erro',
+    gi_desc_1: 'Reparaste numa identificação de voo errada ou numa leitura de ruído que parece estranha? Cada correção ajuda a validar o pipeline automatizado.',
+    gi_name_2: 'Alojar um nó',
+    gi_desc_2: 'Também vives sob um corredor aéreo? A montagem está documentada e pensada para ser replicada — mesmo que parcialmente, começando apenas com um medidor de som. Contacta-nos para te juntares à rede.',
+    gi_name_3: 'Pedir os dados brutos',
+    gi_desc_3: 'Para além dos painéis públicos e relatórios mensais, o conjunto de dados completo, voo a voo, está disponível a pedido para investigadores e cidadãos que nos contactem diretamente.',
+    gi_license: 'Todos os dados publicados (painéis, relatórios mensais, imagens) estão sob licença <strong style="color:rgba(240,237,232,.75)">CC BY 4.0</strong> — reutilização livre, incluindo comercial, com atribuição.',
+    gi_contact: 'Contactar o Capitão →',
   },
   en: {
     eyebrow: 'The project',
@@ -963,6 +1008,16 @@ const ABOUT_TRANSLATIONS = {
     coming2_title: 'Live ATC Listening',
     coming2_desc: "A second radio receiver tuned to Lisbon tower's frequency will capture live communications between pilots and air traffic control — linking each aircraft to the exact instructions they received in real time.",
     coming2_tag: 'RTL-SDR · 118.1 MHz',
+    gi_eyebrow: 'Open data',
+    gi_heading: 'Get involved<br><em>in the record</em>',
+    gi_name_1: 'Flag an error',
+    gi_desc_1: 'Spotted a wrong flight ID or a noise reading that looks off? Every correction helps validate the automated pipeline.',
+    gi_name_2: 'Host a node',
+    gi_desc_2: 'Live under a flight path yourself? The build is documented and designed to be replicated — even partially, starting with just a sound meter. Get in touch to join the network.',
+    gi_name_3: 'Request the raw data',
+    gi_desc_3: 'Beyond the public dashboards and monthly reports, the full flight-level dataset is available on request to researchers and citizens who reach out directly.',
+    gi_license: 'All published data (dashboards, monthly reports, imagery) is released under <strong style="color:rgba(240,237,232,.75)">CC BY 4.0</strong> — free to reuse, including commercially, with attribution.',
+    gi_contact: 'Contact the Captain →',
   },
   fr: {
     eyebrow: 'Le projet',
@@ -1017,6 +1072,16 @@ const ABOUT_TRANSLATIONS = {
     coming2_title: 'Écoute ATC en direct',
     coming2_desc: 'Un second récepteur radio réglé sur la fréquence de la tour de Lisbonne capturera les communications en direct entre pilotes et contrôleurs — reliant chaque aéronef aux instructions exactes reçues en temps réel.',
     coming2_tag: 'RTL-SDR · 118.1 MHz',
+    gi_eyebrow: 'Données ouvertes',
+    gi_heading: 'Participez<br><em>au relevé</em>',
+    gi_name_1: 'Signaler une erreur',
+    gi_desc_1: 'Vous avez repéré une mauvaise identification de vol ou une mesure de bruit qui semble fausse ? Chaque correction aide à valider le pipeline automatisé.',
+    gi_name_2: 'Héberger un nœud',
+    gi_desc_2: 'Vous habitez aussi sous un couloir aérien ? Le montage est documenté et pensé pour être reproduit — même partiellement, en commençant par un simple sonomètre. Contactez-nous pour rejoindre le réseau.',
+    gi_name_3: 'Demander les données brutes',
+    gi_desc_3: 'Au-delà des tableaux de bord publics et des rapports mensuels, le jeu de données complet vol par vol est disponible sur demande pour les chercheurs et citoyens qui nous contactent directement.',
+    gi_license: 'Toutes les données publiées (tableaux de bord, rapports mensuels, images) sont sous licence <strong style="color:rgba(240,237,232,.75)">CC BY 4.0</strong> — réutilisation libre, y compris commerciale, avec attribution.',
+    gi_contact: 'Contacter le Capitaine →',
   }
 };
 
@@ -1114,6 +1179,24 @@ function applyLang(lang) {
   ['coming1_tag','coming2_tag'].forEach((k, i) => {
     if (comingTags[i] && t[k]) comingTags[i].textContent = t[k];
   });
+
+  // Get Involved section
+  const giEyebrow = sel('#get-involved .section-eyebrow');
+  if (giEyebrow) giEyebrow.textContent = t.gi_eyebrow;
+  const giHeading = sel('#get-involved .section-heading');
+  if (giHeading) giHeading.innerHTML = t.gi_heading;
+  const giNames = selAll('#get-involved .hw-name');
+  const giDescs = selAll('#get-involved .hw-desc');
+  ['gi_name_1','gi_name_2','gi_name_3'].forEach((k, i) => {
+    if (giNames[i] && t[k]) giNames[i].textContent = t[k];
+  });
+  ['gi_desc_1','gi_desc_2','gi_desc_3'].forEach((k, i) => {
+    if (giDescs[i] && t[k]) giDescs[i].textContent = t[k];
+  });
+  const giLicense = sel('.gi-license');
+  if (giLicense && t.gi_license) giLicense.innerHTML = t.gi_license;
+  const giContact = sel('.gi-contact');
+  if (giContact && t.gi_contact) giContact.textContent = t.gi_contact;
 }
 
 function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[_lang]||'en'); }
