@@ -590,6 +590,7 @@ nav {
     <a href="#how-it-works" class="section-tab">How it works</a>
     <a href="#hardware" class="section-tab">The Station</a>
     <a href="#whats-next" class="section-tab">What's next</a>
+    <a href="#get-involved" class="section-tab">Open Data</a>
   </div>
 </div>
 
@@ -919,6 +920,7 @@ const ABOUT_TRANSLATIONS = {
     tab_2: 'Como funciona',
     tab_3: 'A Estação',
     tab_4: 'O que vem aí',
+    tab_5: 'Dados Abertos',
     howit_label: 'Como funciona',
     howit_title: 'Três camadas,<br><em>zero gatilhos humanos</em>',
     hw_eyebrow: 'A estação',
@@ -984,6 +986,7 @@ const ABOUT_TRANSLATIONS = {
     tab_2: 'How it works',
     tab_3: 'The Station',
     tab_4: "What's next",
+    tab_5: 'Open Data',
     howit_label: 'How it works',
     howit_title: 'Three layers,<br><em>zero human triggers</em>',
     hw_eyebrow: 'The station',
@@ -1058,6 +1061,7 @@ const ABOUT_TRANSLATIONS = {
     tab_2: 'Comment ça marche',
     tab_3: 'La Station',
     tab_4: 'À venir',
+    tab_5: 'Données Ouvertes',
     howit_label: 'Comment ça marche',
     hw_status_on: '● EN SERVICE',
     hw_status_soon: '◎ TESTÉ · BIENTÔT EN SERVICE',
@@ -1136,7 +1140,7 @@ function applyLang(lang) {
 
   // Tabs
   const tabs = selAll('.section-tab');
-  [t.tab_1, t.tab_2, t.tab_3, t.tab_4].forEach((lbl, i) => {
+  [t.tab_1, t.tab_2, t.tab_3, t.tab_4, t.tab_5].forEach((lbl, i) => {
     if (tabs[i] && lbl) tabs[i].textContent = lbl;
   });
 
