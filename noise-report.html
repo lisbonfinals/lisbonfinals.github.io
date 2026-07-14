@@ -455,8 +455,14 @@ nav {
 footer {
   border-top: 1px solid var(--border);
   padding: 32px 48px;
-  display: flex; align-items:center; justify-content:space-between;
-  font-family:var(--mono); font-size:10px; color:var(--gray);
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+.footer-left {
+  font-family: var(--mono); font-size: 9px; color: rgba(240,237,232,0.28); letter-spacing: .08em;
+}
+.footer-right {
+  font-family: var(--mono); font-size: 9px; color: rgba(245,166,35,0.3); letter-spacing: .08em;
 }
 
 /* ── TABLET ── */
@@ -697,8 +703,8 @@ footer {
 
 <!-- ── FOOTER ── -->
 <footer>
-  <span data-i18n="footer_left">© 2026 Lisbon Finals · Independent noise monitoring · LPPT Lisbon</span>
-  <span data-i18n="footer_right">Data captured from a private terrace · Not affiliated with ANA Aeroportos or ANAC</span>
+  <span class="footer-left" data-i18n="footer_left">LISBON FINALS · Noise Report · lisbonfinals.com</span>
+  <span class="footer-right" data-i18n="footer_right">Not affiliated with ANA Aeroportos or ANAC</span>
 </footer>
 
 <script>
@@ -1020,8 +1026,8 @@ const TRANSLATIONS = {
     archive_label: 'Archive', loading_txt: 'Loading report data...',
     latest_title1: 'Latest', latest_title2: 'Analysis',
     archive_tag: 'All Reports', archive_title: 'Monthly', archive_title2: 'Archive',
-    footer_left: '© 2026 Lisbon Finals · Independent noise monitoring · LPPT Lisbon',
-    footer_right: 'Data captured from a private terrace · Not affiliated with ANA Aeroportos or ANAC',
+    footer_left: 'LISBON FINALS · Noise Report · lisbonfinals.com',
+    footer_right: 'Not affiliated with ANA Aeroportos or ANAC',
   },
   pt: {
     nav_how: 'Como funciona', nav_feed: 'Em direto', nav_stats: 'Estatísticas',
@@ -1040,8 +1046,8 @@ const TRANSLATIONS = {
     archive_label: 'Arquivo', loading_txt: 'A carregar dados...',
     latest_title1: 'Última', latest_title2: 'Análise',
     archive_tag: 'Todos os Relatórios', archive_title: 'Arquivo', archive_title2: 'Mensal',
-    footer_left: '© 2026 Lisbon Finals · Monitorização de ruído independente · LPPT Lisboa',
-    footer_right: 'Dados captados de um terraço privado · Sem afiliação com ANA Aeroportos ou ANAC',
+    footer_left: 'LISBON FINALS · Relatório de Ruído · lisbonfinals.com',
+    footer_right: 'Sem afiliação com ANA Aeroportos ou ANAC',
   },
   fr: {
     hero_tag: 'LPPT Lisbonne · Surveillance acoustique',
@@ -1058,8 +1064,8 @@ const TRANSLATIONS = {
     archive_label: 'Archives', loading_txt: 'Chargement des données...',
     latest_title1: 'Dernière', latest_title2: 'Analyse',
     archive_tag: 'Tous les rapports', archive_title: 'Archive', archive_title2: 'Mensuelle',
-    footer_left: '© 2026 Lisbon Finals · Surveillance sonore indépendante · LPPT Lisbonne',
-    footer_right: 'Données captées depuis une terrasse privée · Sans affiliation avec ANA Aeroportos ou ANAC',
+    footer_left: 'LISBON FINALS · Rapport de Bruit · lisbonfinals.com',
+    footer_right: 'Sans affiliation avec ANA Aeroportos ou ANAC',
   }
 };
 let currentLang = localStorage.getItem('lf_lang') || 'en';

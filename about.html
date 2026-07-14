@@ -844,7 +844,7 @@ nav {
 
 <!-- FOOTER -->
 <footer class="about-footer">
-  <span class="about-footer-left">LISBON FINALS · lisbonfinals.github.io · @lisbon.finals</span>
+  <span class="about-footer-left" id="footerLeft">LISBON FINALS · About · lisbonfinals.com</span>
   <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="about-footer-ig">Follow on Instagram →</a>
 </footer>
 
@@ -907,6 +907,7 @@ const ABOUT_TRANSLATIONS = {
     project_title: 'Uma experiência pessoal acima de Lisboa',
     project_body: 'Lisbon Finals começou com uma pergunta simples: conseguiria um Raspberry Pi numa varanda fotografar automaticamente todos os aviões que passam — e publicar no Instagram sem qualquer intervenção humana?<br><br>A resposta, após meses de iteração, é sim. O que começou como um projeto de fim-de-semana tornou-se uma estação autónoma independente — evidência local, não dados oficiais do aeroporto — seguindo níveis de ruído, rotas de voo, padrões de companhias e dados atmosféricos a partir de uma varanda em Lisboa voltada para a aproximação ao LPPT.',
     pipeline_label: 'Pipeline de automação completo · fim ao fim · zero gatilho humano',
+    footer_left: 'LISBON FINALS · Sobre · lisbonfinals.com',
     footer_ig: 'Seguir no Instagram →',
     kofi_label: 'Apoiar o projecto',
     kofi_desc: 'Todo o hardware é autofinanciado. Se este projecto te é útil ou simplesmente gostas de ver aviões, um café contribui muito para o próximo sensor.',
@@ -973,6 +974,7 @@ const ABOUT_TRANSLATIONS = {
     project_title: 'A personal experiment above Lisbon',
     project_body: 'Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became an independent autonomous station — local evidence, not official airport data — tracking noise levels, flight routes, airline patterns and atmospheric data from a Lisbon terrace facing the LPPT approach path.',
     pipeline_label: 'Full automation pipeline · end to end · zero human trigger',
+    footer_left: 'LISBON FINALS · About · lisbonfinals.com',
     footer_ig: 'Follow on Instagram →',
     kofi_label: 'Support the project',
     kofi_desc: 'All hardware is self-funded. If you find this project useful or just enjoy watching planes, a coffee goes a long way toward the next sensor.',
@@ -1048,6 +1050,7 @@ const ABOUT_TRANSLATIONS = {
     project_title: 'Une expérience personnelle au-dessus de Lisbonne',
     project_body: 'Lisbon Finals a commencé par une question simple : un Raspberry Pi sur une terrasse pourrait-il photographier automatiquement chaque avion — et le publier sur Instagram sans aucune intervention humaine ?<br><br>La réponse, après des mois d\'itération, est oui. C’est une station autonome indépendante : une preuve locale, pas une donnée officielle d’aéroport.',
     pipeline_label: 'Pipeline d\'automatisation complet · bout en bout · zéro déclencheur humain',
+    footer_left: 'LISBON FINALS · À propos · lisbonfinals.com',
     footer_ig: 'Suivre sur Instagram →',
     kofi_label: 'Soutenir le projet',
     kofi_desc: 'Tout le matériel est autofinancé. Si ce projet vous est utile ou si vous aimez simplement regarder les avions, un café contribue beaucoup au prochain capteur.',
@@ -1115,6 +1118,8 @@ function applyLang(lang) {
   if (projTitle) projTitle.innerHTML = t.project_title.replace('\n', '<br>');
   const projBody = sel('.project-card-body');
   if (projBody) projBody.innerHTML = t.project_body;
+  const footerLeft = document.getElementById('footerLeft');
+  if (footerLeft && t.footer_left) footerLeft.textContent = t.footer_left;
   const footerIg = sel('.about-footer-ig');
   if (footerIg) footerIg.textContent = t.footer_ig;
 
