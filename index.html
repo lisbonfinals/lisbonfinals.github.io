@@ -462,14 +462,6 @@ nav {
   display:flex;align-items:center;gap:6px;
   border-top:1px solid var(--border);padding-top:18px;
 }
-.ls-today-block {
-  margin-left:auto;text-align:right;
-  padding-left:24px;border-left:1px solid var(--border);
-}
-.ls-today-num {
-  font-family:var(--mono);font-weight:500;font-size:22px;
-  color:#60a5fa;letter-spacing:.02em;margin-bottom:4px;
-}
 .ls-score-num { font-family:var(--mono);font-weight:500;font-size:22px;color:#4ade80;letter-spacing:.02em; }
 .ls-score-max { font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.3); }
 .ls-score-detail { margin-left:12px; }
@@ -489,15 +481,33 @@ nav {
   line-height:1.9;max-width:760px;margin:52px 0 0;letter-spacing:.01em;
 }
 
-/* ── SECTION TODAY STATS (departures / total, live from the terrace) ── */
-.section-today-stats { grid-column:2;display:flex;align-items:center;gap:28px;margin-top:28px; }
-.sts-item { display:flex;flex-direction:column; }
-.sts-num { font-family:var(--mono);font-weight:500;font-size:28px;color:var(--white);letter-spacing:-.01em;line-height:1;margin-bottom:6px; }
+/* ── SECTION TODAY STATS (traffic breakdown, live from the terrace) ── */
+.section-today-stats {
+  grid-column:2;margin-top:28px;
+  border:1px solid var(--border);background:var(--dark2);
+  padding:20px 24px;
+}
+.sts-eyebrow {
+  display:flex;align-items:center;gap:8px;margin-bottom:18px;
+  font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(240,237,232,.32);
+}
+.sts-eyebrow::before { content:'';width:14px;height:1px;background:var(--amber);flex-shrink:0; }
+.sts-grid { display:flex; }
+.sts-item { flex:1;padding:0 20px;border-right:1px solid var(--border); }
+.sts-item:first-child { padding-left:0; }
+.sts-item:last-child { border-right:none;padding-right:0; }
+.sts-num { font-family:var(--mono);font-weight:500;font-size:26px;color:var(--white);letter-spacing:-.01em;line-height:1;margin-bottom:6px; }
 .sts-num.amber { color:var(--amber); }
 .sts-num.blue { color:#60a5fa; }
-.sts-lbl { font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.32); }
-.sts-sep { width:1px;align-self:stretch;background:var(--border); }
-@media(max-width:768px){ .section-today-stats { gap:20px; } .sts-num { font-size:24px; } }
+.sts-num.dim { color:rgba(240,237,232,.4); }
+.sts-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.32); }
+@media(max-width:768px){
+  .section-today-stats { padding:18px 16px; }
+  .sts-grid { flex-wrap:wrap;gap:16px 0; }
+  .sts-item { flex:1 1 50%;border-right:none;padding:0 0 12px;min-width:120px; }
+  .sts-num { font-size:22px; }
+}
 
 /* ── SECTION SENSORS LEGEND ── */
 .section-sensors { display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px; }
@@ -1216,14 +1226,24 @@ footer {
   </div>
   <p class="section-body" id="section-body-el">Each detected aircraft triggers the full pipeline. A YOLO-trained model evaluates every frame and scores the photo from 1 to 5 — only the best make it to Instagram, without any human input. Two sensors capture what the eye can't see: an ADS1115 circuit measures the peak decibel level as the aircraft passes, and an MPU-6050 accelerometer records the vibration pulse transmitted through the building structure. One plane. Three data points.</p>
   <div class="section-today-stats" id="section-today-stats">
-    <div class="sts-item">
-      <div class="sts-num amber" id="sts-departures">—</div>
-      <div class="sts-lbl" data-i18n="sts_departures_lbl">Departures today</div>
-    </div>
-    <div class="sts-sep"></div>
-    <div class="sts-item">
-      <div class="sts-num blue" id="sts-arrivals">—</div>
-      <div class="sts-lbl" data-i18n="sts_arrivals_lbl">Arrivals today</div>
+    <div class="sts-eyebrow" data-i18n="sts_eyebrow">Today's traffic · 00:00–23:59</div>
+    <div class="sts-grid">
+      <div class="sts-item">
+        <div class="sts-num" id="sts-flights">—</div>
+        <div class="sts-lbl" data-i18n="sts_flights_lbl">Flights today</div>
+      </div>
+      <div class="sts-item">
+        <div class="sts-num amber" id="sts-departures">—</div>
+        <div class="sts-lbl" data-i18n="sts_departures_lbl">Departures today</div>
+      </div>
+      <div class="sts-item">
+        <div class="sts-num blue" id="sts-arrivals">—</div>
+        <div class="sts-lbl" data-i18n="sts_arrivals_lbl">Arrivals today</div>
+      </div>
+      <div class="sts-item">
+        <div class="sts-num dim" id="sts-diff">—</div>
+        <div class="sts-lbl" data-i18n="sts_diff_lbl">Unclassified</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1276,10 +1296,6 @@ footer {
       <div class="ls-score-detail">
         <div class="ls-score-lbl">YOLO Score</div>
         <div class="ls-score-sub" id="ls-published">Published to @lisbon.finals</div>
-      </div>
-      <div class="ls-today-block">
-        <div class="ls-today-num" id="rs-today">—</div>
-        <div class="ls-score-lbl">Flights today</div>
       </div>
     </div>
     <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="ls-ig-link" id="ls-ig-link">View on Instagram</a>
@@ -1676,9 +1692,12 @@ fetch('https://api.github.com/gists/' + GIST_ID)
         window._monthlyQuietest = (d.monthly && d.monthly.quietest_airline) || s.quietest_airline || '';
         window._monthlyNoisiest = (d.monthly && d.monthly.noisiest_airline) || s.noisiest_airline || '';
         _applyRankBadge();
-        if(s.active_today != null){ set('rs-today', s.active_today+' flights today'); }
+        if(s.active_today != null){ set('sts-flights', s.active_today); }
         if(s.departures_today != null){ set('sts-departures', s.departures_today); }
         if(s.arrivals_today != null){ set('sts-arrivals', s.arrivals_today); }
+        if(s.active_today != null && s.departures_today != null && s.arrivals_today != null){
+          set('sts-diff', Math.max(0, s.active_today - s.departures_today - s.arrivals_today));
+        }
         if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); }
         /* ── stats row big numbers ── */
         var photoCount = s.total_photos || s.photos_published || 0;
@@ -2015,15 +2034,17 @@ var INDEX_TRANSLATIONS = {
     ls_aircraft_lbl: 'Aircraft type',
     ls_score_lbl: 'YOLO Score',
     ls_published: 'Published to @lisbon.finals',
-    ls_today_lbl: 'Flights today',
     ls_ig_link: 'View on Instagram',
     ls_vib_lbl: 'Vibration peak',
     ss_photo: 'Photo — YOLO scored by AI',
     ss_db: 'Sound — peak in dB',
     ss_vib: 'Vibration — MPU-6050 accelerometer',
     section_body: 'Each detected aircraft triggers the full pipeline. A YOLO-trained model evaluates every frame and scores the photo from 1 to 5 — only the best make it to Instagram, without any human input. Two sensors capture what the eye can\'t see: an ADS1115 circuit measures the peak decibel level as the aircraft passes, and an MPU-6050 accelerometer records the vibration pulse transmitted through the building structure. One plane. Three data points.',
+    sts_eyebrow: "Today's traffic · 00:00–23:59",
+    sts_flights_lbl: 'Flights today',
     sts_departures_lbl: 'Departures today',
     sts_arrivals_lbl: 'Arrivals today',
+    sts_diff_lbl: 'Unclassified',
     ticker_lbl: 'Live Feed',
     wx_eyebrow: 'Atmospheric conditions',
     wx_title: 'The wind<br><em>decides everything.</em>',
@@ -2119,15 +2140,17 @@ var INDEX_TRANSLATIONS = {
     ls_aircraft_lbl: 'Tipo de aeronave',
     ls_score_lbl: 'YOLO Score',
     ls_published: 'Publicado em @lisbon.finals',
-    ls_today_lbl: 'Voos hoje',
     ls_ig_link: 'Ver no Instagram',
     ls_vib_lbl: 'Pico de vibração',
     ss_photo: 'Foto — avaliada por IA',
     ss_db: 'Som — pico em dB',
     ss_vib: 'Vibração — acelerómetro MPU-6050',
     section_body: 'Cada aeronave detectada desencadeia o pipeline completo. Um modelo treinado em YOLO avalia cada fotograma e atribui uma pontuação de 1 a 5 — só as melhores chegam ao Instagram, sem qualquer intervenção humana. Dois sensores capturam o que o olho não vê: um circuito ADS1115 mede o pico de decibéis no momento da passagem, e um acelerómetro MPU-6050 regista o pulso de vibração transmitido pela estrutura do edifício. Um avião. Três dados.',
+    sts_eyebrow: 'Tráfego de hoje · 00:00–23:59',
+    sts_flights_lbl: 'Voos hoje',
     sts_departures_lbl: 'Descolagens hoje',
     sts_arrivals_lbl: 'Aterragens hoje',
+    sts_diff_lbl: 'Não classificados',
     ticker_lbl: 'Feed em directo',
     wx_eyebrow: 'Condições atmosféricas',
     wx_title: 'O vento<br><em>decide tudo.</em>',
@@ -2222,15 +2245,17 @@ var INDEX_TRANSLATIONS = {
     ls_aircraft_lbl: 'Type d\'appareil',
     ls_score_lbl: 'Score YOLO',
     ls_published: 'Publié sur @lisbon.finals',
-    ls_today_lbl: 'Vols aujourd\'hui',
     ls_ig_link: 'Voir sur Instagram',
     ls_vib_lbl: 'Pic de vibration',
     ss_photo: 'Photo — scorée par IA',
     ss_db: 'Son — pic en dB',
     ss_vib: 'Vibration — accéléromètre MPU-6050',
     section_body: 'Chaque aéronef détecté déclenche le pipeline complet. Un modèle entraîné sur YOLO évalue chaque image et attribue un score de 1 à 5 — seules les meilleures atteignent Instagram, sans aucune intervention humaine. Deux capteurs saisissent ce que l\'œil ne voit pas : un circuit ADS1115 mesure le pic en décibels au passage de l\'appareil, et un accéléromètre MPU-6050 enregistre le pulse de vibration transmis par la structure du bâtiment. Un avion. Trois données.',
+    sts_eyebrow: 'Trafic du jour · 00:00–23:59',
+    sts_flights_lbl: 'Vols aujourd\'hui',
     sts_departures_lbl: 'Décollages aujourd\'hui',
     sts_arrivals_lbl: 'Atterrissages aujourd\'hui',
+    sts_diff_lbl: 'Non classifiés',
     ticker_lbl: 'Flux en direct',
     wx_eyebrow: 'Conditions atmosphériques',
     wx_title: 'Le vent<br><em>décide de tout.</em>',
@@ -2398,7 +2423,6 @@ function applyLang(lang) {
   if (lsStatLbls[2]) lsStatLbls[2].textContent = t.ls_speed_lbl;
   if (lsStatLbls[3]) lsStatLbls[3].textContent = t.ls_aircraft_lbl;
   var yoloLbl = q('.ls-score-detail .ls-score-lbl'); if (yoloLbl) yoloLbl.textContent = t.ls_score_lbl;
-  var todayLbl = q('.ls-today-block .ls-score-lbl'); if (todayLbl) todayLbl.textContent = t.ls_today_lbl;
   var lsPub = el('ls-published'); if (lsPub) lsPub.textContent = t.ls_published;
   var igLink = q('.ls-ig-link'); if (igLink) igLink.textContent = t.ls_ig_link;
   var vibLbl = el('ls-vib-lbl'); if (vibLbl) vibLbl.textContent = t.ls_vib_lbl;
