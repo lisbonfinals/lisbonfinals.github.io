@@ -451,6 +451,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     <a href="#the-data" class="section-tab active" data-i18n="tab_data">The Data</a>
     <a href="#noise-data" class="section-tab" data-i18n="tab_noise">Noise Data</a>
     <a href="#warning-zone" class="section-tab" data-i18n="tab_warning">⚠ Warning Zone</a>
+    <a href="#archive-teaser" class="section-tab" data-i18n="tab_archive_teaser">Archive</a>
   </div>
 </div>
 
@@ -661,12 +662,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 </section>
 
 <!-- ══ TEASER: ARCHIVE (now its own page) ══ -->
-<section class="data-section" style="padding-top:0;">
+<section class="data-section" id="archive-teaser">
   <div class="noise-split">
     <div class="noise-split-left">
-      <div class="section-label" data-i18n="archive_teaser_label">Full history</div>
-      <h2 class="section-title" data-i18n-html="archive_teaser_title">Every flight<br><em>since day one</em></h2>
-      <p class="section-desc" data-i18n="archive_teaser_desc">Beyond this 30-day live view — explore the station's complete dataset, cross-referenced by aircraft model, airline, night regulation, and air quality.</p>
+      <div class="section-label" data-i18n="archive_teaser_label">Explore further</div>
+      <h2 class="section-title" data-i18n-html="archive_teaser_title">Every flight<br><em>cross-referenced</em></h2>
+      <p class="section-desc" data-i18n="archive_teaser_desc">The numbers above already cover the station's complete history. The Archive goes further — cross-referenced by aircraft model, airline, night regulation, and air quality, with full photo galleries for each.</p>
       <a href="/archive.html" class="noise-report-link" data-i18n="archive_teaser_link">→ Explore the full archive</a>
     </div>
   </div>
@@ -948,8 +949,9 @@ const T = {
     limit_exceeded:'Limit: {n}/week · exceeded by {x}', limit_ok:'Limit: {n}/week · within quota',
     compliant:'✓ compliant this week', sub_critical:'> 98.9 dB · absolute ban', sub_l2:'93–95.9 dB outside allowed slots',
     footer:'LISBON FINALS · Data Intelligence · lisbonfinals.com',
-    archive_teaser_label:'Full history', archive_teaser_title:'Every flight<br><em>since day one</em>',
-    archive_teaser_desc:'Beyond this 30-day live view — explore the station\'s complete dataset, cross-referenced by aircraft model, airline, night regulation, and air quality.',
+    tab_archive_teaser:'Archive',
+    archive_teaser_label:'Explore further', archive_teaser_title:'Every flight<br><em>cross-referenced</em>',
+    archive_teaser_desc:'The numbers above already cover the station\'s complete history. The Archive goes further — cross-referenced by aircraft model, airline, night regulation, and air quality, with full photo galleries for each.',
     archive_teaser_link:'→ Explore the full archive'
   },
   pt: {
@@ -997,8 +999,9 @@ const T = {
     limit_exceeded:'Limite: {n}/semana · excedido em {x}', limit_ok:'Limite: {n}/semana · dentro da quota',
     compliant:'✓ conforme esta semana', sub_critical:'> 98,9 dB · proibição absoluta', sub_l2:'93–95,9 dB fora dos horários permitidos',
     footer:'LISBON FINALS · Dados · lisbonfinals.com',
-    archive_teaser_label:'Histórico completo', archive_teaser_title:'Cada voo<br><em>desde o primeiro dia</em>',
-    archive_teaser_desc:'Além desta vista ao vivo de 30 dias — explore o conjunto de dados completo da estação, cruzado por modelo de aeronave, companhia aérea, regulamentação noturna e qualidade do ar.',
+    tab_archive_teaser:'Arquivo',
+    archive_teaser_label:'Explorar mais', archive_teaser_title:'Cada voo<br><em>cruzado em detalhe</em>',
+    archive_teaser_desc:'Os números acima já cobrem o histórico completo da estação. O Arquivo vai mais longe — cruzado por modelo de aeronave, companhia aérea, regulamentação noturna e qualidade do ar, com galerias de fotos completas para cada um.',
     archive_teaser_link:'→ Explorar o arquivo completo'
   },
   fr: {
@@ -1043,8 +1046,9 @@ const T = {
     since:'depuis le',
     limit_exceeded:'Limite : {n}/semaine · dépassé de {x}', limit_ok:'Limite : {n}/semaine · dans les quotas',
     compliant:'✓ conforme cette semaine', sub_critical:'> 98,9 dB · interdiction absolue', sub_l2:'93–95,9 dB hors créneaux autorisés',
-    archive_teaser_label:'Historique complet', archive_teaser_title:'Chaque vol<br><em>depuis le premier jour</em>',
-    archive_teaser_desc:'Au-delà de cette vue live limitée à 30 jours — explorez l\'ensemble complet des données de la station, croisées par modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air.',
+    tab_archive_teaser:'Archives',
+    archive_teaser_label:'Aller plus loin', archive_teaser_title:'Chaque vol<br><em>croisé en détail</em>',
+    archive_teaser_desc:'Les chiffres ci-dessus couvrent déjà l\'historique complet de la station. Les archives vont plus loin — croisées par modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo complètes pour chacun.',
     archive_teaser_link:'→ Explorer les archives complètes'
   }
 };
