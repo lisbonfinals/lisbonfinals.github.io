@@ -171,6 +171,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .archive-table-title{padding:16px 20px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);display:flex;align-items:center;justify-content:space-between;}
 table.archive-table{width:100%;border-collapse:collapse;}
 .archive-table th{text-align:left;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,166,35,.4);padding:10px 20px;background:rgba(245,166,35,.03);border-bottom:1px solid var(--border);white-space:nowrap;}
+.archive-table th.sortable-th{cursor:pointer;user-select:none;transition:color .15s;}
+.archive-table th.sortable-th:hover{color:var(--amber);}
+.archive-table .sort-arrow{margin-left:5px;font-size:8px;}
 .archive-table td{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.75);padding:10px 20px;border-bottom:1px solid rgba(30,37,48,.6);white-space:nowrap;}
 .archive-table tr:last-child td{border-bottom:none;}
 .archive-table tbody tr{transition:background .15s;}
@@ -535,6 +538,53 @@ function avFmt(n) { return (n != null) ? Math.round(n).toLocaleString() : '—';
 function avFmt1(n) { return (n != null) ? Number(n).toFixed(1) : '—'; }
 function avEmptyRow(n) { return `<tr><td colspan="${n}" class="archive-empty">—</td></tr>`; }
 
+// ── Tableaux triables (clic sur l'en-tête = trie asc/desc) — même composant que l'outil Mac interne ──
+const _avTableState = {};
+
+function avInitSortableTable(tableId, rows, columns, rowFn, defaultKey, defaultDir) {
+  _avTableState[tableId] = { rows, columns, rowFn, sortKey: defaultKey || null, sortDir: defaultDir || 'desc' };
+  if (_avTableState[tableId].sortKey) _avSortTableRows(tableId);
+  _avRenderSortableTable(tableId);
+}
+
+function _avSortTableRows(tableId) {
+  const st = _avTableState[tableId];
+  const col = st.columns.find(c => c.key === st.sortKey);
+  const dir = st.sortDir === 'asc' ? 1 : -1;
+  st.rows.sort((a, b) => {
+    let va = a[st.sortKey], vb = b[st.sortKey];
+    if (va == null && vb == null) return 0;
+    if (va == null) return 1;
+    if (vb == null) return -1;
+    if (col && col.type === 'number') { va = Number(va); vb = Number(vb); }
+    else { va = String(va).toLowerCase(); vb = String(vb).toLowerCase(); }
+    if (va < vb) return -1 * dir;
+    if (va > vb) return 1 * dir;
+    return 0;
+  });
+}
+
+function avSortTableClick(tableId, key) {
+  const st = _avTableState[tableId];
+  if (st.sortKey === key) st.sortDir = st.sortDir === 'asc' ? 'desc' : 'asc';
+  else { st.sortKey = key; st.sortDir = 'asc'; }
+  _avSortTableRows(tableId);
+  _avRenderSortableTable(tableId);
+}
+
+function _avRenderSortableTable(tableId) {
+  const st = _avTableState[tableId];
+  const el = document.getElementById(tableId);
+  if (!el) return;
+  const ths = st.columns.map(c => {
+    const active = st.sortKey === c.key;
+    const arrow = active ? `<span class="sort-arrow">${st.sortDir === 'asc' ? '▲' : '▼'}</span>` : '';
+    return `<th class="sortable-th" onclick="avSortTableClick('${tableId}','${c.key}')">${c.label}${arrow}</th>`;
+  }).join('');
+  const body = st.rows.length ? st.rows.map(st.rowFn).join('') : avEmptyRow(st.columns.length);
+  el.innerHTML = `<thead><tr>${ths}</tr></thead><tbody>${body}</tbody>`;
+}
+
 document.querySelectorAll('.archive-subtab').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.archive-subtab').forEach(b => b.classList.remove('active'));
@@ -635,10 +685,16 @@ function avLoadAircraft(type) {
   const d = archiveData.by_aircraft[type];
   if (!d) return;
   document.getElementById('av-aircraft-title').textContent = `${d.aircraft_type} — ${avFmt(d.total_flights)} ${avT('av_flights_lower','flights')}`;
-  const rows = d.airlines.map(r => `<tr><td class="name-cell">${r.airline_flag || ''} ${r.airline}</td><td>${avFmt(r.n)}</td><td>${r.avg_db != null ? avFmt1(r.avg_db) : '—'}</td><td>${r.max_db != null ? avFmt1(r.max_db) : '—'}</td><td>${r.avg_vib != null ? avFmt1(r.avg_vib) : '—'}</td><td>${r.max_vib != null ? avFmt1(r.max_vib) : '—'}</td></tr>`).join('');
-  document.getElementById('av-aircraft-table').innerHTML = `<thead><tr><th>${avT('av_col_airline','Airline')}</th><th>${avT('av_col_flights','Flights')}</th><th>${avT('av_col_avgdb','Avg dB')}</th><th>${avT('av_col_maxdb','Max dB')}</th><th>${avT('av_col_avgvib','Avg vib')}</th><th>${avT('av_col_maxvib','Max vib')}</th></tr></thead><tbody>${rows || avEmptyRow(6)}</tbody>`;
-  const mrows = d.monthly_trend.map(m => `<tr><td>${m.month}</td><td>${avFmt(m.n)}</td><td>${m.avg_db != null ? avFmt1(m.avg_db) : '—'}</td></tr>`).join('');
-  document.getElementById('av-aircraft-monthly').innerHTML = `<thead><tr><th>${avT('av_col_month','Month')}</th><th>${avT('av_col_flights','Flights')}</th><th>${avT('av_col_avgdb','Avg dB')}</th></tr></thead><tbody>${mrows || avEmptyRow(3)}</tbody>`;
+  avInitSortableTable('av-aircraft-table', d.airlines,
+    [{key:'airline',label:avT('av_col_airline','Airline')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'},
+     {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number'}, {key:'max_db',label:avT('av_col_maxdb','Max dB'),type:'number'},
+     {key:'avg_vib',label:avT('av_col_avgvib','Avg vib'),type:'number'}, {key:'max_vib',label:avT('av_col_maxvib','Max vib'),type:'number'}],
+    r => `<tr><td class="name-cell">${r.airline_flag || ''} ${r.airline}</td><td>${avFmt(r.n)}</td><td>${r.avg_db != null ? avFmt1(r.avg_db) : '—'}</td><td>${r.max_db != null ? avFmt1(r.max_db) : '—'}</td><td>${r.avg_vib != null ? avFmt1(r.avg_vib) : '—'}</td><td>${r.max_vib != null ? avFmt1(r.max_vib) : '—'}</td></tr>`,
+    'n', 'desc');
+  avInitSortableTable('av-aircraft-monthly', d.monthly_trend,
+    [{key:'month',label:avT('av_col_month','Month')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'}, {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number'}],
+    m => `<tr><td>${m.month}</td><td>${avFmt(m.n)}</td><td>${m.avg_db != null ? avFmt1(m.avg_db) : '—'}</td></tr>`,
+    'month', 'asc');
   const paginate = (p) => { avPicsPage.aircraft = p; avRenderPics('av-aircraft-pics', 'av-aircraft-pics-pagination', d.best_pics.items, p, paginate); };
   paginate(avPicsPage.aircraft);
 }
@@ -647,10 +703,16 @@ function avLoadAirline(airline) {
   const d = archiveData.by_airline[airline];
   if (!d) return;
   document.getElementById('av-airline-title').textContent = `${d.airline} — ${avFmt(d.total_flights)} ${avT('av_flights_lower','flights')}`;
-  const rows = d.aircraft.map(r => `<tr><td class="name-cell">${r.aircraft_type}</td><td>${avFmt(r.n)}</td><td>${r.avg_db != null ? avFmt1(r.avg_db) : '—'}</td><td>${r.max_db != null ? avFmt1(r.max_db) : '—'}</td><td>${r.avg_vib != null ? avFmt1(r.avg_vib) : '—'}</td><td>${r.max_vib != null ? avFmt1(r.max_vib) : '—'}</td></tr>`).join('');
-  document.getElementById('av-airline-table').innerHTML = `<thead><tr><th>${avT('av_col_aircraft','Aircraft model')}</th><th>${avT('av_col_flights','Flights')}</th><th>${avT('av_col_avgdb','Avg dB')}</th><th>${avT('av_col_maxdb','Max dB')}</th><th>${avT('av_col_avgvib','Avg vib')}</th><th>${avT('av_col_maxvib','Max vib')}</th></tr></thead><tbody>${rows || avEmptyRow(6)}</tbody>`;
-  const mrows = d.monthly_trend.map(m => `<tr><td>${m.month}</td><td>${avFmt(m.n)}</td><td>${m.avg_db != null ? avFmt1(m.avg_db) : '—'}</td></tr>`).join('');
-  document.getElementById('av-airline-monthly').innerHTML = `<thead><tr><th>${avT('av_col_month','Month')}</th><th>${avT('av_col_flights','Flights')}</th><th>${avT('av_col_avgdb','Avg dB')}</th></tr></thead><tbody>${mrows || avEmptyRow(3)}</tbody>`;
+  avInitSortableTable('av-airline-table', d.aircraft,
+    [{key:'aircraft_type',label:avT('av_col_aircraft','Aircraft model')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'},
+     {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number'}, {key:'max_db',label:avT('av_col_maxdb','Max dB'),type:'number'},
+     {key:'avg_vib',label:avT('av_col_avgvib','Avg vib'),type:'number'}, {key:'max_vib',label:avT('av_col_maxvib','Max vib'),type:'number'}],
+    r => `<tr><td class="name-cell">${r.aircraft_type}</td><td>${avFmt(r.n)}</td><td>${r.avg_db != null ? avFmt1(r.avg_db) : '—'}</td><td>${r.max_db != null ? avFmt1(r.max_db) : '—'}</td><td>${r.avg_vib != null ? avFmt1(r.avg_vib) : '—'}</td><td>${r.max_vib != null ? avFmt1(r.max_vib) : '—'}</td></tr>`,
+    'n', 'desc');
+  avInitSortableTable('av-airline-monthly', d.monthly_trend,
+    [{key:'month',label:avT('av_col_month','Month')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'}, {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number'}],
+    m => `<tr><td>${m.month}</td><td>${avFmt(m.n)}</td><td>${m.avg_db != null ? avFmt1(m.avg_db) : '—'}</td></tr>`,
+    'month', 'asc');
   const paginate = (p) => { avPicsPage.airline = p; avRenderPics('av-airline-pics', 'av-airline-pics-pagination', d.best_pics.items, p, paginate); };
   paginate(avPicsPage.airline);
 }
@@ -666,12 +728,20 @@ function avRenderAnac() {
   wCritEl.classList.toggle('ok', d.critical_count === 0);
   wL2El.classList.toggle('ok', d.l2_count === 0);
 
-  const offRows = d.top_offenders.map(o => `<tr><td class="name-cell">${o.airline_flag || ''} ${o.airline}</td><td>${avFmt(o.total)}</td><td>${avFmt(o.critical)}</td><td>${avFmt(o.l2)}</td></tr>`).join('');
-  document.getElementById('av-anac-offenders').innerHTML = `<thead><tr><th>${avT('av_col_airline','Airline')}</th><th>${avT('av_col_total','Total')}</th><th>${avT('av_col_critical','Critical')}</th><th>${avT('av_col_l2','Level 2')}</th></tr></thead><tbody>${offRows || avEmptyRow(4)}</tbody>`;
+  avInitSortableTable('av-anac-offenders', d.top_offenders,
+    [{key:'airline',label:avT('av_col_airline','Airline')}, {key:'total',label:avT('av_col_total','Total'),type:'number'},
+     {key:'critical',label:avT('av_col_critical','Critical'),type:'number'}, {key:'l2',label:avT('av_col_l2','Level 2'),type:'number'}],
+    o => `<tr><td class="name-cell">${o.airline_flag || ''} ${o.airline}</td><td>${avFmt(o.total)}</td><td>${avFmt(o.critical)}</td><td>${avFmt(o.l2)}</td></tr>`,
+    'total', 'desc');
 
   document.getElementById('av-anac-infractions-title').textContent = `${avT('av_anac_infractions','Infractions')} — ${avFmt(d.infractions_total)} ${avT('av_total_lower','total')} (${avT('av_showing_first','showing first')} ${d.infractions.length})`;
-  const infRows = d.infractions.slice(0, 50).map(f => `<tr><td>${f.date} ${f.time}</td><td class="name-cell">${f.airline_flag || ''} ${f.airline || '—'} · ${f.callsign}</td><td>${f.aircraft_type || '—'}</td><td>${avFmt1(f.spl_db)} dB</td><td>${f.infraction === 'critical' ? '🔴' : '🟡'}</td></tr>`).join('');
-  document.getElementById('av-anac-infractions').innerHTML = `<thead><tr><th>${avT('av_col_datetime','Date / Time')}</th><th>${avT('av_col_flight','Flight')}</th><th>${avT('av_col_aircraft','Aircraft')}</th><th>dB</th><th>${avT('av_col_type','Type')}</th></tr></thead><tbody>${infRows || avEmptyRow(5)}</tbody>`;
+  const infractions = d.infractions.slice(0, 50);
+  infractions.forEach(f => { f.datetime = `${f.date} ${f.time}`; });
+  avInitSortableTable('av-anac-infractions', infractions,
+    [{key:'datetime',label:avT('av_col_datetime','Date / Time')}, {key:'callsign',label:avT('av_col_flight','Flight')},
+     {key:'aircraft_type',label:avT('av_col_aircraft','Aircraft')}, {key:'spl_db',label:'dB',type:'number'}, {key:'infraction',label:avT('av_col_type','Type')}],
+    f => `<tr><td>${f.date} ${f.time}</td><td class="name-cell">${f.airline_flag || ''} ${f.airline || '—'} · ${f.callsign}</td><td>${f.aircraft_type || '—'}</td><td>${avFmt1(f.spl_db)} dB</td><td>${f.infraction === 'critical' ? '🔴' : '🟡'}</td></tr>`,
+    'spl_db', 'desc');
 }
 
 // ── Rare / Military ──
@@ -700,8 +770,10 @@ function avRenderQuality() {
   document.getElementById('av-q-types').textContent = d.aircraft_types_before + ' → ' + d.aircraft_types_after;
   document.getElementById('av-q-military-pct').textContent = d.military_suspect_pct + '%';
 
-  const rows = d.aircraft_merged_groups.map(g => `<tr><td class="name-cell">${g.canonical}</td><td>${g.variants.map(v => v.raw).join(', ')}</td><td>${avFmt(g.total)}</td></tr>`).join('');
-  document.getElementById('av-quality-groups').innerHTML = `<thead><tr><th>${avT('av_col_canonical','Canonical name')}</th><th>${avT('av_col_variants','Merged variants')}</th><th>${avT('av_col_total','Total')}</th></tr></thead><tbody>${rows || avEmptyRow(3)}</tbody>`;
+  avInitSortableTable('av-quality-groups', d.aircraft_merged_groups,
+    [{key:'canonical',label:avT('av_col_canonical','Canonical name')}, {key:'variants',label:avT('av_col_variants','Merged variants')}, {key:'total',label:avT('av_col_total','Total'),type:'number'}],
+    g => `<tr><td class="name-cell">${g.canonical}</td><td>${g.variants.map(v => v.raw).join(', ')}</td><td>${avFmt(g.total)}</td></tr>`,
+    'total', 'desc');
 }
 
 // ── Air Quality / Pollution ──
