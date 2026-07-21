@@ -216,6 +216,22 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-bar{width:100%;border-radius:1px;min-height:1px;transition:height .5s ease;}
 .archive-bar.flights{background:rgba(245,166,35,.55);}
 .archive-bar.pollution{background:rgba(96,165,250,.55);}
+.archive-chart-plot{position:relative;}
+.archive-chart-line{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
+
+/* horizontal bar rows — correlation chart, quality distribution */
+.archive-hbar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.archive-hbar-row:last-child{margin-bottom:0;}
+.archive-hbar-lbl{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.55);width:80px;flex-shrink:0;}
+.archive-hbar-track{flex:1;background:rgba(255,255,255,.05);border-radius:2px;height:8px;overflow:hidden;}
+.archive-hbar-fill{height:100%;border-radius:2px;background:var(--amber);transition:width .5s ease;}
+.archive-hbar-fill.blue{background:var(--blue);}
+.archive-hbar-val{font-family:var(--mono);font-size:10px;color:var(--white);width:150px;text-align:right;flex-shrink:0;}
+.archive-hbar-n{color:rgba(240,237,232,.4);}
+@media(max-width:640px){
+  .archive-hbar-lbl{width:56px;}
+  .archive-hbar-val{width:110px;font-size:9px;}
+}
 
 /* pagination for archive photo galleries */
 .archive-pics-pagination{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;}
@@ -351,7 +367,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
 
     <div class="archive-chart-wrap">
       <div class="archive-chart-title"><span data-i18n="av_correlation_title">Sound × vibration correlation</span></div>
-      <div class="archive-chart" id="av-correlation-chart"></div>
+      <div id="av-correlation-chart"></div>
     </div>
 
     <div class="archive-table-title" style="background:var(--dark2);border:1px solid var(--border);border-bottom:none;border-radius:4px 4px 0 0" data-i18n="av_photos_title">Photos</div>
@@ -459,15 +475,15 @@ table.archive-table{width:100%;border-collapse:collapse;}
           <button class="archive-gran-btn" data-gran="monthly" data-i18n="av_gran_month">Month</button>
         </div>
       </div>
-      <div class="archive-chart" id="av-poll-chart"></div>
+      <div class="archive-chart-plot">
+        <div class="archive-chart" id="av-poll-chart"></div>
+        <svg class="archive-chart-line" id="av-poll-temp-svg" preserveAspectRatio="none" viewBox="0 0 100 110"></svg>
+      </div>
       <div class="noise-chart-legend" style="margin-top:12px;">
         <div class="legend-item"><div class="legend-dot" style="background:rgba(245,166,35,.55)"></div><span data-i18n="av_poll_legend_flights">Flights</span></div>
         <div class="legend-item"><div class="legend-dot" style="background:rgba(96,165,250,.55)"></div><span data-i18n="av_poll_legend_pm">Avg. PM2.5</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b;border-radius:50%;"></div><span data-i18n="av_poll_legend_temp">Outside temperature</span></div>
       </div>
-    </div>
-    <div class="archive-table-wrap">
-      <div class="archive-table-title" data-i18n="av_poll_worst">Highest readings on record</div>
-      <div class="archive-table-scroll"><table class="archive-table" id="av-poll-worst"></table></div>
     </div>
   </div>
 </section>
@@ -501,6 +517,20 @@ let avPicsPage = { overview: 1, aircraft: 1, airline: 1, rare: 1 };
 const AV_PAGE_SIZE = 8;
 
 function avT(key, fallback) { const t = T[_lang] || T.en; return t[key] || fallback || key; }
+// air-quality labels are captured in French at the source (main.py) — translate for display
+const AQ_LABELS = {
+  bon: { en: 'Good', pt: 'Bom', fr: 'Bon' },
+  'modéré': { en: 'Moderate', pt: 'Moderado', fr: 'Modéré' },
+  mauvais_sensibles: { en: 'Poor (sensitive)', pt: 'Mau (sensíveis)', fr: 'Mauvais (sensibles)' },
+  mauvais: { en: 'Poor', pt: 'Mau', fr: 'Mauvais' },
+  'très_mauvais': { en: 'Very poor', pt: 'Muito mau', fr: 'Très mauvais' },
+  dangereux: { en: 'Hazardous', pt: 'Perigoso', fr: 'Dangereux' },
+};
+function avQualityLabel(raw) {
+  const entry = AQ_LABELS[raw];
+  if (entry) return entry[_lang] || entry.en;
+  return (raw || '—').replace(/_/g, ' ');
+}
 function avFmt(n) { return (n != null) ? Math.round(n).toLocaleString() : '—'; }
 function avFmt1(n) { return (n != null) ? Number(n).toFixed(1) : '—'; }
 function avEmptyRow(n) { return `<tr><td colspan="${n}" class="archive-empty">—</td></tr>`; }
@@ -577,9 +607,10 @@ function avRenderOverview() {
   const buckets = archiveData.sound_vibration.buckets;
   const maxVib = Math.max(...buckets.map(b => b.avg_vib || 0), 1);
   document.getElementById('av-correlation-chart').innerHTML = buckets.map(b => `
-    <div class="archive-bar-wrap" title="${b.label} dB — ${avFmt1(b.avg_vib)} mg (n=${b.n})">
-      <div class="archive-bar flights" style="height:${b.avg_vib ? Math.max(2, Math.round(b.avg_vib / maxVib * 100)) : 2}%"></div>
-      <span style="font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.38);margin-top:4px;">${b.label}</span>
+    <div class="archive-hbar-row">
+      <span class="archive-hbar-lbl">${b.label} dB</span>
+      <div class="archive-hbar-track"><div class="archive-hbar-fill" style="width:${b.avg_vib ? Math.max(2, Math.round(b.avg_vib / maxVib * 100)) : 2}%"></div></div>
+      <span class="archive-hbar-val">${avFmt1(b.avg_vib)} mg <span class="archive-hbar-n">(n=${avFmt(b.n)})</span></span>
     </div>`).join('');
 
   const paginate = (p) => { avPicsPage.overview = p; avRenderPics('av-overview-pics', 'av-overview-pics-pagination', d.best_pics.items, p, paginate); };
@@ -680,10 +711,35 @@ function avRenderPollutionChart(gran) {
   const maxPm = Math.max(...series.map(s => s.avg_pm25 || 0), 1);
   const shown = series.slice(-60);
   document.getElementById('av-poll-chart').innerHTML = shown.map(s => `
-    <div class="archive-bar-wrap" title="${s.label}: ${s.flights} ${avT('av_flights_lower','flights')}, ${s.avg_pm25 != null ? s.avg_pm25.toFixed(1) : '—'} µg/m³">
+    <div class="archive-bar-wrap" title="${s.label}: ${s.flights} ${avT('av_flights_lower','flights')}, ${s.avg_pm25 != null ? s.avg_pm25.toFixed(1) : '—'} µg/m³${s.avg_temp != null ? ', ' + s.avg_temp.toFixed(1) + '°C' : ''}">
       <div class="archive-bar pollution" style="height:${s.avg_pm25 ? Math.max(2, Math.round(s.avg_pm25 / maxPm * 50)) : 1}%"></div>
       <div class="archive-bar flights" style="height:${Math.max(2, Math.round((s.flights || 0) / maxFlights * 50))}%"></div>
     </div>`).join('');
+
+  // température extérieure (Open-Meteo, historique) — courbe SVG en surimpression des barres
+  const svg = document.getElementById('av-poll-temp-svg');
+  const temps = shown.map(s => s.avg_temp);
+  const validTemps = temps.filter(t => t != null);
+  if (validTemps.length < 2) { svg.innerHTML = ''; return; }
+  const minT = Math.min(...validTemps), maxT = Math.max(...validTemps);
+  const range = (maxT - minT) || 1;
+  const n = shown.length;
+  const points = temps.map((t, i) => {
+    if (t == null) return null;
+    const x = (i + 0.5) / n * 100;
+    const y = 105 - ((t - minT) / range) * 95;
+    return [x, y];
+  });
+  const segments = [];
+  let current = [];
+  points.forEach(p => {
+    if (p) current.push(p);
+    else { if (current.length > 1) segments.push(current); current = []; }
+  });
+  if (current.length > 1) segments.push(current);
+  svg.innerHTML =
+    segments.map(seg => `<polyline points="${seg.map(p => p.join(',')).join(' ')}" fill="none" stroke="#ff6b6b" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('') +
+    points.map(p => p ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="#ff6b6b"/>` : '').join('');
 }
 
 function avRenderPollution() {
@@ -694,14 +750,11 @@ function avRenderPollution() {
 
   const maxN = Math.max(...d.quality_dist.map(q => q.n), 1);
   document.getElementById('av-poll-dist').innerHTML = d.quality_dist.map(q => `
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-      <span style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.55);width:140px;flex-shrink:0;text-transform:capitalize;">${q.quality.replace(/_/g, ' ')}</span>
-      <div style="flex:1;background:rgba(255,255,255,.05);border-radius:2px;height:8px;overflow:hidden;"><div style="height:100%;width:${Math.round(q.n / maxN * 100)}%;background:var(--blue);border-radius:2px;"></div></div>
-      <span style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.4);width:50px;text-align:right;">${avFmt(q.n)}</span>
+    <div class="archive-hbar-row">
+      <span class="archive-hbar-lbl" style="width:120px;">${avQualityLabel(q.quality)}</span>
+      <div class="archive-hbar-track"><div class="archive-hbar-fill blue" style="width:${Math.round(q.n / maxN * 100)}%"></div></div>
+      <span class="archive-hbar-val" style="width:70px;">${avFmt(q.n)}</span>
     </div>`).join('');
-
-  const worstRows = d.worst_readings.map(r => `<tr><td>${r.date} ${r.time}</td><td class="name-cell">${r.airline_flag || ''} ${r.callsign || '—'}</td><td>${avFmt1(r.pm25)} µg/m³</td><td style="text-transform:capitalize">${(r.quality || '').replace(/_/g, ' ')}</td></tr>`).join('');
-  document.getElementById('av-poll-worst').innerHTML = `<thead><tr><th>${avT('av_col_datetime','Date / Time')}</th><th>${avT('av_col_flight','Flight')}</th><th>PM2.5</th><th>${avT('av_col_quality','Quality')}</th></tr></thead><tbody>${worstRows || avEmptyRow(4)}</tbody>`;
 
   avRenderPollutionChart('weekly');
   document.querySelectorAll('#av-poll-gran .archive-gran-btn').forEach(btn => {
@@ -713,8 +766,16 @@ function avRenderPollution() {
   });
 }
 
+let _archiveGenDate = null;
+function avRenderUpdated() {
+  if (!_archiveGenDate) return;
+  const localeMap = { fr: 'fr-FR', pt: 'pt-PT', en: 'en-GB' };
+  document.getElementById('av-updated').textContent = avT('av_updated', 'Updated') + ': ' + _archiveGenDate.toLocaleDateString(localeMap[_lang] || 'en-GB');
+}
+
 function avRefreshAll() {
   if (!archiveData) return;
+  avRenderUpdated();
   avRenderOverview();
   const acSel = document.getElementById('av-aircraft-select');
   const alSel = document.getElementById('av-airline-select');
@@ -730,9 +791,8 @@ fetch(ARCHIVE_URL + '?t=' + Date.now())
   .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
   .then(data => {
     archiveData = data;
-    const genDate = new Date(data.generated_at);
-    const localeMap = { fr: 'fr-FR', pt: 'pt-PT', en: 'en-GB' };
-    document.getElementById('av-updated').textContent = avT('av_updated', 'Updated') + ': ' + genDate.toLocaleDateString(localeMap[_lang] || 'en-GB');
+    _archiveGenDate = new Date(data.generated_at);
+    avRenderUpdated();
     avRenderOverview();
     avPopulateSelects();
     avRenderAnac();
@@ -766,7 +826,7 @@ const T = {
     av_poll_avg:'Average PM2.5', av_poll_max:'Peak PM2.5', av_poll_coverage:'Sensor coverage',
     av_poll_dist:'Air quality distribution', av_poll_chart_title:'Traffic × PM2.5 over time',
     av_gran_day:'Day', av_gran_week:'Week', av_gran_month:'Month',
-    av_poll_legend_flights:'Flights', av_poll_legend_pm:'Avg. PM2.5', av_poll_worst:'Highest readings on record',
+    av_poll_legend_flights:'Flights', av_poll_legend_pm:'Avg. PM2.5', av_poll_legend_temp:'Outside temperature',
     av_pic_open:'Open full resolution', av_gallery_badge:'gallery', av_no_photos:'No photos available for this selection.',
     av_prev:'← Previous', av_next:'Next →', av_page:'Page', av_photos_lower:'photo(s)', av_flights_lower:'flights',
     av_col_airline:'Airline', av_col_flights:'Flights', av_col_avgdb:'Avg dB', av_col_maxdb:'Max dB',
@@ -775,7 +835,7 @@ const T = {
     av_total_lower:'total', av_showing_first:'showing first', av_col_datetime:'Date / Time', av_col_flight:'Flight', av_col_type:'Type',
     av_rare_caveat_title:'⚠ Suspected false positives',
     av_rare_caveat_desc:'some flights tagged "military" resolve to a known commercial airline — most likely a hex-range classification overlap, not an actual military aircraft. See Data Quality for exact counts.',
-    av_col_canonical:'Canonical name', av_col_variants:'Merged variants', av_col_quality:'Quality',
+    av_col_canonical:'Canonical name', av_col_variants:'Merged variants',
     av_updated:'Updated', av_error:'Archive data unavailable — check back shortly.'
   },
   pt: {
@@ -797,7 +857,7 @@ const T = {
     av_poll_avg:'PM2.5 médio', av_poll_max:'Pico PM2.5', av_poll_coverage:'Cobertura do sensor',
     av_poll_dist:'Distribuição da qualidade do ar', av_poll_chart_title:'Tráfego × PM2.5 ao longo do tempo',
     av_gran_day:'Dia', av_gran_week:'Semana', av_gran_month:'Mês',
-    av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_worst:'Leituras mais altas registadas',
+    av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_legend_temp:'Temperatura exterior',
     av_pic_open:'Abrir em resolução total', av_gallery_badge:'galeria', av_no_photos:'Nenhuma foto disponível para esta seleção.',
     av_prev:'← Anterior', av_next:'Seguinte →', av_page:'Página', av_photos_lower:'foto(s)', av_flights_lower:'voos',
     av_col_airline:'Companhia', av_col_flights:'Voos', av_col_avgdb:'dB médio', av_col_maxdb:'dB máx',
@@ -806,7 +866,7 @@ const T = {
     av_total_lower:'total', av_showing_first:'a mostrar os primeiros', av_col_datetime:'Data / Hora', av_col_flight:'Voo', av_col_type:'Tipo',
     av_rare_caveat_title:'⚠ Suspeita de falsos positivos',
     av_rare_caveat_desc:'alguns voos etiquetados como "militar" correspondem a uma companhia aérea comercial conhecida — provavelmente uma sobreposição na classificação por intervalo hex, não uma aeronave militar real. Ver Qualidade dos Dados para contagens exatas.',
-    av_col_canonical:'Nome canónico', av_col_variants:'Variantes fundidas', av_col_quality:'Qualidade',
+    av_col_canonical:'Nome canónico', av_col_variants:'Variantes fundidas',
     av_updated:'Atualizado', av_error:'Dados do arquivo indisponíveis — tente novamente em breve.'
   },
   fr: {
@@ -828,7 +888,7 @@ const T = {
     av_poll_avg:'PM2.5 moyen', av_poll_max:'Pic PM2.5', av_poll_coverage:'Couverture du capteur',
     av_poll_dist:'Répartition de la qualité de l\'air', av_poll_chart_title:'Trafic × PM2.5 dans le temps',
     av_gran_day:'Jour', av_gran_week:'Semaine', av_gran_month:'Mois',
-    av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_worst:'Relevés les plus élevés enregistrés',
+    av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_legend_temp:'Température extérieure',
     av_pic_open:'Ouvrir en pleine résolution', av_gallery_badge:'galerie', av_no_photos:'Aucune photo disponible pour cette sélection.',
     av_prev:'← Précédent', av_next:'Suivant →', av_page:'Page', av_photos_lower:'photo(s)', av_flights_lower:'vols',
     av_col_airline:'Compagnie', av_col_flights:'Vols', av_col_avgdb:'dB moy', av_col_maxdb:'dB max',
@@ -837,7 +897,7 @@ const T = {
     av_total_lower:'total', av_showing_first:'affichage des', av_col_datetime:'Date / Heure', av_col_flight:'Vol', av_col_type:'Type',
     av_rare_caveat_title:'⚠ Suspicion de faux positifs',
     av_rare_caveat_desc:'certains vols étiquetés "militaire" correspondent à une compagnie commerciale connue — probablement un chevauchement de classification par plage hex, pas un vrai avion militaire. Voir Qualité des données pour les chiffres exacts.',
-    av_col_canonical:'Nom canonique', av_col_variants:'Variantes fusionnées', av_col_quality:'Qualité',
+    av_col_canonical:'Nom canonique', av_col_variants:'Variantes fusionnées',
     av_updated:'Mis à jour', av_error:'Données d\'archive indisponibles — réessayez sous peu.'
   }
 };
