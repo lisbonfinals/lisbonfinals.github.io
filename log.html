@@ -615,7 +615,11 @@ nav {
   <a href="/archive.html" onclick="closeDrawer()">Archive</a>
   <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
   <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
-  <a href="/about.html" onclick="closeDrawer()">About</a>
+  <a href="/about.html#the-project" onclick="closeDrawer()">The Project</a>
+  <a href="/about.html#how-it-works" onclick="closeDrawer()">How it works</a>
+  <a href="/about.html#hardware" onclick="closeDrawer()">The Station</a>
+  <a href="/about.html#whats-next" onclick="closeDrawer()">What's next</a>
+  <a href="/about.html#get-involved" onclick="closeDrawer()">Open Data</a>
   <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
 </div>
 
@@ -637,7 +641,16 @@ nav {
     <li><a href="/archive.html">Archive</a></li>
     <li><a href="/noise-report.html" class="nav-noise">Noise Report</a></li>
     <li><a href="/log.html" class="nav-active">Captain's Log</a></li>
-    <li><a href="/about.html">About</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/about.html">About ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/about.html#the-project">The Project</a></li>
+        <li><a href="/about.html#how-it-works">How it works</a></li>
+        <li><a href="/about.html#hardware">The Station</a></li>
+        <li><a href="/about.html#whats-next">What's next</a></li>
+        <li><a href="/about.html#get-involved">Open Data</a></li>
+      </ul>
+    </li>
   </ul>
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>

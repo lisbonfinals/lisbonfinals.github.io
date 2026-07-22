@@ -186,8 +186,8 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-table tbody tr.expandable.expanded td.name-cell::after{content:'▴';color:var(--amber);}
 .archive-table tr.archive-expand-row td{background:rgba(7,9,13,.4);padding:16px 20px;white-space:normal;cursor:default;}
 .archive-table tr.archive-expand-row .archive-expand-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,166,35,.5);margin-bottom:10px;}
-.archive-pics-grid--sm{grid-template-columns:repeat(6,1fr);gap:8px;}
-@media(max-width:900px){.archive-pics-grid--sm{grid-template-columns:repeat(3,1fr);}}
+.archive-pics-grid.archive-pics-grid--sm{grid-template-columns:repeat(6,1fr);gap:8px;}
+@media(max-width:900px){.archive-pics-grid.archive-pics-grid--sm{grid-template-columns:repeat(3,1fr);}}
 
 /* ranked list (top airlines / top aircraft) — clickable rows */
 .archive-ranklist{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
@@ -297,7 +297,11 @@ table.archive-table{width:100%;border-collapse:collapse;}
   <a href="/archive.html" style="color:var(--amber)" onclick="closeDrawer()">Archive</a>
   <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
   <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
-  <a href="/about.html" onclick="closeDrawer()">About</a>
+  <a href="/about.html#the-project" onclick="closeDrawer()">The Project</a>
+  <a href="/about.html#how-it-works" onclick="closeDrawer()">How it works</a>
+  <a href="/about.html#hardware" onclick="closeDrawer()">The Station</a>
+  <a href="/about.html#whats-next" onclick="closeDrawer()">What's next</a>
+  <a href="/about.html#get-involved" onclick="closeDrawer()">Open Data</a>
   <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
 </div>
 
@@ -319,7 +323,16 @@ table.archive-table{width:100%;border-collapse:collapse;}
     <li><a href="/archive.html" class="nav-active">Archive</a></li>
     <li><a href="/noise-report.html" class="nav-noise">Noise Report</a></li>
     <li><a href="/log.html">Captain's Log</a></li>
-    <li><a href="/about.html">About</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/about.html">About ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/about.html#the-project">The Project</a></li>
+        <li><a href="/about.html#how-it-works">How it works</a></li>
+        <li><a href="/about.html#hardware">The Station</a></li>
+        <li><a href="/about.html#whats-next">What's next</a></li>
+        <li><a href="/about.html#get-involved">Open Data</a></li>
+      </ul>
+    </li>
   </ul>
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
@@ -610,7 +623,7 @@ function avRenderPics(containerId, paginationId, items, page, onPage) {
   const slice = items.slice(start, end);
   el.innerHTML = slice.length ? slice.map(p => `
     <a class="archive-pic-card" href="${p.photo_url}" target="_blank" rel="noopener noreferrer" title="${avT('av_pic_open','Open full resolution')}">
-      <img src="${p.photo_url}" loading="lazy" alt="${p.callsign || ''}">
+      <img src="${p.photo_url}" alt="${p.callsign || ''}">
       ${p.score != null ? `<div class="archive-pic-score">★ ${Number(p.score).toFixed(1)}</div>` : ''}
       ${!p.is_instagram ? `<div class="archive-pic-badge">${avT('av_gallery_badge','gallery')}</div>` : ''}
       <div class="archive-pic-meta"><b>${p.callsign || '—'}</b> · ${p.airline || '—'}<br>${p.aircraft_type || ''} · ${p.date || ''}</div>
