@@ -371,6 +371,9 @@ table.archive-table{width:100%;border-collapse:collapse;}
 
   <!-- ── OVERVIEW ── -->
   <div class="archive-view active" id="av-view-overview">
+    <div class="archive-select-row" style="margin-bottom:16px;">
+      <select class="archive-select" id="av-overview-month"></select>
+    </div>
     <div class="stat-grid">
       <div class="stat-card amber"><div class="stat-val" id="av-total-flights">—</div><div class="stat-lbl" data-i18n="av_lbl_total">Total flights</div></div>
       <div class="stat-card"><div class="stat-val" id="av-avg-db">—</div><div class="stat-lbl" data-i18n="av_lbl_avgdb">Average dB</div></div>
@@ -697,8 +700,30 @@ function avRenderRankList(containerId, items, labelKey, flagKey, onClick) {
 }
 
 // ── Overview ──
+function avMonthLabel(ym) {
+  const [y, m] = ym.split('-').map(Number);
+  const localeMap = { fr: 'fr-FR', pt: 'pt-PT', en: 'en-GB' };
+  return new Date(y, m - 1, 1).toLocaleDateString(localeMap[_lang] || 'en-GB', { month: 'long', year: 'numeric' });
+}
+
+function avPopulateMonthSelect() {
+  const sel = document.getElementById('av-overview-month');
+  const months = Object.keys(archiveData.by_month || {}).sort().reverse();
+  const cur = sel.value;
+  sel.innerHTML = `<option value="">${avT('av_month_all', 'All time')}</option>` +
+    months.map(ym => `<option value="${ym}">${avMonthLabel(ym)}</option>`).join('');
+  sel.value = months.includes(cur) ? cur : '';
+  if (!sel.dataset.bound) {
+    sel.dataset.bound = '1';
+    sel.addEventListener('change', avRenderOverview);
+  }
+}
+
 function avRenderOverview() {
-  const d = archiveData.overview;
+  const monthSel = document.getElementById('av-overview-month');
+  const ym = monthSel ? monthSel.value : '';
+  const ov = archiveData.overview;
+  const d = (ym && archiveData.by_month && archiveData.by_month[ym]) ? archiveData.by_month[ym] : ov;
   document.getElementById('av-total-flights').textContent = avFmt(d.total_flights);
   document.getElementById('av-avg-db').textContent = d.avg_db != null ? avFmt1(d.avg_db) + ' dB' : '—';
   document.getElementById('av-max-db').textContent = d.max_db != null ? avFmt1(d.max_db) + ' dB' : '—';
@@ -717,6 +742,9 @@ function avRenderOverview() {
     avLoadAircraft(label);
   });
 
+  // Corrélation son×vibration et galerie photo restent sur l'historique complet,
+  // même quand un mois est sélectionné (portée volontairement limitée aux KPIs
+  // et classements — cf. discussion avec Antonio).
   const buckets = archiveData.sound_vibration.buckets;
   const maxVib = Math.max(...buckets.map(b => b.avg_vib || 0), 1);
   document.getElementById('av-correlation-chart').innerHTML = buckets.map(b => `
@@ -726,7 +754,7 @@ function avRenderOverview() {
       <span class="archive-hbar-val">${avFmt1(b.avg_vib)} mg <span class="archive-hbar-n">(n=${avFmt(b.n)})</span></span>
     </div>`).join('');
 
-  const paginate = (p) => { avPicsPage.overview = p; avRenderPics('av-overview-pics', 'av-overview-pics-pagination', d.best_pics.items, p, paginate); };
+  const paginate = (p) => { avPicsPage.overview = p; avRenderPics('av-overview-pics', 'av-overview-pics-pagination', ov.best_pics.items, p, paginate); };
   paginate(avPicsPage.overview);
 }
 
@@ -915,6 +943,7 @@ function avRenderUpdated() {
 function avRefreshAll() {
   if (!archiveData) return;
   avRenderUpdated();
+  avPopulateMonthSelect();
   avRenderOverview();
   const acSel = document.getElementById('av-aircraft-select');
   const alSel = document.getElementById('av-airline-select');
@@ -932,6 +961,7 @@ fetch(ARCHIVE_URL + '?t=' + Date.now())
     archiveData = data;
     _archiveGenDate = new Date(data.generated_at);
     avRenderUpdated();
+    avPopulateMonthSelect();
     avRenderOverview();
     avPopulateSelects();
     avRenderAnac();
@@ -953,7 +983,7 @@ const T = {
     av_tab_overview:'Overview', av_tab_aircraft:'By Aircraft', av_tab_airline:'By Airline',
     av_tab_anac:'Night · ANAC', av_tab_rare:'Rare · Military', av_tab_quality:'Data Quality', av_tab_pollution:'Air Quality',
     av_lbl_total:'Total flights', av_lbl_avgdb:'Average dB', av_lbl_maxdb:'Peak dB', av_lbl_avgvib:'Avg. vibration (mg)',
-    av_top_airlines:'Top airlines', av_top_aircraft:'Top aircraft models', av_click_hint:'click to explore',
+    av_top_airlines:'Top airlines', av_top_aircraft:'Top aircraft models', av_click_hint:'click to explore', av_month_all:'All time',
     av_correlation_title:'Sound × vibration correlation', av_photos_title:'Best photos', av_monthly_trend:'Monthly trend',
     av_anac_week:'Night flights (00h–06h, all-time)', av_anac_critical:'Critical violations', av_anac_l2:'Level 2 violations',
     av_anac_offenders:'Top offenders (by airline)', av_anac_infractions:'Infractions',
@@ -986,7 +1016,7 @@ const T = {
     av_tab_overview:'Visão geral', av_tab_aircraft:'Por Aeronave', av_tab_airline:'Por Companhia',
     av_tab_anac:'Noite · ANAC', av_tab_rare:'Raros · Militares', av_tab_quality:'Qualidade dos Dados', av_tab_pollution:'Qualidade do Ar',
     av_lbl_total:'Voos totais', av_lbl_avgdb:'dB médio', av_lbl_maxdb:'Pico dB', av_lbl_avgvib:'Vibração média (mg)',
-    av_top_airlines:'Principais companhias', av_top_aircraft:'Principais modelos', av_click_hint:'clique para explorar',
+    av_top_airlines:'Principais companhias', av_top_aircraft:'Principais modelos', av_click_hint:'clique para explorar', av_month_all:'Todo o período',
     av_correlation_title:'Correlação som × vibração', av_photos_title:'Melhores fotos', av_monthly_trend:'Tendência mensal',
     av_anac_week:'Voos noturnos (00h–06h, histórico)', av_anac_critical:'Infrações críticas', av_anac_l2:'Infrações nível 2',
     av_anac_offenders:'Principais infratores (por companhia)', av_anac_infractions:'Infrações',
@@ -1019,7 +1049,7 @@ const T = {
     av_tab_overview:'Vue d\'ensemble', av_tab_aircraft:'Par modèle d\'avion', av_tab_airline:'Par compagnie',
     av_tab_anac:'Nuit · ANAC', av_tab_rare:'Rares · Militaires', av_tab_quality:'Qualité des données', av_tab_pollution:'Qualité de l\'air',
     av_lbl_total:'Vols totaux', av_lbl_avgdb:'dB moyen', av_lbl_maxdb:'Pic dB', av_lbl_avgvib:'Vibration moyenne (mg)',
-    av_top_airlines:'Top compagnies', av_top_aircraft:'Top modèles d\'avion', av_click_hint:'cliquer pour explorer',
+    av_top_airlines:'Top compagnies', av_top_aircraft:'Top modèles d\'avion', av_click_hint:'cliquer pour explorer', av_month_all:'Tout l\'historique',
     av_correlation_title:'Corrélation son × vibration', av_photos_title:'Meilleures photos', av_monthly_trend:'Tendance mensuelle',
     av_anac_week:'Vols nocturnes (00h–06h, historique complet)', av_anac_critical:'Infractions critiques', av_anac_l2:'Infractions niveau 2',
     av_anac_offenders:'Principales compagnies (infractions)', av_anac_infractions:'Infractions',
