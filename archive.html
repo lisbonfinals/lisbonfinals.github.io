@@ -205,6 +205,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-pic-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .archive-pic-score{position:absolute;top:8px;right:8px;background:rgba(7,9,13,.7);color:var(--amber);font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:3px;}
 .archive-pic-badge{position:absolute;top:8px;left:8px;background:rgba(7,9,13,.7);color:var(--blue);font-family:var(--mono);font-size:8px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;}
+.archive-pic-badge.instagram{color:#e1799a;}
 .archive-pic-meta{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(transparent,rgba(7,9,13,.9));font-family:var(--mono);font-size:9px;color:var(--white);}
 .archive-pic-meta b{color:var(--amber);}
 
@@ -628,7 +629,7 @@ function avRenderPics(containerId, paginationId, items, page, onPage) {
     <a class="archive-pic-card" href="${p.photo_url}" target="_blank" rel="noopener noreferrer" title="${avT('av_pic_open','Open full resolution')}">
       <img src="${p.photo_url}" alt="${p.callsign || ''}">
       ${p.score != null ? `<div class="archive-pic-score">★ ${Number(p.score).toFixed(1)}</div>` : ''}
-      ${!p.is_instagram ? `<div class="archive-pic-badge">${avT('av_gallery_badge','gallery')}</div>` : ''}
+      ${p.is_instagram ? `<div class="archive-pic-badge instagram">${avT('av_instagram_badge','instagram')}</div>` : `<div class="archive-pic-badge">${avT('av_gallery_badge','gallery')}</div>`}
       <div class="archive-pic-meta"><b>${p.callsign || '—'}</b> · ${p.airline || '—'}<br>${p.aircraft_type || ''} · ${p.date || ''}</div>
     </a>`).join('') : `<div class="archive-empty" style="grid-column:1/-1">${avT('av_no_photos','No photos available for this selection.')}</div>`;
   const pages = Math.max(1, Math.ceil(items.length / AV_PAGE_SIZE));
@@ -997,7 +998,7 @@ const T = {
     av_poll_dist:'Air quality distribution', av_poll_chart_title:'Traffic × PM2.5 over time',
     av_gran_day:'Day', av_gran_week:'Week', av_gran_month:'Month',
     av_poll_legend_flights:'Flights', av_poll_legend_pm:'Avg. PM2.5', av_poll_legend_temp:'Outside temperature',
-    av_pic_open:'Open full resolution', av_gallery_badge:'gallery', av_no_photos:'No photos available for this selection.', av_expand_photos:'Best photos',
+    av_pic_open:'Open full resolution', av_gallery_badge:'gallery', av_instagram_badge:'instagram', av_no_photos:'No photos available for this selection.', av_expand_photos:'Best photos',
     av_freshness_note:'<b>Snapshot, not live.</b> This archive is republished periodically from the station\'s full database — not streamed in real time like the counters on Data — so totals here can lag the live ticker by a few hours or days. The photo galleries go further too, including shots never posted to Instagram.',
     av_prev:'← Previous', av_next:'Next →', av_page:'Page', av_photos_lower:'photo(s)', av_flights_lower:'flights',
     av_col_airline:'Airline', av_col_flights:'Flights', av_col_avgdb:'Avg dB', av_col_maxdb:'Max dB',
@@ -1030,7 +1031,7 @@ const T = {
     av_poll_dist:'Distribuição da qualidade do ar', av_poll_chart_title:'Tráfego × PM2.5 ao longo do tempo',
     av_gran_day:'Dia', av_gran_week:'Semana', av_gran_month:'Mês',
     av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_legend_temp:'Temperatura exterior',
-    av_pic_open:'Abrir em resolução total', av_gallery_badge:'galeria', av_no_photos:'Nenhuma foto disponível para esta seleção.', av_expand_photos:'Melhores fotos',
+    av_pic_open:'Abrir em resolução total', av_gallery_badge:'galeria', av_instagram_badge:'instagram', av_no_photos:'Nenhuma foto disponível para esta seleção.', av_expand_photos:'Melhores fotos',
     av_freshness_note:'<b>Instantâneo, não em tempo real.</b> Este arquivo é republicado periodicamente a partir da base de dados completa da estação — não é transmitido em tempo real como os contadores da página Dados — por isso os totais aqui podem ficar algumas horas ou dias atrás do contador ao vivo. As galerias de fotos vão mais longe também, incluindo fotos nunca publicadas no Instagram.',
     av_prev:'← Anterior', av_next:'Seguinte →', av_page:'Página', av_photos_lower:'foto(s)', av_flights_lower:'voos',
     av_col_airline:'Companhia', av_col_flights:'Voos', av_col_avgdb:'dB médio', av_col_maxdb:'dB máx',
@@ -1063,7 +1064,7 @@ const T = {
     av_poll_dist:'Répartition de la qualité de l\'air', av_poll_chart_title:'Trafic × PM2.5 dans le temps',
     av_gran_day:'Jour', av_gran_week:'Semaine', av_gran_month:'Mois',
     av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_legend_temp:'Température extérieure',
-    av_pic_open:'Ouvrir en pleine résolution', av_gallery_badge:'galerie', av_no_photos:'Aucune photo disponible pour cette sélection.', av_expand_photos:'Meilleures photos',
+    av_pic_open:'Ouvrir en pleine résolution', av_gallery_badge:'galerie', av_instagram_badge:'instagram', av_no_photos:'Aucune photo disponible pour cette sélection.', av_expand_photos:'Meilleures photos',
     av_freshness_note:'<b>Instantané, pas en direct.</b> Ces archives sont republiées périodiquement depuis la base de données complète de la station — pas diffusées en temps réel comme les compteurs de la page Data — les totaux ici peuvent donc avoir quelques heures ou jours de retard sur le ticker live. Les galeries photo vont plus loin aussi, avec des clichés jamais publiés sur Instagram.',
     av_prev:'← Précédent', av_next:'Suivant →', av_page:'Page', av_photos_lower:'photo(s)', av_flights_lower:'vols',
     av_col_airline:'Compagnie', av_col_flights:'Vols', av_col_avgdb:'dB moy', av_col_maxdb:'dB max',
