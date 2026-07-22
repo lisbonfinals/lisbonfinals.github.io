@@ -467,6 +467,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
   <!-- ── DATA QUALITY ── -->
   <div class="archive-view" id="av-view-quality">
     <div class="archive-note" data-i18n="av_quality_intro">Transparency panel — known caveats in this dataset, with real counters rather than hidden assumptions.</div>
+    <div class="archive-note" data-i18n-html="av_q_airline_methodology"><b>How airlines are identified.</b> Each aircraft is matched to an airline via its live radio callsign first — the most reliable signal we have. When no callsign is available, we fall back to external registry lookups, which are occasionally wrong or outdated. On 22 July 2026 we audited every aircraft with conflicting airline labels across sightings and corrected ~1,070 aircraft (~6,700 flights) where a live callsign contradicted a weaker guess. One editorial call worth flagging: Malta-registered (9H-) aircraft split between two real Ryanair Group entities with different fleets — Malta Air (Boeing 737) and Lauda Europe (Airbus A320/A321) — we now separate them by aircraft type rather than lumping both under "Ryanair".</div>
     <div class="stat-grid">
       <div class="stat-card"><div class="stat-val" id="av-q-capped-pct">—</div><div class="stat-lbl" data-i18n="av_q_capped">dB readings capped at 100</div></div>
       <div class="stat-card"><div class="stat-val" id="av-q-types">—</div><div class="stat-lbl" data-i18n="av_q_types">Aircraft models (raw → merged)</div></div>
@@ -958,6 +959,7 @@ const T = {
     av_anac_offenders:'Top offenders (by airline)', av_anac_infractions:'Infractions',
     av_rare_total:'Rare / military flights detected',
     av_quality_intro:'Transparency panel — known caveats in this dataset, with real counters rather than hidden assumptions.',
+    av_q_airline_methodology:'<b>How airlines are identified.</b> Each aircraft is matched to an airline via its live radio callsign first — the most reliable signal we have. When no callsign is available, we fall back to external registry lookups, which are occasionally wrong or outdated. On 22 July 2026 we audited every aircraft with conflicting airline labels across sightings and corrected ~1,070 aircraft (~6,700 flights) where a live callsign contradicted a weaker guess. One editorial call worth flagging: Malta-registered (9H-) aircraft split between two real Ryanair Group entities with different fleets — Malta Air (Boeing 737) and Lauda Europe (Airbus A320/A321) — we now separate them by aircraft type rather than lumping both under "Ryanair".',
     av_q_capped:'dB readings capped at 100', av_q_types:'Aircraft models (raw → merged)',
     av_q_military:'Suspected false-positive "military" tags', av_q_groups:'Merged aircraft model groups (naming duplicates)',
     av_poll_intro:'Ambient PM sensor readings captured alongside each flight event — a timing reference, not proof that aircraft caused the reading (a barbecue or cigarette on the terrace affects it just as much).',
@@ -990,6 +992,7 @@ const T = {
     av_anac_offenders:'Principais infratores (por companhia)', av_anac_infractions:'Infrações',
     av_rare_total:'Voos raros / militares detetados',
     av_quality_intro:'Painel de transparência — limitações conhecidas neste conjunto de dados, com contadores reais em vez de suposições ocultas.',
+    av_q_airline_methodology:'<b>Como identificamos as companhias aéreas.</b> Cada aeronave é associada a uma companhia primeiro através do seu indicativo de rádio ao vivo — o sinal mais fiável que temos. Quando não há indicativo disponível, recorremos a bases de registo externas, por vezes erradas ou desatualizadas. Em 22 de julho de 2026 auditámos todas as aeronaves com etiquetas de companhia contraditórias entre avistamentos e corrigimos ~1.070 aeronaves (~6.700 voos) em que um indicativo real contradizia uma estimativa mais fraca. Uma decisão editorial a destacar: as aeronaves matriculadas em Malta (9H-) dividem-se entre duas entidades reais do grupo Ryanair com frotas diferentes — Malta Air (Boeing 737) e Lauda Europe (Airbus A320/A321) — agora separamo-las por tipo de aeronave em vez de as juntar todas sob "Ryanair".',
     av_q_capped:'Leituras dB no limite de 100', av_q_types:'Modelos de aeronave (bruto → fundido)',
     av_q_military:'Etiquetas "militar" suspeitas de falso positivo', av_q_groups:'Grupos de modelos fundidos (duplicados de nomenclatura)',
     av_poll_intro:'Leituras do sensor de partículas captadas junto de cada voo detetado — uma referência temporal, não prova de que a aeronave causou a leitura (um churrasco ou cigarro na varanda afeta-a igualmente).',
@@ -1022,6 +1025,7 @@ const T = {
     av_anac_offenders:'Principales compagnies (infractions)', av_anac_infractions:'Infractions',
     av_rare_total:'Vols rares / militaires détectés',
     av_quality_intro:'Panneau de transparence — limites connues de ce jeu de données, avec des compteurs réels plutôt que des suppositions cachées.',
+    av_q_airline_methodology:'<b>Comment on identifie les compagnies aériennes.</b> Chaque avion est d\'abord rattaché à une compagnie via son indicatif radio en direct — le signal le plus fiable dont on dispose. Sans indicatif disponible, on se rabat sur des bases de registre externes, parfois fausses ou obsolètes. Le 22 juillet 2026, on a audité tous les avions ayant des étiquettes de compagnie contradictoires selon les vols et corrigé ~1 070 avions (~6 700 vols) où un indicatif radio réel contredisait une estimation plus faible. Un choix éditorial à signaler : les avions immatriculés à Malte (9H-) se répartissent entre deux vraies entités du groupe Ryanair aux flottes différentes — Malta Air (Boeing 737) et Lauda Europe (Airbus A320/A321) — on les sépare désormais par type d\'avion plutôt que de tout regrouper sous "Ryanair".',
     av_q_capped:'Relevés dB plafonnés à 100', av_q_types:'Modèles d\'avion (bruts → fusionnés)',
     av_q_military:'Étiquettes "militaire" suspectées de faux positif', av_q_groups:'Groupes de modèles fusionnés (doublons de nommage)',
     av_poll_intro:'Relevés du capteur de particules captés en marge de chaque vol détecté — un repère temporel, pas une preuve que l\'avion soit la cause du relevé (un barbecue ou une cigarette sur la terrasse l\'affecte tout autant).',
