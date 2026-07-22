@@ -623,7 +623,7 @@ function avRenderPics(containerId, paginationId, items, page, onPage) {
   const slice = items.slice(start, end);
   el.innerHTML = slice.length ? slice.map(p => `
     <a class="archive-pic-card" href="${p.photo_url}" target="_blank" rel="noopener noreferrer" title="${avT('av_pic_open','Open full resolution')}">
-      <img src="${p.photo_url}" alt="${p.callsign || ''}">
+      <img src="${p.photo_url}" width="400" height="300" alt="${p.callsign || ''}">
       ${p.score != null ? `<div class="archive-pic-score">★ ${Number(p.score).toFixed(1)}</div>` : ''}
       ${!p.is_instagram ? `<div class="archive-pic-badge">${avT('av_gallery_badge','gallery')}</div>` : ''}
       <div class="archive-pic-meta"><b>${p.callsign || '—'}</b> · ${p.airline || '—'}<br>${p.aircraft_type || ''} · ${p.date || ''}</div>
