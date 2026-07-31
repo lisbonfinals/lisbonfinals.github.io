@@ -213,6 +213,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-pic-score{position:absolute;top:8px;right:8px;background:rgba(7,9,13,.7);color:var(--amber);font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:3px;}
 .archive-pic-badge{position:absolute;top:8px;left:8px;background:rgba(7,9,13,.7);color:var(--blue);font-family:var(--mono);font-size:8px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;}
 .archive-pic-badge.instagram{color:#e1799a;}
+.archive-pic-db{position:absolute;bottom:8px;right:8px;background:rgba(7,9,13,.7);color:var(--red,#e6553f);font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:3px;z-index:1;}
 .archive-pic-meta{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(transparent,rgba(7,9,13,.9));font-family:var(--mono);font-size:9px;color:var(--white);}
 .archive-pic-meta b{color:var(--amber);}
 
@@ -389,7 +390,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
       <div class="stat-card blue"><div class="stat-val" id="av-avg-vib">—</div><div class="stat-lbl" data-i18n="av_lbl_avgvib">Avg. vibration (mg)</div></div>
     </div>
 
-    <div class="two-col" style="margin-top:0;margin-bottom:24px;">
+    <div class="two-col" style="margin-top:0;margin-bottom:24px;align-items:start;">
       <div class="archive-table-wrap">
         <div class="archive-table-title"><span data-i18n="av_top_airlines">Top airlines</span><span style="opacity:.5;font-weight:400;text-transform:none;letter-spacing:0" data-i18n="av_click_hint">click to explore</span></div>
         <div class="archive-ranklist" id="av-top-airlines"></div>
@@ -637,6 +638,7 @@ function avRenderPics(containerId, paginationId, items, page, onPage) {
       <img src="${p.photo_url}" alt="${p.callsign || ''}">
       ${p.score != null ? `<div class="archive-pic-score">★ ${Number(p.score).toFixed(1)}</div>` : ''}
       ${p.is_instagram ? `<div class="archive-pic-badge instagram">${avT('av_instagram_badge','instagram')}</div>` : `<div class="archive-pic-badge">${avT('av_gallery_badge','gallery')}</div>`}
+      ${p.spl_db != null ? `<div class="archive-pic-db">${Math.round(p.spl_db)} dB</div>` : ''}
       <div class="archive-pic-meta"><b>${p.callsign || '—'}</b> · ${p.airline || '—'}<br>${p.aircraft_type || ''} · ${p.date || ''}</div>
     </a>`).join('') : `<div class="archive-empty" style="grid-column:1/-1">${avT('av_no_photos','No photos available for this selection.')}</div>`;
   const pages = Math.max(1, Math.ceil(items.length / AV_PAGE_SIZE));
