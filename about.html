@@ -409,6 +409,40 @@ nav {
   .coming-grid { grid-template-columns: 1fr; }
 }
 
+/* ── PRESS ── */
+.press-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.press-card {
+  background: #0d1117; border: 1px solid var(--border);
+  border-radius: 4px; padding: 28px 26px;
+  display: flex; flex-direction: column; gap: 14px;
+  text-decoration: none; color: inherit;
+  transition: border-color .2s, transform .2s;
+}
+.press-card:hover { border-color: rgba(245,166,35,0.4); transform: translateY(-2px); }
+.press-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.press-outlet {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--amber); font-weight: 600;
+}
+.press-date {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .08em; color: rgba(240,237,232,0.33);
+}
+.press-card-title {
+  font-family: var(--sans); font-size: 17px; font-weight: 700; line-height: 1.35; color: var(--white);
+}
+.press-card-quote {
+  font-family: var(--serif); font-style: italic; font-size: 14px; line-height: 1.6;
+  color: rgba(240,237,232,0.55); border-left: 2px solid rgba(245,166,35,0.3); padding-left: 14px;
+}
+.press-card-byline {
+  font-family: var(--mono); font-size: 10px; color: rgba(240,237,232,0.38);
+}
+.press-card-link {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .08em; color: rgba(245,166,35,0.7);
+  margin-top: auto;
+}
+.press-card:hover .press-card-link { color: var(--amber); }
+
 /* ── SECTION TAB BAR ── */
 .section-tabs {
   background: rgba(10,13,18,.95);
@@ -553,6 +587,7 @@ nav {
   <a href="/about.html#hardware" onclick="closeDrawer()">The Station</a>
   <a href="/about.html#whats-next" onclick="closeDrawer()">What's next</a>
   <a href="/about.html#get-involved" onclick="closeDrawer()">Get Involved</a>
+  <a href="/about.html#press" onclick="closeDrawer()">Press</a>
   <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
 </div>
 
@@ -582,6 +617,7 @@ nav {
         <li><a href="/about.html#hardware">The Station</a></li>
         <li><a href="/about.html#whats-next">What's next</a></li>
         <li><a href="/about.html#get-involved">Get Involved</a></li>
+        <li><a href="/about.html#press">Press</a></li>
       </ul>
     </li>
   </ul>
@@ -606,6 +642,7 @@ nav {
     <a href="#hardware" class="section-tab">The Station</a>
     <a href="#whats-next" class="section-tab">What's next</a>
     <a href="#get-involved" class="section-tab">Get Involved</a>
+    <a href="#press" class="section-tab">Press</a>
   </div>
 </div>
 
@@ -857,6 +894,26 @@ nav {
   </div>
 </section>
 
+<hr class="section-divider">
+
+<!-- PRESS -->
+<section class="hardware-section about-section" id="press" style="scroll-margin-top:140px">
+  <div class="section-eyebrow">In the press</div>
+  <h2 class="section-heading">In the<br><em>press</em></h2>
+  <div class="press-grid">
+    <a class="press-card" href="https://amensagem.pt/2026/08/13/campo-grande-terraco-que-conta-avioes/" target="_blank" rel="noopener noreferrer">
+      <div class="press-card-top">
+        <span class="press-outlet">Mensagem de Lisboa</span>
+        <span class="press-date">13.08.2026</span>
+      </div>
+      <div class="press-card-title">No Campo Grande, há um terraço que conta aviões</div>
+      <p class="press-card-quote">«A cada 3 minutos, uma pequena estação instalada por António Boaventura no seu terraço fotografa os gigantes que cruzam o céu de Lisboa, mede o ruído e identifica rapidamente o modelo da aeronave.»</p>
+      <div class="press-card-byline">by Tatiana Martins</div>
+      <span class="press-card-link">Read the article →</span>
+    </a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="about-footer">
   <span class="about-footer-left" id="footerLeft">LISBON FINALS · About · lisbonfinals.com</span>
@@ -937,6 +994,11 @@ const ABOUT_TRANSLATIONS = {
     tab_3: 'A Estação',
     tab_4: 'O que vem aí',
     tab_5: 'Participar',
+    tab_6: 'Imprensa',
+    press_eyebrow: 'Na imprensa',
+    press_heading: 'Na<br><em>imprensa</em>',
+    press_byline: 'por Tatiana Martins',
+    press_link: 'Ler o artigo →',
     howit_label: 'Como funciona',
     howit_title: 'Três camadas,<br><em>zero gatilhos humanos</em>',
     hw_eyebrow: 'A estação',
@@ -1004,6 +1066,11 @@ const ABOUT_TRANSLATIONS = {
     tab_3: 'The Station',
     tab_4: "What's next",
     tab_5: 'Get Involved',
+    tab_6: 'Press',
+    press_eyebrow: 'In the press',
+    press_heading: 'In the<br><em>press</em>',
+    press_byline: 'by Tatiana Martins',
+    press_link: 'Read the article →',
     howit_label: 'How it works',
     howit_title: 'Three layers,<br><em>zero human triggers</em>',
     hw_eyebrow: 'The station',
@@ -1080,6 +1147,11 @@ const ABOUT_TRANSLATIONS = {
     tab_3: 'La Station',
     tab_4: 'À venir',
     tab_5: 'Participer',
+    tab_6: 'Presse',
+    press_eyebrow: 'Dans la presse',
+    press_heading: 'Dans la<br><em>presse</em>',
+    press_byline: 'par Tatiana Martins',
+    press_link: "Lire l'article →",
     howit_label: 'Comment ça marche',
     hw_status_on: '● EN SERVICE',
     hw_status_soon: '◎ TESTÉ · BIENTÔT EN SERVICE',
@@ -1160,7 +1232,7 @@ function applyLang(lang) {
 
   // Tabs
   const tabs = selAll('.section-tab');
-  [t.tab_1, t.tab_2, t.tab_3, t.tab_4, t.tab_5].forEach((lbl, i) => {
+  [t.tab_1, t.tab_2, t.tab_3, t.tab_4, t.tab_5, t.tab_6].forEach((lbl, i) => {
     if (tabs[i] && lbl) tabs[i].textContent = lbl;
   });
 
@@ -1221,6 +1293,14 @@ function applyLang(lang) {
   if (giLicense && t.gi_license) giLicense.innerHTML = t.gi_license;
   const giContact = sel('.gi-contact');
   if (giContact && t.gi_contact) giContact.textContent = t.gi_contact;
+
+  // Press section
+  const pressEyebrow = sel('#press .section-eyebrow');
+  if (pressEyebrow) pressEyebrow.textContent = t.press_eyebrow;
+  const pressHeading = sel('#press .section-heading');
+  if (pressHeading) pressHeading.innerHTML = t.press_heading;
+  selAll('.press-card-byline').forEach(el => { el.textContent = t.press_byline; });
+  selAll('.press-card-link').forEach(el => { el.textContent = t.press_link; });
 }
 
 function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[_lang]||'en'); }
