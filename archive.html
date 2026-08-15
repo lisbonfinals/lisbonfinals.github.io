@@ -199,6 +199,8 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-rank-row{display:flex;align-items:center;gap:14px;padding:12px 20px;border-bottom:1px solid rgba(30,37,48,.6);cursor:pointer;transition:background .15s;}
 .archive-rank-row:last-child{border-bottom:none;}
 .archive-rank-row:hover{background:rgba(245,166,35,.05);}
+.archive-rank-row.active{background:rgba(245,166,35,.12);}
+.archive-rank-row.active .archive-rank-name{color:var(--amber);}
 .archive-rank-flag{font-size:15px;flex-shrink:0;width:20px;text-align:center;}
 .archive-rank-name{flex:1;font-family:var(--sans);font-size:13px;color:var(--white);}
 .archive-rank-n{font-family:var(--mono);font-size:11px;color:var(--amber);flex-shrink:0;}
@@ -471,9 +473,15 @@ table.archive-table{width:100%;border-collapse:collapse;}
     <div class="archive-note warn" id="av-rare-caveat" style="display:none;"></div>
     <div class="stat-grid" style="grid-template-columns:1fr 2fr;margin-bottom:24px;">
       <div class="stat-card amber"><div class="stat-val" id="av-rare-total">—</div><div class="stat-lbl" data-i18n="av_rare_total">Rare / military flights detected</div></div>
-      <div class="archive-ranklist" id="av-rare-bytype"></div>
+      <div class="archive-table-wrap" style="margin-bottom:0">
+        <div class="archive-table-title"><span data-i18n="av_rare_bytype_title">By type</span><span style="opacity:.5;font-weight:400;text-transform:none;letter-spacing:0" data-i18n="av_click_hint">click to explore</span></div>
+        <div class="archive-ranklist" id="av-rare-bytype"></div>
+      </div>
     </div>
-    <div class="archive-table-title" style="background:var(--dark2);border:1px solid var(--border);border-bottom:none;border-radius:4px 4px 0 0" data-i18n="av_photos_title">Photos</div>
+    <div class="archive-table-title" style="background:var(--dark2);border:1px solid var(--border);border-bottom:none;border-radius:4px 4px 0 0">
+      <span data-i18n="av_photos_title">Photos</span>
+      <span id="av-rare-filter-tag" style="opacity:.7;font-weight:400;text-transform:none;letter-spacing:0;cursor:pointer;display:none"></span>
+    </div>
     <div class="archive-pics-grid" id="av-rare-pics" style="border:1px solid var(--border);border-top:none;border-radius:0 0 4px 4px;padding:12px;background:var(--dark2)"></div>
     <div class="archive-pics-pagination" id="av-rare-pics-pagination"></div>
   </div>
@@ -697,13 +705,14 @@ function avToggleRowExpand(row, sourceKey, filterField, filterValue, labelText) 
   paginate(1);
 }
 
-function avRenderRankList(containerId, items, labelKey, flagKey, onClick) {
+function avRenderRankList(containerId, items, labelKey, flagKey, onClick, opts) {
   const el = document.getElementById(containerId);
+  const { labelFn, activeValue } = opts || {};
   if (!items.length) { el.innerHTML = `<div class="archive-empty">—</div>`; return; }
   el.innerHTML = items.map((it, i) => `
-    <div class="archive-rank-row" data-idx="${i}" ${onClick ? '' : 'style="cursor:default"'}>
+    <div class="archive-rank-row${activeValue != null && it[labelKey] === activeValue ? ' active' : ''}" data-idx="${i}" ${onClick ? '' : 'style="cursor:default"'}>
       ${flagKey ? `<span class="archive-rank-flag">${it[flagKey] || '✈️'}</span>` : ''}
-      <span class="archive-rank-name">${it[labelKey]}</span>
+      <span class="archive-rank-name">${labelFn ? labelFn(it) : it[labelKey]}</span>
       <span class="archive-rank-n">${avFmt(it.n)}</span>
     </div>`).join('');
   if (onClick) {
@@ -854,10 +863,32 @@ function avRenderAnac() {
 }
 
 // ── Rare / Military ──
+const RARE_TYPE_LABELS = {
+  military: { en: 'Military', pt: 'Militar', fr: 'Militaire' },
+  bizjet: { en: 'Business jet', pt: 'Jato executivo', fr: 'Jet d\'affaires' },
+  heavy: { en: 'Heavy widebody', pt: 'Widebody pesado', fr: 'Gros-porteur' },
+  unusual: { en: 'Unusual', pt: 'Invulgar', fr: 'Inhabituel' },
+  special_livery: { en: 'Special livery', pt: 'Pintura especial', fr: 'Livrée spéciale' },
+  autre: { en: 'Other', pt: 'Outro', fr: 'Autre' },
+};
+function avRareTypeLabel(raw) {
+  const entry = RARE_TYPE_LABELS[raw];
+  if (entry) return entry[_lang] || entry.en;
+  return raw || '—';
+}
+
+let avRareFilter = null;
+function avSetRareFilter(type) {
+  avRareFilter = (avRareFilter === type) ? null : type;
+  avPicsPage.rare = 1;
+  avRenderRare();
+}
+
 function avRenderRare() {
   const d = archiveData.rare;
   document.getElementById('av-rare-total').textContent = avFmt(d.total);
-  avRenderRankList('av-rare-bytype', d.by_type, 'rare_type', null, null);
+  avRenderRankList('av-rare-bytype', d.by_type, 'rare_type', null, avSetRareFilter,
+    { labelFn: (it) => avRareTypeLabel(it.rare_type), activeValue: avRareFilter });
 
   const militaryWithAirline = d.flights.filter(f => f.rare_type === 'military' && f.airline).length;
   const caveatEl = document.getElementById('av-rare-caveat');
@@ -868,7 +899,18 @@ function avRenderRare() {
     caveatEl.style.display = 'none';
   }
 
-  const paginate = (p) => { avPicsPage.rare = p; avRenderPics('av-rare-pics', 'av-rare-pics-pagination', d.best_pics.items, p, paginate); };
+  const filterTagEl = document.getElementById('av-rare-filter-tag');
+  if (avRareFilter) {
+    filterTagEl.style.display = '';
+    filterTagEl.textContent = `${avRareTypeLabel(avRareFilter)} — ✕ ${avT('av_rare_clear_filter','show all')}`;
+    filterTagEl.onclick = () => avSetRareFilter(avRareFilter);
+  } else {
+    filterTagEl.style.display = 'none';
+    filterTagEl.onclick = null;
+  }
+
+  const picsItems = avRareFilter ? d.best_pics.items.filter(p => p.rare_type === avRareFilter) : d.best_pics.items;
+  const paginate = (p) => { avPicsPage.rare = p; avRenderPics('av-rare-pics', 'av-rare-pics-pagination', picsItems, p, paginate); };
   paginate(avPicsPage.rare);
 }
 
@@ -1001,7 +1043,7 @@ const T = {
     av_correlation_title:'Sound × vibration correlation', av_photos_title:'Best photos', av_monthly_trend:'Monthly trend',
     av_anac_week:'Night flights (00h–06h, all-time)', av_anac_critical:'Critical violations', av_anac_l2:'Level 2 violations',
     av_anac_offenders:'Top offenders (by airline)', av_anac_infractions:'Infractions',
-    av_rare_total:'Rare / military flights detected',
+    av_rare_total:'Rare / military flights detected', av_rare_bytype_title:'By type', av_rare_clear_filter:'show all',
     av_quality_intro:'Transparency panel — known caveats in this dataset, with real counters rather than hidden assumptions.',
     av_q_airline_methodology:'<b>How airlines are identified.</b> Each aircraft is matched to an airline via its live radio callsign first — the most reliable signal we have. When no callsign is available, we fall back to external registry lookups, which are occasionally wrong or outdated. On 22 July 2026 we audited every aircraft with conflicting airline labels across sightings and corrected ~1,070 aircraft (~6,700 flights) where a live callsign contradicted a weaker guess. One editorial call worth flagging: Malta-registered (9H-) aircraft split between two real Ryanair Group entities with different fleets — Malta Air (Boeing 737) and Lauda Europe (Airbus A320/A321) — we now separate them by aircraft type rather than lumping both under "Ryanair".',
     av_q_capped:'dB readings capped at 100', av_q_types:'Aircraft models (raw → merged)',
@@ -1034,7 +1076,7 @@ const T = {
     av_correlation_title:'Correlação som × vibração', av_photos_title:'Melhores fotos', av_monthly_trend:'Tendência mensal',
     av_anac_week:'Voos noturnos (00h–06h, histórico)', av_anac_critical:'Infrações críticas', av_anac_l2:'Infrações nível 2',
     av_anac_offenders:'Principais infratores (por companhia)', av_anac_infractions:'Infrações',
-    av_rare_total:'Voos raros / militares detetados',
+    av_rare_total:'Voos raros / militares detetados', av_rare_bytype_title:'Por tipo', av_rare_clear_filter:'mostrar tudo',
     av_quality_intro:'Painel de transparência — limitações conhecidas neste conjunto de dados, com contadores reais em vez de suposições ocultas.',
     av_q_airline_methodology:'<b>Como identificamos as companhias aéreas.</b> Cada aeronave é associada a uma companhia primeiro através do seu indicativo de rádio ao vivo — o sinal mais fiável que temos. Quando não há indicativo disponível, recorremos a bases de registo externas, por vezes erradas ou desatualizadas. Em 22 de julho de 2026 auditámos todas as aeronaves com etiquetas de companhia contraditórias entre avistamentos e corrigimos ~1.070 aeronaves (~6.700 voos) em que um indicativo real contradizia uma estimativa mais fraca. Uma decisão editorial a destacar: as aeronaves matriculadas em Malta (9H-) dividem-se entre duas entidades reais do grupo Ryanair com frotas diferentes — Malta Air (Boeing 737) e Lauda Europe (Airbus A320/A321) — agora separamo-las por tipo de aeronave em vez de as juntar todas sob "Ryanair".',
     av_q_capped:'Leituras dB no limite de 100', av_q_types:'Modelos de aeronave (bruto → fundido)',
@@ -1067,7 +1109,7 @@ const T = {
     av_correlation_title:'Corrélation son × vibration', av_photos_title:'Meilleures photos', av_monthly_trend:'Tendance mensuelle',
     av_anac_week:'Vols nocturnes (00h–06h, historique complet)', av_anac_critical:'Infractions critiques', av_anac_l2:'Infractions niveau 2',
     av_anac_offenders:'Principales compagnies (infractions)', av_anac_infractions:'Infractions',
-    av_rare_total:'Vols rares / militaires détectés',
+    av_rare_total:'Vols rares / militaires détectés', av_rare_bytype_title:'Par type', av_rare_clear_filter:'tout afficher',
     av_quality_intro:'Panneau de transparence — limites connues de ce jeu de données, avec des compteurs réels plutôt que des suppositions cachées.',
     av_q_airline_methodology:'<b>Comment on identifie les compagnies aériennes.</b> Chaque avion est d\'abord rattaché à une compagnie via son indicatif radio en direct — le signal le plus fiable dont on dispose. Sans indicatif disponible, on se rabat sur des bases de registre externes, parfois fausses ou obsolètes. Le 22 juillet 2026, on a audité tous les avions ayant des étiquettes de compagnie contradictoires selon les vols et corrigé ~1 070 avions (~6 700 vols) où un indicatif radio réel contredisait une estimation plus faible. Un choix éditorial à signaler : les avions immatriculés à Malte (9H-) se répartissent entre deux vraies entités du groupe Ryanair aux flottes différentes — Malta Air (Boeing 737) et Lauda Europe (Airbus A320/A321) — on les sépare désormais par type d\'avion plutôt que de tout regrouper sous "Ryanair".',
     av_q_capped:'Relevés dB plafonnés à 100', av_q_types:'Modèles d\'avion (bruts → fusionnés)',
