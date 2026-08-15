@@ -222,6 +222,8 @@ table.archive-table{width:100%;border-collapse:collapse;}
 /* caveat / note banner */
 .archive-note{background:var(--dark2);border:1px solid rgba(96,165,250,.25);border-radius:4px;padding:16px 20px;margin-bottom:24px;font-family:var(--sans);font-size:12px;line-height:1.7;color:rgba(240,237,232,.6);}
 .archive-note b{color:var(--blue);}
+.archive-note .av-link{color:var(--blue);cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
+.archive-note .av-link:hover{opacity:.75;}
 .archive-note.warn{border-color:rgba(239,68,68,.25);}
 .archive-note.warn b{color:var(--red);}
 
@@ -231,13 +233,23 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-gran-group{display:flex;gap:2px;}
 .archive-gran-btn{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(240,237,232,.12);background:transparent;color:rgba(240,237,232,.43);padding:4px 9px;cursor:pointer;border-radius:2px;}
 .archive-gran-btn.active{color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06);}
-.archive-chart{display:flex;align-items:flex-end;gap:3px;height:110px;}
-.archive-bar-wrap{flex:1;display:flex;flex-direction:column-reverse;align-items:center;gap:1px;height:100%;}
-.archive-bar{width:100%;border-radius:1px;min-height:1px;transition:height .5s ease;}
-.archive-bar.flights{background:rgba(245,166,35,.55);}
-.archive-bar.pollution{background:rgba(96,165,250,.55);}
-.archive-chart-plot{position:relative;}
-.archive-chart-line{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
+/* multi-panel time-series chart — one axis per measure (flights / PM2.5 / temp), stacked, shared x-axis */
+.mchart{display:flex;flex-direction:column;gap:22px;}
+.mchart-panel-label{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.4);margin-bottom:8px;}
+.mchart-panel-label .legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+.mchart-panel-body{display:grid;grid-template-columns:36px 1fr;column-gap:10px;}
+.mchart-yaxis{position:relative;height:64px;}
+.mchart-ytick{position:absolute;right:0;transform:translateY(50%);font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.38);white-space:nowrap;font-variant-numeric:tabular-nums;line-height:1;}
+.mchart-plot{position:relative;height:64px;}
+.mchart-gridline{position:absolute;left:0;right:0;height:1px;background:var(--border);}
+.mchart-bars{position:absolute;inset:0;display:flex;align-items:flex-end;gap:2px;}
+.mchart-bar-wrap{flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center;min-width:0;}
+.mchart-bar{width:100%;max-width:20px;border-radius:2px 2px 0 0;min-height:1px;transition:height .5s ease;}
+.mchart-bar.flights{background:rgba(245,166,35,.65);}
+.mchart-bar.pollution{background:rgba(96,165,250,.65);}
+.mchart-line-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.mchart-xaxis{display:flex;gap:2px;margin-top:8px;padding-left:46px;}
+.mchart-xaxis span{flex:1;min-width:0;text-align:center;font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.32);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 /* horizontal bar rows — correlation chart, quality distribution */
 .archive-hbar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
@@ -522,15 +534,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
           <button class="archive-gran-btn" data-gran="monthly" data-i18n="av_gran_month">Month</button>
         </div>
       </div>
-      <div class="archive-chart-plot">
-        <div class="archive-chart" id="av-poll-chart"></div>
-        <svg class="archive-chart-line" id="av-poll-temp-svg" preserveAspectRatio="none" viewBox="0 0 100 110"></svg>
-      </div>
-      <div class="noise-chart-legend" style="margin-top:12px;">
-        <div class="legend-item"><div class="legend-dot" style="background:rgba(245,166,35,.55)"></div><span data-i18n="av_poll_legend_flights">Flights</span></div>
-        <div class="legend-item"><div class="legend-dot" style="background:rgba(96,165,250,.55)"></div><span data-i18n="av_poll_legend_pm">Avg. PM2.5</span></div>
-        <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b;border-radius:50%;"></div><span data-i18n="av_poll_legend_temp">Outside temperature</span></div>
-      </div>
+      <div class="mchart" id="av-poll-multichart"></div>
     </div>
   </div>
 </section>
@@ -877,6 +881,10 @@ function avRareTypeLabel(raw) {
   return raw || '—';
 }
 
+function avGotoQuality() {
+  document.querySelector('.archive-subtab[data-view="quality"]').click();
+}
+
 let avRareFilter = null;
 function avSetRareFilter(type) {
   avRareFilter = (avRareFilter === type) ? null : type;
@@ -927,42 +935,114 @@ function avRenderQuality() {
     'total', 'desc');
 }
 
-// ── Air Quality / Pollution ──
+// ── Air Quality / Pollution — 3 panneaux empilés (Vols / PM2.5 / Température), un axe par mesure ──
+// Superposer 3 échelles différentes (vols / µg/m³ / °C) sur un seul axe rend les valeurs illisibles
+// (cf. discussion avec Antonio, 15 août) — on les sépare en petits multiples partageant le même axe
+// de temps, ce qui garde la corrélation visuelle (pics alignés verticalement) tout en donnant à
+// chaque mesure de vraies graduations.
+function avNiceStep(rough) {
+  if (!rough || rough <= 0) return 1;
+  const exp = Math.floor(Math.log10(rough));
+  const base = Math.pow(10, exp);
+  const n = rough / base;
+  const nice = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
+  return nice * base;
+}
+// 3 graduations : [0, milieu, haut] pour les barres (base zéro), [min, milieu, max] pour la température
+function avAxisTicks(values, zeroBase) {
+  const vals = values.filter(v => v != null);
+  if (!vals.length) return { min: 0, max: 1, ticks: [0, 0.5, 1] };
+  const dataMax = Math.max(...vals);
+  if (zeroBase) {
+    const step = avNiceStep(Math.max(dataMax, 1) / 2);
+    const top = Math.max(step * 2, Math.ceil(dataMax / step) * step);
+    return { min: 0, max: top, ticks: [0, top / 2, top] };
+  }
+  const dataMin = Math.min(...vals);
+  const step = avNiceStep((dataMax - dataMin) / 2 || 1);
+  const min = Math.floor(dataMin / step) * step;
+  const max = Math.max(min + step * 2, Math.ceil(dataMax / step) * step);
+  return { min, max, ticks: [min, (min + max) / 2, max] };
+}
+function avYAxisHtml(ticks, fmt) {
+  const lo = ticks[0], hi = ticks[ticks.length - 1], range = (hi - lo) || 1;
+  return ticks.map(t => `<span class="mchart-ytick" style="bottom:${Math.round((t - lo) / range * 100)}%">${fmt(t)}</span>`).join('');
+}
+function avGridlinesHtml(ticks) {
+  const lo = ticks[0], hi = ticks[ticks.length - 1], range = (hi - lo) || 1;
+  return ticks.map(t => `<div class="mchart-gridline" style="bottom:${Math.round((t - lo) / range * 100)}%"></div>`).join('');
+}
+function avShortXLabel(label, gran) {
+  if (gran === 'daily') { const [, m, d] = label.split('-'); return `${d}/${m}`; }
+  if (gran === 'weekly') return label.split('-')[1] || label;
+  const [y, m] = label.split('-').map(Number);
+  const localeMap = { fr: 'fr-FR', pt: 'pt-PT', en: 'en-GB' };
+  return new Date(y, m - 1, 1).toLocaleDateString(localeMap[_lang] || 'en-GB', { month: 'short' });
+}
+
 function avRenderPollutionChart(gran) {
   const series = archiveData.traffic_pollution[gran] || [];
-  const maxFlights = Math.max(...series.map(s => s.flights || 0), 1);
-  const maxPm = Math.max(...series.map(s => s.avg_pm25 || 0), 1);
   const shown = series.slice(-60);
-  document.getElementById('av-poll-chart').innerHTML = shown.map(s => `
-    <div class="archive-bar-wrap" title="${s.label}: ${s.flights} ${avT('av_flights_lower','flights')}, ${s.avg_pm25 != null ? s.avg_pm25.toFixed(1) : '—'} µg/m³${s.avg_temp != null ? ', ' + s.avg_temp.toFixed(1) + '°C' : ''}">
-      <div class="archive-bar pollution" style="height:${s.avg_pm25 ? Math.max(2, Math.round(s.avg_pm25 / maxPm * 50)) : 1}%"></div>
-      <div class="archive-bar flights" style="height:${Math.max(2, Math.round((s.flights || 0) / maxFlights * 50))}%"></div>
-    </div>`).join('');
-
-  // température extérieure (Open-Meteo, historique) — courbe SVG en surimpression des barres
-  const svg = document.getElementById('av-poll-temp-svg');
-  const temps = shown.map(s => s.avg_temp);
-  const validTemps = temps.filter(t => t != null);
-  if (validTemps.length < 2) { svg.innerHTML = ''; return; }
-  const minT = Math.min(...validTemps), maxT = Math.max(...validTemps);
-  const range = (maxT - minT) || 1;
   const n = shown.length;
-  const points = temps.map((t, i) => {
-    if (t == null) return null;
-    const x = (i + 0.5) / n * 100;
-    const y = 105 - ((t - minT) / range) * 95;
-    return [x, y];
-  });
-  const segments = [];
-  let current = [];
-  points.forEach(p => {
-    if (p) current.push(p);
-    else { if (current.length > 1) segments.push(current); current = []; }
-  });
-  if (current.length > 1) segments.push(current);
-  svg.innerHTML =
-    segments.map(seg => `<polyline points="${seg.map(p => p.join(',')).join(' ')}" fill="none" stroke="#ff6b6b" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('') +
-    points.map(p => p ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="#ff6b6b"/>` : '').join('');
+  const xStep = Math.max(1, Math.round(n / 6));
+
+  const flightsTicks = avAxisTicks(shown.map(s => s.flights), true);
+  const pmTicks = avAxisTicks(shown.map(s => s.avg_pm25), true);
+  const tempVals = shown.map(s => s.avg_temp).filter(v => v != null);
+  const tempTicks = tempVals.length >= 2 ? avAxisTicks(shown.map(s => s.avg_temp), false) : null;
+
+  const tooltip = (s) => `${s.label}: ${s.flights} ${avT('av_flights_lower', 'flights')}, ${s.avg_pm25 != null ? s.avg_pm25.toFixed(1) : '—'} µg/m³${s.avg_temp != null ? ', ' + s.avg_temp.toFixed(1) + '°C' : ''}`;
+
+  const barsPanel = (ticks, cls, valueKey, fmt) => `
+    <div class="mchart-panel-body">
+      <div class="mchart-yaxis">${avYAxisHtml(ticks.ticks, fmt)}</div>
+      <div class="mchart-plot">
+        ${avGridlinesHtml(ticks.ticks)}
+        <div class="mchart-bars">${shown.map(s => {
+          const v = s[valueKey];
+          const h = v != null ? Math.max(1, Math.round(v / (ticks.max || 1) * 100)) : 0;
+          return `<div class="mchart-bar-wrap" title="${avAttr(tooltip(s))}"><div class="mchart-bar ${cls}" style="height:${h}%"></div></div>`;
+        }).join('')}</div>
+      </div>
+    </div>`;
+
+  const flightsHtml = `
+    <div class="mchart-panel">
+      <div class="mchart-panel-label"><div class="legend-dot" style="background:rgba(245,166,35,.65)"></div><span>${avT('av_poll_legend_flights', 'Flights')}</span></div>
+      ${barsPanel(flightsTicks, 'flights', 'flights', (v) => avFmt(v))}
+    </div>`;
+  const pmHtml = `
+    <div class="mchart-panel">
+      <div class="mchart-panel-label"><div class="legend-dot" style="background:rgba(96,165,250,.65)"></div><span>${avT('av_poll_legend_pm', 'Avg. PM2.5')}</span></div>
+      ${barsPanel(pmTicks, 'pollution', 'avg_pm25', (v) => avFmt1(v))}
+    </div>`;
+
+  let tempHtml = '';
+  if (tempTicks) {
+    const lo = tempTicks.ticks[0], hi = tempTicks.ticks[tempTicks.ticks.length - 1], range = (hi - lo) || 1;
+    const points = shown.map((s, i) => s.avg_temp == null ? null : [(i + 0.5) / n * 100, 100 - (s.avg_temp - lo) / range * 100]);
+    const segments = [];
+    let current = [];
+    points.forEach(p => { if (p) current.push(p); else { if (current.length > 1) segments.push(current); current = []; } });
+    if (current.length > 1) segments.push(current);
+    const svgLines = segments.map(seg => `<polyline points="${seg.map(p => p.join(',')).join(' ')}" fill="none" stroke="#ff6b6b" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('')
+      + points.map(p => p ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="#ff6b6b"/>` : '').join('');
+    tempHtml = `
+      <div class="mchart-panel">
+        <div class="mchart-panel-label"><div class="legend-dot" style="background:#ff6b6b;border-radius:50%;"></div><span>${avT('av_poll_legend_temp', 'Outside temperature')}</span></div>
+        <div class="mchart-panel-body">
+          <div class="mchart-yaxis">${avYAxisHtml(tempTicks.ticks, (v) => Math.round(v) + '°')}</div>
+          <div class="mchart-plot">
+            ${avGridlinesHtml(tempTicks.ticks)}
+            <svg class="mchart-line-svg" preserveAspectRatio="none" viewBox="0 0 100 100">${svgLines}</svg>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  const xAxisHtml = `<div class="mchart-xaxis">${shown.map((s, i) => `<span>${(i % xStep === 0 || i === n - 1) ? avShortXLabel(s.label, gran) : ''}</span>`).join('')}</div>`;
+
+  document.getElementById('av-poll-multichart').innerHTML = flightsHtml + pmHtml + tempHtml + xAxisHtml;
 }
 
 function avRenderPollution() {
@@ -1061,7 +1141,7 @@ const T = {
     av_col_total:'Total', av_col_critical:'Critical', av_col_l2:'Level 2',
     av_total_lower:'total', av_showing_first:'showing first', av_col_datetime:'Date / Time', av_col_flight:'Flight', av_col_type:'Type',
     av_rare_caveat_title:'⚠ Suspected false positives',
-    av_rare_caveat_desc:'some flights tagged "military" resolve to a known commercial airline — most likely a hex-range classification overlap, not an actual military aircraft. See Data Quality for exact counts.',
+    av_rare_caveat_desc:'some flights tagged "military" resolve to a known commercial airline — most likely a hex-range classification overlap, not an actual military aircraft. See <span class="av-link" onclick="avGotoQuality()">Data Quality</span> for exact counts.',
     av_col_canonical:'Canonical name', av_col_variants:'Merged variants',
     av_updated:'Updated', av_error:'Archive data unavailable — check back shortly.'
   },
@@ -1094,7 +1174,7 @@ const T = {
     av_col_total:'Total', av_col_critical:'Crítica', av_col_l2:'Nível 2',
     av_total_lower:'total', av_showing_first:'a mostrar os primeiros', av_col_datetime:'Data / Hora', av_col_flight:'Voo', av_col_type:'Tipo',
     av_rare_caveat_title:'⚠ Suspeita de falsos positivos',
-    av_rare_caveat_desc:'alguns voos etiquetados como "militar" correspondem a uma companhia aérea comercial conhecida — provavelmente uma sobreposição na classificação por intervalo hex, não uma aeronave militar real. Ver Qualidade dos Dados para contagens exatas.',
+    av_rare_caveat_desc:'alguns voos etiquetados como "militar" correspondem a uma companhia aérea comercial conhecida — provavelmente uma sobreposição na classificação por intervalo hex, não uma aeronave militar real. Ver <span class="av-link" onclick="avGotoQuality()">Qualidade dos Dados</span> para contagens exatas.',
     av_col_canonical:'Nome canónico', av_col_variants:'Variantes fundidas',
     av_updated:'Atualizado', av_error:'Dados do arquivo indisponíveis — tente novamente em breve.'
   },
@@ -1127,7 +1207,7 @@ const T = {
     av_col_total:'Total', av_col_critical:'Critique', av_col_l2:'Niveau 2',
     av_total_lower:'total', av_showing_first:'affichage des', av_col_datetime:'Date / Heure', av_col_flight:'Vol', av_col_type:'Type',
     av_rare_caveat_title:'⚠ Suspicion de faux positifs',
-    av_rare_caveat_desc:'certains vols étiquetés "militaire" correspondent à une compagnie commerciale connue — probablement un chevauchement de classification par plage hex, pas un vrai avion militaire. Voir Qualité des données pour les chiffres exacts.',
+    av_rare_caveat_desc:'certains vols étiquetés "militaire" correspondent à une compagnie commerciale connue — probablement un chevauchement de classification par plage hex, pas un vrai avion militaire. Voir <span class="av-link" onclick="avGotoQuality()">Qualité des données</span> pour les chiffres exacts.',
     av_col_canonical:'Nom canonique', av_col_variants:'Variantes fusionnées',
     av_updated:'Mis à jour', av_error:'Données d\'archive indisponibles — réessayez sous peu.'
   }
