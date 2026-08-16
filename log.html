@@ -162,6 +162,31 @@ nav {
   font-family: var(--sans); font-size: 14px; color: rgba(240,237,232,0.47);
   letter-spacing: .06em; max-width: 480px; line-height: 1.7;
 }
+.log-copilot-strip {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  box-sizing: border-box; margin-top: 24px; padding: 9px 18px;
+  background: rgba(245,166,35,.04); border: 1px solid rgba(245,166,35,.15);
+  border-radius: 4px; text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.log-copilot-strip:hover {
+  border-color: rgba(245,166,35,.35); background: rgba(245,166,35,.07);
+}
+.log-copilot-main {
+  display: flex; align-items: center; gap: 10px;
+  flex: 1 1 240px; min-width: 0;
+}
+.log-copilot-icon { flex-shrink: 0; font-size: 13px; }
+.log-copilot-text {
+  font-family: var(--sans); font-size: 12px; line-height: 1.45;
+  color: rgba(240,237,232,.5);
+}
+.log-copilot-cta {
+  flex: 0 1 128px;
+  font-family: var(--mono); font-size: 11px; line-height: 1.4;
+  letter-spacing: .06em; color: var(--amber);
+  white-space: normal; text-align: right;
+}
 .log-hero-meta {
   display: flex; align-items: center; gap: 20px; margin-top: 28px; flex-wrap: wrap;
 }
@@ -173,23 +198,6 @@ nav {
 .log-hero-coords {
   font-family: var(--mono); font-size: 10px; color: rgba(240,237,232,0.33);
   letter-spacing: .08em;
-}
-.log-copilot-strip {
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  box-sizing: border-box; margin-top: 24px; padding: 9px 18px;
-  background: rgba(245,166,35,.04); border: 1px solid rgba(245,166,35,.15);
-  border-radius: 4px; text-decoration: none;
-  transition: border-color .2s, background .2s;
-}
-.log-copilot-strip:hover { border-color: rgba(245,166,35,.35); background: rgba(245,166,35,.07); }
-.log-copilot-main { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; }
-.log-copilot-icon { flex-shrink: 0; font-size: 13px; }
-.log-copilot-text { font-family: var(--sans); font-size: 12px; color: rgba(240,237,232,.5); }
-.log-copilot-cta { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--amber); white-space: nowrap; }
-@media (max-width: 640px) {
-  .log-copilot-strip { flex-direction: column; align-items: flex-start; }
-  .log-copilot-main { width: 100%; }
-  .log-copilot-cta { align-self: flex-start; }
 }
 
 /* ── CAPTAIN PORTRAIT ── */
@@ -230,10 +238,15 @@ nav {
     -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
   }
   .log-hero-sub  { order: 4; }
-  .log-copilot-strip { order: 5; margin-top: 20px; }
+  .log-copilot-strip { order: 5; width: 100% !important; margin-top: 20px; }
   .log-contact-btn { order: 6; margin-top: 24px; }
   .log-bridge-btn { order: 7; margin-top: 12px; margin-left: 0; }
   .log-hero-meta { order: 8; margin-top: 20px; }
+}
+@media (max-width: 640px) {
+  .log-copilot-strip { flex-direction: column; align-items: flex-start; }
+  .log-copilot-main { width: 100%; }
+  .log-copilot-cta { align-self: flex-start; flex-basis: auto; text-align: left; }
 }
 
 /* ── FILTERS ── */
@@ -944,6 +957,8 @@ const LOG_TRANSLATIONS = {
     hero_sub: 'Actualizações técnicas, capturas raras, alterações de hardware — escritas da varanda em tempo real.',
     contact_btn: 'Contactar o Capitão',
     bridge_btn: 'A Ponte', bridge_tag: 'Privado',
+    copilot_text: 'Também vives sob um corredor aéreo? Queres ser o nosso copiloto?',
+    copilot_cta: 'Aloja um nó →',
     filter_all: 'Todos',
     filter_capture: '📸 Captura',
     filter_fix: '🛠️ Fix',
@@ -953,8 +968,6 @@ const LOG_TRANSLATIONS = {
     filter_note: '📝 Nota',
     filter_milestone: '🏆 Marco',
     footer_left: 'LISBON FINALS · Diário do Capitão · lisbonfinals.com',
-    copilot_text: 'Também vives sob um corredor aéreo? Queres ser o nosso copiloto?',
-    copilot_cta: 'Aloja um nó →',
   },
   en: {
     eyebrow: 'Field Journal',
@@ -963,6 +976,8 @@ const LOG_TRANSLATIONS = {
     hero_sub: 'Technical updates, rare catches, hardware changes, bug fixes — written from the terrace in real time.',
     contact_btn: 'Contact the Captain',
     bridge_btn: 'The Bridge', bridge_tag: 'Private',
+    copilot_text: 'Live under a flight path yourself? Want to be our co-pilot?',
+    copilot_cta: 'Host a node →',
     filter_all: 'All',
     filter_capture: '📸 Capture',
     filter_fix: '🛠️ Fix',
@@ -972,8 +987,6 @@ const LOG_TRANSLATIONS = {
     filter_note: '📝 Note',
     filter_milestone: '🏆 Milestone',
     footer_left: "LISBON FINALS · Captain's Log · lisbonfinals.com",
-    copilot_text: 'Live under a flight path yourself? Want to be our co-pilot?',
-    copilot_cta: 'Host a node →',
   },
   fr: {
     eyebrow: 'Journal de bord',
@@ -982,6 +995,8 @@ const LOG_TRANSLATIONS = {
     hero_sub: 'Mises à jour techniques, captures rares, modifications matérielles, corrections — écrites depuis la terrasse en temps réel.',
     contact_btn: 'Contacter le Capitaine',
     bridge_btn: 'La Passerelle', bridge_tag: 'Privé',
+    copilot_text: "Tu habites aussi sous un couloir aérien ? Envie d'être notre copilote ?",
+    copilot_cta: 'Héberge un nœud →',
     filter_all: 'Tout',
     filter_capture: '📸 Capture',
     filter_fix: '🛠️ Fix',
@@ -991,8 +1006,6 @@ const LOG_TRANSLATIONS = {
     filter_note: '📝 Note',
     filter_milestone: '🏆 Étape',
     footer_left: 'LISBON FINALS · Journal de bord · lisbonfinals.com',
-    copilot_text: "Tu habites aussi sous un couloir aérien ? Envie d'être notre copilote ?",
-    copilot_cta: 'Héberge un nœud →',
   }
 };
 
@@ -1015,12 +1028,12 @@ function applyLang(lang) {
   if (bridgeLabel) bridgeLabel.textContent = t.bridge_btn;
   const bridgeTag = document.querySelector('.log-bridge-btn .bridge-tag');
   if (bridgeTag && t.bridge_tag) bridgeTag.textContent = t.bridge_tag;
-  const footerLeft = document.getElementById('footerLeft');
-  if (footerLeft) footerLeft.textContent = t.footer_left;
   const copilotText = document.querySelector('.log-copilot-text');
   if (copilotText) copilotText.textContent = t.copilot_text;
   const copilotCta = document.querySelector('.log-copilot-cta');
   if (copilotCta) copilotCta.textContent = t.copilot_cta;
+  const footerLeft = document.getElementById('footerLeft');
+  if (footerLeft) footerLeft.textContent = t.footer_left;
   // Filters
   const filterLabels = [t.filter_all, t.filter_capture, t.filter_fix, t.filter_hardware, t.filter_rare, t.filter_stats, t.filter_note, t.filter_milestone];
   document.querySelectorAll('.log-filter-btn').forEach((btn, i) => {
@@ -1029,27 +1042,27 @@ function applyLang(lang) {
   alignCopilotStripWidth();
 }
 
-// Matches the copilot strip's width to the actual span of the filter
-// buttons below it (not the full container), so the two rows line up
-// like an instrument panel instead of the strip overhanging empty space.
+// On desktop, match the strip to the real span of the two action cells below.
+// On smaller screens the hero stacks vertically and the strip uses full width.
 function alignCopilotStripWidth() {
   const strip = document.querySelector('.log-copilot-strip');
-  const btns = document.querySelectorAll('.log-filter-btn');
-  if (!strip || !btns.length) return;
-  const rows = new Map();
-  btns.forEach(b => {
-    const r = b.getBoundingClientRect();
-    const key = Math.round(r.top);
-    const row = rows.get(key) || { left: r.left, right: r.right };
-    row.left = Math.min(row.left, r.left);
-    row.right = Math.max(row.right, r.right);
-    rows.set(key, row);
-  });
-  let left = Infinity, right = -Infinity;
-  rows.forEach(row => { left = Math.min(left, row.left); right = Math.max(right, row.right); });
-  strip.style.width = (right - left) + 'px';
+  const contact = document.querySelector('.log-contact-btn');
+  const bridge = document.querySelector('.log-bridge-btn');
+  if (!strip || !contact || !bridge) return;
+  if (window.matchMedia('(max-width: 900px)').matches) {
+    strip.style.width = '100%';
+    return;
+  }
+  const contactRect = contact.getBoundingClientRect();
+  const bridgeRect = bridge.getBoundingClientRect();
+  const left = Math.min(contactRect.left, bridgeRect.left);
+  const right = Math.max(contactRect.right, bridgeRect.right);
+  strip.style.width = Math.ceil(right - left) + 'px';
 }
 window.addEventListener('resize', alignCopilotStripWidth);
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(alignCopilotStripWidth);
+}
 
 function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[_lang]||'en'); }
 document.addEventListener('DOMContentLoaded', () => { applyLang(_lang); });
