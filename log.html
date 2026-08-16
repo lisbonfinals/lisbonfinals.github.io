@@ -176,7 +176,7 @@ nav {
 }
 .log-copilot-strip {
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  max-width: 620px; margin-top: 28px; padding: 14px 22px;
+  box-sizing: border-box; margin-top: 24px; padding: 14px 22px;
   background: rgba(245,166,35,.04); border: 1px solid rgba(245,166,35,.15);
   border-radius: 4px; text-decoration: none;
   transition: border-color .2s, background .2s;
@@ -224,10 +224,10 @@ nav {
     -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
   }
   .log-hero-sub  { order: 4; }
-  .log-hero-meta { order: 5; }
+  .log-copilot-strip { order: 5; margin-top: 20px; }
   .log-contact-btn { order: 6; margin-top: 24px; }
   .log-bridge-btn { order: 7; margin-top: 12px; margin-left: 0; }
-  .log-copilot-strip { order: 8; max-width: 100%; margin-top: 20px; }
+  .log-hero-meta { order: 8; margin-top: 20px; }
 }
 
 /* ── FILTERS ── */
@@ -687,6 +687,11 @@ nav {
   <div class="log-hero-eyebrow"><span></span>Field Journal</div>
   <h1 class="log-hero-title">Captain's<br><em>Log</em></h1>
   <p class="log-hero-sub">Technical updates, rare catches, hardware changes, bug fixes — written from the terrace in real time.</p>
+  <a class="log-copilot-strip" href="/host-a-node.html">
+    <span class="log-copilot-icon">📡</span>
+    <span class="log-copilot-text">Live under a flight path yourself? Want to be our co-pilot?</span>
+    <span class="log-copilot-cta">Host a node →</span>
+  </a>
   <a href="mailto:lisbon.final.spots@gmail.com" class="log-contact-btn">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
     Contact the Captain
@@ -700,11 +705,6 @@ nav {
     <span class="log-hero-count" id="entryCount">— entries</span>
     <span class="log-hero-coords">38°46'N · 009°08'W · Lisbon, Portugal</span>
   </div>
-  <a class="log-copilot-strip" href="/host-a-node.html">
-    <span class="log-copilot-icon">📡</span>
-    <span class="log-copilot-text">Live under a flight path yourself? Want to be our co-pilot?</span>
-    <span class="log-copilot-cta">Host a node →</span>
-  </a>
 </header>
 
 <!-- FILTERS -->
@@ -1018,7 +1018,31 @@ function applyLang(lang) {
   document.querySelectorAll('.log-filter-btn').forEach((btn, i) => {
     if (filterLabels[i]) btn.textContent = filterLabels[i];
   });
+  alignCopilotStripWidth();
 }
+
+// Matches the copilot strip's width to the actual span of the filter
+// buttons below it (not the full container), so the two rows line up
+// like an instrument panel instead of the strip overhanging empty space.
+function alignCopilotStripWidth() {
+  const strip = document.querySelector('.log-copilot-strip');
+  const btns = document.querySelectorAll('.log-filter-btn');
+  if (!strip || !btns.length) return;
+  if (window.innerWidth <= 900) { strip.style.width = ''; return; }
+  const rows = new Map();
+  btns.forEach(b => {
+    const r = b.getBoundingClientRect();
+    const key = Math.round(r.top);
+    const row = rows.get(key) || { left: r.left, right: r.right };
+    row.left = Math.min(row.left, r.left);
+    row.right = Math.max(row.right, r.right);
+    rows.set(key, row);
+  });
+  let left = Infinity, right = -Infinity;
+  rows.forEach(row => { left = Math.min(left, row.left); right = Math.max(right, row.right); });
+  strip.style.width = (right - left) + 'px';
+}
+window.addEventListener('resize', alignCopilotStripWidth);
 
 function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[_lang]||'en'); }
 document.addEventListener('DOMContentLoaded', () => { applyLang(_lang); });
