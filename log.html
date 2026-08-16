@@ -182,9 +182,15 @@ nav {
   transition: border-color .2s, background .2s;
 }
 .log-copilot-strip:hover { border-color: rgba(245,166,35,.35); background: rgba(245,166,35,.07); }
+.log-copilot-main { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; }
 .log-copilot-icon { flex-shrink: 0; font-size: 13px; }
-.log-copilot-text { font-family: var(--sans); font-size: 12px; color: rgba(240,237,232,.5); flex: 1; min-width: 200px; }
+.log-copilot-text { font-family: var(--sans); font-size: 12px; color: rgba(240,237,232,.5); }
 .log-copilot-cta { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--amber); white-space: nowrap; }
+@media (max-width: 640px) {
+  .log-copilot-strip { flex-direction: column; align-items: flex-start; }
+  .log-copilot-main { width: 100%; }
+  .log-copilot-cta { align-self: flex-start; }
+}
 
 /* ── CAPTAIN PORTRAIT ── */
 .log-captain-portrait {
@@ -688,8 +694,10 @@ nav {
   <h1 class="log-hero-title">Captain's<br><em>Log</em></h1>
   <p class="log-hero-sub">Technical updates, rare catches, hardware changes, bug fixes — written from the terrace in real time.</p>
   <a class="log-copilot-strip" href="/host-a-node.html">
-    <span class="log-copilot-icon">📡</span>
-    <span class="log-copilot-text">Live under a flight path yourself? Want to be our co-pilot?</span>
+    <span class="log-copilot-main">
+      <span class="log-copilot-icon">📡</span>
+      <span class="log-copilot-text">Live under a flight path yourself? Want to be our co-pilot?</span>
+    </span>
     <span class="log-copilot-cta">Host a node →</span>
   </a>
   <a href="mailto:lisbon.final.spots@gmail.com" class="log-contact-btn">
