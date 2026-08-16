@@ -1,0 +1,74 @@
+/* Shared accessibility and responsive refinements. Page-specific styling stays inline. */
+.nav-has-dropdown:focus-within .nav-dropdown {
+  display: block;
+}
+
+.nav-links a.nav-noise:not(.nav-active) {
+  color: rgba(240, 237, 232, .54) !important;
+  font-weight: 500 !important;
+  text-shadow: none !important;
+}
+
+.nav-links a.nav-noise.nav-active,
+.nav-drawer a.drawer-noise.drawer-active {
+  color: var(--amber) !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+.nav-drawer a.drawer-noise:not(.drawer-active) {
+  color: rgba(240, 237, 232, .6) !important;
+  opacity: 1 !important;
+}
+
+html.drawer-open,
+body.drawer-open {
+  overflow: hidden !important;
+}
+
+@media (max-width: 1150px) {
+  .nav-drawer {
+    box-sizing: border-box;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+  }
+}
+
+@media (max-width: 1150px) and (max-height: 720px) {
+  .nav-drawer {
+    justify-content: flex-start !important;
+    gap: 20px !important;
+    padding: 86px 24px 38px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  footer .footer-inner,
+  footer .footer-top {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  footer .footer-links {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    justify-self: stretch !important;
+    gap: 30px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  footer .footer-col,
+  footer .footer-desc {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 420px) {
+  footer .footer-links {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
