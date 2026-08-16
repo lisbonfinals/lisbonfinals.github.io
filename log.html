@@ -7,6 +7,12 @@
 <meta name="description" content="Field journal from the Lisbon Finals monitoring station. Technical updates, rare catches, hardware changes — written from the terrace in real time.">
 <meta name="theme-color" content="#0a0d12">
 <link rel="canonical" href="https://www.lisbonfinals.com/log.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/log.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/log.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/log.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/log.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816d"></script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lisbon Finals">
 <meta property="og:title" content="Captain's Log — Lisbon Finals">
@@ -21,6 +27,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com">
 <link rel="preconnect" href="https://gist.githubusercontent.com">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Lisbon Finals Captain's Log","description":"Operational field notes from the Lisbon Finals terrace station.","url":"https://www.lisbonfinals.com/log.html","publisher":{"@type":"Organization","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/"},"inLanguage":"en"}</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -778,6 +786,13 @@ function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+function entryUrl(entry) {
+  const slug = String(entry.title || '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+  return '/journal/' + entry.date + '-' + slug + '.html';
+}
+
 let _allEntries = [];
 let _activeFilter = 'all';
 
@@ -796,11 +811,10 @@ function renderGrid(entries) {
   const secondary = rest.slice(0, 3);
 
   // ── Featured ──
-  const featIdx = _allEntries.indexOf(feat);
   const featExcerpt = (feat.body || feat.title || '').slice(0, 420);
   const featHtml = `
     <div class="log-featured-wrap">
-      <div class="log-featured-card${feat.pinned ? ' pinned' : ''}${feat.category === 'milestone' ? ' milestone' : ''}" onclick="openModal(${featIdx})">
+      <a class="log-featured-card${feat.pinned ? ' pinned' : ''}${feat.category === 'milestone' ? ' milestone' : ''}" href="${entryUrl(feat)}" style="color:inherit;text-decoration:none">
         <div>
           <div class="log-card-top">
             <span class="log-cat log-cat-${esc(feat.category)}">${esc(CAT_LABELS[feat.category] || feat.category)}</span>
@@ -815,7 +829,7 @@ function renderGrid(entries) {
           <span class="log-featured-date-big">${esc(feat.date)}</span>
           <span class="log-featured-read">Read entry →</span>
         </div>
-      </div>
+      </a>
     </div>`;
 
   // ── Secondary 3 cards ──
@@ -825,7 +839,7 @@ function renderGrid(entries) {
         ${secondary.map(e => {
           const ex = (e.body || e.title || '').slice(0, 200);
           const entryNum = String(_allEntries.length - _allEntries.indexOf(e)).padStart(2, '0');
-          return `<div class="log-card${e.pinned ? ' pinned' : ''}${e.category === 'milestone' ? ' milestone' : ''}" onclick="openModal(${_allEntries.indexOf(e)})">
+          return `<a class="log-card${e.pinned ? ' pinned' : ''}${e.category === 'milestone' ? ' milestone' : ''}" href="${entryUrl(e)}" style="color:inherit;text-decoration:none">
             <div class="log-card-top">
               <span class="log-cat log-cat-${esc(e.category)}">${esc(CAT_LABELS[e.category] || e.category)}</span>
               <span class="log-ts">${esc(e.date)}</span>
@@ -837,7 +851,7 @@ function renderGrid(entries) {
               <span class="log-card-sig">— The Captain</span>
               <span class="log-card-entry">Entry #${entryNum}</span>
             </div>
-          </div>`;
+          </a>`;
         }).join('')}
       </div>
     </div>` : '';
@@ -848,10 +862,10 @@ function renderGrid(entries) {
       <div class="log-all-label">All Entries</div>
       <div class="log-all-strip">
         ${_allEntries.map((e, i) => `
-          <div class="log-all-item${i === 0 ? ' active' : ''}" onclick="openModal(${i})">
+          <a class="log-all-item${i === 0 ? ' active' : ''}" href="${entryUrl(e)}" style="color:inherit;text-decoration:none">
             <div class="log-all-item-date">${esc(e.date)}</div>
             <div class="log-all-item-title">${esc(e.title)}</div>
-          </div>`).join('')}
+          </a>`).join('')}
       </div>
     </div>`;
 
@@ -954,11 +968,11 @@ const LOG_TRANSLATIONS = {
     eyebrow: 'Diário de Campo',
     hero_title_1: 'Diário do',
     hero_title_2: 'Capitão',
-    hero_sub: 'Actualizações técnicas, capturas raras, alterações de hardware — escritas da varanda em tempo real.',
+    hero_sub: 'Atualizações técnicas, capturas raras e alterações de hardware — escritas da varanda em tempo real.',
     contact_btn: 'Contactar o Capitão',
     bridge_btn: 'A Ponte', bridge_tag: 'Privado',
     copilot_text: 'Também vives sob um corredor aéreo? Queres ser o nosso copiloto?',
-    copilot_cta: 'Aloja um nó →',
+    copilot_cta: 'Instala um nó →',
     filter_all: 'Todos',
     filter_capture: '📸 Captura',
     filter_fix: '🛠️ Fix',
@@ -1009,10 +1023,11 @@ const LOG_TRANSLATIONS = {
   }
 };
 
-let _lang = localStorage.getItem('lf_lang') || 'en';
+let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
 
 function applyLang(lang) {
   _lang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
   localStorage.setItem('lf_lang', lang);
   const t = LOG_TRANSLATIONS[lang];
   ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });

@@ -7,6 +7,12 @@
 <meta name="description" content="Monthly noise monitoring report for Lisbon Airport (LPPT). Flight-by-flight acoustic data, airline rankings, night violation tracking.">
 <meta name="theme-color" content="#0a0d12">
 <link rel="canonical" href="https://www.lisbonfinals.com/noise-report.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/noise-report.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/noise-report.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/noise-report.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/noise-report.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816d"></script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lisbon Finals">
 <meta property="og:title" content="Noise Report — Lisbon Finals · LPPT Acoustic Monitoring">
@@ -21,6 +27,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com">
 <link rel="preconnect" href="https://gist.githubusercontent.com">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Report","name":"Lisbon Finals monthly noise report","description":"Independent monthly acoustic observations from one residential terrace below the Lisbon Airport approach corridor.","url":"https://www.lisbonfinals.com/noise-report.html","publisher":{"@type":"Organization","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/"},"spatialCoverage":{"@type":"Place","name":"Lisbon, Portugal"},"inLanguage":["en","pt-PT","fr"]}</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -630,6 +638,7 @@ footer {
   </button>
 </nav>
 
+<main id="main-content">
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-bg"></div>
@@ -719,6 +728,7 @@ footer {
 </section>
 
 <!-- ── FOOTER ── -->
+</main>
 <footer>
   <span class="footer-left" data-i18n="footer_left">LISBON FINALS · Noise Report · lisbonfinals.com</span>
   <span class="footer-right" data-i18n="footer_right">Not affiliated with ANA Aeroportos or ANAC</span>
@@ -927,6 +937,7 @@ function renderArchive(reports, activeIdx) {
   grid.innerHTML = reports.map((r, i) => {
     const mn = MONTHS[r.month] || `Month ${r.month}`;
     const isActive = i === activeIdx;
+    const webReport = `/reports/${r.year}-${String(r.month).padStart(2, '0')}.html`;
     return `
     <div class="archive-card${isActive ? ' active' : ''}" onclick="selectReport(${i})"
          style="${isActive ? 'border-color:var(--amber);background:rgba(245,166,35,.04)' : ''}">
@@ -948,6 +959,7 @@ function renderArchive(reports, activeIdx) {
       </div>
       <div class="archive-card-footer">
         <span>${r.night_pct||0}% night operations</span>
+        <a href="${webReport}" class="archive-dl-btn" onclick="event.stopPropagation()">Web report →</a>
         ${r.pdf_url
           ? `<a href="${r.pdf_url}" target="_blank" rel="noopener noreferrer" class="archive-dl-btn" onclick="event.stopPropagation()">
                ↓ PDF
@@ -1054,12 +1066,12 @@ const TRANSLATIONS = {
     hero_sub1: 'Cada voo. Cada decibel. Cada noite.',
     hero_sub2: 'Monitorização acústica independente do Aeroporto de Lisboa — voo a voo, mês a mês.',
     method_title: 'Como ler este relatório',
-    method_copy: 'Esta é uma monitorização residencial independente a partir de uma varanda fixa sob o corredor de aproximação LPPT. Serve para mostrar exposição local repetível, não para substituir mapas acústicos aeroportuários certificados.',
+    method_copy: 'Esta é uma monitorização residencial independente a partir de uma varanda fixa sob o corredor de aproximação LPPT. Serve para mostrar uma exposição local observada de forma consistente, não para substituir cartografia de ruído aeroportuária certificada.',
     method_k1: 'Fonte', method_v1: 'Dados ADS-B de voo cruzados com leituras SPL da estação.',
-    method_k2: 'Limite', method_v2: 'O microfone actual pode limitar perto de 100 dB; alguns picos podem estar subestimados.',
-    method_k3: 'Objectivo', method_v3: 'Um registo público de padrões, anomalias e perturbação nocturna.',
+    method_k2: 'Limite', method_v2: 'O microfone atual pode atingir o limite perto dos 100 dB; alguns picos podem estar subestimados.',
+    method_k3: 'Objetivo', method_v3: 'Um registo público de padrões, anomalias e perturbação noturna.',
     stat_flights: 'Voos Este Mês', stat_avg: 'Nível Médio de Ruído',
-    stat_violations: 'Infrações Noturnas', stat_night: 'Operações Noturnas',
+    stat_violations: 'Alertas Noturnos', stat_night: 'Operações Noturnas',
     archive_label: 'Arquivo', loading_txt: 'A carregar dados...',
     latest_title1: 'Última', latest_title2: 'Análise',
     archive_tag: 'Todos os Relatórios', archive_title: 'Arquivo', archive_title2: 'Mensal',
@@ -1072,12 +1084,12 @@ const TRANSLATIONS = {
     hero_sub1: 'Chaque vol. Chaque décibel. Chaque nuit.',
     hero_sub2: 'Surveillance acoustique indépendante de l\'Aéroport de Lisbonne — vol par vol, mois par mois.',
     method_title: 'Comment lire ce rapport',
-    method_copy: 'Il s’agit d’une surveillance résidentielle indépendante depuis une terrasse fixe sous le couloir d’approche LPPT. Elle montre une exposition locale répétable, sans remplacer une cartographie acoustique aéroportuaire certifiée.',
+    method_copy: 'Il s’agit d’une surveillance résidentielle indépendante depuis une terrasse fixe sous le couloir d’approche LPPT. Elle documente une exposition locale mesurée de façon cohérente, sans remplacer une cartographie acoustique aéroportuaire certifiée.',
     method_k1: 'Source', method_v1: 'Données ADS-B des vols associées aux mesures SPL de la station.',
     method_k2: 'Limite', method_v2: 'Le microphone actuel peut plafonner près de 100 dB ; certains pics peuvent être sous-estimés.',
     method_k3: 'But', method_v3: 'Un registre public des tendances, anomalies et nuisances nocturnes.',
     stat_flights: 'Vols ce mois', stat_avg: 'Niveau sonore moyen',
-    stat_violations: 'Infractions nocturnes', stat_night: 'Opérations nocturnes',
+    stat_violations: 'Alertes nocturnes', stat_night: 'Opérations nocturnes',
     archive_label: 'Archives', loading_txt: 'Chargement des données...',
     latest_title1: 'Dernière', latest_title2: 'Analyse',
     archive_tag: 'Tous les rapports', archive_title: 'Archive', archive_title2: 'Mensuelle',
@@ -1085,7 +1097,7 @@ const TRANSLATIONS = {
     footer_right: 'Sans affiliation avec ANA Aeroportos ou ANAC',
   }
 };
-let currentLang = localStorage.getItem('lf_lang') || 'en';
+let currentLang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
 function applyLang(lang) {
   if (!TRANSLATIONS[lang]) return;
   const t = TRANSLATIONS[lang];
@@ -1095,6 +1107,7 @@ function applyLang(lang) {
   });
   ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
   currentLang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
   localStorage.setItem('lf_lang', lang);
 }
 function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[currentLang]||'en'); }

@@ -7,6 +7,12 @@
 <meta name="description" content="Live flight data, noise measurements and ANAC violation tracking above Lisbon Airport LPPT.">
 <meta name="theme-color" content="#0a0d12">
 <link rel="canonical" href="https://www.lisbonfinals.com/data.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/data.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/data.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/data.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/data.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816d"></script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lisbon Finals">
 <meta property="og:title" content="Data — Lisbon Finals · LPPT Intelligence">
@@ -21,6 +27,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com">
 <link rel="preconnect" href="https://gist.githubusercontent.com">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Lisbon Finals live flight and acoustic observations","description":"Flight detections, local SPL readings, vibration and air-quality observations from one fixed terrace below the LPPT approach corridor.","url":"https://www.lisbonfinals.com/data.html","creator":{"@type":"Organization","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/"},"spatialCoverage":{"@type":"Place","name":"Lisbon, Portugal"},"license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"inLanguage":["en","pt-PT","fr"]}</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -471,6 +479,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 </div>
 
 <!-- ══ SECTION 1: THE DATA ══ -->
+<main id="main-content">
 <section class="data-section" id="the-data">
   <div style="margin-bottom:40px;">
     <div class="section-label" data-i18n="s1_label">Flight intelligence</div>
@@ -688,6 +697,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   </div>
 </section>
 
+</main>
 <footer class="page-footer">
   <span class="footer-left" id="footerLeft">LISBON FINALS · Data Intelligence · lisbonfinals.com</span>
   <span class="footer-updated" id="footerUpdated">—</span>
@@ -970,11 +980,11 @@ const T = {
     archive_teaser_link:'→ Explore the full archive'
   },
   pt: {
-    tab_data:'Os Dados', tab_noise:'Dados de Ruído', tab_warning:'⚠ Zona de Aviso',
+    tab_data:'Os Dados', tab_noise:'Dados de Ruído', tab_warning:'⚠ Zona de alerta',
     s1_label:'Inteligência de voo', s1_title:'Os dados<br><em>falam por si</em>',
     s1_desc:'Cada aeronave detetada sobre a varanda desde 3 de maio de 2026 — telemetria ADS-B combinada com medições acústicas em tempo real.',
     method_kicker:'Como ler',
-    method_copy:'Estes números são observações da estação, não totais oficiais do aeroporto. Mostram o que passa sobre esta varanda, a partir de um ponto fixo, com sensores locais consistentes.',
+    method_copy:'Estes números são observações da estação, não totais oficiais do aeroporto. Mostram o que passa sobre esta varanda, a partir de um ponto fixo e sempre com os mesmos sensores locais.',
     method_flow1:'Telemetria ADS-B', method_flow2:'Picos de som + vibração', method_flow3:'Foto + registo público',
     method_s1_t:'Detectar', method_s1_d:'O tráfego ADS-B identifica aeronave, altitude, velocidade, rota e horário.',
     method_s2_t:'Medir', method_s2_d:'Picos de som e vibração são captados localmente no momento da passagem.',
@@ -995,9 +1005,9 @@ const T = {
     ref_conversation:'Conversa normal', ref_traffic:'Tráfego urbano',
     ref_anac:'Limiar ANAC', ref_critical:'Infração crítica', ref_station:'Localização da estação',
     legend_day:'Dia (06h–22h)', legend_night:'Noite (22h–06h)',
-    s3_label:'Monitorização ANAC', s3_title:'⚠ Zona de<br><em>Aviso</em>',
-    s3_desc:'Voos entre meia-noite e as 6h acima de determinados dB constituem infrações. Registo desta semana:',
-    w_night_lbl:'Voos noturnos esta semana', w_critical_lbl:'Infrações críticas', w_l2_lbl:'Infrações nível 2',
+    s3_label:'Monitorização ANAC', s3_title:'⚠ Zona de<br><em>alerta</em>',
+    s3_desc:'As operações observadas entre a meia-noite e as 6h são comparadas com critérios acústicos de alerta. Este é um registo independente, não uma decisão oficial sobre infrações. Balanço desta semana:',
+    w_night_lbl:'Voos noturnos esta semana', w_critical_lbl:'Alertas críticos', w_l2_lbl:'Alertas de nível 2',
     timeline_title:'Recolher ANAC · 00h–06h · janelas permitidas a verde',
     legend_restricted:'Restrito (00h30–05h00)', legend_allowed:'Permitido (00h00–00h30 · 05h00–06h00)',
     anac_note:'A regulamentação ANAC aplica-se a voos ≥ 93 dB SPL entre meia-noite e as 6h. Duas janelas permitidas: 00h00–00h30 (últimas partidas) e 05h00–06h00 (primeiras chegadas). Infrações críticas ≥ 98.9 dB são incondicionalmente proibidas.',
@@ -1005,7 +1015,7 @@ const T = {
     rule2_title:'Proibição de Aeronaves Ruidosas', rule2_desc:'Aeronaves >98,9 EPNdB (Níveis 8 e 16) estritamente proibidas à noite.',
     rule3_title:'Restrição Nível 2', rule3_desc:'Aeronaves 93–95,9 EPNdB: apenas 00h00–00h30 e 05h00–06h00 permitidas.',
     rule4_title:'Thrust Reverso Proibido', rule4_desc:'O thrust reverso na aterragem é estritamente proibido, exceto em emergências.',
-    last_violation:'Última infração registada',
+    last_violation:'Último alerta registado',
     badge_critical:'🔴 Crítica', badge_l2:'🟡 Nível 2',
     desc_critical:'Acima de 98,9 dB entre meia-noite e as 6h — incondicionalmente proibido',
     desc_l2:'93–95,9 dB durante a janela noturna restrita',
@@ -1015,15 +1025,15 @@ const T = {
     compliant:'✓ conforme esta semana', sub_critical:'> 98,9 dB · proibição absoluta', sub_l2:'93–95,9 dB fora dos horários permitidos',
     footer:'LISBON FINALS · Dados · lisbonfinals.com',
     tab_archive_teaser:'Arquivo',
-    archive_teaser_label:'Explorar mais', archive_teaser_title:'Cada voo<br><em>cruzado em detalhe</em>',
-    archive_teaser_desc:'Os números acima já cobrem o histórico completo da estação. O Arquivo vai mais longe — cruzado por modelo de aeronave, companhia aérea, regulamentação noturna e qualidade do ar, com galerias de fotos completas para cada um.',
+    archive_teaser_label:'Explorar mais', archive_teaser_title:'Cada voo<br><em>analisado em detalhe</em>',
+    archive_teaser_desc:'Os números acima já cobrem o histórico completo da estação. O Arquivo vai mais longe — cruzando modelo de aeronave, companhia aérea, regulamentação noturna e qualidade do ar, com galerias de fotos completas associadas a cada seleção.',
     archive_teaser_link:'→ Explorar o arquivo completo'
   },
   fr: {
     s1_label:'Vols détectés', s1_title:'Les données<br><em>parlent d\'elles-mêmes</em>',
     s1_desc:'Chaque aéronef détecté au-dessus de notre terrasse depuis le 3 mai 2026 — télémétrie ADS-B combinée avec des mesures acoustiques en temps réel.',
     method_kicker:'Comment lire',
-    method_copy:'Ces chiffres sont des observations de station, pas les totaux officiels de l’aéroport. Ils montrent ce qui passe au-dessus de cette terrasse, depuis un point fixe, avec des capteurs locaux constants.',
+    method_copy:'Ces chiffres proviennent des observations réalisées par la station, et non des totaux officiels de l’aéroport. Ils montrent ce qui passe au-dessus de cette terrasse, depuis un point fixe et toujours avec les mêmes capteurs locaux.',
     method_flow1:'Télémétrie ADS-B', method_flow2:'Pics son + vibration', method_flow3:'Photo + registre public',
     method_s1_t:'Détecter', method_s1_d:'Le trafic ADS-B identifie avion, altitude, vitesse, route et horaire.',
     method_s2_t:'Mesurer', method_s2_d:'Les pics de son et de vibration sont captés localement au passage de l’appareil.',
@@ -1042,8 +1052,8 @@ const T = {
     ref_conversation:'Conversation normale', ref_traffic:'Circulation urbaine',
     ref_anac:'Seuil couvre-feu ANAC', ref_critical:'Violation critique',
     s3_label:'Surveillance ANAC', s3_title:'⚠ Zone<br><em>d\'alerte</em>',
-    s3_desc:'Les vols entre minuit et 6h dépassant certains seuils dB constituent des infractions. Bilan de la semaine :',
-    w_night_lbl:'Vols nocturnes cette semaine', w_critical_lbl:'Infractions critiques', w_l2_lbl:'Infractions niveau 2',
+    s3_desc:'Les opérations observées entre minuit et 6h sont comparées à des critères acoustiques d’alerte. Il s’agit d’un relevé indépendant, et non d’une qualification officielle des infractions. Bilan de la semaine :',
+    w_night_lbl:'Vols nocturnes cette semaine', w_critical_lbl:'Alertes critiques', w_l2_lbl:'Alertes de niveau 2',
     timeline_title:'Couvre-feu ANAC · 00h–06h · créneaux autorisés en vert',
     legend_restricted:'Interdit (00h30–05h00)', legend_allowed:'Autorisé (00h00–00h30 · 05h00–06h00)',
     anac_note:'La réglementation ANAC s\'applique aux vols ≥ 93 dB SPL entre minuit et 6h. Deux créneaux autorisés : 00h00–00h30 (derniers départs) et 05h00–06h00 (premières arrivées). Les infractions critiques ≥ 98.9 dB sont inconditionnellement interdites.',
@@ -1053,7 +1063,7 @@ const T = {
     rule2_title:'Interdiction d\'appareils bruyants', rule2_desc:'Aéronefs >98,9 EPNdB (Niveaux 8 et 16) strictement interdits la nuit.',
     rule3_title:'Restriction Niveau 2', rule3_desc:'Appareils 93–95,9 EPNdB : uniquement 00h00–00h30 et 05h00–06h00 autorisés.',
     rule4_title:'Inverseurs de poussée interdits', rule4_desc:'L\'utilisation des inverseurs à l\'atterrissage est strictement interdite sauf urgence.',
-    last_violation:'Dernière infraction enregistrée',
+    last_violation:'Dernière alerte enregistrée',
     badge_critical:'🔴 Critique', badge_l2:'🟡 Niveau 2',
     desc_critical:'Au-dessus de 98,9 dB entre minuit et 6h — inconditionnellement interdit',
     desc_l2:'93–95,9 dB pendant la plage nocturne restreinte',
@@ -1062,16 +1072,17 @@ const T = {
     limit_exceeded:'Limite : {n}/semaine · dépassé de {x}', limit_ok:'Limite : {n}/semaine · dans les quotas',
     compliant:'✓ conforme cette semaine', sub_critical:'> 98,9 dB · interdiction absolue', sub_l2:'93–95,9 dB hors créneaux autorisés',
     tab_archive_teaser:'Archives',
-    archive_teaser_label:'Aller plus loin', archive_teaser_title:'Chaque vol<br><em>croisé en détail</em>',
-    archive_teaser_desc:'Les chiffres ci-dessus couvrent déjà l\'historique complet de la station. Les archives vont plus loin — croisées par modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo complètes pour chacun.',
+    archive_teaser_label:'Aller plus loin', archive_teaser_title:'Chaque vol<br><em>recoupé en détail</em>',
+    archive_teaser_desc:'Les chiffres ci-dessus couvrent déjà tout l\'historique de la station. Les archives permettent d’aller plus loin en recoupant modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo correspondant à chaque sélection.',
     archive_teaser_link:'→ Explorer les archives complètes'
   }
 };
 
-let _lang = localStorage.getItem('lf_lang') || 'en';
+let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
 function applyLang(lang) {
   if (!T[lang]) return;
   _lang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
   localStorage.setItem('lf_lang', lang);
   const t = T[lang];
   ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });

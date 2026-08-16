@@ -7,6 +7,12 @@
 <meta name="description" content="The station's complete flight history since day one — every aircraft, cross-referenced by model, airline, night regulation and air quality.">
 <meta name="theme-color" content="#0a0d12">
 <link rel="canonical" href="https://www.lisbonfinals.com/archive.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/archive.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/archive.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/archive.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/archive.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816d"></script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lisbon Finals">
 <meta property="og:title" content="Archive — Lisbon Finals · Full Flight History">
@@ -21,6 +27,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com">
 <link rel="preconnect" href="https://gist.githubusercontent.com">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Lisbon Finals flight archive","description":"Historical flight-level observations cross-referenced by aircraft, airline, local noise, vibration and air quality.","url":"https://www.lisbonfinals.com/archive.html","creator":{"@type":"Organization","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/"},"temporalCoverage":"2026-05-03/..","spatialCoverage":{"@type":"Place","name":"Lisbon, Portugal"},"license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"inLanguage":["en","pt-PT","fr"]}</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -371,12 +379,13 @@ table.archive-table{width:100%;border-collapse:collapse;}
   </button>
 </nav>
 
+<main id="main-content">
 <!-- ══ ARCHIVE (full-history explorer) ══ -->
 <section class="data-section" id="the-archive">
   <div class="archive-intro-row">
     <div>
       <div class="section-label" data-i18n="s4_label">Full history</div>
-      <h2 class="section-title" data-i18n-html="s4_title">The archive<br><em>every flight, since day one</em></h2>
+      <h1 class="section-title" data-i18n-html="s4_title">The archive<br><em>every flight, since day one</em></h1>
       <p class="section-desc" data-i18n="s4_desc">The station's complete dataset since day one — cross-referenced by aircraft model, airline, night regulation, and air quality, with full photo galleries for each.</p>
     </div>
     <span class="archive-updated" id="av-updated">—</span>
@@ -539,6 +548,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
   </div>
 </section>
 
+</main>
 <footer class="page-footer">
   <span class="footer-left" id="footerLeft">LISBON FINALS · Data Intelligence · lisbonfinals.com</span>
   <span class="footer-updated" id="footerUpdated"></span>
@@ -1158,7 +1168,7 @@ const T = {
     av_anac_offenders:'Principais infratores (por companhia)', av_anac_infractions:'Infrações',
     av_rare_total:'Voos raros / militares detetados', av_rare_bytype_title:'Por tipo', av_rare_clear_filter:'mostrar tudo',
     av_quality_intro:'Painel de transparência — limitações conhecidas neste conjunto de dados, com contadores reais em vez de suposições ocultas.',
-    av_q_airline_methodology:'<b>Como identificamos as companhias aéreas.</b> Cada aeronave é associada a uma companhia primeiro através do seu indicativo de rádio ao vivo — o sinal mais fiável que temos. Quando não há indicativo disponível, recorremos a bases de registo externas, por vezes erradas ou desatualizadas. Em 22 de julho de 2026 auditámos todas as aeronaves com etiquetas de companhia contraditórias entre avistamentos e corrigimos ~1.070 aeronaves (~6.700 voos) em que um indicativo real contradizia uma estimativa mais fraca. Uma decisão editorial a destacar: as aeronaves matriculadas em Malta (9H-) dividem-se entre duas entidades reais do grupo Ryanair com frotas diferentes — Malta Air (Boeing 737) e Lauda Europe (Airbus A320/A321) — agora separamo-las por tipo de aeronave em vez de as juntar todas sob "Ryanair".',
+    av_q_airline_methodology:'<b>Como identificamos as companhias aéreas.</b> Cada aeronave é primeiro associada a uma companhia através do seu indicativo de rádio em direto — o sinal mais fiável de que dispomos. Quando não existe um indicativo, recorremos a bases de registo externas, por vezes incorretas ou desatualizadas. Em 22 de julho de 2026 auditámos todas as aeronaves com etiquetas de companhia contraditórias entre avistamentos e corrigimos ~1.070 aeronaves (~6.700 voos) em que um indicativo real contradizia uma estimativa menos fiável. Uma decisão editorial a destacar: as aeronaves matriculadas em Malta (9H-) dividem-se entre duas entidades reais do grupo Ryanair com frotas diferentes — Malta Air (Boeing 737) e Lauda Europe (Airbus A320/A321) — agora separamo-las por tipo de aeronave em vez de as juntar todas sob "Ryanair".',
     av_q_capped:'Leituras dB no limite de 100', av_q_types:'Modelos de aeronave (bruto → fundido)',
     av_q_military:'Etiquetas "militar" suspeitas de falso positivo', av_q_groups:'Grupos de modelos fundidos (duplicados de nomenclatura)',
     av_poll_intro:'Leituras do sensor de partículas captadas junto de cada voo detetado — uma referência temporal, não prova de que a aeronave causou a leitura (um churrasco ou cigarro na varanda afeta-a igualmente).',
@@ -1167,7 +1177,7 @@ const T = {
     av_gran_day:'Dia', av_gran_week:'Semana', av_gran_month:'Mês',
     av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_legend_temp:'Temperatura exterior',
     av_pic_open:'Abrir em resolução total', av_gallery_badge:'galeria', av_instagram_badge:'instagram', av_no_photos:'Nenhuma foto disponível para esta seleção.', av_expand_photos:'Melhores fotos',
-    av_freshness_note:'<b>Instantâneo, não em tempo real.</b> Este arquivo é republicado periodicamente a partir da base de dados completa da estação — não é transmitido em tempo real como os contadores da página Dados — por isso os totais aqui podem ficar algumas horas ou dias atrás do contador ao vivo. As galerias de fotos vão mais longe também, incluindo fotos nunca publicadas no Instagram.',
+    av_freshness_note:'<b>Instantâneo, não em direto.</b> Este arquivo é republicado periodicamente a partir da base de dados completa da estação. Ao contrário dos contadores da página Dados, não é atualizado em tempo real: os totais podem, por isso, ter algumas horas ou alguns dias de atraso. As galerias de fotos são também mais completas e incluem imagens nunca publicadas no Instagram.',
     av_prev:'← Anterior', av_next:'Seguinte →', av_page:'Página', av_photos_lower:'foto(s)', av_flights_lower:'voos',
     av_col_airline:'Companhia', av_col_flights:'Voos', av_col_avgdb:'dB médio', av_col_maxdb:'dB máx',
     av_col_avgvib:'Vib média', av_col_maxvib:'Vib máx', av_col_month:'Mês', av_col_aircraft:'Modelo de aeronave',
@@ -1181,7 +1191,7 @@ const T = {
   fr: {
     footer:'LISBON FINALS · Données · lisbonfinals.com',
     s4_label:'Historique complet', s4_title:'Les archives<br><em>chaque vol, depuis le premier jour</em>',
-    s4_desc:'L\'ensemble complet des données de la station depuis le premier jour — croisées par modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo complètes pour chacun.',
+    s4_desc:'L\'ensemble des observations de la station depuis le premier jour — recoupées par modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo correspondant à chaque sélection.',
     av_tab_overview:'Vue d\'ensemble', av_tab_aircraft:'Par modèle d\'avion', av_tab_airline:'Par compagnie',
     av_tab_anac:'Nuit · ANAC', av_tab_rare:'Rares · Militaires', av_tab_quality:'Qualité des données', av_tab_pollution:'Qualité de l\'air',
     av_lbl_total:'Vols totaux', av_lbl_avgdb:'dB moyen', av_lbl_maxdb:'Pic dB', av_lbl_avgvib:'Vibration moyenne (mg)',
@@ -1191,16 +1201,16 @@ const T = {
     av_anac_offenders:'Principales compagnies (infractions)', av_anac_infractions:'Infractions',
     av_rare_total:'Vols rares / militaires détectés', av_rare_bytype_title:'Par type', av_rare_clear_filter:'tout afficher',
     av_quality_intro:'Panneau de transparence — limites connues de ce jeu de données, avec des compteurs réels plutôt que des suppositions cachées.',
-    av_q_airline_methodology:'<b>Comment on identifie les compagnies aériennes.</b> Chaque avion est d\'abord rattaché à une compagnie via son indicatif radio en direct — le signal le plus fiable dont on dispose. Sans indicatif disponible, on se rabat sur des bases de registre externes, parfois fausses ou obsolètes. Le 22 juillet 2026, on a audité tous les avions ayant des étiquettes de compagnie contradictoires selon les vols et corrigé ~1 070 avions (~6 700 vols) où un indicatif radio réel contredisait une estimation plus faible. Un choix éditorial à signaler : les avions immatriculés à Malte (9H-) se répartissent entre deux vraies entités du groupe Ryanair aux flottes différentes — Malta Air (Boeing 737) et Lauda Europe (Airbus A320/A321) — on les sépare désormais par type d\'avion plutôt que de tout regrouper sous "Ryanair".',
+    av_q_airline_methodology:'<b>Comment on identifie les compagnies aériennes.</b> Chaque avion est d\'abord rattaché à une compagnie grâce à son indicatif radio en direct — le signal le plus fiable dont on dispose. Sans indicatif, on s\'appuie sur des bases de registre externes, parfois inexactes ou obsolètes. Le 22 juillet 2026, on a audité tous les avions dont les étiquettes de compagnie variaient selon les vols et corrigé ~1 070 avions (~6 700 vols) lorsqu’un indicatif radio réel contredisait une estimation moins fiable. Un choix éditorial à signaler : les avions immatriculés à Malte (9H-) se répartissent entre deux entités du groupe Ryanair aux flottes différentes — Malta Air (Boeing 737) et Lauda Europe (Airbus A320/A321) — on les sépare désormais par type d\'avion plutôt que de tout regrouper sous "Ryanair".',
     av_q_capped:'Relevés dB plafonnés à 100', av_q_types:'Modèles d\'avion (bruts → fusionnés)',
     av_q_military:'Étiquettes "militaire" suspectées de faux positif', av_q_groups:'Groupes de modèles fusionnés (doublons de nommage)',
-    av_poll_intro:'Relevés du capteur de particules captés en marge de chaque vol détecté — un repère temporel, pas une preuve que l\'avion soit la cause du relevé (un barbecue ou une cigarette sur la terrasse l\'affecte tout autant).',
+    av_poll_intro:'Relevés du capteur de particules associés temporellement à chaque vol détecté — un repère chronologique, pas une preuve que l\'avion soit à l’origine de la mesure (un barbecue ou une cigarette sur la terrasse l\'affecte tout autant).',
     av_poll_avg:'PM2.5 moyen', av_poll_max:'Pic PM2.5', av_poll_coverage:'Couverture du capteur',
     av_poll_dist:'Répartition de la qualité de l\'air', av_poll_chart_title:'Trafic × PM2.5 dans le temps',
     av_gran_day:'Jour', av_gran_week:'Semaine', av_gran_month:'Mois',
     av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_legend_temp:'Température extérieure',
     av_pic_open:'Ouvrir en pleine résolution', av_gallery_badge:'galerie', av_instagram_badge:'instagram', av_no_photos:'Aucune photo disponible pour cette sélection.', av_expand_photos:'Meilleures photos',
-    av_freshness_note:'<b>Instantané, pas en direct.</b> Ces archives sont republiées périodiquement depuis la base de données complète de la station — pas diffusées en temps réel comme les compteurs de la page Data — les totaux ici peuvent donc avoir quelques heures ou jours de retard sur le ticker live. Les galeries photo vont plus loin aussi, avec des clichés jamais publiés sur Instagram.',
+    av_freshness_note:'<b>Instantané, pas en direct.</b> Ces archives sont republiées périodiquement depuis la base de données complète de la station. Contrairement aux compteurs de la page Data, elles ne sont pas diffusées en temps réel : les totaux peuvent donc accuser quelques heures ou quelques jours de retard. Les galeries photo sont aussi plus complètes et comprennent des clichés jamais publiés sur Instagram.',
     av_prev:'← Précédent', av_next:'Suivant →', av_page:'Page', av_photos_lower:'photo(s)', av_flights_lower:'vols',
     av_col_airline:'Compagnie', av_col_flights:'Vols', av_col_avgdb:'dB moy', av_col_maxdb:'dB max',
     av_col_avgvib:'Vib moy', av_col_maxvib:'Vib max', av_col_month:'Mois', av_col_aircraft:'Modèle d\'avion',
@@ -1213,10 +1223,11 @@ const T = {
   }
 };
 
-let _lang = localStorage.getItem('lf_lang') || 'en';
+let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
 function applyLang(lang) {
   if (!T[lang]) return;
   _lang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
   localStorage.setItem('lf_lang', lang);
   const t = T[lang];
   ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });

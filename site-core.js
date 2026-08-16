@@ -1,22 +1,23 @@
 (function () {
   'use strict';
 
-  var routeMatch = window.location.pathname.match(/^\/(en|pt|fr)(?:\/|$)/);
+  var routeMatch = window.location.pathname.match(/^\/(pt|fr)(?:\/|$)/);
   var routeLang = routeMatch ? routeMatch[1] : 'en';
   window.LF_ROUTE_LANG = routeLang;
-  if (routeLang) localStorage.setItem('lf_lang', routeLang);
+  localStorage.setItem('lf_lang', routeLang);
 
   function currentFile() {
     var parts = window.location.pathname.split('/').filter(Boolean);
     var file = parts[parts.length - 1] || 'index.html';
-    if (file === 'en' || file === 'pt' || file === 'fr') file = 'index.html';
+    if (file === 'pt' || file === 'fr') file = 'index.html';
     return file.indexOf('.') === -1 ? 'index.html' : file;
   }
 
   function languageUrl(lang) {
     var file = currentFile();
     var suffix = file === 'index.html' ? '' : file;
-    return '/' + lang + '/' + suffix + window.location.hash;
+    var prefix = lang === 'en' ? '/' : '/' + lang + '/';
+    return prefix + suffix + window.location.hash;
   }
 
   window.lfLanguageUrl = languageUrl;
@@ -32,20 +33,21 @@
   }, true);
 
   function localizeInternalLinks() {
-    if (!routeLang) return;
+    if (routeLang === 'en') return;
     document.querySelectorAll('a[href^="/"]').forEach(function (link) {
       var href = link.getAttribute('href');
-      if (!href || href.indexOf('//') === 0 || /^\/(en|pt|fr)(?:\/|$)/.test(href)) return;
+      if (!href || href.indexOf('//') === 0 || /^\/(pt|fr)(?:\/|$)/.test(href)) return;
+      if (!/^\/(?:index\.html|data\.html|archive\.html|noise-report\.html|log\.html|about\.html|host-a-node\.html)?(?:[?#]|$)/.test(href)) return;
       link.setAttribute('href', '/' + routeLang + (href === '/' ? '/' : href));
     });
   }
 
   function markCurrentNavigation() {
-    var path = window.location.pathname.replace(/^\/(en|pt|fr)/, '') || '/';
+    var path = window.location.pathname.replace(/^\/(pt|fr)/, '') || '/';
     var key = path === '/' || path === '/index.html' ? '/' : '/' + path.split('/').filter(Boolean)[0];
     if (key === '/host-a-node.html') key = '/about.html';
     document.querySelectorAll('.nav-links > li > a, .nav-drawer > a').forEach(function (link) {
-      var href = (link.getAttribute('href') || '').replace(/^\/(en|pt|fr)/, '');
+      var href = (link.getAttribute('href') || '').replace(/^\/(pt|fr)/, '');
       var linkKey = href === '/' || href === '/index.html' ? '/' : '/' + href.split('#')[0].split('/').filter(Boolean)[0];
       var active = linkKey === key;
       if (link.classList.contains('nav-noise')) link.classList.toggle('nav-active', active);

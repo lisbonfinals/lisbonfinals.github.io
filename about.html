@@ -7,6 +7,12 @@
 <meta name="description" content="How Lisbon Finals works: RTL-SDR, YOLO, Real-ESRGAN, and a Raspberry Pi — automated from detection to Instagram post.">
 <meta name="theme-color" content="#0a0d12">
 <link rel="canonical" href="https://www.lisbonfinals.com/about.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/about.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/about.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/about.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/about.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816d"></script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lisbon Finals">
 <meta property="og:title" content="About — Lisbon Finals">
@@ -21,6 +27,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com">
 <link rel="preconnect" href="https://gist.githubusercontent.com">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About Lisbon Finals","description":"How the independent Lisbon Finals terrace station detects, photographs and measures aircraft.","url":"https://www.lisbonfinals.com/about.html","about":{"@type":"Organization","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/"},"inLanguage":["en","pt-PT","fr"]}</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -637,6 +645,7 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
   </button>
 </nav>
 
+<main id="main-content">
 <!-- SECTION TAB BAR -->
 <div class="section-tabs" aria-label="About page sections">
   <div class="section-tabs-inner">
@@ -918,6 +927,7 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
 </section>
 
 <!-- FOOTER -->
+</main>
 <footer class="about-footer">
   <span class="about-footer-left" id="footerLeft">LISBON FINALS · About · lisbonfinals.com</span>
   <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="about-footer-ig">Follow on Instagram →</a>
@@ -967,11 +977,11 @@ document.getElementById('nav-burger').addEventListener('click', () => {
 // ── i18n PT/EN ──
 const ABOUT_TRANSLATIONS = {
   pt: {
-    eyebrow: 'O projecto',
+    eyebrow: 'O projeto',
     title_1: 'Uma experiência',
     title_2: '<em>pessoal</em>',
     subtitle_html: '<span style="color:rgba(240,237,232,.38)">sobre</span> Lisboa',
-    sub: 'O Lisbon Finals começou com uma pergunta simples: conseguiria um Raspberry Pi numa varanda fotografar automaticamente todos os aviões que passam por cima — e publicar no Instagram sem qualquer intervenção humana?<br><br>A resposta, após meses de iteração, é sim. O que começou como um projeto de fim-de-semana tornou-se uma estação autónoma independente — evidência local, não dados oficiais do aeroporto — seguindo níveis de ruído, rotas de voo, padrões de companhias e dados atmosféricos a partir de uma varanda em Lisboa voltada para a aproximação ao LPPT.',
+    sub: 'O Lisbon Finals começou com uma pergunta simples: conseguiria um Raspberry Pi numa varanda fotografar automaticamente todos os aviões que passam por cima — e publicar as imagens no Instagram sem qualquer intervenção humana?<br><br>A resposta, após meses de iteração, é sim. O que começou como um projeto de fim de semana tornou-se uma estação autónoma independente — evidência local, não dados oficiais do aeroporto — que monitoriza níveis de ruído, rotas de voo, padrões de companhias e dados atmosféricos a partir de uma varanda em Lisboa voltada para a aproximação ao LPPT.',
     step1_title: 'Detetar & Medir',
     step1_desc: 'Um pequeno recetor rádio capta os sinais que todos os aviões comerciais são obrigados a transmitir — dando-nos o número do voo, altitude, velocidade e posição exata em tempo real. Um microfone mede simultaneamente o nível de ruído na varanda. O sistema só dispara quando ambas as condições se verificam: um avião suficientemente perto, e suficientemente audível.',
     step2_title: 'Capturar & Pontuar',
@@ -980,12 +990,12 @@ const ABOUT_TRANSLATIONS = {
     step3_desc: 'A foto escolhida é processada por um sistema de melhoria IA que reconstrói detalhes finos a 4× a resolução original — cerca de 15 minutos no pequeno computador de bordo da estação. É depois agendada automaticamente, evitando o horário noturno (23h–7h). Tudo vai ao ar no @lisbon.finals com a legenda escrita por IA e os dados do voo — sem intervenção humana.',
     hw_title: 'Hardware em serviço',
     project_title: 'Uma experiência pessoal acima de Lisboa',
-    project_body: 'Lisbon Finals começou com uma pergunta simples: conseguiria um Raspberry Pi numa varanda fotografar automaticamente todos os aviões que passam — e publicar no Instagram sem qualquer intervenção humana?<br><br>A resposta, após meses de iteração, é sim. O que começou como um projeto de fim-de-semana tornou-se uma estação autónoma independente — evidência local, não dados oficiais do aeroporto — seguindo níveis de ruído, rotas de voo, padrões de companhias e dados atmosféricos a partir de uma varanda em Lisboa voltada para a aproximação ao LPPT.',
+    project_body: 'Lisbon Finals começou com uma pergunta simples: conseguiria um Raspberry Pi numa varanda fotografar automaticamente todos os aviões que passam — e publicar as imagens no Instagram sem qualquer intervenção humana?<br><br>A resposta, após meses de iteração, é sim. O que começou como um projeto de fim de semana tornou-se uma estação autónoma independente — evidência local, não dados oficiais do aeroporto — que monitoriza níveis de ruído, rotas de voo, padrões de companhias e dados atmosféricos a partir de uma varanda em Lisboa voltada para a aproximação ao LPPT.',
     pipeline_label: 'Pipeline de automação completo · fim ao fim · zero gatilho humano',
     footer_left: 'LISBON FINALS · Sobre · lisbonfinals.com',
     footer_ig: 'Seguir no Instagram →',
-    kofi_label: 'Apoiar o projecto',
-    kofi_desc: 'Todo o hardware é autofinanciado. Se este projecto te é útil ou simplesmente gostas de ver aviões, um café contribui muito para o próximo sensor.',
+    kofi_label: 'Apoiar o projeto',
+    kofi_desc: 'Todo o hardware é autofinanciado. Se este projeto te é útil ou simplesmente gostas de ver aviões, um café contribui muito para o próximo sensor.',
     stat_since_val: '3 Maio 2026',
     stat_since_lbl: 'A registar desde',
     stat_flights: 'Voos registados',
@@ -1028,7 +1038,7 @@ const ABOUT_TRANSLATIONS = {
     coming2_desc: 'Um segundo receptor rádio sintonizado na frequência da torre de Lisboa vai capturar as comunicações em directo entre pilotos e o controlo de tráfego aéreo — ligando cada aeronave às instruções exactas que recebeu em tempo real.',
     coming2_tag: 'RTL-SDR · 118.1 MHz',
     gi_eyebrow: 'Participa',
-    gi_heading: 'Abre o registo<br><em>a todos</em>',
+    gi_heading: 'Torna o registo<br><em>acessível a todos</em>',
     gi_name_1: 'Reportar um erro',
     gi_desc_1: 'Reparaste numa identificação de voo errada ou numa leitura de ruído que parece estranha? Cada correção ajuda a validar o pipeline automatizado.',
     gi_name_2: 'Alojar um nó',
@@ -1114,7 +1124,7 @@ const ABOUT_TRANSLATIONS = {
     title_1: 'Une expérience',
     title_2: '<em>personnelle</em>',
     subtitle_html: '<span style="color:rgba(240,237,232,.38)">sur</span> Lisbonne',
-    sub: 'Lisbon Finals a commencé par une question simple : un Raspberry Pi sur une terrasse pourrait-il photographier automatiquement chaque avion qui passe — et le publier sur Instagram sans aucune intervention humaine ?<br><br>La réponse, après des mois d\'itération, est oui. Ce qui a commencé comme un projet de week-end est devenu une station autonome indépendante — une preuve locale, pas une donnée officielle d’aéroport — suivant les niveaux sonores, les routes de vol, les habitudes des compagnies et les données atmosphériques depuis une terrasse à Lisbonne face à l’approche LPPT.',
+    sub: 'Lisbon Finals a commencé par une question simple : un Raspberry Pi installé sur une terrasse pourrait-il photographier automatiquement chaque avion qui passe — puis publier la photo sur Instagram sans aucune intervention humaine ?<br><br>Après des mois d\'itération, la réponse est oui. Ce qui a commencé comme un projet de week-end est devenu une station autonome indépendante — des observations locales, et non des données officielles d’aéroport — qui mesure les niveaux sonores, les trajectoires, les habitudes des compagnies et les données atmosphériques depuis une terrasse à Lisbonne face à l’approche LPPT.',
     step1_title: 'Détecter & Mesurer',
     step1_desc: 'Un petit récepteur radio capte les signaux que tous les avions commerciaux sont tenus d\'émettre — nous donnant le numéro de vol, l\'altitude, la vitesse et la position exacte en temps réel. Un microphone mesure simultanément le niveau sonore sur la terrasse. Le système ne se déclenche que lorsque les deux conditions sont réunies : un avion suffisamment proche, et suffisamment audible.',
     step2_title: 'Capturer & Évaluer',
@@ -1133,7 +1143,7 @@ const ABOUT_TRANSLATIONS = {
     hw_desc_7: 'Compteur de particules laser mesurant PM1.0, PM2.5 et PM10 en temps réel. UART → Pi. Corrèle chaque passage d\'aéronef avec une mesure concrète de qualité de l\'air.',
     hw_desc_8: 'Boîtier PMMA 4mm découpé sur mesure (20×40×30cm) avec couvercle incliné, orifices de ventilation, presse-étoupe et étagère interne. Découpé et gravé au laser au Fab Lab Lisboa — terminé en juin 2026.',
     project_title: 'Une expérience personnelle au-dessus de Lisbonne',
-    project_body: 'Lisbon Finals a commencé par une question simple : un Raspberry Pi sur une terrasse pourrait-il photographier automatiquement chaque avion — et le publier sur Instagram sans aucune intervention humaine ?<br><br>La réponse, après des mois d\'itération, est oui. C’est une station autonome indépendante : une preuve locale, pas une donnée officielle d’aéroport.',
+    project_body: 'Lisbon Finals a commencé par une question simple : un Raspberry Pi installé sur une terrasse pourrait-il photographier automatiquement chaque avion — puis publier la photo sur Instagram sans aucune intervention humaine ?<br><br>Après des mois d\'itération, la réponse est oui. Il s’agit d’une station autonome indépendante : des observations locales, et non des données officielles d’aéroport.',
     pipeline_label: 'Pipeline d\'automatisation complet · bout en bout · zéro déclencheur humain',
     footer_left: 'LISBON FINALS · À propos · lisbonfinals.com',
     footer_ig: 'Suivre sur Instagram →',
@@ -1170,11 +1180,11 @@ const ABOUT_TRANSLATIONS = {
     coming2_desc: 'Un second récepteur radio réglé sur la fréquence de la tour de Lisbonne capturera les communications en direct entre pilotes et contrôleurs — reliant chaque aéronef aux instructions exactes reçues en temps réel.',
     coming2_tag: 'RTL-SDR · 118.1 MHz',
     gi_eyebrow: 'Participez',
-    gi_heading: 'Ouvrez le relevé<br><em>à tous</em>',
+    gi_heading: 'Rends les relevés<br><em>accessibles à tous</em>',
     gi_name_1: 'Signaler une erreur',
     gi_desc_1: 'Vous avez repéré une mauvaise identification de vol ou une mesure de bruit qui semble fausse ? Chaque correction aide à valider le pipeline automatisé.',
     gi_name_2: 'Héberger un nœud',
-    gi_desc_2: 'Vous habitez aussi sous un couloir aérien ? Le montage est documenté et pensé pour être reproduit — même partiellement, en commençant par un simple sonomètre. Découvrez ce qu\'il faut.',
+    gi_desc_2: 'Tu habites aussi sous un couloir aérien ? Le montage est documenté et pensé pour être reproduit — même partiellement, en commençant par un simple sonomètre. Découvre ce qu\'il faut.',
     gi_name_3: 'Demander les données brutes',
     gi_desc_3: 'Au-delà des tableaux de bord publics et des rapports mensuels, le jeu de données complet vol par vol est disponible sur demande pour les chercheurs et citoyens qui nous contactent directement.',
     gi_license: 'Toutes les données publiées (tableaux de bord, rapports mensuels, images) sont sous licence <strong style="color:rgba(240,237,232,.75)">CC BY 4.0</strong> — réutilisation libre, y compris commerciale, avec attribution.',
@@ -1182,11 +1192,12 @@ const ABOUT_TRANSLATIONS = {
   }
 };
 
-let _lang = localStorage.getItem('lf_lang') || 'en';
+let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
 
 function applyLang(lang) {
   if (!ABOUT_TRANSLATIONS[lang]) return;
   _lang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
   localStorage.setItem('lf_lang', lang);
   const t = ABOUT_TRANSLATIONS[lang];
   ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });

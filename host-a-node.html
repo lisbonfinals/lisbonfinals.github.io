@@ -7,10 +7,20 @@
 <meta name="description" content="Live under a flight path yourself? The Finals Network is looking for co-pilots to host a node. See what it takes.">
 <meta name="theme-color" content="#0a0d12">
 <link rel="canonical" href="https://www.lisbonfinals.com/host-a-node.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/host-a-node.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/host-a-node.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/host-a-node.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/host-a-node.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816d"></script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lisbon Finals">
 <meta property="og:title" content="Host a node — Finals Network">
 <meta property="og:description" content="Live under a flight path yourself? The Finals Network is looking for co-pilots to host a node.">
+<meta property="og:image" content="https://www.lisbonfinals.com/ressources/host-node-aligned-a-16x9-v2.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.lisbonfinals.com/ressources/host-node-aligned-a-16x9-v2.png">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
 <meta property="og:url" content="https://www.lisbonfinals.com/host-a-node.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -217,9 +227,10 @@ hr.section-divider{max-width:1200px;margin:0 auto;padding:0 48px;border:none;bor
   <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
 </div>
 
+<main id="main-content">
 <section class="data-section" id="hero">
   <div class="section-label" data-i18n="hn_eyebrow">Host a node</div>
-  <h2 class="section-title" data-i18n-html="hn_title">We need a co-pilot.<br><em>someone flying their own final approach</em></h2>
+  <h1 class="section-title" data-i18n-html="hn_title">We need a co-pilot.<br><em>someone flying their own final approach</em></h1>
   <p class="section-desc" data-i18n-html="hn_desc" style="max-width:620px;">Lisbon Finals started as one station, on one terrace, under one flight path. <span style="color:var(--amber)">The Finals Network</span> is what happens if a few more people, elsewhere, under their own flight paths, build one too. It's still mostly a plan. If that sounds like your kind of trouble, keep reading.</p>
   <a class="btn" href="#checklist" data-i18n="hn_cta_read">Read the checklist ↓</a>
 </section>
@@ -368,6 +379,7 @@ hr.section-divider{max-width:1200px;margin:0 auto;padding:0 48px;border:none;bor
   </div>
 </section>
 
+</main>
 <footer class="page-footer">
   <span class="footer-left" id="footerLeft" data-i18n="hn_footer">LISBON FINALS · Finals Network · lisbonfinals.com</span>
 </footer>
@@ -576,7 +588,7 @@ const T = {
   }
 };
 
-let _lang = localStorage.getItem('lf_lang') || 'en';
+let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
 function applyLang(lang) {
   if (!T[lang]) return;
   _lang = lang;
@@ -585,7 +597,7 @@ function applyLang(lang) {
   ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
   document.querySelectorAll('[data-i18n]').forEach(el => { if (t[el.dataset.i18n] != null) el.textContent = t[el.dataset.i18n]; });
   document.querySelectorAll('[data-i18n-html]').forEach(el => { if (t[el.dataset.i18nHtml] != null) el.innerHTML = t[el.dataset.i18nHtml]; });
-  document.documentElement.lang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
 }
 applyLang(_lang);
 

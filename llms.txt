@@ -16,7 +16,7 @@ The project publishes local observations, not official airport totals, certified
 
 ## Languages
 
-- English: https://www.lisbonfinals.com/en/
+- English: https://www.lisbonfinals.com/
 - Portuguese (Portugal): https://www.lisbonfinals.com/pt/
 - French: https://www.lisbonfinals.com/fr/
 
