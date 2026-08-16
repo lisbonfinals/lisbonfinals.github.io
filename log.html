@@ -174,6 +174,17 @@ nav {
   font-family: var(--mono); font-size: 10px; color: rgba(240,237,232,0.33);
   letter-spacing: .08em;
 }
+.log-copilot-strip {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  max-width: 620px; margin-top: 28px; padding: 14px 22px;
+  background: rgba(245,166,35,.04); border: 1px solid rgba(245,166,35,.15);
+  border-radius: 4px; text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.log-copilot-strip:hover { border-color: rgba(245,166,35,.35); background: rgba(245,166,35,.07); }
+.log-copilot-icon { flex-shrink: 0; font-size: 15px; }
+.log-copilot-text { font-family: var(--sans); font-size: 12.5px; color: rgba(240,237,232,.5); flex: 1; min-width: 220px; }
+.log-copilot-cta { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--amber); white-space: nowrap; }
 
 /* ── CAPTAIN PORTRAIT ── */
 .log-captain-portrait {
@@ -216,6 +227,7 @@ nav {
   .log-hero-meta { order: 5; }
   .log-contact-btn { order: 6; margin-top: 24px; }
   .log-bridge-btn { order: 7; margin-top: 12px; margin-left: 0; }
+  .log-copilot-strip { order: 8; max-width: 100%; margin-top: 20px; }
 }
 
 /* ── FILTERS ── */
@@ -688,6 +700,11 @@ nav {
     <span class="log-hero-count" id="entryCount">— entries</span>
     <span class="log-hero-coords">38°46'N · 009°08'W · Lisbon, Portugal</span>
   </div>
+  <a class="log-copilot-strip" href="/host-a-node.html">
+    <span class="log-copilot-icon">📡</span>
+    <span class="log-copilot-text">Live under a flight path yourself? Want to be our co-pilot?</span>
+    <span class="log-copilot-cta">Host a node →</span>
+  </a>
 </header>
 
 <!-- FILTERS -->
@@ -928,6 +945,8 @@ const LOG_TRANSLATIONS = {
     filter_note: '📝 Nota',
     filter_milestone: '🏆 Marco',
     footer_left: 'LISBON FINALS · Diário do Capitão · lisbonfinals.com',
+    copilot_text: 'Também vives sob um corredor aéreo? Queres ser o nosso copiloto?',
+    copilot_cta: 'Aloja um nó →',
   },
   en: {
     eyebrow: 'Field Journal',
@@ -945,6 +964,8 @@ const LOG_TRANSLATIONS = {
     filter_note: '📝 Note',
     filter_milestone: '🏆 Milestone',
     footer_left: "LISBON FINALS · Captain's Log · lisbonfinals.com",
+    copilot_text: 'Live under a flight path yourself? Want to be our co-pilot?',
+    copilot_cta: 'Host a node →',
   },
   fr: {
     eyebrow: 'Journal de bord',
@@ -962,6 +983,8 @@ const LOG_TRANSLATIONS = {
     filter_note: '📝 Note',
     filter_milestone: '🏆 Étape',
     footer_left: 'LISBON FINALS · Journal de bord · lisbonfinals.com',
+    copilot_text: "Tu habites aussi sous un couloir aérien ? Envie d'être notre copilote ?",
+    copilot_cta: 'Héberge un nœud →',
   }
 };
 
@@ -986,6 +1009,10 @@ function applyLang(lang) {
   if (bridgeTag && t.bridge_tag) bridgeTag.textContent = t.bridge_tag;
   const footerLeft = document.getElementById('footerLeft');
   if (footerLeft) footerLeft.textContent = t.footer_left;
+  const copilotText = document.querySelector('.log-copilot-text');
+  if (copilotText) copilotText.textContent = t.copilot_text;
+  const copilotCta = document.querySelector('.log-copilot-cta');
+  if (copilotCta) copilotCta.textContent = t.copilot_cta;
   // Filters
   const filterLabels = [t.filter_all, t.filter_capture, t.filter_fix, t.filter_hardware, t.filter_rare, t.filter_stats, t.filter_note, t.filter_milestone];
   document.querySelectorAll('.log-filter-btn').forEach((btn, i) => {
