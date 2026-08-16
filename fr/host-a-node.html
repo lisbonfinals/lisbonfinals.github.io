@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Héberger un nœud — Lisbon Finals</title>
+<meta name="description" content="Tu habites sous un couloir aérien ? Découvre ce qu’il faut pour installer un nœud indépendant de la Finals Network.">
+<meta name="theme-color" content="#0a0d12">
+<link rel="canonical" href="https://www.lisbonfinals.com/fr/host-a-node.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/en/host-a-node.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/host-a-node.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/host-a-node.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/host-a-node.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816b"></script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="Héberger un nœud — Lisbon Finals">
+<meta property="og:description" content="Tu habites sous un couloir aérien ? Découvre ce qu’il faut pour installer un nœud indépendant de la Finals Network.">
+<meta property="og:image" content="https://www.lisbonfinals.com/ressources/host-node-aligned-a-16x9-v2.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.lisbonfinals.com/ressources/host-node-aligned-a-16x9-v2.png">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<meta property="og:url" content="https://www.lisbonfinals.com/fr/host-a-node.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#07090d; --dark:#0a0d12; --dark2:#0d1117; --dark3:#111827;
+  --border:#1e2530; --border2:#2a3544;
+  --amber:#f5a623; --amber-dim:rgba(245,166,35,0.10);
+  --white:#f0ede8; --gray:#6b7280;
+  --red:#ef4444; --red-dim:rgba(239,68,68,0.08);
+  --green:#22c55e;
+  --blue:#60a5fa; --blue-dim:rgba(96,165,250,0.08);
+  --sans:'Syne',sans-serif; --mono:'JetBrains Mono',monospace; --serif:'Instrument Serif',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:var(--sans);overflow-x:hidden;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:4px;}
+
+/* ── NAV (identical across the site) ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,9,13,.98),transparent);backdrop-filter:blur(4px);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-dot{width:28px;height:28px;border:1.5px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
+.nav-dot::after{content:'';width:10px;height:12px;background:var(--amber);border-radius:0;position:absolute;top:50%;left:50%;transform:translate(-50%,-60%) rotate(-20deg);clip-path:polygon(50% 0%,65% 85%,50% 72%,35% 85%);}
+.nav-wordmark{font-size:13px;font-family:var(--mono);font-weight:500;letter-spacing:.12em;color:var(--white);text-transform:uppercase;}
+.nav-wordmark span{color:var(--amber);}
+.nav-links{display:flex;gap:36px;list-style:none;margin-left:auto;}
+.nav-links a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.55);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--amber);}
+.nav-links a.nav-active{color:var(--amber);}
+.nav-links a.nav-noise{color:var(--amber);font-weight:700;}
+.nav-links a.nav-noise:hover{color:#fff;text-shadow:0 0 14px rgba(245,166,35,.6);}
+.nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
+.nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
+.nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px;}
+.lang-group{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+.lang-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.43);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn:hover{color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.38);}
+.lang-btn.active{color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06);}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:12px;}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;}
+.nav-drawer{display:none;flex-direction:column;gap:32px;position:fixed;inset:0;z-index:99;background:rgba(7,9,13,.97);backdrop-filter:blur(12px);align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.nav-drawer.open{display:flex;opacity:1;pointer-events:all;}
+.nav-drawer a{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.6);text-decoration:none;transition:color .2s;}
+.nav-drawer a:hover{color:var(--white);}
+.nav-drawer a.drawer-warning{color:rgba(248,113,113,.6);}
+.nav-drawer a.drawer-noise{color:var(--amber);opacity:.8;}
+.nav-drawer a.drawer-ig{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(245,166,35,.4);padding:10px 20px;border-radius:4px;color:var(--amber)!important;font-size:11px;margin-top:8px;}
+.nav-has-dropdown{position:relative;}
+.nav-dropdown{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(7,9,13,.97);border:1px solid rgba(245,166,35,.15);border-radius:4px;padding:16px 0 8px;list-style:none;min-width:160px;backdrop-filter:blur(12px);z-index:200;}
+.nav-has-dropdown::after{content:'';position:absolute;top:100%;left:0;right:0;height:16px;}
+.nav-has-dropdown:hover .nav-dropdown{display:block;}
+.nav-dropdown li a{display:block;padding:9px 18px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.5);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;}
+.nav-dropdown li a:hover{color:var(--amber);background:rgba(245,166,35,.05);}
+.nav-dropdown li a.dd-warning{color:rgba(248,113,113,.6);}
+.nav-dropdown li a.dd-warning:hover{color:#ef4444;}
+.nav-dropdown li+li{border-top:1px solid rgba(240,237,232,.05);}
+
+/* ── SECTION HEADERS (uniform across all pages) ── */
+.data-section{padding:72px 48px 80px;max-width:1200px;margin:0 auto;scroll-margin-top:96px;}
+#hero{padding-top:96px;}
+.section-label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-label::before{content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0;}
+.section-title{font-size:clamp(36px,5vw,60px);font-weight:800;line-height:1;letter-spacing:-.02em;color:var(--white);}
+.section-title em{font-family:var(--serif);font-weight:400;font-style:italic;color:rgba(240,237,232,.38);}
+.section-desc{font-family:var(--sans);font-size:14px;line-height:1.8;color:rgba(240,237,232,.43);max-width:560px;margin-top:14px;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;cursor:pointer;transition:border-color .2s,background .2s;margin-top:28px;}
+.btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06);}
+
+hr.section-divider{max-width:1200px;margin:0 auto;padding:0 48px;border:none;border-top:1px solid var(--border);}
+
+.item-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:32px;}
+.item-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:20px 22px;display:flex;align-items:flex-start;gap:16px;position:relative;}
+.item-card.active{border-color:rgba(245,166,35,.35);background:rgba(245,166,35,.03);}
+.item-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+.item-body{flex:1;min-width:0;}
+.item-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;}
+.item-name{font-size:14px;font-weight:600;color:var(--white);}
+.item-desc{font-size:12px;color:rgba(240,237,232,0.43);line-height:1.6;margin-bottom:10px;}
+.item-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.tag.required{border:1px solid rgba(245,166,35,.2);color:rgba(245,166,35,.7);}
+.tag.optional{border:1px solid rgba(240,237,232,.15);color:rgba(240,237,232,.4);}
+.item-card.active .tag.optional{border-color:rgba(245,166,35,.2);color:rgba(245,166,35,.7);}
+.item-price{font-family:var(--mono);font-size:12px;color:rgba(240,237,232,0.5);}
+.item-check{flex:none;width:18px;height:18px;border-radius:3px;border:1.5px solid rgba(240,237,232,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;background:transparent;padding:0;}
+.item-check.locked{background:var(--amber);border-color:var(--amber);cursor:default;}
+.item-check.checked{background:var(--amber);border-color:var(--amber);}
+.item-check svg{width:11px;height:11px;opacity:0;color:var(--dark);}
+.item-check.locked svg,.item-check.checked svg{opacity:1;}
+
+.stats-row{display:flex;gap:32px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--border);margin-top:36px;padding-top:28px;}
+.stat-val{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--amber);line-height:1;}
+.stat-label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,0.33);margin-top:8px;}
+.stats-row .stat{flex:1;min-width:160px;}
+
+.budget-row{display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--border);margin-top:24px;padding-top:24px;}
+.budget-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,0.43);}
+.budget-value{font-family:var(--mono);font-size:26px;font-weight:500;color:var(--amber);}
+.caption{font-family:var(--mono);font-size:10.5px;color:rgba(240,237,232,0.3);margin-top:14px;}
+
+.diagram{margin-top:32px;background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px;}
+.diagram svg{width:100%;height:auto;display:block;}
+.diagram-photo{padding:0;overflow:hidden;}
+.diagram-media{position:relative;}
+.diagram-media img{width:100%;height:auto;display:block;}
+.diagram-overlay{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;padding:18px 22px;}
+.diagram-tag{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-shadow:0 1px 6px rgba(0,0,0,.8);}
+.diagram-tag--existing{color:var(--amber);}
+.diagram-tag--yours{color:var(--blue);}
+.diagram-caption{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.5);text-align:center;padding:14px 22px;border-top:1px solid var(--border);}
+@media(max-width:640px){ .diagram-overlay{padding:14px 16px;} }
+
+.rule-panel{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:8px 24px;margin-top:32px;}
+.rule-row{display:flex;align-items:flex-start;gap:14px;padding:18px 0;border-bottom:1px solid var(--border);}
+.rule-row:last-child{border-bottom:none;}
+.led{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px;}
+.led.amber{background:var(--amber);box-shadow:0 0 6px rgba(245,166,35,.6);}
+.led.blue{background:var(--blue);box-shadow:0 0 6px rgba(96,165,250,.6);}
+.rule-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);min-width:150px;flex:none;}
+.rule-row:last-child .rule-label{color:var(--blue);}
+.rule-value{font-size:13px;line-height:1.7;color:rgba(240,237,232,0.5);}
+
+.manifest{list-style:none;counter-reset:q;max-width:640px;margin-top:28px;}
+.manifest li{counter-increment:q;display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);font-size:13.5px;color:rgba(240,237,232,0.55);line-height:1.6;}
+.manifest li:last-child{border-bottom:none;}
+.manifest li::before{content:counter(q);font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:rgba(245,166,35,.4);flex:none;width:16px;}
+
+.closebar{margin-top:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:18px 24px;background:rgba(245,166,35,.04);border:1px solid rgba(245,166,35,.15);border-radius:4px;}
+.closebar-text{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.5);line-height:1.7;max-width:560px;}
+.closebar-text strong{color:rgba(240,237,232,.75);}
+.closebar .btn{margin-left:auto;margin-top:0;flex-shrink:0;}
+
+.page-footer{border-top:1px solid var(--border);padding:32px 48px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-left{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);letter-spacing:.08em;}
+
+@media (max-width: 1150px) { .nav-links { display:none; } .nav-burger { display:flex; } }
+@media(max-width:1024px){ .item-grid{grid-template-columns:1fr;} .nav-links{display:none;} .nav-burger{display:flex;} }
+@media(max-width:640px){
+  nav,.data-section,.page-footer,hr.section-divider{padding-left:20px;padding-right:20px;}
+  .nav-clock-wrap{margin-left:auto;padding-left:14px;gap:8px;}
+  .nav-clock{display:none;}
+  #hero{padding-top:110px;}
+  .closebar .btn{margin-left:0;}
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="Primary navigation">
+  <a href="/" class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-wordmark">LISBON <span>FINALS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Live</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/data.html">Data ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/data.html#the-data">The Data</a></li>
+        <li><a href="/data.html#noise-data">Noise Data</a></li>
+        <li><a href="/data.html#warning-zone" class="dd-warning">Warning Zone</a></li>
+      </ul>
+    </li>
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/noise-report.html" class="nav-noise">Noise Report</a></li>
+    <li><a href="/log.html">Captain's Log</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/about.html">About ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/about.html#the-project">The Project</a></li>
+        <li><a href="/about.html#how-it-works">How it works</a></li>
+        <li><a href="/about.html#hardware">The Station</a></li>
+        <li><a href="/about.html#whats-next">What's next</a></li>
+        <li><a href="/about.html#get-involved" class="nav-active">Get Involved</a></li>
+        <li><a href="/about.html#press">Press</a></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="nav-clock-wrap">
+    <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
+    <div class="lang-group">
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
+    </div>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="/" onclick="closeDrawer()">Live</a>
+  <a href="/data.html" onclick="closeDrawer()">Data</a>
+  <a href="/archive.html" onclick="closeDrawer()">Archive</a>
+  <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
+  <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
+  <a href="/about.html#get-involved" style="color:var(--amber)" onclick="closeDrawer()">Get Involved</a>
+  <a href="/about.html#press" onclick="closeDrawer()">Press</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
+</div>
+
+<main id="main-content">
+<section class="data-section" id="hero">
+  <div class="section-label" data-i18n="hn_eyebrow">Host a node</div>
+  <h1 class="section-title" data-i18n-html="hn_title">We need a co-pilot.<br><em>someone flying their own final approach</em></h1>
+  <p class="section-desc" data-i18n-html="hn_desc" style="max-width:620px;">Lisbon Finals started as one station, on one terrace, under one flight path. <span style="color:var(--amber)">The Finals Network</span> is what happens if a few more people, elsewhere, under their own flight paths, build one too. It's still mostly a plan. If that sounds like your kind of trouble, keep reading.</p>
+  <a class="btn" href="#checklist" data-i18n="hn_cta_read">Read the checklist ↓</a>
+</section>
+
+<hr class="section-divider">
+
+<section class="data-section" id="checklist">
+  <div class="section-label" data-i18n="hn_s1_label">What it takes</div>
+  <h2 class="section-title" data-i18n-html="hn_s1_title">Pre-flight<br><em>checklist</em></h2>
+  <p class="section-desc" data-i18n="hn_s1_desc">Five components are non-negotiable. Everything past that is your call, and changes the total below.</p>
+
+  <div class="item-grid">
+    <div class="item-card">
+      <span class="item-icon">🖥️</span>
+      <div class="item-body">
+        <div class="item-top"><span class="item-name" data-i18n="hn_item_pi_name">Raspberry Pi 4</span><button class="item-check locked" aria-label="Required"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></button></div>
+        <div class="item-desc" data-i18n="hn_item_pi_desc">Runs the whole station. Price includes power supply and storage.</div>
+        <div class="item-foot"><span class="tag required" data-i18n="hn_required">Required</span><span class="item-price">160&nbsp;€</span></div>
+      </div>
+    </div>
+    <div class="item-card">
+      <span class="item-icon">📡</span>
+      <div class="item-body">
+        <div class="item-top"><span class="item-name" data-i18n="hn_item_rtlsdr_name">RTL-SDR receiver</span><button class="item-check locked" aria-label="Required"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></button></div>
+        <div class="item-desc" data-i18n="hn_item_rtlsdr_desc">Reads every aircraft transponder overhead.</div>
+        <div class="item-foot"><span class="tag required" data-i18n="hn_required">Required</span><span class="item-price">50&nbsp;€</span></div>
+      </div>
+    </div>
+    <div class="item-card">
+      <span class="item-icon">🔊</span>
+      <div class="item-body">
+        <div class="item-top"><span class="item-name" data-i18n="hn_item_soundmeter_name">Calibrated sound meter</span><button class="item-check locked" aria-label="Required"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></button></div>
+        <div class="item-desc" data-i18n="hn_item_soundmeter_desc">Turns noise into a real number. Analog DC output, not USB.</div>
+        <div class="item-foot"><span class="tag required" data-i18n="hn_required">Required</span><span class="item-price">180&nbsp;€</span></div>
+      </div>
+    </div>
+    <div class="item-card">
+      <span class="item-icon">🧩</span>
+      <div class="item-body">
+        <div class="item-top"><span class="item-name" data-i18n="hn_item_adc_name">I2C ADC board</span><button class="item-check locked" aria-label="Required"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></button></div>
+        <div class="item-desc" data-i18n="hn_item_adc_desc">Converts the meter's signal into data the Pi can read. Some wiring, not plug-and-play.</div>
+        <div class="item-foot"><span class="tag required" data-i18n="hn_required">Required</span><span class="item-price">10&nbsp;€</span></div>
+      </div>
+    </div>
+    <div class="item-card">
+      <span class="item-icon">🔌</span>
+      <div class="item-body">
+        <div class="item-top"><span class="item-name" data-i18n="hn_item_enclosure_name">Enclosure, cabling, power</span><button class="item-check locked" aria-label="Required"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></button></div>
+        <div class="item-desc" data-i18n="hn_item_enclosure_desc">Keeps it alive outdoors, year round.</div>
+        <div class="item-foot"><span class="tag required" data-i18n="hn_required">Required</span><span class="item-price">80&nbsp;€</span></div>
+      </div>
+    </div>
+    <div class="item-card" data-optional>
+      <span class="item-icon">📷</span>
+      <div class="item-body">
+        <div class="item-top"><span class="item-name" data-i18n="hn_item_camera_name">Camera, pan-tilt-zoom</span><button class="item-check" data-price="200" aria-label="Optional, add camera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></button></div>
+        <div class="item-desc" data-i18n="hn_item_camera_desc">Photographs the aircraft you log.</div>
+        <div class="item-foot"><span class="tag optional" data-i18n="hn_optional">Optional</span><span class="item-price">200&nbsp;€</span></div>
+      </div>
+    </div>
+    <div class="item-card" data-optional>
+      <span class="item-icon">📳</span>
+      <div class="item-body">
+        <div class="item-top"><span class="item-name" data-i18n="hn_item_vibration_name">Vibration sensor</span><button class="item-check" data-price="20" aria-label="Optional, add vibration sensor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></button></div>
+        <div class="item-desc" data-i18n="hn_item_vibration_desc">Measures what the building feels, not just hears.</div>
+        <div class="item-foot"><span class="tag optional" data-i18n="hn_optional">Optional</span><span class="item-price">20&nbsp;€</span></div>
+      </div>
+    </div>
+    <div class="item-card" data-optional>
+      <span class="item-icon">🌫️</span>
+      <div class="item-body">
+        <div class="item-top"><span class="item-name" data-i18n="hn_item_airquality_name">Air quality sensor</span><button class="item-check" data-price="30" aria-label="Optional, add air quality sensor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></button></div>
+        <div class="item-desc" data-i18n="hn_item_airquality_desc">Particulate readings alongside every flight.</div>
+        <div class="item-foot"><span class="tag optional" data-i18n="hn_optional">Optional</span><span class="item-price">30&nbsp;€</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="budget-row">
+    <span class="budget-label" data-i18n="hn_budget_label">Estimated budget</span>
+    <span class="budget-value" id="total">480&nbsp;€</span>
+  </div>
+  <p class="caption" data-i18n="hn_caption">Rough numbers, not a quote. Tap the optional cards above. Exact costs get confirmed before you order anything.</p>
+</section>
+
+<hr class="section-divider">
+
+<section class="data-section" id="profile">
+  <div class="section-label" data-i18n="hn_s2_label">Who we're looking for</div>
+  <h2 class="section-title" data-i18n-html="hn_s2_title">The right<br><em>seat</em></h2>
+  <p class="section-desc" data-i18n="hn_s2_desc" style="max-width:680px;">We're not after a weekend project. A node takes real time to install and keep calibrated, and real money before the first flight is ever logged. What we are after: someone who already looks up every time something loud goes over the house. If you know your ceiling's rattle by callsign, you're closer to qualified than you think.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-val" data-i18n="hn_stat1_val">Ongoing</div><div class="stat-label" data-i18n="hn_stat1_lbl">Time, not a weekend</div></div>
+    <div class="stat"><div class="stat-val">~480&nbsp;€+</div><div class="stat-label" data-i18n="hn_stat2_lbl">Investment, on you</div></div>
+    <div class="stat"><div class="stat-val" data-i18n="hn_stat3_val">Long term</div><div class="stat-label" data-i18n="hn_stat3_lbl">Commitment, like the record</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="data-section" id="location">
+  <div class="section-label" data-i18n="hn_s3_label">Finding your approach</div>
+  <h2 class="section-title" data-i18n-html="hn_s3_title">Not every<br><em>rooftop helps</em></h2>
+  <p class="section-desc" data-i18n="hn_s3_desc" style="max-width:680px;">Proximity to an airport matters, but it isn't the deciding factor. Complementary coverage matters more than proximity alone. A different runway, another stretch of the same corridor, or coverage beyond an existing node: that's what actually extends the record.</p>
+  <div class="diagram diagram-photo">
+    <div class="diagram-media">
+      <img src="ressources/host-node-aligned-a-16x9-v2.png" alt="Two aircraft moving in the same direction along one runway corridor, with amber and blue paths representing complementary station coverage" loading="lazy">
+      <div class="diagram-overlay">
+        <span class="diagram-tag diagram-tag--existing" data-i18n="hn_diagram_existing">EXISTING NODE</span>
+        <span class="diagram-tag diagram-tag--yours" data-i18n="hn_diagram_yours">YOUR NODE?</span>
+      </div>
+    </div>
+    <div class="diagram-caption" data-i18n="hn_diagram_caption">ONE CORRIDOR. TWO NODES.</div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="data-section" id="rules">
+  <div class="section-label" data-i18n="hn_s4_label">Ground rules</div>
+  <h2 class="section-title" data-i18n-html="hn_s4_title">Before<br><em>you say yes</em></h2>
+  <div class="rule-panel">
+    <div class="rule-row"><span class="led amber"></span><span class="rule-label" data-i18n="hn_rule1_label">Remote access</span><span class="rule-value" data-i18n="hn_rule1_value">We reach the unit itself, and only the unit. Never your home network, never your computer.</span></div>
+    <div class="rule-row"><span class="led amber"></span><span class="rule-label" data-i18n="hn_rule2_label">Data license</span><span class="rule-value" data-i18n="hn_rule2_value">Everything the node records ships CC BY 4.0, same as the rest of the network.</span></div>
+    <div class="rule-row"><span class="led blue"></span><span class="rule-label" data-i18n="hn_rule3_label">Status</span><span class="rule-value" data-i18n="hn_rule3_value">The network's coordination layer is still being built. You're an early applicant, not day-one operational.</span></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="data-section" id="apply">
+  <div class="section-label" data-i18n="hn_s5_label">File your flight plan</div>
+  <h2 class="section-title" data-i18n-html="hn_s5_title">Last item<br><em>on the checklist.</em></h2>
+  <p class="section-desc" data-i18n="hn_s5_desc">Five lines by email, nothing more formal than that.</p>
+  <ol class="manifest">
+    <li data-i18n="hn_manifest1">Where exactly, and what you see from there relative to the runway.</li>
+    <li data-i18n="hn_manifest2">Your comfort level with a Raspberry Pi build.</li>
+    <li data-i18n="hn_manifest3">Base kit only, or which extras.</li>
+    <li data-i18n="hn_manifest4">Why this, why you.</li>
+    <li data-i18n="hn_manifest5">Free for a short call before we go further.</li>
+  </ol>
+  <p class="caption" data-i18n-html="hn_other_ways">Not ready for the full build? There are <a href="/about.html#get-involved" style="color:var(--amber);">other ways to get involved</a>.</p>
+  <div class="closebar">
+    <div class="closebar-text" data-i18n-html="hn_closebar">All published data (dashboards, monthly reports, imagery) is released under <strong>CC BY 4.0</strong>, free to reuse, including commercially, with attribution.</div>
+    <a class="btn" href="mailto:chronos@lisbonfinals.com?subject=Host%20a%20node%20candidature" data-i18n="hn_cta_email">Email the Captain →</a>
+  </div>
+</section>
+
+</main>
+<footer class="page-footer">
+  <span class="footer-left" id="footerLeft" data-i18n="hn_footer">LISBON FINALS · Finals Network · lisbonfinals.com</span>
+</footer>
+
+<script>
+// ── Checklist budget ──
+(function(){
+  var checks = document.querySelectorAll('.item-check[data-price]');
+  var total = document.getElementById('total');
+  var base = 480;
+  function render(){
+    var sum = base;
+    checks.forEach(function(c){ if(c.classList.contains('checked')) sum += parseInt(c.dataset.price,10); });
+    total.textContent = sum.toLocaleString('fr-FR') + ' €';
+  }
+  checks.forEach(function(c){
+    c.addEventListener('click', function(){
+      c.classList.toggle('checked');
+      c.closest('.item-card').classList.toggle('active', c.classList.contains('checked'));
+      render();
+    });
+  });
+  render();
+})();
+
+// ── Nav ──
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+const drawer = document.getElementById('nav-drawer');
+function closeDrawer() {
+  drawer.classList.remove('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+document.getElementById('nav-burger').addEventListener('click', () => {
+  const open = drawer.classList.toggle('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+// ── i18n ──
+const T = {
+  en: {
+    hn_eyebrow:'Host a node',
+    hn_title:'We need a co-pilot.<br><em>someone flying their own final approach</em>',
+    hn_desc:"Lisbon Finals started as one station, on one terrace, under one flight path. <span style=\"color:var(--amber)\">The Finals Network</span> is what happens if a few more people, elsewhere, under their own flight paths, build one too. It's still mostly a plan. If that sounds like your kind of trouble, keep reading.",
+    hn_cta_read:'Read the checklist ↓',
+    hn_s1_label:'What it takes',
+    hn_s1_title:'Pre-flight<br><em>checklist</em>',
+    hn_s1_desc:'Five components are non-negotiable. Everything past that is your call, and changes the total below.',
+    hn_item_pi_name:'Raspberry Pi 4',
+    hn_item_rtlsdr_name:'RTL-SDR receiver',
+    hn_item_soundmeter_name:'Calibrated sound meter',
+    hn_item_adc_name:'I2C ADC board',
+    hn_item_enclosure_name:'Enclosure, cabling, power',
+    hn_item_camera_name:'Camera, pan-tilt-zoom',
+    hn_item_vibration_name:'Vibration sensor',
+    hn_item_airquality_name:'Air quality sensor',
+    hn_item_pi_desc:'Runs the whole station. Price includes power supply and storage.',
+    hn_item_rtlsdr_desc:'Reads every aircraft transponder overhead.',
+    hn_item_soundmeter_desc:'Turns noise into a real number. Analog DC output, not USB.',
+    hn_item_adc_desc:"Converts the meter's signal into data the Pi can read. Some wiring, not plug-and-play.",
+    hn_item_enclosure_desc:'Keeps it alive outdoors, year round.',
+    hn_item_camera_desc:'Photographs the aircraft you log.',
+    hn_item_vibration_desc:'Measures what the building feels, not just hears.',
+    hn_item_airquality_desc:'Particulate readings alongside every flight.',
+    hn_required:'Required', hn_optional:'Optional',
+    hn_budget_label:'Estimated budget',
+    hn_caption:'Rough numbers, not a quote. Tap the optional cards above. Exact costs get confirmed before you order anything.',
+    hn_s2_label:"Who we're looking for",
+    hn_s2_title:'The right<br><em>seat</em>',
+    hn_s2_desc:"We're not after a weekend project. A node takes real time to install and keep calibrated, and real money before the first flight is ever logged. What we are after: someone who already looks up every time something loud goes over the house. If you know your ceiling's rattle by callsign, you're closer to qualified than you think.",
+    hn_stat1_val:'Ongoing', hn_stat1_lbl:'Time, not a weekend',
+    hn_stat2_lbl:'Investment, on you',
+    hn_stat3_val:'Long term', hn_stat3_lbl:'Commitment, like the record',
+    hn_s3_label:'Finding your approach',
+    hn_s3_title:'Not every<br><em>rooftop helps</em>',
+    hn_s3_desc:"Proximity to an airport matters, but it isn't the deciding factor. Complementary coverage matters more than proximity alone. A different runway, another stretch of the same corridor, or coverage beyond an existing node: that's what actually extends the record.",
+    hn_diagram_existing:'EXISTING NODE', hn_diagram_yours:'YOUR NODE?', hn_diagram_caption:'ONE CORRIDOR. TWO NODES.',
+    hn_s4_label:'Ground rules',
+    hn_s4_title:'Before<br><em>you say yes</em>',
+    hn_rule1_label:'Remote access', hn_rule1_value:'We reach the unit itself, and only the unit. Never your home network, never your computer.',
+    hn_rule2_label:'Data license', hn_rule2_value:'Everything the node records ships CC BY 4.0, same as the rest of the network.',
+    hn_rule3_label:'Status', hn_rule3_value:"The network's coordination layer is still being built. You're an early applicant, not day-one operational.",
+    hn_s5_label:'File your flight plan',
+    hn_s5_title:'Last item<br><em>on the checklist.</em>',
+    hn_s5_desc:'Five lines by email, nothing more formal than that.',
+    hn_manifest1:'Where exactly, and what you see from there relative to the runway.',
+    hn_manifest2:'Your comfort level with a Raspberry Pi build.',
+    hn_manifest3:'Base kit only, or which extras.',
+    hn_manifest4:'Why this, why you.',
+    hn_manifest5:'Free for a short call before we go further.',
+    hn_other_ways:'Not ready for the full build? There are <a href="/about.html#get-involved" style="color:var(--amber);">other ways to get involved</a>.',
+    hn_closebar:'All published data (dashboards, monthly reports, imagery) is released under <strong>CC BY 4.0</strong>, free to reuse, including commercially, with attribution.',
+    hn_cta_email:'Email the Captain →',
+    hn_footer:'LISBON FINALS · Finals Network · lisbonfinals.com'
+  },
+  pt: {
+    hn_eyebrow:'Instalar um nó',
+    hn_title:'Precisamos de um copiloto.<br><em>alguém a voar a sua própria aproximação final</em>',
+    hn_desc:'O Lisbon Finals começou com uma estação, num terraço, sob um único corredor aéreo. <span style="color:var(--amber)">A Finals Network</span> nasce quando mais algumas pessoas, noutros lugares e sob os seus próprios corredores, constroem também uma estação. Por enquanto, ainda é sobretudo um plano. Se este é o teu género de sarilho, continua a ler.',
+    hn_cta_read:'Ver a lista pré-voo ↓',
+    hn_s1_label:'O que é necessário',
+    hn_s1_title:'Lista<br><em>pré-voo</em>',
+    hn_s1_desc:'Há cinco componentes indispensáveis. Tudo o resto fica ao teu critério e altera o total apresentado abaixo.',
+    hn_item_pi_name:'Raspberry Pi 4',
+    hn_item_rtlsdr_name:'Recetor RTL-SDR',
+    hn_item_soundmeter_name:'Sonómetro calibrado',
+    hn_item_adc_name:'Placa ADC I2C',
+    hn_item_enclosure_name:'Caixa, cablagem e alimentação',
+    hn_item_camera_name:'Câmara PTZ',
+    hn_item_vibration_name:'Sensor de vibração',
+    hn_item_airquality_name:'Sensor de qualidade do ar',
+    hn_item_pi_desc:'Mantém toda a estação em funcionamento. O preço inclui a fonte de alimentação e o armazenamento.',
+    hn_item_rtlsdr_desc:'Capta os sinais dos transponders de todos os aviões que passam por cima.',
+    hn_item_soundmeter_desc:'Converte o ruído num valor mensurável. Saída analógica DC, não USB.',
+    hn_item_adc_desc:'Converte o sinal do sonómetro em dados que o Pi consegue ler. Exige alguma cablagem; não é plug-and-play.',
+    hn_item_enclosure_desc:'Protege a estação e mantém-na operacional no exterior durante todo o ano.',
+    hn_item_camera_desc:'Fotografa os aviões detetados pela estação.',
+    hn_item_vibration_desc:'Mede o que o edifício sente, não apenas o que se ouve.',
+    hn_item_airquality_desc:'Medições de partículas associadas a cada passagem.',
+    hn_required:'Essencial', hn_optional:'Opcional',
+    hn_budget_label:'Orçamento estimado',
+    hn_caption:'Valores indicativos, não uma proposta fechada. Seleciona os cartões opcionais acima. Confirmamos os custos exatos antes de encomendares seja o que for.',
+    hn_s2_label:'O perfil que procuramos',
+    hn_s2_title:'O lugar do<br><em>copiloto</em>',
+    hn_s2_desc:'Não procuramos um projeto de fim de semana. Instalar um nó, mantê-lo operacional e garantir que continua calibrado exige tempo — e um investimento real antes de o primeiro voo ser registado. Procuramos alguém que já olha para cima sempre que um avião barulhento passa sobre a casa. Se reconheces um voo pelas vibrações do teto, estás mais perto do perfil certo do que imaginas.',
+    hn_stat1_val:'Contínuo', hn_stat1_lbl:'Tempo, não um fim de semana',
+    hn_stat2_lbl:'Investimento a teu cargo',
+    hn_stat3_val:'Longo prazo', hn_stat3_lbl:'Um compromisso duradouro',
+    hn_s3_label:'Encontrar a tua aproximação',
+    hn_s3_title:'Nem todos<br><em>os telhados servem</em>',
+    hn_s3_desc:'Estar perto de um aeroporto importa, mas não é o fator decisivo. Uma cobertura complementar vale mais do que a simples proximidade. Outra pista, outro troço do mesmo corredor ou um ponto de observação para lá de um nó existente: é isso que alarga verdadeiramente o registo.',
+    hn_diagram_existing:'NÓ EXISTENTE', hn_diagram_yours:'O TEU NÓ?', hn_diagram_caption:'UM CORREDOR. DOIS NÓS.',
+    hn_s4_label:'Regras essenciais',
+    hn_s4_title:'Antes<br><em>de dizeres sim</em>',
+    hn_rule1_label:'Acesso remoto', hn_rule1_value:'Acedemos apenas à unidade, e a mais nada. Nunca à tua rede doméstica, nunca ao teu computador.',
+    hn_rule2_label:'Licença dos dados', hn_rule2_value:'Tudo o que o nó regista é publicado sob licença CC BY 4.0, tal como os restantes dados da rede.',
+    hn_rule3_label:'Estado atual', hn_rule3_value:'A infraestrutura de coordenação da rede ainda está a ser desenvolvida. Estás a candidatar-te numa fase inicial; o nó não ficará operacional logo no primeiro dia.',
+    hn_s5_label:'Envia o teu plano de voo',
+    hn_s5_title:'Último ponto<br><em>da lista.</em>',
+    hn_s5_desc:'Cinco linhas por email. Nada mais formal do que isso.',
+    hn_manifest1:'O local exato e o que consegues observar dali em relação à pista.',
+    hn_manifest2:'O teu grau de à-vontade com a montagem e configuração de um Raspberry Pi.',
+    hn_manifest3:'Apenas o kit base ou também alguns extras — e quais.',
+    hn_manifest4:'Porque queres participar e porque és a pessoa certa.',
+    hn_manifest5:'Se estás disponível para uma breve chamada antes de avançarmos.',
+    hn_other_ways:'Ainda não queres avançar para a montagem completa? Há <a href="/about.html#get-involved" style="color:var(--amber);">outras formas de participar</a>.',
+    hn_closebar:'Todos os dados publicados (painéis, relatórios mensais e imagens) são disponibilizados sob a licença <strong>CC BY 4.0</strong> e podem ser reutilizados livremente, inclusive para fins comerciais, com atribuição.',
+    hn_cta_email:'Enviar email ao Capitão →',
+    hn_footer:'LISBON FINALS · Finals Network · lisbonfinals.com'
+  },
+  fr: {
+    hn_eyebrow:'Héberger un nœud',
+    hn_title:'Il nous faut un copilote.<br><em>quelqu’un sur sa propre trajectoire d’approche</em>',
+    hn_desc:'Lisbon Finals a commencé avec une station, sur une terrasse, sous un seul couloir aérien. <span style="color:var(--amber)">Le Finals Network</span> prendra forme si quelques personnes, ailleurs et sous leur propre couloir, construisent leur station à leur tour. Pour l’instant, cela reste surtout un projet. Si c’est ton genre d’aventure, continue.',
+    hn_cta_read:'Voir la check-list ↓',
+    hn_s1_label:"Ce qu'il faut",
+    hn_s1_title:'Check-list<br><em>prévol</em>',
+    hn_s1_desc:'Cinq composants sont indispensables. Tout le reste dépend de toi et fait varier le total ci-dessous.',
+    hn_item_pi_name:'Raspberry Pi 4',
+    hn_item_rtlsdr_name:'Récepteur RTL-SDR',
+    hn_item_soundmeter_name:'Sonomètre étalonné',
+    hn_item_adc_name:'Carte ADC I2C',
+    hn_item_enclosure_name:'Boîtier, câblage et alimentation',
+    hn_item_camera_name:'Caméra PTZ',
+    hn_item_vibration_name:'Capteur de vibrations',
+    hn_item_airquality_name:'Capteur de qualité de l’air',
+    hn_item_pi_desc:'Fait fonctionner toute la station. Le prix inclut l’alimentation et le stockage.',
+    hn_item_rtlsdr_desc:'Capte les signaux des transpondeurs de tous les avions qui passent au-dessus.',
+    hn_item_soundmeter_desc:'Transforme le bruit en une mesure exploitable. Sortie analogique DC, pas USB.',
+    hn_item_adc_desc:'Convertit le signal du sonomètre en données lisibles par le Pi. Un peu de câblage est nécessaire : ce n’est pas du plug-and-play.',
+    hn_item_enclosure_desc:'Protège l’ensemble et le maintient opérationnel à l’extérieur toute l’année.',
+    hn_item_camera_desc:'Photographie les avions détectés par la station.',
+    hn_item_vibration_desc:'Mesure ce que le bâtiment subit, pas seulement ce que l’on entend.',
+    hn_item_airquality_desc:'Mesures de particules associées à chaque passage.',
+    hn_required:'Indispensable', hn_optional:'Facultatif',
+    hn_budget_label:'Budget estimé',
+    hn_caption:'Montants indicatifs, pas un devis. Sélectionne les cartes facultatives ci-dessus. Les coûts exacts seront confirmés avant toute commande.',
+    hn_s2_label:'Le profil recherché',
+    hn_s2_title:'La place du<br><em>copilote</em>',
+    hn_s2_desc:'On ne cherche pas un simple projet de week-end. Installer un nœud, le maintenir opérationnel et correctement étalonné demande du temps — ainsi qu’un véritable investissement avant même d’enregistrer le premier vol. On cherche quelqu’un qui lève déjà les yeux dès qu’un appareil bruyant passe au-dessus de la maison. Si tu reconnais un vol rien qu’aux vibrations du plafond, tu corresponds probablement déjà au profil.',
+    hn_stat1_val:'En continu', hn_stat1_lbl:'Du temps, pas un week-end',
+    hn_stat2_lbl:'Un investissement à ta charge',
+    hn_stat3_val:'Long terme', hn_stat3_lbl:'Un engagement durable',
+    hn_s3_label:'Trouver ton point de vue',
+    hn_s3_title:'Tous les toits<br><em>ne se valent pas</em>',
+    hn_s3_desc:'Être proche d’un aéroport compte, mais ce n’est pas le facteur décisif. Une couverture complémentaire vaut davantage que la simple proximité. Une autre piste, une autre portion du même couloir ou un point d’observation au-delà d’un nœud existant : voilà ce qui enrichit réellement les données.',
+    hn_diagram_existing:'NŒUD EXISTANT', hn_diagram_yours:'TON NŒUD ?', hn_diagram_caption:'UN COULOIR. DEUX NŒUDS.',
+    hn_s4_label:'Règles essentielles',
+    hn_s4_title:'Avant<br><em>de dire oui</em>',
+    hn_rule1_label:'Accès à distance', hn_rule1_value:'On accède uniquement au boîtier, et à rien d’autre. Jamais à ton réseau personnel, jamais à ton ordinateur.',
+    hn_rule2_label:'Licence des données', hn_rule2_value:'Tout ce que le nœud enregistre est publié sous licence CC BY 4.0, comme les autres données du réseau.',
+    hn_rule3_label:'Statut actuel', hn_rule3_value:'L’infrastructure de coordination du réseau est encore en cours de développement. Tu rejoins le projet à un stade précoce : le nœud ne sera pas opérationnel dès le premier jour.',
+    hn_s5_label:'Envoie ton plan de vol',
+    hn_s5_title:'Dernier point<br><em>de la check-list.</em>',
+    hn_s5_desc:'Cinq lignes par e-mail. Rien de plus formel.',
+    hn_manifest1:'L’emplacement exact et ce que tu peux y observer par rapport à la piste.',
+    hn_manifest2:'Ton aisance pour monter et configurer un Raspberry Pi.',
+    hn_manifest3:'Le kit de base seul ou les options souhaitées.',
+    hn_manifest4:'Pourquoi ce projet, et pourquoi toi.',
+    hn_manifest5:'Tes disponibilités pour un bref appel avant d’aller plus loin.',
+    hn_other_ways:'Pas encore prêt pour le montage complet ? Il y a <a href="/about.html#get-involved" style="color:var(--amber);">d\'autres façons de participer</a>.',
+    hn_closebar:'Toutes les données publiées (tableaux de bord, rapports mensuels et images) sont diffusées sous licence <strong>CC BY 4.0</strong> et peuvent être réutilisées librement, y compris à des fins commerciales, avec attribution.',
+    hn_cta_email:'Envoyer un e-mail au Capitaine →',
+    hn_footer:'LISBON FINALS · Finals Network · lisbonfinals.com'
+  }
+};
+
+let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
+function applyLang(lang) {
+  if (!T[lang]) return;
+  _lang = lang;
+  localStorage.setItem('lf_lang', lang);
+  const t = T[lang];
+  ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
+  document.querySelectorAll('[data-i18n]').forEach(el => { if (t[el.dataset.i18n] != null) el.textContent = t[el.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { if (t[el.dataset.i18nHtml] != null) el.innerHTML = t[el.dataset.i18nHtml]; });
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
+}
+applyLang(_lang);
+
+// ── Lisbon clock ──
+(function navClock(){
+  const el = document.getElementById('nav-clock');
+  if (!el) return;
+  function tick(){
+    const now = new Date();
+    const s = now.toLocaleTimeString('pt-PT',{timeZone:'Europe/Lisbon',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    el.innerHTML = s + '<span class="nav-clock-tz">LIS</span>';
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>

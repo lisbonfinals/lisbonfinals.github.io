@@ -1,0 +1,2543 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lisbon Finals — Cada avião sobre uma varanda em Lisboa</title>
+<meta name="description" content="Uma estação autónoma numa varanda em Lisboa que fotografa aeronaves e regista localmente ruído, vibração e qualidade do ar.">
+<meta name="theme-color" content="#0a0d12">
+<link rel="canonical" href="https://www.lisbonfinals.com/pt/">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/en/">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816b"></script>
+
+<!-- Social sharing / OpenGraph — vignette au partage (WhatsApp, X, Instagram, etc.) -->
+<!-- og:image = photo Cloudinary représentative (1200×630). À remplacer par une cover fixe curatée si souhaité. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="Lisbon Finals — Cada avião sobre uma varanda em Lisboa">
+<meta property="og:description" content="Uma estação autónoma numa varanda em Lisboa que fotografa aeronaves e regista localmente ruído, vibração e qualidade do ar.">
+<meta property="og:url" content="https://www.lisbonfinals.com/pt/">
+<meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lisbon Finals — Cada avião sobre uma varanda em Lisboa">
+<meta name="twitter:description" content="Uma estação autónoma numa varanda em Lisboa que fotografa aeronaves e regista localmente ruído, vibração e qualidade do ar.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://gist.githubusercontent.com">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<link rel="dns-prefetch" href="https://api.github.com">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.lisbonfinals.com/#website","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/","description":"An autonomous station on a Lisbon terrace photographing and measuring aircraft below the Lisbon Airport approach corridor.","inLanguage":["en","pt-PT","fr"]},{"@type":"Organization","@id":"https://www.lisbonfinals.com/#project","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/","description":"Independent terrace-based aircraft spotting, acoustic monitoring and open-data project in Lisbon.","sameAs":["https://www.instagram.com/lisbon.finals/"],"location":{"@type":"Place","name":"Lisbon, Portugal"}}]}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark:   #0a0d12;
+  --dark2:  #0d1117;
+  --black:  #060810;
+  --border: #1e2530;
+  --amber:  #f5a623;
+  --white:  #f0ede8;
+  --gray:   rgba(240,237,232,0.43);
+  --green:  #4ade80;
+  --sans:   'Syne', sans-serif;
+  --mono:   'JetBrains Mono', monospace;
+  --serif:  'Instrument Serif', serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--dark); color: var(--white); font-family: var(--sans); overflow-x: hidden; cursor: none; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+}
+
+/* ── CURSOR ── */
+.cursor      { position:fixed;width:8px;height:8px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .1s;mix-blend-mode:difference; }
+.cursor-ring { position:fixed;width:32px;height:32px;border:1px solid rgba(245,166,35,.5);border-radius:50%;pointer-events:none;z-index:9998;transition:all .15s ease; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(7,9,13,0.98), transparent);
+  backdrop-filter: blur(4px);
+}
+.nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
+.nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
+.nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px;}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-dot {
+  width: 28px; height: 28px; border: 1.5px solid var(--amber);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative;
+}
+.nav-dot::after {
+  content: ''; width: 10px; height: 12px; background: var(--amber); border-radius: 0;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -60%) rotate(-20deg);
+  clip-path: polygon(50% 0%, 65% 85%, 50% 72%, 35% 85%);
+}
+.nav-wordmark {
+  font-size: 13px; font-family: var(--mono); font-weight: 500;
+  letter-spacing: .12em; color: var(--white); text-transform: uppercase;
+}
+.nav-wordmark span { color: var(--amber); }
+.nav-links { display: flex; gap: 36px; list-style: none; margin-left: auto; }
+.nav-links a {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(240,237,232,0.55); text-decoration: none; transition: color .2s; cursor: none;
+}
+.nav-links a:hover { color: var(--amber); }
+.nav-links a.nav-active { color: var(--amber); }
+.nav-links a.nav-noise { color: var(--amber); font-weight: 700; display: inline-flex; align-items: center; }
+.nav-links a.nav-noise:hover { color: #fff; text-shadow: 0 0 14px rgba(245,166,35,.6); }
+.nav-noise-badge { font-family: var(--mono); font-size: 9px; letter-spacing: .04em; color: rgba(240,237,232,.4); margin-left: 7px; font-weight: 500; text-transform: none; }
+.nav-noise-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); margin-left: 6px; box-shadow: 0 0 0 3px rgba(245,166,35,.18); animation: navNewPulse 2.4s infinite; }
+@keyframes navNewPulse { 0%,100%{box-shadow:0 0 0 3px rgba(245,166,35,.18);} 50%{box-shadow:0 0 0 7px rgba(245,166,35,.05);} }
+.nav-has-dropdown { position: relative; }
+.nav-dropdown { display:none;position:absolute;top:calc(100% + 12px);left:0;background:rgba(7,9,13,.98);border:1px solid var(--border);min-width:180px;z-index:300; }
+.nav-has-dropdown:hover .nav-dropdown { display:block; }
+.nav-dropdown li { list-style:none; }
+.nav-dropdown li a { display:block;padding:12px 16px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.47);text-decoration:none;transition:all .2s;cursor:none; }
+.nav-dropdown li a:hover { color:var(--amber);background:rgba(245,166,35,.05); }
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px; margin-left: 12px;
+}
+.nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--white); border-radius: 2px; }
+.nav-drawer {
+  display: none; flex-direction: column; gap: 32px;
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(7,9,13,0.97); backdrop-filter: blur(12px);
+  align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.nav-drawer.open { display: flex; opacity: 1; pointer-events: all; }
+.nav-drawer a {
+  font-family: var(--mono); font-size: 14px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(240,237,232,0.6); text-decoration: none; transition: color .2s;
+}
+.nav-drawer a:hover, .nav-drawer a.drawer-active { color: var(--white); }
+.nav-drawer a.drawer-noise { color: var(--amber); opacity: .8; }
+.nav-drawer a.drawer-warning { color: rgba(248,113,113,0.6); }
+.nav-drawer a.drawer-ig {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; border: 1px solid rgba(245,166,35,0.4);
+  padding: 10px 20px; border-radius: 4px; color: var(--amber) !important;
+  font-size: 11px; margin-top: 8px;
+}
+.lang-group { display:flex;align-items:center;gap:2px;flex-shrink:0; }
+.lang-btn { font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.43);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase; }
+.lang-btn:hover { color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.38); }
+.lang-btn.active { color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06); }
+/* keep old .lang-switcher class for backward compat */
+.lang-switcher { display:none; }
+.nav-dropdown li a.dd-warning { color: rgba(248,113,113,0.6); }
+.nav-dropdown li a.dd-warning:hover { color: #ef4444; }
+.nav-dropdown li + li { border-top: 1px solid rgba(240,237,232,0.05); }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 100vh; min-height: 640px;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  padding: 112px 48px 52px;   /* 68px nav + 44px breathing */
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: var(--dark);
+  transition: background .4s;
+}
+.hero-bg img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0;
+  filter: none;
+  transition: opacity 1.4s ease;
+}
+.hero-bg img.loaded { opacity: .70; }
+.hero-vignette-bottom {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--dark) 0%, rgba(10,13,18,.5) 50%, rgba(10,13,18,.1) 100%);
+}
+.hero-vignette-left {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(10,13,18,.85) 0%, rgba(10,13,18,.35) 55%, transparent 100%);
+}
+
+/* photo cycling dot indicators */
+.hero-photo-dots {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; z-index: 4;
+}
+.hero-photo-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(240,237,232,.28); transition: background .3s;
+  cursor: pointer;
+}
+.hero-photo-dot.active { background: var(--amber); }
+
+.hero-content { position:relative;z-index:2;max-width:680px; }
+.hero-live-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(240,237,232,.47); margin-bottom: 20px;
+}
+.hero-live-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 0 3px rgba(74,222,128,.15);
+  animation: hpulse 2.4s infinite;
+}
+@keyframes hpulse { 0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,.15);} 50%{box-shadow:0 0 0 7px rgba(74,222,128,.04);} }
+.hero-title {
+  font-family: var(--sans); font-weight: 800;
+  font-size: clamp(52px, 6.8vw, 88px);
+  line-height: 1; letter-spacing: -.03em;
+  color: var(--white); margin-bottom: 44px;
+}
+.hero-title .line {
+  display: block;
+  margin-bottom: .22em;
+}
+.hero-title .line:last-child { margin-bottom: 0; }
+.hero-title em {
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  color: rgba(240,237,232,.3); font-size: .80em;
+}
+.hero-title em.deci {
+  color: var(--amber); font-size: .91em;
+}
+.hero-title em.second {
+  font-size: .44em;
+  align-self: flex-end;
+  margin-top: -10px;
+}
+.hero-sub {
+  font-family: var(--sans); font-size: 13px; line-height: 1.8;
+  color: rgba(240,237,232,.72); max-width: 500px; margin-top: 24px; margin-bottom: 32px;
+  letter-spacing: .02em;
+}
+.hero-proof {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;
+  max-width: 520px; margin-top: 22px;
+}
+.hero-proof-item {
+  border-top: 1px solid rgba(245,166,35,.22);
+  padding-top: 9px;
+}
+.hero-proof-k {
+  font-family: var(--mono); font-size: 8px; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(240,237,232,.34); margin-bottom: 4px;
+}
+.hero-proof-v {
+  font-family: var(--mono); font-size: 11px; line-height: 1.45;
+  color: rgba(240,237,232,.72);
+}
+.hero-ctas { display:flex;gap:12px;position:absolute;bottom:28px;left:48px;z-index:3; }
+.btn-primary {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  background: var(--amber); color: var(--dark);
+  padding: 13px 24px; border: none; cursor: none; text-decoration: none;
+  transition: opacity .2s; display: inline-block;
+}
+.btn-primary:hover { opacity: .88; }
+.btn-ghost {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  background: transparent; color: rgba(240,237,232,.47);
+  padding: 13px 24px; border: 1px solid rgba(240,237,232,.15); cursor: none;
+  text-decoration: none; transition: all .2s; display: inline-block;
+}
+.btn-ghost:hover { color: var(--white); border-color: rgba(240,237,232,.38); }
+
+/* ── LIVE FLIGHT CARD ── */
+.hero-live-card {
+  position: absolute; bottom: 52px; right: 48px; z-index: 3;
+  width: 440px;
+}
+.hlc-eyebrow {
+  font-family: var(--mono); font-size: 8px; letter-spacing: .2em;
+  text-transform: uppercase; color: rgba(240,237,232,.36);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.hlc-eyebrow::before { content:'';width:16px;height:1px;background:rgba(240,237,232,.15); }
+.hlc-card {
+  background: rgba(13,17,23,.9); border: 1px solid rgba(30,37,48,.9);
+  padding: 18px 20px; backdrop-filter: blur(10px);
+}
+.hlc-next {
+  display:flex; align-items:center; gap:8px; margin-top:9px;
+  padding:9px 14px; background:rgba(13,17,23,.7);
+  border:1px solid rgba(30,37,48,.7); border-left:2px solid rgba(245,166,35,.5);
+  font-family:var(--mono); backdrop-filter:blur(10px);
+}
+.hlc-next-dot { width:5px;height:5px;border-radius:50%;background:var(--amber);flex:none;
+  box-shadow:0 0 6px rgba(245,166,35,.7); animation:hlcNextPulse 2s ease-in-out infinite; }
+@keyframes hlcNextPulse { 0%,100%{opacity:.35;} 50%{opacity:1;} }
+.hlc-next-lbl { font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,166,35,.7);flex:none; }
+.hlc-next-body { font-size:10px;letter-spacing:.03em;color:rgba(240,237,232,.62);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.hlc-top { display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px; }
+.hlc-callsign { font-family:var(--mono);font-weight:500;font-size:20px;color:var(--white);letter-spacing:.04em; }
+.hlc-airline { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.36);margin-top:3px;letter-spacing:.06em; }
+.hlc-score { text-align:right; }
+.hlc-score-num { font-family:var(--mono);font-size:20px;font-weight:500;color:var(--amber); }
+.hlc-score-lbl { font-family:var(--mono);font-size:7px;color:rgba(240,237,232,.3);letter-spacing:.12em;text-transform:uppercase; }
+.hlc-metrics {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+  border-top: 1px solid rgba(30,37,48,.8); padding-top: 14px;
+}
+.hlc-m-val { font-family:var(--mono);font-size:12px;font-weight:500;color:var(--white);white-space:nowrap; }
+.hlc-m-val.amber { color:var(--amber); }
+.hlc-m-lbl { font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-top:3px; }
+.hlc-empty { font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);text-align:center;padding:12px; }
+
+.hero-mobile-live {
+  display:none;
+  position:absolute; left:20px; right:20px; bottom:88px; z-index:3;
+  background:rgba(13,17,23,.84); border:1px solid rgba(245,166,35,.24);
+  backdrop-filter:blur(12px); padding:13px 14px;
+}
+.hml-top { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px; }
+.hml-label {
+  font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(245,166,35,.72);
+}
+.hml-time { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.36);white-space:nowrap; }
+.hml-main { display:flex;align-items:flex-end;justify-content:space-between;gap:14px; }
+.hml-callsign { font-family:var(--mono);font-size:20px;font-weight:500;letter-spacing:.05em;color:var(--white);line-height:1; }
+.hml-airline { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.38);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px; }
+.hml-metrics { display:flex;gap:12px;flex-shrink:0; }
+.hml-metric { text-align:right; }
+.hml-val { font-family:var(--mono);font-size:13px;color:var(--white);white-space:nowrap; }
+.hml-val.noise { color:#f87171; }
+.hml-key { font-family:var(--mono);font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-top:3px; }
+
+/* ── RUNWAY STRIP ── */
+.runway-strip {
+  background: var(--dark2); border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px; display: flex; align-items: center;
+  overflow-x: auto;
+}
+.rs-item {
+  padding: 18px 28px; display: flex; flex-direction: column; gap: 5px;
+  border-right: 1px solid var(--border); flex-shrink: 0;
+}
+.rs-item:first-child { padding-left: 0; }
+.rs-label { font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.3); }
+.rs-value { font-family:var(--mono);font-size:14px;font-weight:500;color:var(--white); }
+.rs-value.amber { color:var(--amber); }
+.rs-value.muted { color:rgba(147,180,220,.7); }
+.rs-runway-badge {
+  font-family:var(--mono);font-size:13px;color:var(--amber);
+  border:1px solid rgba(245,166,35,.35);padding:4px 10px;display:inline-block;letter-spacing:.06em;
+}
+.rs-updated { margin-left:auto;padding:18px 0;font-family:var(--mono);font-size:7.5px;color:rgba(240,237,232,.26);letter-spacing:.1em;white-space:nowrap;flex-shrink:0; }
+
+/* ── LIVE TICKER ── */
+.live-ticker {
+  background: rgba(10,13,18,1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  overflow: hidden; position: relative; height: 62px;
+  display: flex; align-items: center;
+}
+.live-ticker::before,.live-ticker::after {
+  content:''; position:absolute; top:0; bottom:0; z-index:2; width:120px;
+  pointer-events:none;
+}
+.live-ticker::before { left:0; background:linear-gradient(to right, rgba(10,13,18,1), transparent); }
+.live-ticker::after  { right:0; background:linear-gradient(to left, rgba(10,13,18,1), transparent); }
+.ticker-label {
+  flex-shrink:0; padding:0 22px; font-family:var(--mono); font-size:9px;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--amber);
+  border-right:1px solid var(--border); white-space:nowrap; z-index:3;
+  background:rgba(10,13,18,1); height:100%; display:flex; align-items:center; gap:8px;
+}
+.ticker-live-dot {
+  width:7px; height:7px; border-radius:50%; background:var(--amber);
+  animation: ndot 2s infinite; flex-shrink:0;
+}
+.ticker-scroll { flex:1; overflow:hidden; }
+.ticker-track {
+  display:inline-flex; align-items:center;
+  animation: tickermove 120s linear infinite;
+  white-space:nowrap;
+}
+.ticker-track:hover { animation-play-state:paused; }
+@keyframes tickermove {
+  0%   { transform:translateX(0); }
+  100% { transform:translateX(-50%); }
+}
+.ticker-item {
+  display:inline-flex; align-items:center; gap:12px;
+  padding:0 36px; border-right:1px solid rgba(240,237,232,.05);
+  font-family:var(--mono); font-size:11px;
+}
+.ti-cs   { color:var(--amber); font-weight:600; letter-spacing:.08em; font-size:12px; }
+.ti-sep  { color:rgba(240,237,232,.15); }
+.ti-val  { color:rgba(240,237,232,.5); }
+.ti-ac   { color:rgba(240,237,232,.43); font-style:italic; }
+.ti-db   { color:var(--amber); font-weight:500; }
+.ti-ts   { color:rgba(240,237,232,.33); font-size:10px; }
+.ti-flag { font-size:14px; line-height:1; }
+.ti-unit { color:rgba(240,237,232,.3); font-size:9.5px; margin-left:2px; }
+.ti-vib  { display:inline-flex; align-items:center; gap:4px; font-size:10px; }
+
+/* ── LATEST SHOT ── */
+.latest-shot {
+  display: grid; grid-template-columns: 1.15fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.ls-photo {
+  position: relative; height:auto; min-height:540px; overflow: hidden;
+  background: var(--dark2);
+}
+.ls-photo img {
+  width:100%; height:100%; object-fit:cover;
+  filter: none;
+  transition: transform 6s ease, opacity .6s;
+}
+.ls-photo:hover img { transform: scale(1.03); }
+.ls-photo-overlay {
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom, transparent 40%, rgba(10,13,18,.88) 100%),
+             linear-gradient(to right, transparent 50%, rgba(10,13,18,.5) 100%);
+  pointer-events:none;
+}
+.ls-photo-badge {
+  position:absolute;top:22px;left:22px;
+  font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;
+  background:rgba(10,13,18,.75);border:1px solid rgba(200,150,50,.4);
+  padding:5px 10px;color:var(--amber);
+}
+/* photo bottom overlay — callsign + date */
+.ls-photo-bottom {
+  position:absolute;bottom:0;left:0;right:0;padding:20px 24px;
+}
+.ls-photo-cs {
+  font-family:var(--mono);font-weight:500;font-size:22px;
+  color:var(--amber);letter-spacing:.06em;margin-bottom:5px;
+  display:flex;align-items:center;gap:8px;
+}
+.ls-photo-dateline {
+  font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.5);letter-spacing:.06em;
+}
+/* monthly ranking badge */
+.ls-rank-badge {
+  position:absolute;top:22px;right:22px;
+  font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 12px;border:1px solid;display:none;
+}
+.ls-rank-badge.quietest { color:#4ade80;border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.08); }
+.ls-rank-badge.noisiest { color:#f87171;border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.08); }
+.ls-info {
+  background: var(--dark2); padding: 38px 48px 34px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-left: 1px solid var(--border);
+}
+.ls-eyebrow {
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(240,237,232,.36);display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.ls-eyebrow::before { content:'';width:20px;height:1px;background:rgba(245,166,35,.45); }
+.ls-callsign { font-family:var(--mono);font-weight:500;font-size:clamp(28px,3vw,40px);color:var(--white);line-height:1;margin-bottom:5px;letter-spacing:.06em; }
+.ls-airline  { font-family:var(--serif);font-style:italic;font-size:18px;color:rgba(240,237,232,.36);margin-bottom:24px; }
+.ls-stats {
+  display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;margin-bottom:22px;
+  border-top:1px solid var(--border);padding-top:22px;
+}
+.ls-stat-val { font-family:var(--mono);font-size:15px;font-weight:500;color:var(--white); }
+.ls-stat-val.amber { color:var(--amber); }
+.ls-stat-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-top:4px; }
+.ls-score-row {
+  display:flex;align-items:center;gap:6px;
+  border-top:1px solid var(--border);padding-top:18px;
+}
+.ls-score-num { font-family:var(--mono);font-weight:500;font-size:22px;color:#4ade80;letter-spacing:.02em; }
+.ls-score-max { font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.3); }
+.ls-score-detail { margin-left:12px; }
+.ls-score-lbl { font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.36); }
+.ls-score-sub { font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);margin-top:3px; }
+.ls-ig-link {
+  display:inline-flex;align-items:center;gap:8px;margin-top:17px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(240,237,232,.38);text-decoration:none;transition:color .2s;cursor:none;
+}
+.ls-ig-link::after { content:'→'; }
+.ls-ig-link:hover { color:var(--amber); }
+
+/* ── SECTION BODY ── */
+.section-body {
+  font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.47);
+  line-height:1.9;max-width:760px;margin:52px 0 0;letter-spacing:.01em;
+}
+
+/* ── SECTION TODAY STATS (traffic breakdown, live from the terrace) ── */
+.section-today-stats {
+  grid-column:2;margin-top:14px;
+  border:1px solid var(--border);background:var(--dark2);
+  padding:20px 24px;
+}
+.sts-eyebrow {
+  display:flex;align-items:center;gap:8px;margin-bottom:18px;
+  font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(240,237,232,.32);
+}
+.sts-eyebrow::before { content:'';width:14px;height:1px;background:var(--amber);flex-shrink:0; }
+.sts-grid { display:flex; }
+.sts-item { flex:1;padding:0 20px;border-right:1px solid var(--border); }
+.sts-item:first-child { padding-left:0; }
+.sts-item:last-child { border-right:none;padding-right:0; }
+.sts-num { font-family:var(--mono);font-weight:500;font-size:26px;color:var(--white);letter-spacing:-.01em;line-height:1;margin-bottom:6px; }
+.sts-num.amber { color:var(--amber); }
+.sts-num.blue { color:#60a5fa; }
+.sts-num.dim { color:rgba(240,237,232,.4); }
+.sts-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.32); }
+@media(max-width:768px){
+  .section-today-stats { padding:18px 16px; }
+  .sts-grid { flex-wrap:wrap;gap:16px 0; }
+  .sts-item { flex:1 1 50%;border-right:none;padding:0 0 12px;min-width:120px; }
+  .sts-num { font-size:22px; }
+}
+
+/* ── SECTION SENSORS LEGEND ── */
+.section-sensors { display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px; }
+.ss-item { display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.4);letter-spacing:.06em; }
+.ss-dot { width:6px;height:6px;border-radius:50%;flex-shrink:0; }
+.ss-photo { background:#4ade80; }
+.ss-db    { background:#f87171; }
+.ss-vib   { background:var(--amber); }
+.ss-sep   { color:rgba(240,237,232,.15);font-family:var(--mono);font-size:9px; }
+
+/* ── VIBRATION PULSE (latest shot) ── */
+.ls-vib-row { border-top:1px solid var(--border);padding-top:14px;margin-bottom:14px; }
+.ls-vib-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:8px; }
+.ls-vib-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.36); }
+.ls-vib-badge { font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:3px; }
+.ls-vib-badge.soft   { color:#4ade80;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.25); }
+.ls-vib-badge.felt   { color:#f5a623;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3); }
+.ls-vib-badge.strong { color:#fb923c;background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.3); }
+.ls-vib-badge.intense{ color:#f87171;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.3); }
+.ls-vib-inner { display:flex;align-items:center;gap:12px; }
+.ls-vib-bar-wrap { flex:1;height:8px;background:rgba(240,237,232,.06);border-radius:3px;overflow:hidden; }
+.ls-vib-bar { height:100%;border-radius:3px;transition:width .8s cubic-bezier(.4,0,.2,1),background .8s ease;width:0%; }
+.ls-vib-val { font-family:var(--mono);font-size:14px;font-weight:600;min-width:62px;text-align:right; }
+
+/* ── GALLERY STRIP ── */
+.gallery-strip { overflow:hidden; position:relative; }
+.gallery-strip::before,.gallery-strip::after { display:none; }
+.gallery-track {
+  display:flex; gap:3px;
+  animation: gallery-scroll 40s linear infinite;
+  width:max-content;
+}
+.gallery-strip:hover .gallery-track { animation-play-state:paused; }
+@keyframes gallery-scroll {
+  0%   { transform:translateX(0); }
+  100% { transform:translateX(-50%); }
+}
+.gallery-card {
+  position:relative; height:360px; width:480px; flex:none; overflow:hidden;
+  background:var(--dark); cursor:none;
+}
+.gallery-card img { width:100%;height:100%;object-fit:cover;filter:none;transition:transform 5s ease; }
+.gallery-card:hover img { transform:scale(1.04); }
+.gallery-card-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(10,13,18,.92) 0%,rgba(10,13,18,.3) 50%,transparent 100%); }
+.gallery-card-info { position:absolute;bottom:0;left:0;right:0;padding:18px 20px; }
+.gc-callsign {
+  font-family:var(--mono);font-weight:500;font-size:18px;
+  color:var(--amber);letter-spacing:.06em;margin-bottom:4px;
+  display:flex;align-items:center;gap:8px;
+}
+.gc-flag { font-size:16px; }
+.gc-airline { font-family:var(--mono);font-size:8.5px;color:rgba(240,237,232,.45);letter-spacing:.06em;margin-bottom:6px; }
+.gc-date-line { font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.7);letter-spacing:.06em;margin-bottom:5px; }
+.gc-tech { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.36);letter-spacing:.04em; }
+.gc-score { position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.75);background:rgba(10,13,18,.55);padding:3px 8px;letter-spacing:.04em; }
+.gc-date { position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.75);background:rgba(10,13,18,.55);padding:3px 8px;letter-spacing:.04em; }
+
+/* ── WEATHER / STATION CONDITIONS ── */
+.weather-section {
+  padding: 72px 48px 40px;
+  display: grid; grid-template-columns: 1fr 480px; gap: 80px; align-items: end;
+}
+.weather-eyebrow {
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:28px;
+}
+.weather-eyebrow::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
+.weather-title {
+  font-family:var(--sans);font-weight:800;font-size:clamp(32px,3.6vw,52px);
+  color:var(--white);letter-spacing:-.02em;line-height:.92;margin-bottom:24px;
+}
+.weather-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.3);display:block; }
+.weather-body {
+  font-family:var(--sans);font-size:14px;color:rgba(240,237,232,.5);
+  line-height:1.85;max-width:520px;margin-bottom:32px;
+}
+.rwy-cards { display:flex;flex-direction:column;gap:8px; }
+.rwy-card {
+  border:1px solid var(--border);padding:16px 20px;
+  display:flex;align-items:flex-start;gap:16px;opacity:.4;transition:opacity .3s;
+}
+.rwy-card.active { border-color:rgba(245,166,35,.35);opacity:1; }
+.rwy-badge {
+  font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.1em;
+  background:var(--border);color:var(--white);padding:4px 8px;white-space:nowrap;flex-shrink:0;
+}
+.rwy-card.active .rwy-badge { background:rgba(245,166,35,.15);color:var(--amber); }
+.rwy-title { font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);margin-bottom:4px; }
+.rwy-desc { font-family:var(--sans);font-size:12px;color:rgba(240,237,232,.38);line-height:1.6; }
+/* weather live card */
+.wlive-card {
+  background:var(--dark2);border:1px solid var(--border);padding:32px;
+}
+.wlive-header {
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border);
+}
+.wlive-source { font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.33); }
+.wlive-time { font-family:var(--mono);font-size:10px;color:rgba(245,166,35,.6); }
+.wlive-temp { font-family:var(--mono);font-weight:400;font-size:58px;color:var(--white);letter-spacing:-.01em;line-height:1;margin-bottom:8px; }
+.wlive-cond { font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.47);margin-bottom:28px;display:flex;align-items:center;gap:8px; }
+.wlive-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px; }
+.wlive-item-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-bottom:6px; }
+.wlive-item-val { font-family:var(--mono);font-size:18px;font-weight:500;color:var(--white); }
+.wlive-item-val.amber { color:var(--amber); }
+.wlive-item-sub { font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.36);margin-top:3px; }
+.wlive-compass { position:relative;width:36px;height:36px;border:1px solid var(--border);border-radius:50%;margin-top:4px; }
+.wlive-compass-needle { position:absolute;width:2px;height:14px;background:var(--amber);left:50%;top:4px;transform-origin:bottom center;transform:translateX(-50%); }
+.wlive-footer { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.26);line-height:1.7;border-top:1px solid var(--border);padding-top:16px; }
+
+/* ── AIR QUALITY SECTION ── */
+.aq-section {
+  padding:72px 48px; border-bottom:1px solid var(--border);
+  display:grid; grid-template-columns:1fr 480px; gap:80px; align-items:start;
+}
+.aq-eyebrow {
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:28px;
+}
+.aq-eyebrow::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
+.aq-title {
+  font-family:var(--sans);font-weight:800;font-size:clamp(26px,3vw,42px);
+  color:var(--white);letter-spacing:-.02em;line-height:1;margin-bottom:20px;
+}
+.aq-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.3);display:block; }
+.aq-body { font-size:14px;color:rgba(240,237,232,.45);line-height:1.75;margin-bottom:28px; }
+.aq-thresholds { display:flex;flex-direction:column;gap:6px;margin-top:4px; }
+.aq-thresh-row { display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.36); }
+.aq-thresh-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+/* card */
+.aq-card {
+  background:#0d1117;border:1px solid var(--border);border-radius:4px;
+  padding:28px;position:relative;overflow:hidden;
+}
+.aq-card-header { display:flex;justify-content:space-between;align-items:center;margin-bottom:24px; }
+.aq-source { font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.33); }
+.aq-live-dot {
+  width:6px;height:6px;border-radius:50%;background:#4ade80;
+  box-shadow:0 0 6px #4ade80;animation:pulse-dot 2s ease-in-out infinite;
+}
+.aq-live-dot.pending { background:rgba(240,237,232,.28);box-shadow:none;animation:none; }
+.aq-hero-lbl { font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-bottom:6px; }
+.aq-hero { font-family:var(--mono);font-weight:400;font-size:58px;color:var(--white);letter-spacing:-.01em;line-height:1;margin-bottom:4px; }
+.aq-hero-unit { font-size:14px;color:rgba(240,237,232,.38);margin-left:4px; }
+.aq-index-badge {
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  padding:4px 10px;border-radius:3px;margin-bottom:24px;
+  background:rgba(240,237,232,.06);color:rgba(240,237,232,.47);
+}
+.aq-index-badge .aq-idx-dot { width:6px;height:6px;border-radius:50%; }
+/* AQI bar */
+.aq-bar-wrap { position:relative;margin-bottom:28px; }
+.aq-bar {
+  height:4px;border-radius:2px;
+  background:linear-gradient(to right,#4ade80 0%,#facc15 25%,#fb923c 50%,#ef4444 72%,#a855f7 100%);
+  opacity:.5;
+}
+.aq-needle {
+  position:absolute;top:-4px;width:2px;height:12px;background:var(--white);
+  border-radius:1px;transform:translateX(-50%);transition:left .6s ease;
+  box-shadow:0 0 4px rgba(255,255,255,.4);
+}
+.aq-bar-labels { display:flex;justify-content:space-between;margin-top:5px; }
+.aq-bar-lbl { font-family:var(--mono);font-size:7px;color:rgba(240,237,232,.28);letter-spacing:.05em; }
+/* grid PM1 PM2.5 PM10 */
+.aq-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px; }
+.aq-item-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-bottom:6px; }
+.aq-item-val { font-family:var(--mono);font-size:22px;font-weight:500;color:var(--white); }
+.aq-item-val.amber { color:var(--amber); }
+.aq-item-sub { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.3);margin-top:2px; }
+/* pending overlay */
+.aq-pending {
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;border-radius:3px;
+  background:rgba(245,166,35,.05);border:1px solid rgba(245,166,35,.12);
+  margin-top:0;
+}
+.aq-pending-dot {
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(245,166,35,.5);flex-shrink:0;
+  animation:pulse-dot 1.8s ease-in-out infinite;
+}
+.aq-pending-txt { font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:rgba(245,166,35,.6); }
+.aq-footer { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.26);line-height:1.7;border-top:1px solid var(--border);padding-top:14px;margin-top:20px; }
+
+/* old 4-card grid — kept for compat but hidden */
+.weather-grid { display:none; }
+.weather-card,.wc-icon,.wc-val,.wc-lbl,.wc-sub { display:none; }
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  position: relative;
+  height: 1px;
+  margin: 0 80px;
+  background: linear-gradient(to right, transparent, rgba(240,237,232,.08) 25%, rgba(240,237,232,.08) 75%, transparent);
+}
+.section-divider::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 1px;
+  background: var(--amber);
+  opacity: .35;
+}
+@media(max-width:768px){ .section-divider { margin: 0 24px; } }
+
+/* ── STATS ROW ── */
+.stats-row {
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--border);
+  background:var(--dark2);
+}
+.stat-cell {
+  padding:28px 36px;
+  border-right:1px solid var(--border);
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+}
+.stat-cell:last-child { border-right:none; }
+.stat-num {
+  font-family:var(--mono);font-weight:500;
+  font-size:clamp(28px,3vw,42px);
+  color:var(--white);letter-spacing:-.01em;line-height:1;
+  margin-bottom:8px;
+}
+.stat-num.amber { color:var(--amber); }
+.stat-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-bottom:3px; }
+.stat-sub { font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.14);letter-spacing:.06em; }
+.stats-disclaimer {
+  font-family:var(--mono);font-size:10px;letter-spacing:.10em;text-transform:uppercase;
+  color:rgba(240,237,232,.36);text-align:center;
+  padding:22px 80px 16px;
+  border-top:1px solid var(--border);
+  line-height:2;
+}
+@media (max-width:900px) { .stats-disclaimer { padding:16px 20px 24px; font-size:8px; } }
+
+/* ── SECTION HEADER ── */
+.section-header {
+  padding:52px 48px 56px;
+  border-bottom:1px solid var(--border);
+  background:var(--dark);
+  display:grid;grid-template-columns:minmax(320px,.82fr) minmax(420px,1.18fr);
+  column-gap:72px;row-gap:0;align-items:start;
+}
+.section-heading { min-width:0; }
+.section-eyebrow {
+  font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:16px;
+}
+.section-eyebrow::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
+.section-title {
+  font-family:var(--sans);font-weight:800;font-size:clamp(32px,3.6vw,52px);
+  color:var(--white);letter-spacing:-.02em;line-height:.92;
+}
+.section-title em {
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  color:rgba(240,237,232,.3);display:block;
+}
+
+/* ── PROJECT POSITION ── */
+.position-band {
+  display:grid;grid-template-columns:minmax(320px,.82fr) minmax(420px,1.18fr);gap:72px;
+  padding:64px 48px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(245,166,35,.035),rgba(13,17,23,.35) 48%,rgba(10,13,18,1));
+}
+.position-kicker {
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.position-kicker::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
+.position-title {
+  font-family:var(--sans);font-weight:800;font-size:clamp(30px,3.4vw,48px);
+  line-height:.98;letter-spacing:-.02em;color:var(--white);
+}
+.position-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.34); }
+.position-copy {
+  font-size:14px;line-height:1.9;color:rgba(240,237,232,.58);max-width:680px;margin-top:52px;
+}
+.position-points {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px;
+}
+.position-point {
+  border-top:1px solid rgba(245,166,35,.22);padding-top:12px;
+}
+.position-point-k {
+  font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(245,166,35,.62);margin-bottom:6px;
+}
+.position-point-v { font-family:var(--mono);font-size:10px;line-height:1.6;color:rgba(240,237,232,.48); }
+
+/* ── START HERE ── */
+.start-section {
+  padding:56px 48px;background:var(--dark);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.start-inner {
+  display:grid;grid-template-columns:minmax(340px,460px) 1fr;gap:56px;align-items:end;
+}
+.start-kicker {
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.start-kicker::before { content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0; }
+.start-title {
+  font-size:clamp(30px,3.2vw,46px);font-weight:800;line-height:.98;letter-spacing:-.02em;
+  color:var(--white);margin-bottom:18px;max-width:460px;
+}
+.start-title em { font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(240,237,232,.34); }
+.start-copy { font-size:13px;line-height:1.85;color:rgba(240,237,232,.48);max-width:430px; }
+.start-steps { display:grid;grid-template-columns:repeat(3,1fr);gap:26px;background:transparent;border:0; }
+.start-step {
+  position:relative;text-decoration:none;display:flex;flex-direction:column;min-height:auto;
+  padding:0 0 0 18px;border-left:1px solid rgba(245,166,35,.34);transition:border-color .2s;
+}
+.start-step::before {
+  content:'';position:absolute;left:-4px;top:4px;width:7px;height:7px;border-radius:50%;
+  background:var(--amber);box-shadow:0 0 0 8px rgba(245,166,35,.06);
+}
+.start-step:hover { border-color:rgba(245,166,35,.75); }
+.start-step-title { font-size:20px;font-weight:800;color:var(--white);line-height:1.05;margin-bottom:10px;max-width:260px; }
+.start-step-desc { font-size:12px;line-height:1.75;color:rgba(240,237,232,.44);max-width:260px; }
+.start-step-arrow { font-family:var(--mono);font-size:10px;color:var(--amber);margin-top:14px;letter-spacing:.08em;text-transform:uppercase; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 60px 48px 40px;
+}
+.footer-top {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 40px; margin-bottom: 48px;
+}
+.footer-brand { max-width: 320px; }
+.footer-links { justify-self: end; }
+.footer-brand-name { font-size:18px;font-weight:800;letter-spacing:.05em;margin-bottom:12px; }
+.footer-brand-name span { color:var(--amber); }
+.footer-desc { font-size:13px;color:rgba(240,237,232,.43);line-height:1.7; }
+.footer-links { display:flex;gap:64px; }
+.footer-col-title { font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);margin-bottom:16px; }
+.footer-col a { display:block;font-size:13px;color:rgba(240,237,232,.47);text-decoration:none;margin-bottom:10px;transition:color .2s;cursor:none; }
+.footer-col a:hover { color:var(--amber); }
+.footer-radar { display:flex;flex-direction:column;align-items:center;gap:14px; }
+.footer-radar-label { font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.3); }
+.footer-radar-disc { position:relative;width:180px;height:180px;flex-shrink:0; }
+.footer-radar-img {
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  mask-image:radial-gradient(circle at center,black 44%,rgba(0,0,0,.4) 58%,transparent 72%);
+  -webkit-mask-image:radial-gradient(circle at center,black 44%,rgba(0,0,0,.4) 58%,transparent 72%);
+}
+.footer-radar-svg {
+  position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
+  mask-image:radial-gradient(circle at center,black 44%,rgba(0,0,0,.4) 58%,transparent 72%);
+  -webkit-mask-image:radial-gradient(circle at center,black 44%,rgba(0,0,0,.4) 58%,transparent 72%);
+}
+.footer-radar-meta { font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:rgba(240,237,232,.36);text-align:center; }
+.footer-radar-meta strong { color:var(--amber); }
+.footer-kofi {
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  gap:22px;padding:44px 0;margin-bottom:28px;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.footer-kofi-label { display:flex;align-items:center;gap:10px; }
+.footer-kofi-label span { font-size:11px;letter-spacing:.12em;color:var(--amber);text-transform:uppercase;font-weight:500;font-family:var(--mono); }
+.footer-kofi-label::before,.footer-kofi-label::after { content:'';display:block;width:28px;height:1px;background:var(--amber);opacity:.7; }
+.footer-kofi-matrix { font-size:12px;color:#00cc55;line-height:2;max-width:520px;margin:0;font-family:var(--mono);letter-spacing:.04em;min-height:72px; }
+.footer-kofi img { opacity:.9;transition:opacity .2s; }
+.footer-kofi img:hover { opacity:1; }
+.footer-bottom { display:flex;align-items:center;justify-content:space-between;padding-top:32px; }
+.footer-copy { font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.28); }
+.footer-insta { display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.43);text-decoration:none;transition:color .2s;cursor:none; }
+.footer-insta:hover { color:var(--amber); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .nav-links { display:none; }
+  .nav-burger { display:flex; }
+}
+/* nav-links overflow with the "Noise Report" badge before the 1024px grid breakpoint kicks in */
+@media (max-width: 1150px) {
+  .nav-links { display:none; }
+  .nav-burger { display:flex; }
+}
+@media (max-width: 1120px) {
+  .start-inner { grid-template-columns:1fr; gap:34px; }
+  .start-title { max-width:620px; }
+  .start-copy { max-width:620px; }
+}
+@media (max-width: 900px) {
+  nav { padding:16px 20px; }
+  .hero { min-height:720px; padding:88px 20px 196px; justify-content:flex-end; }
+  .hero-content { max-width:100%; text-align:left; }
+  .hero-sub { max-width:100%; margin-left:0; margin-bottom:0; }
+  .hero-proof { grid-template-columns:1fr 1fr 1fr; max-width:100%; }
+  .hero-content { position:static; }
+  .hero-live-pill { position:absolute; top:76px; left:20px; z-index:3; display:flex; margin:0; }
+  .hero-ctas { left:auto; right:20px; bottom:20px; }
+  .hero-live-card { display:none; }
+  .hero-mobile-live { display:block; }
+  .latest-shot { grid-template-columns:1fr; }
+  .ls-photo { min-height:280px; }
+  .ls-info { padding:32px 20px; }
+  .gallery-strip { grid-template-columns:1fr 1fr; }
+  .weather-grid { grid-template-columns:1fr 1fr; }
+  .runway-strip { padding:0 20px; }
+  .weather-section { padding:48px 20px; grid-template-columns:1fr; }
+  .aq-section { padding:48px 20px; grid-template-columns:1fr; }
+  .position-band { grid-template-columns:1fr; gap:28px; padding:48px 20px; }
+  .position-copy { margin-top:0; }
+  .position-points { grid-template-columns:1fr; }
+  .start-section { padding:48px 20px; }
+  .start-inner { grid-template-columns:1fr; gap:28px; }
+  .start-steps { grid-template-columns:1fr; }
+  .start-step { min-height:auto; }
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .stat-cell { padding:20px 20px; }
+  .section-header { grid-template-columns:1fr; gap:22px; padding:36px 20px 32px; }
+  .section-body { max-width:100%; margin-top:0; }
+  .section-today-stats { grid-column:1; }
+  .footer-top { flex-wrap:wrap; }
+  footer { padding:40px 20px; }
+  .footer-radar { width:100%; align-items:center; }
+}
+@media (max-width: 640px) {
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .gallery-strip { grid-template-columns:1fr; }
+  .rwy-cards { flex-direction:column; }
+  .hero-title { font-size:clamp(2.4rem,11vw,4.8rem); }
+  .hero-title .line { margin-bottom:.12em; }
+  .hero-title em.second {
+    font-family:var(--mono); font-style:normal; font-size:10px; line-height:1.4;
+    letter-spacing:.14em; text-transform:uppercase; margin-top:8px;
+    color:rgba(240,237,232,.42);
+  }
+  .hero-proof { grid-template-columns:1fr; gap:7px; }
+  .hero-proof-item { display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-top:7px; }
+  .hero-proof-k { margin-bottom:0; }
+  .hero-proof-v { text-align:right; }
+  .hero-ctas { left:20px; right:20px; }
+  .hero-ctas a { flex:1; text-align:center; padding-left:10px; padding-right:10px; }
+  .nav-clock-wrap { margin-left:12px; padding-left:12px; gap:8px; }
+  .nav-clock { display:none; }
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  body, .nav-links a, .nav-dropdown li a, .btn-primary, .btn-ghost, .gallery-card, .footer-col a, .footer-insta, .ls-ig-link { cursor:auto; }
+  .cursor, .cursor-ring { display:none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after {
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav aria-label="Primary navigation">
+  <a href="/" class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-wordmark">LISBON <span>FINALS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/" class="nav-active">Live</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/data.html">Data ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/data.html#the-data">The Data</a></li>
+        <li><a href="/data.html#noise-data">Noise Data</a></li>
+        <li><a href="/data.html#warning-zone" class="dd-warning">Warning Zone</a></li>
+      </ul>
+    </li>
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/noise-report.html" class="nav-noise">Noise Report<span class="nav-noise-badge" id="nav-noise-badge"></span><span class="nav-noise-dot" id="nav-noise-dot" hidden></span></a></li>
+    <li><a href="/log.html">Captain's Log</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/about.html">About ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/about.html#the-project">The Project</a></li>
+        <li><a href="/about.html#how-it-works">How it works</a></li>
+        <li><a href="/about.html#hardware">The Station</a></li>
+        <li><a href="/about.html#whats-next">What's next</a></li>
+        <li><a href="/about.html#get-involved">Get Involved</a></li>
+        <li><a href="/about.html#press">Press</a></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="nav-clock-wrap">
+    <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
+    <div class="lang-group">
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
+    </div>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- NAV DRAWER (mobile) -->
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="/" class="drawer-active">Live</a>
+  <a href="/data.html#the-data">The Data</a>
+  <a href="/data.html#noise-data">Noise Data</a>
+  <a href="/data.html#warning-zone" class="drawer-warning">Warning Zone</a>
+  <a href="/archive.html">Archive</a>
+  <a href="/noise-report.html" class="drawer-noise">Noise Report</a>
+  <a href="/log.html">Captain's Log</a>
+  <a href="/about.html#the-project">The Project</a>
+  <a href="/about.html#how-it-works">How it works</a>
+  <a href="/about.html#hardware">The Station</a>
+  <a href="/about.html#whats-next">What's next</a>
+  <a href="/about.html#get-involved">Get Involved</a>
+  <a href="/about.html#press">Press</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig">Follow @lisbon.finals</a>
+</div>
+
+<main id="main-content">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="hero-bg">
+    <img id="hero-img-a" src="" alt="Latest aircraft detected above the Lisbon Finals terrace" />
+    <img id="hero-img-b" src="" alt="Previous aircraft detected above the Lisbon Finals terrace" />
+  </div>
+  <div class="hero-vignette-bottom"></div>
+  <div class="hero-vignette-left"></div>
+
+  <div class="hero-content">
+    <div class="hero-live-pill">
+      <span class="hero-live-dot"></span>
+      Tracking live · LPPT approach path
+    </div>
+    <h1 class="hero-title">
+      <span class="line">Every <span style="color:var(--amber)">plane.</span></span>
+      <span class="line" style="display:inline-flex;flex-direction:column;"><span><em style="color:var(--white)">Every </em><em class="deci">decibel.</em></span><em class="second">And so much more.</em></span>
+    </h1>
+    <p class="hero-sub">A real terrace station under Lisbon Airport's approach path. It photographs each passing aircraft, measures noise and vibration, then publishes the best captures without human input.</p>
+    <div class="hero-proof" aria-label="Station summary">
+      <div class="hero-proof-item">
+        <div class="hero-proof-k" data-i18n="proof_where_k">Where</div>
+        <div class="hero-proof-v" data-i18n="proof_where_v">2.6 km from RWY 03</div>
+      </div>
+      <div class="hero-proof-item">
+        <div class="hero-proof-k" data-i18n="proof_measures_k">Measures</div>
+        <div class="hero-proof-v" data-i18n="proof_measures_v">Photo · dB · vibration</div>
+      </div>
+      <div class="hero-proof-item">
+        <div class="hero-proof-k" data-i18n="proof_mode_k">Mode</div>
+        <div class="hero-proof-v" data-i18n="proof_mode_v">Autonomous · 24/7</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-ctas">
+    <a href="/data.html" class="btn-primary">Explore the data</a>
+    <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="btn-ghost">@lisbon.finals</a>
+  </div>
+
+  <!-- Live flight card -->
+  <div class="hero-live-card">
+    <div class="hlc-eyebrow">Latest detected</div>
+    <div class="hlc-card" id="live-card">
+      <div class="hlc-empty">Loading…</div>
+    </div>
+    <!-- Next expected arrival (from LPPT schedule) -->
+    <div class="hlc-next" id="next-arrival" style="display:none;">
+      <span class="hlc-next-dot"></span>
+      <span class="hlc-next-lbl" id="next-arr-lbl">Next expected</span>
+      <span class="hlc-next-body" id="next-arr-body"></span>
+    </div>
+  </div>
+
+  <div class="hero-mobile-live" aria-live="polite">
+    <div class="hml-top">
+      <div class="hml-label" data-i18n="mobile_live_label">Latest aircraft</div>
+      <div class="hml-time" id="hml-time">Loading</div>
+    </div>
+    <div class="hml-main">
+      <div>
+        <div class="hml-callsign" id="hml-callsign">—</div>
+        <div class="hml-airline" id="hml-airline">Waiting for station data</div>
+      </div>
+      <div class="hml-metrics">
+        <div class="hml-metric">
+          <div class="hml-val noise" id="hml-noise">—</div>
+          <div class="hml-key">dB</div>
+        </div>
+        <div class="hml-metric">
+          <div class="hml-val" id="hml-alt">—</div>
+          <div class="hml-key">FT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-photo-dots" id="photo-dots"></div>
+</section>
+
+<!-- STATS ROW -->
+<div class="stats-disclaimer" data-i18n="stats_disclaimer">Depending on wind direction, this station captures either landing approaches or takeoffs — whichever phase passes over the terrace. One phase at a time. These figures reflect observed traffic, not total airport volume.</div>
+<div class="stats-row">
+  <div class="stat-cell">
+    <div class="stat-lbl">Flights tracked</div>
+    <div class="stat-num" id="stat-flights">—</div>
+    <div class="stat-sub">since May 3, 2026</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-lbl">Photos captured</div>
+    <div class="stat-num" id="stat-photos">—</div>
+    <div class="stat-sub"><span id="stat-posts">—</span> <span class="stat-photos-subword">published · zero human</span></div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-lbl">Peak noise recorded</div>
+    <div class="stat-num amber" id="stat-peak">—</div>
+    <div class="stat-sub" id="stat-peak-sub">—</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-lbl">Days running</div>
+    <div class="stat-num" id="stat-days">—</div>
+    <div class="stat-sub">autonomous · 24/7</div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- STATION CONDITIONS -->
+<div class="weather-section">
+  <!-- LEFT: explanation -->
+  <div>
+    <div class="weather-eyebrow">Atmospheric conditions</div>
+    <h2 class="weather-title">The wind<br><em>decides everything.</em></h2>
+    <p class="weather-body">LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 03, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 21, climbing towards the SSW, crossing the terrace before reaching the Tejo.</p>
+    <div class="rwy-cards">
+      <div class="rwy-card" id="rwy-card-03">
+        <div class="rwy-badge">RWY 03</div>
+        <div>
+          <div class="rwy-title">North wind — landing over the terrace ✦</div>
+          <div class="rwy-desc">Planes approach from the south and land over my terrace. Close, slow, full-frame — most impactful shots.</div>
+        </div>
+      </div>
+      <div class="rwy-card" id="rwy-card-21">
+        <div class="rwy-badge">RWY 21</div>
+        <div>
+          <div class="rwy-title">South wind — takeoff over the terrace</div>
+          <div class="rwy-desc">Planes take off and climb over my terrace heading north. Higher, faster — less impactful shots.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- RIGHT: live weather card -->
+  <div class="wlive-card">
+    <div class="wlive-header">
+      <div class="wlive-source">LPPT · Live weather</div>
+      <div class="wlive-time" id="wc-time">—</div>
+    </div>
+    <div class="wlive-temp" id="wc-temp">—</div>
+    <div class="wlive-cond"><span id="wc-icon">🌤</span><span id="wc-cond">—</span></div>
+    <div class="wlive-grid">
+      <div>
+        <div class="wlive-item-lbl">Wind</div>
+        <div class="wlive-item-val" id="wc-wind">—</div>
+        <div class="wlive-item-sub" id="wc-wdir">—</div>
+      </div>
+      <div>
+        <div class="wlive-item-lbl">Active runway</div>
+        <div class="wlive-item-val amber" id="wc-runway">—</div>
+        <div class="wlive-item-sub" id="wc-rwyconf">—</div>
+      </div>
+      <div>
+        <div class="wlive-item-lbl">Wind direction</div>
+        <div class="wlive-item-val" id="wc-wdir-deg">—</div>
+        <div class="wlive-item-sub" id="wc-wdir-card">—</div>
+      </div>
+      <div>
+        <div class="wlive-item-lbl">Visibility</div>
+        <div class="wlive-item-val" id="wc-vis">—</div>
+        <div class="wlive-item-sub">km</div>
+      </div>
+    </div>
+    <div class="wlive-footer">Source: wttr.in · LPPT (38.78°N, 9.14°W) · Updates every 5 min</div>
+  </div>
+</div>
+
+<!-- hidden elements kept for JS compat -->
+<span id="rs-runway" style="display:none"></span>
+<span id="rs-wind"   style="display:none"></span>
+<span id="rs-dir"    style="display:none"></span>
+<span id="rs-temp"   style="display:none"></span>
+<span id="rs-vis"    style="display:none"></span>
+<span id="rs-peak"   style="display:none"></span>
+<span id="rs-updated" style="display:none"></span>
+
+<!-- PROJECT POSITION -->
+<section class="position-band" aria-labelledby="position-title">
+  <div>
+    <div class="position-kicker" data-i18n="position_kicker">Project stance</div>
+    <h2 class="position-title" id="position-title" data-i18n-html="position_title">Not anti-aviation.<br><em>Pro-measurement.</em></h2>
+  </div>
+  <div>
+    <p class="position-copy" data-i18n="position_copy">Lisbon Finals is an independent terrace station under the LPPT approach path. It observes aircraft passages, noise peaks, vibration pulses and air-quality signals from one fixed point. The point is not to dramatize the sky. It is to make the invisible parts of it visible.</p>
+    <div class="position-points">
+      <div class="position-point">
+        <div class="position-point-k" data-i18n="position_p1_k">This is</div>
+        <div class="position-point-v" data-i18n="position_p1_v">Independent observation, logged locally.</div>
+      </div>
+      <div class="position-point">
+        <div class="position-point-k" data-i18n="position_p2_k">This is not</div>
+        <div class="position-point-v" data-i18n="position_p2_v">Official airport data or a complaint platform.</div>
+      </div>
+      <div class="position-point">
+        <div class="position-point-k" data-i18n="position_p3_k">Use</div>
+        <div class="position-point-v" data-i18n="position_p3_v">Local evidence for curious residents and aviation people.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION HEADER: LATEST CAPTURES -->
+<div class="section-header" id="latest-captures">
+  <div class="section-heading">
+    <div class="section-eyebrow">Latest captures</div>
+    <div class="section-title">Live<em>from the terrace</em></div>
+  </div>
+  <p class="section-body" id="section-body-el">Each detected aircraft triggers the full pipeline. A YOLO-trained model evaluates every frame and scores the photo from 1 to 5 — only the best make it to Instagram, without any human input. Two sensors capture what the eye can't see: an ADS1115 circuit measures the peak decibel level as the aircraft passes, and an MPU-6050 accelerometer records the vibration pulse transmitted through the building structure. One plane. Three data points.</p>
+  <div class="section-today-stats" id="section-today-stats">
+    <div class="sts-eyebrow" data-i18n="sts_eyebrow">Today's traffic · 00:00–23:59</div>
+    <div class="sts-grid">
+      <div class="sts-item">
+        <div class="sts-num" id="sts-flights">—</div>
+        <div class="sts-lbl" data-i18n="sts_flights_lbl">Flights today</div>
+      </div>
+      <div class="sts-item">
+        <div class="sts-num amber" id="sts-departures">—</div>
+        <div class="sts-lbl" data-i18n="sts_departures_lbl">Departures today</div>
+      </div>
+      <div class="sts-item">
+        <div class="sts-num blue" id="sts-arrivals">—</div>
+        <div class="sts-lbl" data-i18n="sts_arrivals_lbl">Arrivals today</div>
+      </div>
+      <div class="sts-item">
+        <div class="sts-num dim" id="sts-diff">—</div>
+        <div class="sts-lbl" data-i18n="sts_diff_lbl">Unclassified</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LATEST SHOT -->
+<div class="latest-shot">
+  <div class="ls-photo">
+    <img id="ls-img" src="" alt="Latest flight photo" />
+    <div class="ls-photo-overlay"></div>
+    <div class="ls-photo-badge" id="ls-badge">Latest published</div>
+    <div class="ls-rank-badge" id="ls-rank-badge"></div>
+    <span id="ls-photo-flag" style="display:none"></span>
+    <span id="ls-photo-cs"   style="display:none"></span>
+    <span id="ls-photo-date" style="display:none"></span>
+  </div>
+  <div class="ls-info">
+    <div class="ls-eyebrow">Latest shot</div>
+    <div class="ls-callsign" id="ls-callsign">—</div>
+    <div class="ls-airline" id="ls-airline">—</div>
+    <div class="ls-stats">
+      <div>
+        <div class="ls-stat-val" id="ls-alt">—</div>
+        <div class="ls-stat-lbl">Altitude</div>
+      </div>
+      <div>
+        <div class="ls-stat-val" style="color:#f87171;" id="ls-db">—</div>
+        <div class="ls-stat-lbl">Peak noise</div>
+      </div>
+      <div>
+        <div class="ls-stat-val" id="ls-speed">—</div>
+        <div class="ls-stat-lbl">Ground speed</div>
+      </div>
+      <div>
+        <div class="ls-stat-val" id="ls-aircraft">—</div>
+        <div class="ls-stat-lbl">Aircraft type</div>
+      </div>
+    </div>
+    <div class="ls-vib-row" id="ls-vib-row" style="display:none;">
+      <div class="ls-vib-header">
+        <div class="ls-vib-lbl">Vibration pulse — MPU-6050</div>
+        <span class="ls-vib-badge" id="ls-vib-badge">—</span>
+      </div>
+      <div class="ls-vib-inner">
+        <div class="ls-vib-bar-wrap"><div class="ls-vib-bar" id="ls-vib-bar"></div></div>
+        <div class="ls-vib-val" id="ls-vib-val">—</div>
+      </div>
+    </div>
+    <div class="ls-score-row">
+      <div class="ls-score-num" id="ls-score">—</div><div class="ls-score-max"> / 5</div>
+      <div class="ls-score-detail">
+        <div class="ls-score-lbl">YOLO Score</div>
+        <div class="ls-score-sub" id="ls-published">Published to @lisbon.finals</div>
+      </div>
+    </div>
+    <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="ls-ig-link" id="ls-ig-link">View on Instagram</a>
+    <div class="section-sensors" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+      <span class="ss-item"><span class="ss-dot ss-photo"></span><span id="ss-photo-lbl">Photo — YOLO scored by AI</span></span>
+      <span class="ss-sep">·</span>
+      <span class="ss-item"><span class="ss-dot ss-db"></span><span id="ss-db-lbl">Sound — peak in dB</span></span>
+      <span class="ss-sep">·</span>
+      <span class="ss-item"><span class="ss-dot ss-vib"></span><span id="ss-vib-lbl">Vibration — MPU-6050 accelerometer</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY STRIP -->
+<div class="gallery-strip" id="gallery-strip"></div>
+
+<!-- LIVE TICKER -->
+<div class="live-ticker">
+  <div class="ticker-label"><div class="ticker-live-dot"></div>Live Feed</div>
+  <div class="ticker-scroll">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item"><span class="ti-val">Loading…</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- AIR QUALITY SECTION -->
+<section class="aq-section" id="air-quality">
+  <div>
+    <div class="aq-eyebrow" id="aq-eyebrow">Outdoor monitoring</div>
+    <h2 class="aq-title" id="aq-title-el">Air quality<br><em>at the terrace.</em></h2>
+    <p class="aq-body" id="aq-body-el">Every aircraft that passes over this terrace burns Jet A-1 fuel — releasing ultrafine particles directly into the approach corridor. The PMS5003 laser particle counter measures PM1.0, PM2.5 and PM10 in real time, correlating each reading with the passing flight. A concrete answer to a question nobody else is asking here.</p>
+    <div class="aq-thresholds" id="aq-thresholds">
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#4ade80"></div>Good · 0–10 µg/m³</div>
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#facc15"></div>Fair · 10–20 µg/m³</div>
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#fb923c"></div>Moderate · 20–25 µg/m³</div>
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#ef4444"></div>Poor · 25–50 µg/m³</div>
+      <div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:#a855f7"></div>Very poor · &gt;50 µg/m³</div>
+    </div>
+  </div>
+  <div class="aq-card">
+    <div class="aq-card-header">
+      <div class="aq-source" id="aq-source-el">PMS5003 · Outdoor station</div>
+      <div class="aq-live-dot pending" id="aq-dot"></div>
+    </div>
+    <div class="aq-hero-lbl" id="aq-hero-lbl">PM2.5 — Fine particles</div>
+    <div class="aq-hero"><span id="aq-pm25-hero">—</span><span class="aq-hero-unit">µg/m³</span></div>
+    <div class="aq-index-badge" id="aq-badge">
+      <div class="aq-idx-dot" id="aq-badge-dot" style="background:rgba(240,237,232,.28)"></div>
+      <span id="aq-badge-lbl">Sensor pending</span>
+    </div>
+    <div class="aq-bar-wrap">
+      <div class="aq-bar"></div>
+      <div class="aq-needle" id="aq-needle" style="left:0%"></div>
+    </div>
+    <div class="aq-bar-labels">
+      <span class="aq-bar-lbl">0</span>
+      <span class="aq-bar-lbl">25</span>
+      <span class="aq-bar-lbl">50</span>
+      <span class="aq-bar-lbl">75+</span>
+    </div>
+    <div class="aq-grid">
+      <div>
+        <div class="aq-item-lbl">PM1.0</div>
+        <div class="aq-item-val" id="aq-pm1">—</div>
+        <div class="aq-item-sub">µg/m³</div>
+      </div>
+      <div>
+        <div class="aq-item-lbl">PM2.5</div>
+        <div class="aq-item-val amber" id="aq-pm25">—</div>
+        <div class="aq-item-sub">µg/m³</div>
+      </div>
+      <div>
+        <div class="aq-item-lbl">PM10</div>
+        <div class="aq-item-val" id="aq-pm10">—</div>
+        <div class="aq-item-sub">µg/m³</div>
+      </div>
+    </div>
+    <div class="aq-pending" id="aq-pending">
+      <div class="aq-pending-dot"></div>
+      <div class="aq-pending-txt" id="aq-pending-txt">Sensor coming online — PMS5003 installation in progress</div>
+    </div>
+    <div class="aq-footer" id="aq-footer-el">Source: PMS5003 · LPPT approach corridor · Lisbon, Portugal</div>
+  </div>
+</section>
+
+<!-- START HERE -->
+<section class="start-section" aria-labelledby="start-title">
+  <div class="start-inner">
+    <div>
+      <div class="start-kicker" data-i18n="start_kicker">Start here</div>
+      <h2 class="start-title" id="start-title" data-i18n-html="start_title">New to Lisbon Finals?<br><em>Follow the signal.</em></h2>
+      <p class="start-copy" data-i18n="start_copy">The fastest way in: see what the station is catching now, understand how the measurements work, then read the reports and field notes behind the numbers.</p>
+    </div>
+    <div class="start-steps">
+      <a href="#latest-captures" class="start-step">
+        <div class="start-step-title" data-i18n="start_s1_t">Watch the station live</div>
+        <div class="start-step-desc" data-i18n="start_s1_d">Latest capture, sound peak, vibration pulse and today’s observed traffic.</div>
+        <div class="start-step-arrow" data-i18n="start_s1_a">Jump to live</div>
+      </a>
+      <a href="/data.html" class="start-step">
+        <div class="start-step-title" data-i18n="start_s2_t">Understand the measurements</div>
+        <div class="start-step-desc" data-i18n="start_s2_d">How flight telemetry, dB peaks and local sensor readings become public data.</div>
+        <div class="start-step-arrow" data-i18n="start_s2_a">Open data</div>
+      </a>
+      <a href="/noise-report.html" class="start-step">
+        <div class="start-step-title" data-i18n="start_s3_t">Read the monthly signal</div>
+        <div class="start-step-desc" data-i18n="start_s3_d">Noise reports, night operations, outliers and the limits of the current station.</div>
+        <div class="start-step-arrow" data-i18n="start_s3_a">View reports</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+</main>
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-brand-name">LISBON <span>FINALS</span></div>
+      <p class="footer-desc">An autonomous aircraft spotting and acoustic monitoring system operating 24/7 from a residential terrace in Lisbon, directly under the final approach path to LPPT.</p>
+
+    </div>
+
+    <div class="footer-radar">
+      <div class="footer-radar-label">Position</div>
+      <div class="footer-radar-disc">
+        <img class="footer-radar-img" src="ressources/Imagewebsite1.png" alt="Radar LPPT" loading="lazy" decoding="async"/>
+        <svg class="footer-radar-svg" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="fr-clip"><circle cx="500" cy="500" r="455"/></clipPath>
+            <filter id="fr-glow" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="5" result="b1"/>
+              <feGaussianBlur stdDeviation="2" result="b2"/>
+              <feMerge><feMergeNode in="b1"/><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="fr-trail" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="14" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="fr-dot" x="-150%" y="-150%" width="400%" height="400%">
+              <feGaussianBlur stdDeviation="8" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <g clip-path="url(#fr-clip)">
+            <g>
+              <animateTransform attributeName="transform" type="rotate"
+                from="0 500 500" to="360 500 500" dur="4s" repeatCount="indefinite"/>
+              <path d="M500,500 L500,45 A455,455 0 0,1 955,500 Z" fill="rgba(255,190,0,0.055)" filter="url(#fr-trail)"/>
+              <path d="M500,500 L500,45 A455,455 0 0,1 872,238 Z" fill="rgba(255,200,0,0.085)" filter="url(#fr-trail)"/>
+              <path d="M500,500 L500,45 A455,455 0 0,1 713,97 Z"  fill="rgba(255,215,0,0.14)"/>
+              <line x1="500" y1="500" x2="500" y2="45" stroke="#ffdd20" stroke-width="2.2" stroke-opacity="0.92" stroke-linecap="round" filter="url(#fr-glow)"/>
+              <line x1="500" y1="500" x2="500" y2="45" stroke="#fff8c0" stroke-width="0.8" stroke-opacity="0.6"/>
+            </g>
+          </g>
+          <circle cx="500" cy="500" r="18" fill="none" stroke="#ff3300" stroke-width="1.5">
+            <animate attributeName="r"              values="14;30;14" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="stroke-opacity" values="0.65;0;0.65" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="500" cy="500" r="7"   fill="#ff2200" filter="url(#fr-dot)"/>
+          <circle cx="500" cy="500" r="3.5" fill="#ff5533"/>
+          <circle cx="500" cy="500" r="1.5" fill="#ffddcc"/>
+        </svg>
+      </div>
+      <div class="footer-radar-meta"><strong>2.6 km</strong> from runway 03 · LPPT</div>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <div class="footer-col-title">Station</div>
+        <a href="about.html">How it works</a>
+        <a href="data.html">Statistics</a>
+        <a href="data.html#noise-data">Noise data</a>
+        <a href="noise-report.html">Noise Report</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Connect</div>
+        <a href="https://instagram.com/lisbon.finals" target="_blank" rel="noopener">@lisbon.finals</a>
+        <a href="mailto:chronos@lisbonfinals.com">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-kofi">
+    <div class="footer-kofi-label"><span>Support the project</span></div>
+    <p id="footer-matrix" class="footer-kofi-matrix"></p>
+    <a href='https://ko-fi.com/O5O01ZPUX0' target='_blank' rel='noopener noreferrer'>
+      <img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' loading='lazy' decoding='async' />
+    </a>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Lisbon Finals · Automated Aviation Intelligence · LPPT</span>
+    <a href="https://instagram.com/lisbon.finals" class="footer-insta">📸 @lisbon.finals</a>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+(function(){
+  var c=document.getElementById('cursor'),r=document.getElementById('cursor-ring');
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;c.style.left=mx-4+'px';c.style.top=my-4+'px';});
+  function ar(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;r.style.left=rx-16+'px';r.style.top=ry-16+'px';requestAnimationFrame(ar);}
+  ar();
+})();
+
+/* ── CONSTANTS ── */
+var GIST_ID       = '943998ff407a141792bcd5d2c5f3fc36'; /* latest.json — photos */
+var STATS_GIST_ID = '2edb053ac9f9c91047c1b36f706d302c'; /* lisbon_finals.json — stats */
+window._monthlyQuietest = '';
+window._monthlyNoisiest = '';
+window._lsAirline = '';
+function _applyRankBadge(){
+  var badge = el('ls-rank-badge');
+  if(!badge) return;
+  var airline = window._lsAirline;
+  if(!airline){ badge.style.display='none'; return; }
+  var q = window._monthlyQuietest, n = window._monthlyNoisiest;
+  if(q && airline.toLowerCase().indexOf(q.toLowerCase()) !== -1){
+    badge.textContent = '🟢 Quietest this month';
+    badge.className = 'ls-rank-badge quietest';
+    badge.style.display = 'block';
+  } else if(n && airline.toLowerCase().indexOf(n.toLowerCase()) !== -1){
+    badge.textContent = '🔴 Noisiest this month';
+    badge.className = 'ls-rank-badge noisiest';
+    badge.style.display = 'block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+var CLOUD = 'https://res.cloudinary.com/dtjccssx1/image/upload';
+
+/* ── HELPERS ── */
+function el(id){ return document.getElementById(id); }
+function set(id,v){ var e=el(id); if(e) e.textContent=v; }
+function cardinal(d){
+  var dirs=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  return dirs[Math.round(d/22.5)%16];
+}
+function calcRunway(deg,spd){
+  // Sous 10kt, le vent est trop faible pour imposer un sens de piste fiable
+  // (observé le 1er juillet : 8kt WNW affiché "takeoff" alors que la station
+  // enregistrait des atterrissages sur RWY 03) — on reste non-committal.
+  if(spd<10) return {rwy:'—',conf:'Calm / variable winds'};
+  if(deg>=315||deg<135) return {rwy:'03',conf:'NNE config — landing over terrace'};
+  return {rwy:'21',conf:'SSW config — takeoff over terrace'};
+}
+function getPhotoUrl(f, w){
+  if(!f) return '';
+  /* direct Cloudinary URL (from latest.json 'url' field) */
+  if(f.url && f.url.startsWith('http')) return f.url;
+  if(f.cloudinary_url && f.cloudinary_url.startsWith('http')) return f.cloudinary_url;
+  if(f.photo_url && f.photo_url.startsWith('http')) return f.photo_url;
+  var fname = f.filename || f.photo_filename || '';
+  if(!fname) return '';
+  var pid = fname.replace(/\s+/g,'_').replace(/\.[^.]+$/, '');
+  return CLOUD + '/w_'+(w||900)+',q_auto,f_auto/photos/' + pid;
+}
+/* field helpers for latest.json data structure */
+function fNoise(f){ return f.spl_db || f.noise_db || null; }
+function fSpeed(f){ return f.speed_kts || f.ground_speed || null; }
+function fAlt(f)  { return f.altitude_ft || f.altitude || null; }
+function updateMobileLiveFlight(ld){
+  if(!ld) return;
+  set('hml-callsign', ld.callsign || '—');
+  set('hml-airline', ld.airline || ld.aircraft_type || 'Station data live');
+  set('hml-noise', ld.spl_db ? Math.round(ld.spl_db) : '—');
+  set('hml-alt', ld.altitude_ft ? Math.round(ld.altitude_ft).toLocaleString('en-US') : '—');
+  if(ld.timestamp){
+    var d = new Date(ld.timestamp);
+    set('hml-time', d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}));
+  }
+}
+
+/* ── HERO PHOTO ROTATOR ── */
+var _photos = [], _photoIdx = 0, _imgA = el('hero-img-a'), _imgB = el('hero-img-b');
+var _activeImg = _imgA, _inactiveImg = _imgB;
+function showPhoto(url){
+  if(!url) return;
+  _inactiveImg.onload = function(){
+    this.classList.add('loaded');
+    _activeImg.classList.remove('loaded'); /* CSS transition handles fade-out */
+    var tmp = _activeImg; _activeImg = _inactiveImg; _inactiveImg = tmp;
+    updateDots();
+  };
+  _inactiveImg.src = url;
+}
+function nextPhoto(){
+  if(_photos.length < 2) return;
+  _photoIdx = (_photoIdx + 1) % _photos.length;
+  showPhoto(_photos[_photoIdx]);
+}
+function updateDots(){
+  var dots = document.querySelectorAll('.hero-photo-dot');
+  dots.forEach(function(d,i){ d.classList.toggle('active', i===_photoIdx); });
+}
+function buildDots(){
+  var cont = el('photo-dots');
+  if(!cont || _photos.length < 2) return;
+  cont.innerHTML = '';
+  _photos.forEach(function(url, i){
+    var d = document.createElement('div');
+    d.className = 'hero-photo-dot' + (i===0?' active':'');
+    d.onclick = function(){ _photoIdx=i; showPhoto(_photos[i]); };
+    cont.appendChild(d);
+  });
+}
+
+/* ── AIR QUALITY ── */
+function _updateAirQuality(d){
+  var aq = d.air_quality || {};
+  var pm1  = aq.pm1  != null ? aq.pm1  : (d.pm1  != null ? d.pm1  : null);
+  var pm25 = aq.pm25 != null ? aq.pm25 : (d.pm25 != null ? d.pm25 : null);
+  var pm10 = aq.pm10 != null ? aq.pm10 : (d.pm10 != null ? d.pm10 : null);
+  var pending = pm25 == null;
+  var dot  = document.getElementById('aq-dot');
+  var pend = document.getElementById('aq-pending');
+  if(pending){
+    if(dot)  { dot.classList.add('pending'); }
+    if(pend) { pend.style.display='flex'; }
+    return;
+  }
+  if(pend) pend.style.display='none';
+  if(dot)  dot.classList.remove('pending');
+  /* PM values */
+  var h = document.getElementById('aq-pm25-hero');
+  if(h) h.textContent = pm25.toFixed(1);
+  var p1 = document.getElementById('aq-pm1');
+  if(p1) p1.textContent = pm1 != null ? pm1.toFixed(1) : '—';
+  var p25 = document.getElementById('aq-pm25');
+  if(p25) p25.textContent = pm25.toFixed(1);
+  var p10 = document.getElementById('aq-pm10');
+  if(p10) p10.textContent = pm10 != null ? pm10.toFixed(1) : '—';
+  /* AQI label + colour */
+  var _tl = (typeof INDEX_TRANSLATIONS !== 'undefined' && typeof _lang !== 'undefined') ? (INDEX_TRANSLATIONS[_lang] || INDEX_TRANSLATIONS['en']) : INDEX_TRANSLATIONS['en'];
+  var lvls = [
+    {max:10,  lbl:_tl.aq_good||'Good',           col:'#4ade80'},
+    {max:20,  lbl:_tl.aq_fair||'Fair',            col:'#facc15'},
+    {max:25,  lbl:_tl.aq_moderate||'Moderate',    col:'#fb923c'},
+    {max:50,  lbl:_tl.aq_poor||'Poor',            col:'#ef4444'},
+    {max:75,  lbl:_tl.aq_very_poor||'Very poor',  col:'#a855f7'},
+    {max:9999,lbl:_tl.aq_hazardous||'Hazardous',  col:'#1e1e2e'}
+  ];
+  var lvl = lvls[lvls.length-1];
+  for(var i=0;i<lvls.length;i++){ if(pm25 <= lvls[i].max){ lvl=lvls[i]; break; } }
+  var badge = document.getElementById('aq-badge');
+  var bdot  = document.getElementById('aq-badge-dot');
+  var blbl  = document.getElementById('aq-badge-lbl');
+  if(bdot) bdot.style.background = lvl.col;
+  if(blbl) blbl.textContent = lvl.lbl;
+  if(badge) badge.style.borderColor = lvl.col+'44';
+  /* needle position — scale 0..75+ → 0..100% (clamped) */
+  var pct = Math.min(100, pm25 / 75 * 100);
+  var needle = document.getElementById('aq-needle');
+  if(needle) needle.style.left = pct.toFixed(1) + '%';
+}
+
+/* ── GIST DATA ── */
+fetch('https://api.github.com/gists/' + GIST_ID)
+  .then(function(r){ return r.json(); })
+  .then(function(gist){
+    /* fetch lisbon_finals.json from stats Gist for accurate daily stats + last detected */
+    fetch('https://api.github.com/gists/' + STATS_GIST_ID)
+      .then(function(r){ return r.json(); })
+      .then(function(sg){
+        var fStats = sg.files && sg.files['lisbon_finals.json'];
+        if(!fStats || !fStats.raw_url) return;
+        return fetch(fStats.raw_url);
+      })
+      .then(function(r){ return r && r.json(); })
+      .then(function(d){
+        if(!d) return;
+        _updateAirQuality(d);
+        window._nextArrivals = d.next_arrivals || [];
+        _renderNextArrival();
+        /* ── nav noise report badge ── */
+        var reports = d.reports || [];
+        if(reports.length){
+          var latest = reports[0];
+          var badgeEl = el('nav-noise-badge');
+          if(badgeEl){
+            var mn = (latest.month_name || '').slice(0,3).toUpperCase();
+            var dbTxt = latest.avg_db != null ? latest.avg_db.toFixed(1)+'dB' : '';
+            badgeEl.textContent = (mn ? mn+' ' : '') + dbTxt;
+          }
+          var genMs = latest.generated_at ? new Date(latest.generated_at).getTime() : 0;
+          var isNew = genMs > 0 && (Date.now() - genMs) < 10*86400000;
+          var dotEl = el('nav-noise-dot');
+          if(dotEl) dotEl.hidden = !isNew;
+        }
+        var s = d.stats || {};
+        /* store monthly rankings for badge */
+        window._monthlyQuietest = (d.monthly && d.monthly.quietest_airline) || s.quietest_airline || '';
+        window._monthlyNoisiest = (d.monthly && d.monthly.noisiest_airline) || s.noisiest_airline || '';
+        _applyRankBadge();
+        if(s.active_today != null){ set('sts-flights', s.active_today); }
+        if(s.departures_today != null){ set('sts-departures', s.departures_today); }
+        if(s.arrivals_today != null){ set('sts-arrivals', s.arrivals_today); }
+        if(s.active_today != null && s.departures_today != null && s.arrivals_today != null){
+          set('sts-diff', Math.max(0, s.active_today - s.departures_today - s.arrivals_today));
+        }
+        if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); }
+        /* ── stats row big numbers ── */
+        var photoCount = s.total_photos || s.photos_published || 0;
+        var postCount  = s.total_posts || 0;
+        // Valeurs brutes mémorisées → reformatées lors d'un changement de langue
+        window._rawStats = { flights: s.total_flights || 0, photos: photoCount, posts: postCount };
+        if(s.total_flights > 0){ set('stat-flights', nfmt(s.total_flights)); }
+        if(photoCount > 0){ set('stat-photos', nfmt(photoCount)); }
+        if(postCount > 0){ set('stat-posts', nfmt(postCount)); }
+        if(s.peak_noise_db > 0){
+          set('stat-peak', s.peak_noise_db.toFixed(1)+' dB');
+          if(s.peak_callsign){ set('stat-peak-sub', s.peak_callsign); }
+        }
+        /* days since May 3 */
+        var startMs = new Date('2026-05-03').getTime();
+        var daysActive = Math.floor((Date.now() - startMs) / 86400000);
+        if(daysActive > 0){ set('stat-days', daysActive); }
+        /* ── live ticker from lisbon_finals.json ── */
+        var tdata = d.ticker;
+        var track = el('ticker-track');
+        if(track && tdata && tdata.length){
+          function mkTick(t){
+            var cs  = t.callsign || '—';
+            var flag= t.flag || '';
+            var al  = t.airline  || '';
+            var ac  = t.aircraft || '';
+            var altFt = t.alt_ft ? Math.round(t.alt_ft) : null;
+            var alt = altFt ? altFt+' ft<span class="ti-unit">/ '+Math.round(altFt*0.3048)+' m</span>' : '—';
+            var spdKt = t.speed_kts ? Math.round(t.speed_kts) : null;
+            var spd = spdKt ? spdKt+' kt<span class="ti-unit">/ '+Math.round(spdKt*1.852)+' km/h</span>' : '—';
+            var db  = t.noise_db ? Math.round(t.noise_db)+' dB' : '—';
+            var ts  = t.timestamp ? (function(){ var d=new Date(t.timestamp); return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
+            /* vibration indicator */
+            var vibHtml = '';
+            var vp = t.vibration_peak != null ? t.vibration_peak : null;
+            if(vp != null){
+              var vlvl = vp>=80?4:vp>=50?3:vp>=20?2:1;
+              var VIB_LABELS={en:['','soft','felt','strong','intense'],pt:['','suave','sentido','forte','intenso'],fr:['','léger','senti','fort','intense']};
+              var VIB_COLORS=['','rgba(74,222,128,.85)','rgba(251,191,36,.85)','rgba(251,146,60,.85)','rgba(248,113,113,.85)'];
+              var vlbl=(VIB_LABELS[_lang]||VIB_LABELS.en)[vlvl];
+              var vcol=VIB_COLORS[vlvl];
+              var vbars='█'.repeat(vlvl)+'<span style="color:rgba(240,237,232,.12)">'+'░'.repeat(4-vlvl)+'</span>';
+              vibHtml='<span class="ti-sep">·</span><span class="ti-vib" style="color:'+vcol+'">'+vbars+' '+vlbl+'</span>';
+            }
+            return '<span class="ticker-item">'+
+              (ts?'<span class="ti-ts">'+ts+'</span><span class="ti-sep">·</span>':'')+
+              (flag?'<span class="ti-flag">'+flag+'</span>':'')+
+              '<span class="ti-cs">'+cs+'</span>'+
+              (al?'<span class="ti-sep">·</span><span class="ti-val">'+al+'</span>':'')+
+              (ac?'<span class="ti-sep">·</span><span class="ti-val ti-ac">'+ac+'</span>':'')+
+              '<span class="ti-sep">·</span><span class="ti-val">'+alt+'</span>'+
+              '<span class="ti-sep">·</span><span class="ti-val">'+spd+'</span>'+
+              '<span class="ti-sep">·</span><span class="ti-db">'+db+'</span>'+
+              vibHtml+
+            '</span>';
+          }
+          var html = tdata.map(mkTick).join('');
+          track.innerHTML = html + html;
+          /* Reset complet de l'animation (pas juste la durée) : sur certains
+             navigateurs, changer animationDuration seul pendant que l'animation
+             tourne déjà (démarrée par le CSS au chargement de la page) reste
+             figé jusqu'à un repaint externe — d'où le besoin de survoler pour
+             que ça "démarre". void offsetWidth force le reflow entre les deux. */
+          track.style.animation = 'none';
+          void track.offsetWidth;
+          track.style.animation = 'tickermove ' + (tdata.length * 4) + 's linear infinite';
+        }
+        /* ── last detected card ── */
+        var ld = d.last_detected;
+        var lc = el('live-card');
+        if(ld && lc){
+          var altStr = ld.altitude_ft ? Math.round(ld.altitude_ft)+' ft / '+Math.round(ld.altitude_ft*0.3048)+' m' : '—';
+          var spdStr = ld.speed_kts   ? Math.round(ld.speed_kts)+' kt / '+Math.round(ld.speed_kts*1.852)+' km/h' : '—';
+          var dbStr  = ld.spl_db      ? ld.spl_db.toFixed(1)+' dB' : '—';
+          var tsStr  = ld.timestamp   ? (function(){ var d=new Date(ld.timestamp); return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); })() : '';
+          lc.innerHTML =
+            '<div class="hlc-top">'+
+              '<div><div class="hlc-callsign">'+(ld.callsign||'—')+'</div>'+
+              '<div class="hlc-airline">'+(ld.airline||'')+(tsStr?' · '+tsStr:'')+'</div></div>'+
+              '<div class="hlc-score"><div class="hlc-score-num">'+(ld.aircraft_type||'—')+'</div><div class="hlc-score-lbl">TYPE</div></div>'+
+            '</div>'+
+            '<div class="hlc-metrics">'+
+              '<div><div class="hlc-m-val">'+altStr+'</div><div class="hlc-m-lbl">Altitude</div></div>'+
+              '<div><div class="hlc-m-val">'+spdStr+'</div><div class="hlc-m-lbl">Speed</div></div>'+
+              '<div><div class="hlc-m-val amber">'+dbStr+'</div><div class="hlc-m-lbl">Noise</div></div>'+
+            '</div>';
+          updateMobileLiveFlight(ld);
+        }
+      }).catch(function(){});
+    var f = gist.files && gist.files['latest.json'];
+    if(!f || !f.raw_url) throw new Error('latest.json absent');
+    return fetch(f.raw_url);
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(recent){
+    if(!Array.isArray(recent) || !recent.length) return;
+
+    /* live card now populated from lisbon_finals.json last_detected (above) */
+
+    /* strip stats come from lisbon_finals.json (fetched above) — no override needed */
+
+    /* ── hero photos ── */
+    _photos = recent.reduce(function(acc, f){
+      var url = getPhotoUrl(f, 1600);
+      if(url) acc.push(url);
+      return acc;
+    }, []);
+    if(_photos.length){
+      _imgA.onload = function(){ this.classList.add('loaded'); };
+      _imgA.src = _photos[0];
+      buildDots();
+      if(_photos.length > 1) setInterval(nextPhoto, 6000);
+    }
+
+    /* ── latest shot ── */
+    var lf = recent[0];
+    var imgUrl = getPhotoUrl(lf, 900);
+    if(imgUrl){ var li=el('ls-img'); if(li){ li.src=imgUrl; li.alt=lf.callsign||''; } }
+    set('ls-callsign', lf.callsign||'—');
+    set('ls-airline',  lf.airline||'—');
+    set('ls-alt',      fAlt(lf)   ? Math.round(fAlt(lf))+' ft / '+Math.round(fAlt(lf)*0.3048)+' m' : '—');
+    set('ls-db',       fNoise(lf) ? Math.round(fNoise(lf))+' dB' : '—');
+    set('ls-speed',    fSpeed(lf) ? Math.round(fSpeed(lf))+' kt / '+Math.round(fSpeed(lf)*1.852)+' km/h' : '—');
+    set('ls-aircraft', lf.aircraft_type||'—');
+    updateMobileLiveFlight({
+      callsign: lf.callsign,
+      airline: lf.airline,
+      aircraft_type: lf.aircraft_type,
+      altitude_ft: fAlt(lf),
+      spl_db: fNoise(lf),
+      timestamp: lf.timestamp || lf.published_at
+    });
+    /* vibration pulse */
+    var vib = lf.vibration_peak != null ? lf.vibration_peak : null;
+    var vibRow = el('ls-vib-row');
+    if (vib != null && vib > 0 && vibRow) {
+      // Échelle 0–150mg → 0–100% (cap à 100)
+      var vibPct = Math.min(100, (vib / 150) * 100);
+      // Seuils : soft <20 / felt 20-60 / strong 60-120 / intense >120
+      var vibLevel, vibColor;
+      if      (vib < 20)  { vibLevel='soft';    vibColor='#4ade80'; }
+      else if (vib < 60)  { vibLevel='felt';    vibColor='#f5a623'; }
+      else if (vib < 120) { vibLevel='strong';  vibColor='#fb923c'; }
+      else                { vibLevel='intense'; vibColor='#f87171'; }
+      var vibBar   = el('ls-vib-bar');
+      var vibVal   = el('ls-vib-val');
+      var vibBadge = el('ls-vib-badge');
+      if (vibBar)   { vibBar.style.width = vibPct + '%'; vibBar.style.background = vibColor; }
+      if (vibVal)   { vibVal.textContent = Math.round(vib) + ' mg'; vibVal.style.color = vibColor; }
+      if (vibBadge) { vibBadge.textContent = vibLevel; vibBadge.className = 'ls-vib-badge ' + vibLevel; }
+      vibRow.style.display = 'block';
+    } else if (vibRow) {
+      vibRow.style.display = 'none';
+    }
+    var sc = lf.score != null ? lf.score : (lf.yolo_score != null ? lf.yolo_score : null);
+    set('ls-score', sc !== null ? parseFloat(sc).toFixed(1) : '—');
+    var tsField = lf.timestamp || lf.published_at;
+    if(tsField){
+      var dt=new Date(tsField);
+      var dateStr = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+      set('ls-badge', dateStr);
+      set('ls-photo-date', dateStr);
+    }
+    /* photo overlay — flag + callsign */
+    var flagEl = el('ls-photo-flag');
+    if(flagEl) flagEl.textContent = lf.airline_flag || '';
+    set('ls-photo-cs', lf.callsign || '—');
+    /* monthly ranking badge — cross-ref with stats */
+    window._lsAirline = lf.airline || '';
+    _applyRankBadge();
+
+    /* ticker now populated from lisbon_finals.json (d.ticker) in stats fetch above */
+
+    /* ── gallery strip (infinite scroll) ── */
+    var strip = el('gallery-strip');
+    if(strip && recent.length > 1){
+      var ghtml=''; var max=Math.min(10,recent.length);
+      for(var i=1;i<max;i++){
+        var g=recent[i];
+        var gUrl=getPhotoUrl(g,700);
+        var gDbVal=fNoise(g)?fNoise(g).toFixed(1)+' dB':'';
+        var gDb=gDbVal?'<span style="color:var(--amber)">'+gDbVal+'</span>':'';
+        var gAc=g.aircraft_type||'';
+        var gReg=g.registration||'';
+        var gFlag=g.airline_flag||'';
+        var gAlt=g.altitude_ft?Math.round(g.altitude_ft)+' ft / '+Math.round(g.altitude_ft*0.3048)+' m':'';
+        var gSpd=fSpeed(g)?Math.round(fSpeed(g))+' kt / '+Math.round(fSpeed(g)*1.852)+' km/h':'';
+        var gDateLine='',gTs='';
+        var tsRaw=g.timestamp||g.published_at;
+        if(tsRaw){
+          var gd=new Date(tsRaw);
+          gDateLine=gd.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+' · '+gd.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+        }
+        var gTechParts=[gAlt,gSpd,gDb].filter(Boolean);
+        var gTech=gTechParts.join(' · ');
+        var gMeta=[g.airline,gAc,gReg].filter(Boolean).join(' · ');
+        ghtml+='<div class="gallery-card">'+
+          (gUrl?'<img src="'+gUrl+'" alt="'+(g.callsign||'')+'" loading="lazy">':'')+
+          '<div class="gallery-card-overlay"></div>'+
+          '<div class="gallery-card-info">'+
+            '<div class="gc-callsign">'+(gFlag?'<span class="gc-flag">'+gFlag+'</span>':'')+
+              (g.callsign||'—')+'</div>'+
+            (gMeta?'<div class="gc-airline">'+gMeta+'</div>':'')+
+            (gDateLine?'<div class="gc-date-line">'+gDateLine+'</div>':'')+
+            (gTech?'<div class="gc-tech">'+gTech+'</div>':'')+
+          '</div></div>';
+      }
+      /* infinite scroll: duplicate cards for seamless loop */
+      strip.innerHTML='<div class="gallery-track">'+ghtml+ghtml+'</div>';
+    }
+  })
+  .catch(function(e){ console.warn('Gist error',e); });
+
+/* ── WEATHER ── */
+var WTTR_ICON={113:'☀️',116:'⛅',119:'☁️',122:'☁️',143:'🌫',176:'🌦',179:'🌨',
+  182:'🌧',185:'🌧',200:'⛈',227:'🌨',230:'❄️',248:'🌫',260:'🌫',263:'🌦',266:'🌧',
+  281:'🌧',284:'🌧',293:'🌦',296:'🌧',299:'🌧',302:'🌧',305:'🌧',308:'🌧',311:'🌧',
+  314:'🌧',317:'🌨',320:'🌨',323:'🌨',326:'🌨',329:'❄️',332:'❄️',335:'❄️',338:'❄️',
+  350:'🌧',353:'🌦',356:'🌧',359:'🌧',362:'🌨',365:'🌨',368:'🌨',371:'❄️',374:'🌨',
+  377:'🌨',386:'⛈',389:'⛈',392:'⛈',395:'❄️'};
+fetch('https://wttr.in/38.7749,-9.1397?format=j1')
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    var c=d.current_condition&&d.current_condition[0]; if(!c) return;
+    var temp=parseInt(c.temp_C),wind=parseInt(c.windspeedKmph),dir=parseInt(c.winddirDegree);
+    var vis=parseInt(c.visibility),code=parseInt(c.weatherCode)||0;
+    var desc=(c.weatherDesc&&c.weatherDesc[0]&&c.weatherDesc[0].value)||'';
+    var card=cardinal(dir),rwy=calcRunway(dir,wind),kt=Math.round(wind*.539957);
+    var ts=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    set('rs-wind',  kt+' kt');
+    set('rs-dir',   dir+'° '+card);
+    set('rs-temp',  temp+' °C');
+    set('rs-vis',   vis+' km');
+    set('rs-runway',rwy.rwy);
+    set('rs-updated','LPPT · '+ts);
+    set('wc-temp',  temp+'°C');
+    set('wc-cond',  desc);
+    set('wc-wind',  kt+' kt');
+    set('wc-wdir',  dir+'° '+card);
+    set('wc-runway','RWY '+rwy.rwy);
+    set('wc-rwyconf',rwy.conf);
+    set('wc-wdir-deg', dir+'°');
+    set('wc-wdir-card', card);
+    set('wc-vis',   vis);
+    set('wc-time',  ts);
+    var ico=el('wc-icon'); if(ico) ico.textContent=WTTR_ICON[code]||'🌤';
+    /* activate correct runway card */
+    var c03=el('rwy-card-03'), c21=el('rwy-card-21');
+    if(c03&&c21){ c03.classList.toggle('active',rwy.rwy==='03'); c21.classList.toggle('active',rwy.rwy==='21'); }
+  })
+  .catch(function(){});
+
+/* ── FOOTER MATRIX ── */
+(function(){
+  var el2=document.getElementById('footer-matrix'); if(!el2) return;
+  var lines=[
+    "This is an independent volunteer project — no ads, no funding,",
+    "just a Raspberry Pi and a passion for aviation.",
+    "If you enjoy the data, the photos or the reels,",
+    "every coffee helps keep the station running."
+  ];
+  var finalText=lines.join('\n');
+  var chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
+  var frame=0;
+  function randChar(){ return chars[Math.floor(Math.random()*chars.length)]; }
+  function tick(){
+    var progress=frame/2.2,html='';
+    for(var i=0;i<finalText.length;i++){
+      var ch=finalText[i];
+      if(ch==='\n'){html+='<br>';continue;}
+      if(i<=progress) html+='<span style="color:#00ff66">'+ch+'</span>';
+      else if(i<=progress+8) html+='<span style="color:#00aa44;opacity:.6">'+randChar()+'</span>';
+      else html+='<span style="opacity:0">'+ch+'</span>';
+    }
+    el2.innerHTML=html; frame++;
+    if(frame<finalText.length*2.5) requestAnimationFrame(tick);
+  }
+  var obs=new IntersectionObserver(function(ents){
+    if(ents[0].isIntersecting){obs.disconnect();setTimeout(function(){requestAnimationFrame(tick);},200);}
+  },{threshold:.3});
+  obs.observe(el2);
+})();
+
+// ── LANG TOGGLE ──
+var INDEX_TRANSLATIONS = {
+  en: {
+    hero_pill: 'Tracking live · LPPT approach path',
+    hero_sub: "A real terrace station under Lisbon Airport's approach path. It photographs each passing aircraft, measures noise and vibration, then publishes the best captures without human input.",
+    proof_where_k: 'Where',
+    proof_where_v: '2.6 km from RWY 03',
+    proof_measures_k: 'Measures',
+    proof_measures_v: 'Photo · dB · vibration',
+    proof_mode_k: 'Mode',
+    proof_mode_v: 'Autonomous · 24/7',
+    mobile_live_label: 'Latest aircraft',
+    position_kicker: 'Project stance',
+    position_title: 'Not anti-aviation.<br><em>Pro-measurement.</em>',
+    position_copy: 'Lisbon Finals is an independent terrace station under the LPPT approach path. It observes aircraft passages, noise peaks, vibration pulses and air-quality signals from one fixed point. The point is not to dramatize the sky. It is to make the invisible parts of it visible.',
+    position_p1_k: 'This is',
+    position_p1_v: 'Independent observation, logged locally.',
+    position_p2_k: 'This is not',
+    position_p2_v: 'Official airport data or a complaint platform.',
+    position_p3_k: 'Use',
+    position_p3_v: 'Local evidence for curious residents and aviation people.',
+    start_kicker: 'Start here',
+    start_title: 'New to Lisbon Finals?<br><em>Follow the signal.</em>',
+    start_copy: 'The fastest way in: see what the station is catching now, understand how the measurements work, then read the reports and field notes behind the numbers.',
+    start_s1_t: 'Watch the station live',
+    start_s1_d: 'Latest capture, sound peak, vibration pulse and today’s observed traffic.',
+    start_s1_a: 'Jump to live',
+    start_s2_t: 'Understand the measurements',
+    start_s2_d: 'How flight telemetry, dB peaks and local sensor readings become public data.',
+    start_s2_a: 'Open data',
+    start_s3_t: 'Read the monthly signal',
+    start_s3_d: 'Noise reports, night operations, outliers and the limits of the current station.',
+    start_s3_a: 'View reports',
+    cta_data: 'Explore the data',
+    hlc_eyebrow: 'Latest detected',
+    stat_flights_lbl: 'Flights tracked',
+    stat_flights_sub: 'since May 3, 2026',
+    stat_photos_lbl: 'Photos captured',
+    stat_photos_sub: 'published · zero human',
+    stat_peak_lbl: 'Peak noise recorded',
+    stat_days_lbl: 'Days running',
+    stat_days_sub: 'autonomous · 24/7',
+    na_label: 'Next expected', na_in: 'in', na_min: 'min', na_now: 'landing now', na_from: 'from',
+    sec_eyebrow: 'Latest captures',
+    sec_title: 'Live<em>from the terrace</em>',
+    ls_eyebrow: 'Latest shot',
+    ls_badge: 'Latest published',
+    ls_alt_lbl: 'Altitude',
+    ls_noise_lbl: 'Peak noise',
+    ls_speed_lbl: 'Ground speed',
+    ls_aircraft_lbl: 'Aircraft type',
+    ls_score_lbl: 'YOLO Score',
+    ls_published: 'Published to @lisbon.finals',
+    ls_ig_link: 'View on Instagram',
+    ls_vib_lbl: 'Vibration peak',
+    ss_photo: 'Photo — YOLO scored by AI',
+    ss_db: 'Sound — peak in dB',
+    ss_vib: 'Vibration — MPU-6050 accelerometer',
+    section_body: 'Each detected aircraft triggers the full pipeline. A YOLO-trained model evaluates every frame and scores the photo from 1 to 5 — only the best make it to Instagram, without any human input. Two sensors capture what the eye can\'t see: an ADS1115 circuit measures the peak decibel level as the aircraft passes, and an MPU-6050 accelerometer records the vibration pulse transmitted through the building structure. One plane. Three data points.',
+    sts_eyebrow: "Today's traffic · 00:00–23:59",
+    sts_flights_lbl: 'Flights today',
+    sts_departures_lbl: 'Departures today',
+    sts_arrivals_lbl: 'Arrivals today',
+    sts_diff_lbl: 'Unclassified',
+    ticker_lbl: 'Live Feed',
+    wx_eyebrow: 'Atmospheric conditions',
+    wx_title: 'The wind<br><em>decides everything.</em>',
+    wx_body: "LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 03, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 21, climbing towards the SSW, crossing the terrace before reaching the Tejo.",
+    rwy03_title: 'North wind — landing over the terrace ✶',
+    rwy03_desc: 'Planes approach from the south and land over my terrace. Close, slow, full-frame — most impactful shots.',
+    rwy21_title: 'South wind — takeoff over the terrace',
+    rwy21_desc: 'Planes take off and climb over my terrace heading north. Higher, faster — less impactful shots.',
+    wlive_source: 'LPPT · Live weather',
+    wlive_wind: 'Wind',
+    wlive_runway: 'Active runway',
+    wlive_wdir: 'Wind direction',
+    wlive_vis: 'Visibility',
+    ec1_lbl: 'The data',
+    ec1_title: 'Flight &amp; noise<br><em>intelligence</em>',
+    ec1_desc: 'Every flight tracked. Every decibel measured. Live ticker, ANAC warning zone, and full acoustic history.',
+    ec1_arrow: '→ Explore data',
+    ec2_lbl: "Captain’s Log",
+    ec2_title: 'The station<br><em>journal</em>',
+    ec2_desc: 'Operational notes, unusual events, maintenance logs, and observations from the terrace.',
+    ec2_arrow: '→ Read the log',
+    ec3_lbl: 'The project',
+    ec3_title: 'A personal<br><em>experiment</em>',
+    ec3_desc: 'RTL-SDR, YOLO, Real-ESRGAN, Raspberry Pi — how one autonomous station works end-to-end.',
+    ec3_arrow: '→ How it works',
+    footer_desc: 'An autonomous aircraft spotting and acoustic monitoring system operating 24/7 from a residential terrace in Lisbon, directly under the final approach path to LPPT.',
+    footer_proj: 'Project',
+    footer_connect: 'Connect',
+    footer_support: 'Support the project',
+    hero_w1: 'Every', hero_w2: 'plane.', hero_w3: 'Every ', hero_w4: 'And so much more.',
+    stats_disclaimer: 'Depending on wind direction, this station captures either landing approaches or takeoffs — whichever phase passes over the terrace. One phase at a time. These figures reflect observed traffic, not total airport volume.',
+    footer_copy: '© 2026 Lisbon Finals · Automated Aviation Intelligence · LPPT',
+    aq_eyebrow: 'Outdoor monitoring',
+    aq_title: 'Air quality<br><em>at the terrace.</em>',
+    aq_body: 'Every aircraft that passes over this terrace burns Jet A-1 fuel — releasing ultrafine particles directly into the approach corridor. The PMS5003 laser particle counter measures PM1.0, PM2.5 and PM10 in real time, correlating each reading with the passing flight. A concrete answer to a question nobody else is asking here.',
+    aq_thresh: ['Good · 0–10 µg/m³','Fair · 10–20 µg/m³','Moderate · 20–25 µg/m³','Poor · 25–50 µg/m³','Very poor · >50 µg/m³'],
+    aq_source: 'PMS5003 · Outdoor station',
+    aq_hero_lbl: 'PM2.5 — Fine particles',
+    aq_sensor_pending: 'Sensor pending',
+    aq_pending_txt: 'Sensor coming online — PMS5003 installation in progress',
+    aq_footer: 'Source: PMS5003 · LPPT approach corridor · Lisbon, Portugal',
+    aq_good: 'Good', aq_fair: 'Fair', aq_moderate: 'Moderate', aq_poor: 'Poor', aq_very_poor: 'Very poor', aq_hazardous: 'Hazardous',
+  },
+  pt: {
+    hero_pill: 'Em directo · Rota de aproximação LPPT',
+    hero_w1: 'Cada', hero_w2: 'avião.', hero_w3: 'Cada ', hero_w4: 'E muito mais.',
+    hero_sub: 'Uma estação independente numa varanda sob a aproximação ao LPPT. Observa aeronaves, ruído, vibração e sinais de qualidade do ar — e publica as melhores capturas sem intervenção humana.',
+    proof_where_k: 'Onde',
+    proof_where_v: '2,6 km da RWY 03',
+    proof_measures_k: 'Mede',
+    proof_measures_v: 'Foto · dB · vibração',
+    proof_mode_k: 'Modo',
+    proof_mode_v: 'Autónomo · 24/7',
+    mobile_live_label: 'Última aeronave',
+    position_kicker: 'Posição do projeto',
+    position_title: 'Não é anti-aviação.<br><em>É pró-medição.</em>',
+    position_copy: 'Lisbon Finals é uma estação independente numa varanda sob a aproximação ao LPPT. Observa passagens de aeronaves, picos de ruído, pulsos de vibração e sinais de qualidade do ar a partir de um ponto fixo. O objetivo não é dramatizar o céu. É tornar visível a parte invisível dele.',
+    position_p1_k: 'O que é',
+    position_p1_v: 'Observação independente, registada localmente.',
+    position_p2_k: 'O que não é',
+    position_p2_v: 'Dados oficiais do aeroporto ou plataforma de queixas.',
+    position_p3_k: 'Utilidade',
+    position_p3_v: 'Evidência local para residentes curiosos e pessoas da aviação.',
+    start_kicker: 'Começar aqui',
+    start_title: 'Novo no Lisbon Finals?<br><em>Segue o sinal.</em>',
+    start_copy: 'A entrada mais rápida: veja o que a estação está a captar agora, compreenda como as medições funcionam e leia os relatórios e notas por trás dos números.',
+    start_s1_t: 'Ver a estação em directo',
+    start_s1_d: 'Última captura, pico sonoro, pulso de vibração e tráfego observado hoje.',
+    start_s1_a: 'Ir para o live',
+    start_s2_t: 'Compreender as medições',
+    start_s2_d: 'Como telemetria de voo, picos em dB e sensores locais se tornam dados públicos.',
+    start_s2_a: 'Abrir dados',
+    start_s3_t: 'Ler o sinal mensal',
+    start_s3_d: 'Relatórios de ruído, operações noturnas, anomalias e limites da estação atual.',
+    start_s3_a: 'Ver relatórios',
+    cta_data: 'Explorar os dados',
+    hlc_eyebrow: 'Último detectado',
+    stat_flights_lbl: 'Voos registados',
+    stat_flights_sub: 'desde 3 de Maio de 2026',
+    stat_photos_lbl: 'Fotos capturadas',
+    stat_photos_sub: 'publicadas · zero humano',
+    stat_peak_lbl: 'Pico de ruído registado',
+    stat_days_lbl: 'Dias em funcionamento',
+    stat_days_sub: 'autónomo · 24/7',
+    na_label: 'Próxima chegada', na_in: 'em', na_min: 'min', na_now: 'a aterrar', na_from: 'de',
+    sec_eyebrow: 'Últimas capturas',
+    sec_title: 'Em directo<em>da varanda</em>',
+    ls_eyebrow: 'Última foto',
+    ls_badge: 'Última publicação',
+    ls_alt_lbl: 'Altitude',
+    ls_noise_lbl: 'Pico de ruído',
+    ls_speed_lbl: 'Velocidade solo',
+    ls_aircraft_lbl: 'Tipo de aeronave',
+    ls_score_lbl: 'YOLO Score',
+    ls_published: 'Publicado em @lisbon.finals',
+    ls_ig_link: 'Ver no Instagram',
+    ls_vib_lbl: 'Pico de vibração',
+    ss_photo: 'Foto — avaliada por IA',
+    ss_db: 'Som — pico em dB',
+    ss_vib: 'Vibração — acelerómetro MPU-6050',
+    section_body: 'Cada aeronave detectada desencadeia o pipeline completo. Um modelo treinado em YOLO avalia cada fotograma e atribui uma pontuação de 1 a 5 — só as melhores chegam ao Instagram, sem qualquer intervenção humana. Dois sensores capturam o que o olho não vê: um circuito ADS1115 mede o pico de decibéis no momento da passagem, e um acelerómetro MPU-6050 regista o pulso de vibração transmitido pela estrutura do edifício. Um avião. Três dados.',
+    sts_eyebrow: 'Tráfego de hoje · 00:00–23:59',
+    sts_flights_lbl: 'Voos hoje',
+    sts_departures_lbl: 'Descolagens hoje',
+    sts_arrivals_lbl: 'Aterragens hoje',
+    sts_diff_lbl: 'Não classificados',
+    ticker_lbl: 'Feed em directo',
+    wx_eyebrow: 'Condições atmosféricas',
+    wx_title: 'O vento<br><em>decide tudo.</em>',
+    wx_body: 'A pista do LPPT corre de SSW a NNE. O vento decide o sentido do tráfego. Com vento norte, as aeronaves aproximam-se pelo sul — descendo sobre o Tejo e o centro da cidade antes de aterrar na RWY 03, passando directamente sobre a minha varanda. Com vento sul, descolam pela RWY 21, subindo para SSW e cruzando a varanda antes de atingirem o Tejo.',
+    rwy03_title: 'Vento norte — aterragem sobre a varanda ✶',
+    rwy03_desc: 'Os aviões aproximam-se pelo sul e aterram sobre a minha varanda. Perto, lentos, em plano completo — os melhores disparos.',
+    rwy21_title: 'Vento sul — descolagem sobre a varanda',
+    rwy21_desc: 'Os aviões descolam e sobem sobre a minha varanda em direcção a norte. Mais alto, mais rápido — disparos menos impactantes.',
+    wlive_source: 'LPPT · Tempo em directo',
+    wlive_wind: 'Vento',
+    wlive_runway: 'Pista activa',
+    wlive_wdir: 'Direcção do vento',
+    wlive_vis: 'Visibilidade',
+    ec1_lbl: 'Os dados',
+    ec1_title: 'Inteligência de voo<br><em>e ruído</em>',
+    ec1_desc: 'Cada voo registado. Cada decibel medido. Contador em direto, zona de alerta ANAC e histórico acústico completo.',
+    ec1_arrow: '→ Explorar dados',
+    ec2_lbl: 'Diário de Bordo',
+    ec2_title: 'O diário<br><em>da estação</em>',
+    ec2_desc: 'Notas operacionais, eventos incomuns, registos de manutenção e observações da varanda.',
+    ec2_arrow: '→ Ler o diário',
+    ec3_lbl: 'O projeto',
+    ec3_title: 'Uma experiência<br><em>pessoal</em>',
+    ec3_desc: 'RTL-SDR, YOLO, Real-ESRGAN, Raspberry Pi — como uma estação autónoma funciona de ponta a ponta.',
+    ec3_arrow: '→ Como funciona',
+    footer_desc: 'Um sistema autónomo de observação de aeronaves e monitorização acústica em funcionamento 24/7 a partir de uma varanda residencial em Lisboa, directamente sob a rota de aproximação final ao LPPT.',
+    footer_proj: 'Projecto',
+    footer_connect: 'Contacto',
+    footer_support: 'Apoiar o projeto',
+    stats_disclaimer: 'Dependendo da direção do vento, esta estação capta aproximações ou descolagens — a fase que passa sobre a varanda. Uma fase de cada vez. Estes valores refletem o tráfego observado, não o volume total do aeroporto.',
+    footer_copy: '© 2026 Lisbon Finals · Inteligência de Aviação Autónoma · LPPT',
+    aq_eyebrow: 'Monitorização exterior',
+    aq_title: 'Qualidade do ar<br><em>na varanda.</em>',
+    aq_body: 'Cada aeronave que passa sobre esta varanda queima combustível Jet A-1 — libertando partículas ultrafinas directamente no corredor de aproximação. O contador de partículas laser PMS5003 mede PM1.0, PM2.5 e PM10 em tempo real, correlacionando cada leitura com o voo que passa. Uma resposta concreta a uma pergunta que mais ninguém faz aqui.',
+    aq_thresh: ['Bom · 0–10 µg/m³','Razoável · 10–20 µg/m³','Moderado · 20–25 µg/m³','Mau · 25–50 µg/m³','Muito mau · >50 µg/m³'],
+    aq_source: 'PMS5003 · Estação exterior',
+    aq_hero_lbl: 'PM2.5 — Partículas finas',
+    aq_sensor_pending: 'Sensor pendente',
+    aq_pending_txt: 'Sensor a iniciar — instalação PMS5003 em curso',
+    aq_footer: 'Fonte: PMS5003 · Corredor de aproximação LPPT · Lisboa, Portugal',
+    aq_good: 'Bom', aq_fair: 'Razoável', aq_moderate: 'Moderado', aq_poor: 'Mau', aq_very_poor: 'Muito mau', aq_hazardous: 'Perigoso',
+  },
+  fr: {
+    hero_pill: 'En direct · Trajectoire d\'approche LPPT',
+    hero_w1: 'Chaque', hero_w2: 'avion.', hero_w3: 'Chaque ', hero_w4: 'Et bien plus encore.',
+    hero_sub: 'Une station indépendante installée sur une terrasse sous l’approche LPPT. Elle observe les avions, le bruit, les vibrations et la qualité de l’air — puis publie les meilleures captures sans intervention humaine.',
+    proof_where_k: 'Lieu',
+    proof_where_v: '2,6 km de la RWY 03',
+    proof_measures_k: 'Mesures',
+    proof_measures_v: 'Photo · dB · vibration',
+    proof_mode_k: 'Mode',
+    proof_mode_v: 'Autonome · 24/7',
+    mobile_live_label: 'Dernier avion',
+    position_kicker: 'Position du projet',
+    position_title: 'Pas anti-aviation.<br><em>Pro-mesure.</em>',
+    position_copy: 'Lisbon Finals est une station de terrasse indépendante sous l’approche LPPT. Elle observe les passages d’avions, les pics sonores, les vibrations et la qualité de l’air depuis un point fixe. Le but n’est pas de dramatiser le ciel. C’est de rendre visible sa part invisible.',
+    position_p1_k: 'Ce que c’est',
+    position_p1_v: 'Une observation indépendante, relevée localement.',
+    position_p2_k: 'Ce que ce n’est pas',
+    position_p2_v: 'Des données officielles d’aéroport ou une plateforme de plainte.',
+    position_p3_k: 'Usage',
+    position_p3_v: 'Une preuve locale pour riverains curieux et passionnés d’aviation.',
+    start_kicker: 'Commencer ici',
+    start_title: 'Nouveau sur Lisbon Finals ?<br><em>Suis le signal.</em>',
+    start_copy: 'Le parcours le plus direct : voir ce que la station capte maintenant, comprendre comment fonctionnent les mesures, puis lire les rapports et les notes qui éclairent les chiffres.',
+    start_s1_t: 'Voir la station en direct',
+    start_s1_d: 'Dernière capture, pic sonore, vibration et trafic observé aujourd’hui.',
+    start_s1_a: 'Aller au live',
+    start_s2_t: 'Comprendre les mesures',
+    start_s2_d: 'Comment télémétrie, pics dB et capteurs locaux deviennent des données publiques.',
+    start_s2_a: 'Ouvrir les données',
+    start_s3_t: 'Lire le signal mensuel',
+    start_s3_d: 'Rapports bruit, opérations nocturnes, anomalies et limites de la station actuelle.',
+    start_s3_a: 'Voir les rapports',
+    cta_data: 'Explorer les données',
+    hlc_eyebrow: 'Dernier détecté',
+    stat_flights_lbl: 'Vols enregistrés',
+    stat_flights_sub: 'depuis le 3 mai 2026',
+    stat_photos_lbl: 'Photos capturées',
+    stat_photos_sub: 'publiées · zéro humain',
+    stat_peak_lbl: 'Pic sonore enregistré',
+    stat_days_lbl: 'Jours en service',
+    stat_days_sub: 'autonome · 24/7',
+    na_label: 'Prochaine arrivée', na_in: 'dans', na_min: 'min', na_now: 'à l’atterrissage', na_from: 'de',
+    sec_eyebrow: 'Dernières captures',
+    sec_title: 'En direct<em>depuis la terrasse</em>',
+    ls_eyebrow: 'Dernière photo',
+    ls_badge: 'Dernière publication',
+    ls_alt_lbl: 'Altitude',
+    ls_noise_lbl: 'Pic sonore',
+    ls_speed_lbl: 'Vitesse sol',
+    ls_aircraft_lbl: 'Type d\'appareil',
+    ls_score_lbl: 'Score YOLO',
+    ls_published: 'Publié sur @lisbon.finals',
+    ls_ig_link: 'Voir sur Instagram',
+    ls_vib_lbl: 'Pic de vibration',
+    ss_photo: 'Photo — scorée par IA',
+    ss_db: 'Son — pic en dB',
+    ss_vib: 'Vibration — accéléromètre MPU-6050',
+    section_body: 'Chaque aéronef détecté déclenche le pipeline complet. Un modèle entraîné sur YOLO évalue chaque image et attribue un score de 1 à 5 — seules les meilleures atteignent Instagram, sans aucune intervention humaine. Deux capteurs saisissent ce que l\'œil ne voit pas : un circuit ADS1115 mesure le pic en décibels au passage de l\'appareil, et un accéléromètre MPU-6050 enregistre le pulse de vibration transmis par la structure du bâtiment. Un avion. Trois données.',
+    sts_eyebrow: 'Trafic du jour · 00:00–23:59',
+    sts_flights_lbl: 'Vols aujourd\'hui',
+    sts_departures_lbl: 'Décollages aujourd\'hui',
+    sts_arrivals_lbl: 'Atterrissages aujourd\'hui',
+    sts_diff_lbl: 'Non classifiés',
+    ticker_lbl: 'Flux en direct',
+    wx_eyebrow: 'Conditions atmosphériques',
+    wx_title: 'Le vent<br><em>décide de tout.</em>',
+    wx_body: 'La piste de LPPT s\'étend du SSW au NNE. Le vent décide du sens du trafic. Par vent du nord, les aéronefs approchent par le sud — descendant sur le Tage et le centre-ville avant d\'atterrir sur la RWY 03, passant directement au-dessus de ma terrasse. Par vent du sud, ils décollent sur la RWY 21, montant vers le SSW et survolant la terrasse avant d\'atteindre le Tage.',
+    rwy03_title: 'Vent du nord — atterrissage au-dessus de la terrasse ✶',
+    rwy03_desc: 'Les avions approchent par le sud et atterrissent au-dessus de ma terrasse. Proches, lents, en plan complet — les meilleurs clichés.',
+    rwy21_title: 'Vent du sud — décollage au-dessus de la terrasse',
+    rwy21_desc: 'Les avions décollent et montent au-dessus de ma terrasse en direction du nord. Plus haut, plus rapide — clichés moins impactants.',
+    wlive_source: 'LPPT · Météo en direct',
+    wlive_wind: 'Vent',
+    wlive_runway: 'Piste active',
+    wlive_wdir: 'Direction du vent',
+    wlive_vis: 'Visibilité',
+    ec1_lbl: 'Les données',
+    ec1_title: 'Intelligence de vol<br><em>et acoustique</em>',
+    ec1_desc: 'Chaque vol enregistré. Chaque décibel mesuré. Ticker live, zone d\'alerte ANAC et historique acoustique complet.',
+    ec1_arrow: '→ Explorer les données',
+    ec2_lbl: 'Journal de bord',
+    ec2_title: 'Le journal<br><em>de la station</em>',
+    ec2_desc: 'Notes opérationnelles, événements inhabituels, registres de maintenance et observations depuis la terrasse.',
+    ec2_arrow: '→ Lire le journal',
+    ec3_lbl: 'Le projet',
+    ec3_title: 'Une expérience<br><em>personnelle</em>',
+    ec3_desc: 'RTL-SDR, YOLO, Real-ESRGAN, Raspberry Pi — comment une station autonome fonctionne de bout en bout.',
+    ec3_arrow: '→ Comment ça marche',
+    footer_desc: 'Un système autonome d\'observation d\'aéronefs et de surveillance acoustique opérant 24/7 depuis une terrasse résidentielle à Lisbonne, directement sous la trajectoire d\'approche finale de LPPT.',
+    footer_proj: 'Projet',
+    footer_connect: 'Contact',
+    footer_support: 'Soutenir le projet',
+    stats_disclaimer: 'Selon la direction du vent, cette station capte les approches ou les décollages — la phase qui survole la terrasse. Une seule phase à la fois. Ces chiffres reflètent le trafic observé, pas le volume total de l\'aéroport.',
+    footer_copy: '© 2026 Lisbon Finals · Intelligence Aviation Autonome · LPPT',
+    aq_eyebrow: 'Surveillance extérieure',
+    aq_title: 'Qualité de l\'air<br><em>sur la terrasse.</em>',
+    aq_body: 'Chaque aéronef qui passe au-dessus de cette terrasse brûle du carburant Jet A-1 — libérant des particules ultrafines directement dans le couloir d\'approche. Le compteur de particules laser PMS5003 mesure PM1.0, PM2.5 et PM10 en temps réel, corrélant chaque lecture avec le vol en cours. Une réponse concrète à une question que personne d\'autre ne pose ici.',
+    aq_thresh: ['Bon · 0–10 µg/m³','Correct · 10–20 µg/m³','Modéré · 20–25 µg/m³','Mauvais · 25–50 µg/m³','Très mauvais · >50 µg/m³'],
+    aq_source: 'PMS5003 · Station extérieure',
+    aq_hero_lbl: 'PM2.5 — Particules fines',
+    aq_sensor_pending: 'Capteur en attente',
+    aq_pending_txt: 'Capteur en cours d\'initialisation — installation PMS5003 en cours',
+    aq_footer: 'Source : PMS5003 · Couloir d\'approche LPPT · Lisbonne, Portugal',
+    aq_good: 'Bon', aq_fair: 'Correct', aq_moderate: 'Modéré', aq_poor: 'Mauvais', aq_very_poor: 'Très mauvais', aq_hazardous: 'Dangereux',
+  }
+};
+
+var _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
+
+// Formatage des nombres selon la langue active : 10,715 (en) · 10 715 (pt/fr)
+var _NUM_LOCALE = { en: 'en-US', pt: 'pt-PT', fr: 'fr-FR' };
+function nfmt(n) {
+  try { return Number(n).toLocaleString(_NUM_LOCALE[_lang] || 'en-US'); }
+  catch (e) { return '' + n; }
+}
+
+// ── Next expected arrival (depuis le planning LPPT exporté dans le gist) ──
+function _lisbonNowMin() {
+  var s = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Lisbon', hour: '2-digit', minute: '2-digit', hour12: false });
+  var p = s.split(':'); return (parseInt(p[0], 10) || 0) * 60 + (parseInt(p[1], 10) || 0);
+}
+function _naDelta(a) {
+  var p = (a.eta || '').split(':');
+  if (p.length !== 2) return a.eta_in_min;
+  var d = (parseInt(p[0], 10) * 60 + parseInt(p[1], 10)) - _lisbonNowMin();
+  if (d < -90) d += 1440;   // wrap minuit
+  return d;
+}
+function _renderNextArrival() {
+  var wrap = document.getElementById('next-arrival');
+  if (!wrap) return;
+  var list = window._nextArrivals || [];
+  var a = null, delta = 0;
+  for (var i = 0; i < list.length; i++) {           // 1ère arrivée pas encore passée (>5 min de retard → suivante)
+    var d = _naDelta(list[i]); if (d >= -5) { a = list[i]; delta = d; break; }
+  }
+  if (!a) { wrap.style.display = 'none'; return; }
+  var t = (typeof INDEX_TRANSLATIONS !== 'undefined' && INDEX_TRANSLATIONS[_lang]) ? INDEX_TRANSLATIONS[_lang] : {};
+  var inTxt;
+  if (delta <= 0)      inTxt = (t.na_now || 'landing now');
+  else if (delta < 90) inTxt = (t.na_in || 'in') + ' ~' + delta + ' ' + (t.na_min || 'min');
+  else                 inTxt = (t.na_in || 'in') + ' ~' + Math.round(delta / 60) + ' h';
+  var airline = (a.airline || '').replace(/\s*\(.*?\)\s*/g, '').trim();
+  var origin = a.origin_city || a.origin_iata || '';
+  var parts = [a.callsign];
+  if (airline) parts.push(airline);
+  if (origin) parts.push((t.na_from || 'from') + ' ' + origin);
+  parts.push(a.eta + ' (' + inTxt + ')');
+  var lbl = document.getElementById('next-arr-lbl'); if (lbl) lbl.textContent = t.na_label || 'Next expected';
+  var body = document.getElementById('next-arr-body'); if (body) body.textContent = parts.join(' · ');
+  wrap.style.display = '';
+}
+setInterval(_renderNextArrival, 30000);
+
+function applyLang(lang) {
+  if (!INDEX_TRANSLATIONS[lang]) return;
+  _lang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
+  localStorage.setItem('lf_lang', lang);
+  var t = INDEX_TRANSLATIONS[lang];
+  // Update 3-button switcher
+  ['en','pt','fr'].forEach(function(l) {
+    var b = document.getElementById('lang-' + l);
+    if (b) b.classList.toggle('active', l === lang);
+  });
+
+  // Reformater les grands nombres dans la langue choisie (10,715 ↔ 10 715)
+  if (window._rawStats) {
+    var _rf = function(id, v){ var e = document.getElementById(id); if (e && v) e.textContent = nfmt(v); };
+    _rf('stat-flights', window._rawStats.flights);
+    _rf('stat-photos',  window._rawStats.photos);
+    _rf('stat-posts',   window._rawStats.posts);
+  }
+
+  function q(s) { return document.querySelector(s); }
+  function qa(s) { return document.querySelectorAll(s); }
+  function el(id) { return document.getElementById(id); }
+
+  // Hero pill
+  var pill = q('.hero-live-pill');
+  if (pill) { var dot = pill.querySelector('.hero-live-dot'); pill.innerHTML = ''; if (dot) pill.appendChild(dot); pill.appendChild(document.createTextNode(' ' + t.hero_pill)); }
+  // Hero title — target text nodes directly, never touch the HTML structure
+  var ht = q('.hero-title');
+  if (ht) {
+    var lines = ht.querySelectorAll('.line');
+    if (lines[0]) {
+      // line 1 : "Every plane." → first text node + amber span
+      var tn1 = lines[0].firstChild;
+      if (tn1 && tn1.nodeType === 3) tn1.textContent = t.hero_w1 + ' ';
+      var amb = lines[0].querySelector('span');
+      if (amb) amb.textContent = t.hero_w2;
+    }
+    if (lines[1]) {
+      // line 2 : first em ("Every ") + second em "decibel." (unchanged) + third em "And so much more."
+      var ems = lines[1].querySelectorAll('em');
+      if (ems[0]) ems[0].textContent = t.hero_w3;
+      if (ems[2]) ems[2].textContent = t.hero_w4;
+    }
+  }
+  // Hero sub
+  var sub = q('.hero-sub'); if (sub) sub.textContent = t.hero_sub;
+  // CTA
+  var cta = q('.btn-primary'); if (cta) cta.textContent = t.cta_data;
+  // HLC eyebrow
+  var hlc = q('.hlc-eyebrow'); if (hlc) hlc.textContent = t.hlc_eyebrow;
+  // Stats labels
+  var statLbls = qa('.stats-row .stat-lbl');
+  if (statLbls[0]) statLbls[0].textContent = t.stat_flights_lbl;
+  if (statLbls[1]) statLbls[1].textContent = t.stat_photos_lbl;
+  if (statLbls[2]) statLbls[2].textContent = t.stat_peak_lbl;
+  if (statLbls[3]) statLbls[3].textContent = t.stat_days_lbl;
+  // Stats subs (skip index 2 — dynamic peak sub)
+  var statSubs = qa('.stats-row .stat-sub');
+  if (statSubs[0]) statSubs[0].textContent = t.stat_flights_sub;
+  // index 1 : ne pas écraser (contient le nombre #published) — on traduit juste le mot
+  var photoSubWord = q('.stat-photos-subword'); if (photoSubWord) photoSubWord.textContent = t.stat_photos_sub;
+  if (typeof _renderNextArrival === 'function') _renderNextArrival();   // ré-libellé "Next expected" dans la langue
+  if (statSubs[3]) statSubs[3].textContent = t.stat_days_sub;
+  // Section header
+  var eyebrow = q('.section-eyebrow'); if (eyebrow) eyebrow.textContent = t.sec_eyebrow;
+  var sectTitle = q('.section-title'); if (sectTitle) sectTitle.innerHTML = t.sec_title;
+  var sectBody = el('section-body-el'); if (sectBody) sectBody.textContent = t.section_body;
+  // Latest shot card
+  var lsEyebrow = q('.ls-eyebrow'); if (lsEyebrow) lsEyebrow.textContent = t.ls_eyebrow;
+  var lsBadge = q('.ls-photo-badge'); if (lsBadge) lsBadge.textContent = t.ls_badge;
+  var lsStatLbls = qa('.ls-stat-lbl');
+  if (lsStatLbls[0]) lsStatLbls[0].textContent = t.ls_alt_lbl;
+  if (lsStatLbls[1]) lsStatLbls[1].textContent = t.ls_noise_lbl;
+  if (lsStatLbls[2]) lsStatLbls[2].textContent = t.ls_speed_lbl;
+  if (lsStatLbls[3]) lsStatLbls[3].textContent = t.ls_aircraft_lbl;
+  var yoloLbl = q('.ls-score-detail .ls-score-lbl'); if (yoloLbl) yoloLbl.textContent = t.ls_score_lbl;
+  var lsPub = el('ls-published'); if (lsPub) lsPub.textContent = t.ls_published;
+  var igLink = q('.ls-ig-link'); if (igLink) igLink.textContent = t.ls_ig_link;
+  var vibLbl = el('ls-vib-lbl'); if (vibLbl) vibLbl.textContent = t.ls_vib_lbl;
+  var ssPhoto = el('ss-photo-lbl'); if (ssPhoto) ssPhoto.textContent = t.ss_photo;
+  var ssDb = el('ss-db-lbl'); if (ssDb) ssDb.textContent = t.ss_db;
+  var ssVib = el('ss-vib-lbl'); if (ssVib) ssVib.textContent = t.ss_vib;
+  // Ticker label
+  var tickerLbl = q('.ticker-label');
+  if (tickerLbl) { var tdot = tickerLbl.querySelector('.ticker-live-dot'); tickerLbl.innerHTML = ''; if (tdot) tickerLbl.appendChild(tdot); tickerLbl.appendChild(document.createTextNode(t.ticker_lbl)); }
+  // Weather section
+  var wxEyebrow = q('.weather-eyebrow'); if (wxEyebrow) wxEyebrow.textContent = t.wx_eyebrow;
+  var wxTitle = q('.weather-title'); if (wxTitle) wxTitle.innerHTML = t.wx_title;
+  var wxBody = q('.weather-body'); if (wxBody) wxBody.textContent = t.wx_body;
+  var r03t = q('#rwy-card-03 .rwy-title'); if (r03t) r03t.textContent = t.rwy03_title;
+  var r03d = q('#rwy-card-03 .rwy-desc'); if (r03d) r03d.textContent = t.rwy03_desc;
+  var r21t = q('#rwy-card-21 .rwy-title'); if (r21t) r21t.textContent = t.rwy21_title;
+  var r21d = q('#rwy-card-21 .rwy-desc'); if (r21d) r21d.textContent = t.rwy21_desc;
+  var wlSrc = q('.wlive-source'); if (wlSrc) wlSrc.textContent = t.wlive_source;
+  var wlLbls = qa('.wlive-item-lbl');
+  if (wlLbls[0]) wlLbls[0].textContent = t.wlive_wind;
+  if (wlLbls[1]) wlLbls[1].textContent = t.wlive_runway;
+  if (wlLbls[2]) wlLbls[2].textContent = t.wlive_wdir;
+  if (wlLbls[3]) wlLbls[3].textContent = t.wlive_vis;
+  // Air quality section
+  var aqEyebrow = el('aq-eyebrow'); if (aqEyebrow) aqEyebrow.textContent = t.aq_eyebrow;
+  var aqTitle = el('aq-title-el'); if (aqTitle) aqTitle.innerHTML = t.aq_title;
+  var aqBody = el('aq-body-el'); if (aqBody) aqBody.textContent = t.aq_body;
+  var aqThresh = el('aq-thresholds');
+  if (aqThresh && t.aq_thresh) {
+    var colors = ['#4ade80','#facc15','#fb923c','#ef4444','#a855f7'];
+    aqThresh.innerHTML = t.aq_thresh.map(function(lbl, i) {
+      return '<div class="aq-thresh-row"><div class="aq-thresh-dot" style="background:'+colors[i]+'"></div>'+lbl+'</div>';
+    }).join('');
+  }
+  var aqSrc = el('aq-source-el'); if (aqSrc) aqSrc.textContent = t.aq_source;
+  var aqHeroLbl = el('aq-hero-lbl'); if (aqHeroLbl) aqHeroLbl.textContent = t.aq_hero_lbl;
+  var aqBadgeLbl = el('aq-badge-lbl'); if (aqBadgeLbl && aqBadgeLbl.textContent === INDEX_TRANSLATIONS['en'].aq_sensor_pending || (aqBadgeLbl && aqBadgeLbl.textContent === INDEX_TRANSLATIONS['pt'].aq_sensor_pending) || (aqBadgeLbl && aqBadgeLbl.textContent === INDEX_TRANSLATIONS['fr'].aq_sensor_pending)) aqBadgeLbl.textContent = t.aq_sensor_pending;
+  var aqPendTxt = el('aq-pending-txt'); if (aqPendTxt) aqPendTxt.textContent = t.aq_pending_txt;
+  var aqFooter = el('aq-footer-el'); if (aqFooter) aqFooter.textContent = t.aq_footer;
+  // Footer
+  var fDesc = q('.footer-desc'); if (fDesc) fDesc.textContent = t.footer_desc;
+  var fCols = qa('.footer-col-title');
+  if (fCols[0]) fCols[0].textContent = t.footer_proj;
+  if (fCols[1]) fCols[1].textContent = t.footer_connect;
+  var fKofi = q('.footer-kofi-label span'); if (fKofi) fKofi.textContent = t.footer_support;
+  var fCopy = q('.footer-copy'); if (fCopy) fCopy.textContent = t.footer_copy;
+  qa('[data-i18n-html]').forEach(function(el) { var k = el.getAttribute('data-i18n-html'); if (t[k]) el.innerHTML = t[k]; });
+  // generic data-i18n sweep
+  qa('[data-i18n]').forEach(function(el) { var k = el.getAttribute('data-i18n'); if (t[k]) el.textContent = t[k]; });
+}
+
+function toggleLang() { var cycle = {en:'pt',pt:'fr',fr:'en'}; applyLang(cycle[_lang] || 'en'); }
+
+document.addEventListener('DOMContentLoaded', function() { applyLang(_lang); });
+
+// ── MOBILE BURGER ──
+(function(){
+  var burger = document.getElementById('nav-burger');
+  var drawer = document.getElementById('nav-drawer');
+  if (burger && drawer) {
+    function setDrawer(open){
+      drawer.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    burger.addEventListener('click', function(){
+      setDrawer(!drawer.classList.contains('open'));
+    });
+    document.addEventListener('click', function(e){
+      if (!drawer.contains(e.target) && !burger.contains(e.target)) setDrawer(false);
+    });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setDrawer(false); });
+    });
+  }
+})();
+
+// ── Lisbon clock ──
+(function navClock(){
+  const el = document.getElementById('nav-clock');
+  if (!el) return;
+  function tick(){
+    const s = new Date().toLocaleTimeString('pt-PT',{timeZone:'Europe/Lisbon',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    el.innerHTML = s + '<span class="nav-clock-tz">LIS</span>';
+  }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+
+<script data-goatcounter="https://lisbonfinals.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

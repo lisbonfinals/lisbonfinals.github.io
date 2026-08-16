@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Données — Lisbon Finals · Observatoire LPPT</title>
+<meta name="description" content="Détections de vols et observations acoustiques locales indépendantes sous le couloir d’approche de l’aéroport de Lisbonne.">
+<meta name="theme-color" content="#0a0d12">
+<link rel="canonical" href="https://www.lisbonfinals.com/fr/data.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/en/data.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/data.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/data.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/data.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816b"></script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="Données — Lisbon Finals · Observatoire LPPT">
+<meta property="og:description" content="Détections de vols et observations acoustiques locales indépendantes sous le couloir d’approche de l’aéroport de Lisbonne.">
+<meta property="og:url" content="https://www.lisbonfinals.com/fr/data.html">
+<meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Données — Lisbon Finals · Observatoire LPPT">
+<meta name="twitter:description" content="Détections de vols et observations acoustiques locales indépendantes sous le couloir d’approche de l’aéroport de Lisbonne.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://gist.githubusercontent.com">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Lisbon Finals live flight and acoustic observations","description":"Flight detections, local SPL readings, vibration and air-quality observations from one fixed terrace below the LPPT approach corridor.","url":"https://www.lisbonfinals.com/data.html","creator":{"@type":"Organization","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/"},"spatialCoverage":{"@type":"Place","name":"Lisbon, Portugal"},"license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"inLanguage":["en","pt-PT","fr"]}</script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#07090d; --dark:#0a0d12; --dark2:#0d1117; --dark3:#111827;
+  --border:#1e2530; --border2:#2a3544;
+  --amber:#f5a623; --amber-dim:rgba(245,166,35,0.10);
+  --white:#f0ede8; --gray:#6b7280;
+  --red:#ef4444; --red-dim:rgba(239,68,68,0.08);
+  --green:#22c55e;
+  --blue:#60a5fa; --blue-dim:rgba(96,165,250,0.08);
+  --sans:'Syne',sans-serif; --mono:'JetBrains Mono',monospace; --serif:'Instrument Serif',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:var(--sans);overflow-x:hidden;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:4px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,9,13,.98),transparent);backdrop-filter:blur(4px);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-dot{width:28px;height:28px;border:1.5px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
+.nav-dot::after{content:'';width:10px;height:12px;background:var(--amber);border-radius:0;position:absolute;top:50%;left:50%;transform:translate(-50%,-60%) rotate(-20deg);clip-path:polygon(50% 0%,65% 85%,50% 72%,35% 85%);}
+.nav-wordmark{font-size:13px;font-family:var(--mono);font-weight:500;letter-spacing:.12em;color:var(--white);text-transform:uppercase;}
+.nav-wordmark span{color:var(--amber);}
+.nav-links{display:flex;gap:36px;list-style:none;margin-left:auto;}
+.nav-links a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.55);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--amber);}
+.nav-links a.nav-active{color:var(--amber);}
+.nav-links a.nav-noise{color:var(--amber);font-weight:700;}
+.nav-links a.nav-noise:hover{color:#fff;text-shadow:0 0 14px rgba(245,166,35,.6);}
+.nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
+.nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
+.nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px;}
+.lang-group{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+.lang-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.43);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn:hover{color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.38);}
+.lang-btn.active{color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06);}
+.lang-switcher{display:none;}
+.lang-switcher:hover{border-color:var(--amber);color:var(--amber);}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:12px;}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;}
+.nav-drawer{display:none;flex-direction:column;gap:32px;position:fixed;inset:0;z-index:99;background:rgba(7,9,13,.97);backdrop-filter:blur(12px);align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.nav-drawer.open{display:flex;opacity:1;pointer-events:all;}
+.nav-drawer a{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.6);text-decoration:none;transition:color .2s;}
+.nav-drawer a:hover{color:var(--white);}
+.nav-drawer a.drawer-warning{color:rgba(248,113,113,.6);}
+.nav-drawer a.drawer-noise{color:var(--amber);opacity:.8;}
+.nav-drawer a.drawer-ig{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(245,166,35,.4);padding:10px 20px;border-radius:4px;color:var(--amber)!important;font-size:11px;margin-top:8px;}
+
+/* ── NAV DROPDOWN ── */
+.nav-has-dropdown{position:relative;}
+.nav-dropdown{
+  display:none;position:absolute;top:100%;left:50%;
+  transform:translateX(-50%);
+  background:rgba(7,9,13,.97);border:1px solid rgba(245,166,35,.15);
+  border-radius:4px;padding:16px 0 8px;list-style:none;
+  min-width:160px;backdrop-filter:blur(12px);z-index:200;
+}
+.nav-has-dropdown::after{
+  content:'';position:absolute;
+  top:100%;left:0;right:0;height:16px;
+}
+.nav-has-dropdown:hover .nav-dropdown{display:block;}
+.nav-dropdown li a{display:block;padding:9px 18px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.5);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;}
+.nav-dropdown li a:hover{color:var(--amber);background:rgba(245,166,35,.05);}
+.nav-dropdown li a.dd-warning{color:rgba(248,113,113,.6);}
+.nav-dropdown li a.dd-warning:hover{color:#ef4444;}
+.nav-dropdown li+li{border-top:1px solid rgba(240,237,232,.05);}
+.nav-data-trigger{cursor:default;}
+
+/* ── SECTION ANCHOR NAV ── */
+.section-tabs{
+  background:rgba(10,13,18,.95);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:68px;z-index:50;
+  backdrop-filter:blur(8px);
+}
+.section-tabs-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;gap:0;}
+.section-tab{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.43);text-decoration:none;padding:16px 24px;border-bottom:2px solid transparent;transition:all .2s;display:block;}
+.section-tab:hover{color:rgba(240,237,232,.7);}
+.section-tab.active{color:var(--amber);border-bottom-color:var(--amber);}
+
+/* ── SECTIONS ── */
+.data-section{padding:72px 48px 80px;max-width:1200px;margin:0 auto;scroll-margin-top:96px;}
+#the-data{padding-top:96px;}
+.data-section+.data-section{border-top:1px solid var(--border);}
+
+/* ── SECTION HEADERS (uniform across all pages) ── */
+.section-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.section-label::before{
+  content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0;
+}
+#warning-zone .section-label{ color:var(--red); }
+#warning-zone .section-label::before{ background:var(--red); }
+.section-title{
+  font-size:clamp(36px,5vw,60px);font-weight:800;
+  line-height:1;letter-spacing:-.02em;color:var(--white);
+}
+/* em in titles: Instrument Serif italic, muted gray — NEVER amber */
+.section-title em{
+  font-family:var(--serif);font-weight:400;
+  font-style:italic;color:rgba(240,237,232,.38);
+}
+.section-desc{font-family:var(--sans);font-size:14px;line-height:1.8;color:rgba(240,237,232,.43);max-width:520px;margin-top:14px;}
+
+/* ── METHODOLOGY STRIP ── */
+.method-strip{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end;
+  margin:28px 0 34px;padding-left:22px;border-left:1px solid rgba(245,166,35,.42);
+}
+.method-kicker{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+.method-copy{font-size:13px;line-height:1.75;color:rgba(240,237,232,.56);max-width:720px;}
+.method-flow{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px 18px;max-width:520px;}
+.method-flow span{
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(240,237,232,.45);white-space:nowrap;display:flex;align-items:center;gap:10px;
+}
+.method-flow span::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(245,166,35,.65);}
+
+/* ── STAT CARDS ── */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;}
+.stat-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px;position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;}
+.stat-card.amber::before{background:radial-gradient(ellipse at top left,rgba(245,166,35,.06),transparent 60%);}
+.stat-card.red::before{background:radial-gradient(ellipse at top left,rgba(239,68,68,.06),transparent 60%);}
+.stat-card.green::before{background:radial-gradient(ellipse at top left,rgba(34,197,94,.06),transparent 60%);}
+.stat-card.blue::before{background:radial-gradient(ellipse at top left,rgba(96,165,250,.06),transparent 60%);}
+.stat-card:hover::before{opacity:1;}
+.stat-val{font-family:var(--mono);font-size:36px;font-weight:500;line-height:1;margin-bottom:8px;color:var(--white);}
+.stat-card.amber .stat-val{color:var(--amber);}
+.stat-card.red .stat-val{color:var(--red);}
+.stat-card.green .stat-val{color:var(--green);}
+.stat-card.blue .stat-val{color:var(--blue);}
+.stat-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.38);}
+.stat-sub{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);margin-top:6px;}
+
+/* ── TICKER ── */
+.ticker-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.ticker-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.ticker-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);}
+.ticker-live{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--green);display:flex;align-items:center;gap:6px;}
+.ticker-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+/* ticker — no scroll trap, page scrolls naturally */
+.ticker-list{}
+.ticker-col-heads{
+  display:grid;
+  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px 72px;
+  gap:0;
+  padding:8px 20px;
+  background:rgba(245,166,35,.04);
+  border-bottom:1px solid var(--border);
+}
+.ticker-col-head{
+  font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(245,166,35,.35);
+}
+.ticker-col-head.right{text-align:right;}
+.ticker-row{
+  display:grid;
+  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px 72px;
+  gap:0;
+  align-items:center;
+  padding:9px 20px;
+  border-bottom:1px solid rgba(30,37,48,.6);
+  transition:background .15s;
+}
+.ticker-row:hover{background:rgba(245,166,35,.03);}
+.ticker-time{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.55);line-height:1.35;}
+.ticker-time strong{display:block;color:rgba(240,237,232,.55);font-size:10px;font-weight:500;}
+.ticker-flag{font-size:13px;}
+.ticker-callsign{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);}
+.ticker-airline{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.65);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px;}
+.ticker-route{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.5);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ticker-phase{font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:rgba(240,237,232,.5);}
+.ticker-alt{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.5);text-align:right;line-height:1.4;}
+.ticker-alt strong{display:block;color:rgba(240,237,232,.75);font-size:10px;font-weight:500;}
+.ticker-db{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;}
+.ticker-db.loud{color:var(--red);}
+.ticker-db.normal{color:rgba(240,237,232,.6);}
+.ticker-vib{display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-left:8px;min-width:64px;}
+.ticker-vib-bars{font-family:monospace;font-size:11px;letter-spacing:1px;line-height:1;}
+.ticker-vib-row{display:flex;align-items:center;gap:4px;}
+.ticker-vib-emoji{font-size:10px;line-height:1;}
+.ticker-vib-val{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.04em;}
+.ticker-vib.no-data .ticker-vib-val{color:rgba(240,237,232,.15);}
+.ticker-empty{padding:24px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);}
+/* ── TABLET : carte 2 lignes ── */
+@media(max-width:1040px) and (min-width:480px){
+  .ticker-col-heads{display:none;}
+  .ticker-row{
+    display:flex;flex-wrap:wrap;align-items:baseline;
+    gap:0;padding:12px 20px;
+    border-bottom:1px solid rgba(30,37,48,.6);
+    position:relative;
+  }
+  /* ligne 1 : heure · flag · vol · compagnie */
+  .ticker-time{order:1;margin-right:10px;flex-shrink:0;}
+  .ticker-time strong{display:inline;font-size:11px;}
+  .ticker-time-date{display:inline;margin-left:4px;font-size:9px;color:rgba(240,237,232,.33);}
+  .ticker-flag{order:2;margin-right:6px;font-size:14px;}
+  .ticker-callsign{order:3;margin-right:10px;font-size:12px;}
+  .ticker-airline{order:4;flex:1;font-size:11px;min-width:0;}
+  /* ligne 2 : route · phase · altitude · dB */
+  .ticker-route{order:5;width:100%;margin-top:4px;font-size:9px;color:rgba(240,237,232,.3);}
+  .ticker-route::before{content:'';display:inline-block;width:0;}
+  .ticker-phase{order:6;font-size:8px;color:rgba(240,237,232,.28);margin-right:12px;margin-top:4px;}
+  .ticker-alt{order:7;text-align:left;margin-right:12px;margin-top:4px;line-height:1.3;}
+  .ticker-alt strong{display:inline;font-size:10px;}
+  .ticker-alt-m{display:inline;margin-left:4px;font-size:9px;color:rgba(240,237,232,.28);}
+  .ticker-db{order:8;margin-top:4px;font-size:11px;}
+  /* route + meta sur une seule ligne 2 */
+  .ticker-phase,.ticker-alt,.ticker-db{flex-shrink:0;}
+}
+/* mobile: collapse to essential columns */
+@media(max-width:480px){
+  .ticker-col-heads,
+  .ticker-row{grid-template-columns:72px 22px 64px 1fr 54px;}
+  .ticker-col-head.hide-sm,.ticker-time-date,
+  .ticker-route,.ticker-phase,.ticker-alt-m{display:none;}
+  .ticker-alt strong{font-size:9px;}
+}
+
+/* ── NOISE SECTION — SPLIT LAYOUT ── */
+.noise-split{display:grid;grid-template-columns:2fr 3fr;gap:56px;align-items:start;}
+.noise-split-left{}
+.noise-split-left .section-label{margin-bottom:12px;}
+.noise-split-left .section-title{margin-bottom:0;}
+.noise-split-left .section-desc{margin-top:16px;}
+.noise-report-link{
+  display:inline-flex;align-items:center;gap:8px;margin-top:28px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(245,166,35,.6);text-decoration:none;border:1px solid rgba(245,166,35,.2);
+  padding:10px 18px;border-radius:3px;transition:all .2s;
+}
+.noise-report-link:hover{color:var(--amber);border-color:var(--amber);background:rgba(245,166,35,.05);}
+
+.noise-split-right{}
+.noise-chart-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px 20px 14px;margin-bottom:16px;}
+.noise-chart-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:16px;}
+.noise-chart{display:flex;align-items:flex-end;gap:3px;height:100px;}
+.noise-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;}
+.noise-bar{width:100%;border-radius:2px 2px 0 0;transition:height .6s ease;min-height:2px;background:rgba(245,166,35,.2);}
+.noise-bar.night{background:rgba(99,102,241,.4);}
+.noise-bar.active{background:var(--amber);}
+.noise-chart-legend{display:flex;gap:16px;margin-top:10px;}
+.legend-item{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.38);display:flex;align-items:center;gap:6px;}
+.legend-dot{width:8px;height:8px;border-radius:2px;}
+
+/* 4 mini-stats below the chart */
+.noise-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.noise-mini-stat{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:16px 18px;}
+.noise-mini-val{font-family:var(--mono);font-size:24px;font-weight:500;color:var(--amber);line-height:1;margin-bottom:4px;}
+.noise-mini-val.blue{color:var(--blue);}
+.noise-mini-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);}
+
+/* ── INFO CARDS ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px;}
+.info-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px;}
+.info-card-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:16px;}
+.info-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(240,237,232,.04);}
+.info-row:last-child{border-bottom:none;}
+.info-row-lbl{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.43);}
+.info-row-val{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);}
+.info-row-val.red{color:var(--red);}
+.info-row-val.amber{color:var(--amber);}
+
+/* ── WARNING ZONE ── */
+.warning-hero-card{background:linear-gradient(135deg,rgba(239,68,68,.06) 0%,rgba(7,9,13,0) 60%);border:1px solid rgba(239,68,68,.2);border-radius:4px;padding:36px;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
+.warning-stat{text-align:center;}
+.warning-val{font-family:var(--mono);font-size:48px;font-weight:500;line-height:1;}
+.warning-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-top:8px;}
+.warning-sub{font-family:var(--mono);font-size:9px;margin-top:4px;}
+/* stat-level color theming */
+.warning-stat.night .warning-val{color:#5ea5f0;}
+.warning-stat.night .warning-lbl{color:rgba(94,165,240,.65);}
+.warning-stat.night .warning-sub{color:rgba(94,165,240,.4);}
+.warning-stat.critical .warning-val{color:var(--red);}
+.warning-stat.critical .warning-lbl{color:rgba(239,68,68,.65);}
+.warning-stat.critical .warning-sub{color:rgba(239,68,68,.4);}
+.warning-stat.l2 .warning-val{color:var(--amber);}
+.warning-stat.l2 .warning-lbl{color:rgba(245,166,35,.65);}
+.warning-stat.l2 .warning-sub{color:rgba(245,166,35,.4);}
+/* ANAC rule cards */
+.anac-rules{display:flex;flex-direction:column;gap:0;margin-top:24px;}
+.anac-rule-card{display:flex;align-items:center;gap:20px;padding:18px 24px;background:var(--dark2);border:1px solid var(--border);border-bottom:none;}
+.anac-rule-card:first-child{border-radius:4px 4px 0 0;}
+.anac-rule-card:last-child{border-bottom:1px solid var(--border);border-radius:0 0 4px 4px;}
+.anac-rule-icon{font-size:22px;flex-shrink:0;width:36px;text-align:center;}
+.anac-rule-title{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--white);margin-bottom:3px;letter-spacing:-.01em;}
+.anac-rule-desc{font-family:var(--sans);font-size:12px;color:rgba(240,237,232,.43);line-height:1.6;}
+/* green override when compliant */
+.warning-val.ok{color:var(--green)!important;}
+/* night flights progress bar */
+.warning-progress{height:2px;background:rgba(255,255,255,.07);border-radius:1px;margin-top:14px;overflow:hidden;}
+.warning-progress-fill{height:100%;border-radius:1px;width:0;transition:width .8s ease;}
+.warning-progress-fill.over{background:var(--red);}
+.warning-progress-fill.safe{background:#4ade80;}
+.warning-limit{font-family:var(--mono);font-size:9px;margin-top:5px;}
+
+.violation-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:20px 24px;display:flex;align-items:center;gap:16px;margin-bottom:12px;transition:border-color .2s;}
+.violation-card.critical{border-color:rgba(239,68,68,.3);}
+.violation-card.l2{border-color:rgba(245,166,35,.2);}
+.violation-badge{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px;flex-shrink:0;}
+.violation-badge.critical{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+.violation-badge.l2{background:rgba(245,166,35,.1);color:var(--amber);border:1px solid rgba(245,166,35,.25);}
+.violation-badge.ok{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.25);}
+.violation-info{flex:1;}
+.violation-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:3px;}
+.violation-desc{font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.38);line-height:1.5;}
+.violation-db{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--red);text-align:right;}
+.violation-db.ok{color:var(--green);}
+.violation-db-lbl{font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.28);text-align:right;}
+
+.night-window{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px;margin-top:24px;}
+.night-window-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:16px;}
+.night-timeline{display:flex;gap:2px;height:32px;align-items:stretch;}
+.night-slot{flex:1;border-radius:2px;}
+.night-slot.restricted{background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.15);}
+.night-slot.allowed{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.1);}
+.night-labels{display:flex;gap:2px;margin-top:4px;}
+.night-labels span{flex:1;font-family:var(--mono);font-size:7px;color:rgba(240,237,232,.28);text-align:center;}
+.night-legend{display:flex;gap:16px;margin-top:12px;}
+
+/* ── FOOTER ── */
+.page-footer{border-top:1px solid var(--border);padding:32px 48px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-left{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);letter-spacing:.08em;}
+.footer-updated{font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.3);letter-spacing:.08em;}
+
+/* ── ERROR STATE ── */
+.data-error{padding:20px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);border:1px dashed rgba(240,237,232,.08);border-radius:4px;}
+
+/* ── RESPONSIVE ── */
+/* nav-links overflow with the "Noise Report" item before the 1024px grid breakpoint kicks in */
+@media (max-width: 1150px) {
+  .nav-links { display:none; }
+  .nav-burger { display:flex; }
+}
+@media(max-width:1024px){
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .warning-hero-card{grid-template-columns:1fr;}
+  .method-strip{grid-template-columns:1fr;gap:16px;align-items:start;}
+  .method-flow{justify-content:flex-start;}
+  .noise-split{grid-template-columns:1fr;}
+  .two-col{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .nav-burger{display:flex;}
+}
+@media(max-width:640px){
+  nav,.data-section,.section-tabs-inner,.page-footer{padding-left:20px;padding-right:20px;}
+  .nav-clock-wrap{margin-left:auto;padding-left:14px;gap:8px;}
+  .nav-clock{display:none;}
+  .section-tabs{overflow-x:auto;scrollbar-width:none;}
+  .section-tabs::-webkit-scrollbar{display:none;}
+  .section-tabs-inner{min-width:max-content;}
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .method-strip{margin:24px 0 28px;padding-left:16px;}
+  .method-flow{gap:8px 14px;}
+  .method-flow span{white-space:normal;line-height:1.5;}
+  .section-tab{padding:12px 14px;font-size:9px;}
+  .noise-mini-grid{grid-template-columns:1fr 1fr;}
+}
+@media (prefers-reduced-motion: reduce) {
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- DRAWER -->
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="/" onclick="closeDrawer()">Live</a>
+  <a href="/data.html" style="color:var(--amber)" onclick="closeDrawer()">The Data</a>
+  <a href="/data.html#noise-data" onclick="closeDrawer()">Noise Data</a>
+  <a href="/data.html#warning-zone" class="drawer-warning" onclick="closeDrawer()">Warning Zone</a>
+  <a href="/archive.html" onclick="closeDrawer()">Archive</a>
+  <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
+  <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
+  <a href="/about.html#the-project" onclick="closeDrawer()">The Project</a>
+  <a href="/about.html#how-it-works" onclick="closeDrawer()">How it works</a>
+  <a href="/about.html#hardware" onclick="closeDrawer()">The Station</a>
+  <a href="/about.html#whats-next" onclick="closeDrawer()">What's next</a>
+  <a href="/about.html#get-involved" onclick="closeDrawer()">Get Involved</a>
+  <a href="/about.html#press" onclick="closeDrawer()">Press</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
+</div>
+
+<nav aria-label="Primary navigation">
+  <a href="/" class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-wordmark">LISBON <span>FINALS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Live</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/data.html" class="nav-active">Data ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/data.html#the-data" style="color:var(--amber)">The Data</a></li>
+        <li><a href="/data.html#noise-data">Noise Data</a></li>
+        <li><a href="/data.html#warning-zone" class="dd-warning">Warning Zone</a></li>
+      </ul>
+    </li>
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/noise-report.html" class="nav-noise">Noise Report</a></li>
+    <li><a href="/log.html">Captain's Log</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/about.html">About ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/about.html#the-project">The Project</a></li>
+        <li><a href="/about.html#how-it-works">How it works</a></li>
+        <li><a href="/about.html#hardware">The Station</a></li>
+        <li><a href="/about.html#whats-next">What's next</a></li>
+        <li><a href="/about.html#get-involved">Get Involved</a></li>
+        <li><a href="/about.html#press">Press</a></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="nav-clock-wrap">
+    <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
+    <div class="lang-group">
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
+    </div>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- SECTION TABS — sits right below fixed nav -->
+<div class="section-tabs" aria-label="Data page sections">
+  <div class="section-tabs-inner">
+    <a href="#the-data" class="section-tab active" data-i18n="tab_data">The Data</a>
+    <a href="#noise-data" class="section-tab" data-i18n="tab_noise">Noise Data</a>
+    <a href="#warning-zone" class="section-tab" data-i18n="tab_warning">⚠ Warning Zone</a>
+    <a href="#archive-teaser" class="section-tab" data-i18n="tab_archive_teaser">Archive</a>
+  </div>
+</div>
+
+<!-- ══ SECTION 1: THE DATA ══ -->
+<main id="main-content">
+<section class="data-section" id="the-data">
+  <div style="margin-bottom:40px;">
+    <div class="section-label" data-i18n="s1_label">Flight intelligence</div>
+    <h1 class="section-title" data-i18n-html="s1_title">The data<br><em>speaks for itself</em></h1>
+    <p class="section-desc" data-i18n="s1_desc">Every aircraft detected over our terrace since May 3, 2026 — ADS-B telemetry combined with real-time acoustic measurements.</p>
+  </div>
+
+  <div class="method-strip" aria-label="Data methodology">
+    <div class="method-intro">
+      <div class="method-kicker" data-i18n="method_kicker">How to read it</div>
+      <div class="method-copy" data-i18n="method_copy">These numbers are station observations, not official airport totals. They show what crosses this terrace, from one fixed point, using consistent local sensors.</div>
+    </div>
+    <div class="method-flow" aria-label="Measurement sources">
+      <span data-i18n="method_flow1">ADS-B telemetry</span>
+      <span data-i18n="method_flow2">Sound + vibration peaks</span>
+      <span data-i18n="method_flow3">Photo evidence + public log</span>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card amber">
+      <div class="stat-val" id="s1-flights">—</div>
+      <div class="stat-lbl" data-i18n="lbl_flights">Flights tracked</div>
+      <div class="stat-sub" data-i18n="lbl_since">since May 3, 2026</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="s1-photos">—</div>
+      <div class="stat-lbl" data-i18n="lbl_photos">Photos captured</div>
+      <div class="stat-sub" id="s1-photos-pct">— detection rate</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-val" id="s1-today">—</div>
+      <div class="stat-lbl" data-i18n="lbl_today">Flights today</div>
+      <div class="stat-sub" id="s1-rush">rush hour: —</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-val" id="s1-loud">—</div>
+      <div class="stat-lbl" data-i18n="lbl_loud">Flights above 95 dB</div>
+      <div class="stat-sub" data-i18n="lbl_loud_sub">cumul. since May 3</div>
+    </div>
+  </div>
+
+  <!-- RECENT FLIGHTS TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-header">
+      <span class="ticker-title" data-i18n="ticker_title">Recent detections</span>
+      <span class="ticker-live" data-i18n="ticker_live">Live</span>
+    </div>
+    <div class="ticker-col-heads">
+      <span class="ticker-col-head">Date / Heure</span>
+      <span class="ticker-col-head"></span>
+      <span class="ticker-col-head">Vol</span>
+      <span class="ticker-col-head">Compagnie</span>
+      <span class="ticker-col-head hide-sm">Route</span>
+      <span class="ticker-col-head hide-sm">Phase</span>
+      <span class="ticker-col-head right hide-sm">Altitude</span>
+      <span class="ticker-col-head right">dB</span>
+      <span class="ticker-col-head right hide-sm">Vib</span>
+    </div>
+    <div class="ticker-list" id="tickerList">
+      <div class="ticker-empty">Loading…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 2: NOISE DATA — SPLIT LAYOUT ══ -->
+<section class="data-section" id="noise-data">
+  <div class="noise-split">
+    <!-- LEFT: title + desc + link -->
+    <div class="noise-split-left">
+      <div class="section-label" data-i18n="s2_label">Acoustic monitoring</div>
+      <h2 class="section-title" data-i18n-html="s2_title">Noise data<br><em>for everyone</em></h2>
+      <p class="section-desc" data-i18n="s2_desc">Real SPL measurements taken at ground level on the terrace facing runway 03. Every pass, every decibel, fully timestamped.</p>
+      <a href="/noise-report.html" class="noise-report-link" data-i18n="noise_report_link">→ Full noise report</a>
+    </div>
+
+    <!-- RIGHT: chart + 4 stats -->
+    <div class="noise-split-right">
+      <div class="noise-chart-wrap">
+        <div class="noise-chart-title" data-i18n="chart_title">Average dB by hour (today) · SPL</div>
+        <div class="noise-chart" id="noiseChart">
+          <div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);margin:auto;">Loading…</div>
+        </div>
+        <div class="noise-chart-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span data-i18n="legend_day">Day (06h–22h)</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:rgba(99,102,241,.5)"></div><span data-i18n="legend_night">Night (22h–06h)</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:rgba(245,166,35,1);opacity:.4"></div><span>current hour</span></div>
+        </div>
+      </div>
+
+      <!-- 4 mini stats -->
+      <div class="noise-mini-grid">
+        <div class="noise-mini-stat">
+          <div class="noise-mini-val" id="n-peak-db">—</div>
+          <div class="noise-mini-lbl" data-i18n="lbl_peak_today">Peak today</div>
+        </div>
+        <div class="noise-mini-stat">
+          <div class="noise-mini-val" id="n-avg-today" style="color:var(--red)">—</div>
+          <div class="noise-mini-lbl" data-i18n="lbl_alltime_peak">All-time peak</div>
+        </div>
+        <div class="noise-mini-stat">
+          <div class="noise-mini-val blue" id="n-flights-today">—</div>
+          <div class="noise-mini-lbl" data-i18n="lbl_flights_today">Flights today</div>
+        </div>
+        <div class="noise-mini-stat">
+          <div class="noise-mini-val blue" id="n-rush">—</div>
+          <div class="noise-mini-lbl" data-i18n="lbl_rush_hour">Rush hour</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- context cards below -->
+  <div class="two-col">
+    <div class="info-card">
+      <div class="info-card-title" data-i18n="peak_title">Noise record</div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="lbl_peak_all">All-time peak</span><span class="info-row-val amber" id="n-peak-all">— dB</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="lbl_peak_flight">Loudest flight</span><span class="info-row-val" id="n-peak-flight">—</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="lbl_loud_total">Flights &gt;95 dB total</span><span class="info-row-val red" id="n-loud">—</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="lbl_avg_night">Avg night dB (this week)</span><span class="info-row-val" id="n-avg-night">—</span></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title" data-i18n="context_title">Reference levels</div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_conversation">Normal conversation</span><span class="info-row-val">~60 dB</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_traffic">City traffic</span><span class="info-row-val">~70 dB</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_anac">ANAC curfew threshold</span><span class="info-row-val amber">≥ 93 dB</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_critical">Critical violation</span><span class="info-row-val red">≥ 98.9 dB</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_station">Station location</span><span class="info-row-val">38°46'N · 009°08'W</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 3: WARNING ZONE ══ -->
+<section class="data-section" id="warning-zone">
+  <div style="margin-bottom:40px;">
+    <div class="section-label" data-i18n="s3_label">ANAC regulation monitoring</div>
+    <h2 class="section-title" data-i18n-html="s3_title">⚠ Warning<br><em>Zone</em></h2>
+    <p class="section-desc" data-i18n="s3_desc">Flights between midnight and 6am above ANAC dB thresholds are violations. This week's record:</p>
+  </div>
+
+  <div class="warning-hero-card">
+    <div class="warning-stat night">
+      <div class="warning-val" id="w-night-total">—</div>
+      <div class="warning-lbl" data-i18n="w_night_lbl">Night flights this week</div>
+      <div class="warning-sub" id="w-week-from">since Monday</div>
+      <div class="warning-progress"><div class="warning-progress-fill" id="w-night-fill"></div></div>
+      <div class="warning-limit" id="w-night-limit">Limit: 91/week</div>
+    </div>
+    <div class="warning-stat critical">
+      <div class="warning-val" id="w-critical">—</div>
+      <div class="warning-lbl" data-i18n="w_critical_lbl">Critical violations</div>
+      <div class="warning-sub">&gt; 98.9 dB · absolute ban</div>
+    </div>
+    <div class="warning-stat l2">
+      <div class="warning-val" id="w-l2">—</div>
+      <div class="warning-lbl" data-i18n="w_l2_lbl">Level 2 violations</div>
+      <div class="warning-sub">93–95.9 dB outside allowed slots</div>
+    </div>
+  </div>
+
+  <div id="lastInfractionCard"></div>
+
+  <div class="night-window">
+    <div class="night-window-title" data-i18n="timeline_title">ANAC night curfew · 00h–06h · allowed slots in green</div>
+    <div class="night-timeline" id="nightTimeline"></div>
+    <div class="night-labels">
+      <span>00h</span><span>01h</span><span>02h</span><span>03h</span><span>04h</span><span>05h</span>
+    </div>
+    <div class="night-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(239,68,68,.3)"></div><span data-i18n="legend_restricted">Restricted (00h30–05h00)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(34,197,94,.2)"></div><span data-i18n="legend_allowed">Allowed (00h00–00h30 · 05h00–06h00)</span></div>
+    </div>
+    <div class="anac-rules">
+      <div class="anac-rule-card">
+        <div class="anac-rule-icon">🚫</div>
+        <div>
+          <div class="anac-rule-title" data-i18n="rule1_title">Curfew 00:00–06:00</div>
+          <div class="anac-rule-desc" data-i18n="rule1_desc">Max 91 movements/week · 26/day. No scheduled flights during the night period.</div>
+        </div>
+      </div>
+      <div class="anac-rule-card">
+        <div class="anac-rule-icon">🔇</div>
+        <div>
+          <div class="anac-rule-title" data-i18n="rule2_title">Noisy Aircraft Ban</div>
+          <div class="anac-rule-desc" data-i18n="rule2_desc">Aircraft &gt;98.9 EPNdB (Levels 8 &amp; 16) strictly prohibited at night.</div>
+        </div>
+      </div>
+      <div class="anac-rule-card">
+        <div class="anac-rule-icon">⚠️</div>
+        <div>
+          <div class="anac-rule-title" data-i18n="rule3_title">Level 2 Restriction</div>
+          <div class="anac-rule-desc" data-i18n="rule3_desc">93–95.9 EPNdB aircraft: only 00:00–00:30 and 05:00–06:00 allowed.</div>
+        </div>
+      </div>
+      <div class="anac-rule-card">
+        <div class="anac-rule-icon">🔴</div>
+        <div>
+          <div class="anac-rule-title" data-i18n="rule4_title">Reverse Thrust Banned</div>
+          <div class="anac-rule-desc" data-i18n="rule4_desc">Landing reverse thrust is strictly forbidden except in emergencies.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEASER: ARCHIVE (now its own page) ══ -->
+<section class="data-section" id="archive-teaser">
+  <div class="noise-split">
+    <div class="noise-split-left">
+      <div class="section-label" data-i18n="archive_teaser_label">Explore further</div>
+      <h2 class="section-title" data-i18n-html="archive_teaser_title">Every flight<br><em>cross-referenced</em></h2>
+      <p class="section-desc" data-i18n="archive_teaser_desc">The numbers above already cover the station's complete history. The Archive goes further — cross-referenced by aircraft model, airline, night regulation, and air quality, with full photo galleries for each.</p>
+      <a href="/archive.html" class="noise-report-link" data-i18n="archive_teaser_link">→ Explore the full archive</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="page-footer">
+  <span class="footer-left" id="footerLeft">LISBON FINALS · Data Intelligence · lisbonfinals.com</span>
+  <span class="footer-updated" id="footerUpdated">—</span>
+</footer>
+
+<script>
+const GIST_URL = 'https://gist.githubusercontent.com/lisbonfinals/2edb053ac9f9c91047c1b36f706d302c/raw/lisbon_finals.json';
+
+function fmt(n) { return (n != null && n !== '') ? Number(n).toLocaleString() : '—'; }
+function fmtDb(db) { return (db && db > 0) ? db.toFixed(1) + ' dB' : '—'; }
+
+// ── Build noise chart (24h) ──
+function buildNoiseChart(byHour) {
+  const chart = document.getElementById('noiseChart');
+  if (!byHour || !byHour.length) {
+    chart.innerHTML = '<div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);margin:auto;">No data yet</div>';
+    return;
+  }
+  const max = Math.max(...byHour, 1);
+  const now = new Date().getHours();
+  chart.innerHTML = byHour.map((db, h) => {
+    const pct = max > 0 ? Math.round((db / max) * 100) : 0;
+    const isNight = h < 6 || h >= 22;
+    const isNow = h === now;
+    const cls = isNow ? 'active' : isNight ? 'night' : '';
+    return `<div class="noise-bar-wrap">
+      <div class="noise-bar ${cls}" style="height:${pct || 2}%"></div>
+    </div>`;
+  }).join('');
+
+}
+
+// ── Build ticker ──
+function buildTicker(ticker) {
+  const el = document.getElementById('tickerList');
+  if (!ticker || !ticker.length) {
+    el.innerHTML = '<div class="ticker-empty">No recent detections</div>';
+    return;
+  }
+  el.innerHTML = ticker.slice(0, 40).map(f => {
+    const db = f.noise_db || 0;
+    const dbCls = db > 95 ? 'loud' : 'normal';
+    const ts = f.timestamp || '';
+    const dateStr = ts.length >= 10 ? ts.slice(8,10) + '/' + ts.slice(5,7) : '—';
+    const timeStr = ts.length >= 16 ? ts.slice(11,16) : (ts.length >= 19 ? ts.slice(11,16) : '—');
+    const altFt = f.alt_ft ? Math.round(f.alt_ft) : null;
+    const altM  = altFt ? Math.round(altFt * 0.3048) : null;
+    const route = f.route || (f.origin && f.destination ? f.origin + ' → ' + f.destination : (f.origin || f.destination || '—'));
+    return `<div class="ticker-row">
+      <span class="ticker-time"><strong>${timeStr}</strong><span class="ticker-time-date">${dateStr}</span></span>
+      <span class="ticker-flag">${f.flag || '✈️'}</span>
+      <span class="ticker-callsign">${f.callsign || '—'}</span>
+      <span class="ticker-airline">${f.airline || '—'}</span>
+      <span class="ticker-route hide-sm">${route}</span>
+      <span class="ticker-phase hide-sm">${f.phase || '—'}</span>
+      <span class="ticker-alt hide-sm">${altFt ? '<strong>' + altFt.toLocaleString() + ' ft</strong><span class="ticker-alt-m">' + altM.toLocaleString() + ' m</span>' : '—'}</span>
+      <span class="ticker-db ${dbCls}">${db ? db.toFixed(1) + ' dB' : '—'}</span>
+      ${(() => {
+        const vib = f.vibration_peak;
+        if (vib == null) return '<span class="ticker-vib no-data hide-sm"><span class="ticker-vib-val">—</span></span>';
+        const VIB_LABELS = {
+          en: ['soft','soft','felt','shook','strong'],
+          pt: ['suave','suave','sentido','forte','intenso'],
+          fr: ['doux','doux','ressenti','fort','intense']
+        };
+        const lvl   = vib >= 80 ? 4 : vib >= 50 ? 3 : vib >= 20 ? 2 : 1;
+        const color = ['','rgba(74,222,128,.6)','rgba(251,191,36,.6)','rgba(251,146,60,.6)','rgba(248,113,113,.6)'][lvl];
+        const lbl   = (VIB_LABELS[_lang] || VIB_LABELS.en)[lvl];
+        const filled = '█'.repeat(lvl);
+        const empty  = '░'.repeat(4 - lvl);
+        return `<span class="ticker-vib hide-sm"><span class="ticker-vib-bars" style="color:${color}">${filled}<span style="color:rgba(240,237,232,.12)">${empty}</span></span><span class="ticker-vib-val" style="color:${color}">${lbl}</span></span>`;
+      })()}
+    </div>`;
+  }).join('');
+}
+
+// ── Build night timeline ──
+function buildNightTimeline() {
+  const el = document.getElementById('nightTimeline');
+  const slots = [];
+  for (let h = 0; h < 6; h++) {
+    for (let m = 0; m < 60; m += 10) {
+      const mins = h * 60 + m;
+      const isAllowed = mins <= 30 || mins >= 300;
+      slots.push(`<div class="night-slot ${isAllowed ? 'allowed' : 'restricted'}" title="${String(h).padStart(2,'0')}h${String(m).padStart(2,'0')}"></div>`);
+    }
+  }
+  el.innerHTML = slots.join('');
+}
+
+// ── Build last infraction card ──
+function buildLastInfraction(s) {
+  const el = document.getElementById('lastInfractionCard');
+  if (!s.last_infraction_callsign) {
+    el.innerHTML = `<div class="violation-card"><div class="violation-badge ok">✓ Clear</div><div class="violation-info"><div class="violation-title">No violations recorded this period</div></div></div>`;
+    return;
+  }
+  const type = s.last_infraction_type || 'l2';
+  const ts = s.last_infraction_time ? s.last_infraction_time.slice(0,16).replace('T',' ') : '—';
+  const tV = T[_lang] || T['en'];
+  const badge = type === 'critical' ? (tV.badge_critical||'🔴 Critical') : (tV.badge_l2||'🟡 Level 2');
+  const desc  = type === 'critical' ? (tV.desc_critical||'Above 98.9 dB between midnight and 6am — unconditionally prohibited') : (tV.desc_l2||'93–95.9 dB during restricted night window');
+  el.innerHTML = `
+    <div class="section-label" style="margin-bottom:12px">${tV.last_violation||'Last recorded violation'}</div>
+    <div class="violation-card ${type}">
+      <div class="violation-badge ${type}">${badge}</div>
+      <div class="violation-info">
+        <div class="violation-title">${s.last_infraction_airline || s.last_infraction_callsign} · ${s.last_infraction_callsign}</div>
+        <div class="violation-desc">${ts} · ${desc}</div>
+      </div>
+      <div>
+        <div class="violation-db">${fmtDb(s.last_infraction_db)}</div>
+        <div class="violation-db-lbl">${tV.recorded_spl||'recorded SPL'}</div>
+      </div>
+    </div>`;
+}
+
+// ── Load Gist ──
+fetch(GIST_URL + '?t=' + Date.now())
+  .then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
+  .then(data => {
+    const s = data.stats || {};
+
+    // Section 1 — flight stats
+    document.getElementById('s1-flights').textContent = fmt(s.total_flights);
+    document.getElementById('s1-photos').textContent = fmt(s.total_photos);
+    const pct = s.total_flights ? Math.round(s.total_photos / s.total_flights * 100) : 0;
+    document.getElementById('s1-photos-pct').textContent = pct + '% detection rate';
+    document.getElementById('s1-today').textContent = fmt(s.active_today);
+    document.getElementById('s1-rush').textContent = s.rush_hour != null ? 'rush hour: ' + s.rush_hour + 'h' : 'rush hour: —';
+    document.getElementById('s1-loud').textContent = fmt(s.loud_flights_95db);
+
+    // Section 2 — noise
+    buildNoiseChart(data.noise_by_hour);
+    document.getElementById('n-peak-db').textContent = fmtDb(s.peak_today_db);
+    // mini stats (right column)
+    document.getElementById('n-avg-today').textContent = fmtDb(s.peak_noise_db);  // all-time peak
+    document.getElementById('n-flights-today').textContent = fmt(s.active_today);
+    document.getElementById('n-rush').textContent = s.rush_hour != null ? s.rush_hour + 'h' : '—';
+    // info cards
+    document.getElementById('n-peak-all').textContent = fmtDb(s.peak_noise_db);
+    document.getElementById('n-peak-flight').textContent = s.peak_noise_flight || '—';
+    document.getElementById('n-loud').textContent = fmt(s.loud_flights_95db);
+    document.getElementById('n-avg-night').textContent = fmtDb(s.avg_night_db);
+
+    // Section 3 — warning zone
+    const wNight = document.getElementById('w-night-total');
+    const wCrit = document.getElementById('w-critical');
+    const wL2 = document.getElementById('w-l2');
+    const nightCount = s.night_flights_week || 0;
+    const critCount  = s.night_infraction_critical || 0;
+    const l2Count    = s.night_infraction_l2 || 0;
+    wNight.textContent = fmt(nightCount);
+    wCrit.textContent  = fmt(critCount);
+    wL2.textContent    = fmt(l2Count);
+    if (critCount === 0) wCrit.classList.add('ok');
+    if (l2Count   === 0) wL2.classList.add('ok');
+    const tW = T[_lang] || T['en'];
+    if (s.night_week_from) document.getElementById('w-week-from').textContent = (tW.since||'since') + ' ' + s.night_week_from;
+
+    // Night flights — progress bar vs 91/week limit
+    const NIGHT_LIMIT = 91;
+    const isOver = nightCount > NIGHT_LIMIT;
+    const fill = document.getElementById('w-night-fill');
+    if (fill) {
+      fill.style.width = Math.min((nightCount / NIGHT_LIMIT) * 100, 100) + '%';
+      fill.className = 'warning-progress-fill ' + (isOver ? 'over' : 'safe');
+    }
+    const limitEl = document.getElementById('w-night-limit');
+    if (limitEl) {
+      limitEl.style.color = 'rgba(94,165,240,.45)';
+      limitEl.textContent = isOver
+        ? (tW.limit_exceeded||'Limit: ').replace('{n}', NIGHT_LIMIT).replace('{x}', nightCount - NIGHT_LIMIT)
+        : (tW.limit_ok||'Limit: ').replace('{n}', NIGHT_LIMIT);
+    }
+
+    // Dynamic sub-text for critical & L2 (green ✓ when compliant)
+    const critSub = document.querySelector('.warning-stat.critical .warning-sub');
+    if (critSub) critSub.textContent = critCount === 0 ? (tW.compliant||'✓ compliant this week') : (tW.sub_critical||'> 98.9 dB · absolute ban');
+    const l2Sub = document.querySelector('.warning-stat.l2 .warning-sub');
+    if (l2Sub) l2Sub.textContent = l2Count === 0 ? (tW.compliant||'✓ compliant this week') : (tW.sub_l2||'93–95.9 dB outside allowed slots');
+
+    buildLastInfraction(s);
+
+    // Ticker
+    buildTicker(data.ticker);
+
+    // Footer
+    const gen = data.generated_at ? new Date(data.generated_at).toLocaleString('en-GB') : '—';
+    document.getElementById('footerUpdated').textContent = 'Updated: ' + gen;
+  })
+  .catch(err => {
+    console.error('Data load error:', err);
+    document.getElementById('tickerList').innerHTML = '<div class="ticker-empty">Data unavailable — check back shortly</div>';
+  });
+
+buildNightTimeline();
+
+// ── Sticky tab highlight on scroll ──
+const tabs = document.querySelectorAll('.section-tab');
+const sections = document.querySelectorAll('.data-section');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tabs.forEach(t => t.classList.remove('active'));
+      const tab = document.querySelector(`.section-tab[href="#${e.target.id}"]`);
+      if (tab) tab.classList.add('active');
+    }
+  });
+}, { rootMargin: '-120px 0px -50% 0px', threshold: 0 });
+sections.forEach(s => io.observe(s));
+
+// ── Nav ──
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+const drawer = document.getElementById('nav-drawer');
+function closeDrawer() {
+  drawer.classList.remove('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+document.getElementById('nav-burger').addEventListener('click', () => {
+  const open = drawer.classList.toggle('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+// ── i18n ──
+const T = {
+  en: {
+    tab_data:'The Data', tab_noise:'Noise Data', tab_warning:'⚠ Warning Zone',
+    s1_label:'Flight intelligence', s1_title:'The data<br><em>speaks for itself</em>',
+    s1_desc:'Every aircraft detected over our terrace since May 3, 2026 — ADS-B telemetry combined with real-time acoustic measurements.',
+    method_kicker:'How to read it',
+    method_copy:'These numbers are station observations, not official airport totals. They show what crosses this terrace, from one fixed point, using consistent local sensors.',
+    method_flow1:'ADS-B telemetry', method_flow2:'Sound + vibration peaks', method_flow3:'Photo evidence + public log',
+    method_s1_t:'Detect', method_s1_d:'ADS-B traffic identifies aircraft, altitude, speed, route and timing.',
+    method_s2_t:'Measure', method_s2_d:'Sound and vibration peaks are captured locally as the aircraft passes.',
+    method_s3_t:'Publish', method_s3_d:'The best photo and structured data are stored, scored and surfaced publicly.',
+    lbl_flights:'Flights tracked', lbl_since:'since May 3, 2026',
+    lbl_photos:'Photos captured', lbl_today:'Flights today',
+    lbl_loud:'Flights above 95 dB', lbl_loud_sub:'cumul. since May 3',
+    ticker_title:'Recent detections', ticker_live:'Live',
+    s2_label:'Acoustic monitoring', s2_title:'Noise data<br><em>for everyone</em>',
+    s2_desc:'Real SPL measurements taken at ground level on the terrace facing runway 03. Every pass, every decibel, fully timestamped.',
+    noise_report_link:'→ Full noise report',
+    chart_title:'Average dB by hour (today) · SPL',
+    lbl_peak_today:'Peak today', lbl_alltime_peak:'All-time peak',
+    lbl_flights_today:'Flights today', lbl_rush_hour:'Rush hour',
+    peak_title:'Noise record', lbl_peak_all:'All-time peak', lbl_peak_flight:'Loudest flight',
+    lbl_loud_total:'Flights >95 dB total', lbl_avg_night:'Avg night dB (this week)',
+    context_title:'Reference levels',
+    ref_conversation:'Normal conversation', ref_traffic:'City traffic',
+    ref_anac:'ANAC curfew threshold', ref_critical:'Critical violation', ref_station:'Station location',
+    legend_day:'Day (06h–22h)', legend_night:'Night (22h–06h)',
+    s3_label:'ANAC regulation monitoring', s3_title:'⚠ Warning<br><em>Zone</em>',
+    s3_desc:'Flights between midnight and 6am above ANAC dB thresholds are violations. This week\'s record:',
+    w_night_lbl:'Night flights this week', w_critical_lbl:'Critical violations', w_l2_lbl:'Level 2 violations',
+    timeline_title:'ANAC night curfew · 00h–06h · allowed slots in green',
+    legend_restricted:'Restricted (00h30–05h00)', legend_allowed:'Allowed (00h00–00h30 · 05h00–06h00)',
+    anac_note:'ANAC regulations apply to flights ≥ 93 dB SPL between midnight and 6am. Two allowed windows: 00h00–00h30 (last departures) and 05h00–06h00 (early arrivals). Critical violations ≥ 98.9 dB are unconditionally prohibited.',
+    rule1_title:'Curfew 00:00–06:00', rule1_desc:'Max 91 movements/week · 26/day. No scheduled flights during the night period.',
+    rule2_title:'Noisy Aircraft Ban', rule2_desc:'Aircraft >98.9 EPNdB (Levels 8 & 16) strictly prohibited at night.',
+    rule3_title:'Level 2 Restriction', rule3_desc:'93–95.9 EPNdB aircraft: only 00:00–00:30 and 05:00–06:00 allowed.',
+    rule4_title:'Reverse Thrust Banned', rule4_desc:'Landing reverse thrust is strictly forbidden except in emergencies.',
+    last_violation:'Last recorded violation',
+    badge_critical:'🔴 Critical', badge_l2:'🟡 Level 2',
+    desc_critical:'Above 98.9 dB between midnight and 6am — unconditionally prohibited',
+    desc_l2:'93–95.9 dB during restricted night window',
+    recorded_spl:'recorded SPL',
+    since:'since',
+    limit_exceeded:'Limit: {n}/week · exceeded by {x}', limit_ok:'Limit: {n}/week · within quota',
+    compliant:'✓ compliant this week', sub_critical:'> 98.9 dB · absolute ban', sub_l2:'93–95.9 dB outside allowed slots',
+    footer:'LISBON FINALS · Data Intelligence · lisbonfinals.com',
+    tab_archive_teaser:'Archive',
+    archive_teaser_label:'Explore further', archive_teaser_title:'Every flight<br><em>cross-referenced</em>',
+    archive_teaser_desc:'The numbers above already cover the station\'s complete history. The Archive goes further — cross-referenced by aircraft model, airline, night regulation, and air quality, with full photo galleries for each.',
+    archive_teaser_link:'→ Explore the full archive'
+  },
+  pt: {
+    tab_data:'Os Dados', tab_noise:'Dados de Ruído', tab_warning:'⚠ Zona de alerta',
+    s1_label:'Inteligência de voo', s1_title:'Os dados<br><em>falam por si</em>',
+    s1_desc:'Cada aeronave detetada sobre a varanda desde 3 de maio de 2026 — telemetria ADS-B combinada com medições acústicas em tempo real.',
+    method_kicker:'Como ler',
+    method_copy:'Estes números são observações da estação, não totais oficiais do aeroporto. Mostram o que passa sobre esta varanda, a partir de um ponto fixo e sempre com os mesmos sensores locais.',
+    method_flow1:'Telemetria ADS-B', method_flow2:'Picos de som + vibração', method_flow3:'Foto + registo público',
+    method_s1_t:'Detectar', method_s1_d:'O tráfego ADS-B identifica aeronave, altitude, velocidade, rota e horário.',
+    method_s2_t:'Medir', method_s2_d:'Picos de som e vibração são captados localmente no momento da passagem.',
+    method_s3_t:'Publicar', method_s3_d:'A melhor foto e os dados estruturados são guardados, pontuados e apresentados publicamente.',
+    lbl_flights:'Voos registados', lbl_since:'desde 3 de maio de 2026',
+    lbl_photos:'Fotos capturadas', lbl_today:'Voos hoje',
+    lbl_loud:'Voos acima de 95 dB', lbl_loud_sub:'acumul. desde 3 maio',
+    ticker_title:'Deteções recentes', ticker_live:'Ao vivo',
+    s2_label:'Monitorização acústica', s2_title:'Dados de ruído<br><em>para todos</em>',
+    s2_desc:'Medições SPL reais ao nível do solo na varanda virada para a pista 03. Cada passagem, cada decibel, totalmente registado.',
+    noise_report_link:'→ Relatório completo de ruído',
+    chart_title:'dB médio por hora (hoje) · SPL',
+    lbl_peak_today:'Pico hoje', lbl_alltime_peak:'Pico histórico',
+    lbl_flights_today:'Voos hoje', lbl_rush_hour:'Hora de pico',
+    peak_title:'Registo de ruído', lbl_peak_all:'Pico histórico', lbl_peak_flight:'Voo mais ruidoso',
+    lbl_loud_total:'Voos >95 dB total', lbl_avg_night:'Média noturna dB (esta semana)',
+    context_title:'Níveis de referência',
+    ref_conversation:'Conversa normal', ref_traffic:'Tráfego urbano',
+    ref_anac:'Limiar ANAC', ref_critical:'Infração crítica', ref_station:'Localização da estação',
+    legend_day:'Dia (06h–22h)', legend_night:'Noite (22h–06h)',
+    s3_label:'Monitorização ANAC', s3_title:'⚠ Zona de<br><em>alerta</em>',
+    s3_desc:'As operações observadas entre a meia-noite e as 6h são comparadas com critérios acústicos de alerta. Este é um registo independente, não uma decisão oficial sobre infrações. Balanço desta semana:',
+    w_night_lbl:'Voos noturnos esta semana', w_critical_lbl:'Alertas críticos', w_l2_lbl:'Alertas de nível 2',
+    timeline_title:'Recolher ANAC · 00h–06h · janelas permitidas a verde',
+    legend_restricted:'Restrito (00h30–05h00)', legend_allowed:'Permitido (00h00–00h30 · 05h00–06h00)',
+    anac_note:'A regulamentação ANAC aplica-se a voos ≥ 93 dB SPL entre meia-noite e as 6h. Duas janelas permitidas: 00h00–00h30 (últimas partidas) e 05h00–06h00 (primeiras chegadas). Infrações críticas ≥ 98.9 dB são incondicionalmente proibidas.',
+    rule1_title:'Recolher 00:00–06:00', rule1_desc:'Máx. 91 movimentos/semana · 26/dia. Sem voos programados durante o período noturno.',
+    rule2_title:'Proibição de Aeronaves Ruidosas', rule2_desc:'Aeronaves >98,9 EPNdB (Níveis 8 e 16) estritamente proibidas à noite.',
+    rule3_title:'Restrição Nível 2', rule3_desc:'Aeronaves 93–95,9 EPNdB: apenas 00h00–00h30 e 05h00–06h00 permitidas.',
+    rule4_title:'Thrust Reverso Proibido', rule4_desc:'O thrust reverso na aterragem é estritamente proibido, exceto em emergências.',
+    last_violation:'Último alerta registado',
+    badge_critical:'🔴 Crítica', badge_l2:'🟡 Nível 2',
+    desc_critical:'Acima de 98,9 dB entre meia-noite e as 6h — incondicionalmente proibido',
+    desc_l2:'93–95,9 dB durante a janela noturna restrita',
+    recorded_spl:'SPL registado',
+    since:'desde',
+    limit_exceeded:'Limite: {n}/semana · excedido em {x}', limit_ok:'Limite: {n}/semana · dentro da quota',
+    compliant:'✓ conforme esta semana', sub_critical:'> 98,9 dB · proibição absoluta', sub_l2:'93–95,9 dB fora dos horários permitidos',
+    footer:'LISBON FINALS · Dados · lisbonfinals.com',
+    tab_archive_teaser:'Arquivo',
+    archive_teaser_label:'Explorar mais', archive_teaser_title:'Cada voo<br><em>analisado em detalhe</em>',
+    archive_teaser_desc:'Os números acima já cobrem o histórico completo da estação. O Arquivo vai mais longe — cruzando modelo de aeronave, companhia aérea, regulamentação noturna e qualidade do ar, com galerias de fotos completas associadas a cada seleção.',
+    archive_teaser_link:'→ Explorar o arquivo completo'
+  },
+  fr: {
+    s1_label:'Vols détectés', s1_title:'Les données<br><em>parlent d\'elles-mêmes</em>',
+    s1_desc:'Chaque aéronef détecté au-dessus de notre terrasse depuis le 3 mai 2026 — télémétrie ADS-B combinée avec des mesures acoustiques en temps réel.',
+    method_kicker:'Comment lire',
+    method_copy:'Ces chiffres proviennent des observations réalisées par la station, et non des totaux officiels de l’aéroport. Ils montrent ce qui passe au-dessus de cette terrasse, depuis un point fixe et toujours avec les mêmes capteurs locaux.',
+    method_flow1:'Télémétrie ADS-B', method_flow2:'Pics son + vibration', method_flow3:'Photo + registre public',
+    method_s1_t:'Détecter', method_s1_d:'Le trafic ADS-B identifie avion, altitude, vitesse, route et horaire.',
+    method_s2_t:'Mesurer', method_s2_d:'Les pics de son et de vibration sont captés localement au passage de l’appareil.',
+    method_s3_t:'Publier', method_s3_d:'La meilleure photo et les données structurées sont stockées, scorées et rendues publiques.',
+    ticker_title:'Détections récentes', ticker_live:'En direct',
+    lbl_total:'Vols totaux', lbl_flights:'Vols suivis', lbl_since:'depuis le 3 mai 2026',
+    lbl_today:'Vols aujourd\'hui', lbl_loud:'Vols au-dessus de 95 dB',
+    lbl_loud_sub:'cumul depuis le 3 mai', lbl_photos:'Photos capturées',
+    s2_label:'Surveillance acoustique', s2_title:'Données acoustiques<br><em>pour tous</em>',
+    s2_desc:'Mesures SPL réelles au niveau du sol sur la terrasse face à la piste 03. Chaque passage, chaque décibel, horodaté.',
+    chart_title:'dB moyen par heure (aujourd\'hui) · SPL',
+    lbl_peak_today:'Pic aujourd\'hui', lbl_avg_today:'Moyenne aujourd\'hui',
+    lbl_alltime_peak:'Pic historique',
+    lbl_peak_all:'Pic historique', lbl_loud_total:'Vols >95 dB au total',
+    lbl_avg_night:'dB moyen nocturne (cette semaine)',
+    ref_conversation:'Conversation normale', ref_traffic:'Circulation urbaine',
+    ref_anac:'Seuil couvre-feu ANAC', ref_critical:'Violation critique',
+    s3_label:'Surveillance ANAC', s3_title:'⚠ Zone<br><em>d\'alerte</em>',
+    s3_desc:'Les opérations observées entre minuit et 6h sont comparées à des critères acoustiques d’alerte. Il s’agit d’un relevé indépendant, et non d’une qualification officielle des infractions. Bilan de la semaine :',
+    w_night_lbl:'Vols nocturnes cette semaine', w_critical_lbl:'Alertes critiques', w_l2_lbl:'Alertes de niveau 2',
+    timeline_title:'Couvre-feu ANAC · 00h–06h · créneaux autorisés en vert',
+    legend_restricted:'Interdit (00h30–05h00)', legend_allowed:'Autorisé (00h00–00h30 · 05h00–06h00)',
+    anac_note:'La réglementation ANAC s\'applique aux vols ≥ 93 dB SPL entre minuit et 6h. Deux créneaux autorisés : 00h00–00h30 (derniers départs) et 05h00–06h00 (premières arrivées). Les infractions critiques ≥ 98.9 dB sont inconditionnellement interdites.',
+    footer:'LISBON FINALS · Données · lisbonfinals.com',
+    tab_data:'Les données', tab_noise:'Données acoustiques', tab_warning:'⚠ Zone d\'alerte',
+    rule1_title:'Couvre-feu 00:00–06:00', rule1_desc:'Max 91 mouvements/semaine · 26/jour. Aucun vol commercial pendant la période nocturne.',
+    rule2_title:'Interdiction d\'appareils bruyants', rule2_desc:'Aéronefs >98,9 EPNdB (Niveaux 8 et 16) strictement interdits la nuit.',
+    rule3_title:'Restriction Niveau 2', rule3_desc:'Appareils 93–95,9 EPNdB : uniquement 00h00–00h30 et 05h00–06h00 autorisés.',
+    rule4_title:'Inverseurs de poussée interdits', rule4_desc:'L\'utilisation des inverseurs à l\'atterrissage est strictement interdite sauf urgence.',
+    last_violation:'Dernière alerte enregistrée',
+    badge_critical:'🔴 Critique', badge_l2:'🟡 Niveau 2',
+    desc_critical:'Au-dessus de 98,9 dB entre minuit et 6h — inconditionnellement interdit',
+    desc_l2:'93–95,9 dB pendant la plage nocturne restreinte',
+    recorded_spl:'SPL mesuré',
+    since:'depuis le',
+    limit_exceeded:'Limite : {n}/semaine · dépassé de {x}', limit_ok:'Limite : {n}/semaine · dans les quotas',
+    compliant:'✓ conforme cette semaine', sub_critical:'> 98,9 dB · interdiction absolue', sub_l2:'93–95,9 dB hors créneaux autorisés',
+    tab_archive_teaser:'Archives',
+    archive_teaser_label:'Aller plus loin', archive_teaser_title:'Chaque vol<br><em>recoupé en détail</em>',
+    archive_teaser_desc:'Les chiffres ci-dessus couvrent déjà tout l\'historique de la station. Les archives permettent d’aller plus loin en recoupant modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo correspondant à chaque sélection.',
+    archive_teaser_link:'→ Explorer les archives complètes'
+  }
+};
+
+let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
+function applyLang(lang) {
+  if (!T[lang]) return;
+  _lang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
+  localStorage.setItem('lf_lang', lang);
+  const t = T[lang];
+  ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    if (t[el.dataset.i18n] != null) el.textContent = t[el.dataset.i18n];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    if (t[el.dataset.i18nHtml] != null) el.innerHTML = t[el.dataset.i18nHtml];
+  });
+  const fl = document.getElementById('footerLeft');
+  if (fl) fl.textContent = t.footer;
+}
+function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[_lang]||'en'); }
+applyLang(_lang);
+
+// ── Lisbon clock ──
+(function navClock(){
+  const el = document.getElementById('nav-clock');
+  if (!el) return;
+  function tick(){
+    const now = new Date();
+    const s = now.toLocaleTimeString('pt-PT',{timeZone:'Europe/Lisbon',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    el.innerHTML = s + '<span class="nav-clock-tz">LIS</span>';
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+<script data-goatcounter="https://lisbonfinals.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
