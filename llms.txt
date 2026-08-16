@@ -1,0 +1,25 @@
+# Lisbon Finals
+
+Lisbon Finals is an independent, autonomous aircraft-spotting and local acoustic-observation station on a residential terrace below the Lisbon Airport (LPPT) approach corridor.
+
+The project publishes local observations, not official airport totals, certified airport noise mapping, or regulatory decisions. Measurements describe one fixed observation point in Lisbon.
+
+## Core pages
+
+- Live station: https://www.lisbonfinals.com/
+- Data and methodology: https://www.lisbonfinals.com/data.html
+- Historical archive: https://www.lisbonfinals.com/archive.html
+- Monthly noise reports: https://www.lisbonfinals.com/noise-report.html
+- Captain's Log: https://www.lisbonfinals.com/log.html
+- Project and hardware: https://www.lisbonfinals.com/about.html
+- Finals Network: https://www.lisbonfinals.com/host-a-node.html
+
+## Languages
+
+- English: https://www.lisbonfinals.com/en/
+- Portuguese (Portugal): https://www.lisbonfinals.com/pt/
+- French: https://www.lisbonfinals.com/fr/
+
+## Reuse
+
+Published dashboards, reports and imagery are released under CC BY 4.0 with attribution to Lisbon Finals.
