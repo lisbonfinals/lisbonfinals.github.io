@@ -1,16 +1,116 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Noise Report is Live — Lisbon Finals</title><meta name="description" content="Tonight we shipped something genuinely worth documenting. Started with a simple idea: a downloadable monthly PDF. Ended up building a full public noise observ">
-<link rel="canonical" href="https://www.lisbonfinals.com/journal/2026-06-02-the-noise-report-is-live.html"><link rel="stylesheet" href="/site-core.css">
+<link rel="canonical" href="https://www.lisbonfinals.com/journal/2026-06-02-the-noise-report-is-live.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site-core.css"><script src="/site-core.js"></script>
 <meta property="og:type" content="article"><meta property="og:title" content="The Noise Report is Live"><meta property="og:description" content="Tonight we shipped something genuinely worth documenting. Started with a simple idea: a downloadable monthly PDF. Ended up building a full public noise observ"><meta property="og:url" content="https://www.lisbonfinals.com/journal/2026-06-02-the-noise-report-is-live.html">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The Noise Report is Live","datePublished":"2026-06-02T00:14:00+01:00","dateModified":"2026-06-02T00:14:00+01:00","mainEntityOfPage":"https://www.lisbonfinals.com/journal/2026-06-02-the-noise-report-is-live.html","url":"https://www.lisbonfinals.com/journal/2026-06-02-the-noise-report-is-live.html","author":{"@type":"Person","name":"The Captain"},"publisher":{"@type":"Organization","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/"},"articleSection":"milestone","inLanguage":"en","spatialCoverage":"Lisbon, Portugal"}</script>
-<style>:root{--bg:#07090d;--white:#f0ede8;--amber:#f5a623;--muted:rgba(240,237,232,.58);--border:rgba(245,166,35,.2)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,sans-serif}.plain-nav{height:78px;padding:0 clamp(22px,5vw,74px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}.plain-nav a{color:var(--white);text-decoration:none;font:600 12px monospace;letter-spacing:.14em}.plain-nav b,.article-kicker,em{color:var(--amber)}.article-shell{width:min(820px,calc(100% - 40px));margin:0 auto;padding:90px 0}.article-kicker{font:11px monospace;letter-spacing:.14em;text-transform:uppercase}h1{font:clamp(48px,8vw,88px)/.96 Georgia,serif;font-weight:400;margin:24px 0}h1 em{font-weight:400}.article-rule{height:1px;background:var(--border);margin:38px 0}article{font:18px/1.8 Georgia,serif;color:rgba(240,237,232,.84)}article p{margin:0 0 26px}.method-note{padding:20px;border-left:2px solid var(--amber);color:var(--muted)}footer{margin-top:54px;padding-top:24px;border-top:1px solid var(--border);font:11px/1.7 monospace;color:var(--muted)}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 46px}.metric-grid div{padding:20px 14px;border:1px solid var(--border);background:rgba(245,166,35,.03)}.metric-grid b,.metric-grid span{display:block}.metric-grid b{font:28px Georgia,serif;color:var(--amber)}.metric-grid span{font:10px/1.4 monospace;color:var(--muted);margin-top:8px}.download{display:inline-block;margin-top:18px;padding:14px 18px;border:1px solid var(--amber);color:var(--amber);text-decoration:none;font:11px monospace;letter-spacing:.1em;text-transform:uppercase}@media(max-width:700px){.article-shell{padding:58px 0}.metric-grid{grid-template-columns:repeat(2,1fr)}}</style></head><body><header class="plain-nav"><a href="/">LISBON <b>FINALS</b></a><a href="/log.html">← Captain's Log</a></header>
-<main class="article-shell"><div class="article-kicker">milestone · 2026-06-02 00:14</div>
-<h1>The Noise Report is Live</h1><div class="article-rule"></div><article><p>Tonight we shipped something genuinely worth documenting.</p>
+<style>:root{--black:#07090d;--dark:#0a0d12;--dark2:#0d1117;--border:#1e2530;--amber:#f5a623;--white:#f0ede8;--sans:'Syne',sans-serif;--mono:'JetBrains Mono',monospace;--serif:'Instrument Serif',serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--white);font-family:var(--sans);overflow-x:hidden}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,9,13,.98),transparent);backdrop-filter:blur(4px)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-dot{width:28px;height:28px;border:1.5px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+.nav-dot::after{content:'';width:10px;height:12px;background:var(--amber);position:absolute;top:50%;left:50%;transform:translate(-50%,-60%) rotate(-20deg);clip-path:polygon(50% 0%,65% 85%,50% 72%,35% 85%)}
+.nav-wordmark{font-size:13px;font-family:var(--mono);font-weight:500;letter-spacing:.12em;color:var(--white);text-transform:uppercase}
+.nav-wordmark span{color:var(--amber)}
+.nav-links{display:flex;gap:36px;list-style:none;margin-left:auto}
+.nav-links a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.55);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.nav-active{color:var(--amber)}
+.nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12)}
+.nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap}
+.nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:12px}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px}
+.nav-drawer{display:none;flex-direction:column;gap:32px;position:fixed;inset:0;z-index:99;background:rgba(7,9,13,.97);backdrop-filter:blur(12px);align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.nav-drawer.open{display:flex;opacity:1;pointer-events:all}
+.nav-drawer a{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.6);text-decoration:none;transition:color .2s}
+.nav-drawer a:hover{color:var(--white)}
+@media (max-width:1150px){.nav-links{display:none}.nav-burger{display:flex}}
+@media (max-width:640px){nav{padding-left:20px;padding-right:20px}.nav-clock-wrap{margin-left:auto;padding-left:14px;gap:8px}.nav-clock{display:none}}
+.page-footer{border-top:1px solid var(--border);padding:32px 48px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-left{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);letter-spacing:.08em}
+.footer-back{font-family:var(--mono);font-size:10px;color:var(--amber);text-decoration:none;letter-spacing:.08em}
+.footer-back:hover{text-decoration:underline}
+@media(max-width:640px){.page-footer{padding:24px 20px}}
+.article-shell{width:min(760px,calc(100% - 40px));margin:0 auto;padding:150px 0 90px}
+.back-link{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.4);text-decoration:none;margin-bottom:28px;transition:color .2s}
+.back-link:hover{color:var(--amber)}
+.article-kicker{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.article-date{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(240,237,232,.33)}
+.log-cat{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:3px;border:1px solid rgba(240,237,232,0.1);color:rgba(240,237,232,0.5)}
+.log-cat-fix{border-color:rgba(96,165,250,.3);color:#93c5fd}
+.log-cat-capture{border-color:rgba(52,211,153,.3);color:#6ee7b7}
+.log-cat-hardware{border-color:rgba(251,146,60,.3);color:#fdb57a}
+.log-cat-rare{border-color:rgba(245,166,35,.4);color:var(--amber)}
+.log-cat-stats{border-color:rgba(167,139,250,.3);color:#c4b5fd}
+.log-cat-note{border-color:rgba(240,237,232,.15);color:rgba(240,237,232,.5)}
+.log-cat-milestone{background:var(--amber);border-color:var(--amber);color:#000;font-weight:800;letter-spacing:.18em}
+.article-title{font-family:var(--sans);font-weight:800;font-size:clamp(32px,5.5vw,52px);line-height:1.1;letter-spacing:-.02em;color:var(--white)}
+.article-rule{height:1px;background:var(--border);margin:32px 0 40px}
+.article-body{font-family:var(--sans);font-size:16px;line-height:1.85;color:rgba(240,237,232,.68)}
+.article-body p{margin:0 0 24px}
+.article-body p:last-child{margin-bottom:0}
+.article-sig{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:rgba(240,237,232,.33)}
+.method-note{margin-top:24px;padding:18px 20px;border-left:2px solid var(--amber);color:rgba(240,237,232,.45);font-size:13px;line-height:1.7;background:rgba(245,166,35,.03)}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:0 0 40px}
+.metric-grid div{background:var(--dark2);padding:22px 16px}
+.metric-grid b{display:block;font-family:var(--mono);font-size:26px;font-weight:500;color:var(--amber)}
+.metric-grid span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.35);margin-top:8px}
+@media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
+.dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}</style></head><body>
+<nav aria-label="Primary navigation">
+  <a href="/" class="nav-logo"><div class="nav-dot"></div><span class="nav-wordmark">LISBON <span>FINALS</span></span></a>
+  <ul class="nav-links"><li><a href="/">Live</a></li><li><a href="/data.html">Data</a></li><li><a href="/archive.html">Archive</a></li><li><a href="/noise-report.html">Noise Report</a></li><li><a href="/log.html" class="nav-active">Captain's Log</a></li><li><a href="/about.html">About</a></li></ul>
+  <div class="nav-clock-wrap"><span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span></div>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="/" onclick="closeDrawer()">Live</a>
+  <a href="/data.html" onclick="closeDrawer()">Data</a>
+  <a href="/archive.html" onclick="closeDrawer()">Archive</a>
+  <a href="/noise-report.html" onclick="closeDrawer()">Noise Report</a>
+  <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
+  <a href="/about.html" onclick="closeDrawer()">About</a>
+</div>
+<main class="article-shell">
+<a href="/log.html" class="back-link">← Captain's Log</a>
+<div class="article-kicker"><span class="log-cat log-cat-milestone">🏆 Milestone</span><span class="article-date">2026-06-02 00:14</span></div>
+<h1 class="article-title">The Noise Report is Live</h1><div class="article-rule"></div>
+<article class="article-body"><p>Tonight we shipped something genuinely worth documenting.</p>
 <p>Started with a simple idea: a downloadable monthly PDF. Ended up building a full public noise observatory for Lisbon airport — live at lisbonfinals.github.io/noise-report.html.</p>
 <p>The May 2026 numbers are striking. 10,290 flights over this terrace. Average 89.9 dB. 422 night violations. And the finding that matters: 100% of night violations are arrivals. Every single one. Runway 03 sends planes straight over the city at 160 meters, every night, while Lisbon sleeps.</p>
 <p>Business jets are louder than commercial aircraft. The Gulfstream IV-SP tops the charts at 96.1 dB — beating every Airbus and Boeing in the dataset. Nobody talks about this.</p>
 <p>The pipeline now runs end to end. Pi captures the flight. PDF generated. Uploaded to GitHub Pages. Gist updated. Public page refreshes. One command.</p>
 <p>Microphone still capped at 100 dB. The real data comes when the outdoor station goes live in June. That is when this page becomes a genuine reference.</p>
 <p>For now — May 2026 is documented. Permanently. Publicly. Flight by flight.</p></article>
-<footer>— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</footer></main></body></html>
+<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
+</main>
+<footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
+<script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+const drawer = document.getElementById('nav-drawer');
+function closeDrawer() {
+  drawer.classList.remove('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', 'false');
+}
+document.getElementById('nav-burger').addEventListener('click', () => {
+  const open = drawer.classList.toggle('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+(function navClock(){
+  const el = document.getElementById('nav-clock');
+  if (!el) return;
+  function tick(){
+    const now = new Date();
+    const s = now.toLocaleTimeString('pt-PT',{timeZone:'Europe/Lisbon',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    el.innerHTML = s + '<span class="nav-clock-tz">LIS</span>';
+  }
+  tick();
+  setInterval(tick, 1000);
+})();</script>
+</body></html>
