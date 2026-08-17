@@ -309,11 +309,17 @@ hr.section-divider{max-width:1200px;margin:0 auto;padding:0 48px;border:none;bor
     </div>
   </div>
 
+  <div class="section-label" style="margin-top:36px;margin-bottom:0;" data-i18n="hn_sourcing_label">Two ways to get there</div>
+  <div class="rule-panel" style="margin-top:16px;">
+    <div class="rule-row"><span class="led amber"></span><span class="rule-label" data-i18n="hn_sourcing1_label">Self-build</span><span class="rule-value" data-i18n="hn_sourcing1_value">Every part above is available on Amazon. You buy it, you assemble it. Wiring diagrams and setup guidance from us are coming.</span></div>
+    <div class="rule-row"><span class="led blue"></span><span class="rule-label" data-i18n="hn_sourcing2_label">Turnkey build</span><span class="rule-value" data-i18n="hn_sourcing2_value">We source, assemble and configure the whole unit for you, ready to plug in. Costs more, quoted case by case.</span></div>
+  </div>
+
   <div class="budget-row">
-    <span class="budget-label" data-i18n="hn_budget_label">Estimated budget</span>
+    <span class="budget-label" data-i18n="hn_budget_label">Estimated budget · self-build</span>
     <span class="budget-value" id="total">480&nbsp;€</span>
   </div>
-  <p class="caption" data-i18n="hn_caption">Rough numbers, not a quote. Tap the optional cards above. Exact costs get confirmed before you order anything.</p>
+  <p class="caption" data-i18n="hn_caption">Rough numbers, not a quote. Tap the optional cards above. Want it turnkey instead? Mention it when you apply. It's priced individually.</p>
 </section>
 
 <hr class="section-divider">
@@ -334,7 +340,7 @@ hr.section-divider{max-width:1200px;margin:0 auto;padding:0 48px;border:none;bor
 <section class="data-section" id="location">
   <div class="section-label" data-i18n="hn_s3_label">Finding your approach</div>
   <h2 class="section-title" data-i18n-html="hn_s3_title">Not every<br><em>rooftop helps</em></h2>
-  <p class="section-desc" data-i18n="hn_s3_desc" style="max-width:680px;">Proximity to an airport matters, but it isn't the deciding factor. Complementary coverage matters more than proximity alone. A different runway, another stretch of the same corridor, or coverage beyond an existing node: that's what actually extends the record.</p>
+  <p class="section-desc" data-i18n="hn_s3_desc" style="max-width:680px;">Proximity to an airport matters, but it isn't the deciding factor. Each airport gets a maximum of two nodes, positioned to cover different sides of the approach, not the same view twice. It's also why this is a long-term commitment: once both spots are filled, the next opening can be a long wait.</p>
   <div class="diagram diagram-photo">
     <div class="diagram-media">
       <img src="ressources/host-node-aligned-a-16x9-v2.png" alt="Two aircraft moving in the same direction along one runway corridor, with amber and blue paths representing complementary station coverage" loading="lazy">
@@ -446,8 +452,13 @@ const T = {
     hn_item_vibration_desc:'Measures what the building feels, not just hears.',
     hn_item_airquality_desc:'Particulate readings alongside every flight.',
     hn_required:'Required', hn_optional:'Optional',
-    hn_budget_label:'Estimated budget',
-    hn_caption:'Rough numbers, not a quote. Tap the optional cards above. Exact costs get confirmed before you order anything.',
+    hn_sourcing_label:'Two ways to get there',
+    hn_sourcing1_label:'Self-build',
+    hn_sourcing1_value:'Every part above is available on Amazon. You buy it, you assemble it. Wiring diagrams and setup guidance from us are coming.',
+    hn_sourcing2_label:'Turnkey build',
+    hn_sourcing2_value:'We source, assemble and configure the whole unit for you, ready to plug in. Costs more, quoted case by case.',
+    hn_budget_label:'Estimated budget · self-build',
+    hn_caption:"Rough numbers, not a quote. Tap the optional cards above. Want it turnkey instead? Mention it when you apply. It's priced individually.",
     hn_s2_label:"Who we're looking for",
     hn_s2_title:'The right<br><em>seat</em>',
     hn_s2_desc:"We're not after a weekend project. A node takes real time to install and keep calibrated, and real money before the first flight is ever logged. What we are after: someone who already looks up every time something loud goes over the house. If you know your ceiling's rattle by callsign, you're closer to qualified than you think.",
@@ -456,7 +467,7 @@ const T = {
     hn_stat3_val:'Long term', hn_stat3_lbl:'Commitment, like the record',
     hn_s3_label:'Finding your approach',
     hn_s3_title:'Not every<br><em>rooftop helps</em>',
-    hn_s3_desc:"Proximity to an airport matters, but it isn't the deciding factor. Complementary coverage matters more than proximity alone. A different runway, another stretch of the same corridor, or coverage beyond an existing node: that's what actually extends the record.",
+    hn_s3_desc:"Proximity to an airport matters, but it isn't the deciding factor. Each airport gets a maximum of two nodes, positioned to cover different sides of the approach, not the same view twice. It's also why this is a long-term commitment: once both spots are filled, the next opening can be a long wait.",
     hn_diagram_existing:'EXISTING NODE', hn_diagram_yours:'YOUR NODE?', hn_diagram_caption:'ONE CORRIDOR. TWO NODES.',
     hn_s4_label:'Ground rules',
     hn_s4_title:'Before<br><em>you say yes</em>',
@@ -501,8 +512,13 @@ const T = {
     hn_item_vibration_desc:'Mede o que o edifício sente, não apenas o que se ouve.',
     hn_item_airquality_desc:'Medições de partículas associadas a cada passagem.',
     hn_required:'Essencial', hn_optional:'Opcional',
-    hn_budget_label:'Orçamento estimado',
-    hn_caption:'Valores indicativos, não uma proposta fechada. Seleciona os cartões opcionais acima. Confirmamos os custos exatos antes de encomendares seja o que for.',
+    hn_sourcing_label:'Duas formas de montar o teu nó',
+    hn_sourcing1_label:'Montagem própria',
+    hn_sourcing1_value:'Todas as peças acima estão disponíveis na Amazon. Compras e montas tu mesmo. Vamos disponibilizar esquemas de ligação e apoio à instalação em breve.',
+    hn_sourcing2_label:'Chave-na-mão',
+    hn_sourcing2_value:'Tratamos de tudo: compramos, montamos e configuramos a unidade completa, pronta a ligar. Custa mais, e o valor é definido caso a caso.',
+    hn_budget_label:'Orçamento estimado · montagem própria',
+    hn_caption:'Valores indicativos, não uma proposta fechada. Seleciona os cartões opcionais acima. Preferes a versão chave-na-mão? Diz isso na tua candidatura, o preço é definido caso a caso.',
     hn_s2_label:'O perfil que procuramos',
     hn_s2_title:'O lugar do<br><em>copiloto</em>',
     hn_s2_desc:'Não procuramos um projeto de fim de semana. Instalar um nó, mantê-lo operacional e garantir que continua calibrado exige tempo — e um investimento real antes de o primeiro voo ser registado. Procuramos alguém que já olha para cima sempre que um avião barulhento passa sobre a casa. Se reconheces um voo pelas vibrações do teto, estás mais perto do perfil certo do que imaginas.',
@@ -511,7 +527,7 @@ const T = {
     hn_stat3_val:'Longo prazo', hn_stat3_lbl:'Um compromisso duradouro',
     hn_s3_label:'Encontrar a tua aproximação',
     hn_s3_title:'Nem todos<br><em>os telhados servem</em>',
-    hn_s3_desc:'Estar perto de um aeroporto importa, mas não é o fator decisivo. Uma cobertura complementar vale mais do que a simples proximidade. Outra pista, outro troço do mesmo corredor ou um ponto de observação para lá de um nó existente: é isso que alarga verdadeiramente o registo.',
+    hn_s3_desc:'Estar perto de um aeroporto importa, mas não é o fator decisivo. Cada aeroporto tem um limite de dois nós, posicionados para cobrir lados diferentes da aproximação, não o mesmo ângulo duas vezes. É também por isso que pedimos um compromisso de longo prazo: assim que as duas vagas estiverem ocupadas, a próxima pode demorar a aparecer.',
     hn_diagram_existing:'NÓ EXISTENTE', hn_diagram_yours:'O TEU NÓ?', hn_diagram_caption:'UM CORREDOR. DOIS NÓS.',
     hn_s4_label:'Regras essenciais',
     hn_s4_title:'Antes<br><em>de dizeres sim</em>',
@@ -556,8 +572,13 @@ const T = {
     hn_item_vibration_desc:'Mesure ce que le bâtiment subit, pas seulement ce que l’on entend.',
     hn_item_airquality_desc:'Mesures de particules associées à chaque passage.',
     hn_required:'Indispensable', hn_optional:'Facultatif',
-    hn_budget_label:'Budget estimé',
-    hn_caption:'Montants indicatifs, pas un devis. Sélectionne les cartes facultatives ci-dessus. Les coûts exacts seront confirmés avant toute commande.',
+    hn_sourcing_label:'Deux façons de monter ton nœud',
+    hn_sourcing1_label:'Montage maison',
+    hn_sourcing1_value:'Toutes les pièces ci-dessus sont disponibles sur Amazon. Tu achètes, tu montes toi-même. Les schémas de câblage et l’accompagnement à l’installation arrivent bientôt.',
+    hn_sourcing2_label:'Clé en main',
+    hn_sourcing2_value:'On s’occupe de tout : on achète, on assemble et on configure l’ensemble, prêt à brancher. Ça coûte plus cher, et le prix se discute au cas par cas.',
+    hn_budget_label:'Budget estimé · montage maison',
+    hn_caption:'Montants indicatifs, pas un devis. Sélectionne les cartes facultatives ci-dessus. Tu préfères la version clé en main ? Précise-le dans ta candidature, le prix se discute au cas par cas.',
     hn_s2_label:'Le profil recherché',
     hn_s2_title:'La place du<br><em>copilote</em>',
     hn_s2_desc:'On ne cherche pas un simple projet de week-end. Installer un nœud, le maintenir opérationnel et correctement étalonné demande du temps — ainsi qu’un véritable investissement avant même d’enregistrer le premier vol. On cherche quelqu’un qui lève déjà les yeux dès qu’un appareil bruyant passe au-dessus de la maison. Si tu reconnais un vol rien qu’aux vibrations du plafond, tu corresponds probablement déjà au profil.',
@@ -566,7 +587,7 @@ const T = {
     hn_stat3_val:'Long terme', hn_stat3_lbl:'Un engagement durable',
     hn_s3_label:'Trouver ton point de vue',
     hn_s3_title:'Tous les toits<br><em>ne se valent pas</em>',
-    hn_s3_desc:'Être proche d’un aéroport compte, mais ce n’est pas le facteur décisif. Une couverture complémentaire vaut davantage que la simple proximité. Une autre piste, une autre portion du même couloir ou un point d’observation au-delà d’un nœud existant : voilà ce qui enrichit réellement les données.',
+    hn_s3_desc:'Être proche d’un aéroport compte, mais ce n’est pas le facteur décisif. Chaque aéroport est limité à deux nœuds maximum, positionnés pour couvrir des angles différents de l’approche, pas le même point de vue en double. C’est aussi pour ça qu’on demande un engagement long terme : une fois les deux places prises, la prochaine ouverture peut se faire attendre.',
     hn_diagram_existing:'NŒUD EXISTANT', hn_diagram_yours:'TON NŒUD ?', hn_diagram_caption:'UN COULOIR. DEUX NŒUDS.',
     hn_s4_label:'Règles essentielles',
     hn_s4_title:'Avant<br><em>de dire oui</em>',
