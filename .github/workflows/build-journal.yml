@@ -1,0 +1,40 @@
+name: Build journal & report pages
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-journal
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate journal/report pages, sitemap and feed
+        run: node scripts/build-discovery.mjs
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "lisbonfinals-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add journal/ reports/ sitemap.xml feed.xml pt/ fr/ en/
+          if git diff --cached --quiet; then
+            echo "Nothing new to publish."
+          else
+            git commit -m "Auto-build: sync journal/report pages"
+            git push
+          fi
