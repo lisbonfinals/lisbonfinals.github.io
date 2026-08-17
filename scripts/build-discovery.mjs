@@ -72,12 +72,6 @@ async function buildLocalizedPages() {
       const source = await fs.readFile(path.join(root, file), 'utf8');
       await fs.writeFile(path.join(out, file), replaceMeta(source, lang, file));
     }
-    const assetOut = path.join(out, 'ressources');
-    await fs.mkdir(assetOut, { recursive: true });
-    await fs.copyFile(
-      path.join(root, 'assets', 'host-node-aligned-a-16x9-v2.png'),
-      path.join(assetOut, 'host-node-aligned-a-16x9-v2.png')
-    );
   }
 }
 
