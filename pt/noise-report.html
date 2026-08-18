@@ -917,7 +917,9 @@ function renderReport(report) {
       </div>
 
       <div class="hardware-note">
-        ${TRANSLATIONS[currentLang].hardware_note}
+        ${(report.year > 2026 || (report.year === 2026 && report.month >= 7))
+            ? TRANSLATIONS[currentLang].hardware_note_new
+            : TRANSLATIONS[currentLang].hardware_note_old}
       </div>
 
     </div>
@@ -1056,7 +1058,8 @@ const TRANSLATIONS = {
     archive_tag: 'All Reports', archive_title: 'Monthly', archive_title2: 'Archive',
     footer_left: 'LISBON FINALS · Noise Report · lisbonfinals.com',
     footer_right: 'Not affiliated with ANA Aeroportos or ANAC',
-    hardware_note: 'Readings come from a calibrated outdoor station, active since June 2026, accurate up to 130 dB SPL.',
+    hardware_note_old: 'Current microphone capped at 100 dB — actual peak levels may exceed 99.9 dB shown. New calibrated outdoor station coming June 2026.',
+    hardware_note_new: 'The new sonometer, capable of measuring up to 130 dB, has been active since late June 2026.',
   },
   pt: {
     nav_how: 'Como funciona', nav_feed: 'Em direto', nav_stats: 'Estatísticas',
@@ -1077,7 +1080,8 @@ const TRANSLATIONS = {
     archive_tag: 'Todos os Relatórios', archive_title: 'Arquivo', archive_title2: 'Mensal',
     footer_left: 'LISBON FINALS · Relatório de Ruído · lisbonfinals.com',
     footer_right: 'Sem afiliação com ANA Aeroportos ou ANAC',
-    hardware_note: 'As leituras provêm de uma estação exterior calibrada, ativa desde junho de 2026, com precisão até 130 dB SPL.',
+    hardware_note_old: 'O microfone atual estava limitado a 100 dB — os níveis de pico reais podem ter excedido os 99,9 dB apresentados. Nova estação exterior calibrada prevista para junho de 2026.',
+    hardware_note_new: 'O novo sonómetro, capaz de medir até 130 dB, está ativo desde o final de junho de 2026.',
   },
   fr: {
     hero_tag: 'LPPT Lisbonne · Surveillance acoustique',
@@ -1096,7 +1100,8 @@ const TRANSLATIONS = {
     archive_tag: 'Tous les rapports', archive_title: 'Archive', archive_title2: 'Mensuelle',
     footer_left: 'LISBON FINALS · Rapport de Bruit · lisbonfinals.com',
     footer_right: 'Sans affiliation avec ANA Aeroportos ou ANAC',
-    hardware_note: 'Les mesures proviennent d\'une station extérieure calibrée, active depuis juin 2026, précise jusqu\'à 130 dB SPL.',
+    hardware_note_old: 'Le microphone actuel était plafonné à 100 dB — les niveaux de pic réels peuvent avoir dépassé les 99,9 dB affichés. Nouvelle station extérieure calibrée prévue pour juin 2026.',
+    hardware_note_new: 'Le nouveau sonomètre, capable de mesurer jusqu\'à 130 dB, est actif depuis fin juin 2026.',
   }
 };
 let currentLang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
