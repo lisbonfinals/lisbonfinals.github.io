@@ -63,7 +63,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .metric-grid span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.35);margin-top:8px}
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
-.dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}</style></head><body>
+.dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
+.log-all-wrap{margin-top:56px}
+.log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
+.log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
+.log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.log-all-strip::-webkit-scrollbar{height:2px}
+.log-all-strip::-webkit-scrollbar-thumb{background:rgba(245,166,35,.3)}
+.log-all-item{flex-shrink:0;min-width:150px;max-width:190px;padding:14px 18px;border-right:1px solid var(--border);text-decoration:none;transition:background .2s}
+.log-all-item:hover{background:rgba(245,166,35,.04)}
+.log-all-item.active{background:rgba(245,166,35,.07);border-bottom:2px solid var(--amber)}
+.log-all-item-date{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.33);margin-bottom:5px}
+.log-all-item.active .log-all-item-date{color:var(--amber)}
+.log-all-item-title{font-family:var(--serif);font-style:italic;font-size:12px;color:rgba(240,237,232,.5);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.log-all-item.active .log-all-item-title{color:var(--white)}</style></head><body>
 <nav aria-label="Primary navigation">
   <a href="/" class="nav-logo"><div class="nav-dot"></div><span class="nav-wordmark">LISBON <span>FINALS</span></span></a>
   <ul class="nav-links"><li><a href="/">Live</a></li><li><a href="/data.html">Data</a></li><li><a href="/archive.html">Archive</a></li><li><a href="/noise-report.html" class="nav-active">Noise Report</a></li><li><a href="/log.html">Captain's Log</a></li><li><a href="/about.html">About</a></li></ul>

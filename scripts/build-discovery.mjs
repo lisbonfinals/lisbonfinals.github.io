@@ -142,7 +142,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .metric-grid span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.35);margin-top:8px}
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
-.dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}`;
+.dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
+.log-all-wrap{margin-top:56px}
+.log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
+.log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
+.log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.log-all-strip::-webkit-scrollbar{height:2px}
+.log-all-strip::-webkit-scrollbar-thumb{background:rgba(245,166,35,.3)}
+.log-all-item{flex-shrink:0;min-width:150px;max-width:190px;padding:14px 18px;border-right:1px solid var(--border);text-decoration:none;transition:background .2s}
+.log-all-item:hover{background:rgba(245,166,35,.04)}
+.log-all-item.active{background:rgba(245,166,35,.07);border-bottom:2px solid var(--amber)}
+.log-all-item-date{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.33);margin-bottom:5px}
+.log-all-item.active .log-all-item-date{color:var(--amber)}
+.log-all-item-title{font-family:var(--serif);font-style:italic;font-size:12px;color:rgba(240,237,232,.5);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.log-all-item.active .log-all-item-title{color:var(--white)}`;
+}
+
+function entriesStrip(entriesWithSlug, activeSlug) {
+  const items = entriesWithSlug.map(({ entry, slug }) =>
+    `<a class="log-all-item${slug === activeSlug ? ' active' : ''}" href="/journal/${slug}.html">
+      <div class="log-all-item-date">${esc(entry.date)}</div>
+      <div class="log-all-item-title">${esc(entry.title)}</div>
+    </a>`).join('');
+  return `<div class="log-all-wrap">
+  <div class="log-all-label">All Entries</div>
+  <div class="log-all-strip">${items}</div>
+</div>`;
 }
 
 function chromeNav(activeHref) {
@@ -188,7 +213,7 @@ document.getElementById('nav-burger').addEventListener('click', () => {
 })();`;
 }
 
-function articleTemplate(entry, slug) {
+function articleTemplate(entry, slug, entriesWithSlug) {
   const url = `${base}/journal/${slug}.html`;
   const description = (entry.body || entry.title).replace(/\s+/g, ' ').slice(0, 158);
   const paragraphs = String(entry.body || '').split(/\n\n|\n/).filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('\n');
@@ -217,9 +242,11 @@ ${chromeNav('/log.html')}
 <h1 class="article-title">${esc(entry.title)}</h1><div class="article-rule"></div>
 <article class="article-body">${paragraphs}</article>
 <div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
+${entriesStrip(entriesWithSlug, slug)}
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
-<script>${chromeScript()}<\/script>
+<script>${chromeScript()}
+document.querySelector('.log-all-item.active')?.scrollIntoView({inline:'center',block:'nearest'});<\/script>
 </body></html>`;
 }
 
@@ -279,10 +306,10 @@ async function buildContent() {
   await fs.mkdir(journalOut, { recursive: true });
   await fs.mkdir(reportsOut, { recursive: true });
 
+  const entriesWithSlug = entries.map(entry => ({ entry, slug: `${entry.date}-${slugify(entry.title)}` }));
   const journalPages = [];
-  for (const entry of entries) {
-    const slug = `${entry.date}-${slugify(entry.title)}`;
-    await fs.writeFile(path.join(journalOut, `${slug}.html`), articleTemplate(entry, slug));
+  for (const { entry, slug } of entriesWithSlug) {
+    await fs.writeFile(path.join(journalOut, `${slug}.html`), articleTemplate(entry, slug, entriesWithSlug));
     journalPages.push({ loc: `${base}/journal/${slug}.html`, lastmod: entry.date, entry, slug });
   }
   const reportPages = [];

@@ -63,7 +63,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .metric-grid span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.35);margin-top:8px}
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
-.dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}</style></head><body>
+.dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
+.log-all-wrap{margin-top:56px}
+.log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
+.log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
+.log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.log-all-strip::-webkit-scrollbar{height:2px}
+.log-all-strip::-webkit-scrollbar-thumb{background:rgba(245,166,35,.3)}
+.log-all-item{flex-shrink:0;min-width:150px;max-width:190px;padding:14px 18px;border-right:1px solid var(--border);text-decoration:none;transition:background .2s}
+.log-all-item:hover{background:rgba(245,166,35,.04)}
+.log-all-item.active{background:rgba(245,166,35,.07);border-bottom:2px solid var(--amber)}
+.log-all-item-date{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.33);margin-bottom:5px}
+.log-all-item.active .log-all-item-date{color:var(--amber)}
+.log-all-item-title{font-family:var(--serif);font-style:italic;font-size:12px;color:rgba(240,237,232,.5);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.log-all-item.active .log-all-item-title{color:var(--white)}</style></head><body>
 <nav aria-label="Primary navigation">
   <a href="/" class="nav-logo"><div class="nav-dot"></div><span class="nav-wordmark">LISBON <span>FINALS</span></span></a>
   <ul class="nav-links"><li><a href="/">Live</a></li><li><a href="/data.html">Data</a></li><li><a href="/archive.html">Archive</a></li><li><a href="/noise-report.html">Noise Report</a></li><li><a href="/log.html" class="nav-active">Captain's Log</a></li><li><a href="/about.html">About</a></li></ul>
@@ -89,6 +102,106 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 <p>What&#39;s next? We keep refining all of this — and maybe, down the line, open part of it up to others: municipalities, researchers, curious minds. Nothing&#39;s set in stone yet, but the idea is taking shape.</p>
 <p>Stay tuned. The sky isn&#39;t done telling us things yet. ✈️</p></article>
 <div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
+<div class="log-all-wrap">
+  <div class="log-all-label">All Entries</div>
+  <div class="log-all-strip"><a class="log-all-item" href="/journal/2026-08-17-looking-for-a-co-pilot.html">
+      <div class="log-all-item-date">2026-08-17</div>
+      <div class="log-all-item-title">Looking for a Co-Pilot</div>
+    </a><a class="log-all-item" href="/journal/2026-08-14-someone-finally-asked-why.html">
+      <div class="log-all-item-date">2026-08-14</div>
+      <div class="log-all-item-title">Someone Finally Asked Why</div>
+    </a><a class="log-all-item" href="/journal/2026-08-01-july-s-report-is-live-and-we-caught-it-repeating-a-lie.html">
+      <div class="log-all-item-date">2026-08-01</div>
+      <div class="log-all-item-title">July&#39;s Report Is Live — And We Caught It Repeating a Lie</div>
+    </a><a class="log-all-item" href="/journal/2026-07-22-the-archive-opens.html">
+      <div class="log-all-item-date">2026-07-22</div>
+      <div class="log-all-item-title">The Archive Opens</div>
+    </a><a class="log-all-item active" href="/journal/2026-07-20-behind-the-scenes-at-the-station.html">
+      <div class="log-all-item-date">2026-07-20</div>
+      <div class="log-all-item-title">Behind the scenes at the station</div>
+    </a><a class="log-all-item" href="/journal/2026-07-14-the-reports-that-vanished-and-a-journalist-who-didn-t.html">
+      <div class="log-all-item-date">2026-07-14</div>
+      <div class="log-all-item-title">The Reports That Vanished (And a Journalist Who Didn&#39;t)</div>
+    </a><a class="log-all-item" href="/journal/2026-07-03-a-lot-happened-this-week-not-all-of-it-on-purpose.html">
+      <div class="log-all-item-date">2026-07-03</div>
+      <div class="log-all-item-title">A Lot Happened This Week (Not All Of It On Purpose)</div>
+    </a><a class="log-all-item" href="/journal/2026-06-30-the-numbers-don-t-lie-neither-does-the-camera.html">
+      <div class="log-all-item-date">2026-06-30</div>
+      <div class="log-all-item-title">The Numbers Don&#39;t Lie. Neither Does the Camera.</div>
+    </a><a class="log-all-item" href="/journal/2026-06-28-loudest-flight-of-june-124-1-db.html">
+      <div class="log-all-item-date">2026-06-28</div>
+      <div class="log-all-item-title">Loudest Flight of June: 124.1 dB</div>
+    </a><a class="log-all-item" href="/journal/2026-06-28-the-camera-that-moved-in-the-night.html">
+      <div class="log-all-item-date">2026-06-28</div>
+      <div class="log-all-item-title">The Camera That Moved in the Night</div>
+    </a><a class="log-all-item" href="/journal/2026-06-28-the-site-gets-a-voice.html">
+      <div class="log-all-item-date">2026-06-28</div>
+      <div class="log-all-item-title">The Site Gets a Voice</div>
+    </a><a class="log-all-item" href="/journal/2026-06-26-website-overhaul-clearer-signal-fewer-boxes-same-data-pipeline.html">
+      <div class="log-all-item-date">2026-06-26</div>
+      <div class="log-all-item-title">Website overhaul: clearer signal, fewer boxes, same data pipeline</div>
+    </a><a class="log-all-item" href="/journal/2026-06-23-the-whole-aircraft.html">
+      <div class="log-all-item-date">2026-06-23</div>
+      <div class="log-all-item-title">The Whole Aircraft</div>
+    </a><a class="log-all-item" href="/journal/2026-06-22-the-sensor-and-i-finally-had-a-talk.html">
+      <div class="log-all-item-date">2026-06-22</div>
+      <div class="log-all-item-title">The Sensor and I Finally Had a Talk</div>
+    </a><a class="log-all-item" href="/journal/2026-06-21-always-a-captain-in-the-cockpit.html">
+      <div class="log-all-item-date">2026-06-21</div>
+      <div class="log-all-item-title">Always a Captain in the Cockpit</div>
+    </a><a class="log-all-item" href="/journal/2026-06-18-the-planes-that-got-stuck.html">
+      <div class="log-all-item-date">2026-06-18</div>
+      <div class="log-all-item-title">The Planes That Got Stuck</div>
+    </a><a class="log-all-item" href="/journal/2026-06-12-station-v1-fully-deployed.html">
+      <div class="log-all-item-date">2026-06-12</div>
+      <div class="log-all-item-title">Station V1 — Fully deployed</div>
+    </a><a class="log-all-item" href="/journal/2026-06-10-the-day-the-station-started-telling-the-truth.html">
+      <div class="log-all-item-date">2026-06-10</div>
+      <div class="log-all-item-title">The Day the Station Started Telling the Truth</div>
+    </a><a class="log-all-item" href="/journal/2026-06-10-station-goes-live-the-box-is-outside.html">
+      <div class="log-all-item-date">2026-06-10</div>
+      <div class="log-all-item-title">Station Goes Live — The Box is Outside 🎉</div>
+    </a><a class="log-all-item" href="/journal/2026-06-09-fab-lab-day-the-box-is-born.html">
+      <div class="log-all-item-date">2026-06-09</div>
+      <div class="log-all-item-title">FAB LAB Day — The Box is Born</div>
+    </a><a class="log-all-item" href="/journal/2026-06-06-clearing-the-runway.html">
+      <div class="log-all-item-date">2026-06-06</div>
+      <div class="log-all-item-title">Clearing the Runway</div>
+    </a><a class="log-all-item" href="/journal/2026-06-04-preparing-for-the-elements.html">
+      <div class="log-all-item-date">2026-06-04</div>
+      <div class="log-all-item-title">Preparing for the Elements</div>
+    </a><a class="log-all-item" href="/journal/2026-06-03-sdr-dongle-overheating-lost-flights.html">
+      <div class="log-all-item-date">2026-06-03</div>
+      <div class="log-all-item-title">SDR Dongle Overheating — Lost Flights</div>
+    </a><a class="log-all-item" href="/journal/2026-06-02-the-noise-report-is-live.html">
+      <div class="log-all-item-date">2026-06-02</div>
+      <div class="log-all-item-title">The Noise Report is Live</div>
+    </a><a class="log-all-item" href="/journal/2026-05-28-the-reel-that-published-twice-again.html">
+      <div class="log-all-item-date">2026-05-28</div>
+      <div class="log-all-item-title">The Reel That Published Twice Again</div>
+    </a><a class="log-all-item" href="/journal/2026-05-27-the-morning-that-stood-still.html">
+      <div class="log-all-item-date">2026-05-27</div>
+      <div class="log-all-item-title">The Morning That Stood Still</div>
+    </a><a class="log-all-item" href="/journal/2026-05-25-the-reel-that-published-twice.html">
+      <div class="log-all-item-date">2026-05-25</div>
+      <div class="log-all-item-title">The Reel That Published Twice</div>
+    </a><a class="log-all-item" href="/journal/2026-05-25-the-station-earns-its-shell.html">
+      <div class="log-all-item-date">2026-05-25</div>
+      <div class="log-all-item-title">The Station Earns Its Shell</div>
+    </a><a class="log-all-item" href="/journal/2026-05-21-crossposting-reel-polish.html">
+      <div class="log-all-item-date">2026-05-21</div>
+      <div class="log-all-item-title">Crossposting &amp; Reel polish</div>
+    </a><a class="log-all-item" href="/journal/2026-05-20-transavia-france-registration-fallback.html">
+      <div class="log-all-item-date">2026-05-20</div>
+      <div class="log-all-item-title">Transavia France — registration fallback</div>
+    </a><a class="log-all-item" href="/journal/2026-05-20-make-com-crossposting-all-systems-go.html">
+      <div class="log-all-item-date">2026-05-20</div>
+      <div class="log-all-item-title">Make.com crossposting — all systems go</div>
+    </a><a class="log-all-item" href="/journal/2026-05-20-121-flights-lost-and-recovered.html">
+      <div class="log-all-item-date">2026-05-20</div>
+      <div class="log-all-item-title">121 flights lost — and recovered</div>
+    </a></div>
+</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
@@ -111,5 +224,6 @@ document.getElementById('nav-burger').addEventListener('click', () => {
   }
   tick();
   setInterval(tick, 1000);
-})();</script>
+})();
+document.querySelector('.log-all-item.active')?.scrollIntoView({inline:'center',block:'nearest'});</script>
 </body></html>
