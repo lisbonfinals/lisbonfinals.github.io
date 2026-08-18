@@ -707,7 +707,7 @@ footer {
       </div>
       <div class="report-method-item">
         <div class="report-method-k" data-i18n="method_k2">Limit</div>
-        <div class="report-method-v" data-i18n="method_v2">Current microphone can cap near 100 dB; peaks may be understated.</div>
+        <div class="report-method-v" data-i18n="method_v2">Calibrated outdoor station active since June 2026; measures up to 130 dB SPL.</div>
       </div>
       <div class="report-method-item">
         <div class="report-method-k" data-i18n="method_k3">Purpose</div>
@@ -917,8 +917,7 @@ function renderReport(report) {
       </div>
 
       <div class="hardware-note">
-        ⚠ Current microphone capped at 100 dB — actual peak levels may exceed 99.9 dB shown.
-        New calibrated outdoor station coming June 2026.
+        ${TRANSLATIONS[currentLang].hardware_note}
       </div>
 
     </div>
@@ -1048,7 +1047,7 @@ const TRANSLATIONS = {
     method_title: 'How to read this report',
     method_copy: 'This is independent residential monitoring from one fixed terrace below the LPPT approach corridor. It is designed to show repeatable local exposure, not to replace certified airport noise mapping.',
     method_k1: 'Source', method_v1: 'ADS-B flight data paired with station SPL readings.',
-    method_k2: 'Limit', method_v2: 'Current microphone can cap near 100 dB; peaks may be understated.',
+    method_k2: 'Limit', method_v2: 'Calibrated outdoor station active since June 2026; measures up to 130 dB SPL.',
     method_k3: 'Purpose', method_v3: 'A public record for patterns, outliers and night-time disturbance.',
     stat_flights: 'Flights This Month', stat_avg: 'Avg Noise Level',
     stat_violations: 'Night Violations', stat_night: 'Night Operations',
@@ -1057,6 +1056,7 @@ const TRANSLATIONS = {
     archive_tag: 'All Reports', archive_title: 'Monthly', archive_title2: 'Archive',
     footer_left: 'LISBON FINALS · Noise Report · lisbonfinals.com',
     footer_right: 'Not affiliated with ANA Aeroportos or ANAC',
+    hardware_note: 'Readings come from a calibrated outdoor station, active since June 2026, accurate up to 130 dB SPL.',
   },
   pt: {
     nav_how: 'Como funciona', nav_feed: 'Em direto', nav_stats: 'Estatísticas',
@@ -1068,7 +1068,7 @@ const TRANSLATIONS = {
     method_title: 'Como ler este relatório',
     method_copy: 'Esta é uma monitorização residencial independente a partir de uma varanda fixa sob o corredor de aproximação LPPT. Serve para mostrar uma exposição local observada de forma consistente, não para substituir cartografia de ruído aeroportuária certificada.',
     method_k1: 'Fonte', method_v1: 'Dados ADS-B de voo cruzados com leituras SPL da estação.',
-    method_k2: 'Limite', method_v2: 'O microfone atual pode atingir o limite perto dos 100 dB; alguns picos podem estar subestimados.',
+    method_k2: 'Limite', method_v2: 'Estação exterior calibrada, ativa desde junho de 2026; mede até 130 dB SPL.',
     method_k3: 'Objetivo', method_v3: 'Um registo público de padrões, anomalias e perturbação noturna.',
     stat_flights: 'Voos Este Mês', stat_avg: 'Nível Médio de Ruído',
     stat_violations: 'Alertas Noturnos', stat_night: 'Operações Noturnas',
@@ -1077,6 +1077,7 @@ const TRANSLATIONS = {
     archive_tag: 'Todos os Relatórios', archive_title: 'Arquivo', archive_title2: 'Mensal',
     footer_left: 'LISBON FINALS · Relatório de Ruído · lisbonfinals.com',
     footer_right: 'Sem afiliação com ANA Aeroportos ou ANAC',
+    hardware_note: 'As leituras provêm de uma estação exterior calibrada, ativa desde junho de 2026, com precisão até 130 dB SPL.',
   },
   fr: {
     hero_tag: 'LPPT Lisbonne · Surveillance acoustique',
@@ -1086,7 +1087,7 @@ const TRANSLATIONS = {
     method_title: 'Comment lire ce rapport',
     method_copy: 'Il s’agit d’une surveillance résidentielle indépendante depuis une terrasse fixe sous le couloir d’approche LPPT. Elle documente une exposition locale mesurée de façon cohérente, sans remplacer une cartographie acoustique aéroportuaire certifiée.',
     method_k1: 'Source', method_v1: 'Données ADS-B des vols associées aux mesures SPL de la station.',
-    method_k2: 'Limite', method_v2: 'Le microphone actuel peut plafonner près de 100 dB ; certains pics peuvent être sous-estimés.',
+    method_k2: 'Limite', method_v2: 'Station extérieure calibrée, active depuis juin 2026 ; mesure jusqu\'à 130 dB SPL.',
     method_k3: 'But', method_v3: 'Un registre public des tendances, anomalies et nuisances nocturnes.',
     stat_flights: 'Vols ce mois', stat_avg: 'Niveau sonore moyen',
     stat_violations: 'Alertes nocturnes', stat_night: 'Opérations nocturnes',
@@ -1095,6 +1096,7 @@ const TRANSLATIONS = {
     archive_tag: 'Tous les rapports', archive_title: 'Archive', archive_title2: 'Mensuelle',
     footer_left: 'LISBON FINALS · Rapport de Bruit · lisbonfinals.com',
     footer_right: 'Sans affiliation avec ANA Aeroportos ou ANAC',
+    hardware_note: 'Les mesures proviennent d\'une station extérieure calibrée, active depuis juin 2026, précise jusqu\'à 130 dB SPL.',
   }
 };
 let currentLang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
