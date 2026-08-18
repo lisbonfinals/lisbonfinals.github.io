@@ -64,7 +64,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
 .dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
-.log-all-wrap{margin-top:56px}
+.log-all-wrap{margin-bottom:36px}
 .log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
 .log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
 .log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -92,15 +92,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <a href="/about.html" onclick="closeDrawer()">About</a>
 </div>
 <main class="article-shell">
-<a href="/log.html" class="back-link">← Captain's Log</a>
-<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-06-22 19:30</span></div>
-<h1 class="article-title">The Sensor and I Finally Had a Talk</h1><div class="article-rule"></div>
-<article class="article-body"><p>The station has always listened with two ears. There&#39;s the trusty camera microphone — honest, dependable, quietly logging takeoffs and landings for weeks. And then there&#39;s the professional sound meter I added more recently to chase the really big numbers, the full 30-to-130 dB range.</p>
-<p>The thing is, the new meter kept holding back. It promised 130 dB but politely stopped around 100, like an opera singer who refuses to reach for the high notes. The data was sound; the newcomer just wasn&#39;t living up to its billing. So today I did the only sensible thing: I took the laptop onto the terrace, sat down next to the meter, and coaxed out its real voice. With the right tuning it finally sings the full scale — 95 dB now means a genuine 95 dB, all the way up to the loudest jets.</p>
-<p>While I had the hood open, I settled a long-running philosophical dispute. The camera used to ask the microphone for permission before every shot. &quot;Is it loud enough?&quot; &quot;Eh, not sure.&quot; &quot;No photo for you, then.&quot; Quieter planes were gliding past uncaptured purely for being well-mannered. So I separated the two. Now the radar spots the aircraft, the camera does its job, and the microphone simply takes notes in the corner — an observer, no longer a bouncer.</p>
-<p>The ground-vibration sensor also stopped misplacing its own memories. It now logs every tremor, 100% of them. It turned out three parts of the brain were scribbling in the same notebook at once; they take turns now. Very civilized.</p>
-<p>A long day on the terrace. The station hears better, sees more, and forgets nothing. Every plane over Lisbon — at last, properly on the record.</p></article>
-<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 <div class="log-all-wrap">
   <div class="log-all-label">All Entries</div>
   <div class="log-all-strip"><a class="log-all-item" href="/journal/2026-08-17-looking-for-a-co-pilot.html">
@@ -201,6 +192,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="log-all-item-title">121 flights lost — and recovered</div>
     </a></div>
 </div>
+<a href="/log.html" class="back-link">← Captain's Log</a>
+<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-06-22 19:30</span></div>
+<h1 class="article-title">The Sensor and I Finally Had a Talk</h1><div class="article-rule"></div>
+<article class="article-body"><p>The station has always listened with two ears. There&#39;s the trusty camera microphone — honest, dependable, quietly logging takeoffs and landings for weeks. And then there&#39;s the professional sound meter I added more recently to chase the really big numbers, the full 30-to-130 dB range.</p>
+<p>The thing is, the new meter kept holding back. It promised 130 dB but politely stopped around 100, like an opera singer who refuses to reach for the high notes. The data was sound; the newcomer just wasn&#39;t living up to its billing. So today I did the only sensible thing: I took the laptop onto the terrace, sat down next to the meter, and coaxed out its real voice. With the right tuning it finally sings the full scale — 95 dB now means a genuine 95 dB, all the way up to the loudest jets.</p>
+<p>While I had the hood open, I settled a long-running philosophical dispute. The camera used to ask the microphone for permission before every shot. &quot;Is it loud enough?&quot; &quot;Eh, not sure.&quot; &quot;No photo for you, then.&quot; Quieter planes were gliding past uncaptured purely for being well-mannered. So I separated the two. Now the radar spots the aircraft, the camera does its job, and the microphone simply takes notes in the corner — an observer, no longer a bouncer.</p>
+<p>The ground-vibration sensor also stopped misplacing its own memories. It now logs every tremor, 100% of them. It turned out three parts of the brain were scribbling in the same notebook at once; they take turns now. Very civilized.</p>
+<p>A long day on the terrace. The station hears better, sees more, and forgets nothing. Every plane over Lisbon — at last, properly on the record.</p></article>
+<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });

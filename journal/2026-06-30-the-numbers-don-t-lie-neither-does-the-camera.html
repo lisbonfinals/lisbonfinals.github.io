@@ -64,7 +64,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
 .dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
-.log-all-wrap{margin-top:56px}
+.log-all-wrap{margin-bottom:36px}
 .log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
 .log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
 .log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -92,16 +92,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <a href="/about.html" onclick="closeDrawer()">About</a>
 </div>
 <main class="article-shell">
-<a href="/log.html" class="back-link">← Captain's Log</a>
-<div class="article-kicker"><span class="log-cat log-cat-stats">📊 Stats</span><span class="article-date">2026-06-30 18:01</span></div>
-<h1 class="article-title">The Numbers Don&#39;t Lie. Neither Does the Camera.</h1><div class="article-rule"></div>
-<article class="article-body"><p>Ran the numbers today. 82.3% of photos scoring 4.0★ or above. Compared to 15% back in May. I didn&#39;t change the sky. I didn&#39;t change the planes. I changed the algorithm — and apparently that was enough.</p>
-<p>The gallery on the front page now scrolls on its own. Nine photos, gliding left in an infinite loop, because if you&#39;re going to have 200 shots of aircraft belly-down at 600 feet, the least you can do is let people see them.</p>
-<p>Also discovered the Daily Reel has been silently failing since June 26th. Generating perfectly. Uploading to Cloudinary. Then hitting a wall. Turns out the publishing function was still talking to the wrong API endpoint — the one we fixed everywhere else on June 28th. Classic. The station remembered to photograph 150 planes a day but forgot to update one line of code. Fixed. Tonight&#39;s reel will publish. Probably.</p>
-<p>Removed the dark gradient masks from the reel photos while we were in there. The shots are good enough now. They don&#39;t need hiding.</p>
-<p>The threshold slider now moves in steps of 0.05. Because 4.3 and 4.35 are not the same thing, and precision matters when you&#39;re deciding which planes make the cut.</p>
-<p>217 flights today for the moment... Zero human involvement. Except the debugging.</p></article>
-<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 <div class="log-all-wrap">
   <div class="log-all-label">All Entries</div>
   <div class="log-all-strip"><a class="log-all-item" href="/journal/2026-08-17-looking-for-a-co-pilot.html">
@@ -202,6 +192,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="log-all-item-title">121 flights lost — and recovered</div>
     </a></div>
 </div>
+<a href="/log.html" class="back-link">← Captain's Log</a>
+<div class="article-kicker"><span class="log-cat log-cat-stats">📊 Stats</span><span class="article-date">2026-06-30 18:01</span></div>
+<h1 class="article-title">The Numbers Don&#39;t Lie. Neither Does the Camera.</h1><div class="article-rule"></div>
+<article class="article-body"><p>Ran the numbers today. 82.3% of photos scoring 4.0★ or above. Compared to 15% back in May. I didn&#39;t change the sky. I didn&#39;t change the planes. I changed the algorithm — and apparently that was enough.</p>
+<p>The gallery on the front page now scrolls on its own. Nine photos, gliding left in an infinite loop, because if you&#39;re going to have 200 shots of aircraft belly-down at 600 feet, the least you can do is let people see them.</p>
+<p>Also discovered the Daily Reel has been silently failing since June 26th. Generating perfectly. Uploading to Cloudinary. Then hitting a wall. Turns out the publishing function was still talking to the wrong API endpoint — the one we fixed everywhere else on June 28th. Classic. The station remembered to photograph 150 planes a day but forgot to update one line of code. Fixed. Tonight&#39;s reel will publish. Probably.</p>
+<p>Removed the dark gradient masks from the reel photos while we were in there. The shots are good enough now. They don&#39;t need hiding.</p>
+<p>The threshold slider now moves in steps of 0.05. Because 4.3 and 4.35 are not the same thing, and precision matters when you&#39;re deciding which planes make the cut.</p>
+<p>217 flights today for the moment... Zero human involvement. Except the debugging.</p></article>
+<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });

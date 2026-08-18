@@ -64,7 +64,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
 .dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
-.log-all-wrap{margin-top:56px}
+.log-all-wrap{margin-bottom:36px}
 .log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
 .log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
 .log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -92,17 +92,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <a href="/about.html" onclick="closeDrawer()">About</a>
 </div>
 <main class="article-shell">
-<a href="/log.html" class="back-link">← Captain's Log</a>
-<div class="article-kicker"><span class="log-cat log-cat-milestone">🏆 Milestone</span><span class="article-date">2026-06-02 00:14</span></div>
-<h1 class="article-title">The Noise Report is Live</h1><div class="article-rule"></div>
-<article class="article-body"><p>Tonight we shipped something genuinely worth documenting.</p>
-<p>Started with a simple idea: a downloadable monthly PDF. Ended up building a full public noise observatory for Lisbon airport — live at lisbonfinals.github.io/noise-report.html.</p>
-<p>The May 2026 numbers are striking. 10,290 flights over this terrace. Average 89.9 dB. 422 night violations. And the finding that matters: 100% of night violations are arrivals. Every single one. Runway 03 sends planes straight over the city at 160 meters, every night, while Lisbon sleeps.</p>
-<p>Business jets are louder than commercial aircraft. The Gulfstream IV-SP tops the charts at 96.1 dB — beating every Airbus and Boeing in the dataset. Nobody talks about this.</p>
-<p>The pipeline now runs end to end. Pi captures the flight. PDF generated. Uploaded to GitHub Pages. Gist updated. Public page refreshes. One command.</p>
-<p>Microphone still capped at 100 dB. The real data comes when the outdoor station goes live in June. That is when this page becomes a genuine reference.</p>
-<p>For now — May 2026 is documented. Permanently. Publicly. Flight by flight.</p></article>
-<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 <div class="log-all-wrap">
   <div class="log-all-label">All Entries</div>
   <div class="log-all-strip"><a class="log-all-item" href="/journal/2026-08-17-looking-for-a-co-pilot.html">
@@ -203,6 +192,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="log-all-item-title">121 flights lost — and recovered</div>
     </a></div>
 </div>
+<a href="/log.html" class="back-link">← Captain's Log</a>
+<div class="article-kicker"><span class="log-cat log-cat-milestone">🏆 Milestone</span><span class="article-date">2026-06-02 00:14</span></div>
+<h1 class="article-title">The Noise Report is Live</h1><div class="article-rule"></div>
+<article class="article-body"><p>Tonight we shipped something genuinely worth documenting.</p>
+<p>Started with a simple idea: a downloadable monthly PDF. Ended up building a full public noise observatory for Lisbon airport — live at lisbonfinals.github.io/noise-report.html.</p>
+<p>The May 2026 numbers are striking. 10,290 flights over this terrace. Average 89.9 dB. 422 night violations. And the finding that matters: 100% of night violations are arrivals. Every single one. Runway 03 sends planes straight over the city at 160 meters, every night, while Lisbon sleeps.</p>
+<p>Business jets are louder than commercial aircraft. The Gulfstream IV-SP tops the charts at 96.1 dB — beating every Airbus and Boeing in the dataset. Nobody talks about this.</p>
+<p>The pipeline now runs end to end. Pi captures the flight. PDF generated. Uploaded to GitHub Pages. Gist updated. Public page refreshes. One command.</p>
+<p>Microphone still capped at 100 dB. The real data comes when the outdoor station goes live in June. That is when this page becomes a genuine reference.</p>
+<p>For now — May 2026 is documented. Permanently. Publicly. Flight by flight.</p></article>
+<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });

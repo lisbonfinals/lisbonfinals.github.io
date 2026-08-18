@@ -64,7 +64,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
 .dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
-.log-all-wrap{margin-top:56px}
+.log-all-wrap{margin-bottom:36px}
 .log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
 .log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
 .log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -92,13 +92,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <a href="/about.html" onclick="closeDrawer()">About</a>
 </div>
 <main class="article-shell">
-<a href="/log.html" class="back-link">← Captain's Log</a>
-<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-06-28 10:59</span></div>
-<h1 class="article-title">The Camera That Moved in the Night</h1><div class="article-rule"></div>
-<article class="article-body"><p>Woke up to zero captures. The Reolink TrackMix had silently pivoted away from the approach path sometime around 21:03 last night — its AI tracking triggered on something (a bird? a reflection?) and the PTZ never found its way back to the preset. No code change, no config drift. Pure hardware drift.</p>
-<p>Repositioned the camera, cleaned the enclosure, moved the USB backup key to a more stable port with an extension cable. While we were at it: flushed 450 MB of accumulated RAM from admin_server (restart → 59 MB), set a daily 4am cron to keep it clean, repaired the USB key&#39;s FAT filesystem, and deactivated a ghost service (lisbon-vibration) that was crashing on startup because it was never meant to run standalone — the MPU-6050 has always been driven by main.py.</p>
-<p>By mid-morning, the first two photos of the day were in. The instrument is back in tune.</p></article>
-<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 <div class="log-all-wrap">
   <div class="log-all-label">All Entries</div>
   <div class="log-all-strip"><a class="log-all-item" href="/journal/2026-08-17-looking-for-a-co-pilot.html">
@@ -199,6 +192,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="log-all-item-title">121 flights lost — and recovered</div>
     </a></div>
 </div>
+<a href="/log.html" class="back-link">← Captain's Log</a>
+<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-06-28 10:59</span></div>
+<h1 class="article-title">The Camera That Moved in the Night</h1><div class="article-rule"></div>
+<article class="article-body"><p>Woke up to zero captures. The Reolink TrackMix had silently pivoted away from the approach path sometime around 21:03 last night — its AI tracking triggered on something (a bird? a reflection?) and the PTZ never found its way back to the preset. No code change, no config drift. Pure hardware drift.</p>
+<p>Repositioned the camera, cleaned the enclosure, moved the USB backup key to a more stable port with an extension cable. While we were at it: flushed 450 MB of accumulated RAM from admin_server (restart → 59 MB), set a daily 4am cron to keep it clean, repaired the USB key&#39;s FAT filesystem, and deactivated a ghost service (lisbon-vibration) that was crashing on startup because it was never meant to run standalone — the MPU-6050 has always been driven by main.py.</p>
+<p>By mid-morning, the first two photos of the day were in. The instrument is back in tune.</p></article>
+<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });

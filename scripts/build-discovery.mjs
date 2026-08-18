@@ -143,7 +143,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
 .dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
-.log-all-wrap{margin-top:56px}
+.log-all-wrap{margin-bottom:36px}
 .log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
 .log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
 .log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -237,12 +237,12 @@ function articleTemplate(entry, slug, entriesWithSlug) {
 <style>${chromeStyles()}</style></head><body>
 ${chromeNav('/log.html')}
 <main class="article-shell">
+${entriesStrip(entriesWithSlug, slug)}
 <a href="/log.html" class="back-link">← Captain's Log</a>
 <div class="article-kicker"><span class="log-cat log-cat-${esc(entry.category || 'note')}">${cat.emoji} ${esc(cat.label)}</span><span class="article-date">${esc(entry.date)}${entry.time ? ' ' + esc(entry.time) : ''}</span></div>
 <h1 class="article-title">${esc(entry.title)}</h1><div class="article-rule"></div>
 <article class="article-body">${paragraphs}</article>
 <div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
-${entriesStrip(entriesWithSlug, slug)}
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>${chromeScript()}

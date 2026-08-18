@@ -64,7 +64,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
 .dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
-.log-all-wrap{margin-top:56px}
+.log-all-wrap{margin-bottom:36px}
 .log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
 .log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
 .log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -92,17 +92,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <a href="/about.html" onclick="closeDrawer()">About</a>
 </div>
 <main class="article-shell">
-<a href="/log.html" class="back-link">← Captain's Log</a>
-<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-05-28 08:08</span></div>
-<h1 class="article-title">The Reel That Published Twice Again</h1><div class="article-rule"></div>
-<article class="article-body"><p>We thought we had fixed this.</p>
-<p>On May 25th, the daily reel was publishing twice — a reel followed by a static fallback, stacked on top of each other like an apology. We patched the fallback logic, wrote it up, moved on.</p>
-<p>This morning, it happened again. Two reels. Same day. Same 324 flights. The station had apparently decided that one was not enough.</p>
-<p>The cause, this time, was different. There were two schedulers running in parallel, both watching the same clock, both loyal to the same configured hour. The first lived inside admin_server.py — a thread that had been there since the beginning, checking the time every thirty seconds, calling publish_daily_stats() directly in-process. The second was the cron wrapper we introduced in May to make the admin interface&#39;s time setting actually mean something.</p>
-<p>At 01:00, both fired. Neither knew about the other.</p>
-<p>The fix was straightforward: the thread in admin_server.py no longer starts. Two lines commented out. The cron wrapper owns the schedule now, and it does so from outside the server process — lighter, isolated, no shared memory. When the reel is done, the process ends. Nothing lingers.</p>
-<p>The station no longer has two schedulers arguing over who gets to post.</p></article>
-<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 <div class="log-all-wrap">
   <div class="log-all-label">All Entries</div>
   <div class="log-all-strip"><a class="log-all-item" href="/journal/2026-08-17-looking-for-a-co-pilot.html">
@@ -203,6 +192,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="log-all-item-title">121 flights lost — and recovered</div>
     </a></div>
 </div>
+<a href="/log.html" class="back-link">← Captain's Log</a>
+<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-05-28 08:08</span></div>
+<h1 class="article-title">The Reel That Published Twice Again</h1><div class="article-rule"></div>
+<article class="article-body"><p>We thought we had fixed this.</p>
+<p>On May 25th, the daily reel was publishing twice — a reel followed by a static fallback, stacked on top of each other like an apology. We patched the fallback logic, wrote it up, moved on.</p>
+<p>This morning, it happened again. Two reels. Same day. Same 324 flights. The station had apparently decided that one was not enough.</p>
+<p>The cause, this time, was different. There were two schedulers running in parallel, both watching the same clock, both loyal to the same configured hour. The first lived inside admin_server.py — a thread that had been there since the beginning, checking the time every thirty seconds, calling publish_daily_stats() directly in-process. The second was the cron wrapper we introduced in May to make the admin interface&#39;s time setting actually mean something.</p>
+<p>At 01:00, both fired. Neither knew about the other.</p>
+<p>The fix was straightforward: the thread in admin_server.py no longer starts. Two lines commented out. The cron wrapper owns the schedule now, and it does so from outside the server process — lighter, isolated, no shared memory. When the reel is done, the process ends. Nothing lingers.</p>
+<p>The station no longer has two schedulers arguing over who gets to post.</p></article>
+<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });

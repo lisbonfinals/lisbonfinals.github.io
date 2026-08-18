@@ -64,7 +64,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
 .dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
-.log-all-wrap{margin-top:56px}
+.log-all-wrap{margin-bottom:36px}
 .log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
 .log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
 .log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -92,16 +92,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <a href="/about.html" onclick="closeDrawer()">About</a>
 </div>
 <main class="article-shell">
-<a href="/log.html" class="back-link">← Captain's Log</a>
-<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-07-20 20:32</span></div>
-<h1 class="article-title">Behind the scenes at the station</h1><div class="article-rule"></div>
-<article class="article-body"><p>While the planes kept rolling in over the terrace these past few days, we&#39;ve been busy building something backstage: a brand new tool that lets us dig through the station&#39;s entire history — not just the last 30 days shown on the site.</p>
-<p>The result: we can now ask questions we simply couldn&#39;t before. Which airline flies which aircraft type most often — and which pairing is the quietest, or the loudest? Which airline makes the most noise overnight? And, most fun of all: what are the best photos ever captured, sorted by aircraft or by airline?</p>
-<p>One small win worth sharing: while digging through the data, we caught a real gem that had been mislabeled — a beautiful Portuguese Air Force KC-390 the system wasn&#39;t recognizing properly. Fixed. Its photo is now sitting right where it belongs. 🛬</p>
-<p>We also switched on a sensor that had been quietly sitting unused: air quality. Fair warning — it&#39;s sensitive enough to pick up a neighbor&#39;s barbecue or a cigarette on a nearby terrace, so we won&#39;t be blaming every hazy reading on aircraft. But we can now track how it evolves hour by hour, day by day, week by week, month by month.</p>
-<p>What&#39;s next? We keep refining all of this — and maybe, down the line, open part of it up to others: municipalities, researchers, curious minds. Nothing&#39;s set in stone yet, but the idea is taking shape.</p>
-<p>Stay tuned. The sky isn&#39;t done telling us things yet. ✈️</p></article>
-<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 <div class="log-all-wrap">
   <div class="log-all-label">All Entries</div>
   <div class="log-all-strip"><a class="log-all-item" href="/journal/2026-08-17-looking-for-a-co-pilot.html">
@@ -202,6 +192,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="log-all-item-title">121 flights lost — and recovered</div>
     </a></div>
 </div>
+<a href="/log.html" class="back-link">← Captain's Log</a>
+<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-07-20 20:32</span></div>
+<h1 class="article-title">Behind the scenes at the station</h1><div class="article-rule"></div>
+<article class="article-body"><p>While the planes kept rolling in over the terrace these past few days, we&#39;ve been busy building something backstage: a brand new tool that lets us dig through the station&#39;s entire history — not just the last 30 days shown on the site.</p>
+<p>The result: we can now ask questions we simply couldn&#39;t before. Which airline flies which aircraft type most often — and which pairing is the quietest, or the loudest? Which airline makes the most noise overnight? And, most fun of all: what are the best photos ever captured, sorted by aircraft or by airline?</p>
+<p>One small win worth sharing: while digging through the data, we caught a real gem that had been mislabeled — a beautiful Portuguese Air Force KC-390 the system wasn&#39;t recognizing properly. Fixed. Its photo is now sitting right where it belongs. 🛬</p>
+<p>We also switched on a sensor that had been quietly sitting unused: air quality. Fair warning — it&#39;s sensitive enough to pick up a neighbor&#39;s barbecue or a cigarette on a nearby terrace, so we won&#39;t be blaming every hazy reading on aircraft. But we can now track how it evolves hour by hour, day by day, week by week, month by month.</p>
+<p>What&#39;s next? We keep refining all of this — and maybe, down the line, open part of it up to others: municipalities, researchers, curious minds. Nothing&#39;s set in stone yet, but the idea is taking shape.</p>
+<p>Stay tuned. The sky isn&#39;t done telling us things yet. ✈️</p></article>
+<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });

@@ -64,7 +64,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
 .dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
-.log-all-wrap{margin-top:56px}
+.log-all-wrap{margin-bottom:36px}
 .log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
 .log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
 .log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -92,15 +92,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <a href="/about.html" onclick="closeDrawer()">About</a>
 </div>
 <main class="article-shell">
-<a href="/log.html" class="back-link">← Captain's Log</a>
-<div class="article-kicker"><span class="log-cat log-cat-milestone">🏆 Milestone</span><span class="article-date">2026-07-03 02:59</span></div>
-<h1 class="article-title">A Lot Happened This Week (Not All Of It On Purpose)</h1><div class="article-rule"></div>
-<article class="article-body"><p>Six hours of silence, and nothing in the logs to explain it. That&#39;s how this week started. Turned out two parts of the system were racing to write the same settings file — main.py and the admin panel, both innocent, both guilty. The listening window quietly collapsed to 7.5 seconds and stayed there until someone happened to click &quot;save&quot; on the control panel and, by accident, fixed it. Now it&#39;s fixed on purpose, with a proper lock.</p>
-<p>Then I went looking for an old problem in June&#39;s noise numbers and found one: for about twelve days right after the real sound meter went live, it was reading the moment a plane triggered detection, not the actual peak. The report now says so honestly. While I was in there I also noticed I&#39;d been quietly crediting entire noise readings to British Airways and Air France that could have belonged to any airline registered in those countries. Corrected. The airline ranking is also twice as long now — turns out a lot of carriers were being cut off at 20.</p>
-<p>The Noise Report finally has its own spot in the navigation instead of hiding under a dropdown, and it shows the latest month right there, with a small light that comes on when a new one drops.</p>
-<p>There&#39;s also a bigger question I&#39;ve been sitting with: what is this actually for, beyond my own curiosity about the noise over this terrace? The honest answer is that it&#39;s citizen science — an independent, repeatable, public record from one fixed point, not official, not a complaint, just consistent local evidence. Lisbon Finals is now listed on the European Citizen Science Platform (citizenscience.eu/project/841), alongside projects doing the same kind of thing across Europe. It doesn&#39;t change what the station does. It changes what the numbers are for.</p>
-<p>None of this makes a good single headline. All of it, together, is most of what this project actually is.</p></article>
-<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 <div class="log-all-wrap">
   <div class="log-all-label">All Entries</div>
   <div class="log-all-strip"><a class="log-all-item" href="/journal/2026-08-17-looking-for-a-co-pilot.html">
@@ -201,6 +192,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="log-all-item-title">121 flights lost — and recovered</div>
     </a></div>
 </div>
+<a href="/log.html" class="back-link">← Captain's Log</a>
+<div class="article-kicker"><span class="log-cat log-cat-milestone">🏆 Milestone</span><span class="article-date">2026-07-03 02:59</span></div>
+<h1 class="article-title">A Lot Happened This Week (Not All Of It On Purpose)</h1><div class="article-rule"></div>
+<article class="article-body"><p>Six hours of silence, and nothing in the logs to explain it. That&#39;s how this week started. Turned out two parts of the system were racing to write the same settings file — main.py and the admin panel, both innocent, both guilty. The listening window quietly collapsed to 7.5 seconds and stayed there until someone happened to click &quot;save&quot; on the control panel and, by accident, fixed it. Now it&#39;s fixed on purpose, with a proper lock.</p>
+<p>Then I went looking for an old problem in June&#39;s noise numbers and found one: for about twelve days right after the real sound meter went live, it was reading the moment a plane triggered detection, not the actual peak. The report now says so honestly. While I was in there I also noticed I&#39;d been quietly crediting entire noise readings to British Airways and Air France that could have belonged to any airline registered in those countries. Corrected. The airline ranking is also twice as long now — turns out a lot of carriers were being cut off at 20.</p>
+<p>The Noise Report finally has its own spot in the navigation instead of hiding under a dropdown, and it shows the latest month right there, with a small light that comes on when a new one drops.</p>
+<p>There&#39;s also a bigger question I&#39;ve been sitting with: what is this actually for, beyond my own curiosity about the noise over this terrace? The honest answer is that it&#39;s citizen science — an independent, repeatable, public record from one fixed point, not official, not a complaint, just consistent local evidence. Lisbon Finals is now listed on the European Citizen Science Platform (citizenscience.eu/project/841), alongside projects doing the same kind of thing across Europe. It doesn&#39;t change what the station does. It changes what the numbers are for.</p>
+<p>None of this makes a good single headline. All of it, together, is most of what this project actually is.</p></article>
+<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });

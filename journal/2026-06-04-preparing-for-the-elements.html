@@ -64,7 +64,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:640px){.metric-grid{grid-template-columns:repeat(2,1fr)}.article-shell{padding:130px 0 70px}}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);background:transparent;border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:10px 18px;text-decoration:none;margin-top:28px;transition:border-color .2s,background .2s}
 .dl-btn:hover{border-color:rgba(245,166,35,.6);background:rgba(245,166,35,.06)}
-.log-all-wrap{margin-top:56px}
+.log-all-wrap{margin-bottom:36px}
 .log-all-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,237,232,.28);padding-bottom:10px;display:flex;align-items:center;gap:12px}
 .log-all-label::before{content:'';width:20px;height:1px;background:rgba(240,237,232,.15);flex-shrink:0}
 .log-all-strip{overflow-x:auto;display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -92,15 +92,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <a href="/about.html" onclick="closeDrawer()">About</a>
 </div>
 <main class="article-shell">
-<a href="/log.html" class="back-link">← Captain's Log</a>
-<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-06-04 10:39</span></div>
-<h1 class="article-title">Preparing for the Elements</h1><div class="article-rule"></div>
-<article class="article-body"><p>Three purchases landed today, and each one tells a story.</p>
-<p>The first RTL-SDR we ever ran overheated on June 3rd — silently, without crashing, just stopping. Approximately 146 flights lost to a dongle that kept running but stopped listening. The replacement is already on its way. So is a proper antenna, and a 40mm fan that will keep the whole lower compartment breathing.</p>
-<p>The plexiglass shell is ready for the laser cutter. Monday, June 8th, Fab Lab Lisbon. The SVG files are clean — cuts in red, logo engraved on the front panel, and a new 40×40mm opening on the east face for the fan. Below the plateau: the Pi and the SDR. Above: the GPIO board, the ADS1115, the sensors. Air in through the right side. Heat out through the top.</p>
-<p>Next week the hardware converges. The dongle arrives Wednesday. The fan arrives Thursday. The box comes back from the lab on Monday. Then for the first time, the station moves outside — into real air, real wind, real noise.</p>
-<p>The shell earns its purpose next week.</p></article>
-<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 <div class="log-all-wrap">
   <div class="log-all-label">All Entries</div>
   <div class="log-all-strip"><a class="log-all-item" href="/journal/2026-08-17-looking-for-a-co-pilot.html">
@@ -201,6 +192,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="log-all-item-title">121 flights lost — and recovered</div>
     </a></div>
 </div>
+<a href="/log.html" class="back-link">← Captain's Log</a>
+<div class="article-kicker"><span class="log-cat log-cat-fix">🛠️ Fix</span><span class="article-date">2026-06-04 10:39</span></div>
+<h1 class="article-title">Preparing for the Elements</h1><div class="article-rule"></div>
+<article class="article-body"><p>Three purchases landed today, and each one tells a story.</p>
+<p>The first RTL-SDR we ever ran overheated on June 3rd — silently, without crashing, just stopping. Approximately 146 flights lost to a dongle that kept running but stopped listening. The replacement is already on its way. So is a proper antenna, and a 40mm fan that will keep the whole lower compartment breathing.</p>
+<p>The plexiglass shell is ready for the laser cutter. Monday, June 8th, Fab Lab Lisbon. The SVG files are clean — cuts in red, logo engraved on the front panel, and a new 40×40mm opening on the east face for the fan. Below the plateau: the Pi and the SDR. Above: the GPIO board, the ADS1115, the sensors. Air in through the right side. Heat out through the top.</p>
+<p>Next week the hardware converges. The dongle arrives Wednesday. The fan arrives Thursday. The box comes back from the lab on Monday. Then for the first time, the station moves outside — into real air, real wind, real noise.</p>
+<p>The shell earns its purpose next week.</p></article>
+<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
 <script>document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
