@@ -904,6 +904,7 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
     <div class="gi-license" style="font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.5);line-height:1.7;max-width:560px;">All published data (dashboards, monthly reports, imagery) is released under <strong style="color:rgba(240,237,232,.75)">CC BY 4.0</strong> — free to reuse, including commercially, with attribution.</div>
     <a href="mailto:chronos@lisbonfinals.com" class="gi-contact" style="flex-shrink:0;margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--amber);white-space:nowrap;text-decoration:none;border:1px solid rgba(245,166,35,.3);padding:8px 14px;border-radius:3px;">Contact the Captain →</a>
   </div>
+  <div class="gi-ecsa" style="margin-top:14px;font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.5);letter-spacing:.02em;">Official member of the <a href="https://citizenscience.eu/project/841" target="_blank" rel="noopener noreferrer" style="color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3)">European Citizen Science Association</a> (ECSA).</div>
 </section>
 
 <hr class="section-divider">
@@ -1047,6 +1048,7 @@ const ABOUT_TRANSLATIONS = {
     gi_desc_3: 'Para além dos painéis públicos e relatórios mensais, o conjunto de dados completo, voo a voo, está disponível a pedido para investigadores e cidadãos que nos contactem diretamente.',
     gi_license: 'Todos os dados publicados (painéis, relatórios mensais, imagens) estão sob licença <strong style="color:rgba(240,237,232,.75)">CC BY 4.0</strong> — reutilização livre, incluindo comercial, com atribuição.',
     gi_contact: 'Contactar o Capitão →',
+    gi_ecsa: 'Membro oficial da <a href="https://citizenscience.eu/project/841" target="_blank" rel="noopener noreferrer" style="color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3)">European Citizen Science Association</a> (ECSA).',
   },
   en: {
     eyebrow: 'The project',
@@ -1118,6 +1120,7 @@ const ABOUT_TRANSLATIONS = {
     gi_desc_3: 'Beyond the public dashboards and monthly reports, the full flight-level dataset is available on request to researchers and citizens who reach out directly.',
     gi_license: 'All published data (dashboards, monthly reports, imagery) is released under <strong style="color:rgba(240,237,232,.75)">CC BY 4.0</strong> — free to reuse, including commercially, with attribution.',
     gi_contact: 'Contact the Captain →',
+    gi_ecsa: 'Official member of the <a href="https://citizenscience.eu/project/841" target="_blank" rel="noopener noreferrer" style="color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3)">European Citizen Science Association</a> (ECSA).',
   },
   fr: {
     eyebrow: 'Le projet',
@@ -1189,6 +1192,7 @@ const ABOUT_TRANSLATIONS = {
     gi_desc_3: 'Au-delà des tableaux de bord publics et des rapports mensuels, le jeu de données complet vol par vol est disponible sur demande pour les chercheurs et citoyens qui nous contactent directement.',
     gi_license: 'Toutes les données publiées (tableaux de bord, rapports mensuels, images) sont sous licence <strong style="color:rgba(240,237,232,.75)">CC BY 4.0</strong> — réutilisation libre, y compris commerciale, avec attribution.',
     gi_contact: 'Contacter le Capitaine →',
+    gi_ecsa: 'Membre officiel de l\'<a href="https://citizenscience.eu/project/841" target="_blank" rel="noopener noreferrer" style="color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3)">European Citizen Science Association</a> (ECSA).',
   }
 };
 
@@ -1307,6 +1311,8 @@ function applyLang(lang) {
   if (giLicense && t.gi_license) giLicense.innerHTML = t.gi_license;
   const giContact = sel('.gi-contact');
   if (giContact && t.gi_contact) giContact.textContent = t.gi_contact;
+  const giEcsa = sel('.gi-ecsa');
+  if (giEcsa && t.gi_ecsa) giEcsa.innerHTML = t.gi_ecsa;
 
   // Press section
   const pressEyebrow = sel('#press .section-eyebrow');
