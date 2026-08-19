@@ -170,6 +170,11 @@ nav {
   font-family: var(--sans); font-size: 14px; color: rgba(240,237,232,0.47);
   letter-spacing: .06em; max-width: 480px; line-height: 1.7;
 }
+.log-hero-ecsa {
+  font-family: var(--mono); font-size: 11px; color: rgba(240,237,232,.4);
+  letter-spacing: .02em; margin-top: 10px;
+}
+.log-hero-ecsa a { color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(245,166,35,.3); }
 .log-copilot-strip {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   box-sizing: border-box; margin-top: 24px; padding: 9px 18px;
@@ -714,6 +719,7 @@ nav {
   <div class="log-hero-eyebrow"><span></span>Field Journal</div>
   <h1 class="log-hero-title">Captain's<br><em>Log</em></h1>
   <p class="log-hero-sub">Technical updates, rare catches, hardware changes, bug fixes — written from the terrace in real time.</p>
+  <div class="log-hero-ecsa">Official member of the <a href="https://citizenscience.eu/project/841" target="_blank" rel="noopener noreferrer">European Citizen Science Association</a> (ECSA).</div>
   <a class="log-copilot-strip" href="/host-a-node.html">
     <span class="log-copilot-main">
       <span class="log-copilot-icon">📡</span>
@@ -969,6 +975,7 @@ const LOG_TRANSLATIONS = {
     hero_title_1: 'Diário do',
     hero_title_2: 'Capitão',
     hero_sub: 'Atualizações técnicas, capturas raras e alterações de hardware — escritas da varanda em tempo real.',
+    hero_ecsa: 'Membro oficial da <a href="https://citizenscience.eu/project/841" target="_blank" rel="noopener noreferrer">European Citizen Science Association</a> (ECSA).',
     contact_btn: 'Contactar o Capitão',
     bridge_btn: 'A Ponte', bridge_tag: 'Privado',
     copilot_text: 'Também vives sob um corredor aéreo? Queres ser o nosso copiloto?',
@@ -988,6 +995,7 @@ const LOG_TRANSLATIONS = {
     hero_title_1: "Captain's",
     hero_title_2: 'Log',
     hero_sub: 'Technical updates, rare catches, hardware changes, bug fixes — written from the terrace in real time.',
+    hero_ecsa: 'Official member of the <a href="https://citizenscience.eu/project/841" target="_blank" rel="noopener noreferrer">European Citizen Science Association</a> (ECSA).',
     contact_btn: 'Contact the Captain',
     bridge_btn: 'The Bridge', bridge_tag: 'Private',
     copilot_text: 'Live under a flight path yourself? Want to be our co-pilot?',
@@ -1007,6 +1015,7 @@ const LOG_TRANSLATIONS = {
     hero_title_1: 'Journal du',
     hero_title_2: 'Capitaine',
     hero_sub: 'Mises à jour techniques, captures rares, modifications matérielles, corrections — écrites depuis la terrasse en temps réel.',
+    hero_ecsa: 'Membre officiel de l\'<a href="https://citizenscience.eu/project/841" target="_blank" rel="noopener noreferrer">European Citizen Science Association</a> (ECSA).',
     contact_btn: 'Contacter le Capitaine',
     bridge_btn: 'La Passerelle', bridge_tag: 'Privé',
     copilot_text: "Tu habites aussi sous un couloir aérien ? Envie d'être notre copilote ?",
@@ -1037,6 +1046,8 @@ function applyLang(lang) {
   if (title) title.innerHTML = `${t.hero_title_1}<br><em>${t.hero_title_2}</em>`;
   const sub = document.querySelector('.log-hero-sub');
   if (sub) sub.textContent = t.hero_sub;
+  const ecsa = document.querySelector('.log-hero-ecsa');
+  if (ecsa && t.hero_ecsa) ecsa.innerHTML = t.hero_ecsa;
   const contactBtn = document.querySelector('.log-contact-btn');
   if (contactBtn) { const svg = contactBtn.querySelector('svg'); contactBtn.innerHTML = ''; if (svg) contactBtn.appendChild(svg); contactBtn.appendChild(document.createTextNode(' ' + t.contact_btn)); }
   const bridgeLabel = document.querySelector('.log-bridge-btn .bridge-label');
