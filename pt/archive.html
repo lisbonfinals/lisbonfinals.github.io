@@ -758,16 +758,18 @@ function avMonthLabel(ym, short) {
 }
 
 // Barres cliquables (une par mois) à côté d'un sélecteur — repère visuel des
-// mois avec le plus de trafic + raccourci pour sauter directement dessus.
-function avRenderMonthSparkline(containerId, selectId) {
+// mois avec le plus de [valueFn] + raccourci pour sauter directement dessus.
+// valueFn(monthData) laisse chaque onglet choisir sa propre métrique (trafic
+// total pour Overview, vols nocturnes pour Nuit·ANAC — pas la même chose).
+function avRenderMonthSparkline(containerId, selectId, valueFn) {
   const el = document.getElementById(containerId);
   const sel = document.getElementById(selectId);
   if (!el || !sel) return;
   const cur = sel.value;
   const months = Object.keys(archiveData.by_month || {}).sort();
-  const max = Math.max(...months.map(ym => archiveData.by_month[ym].total_flights || 0), 1);
+  const max = Math.max(...months.map(ym => valueFn(archiveData.by_month[ym]) || 0), 1);
   el.innerHTML = months.map(ym => {
-    const n = archiveData.by_month[ym].total_flights || 0;
+    const n = valueFn(archiveData.by_month[ym]) || 0;
     const pct = Math.max(2, Math.round(n / max * 100));
     return `<div class="archive-hbar-row${ym === cur ? ' active' : ''}" data-ym="${ym}">
       <span class="archive-hbar-lbl">${avMonthLabel(ym, true)}</span>
@@ -808,7 +810,7 @@ function avRenderOverview() {
   const ym = monthSel ? monthSel.value : '';
   const ov = archiveData.overview;
   const d = (ym && archiveData.by_month && archiveData.by_month[ym]) ? archiveData.by_month[ym] : ov;
-  avRenderMonthSparkline('av-overview-sparkline', 'av-overview-month');
+  avRenderMonthSparkline('av-overview-sparkline', 'av-overview-month', m => m.total_flights);
   document.getElementById('av-total-flights').textContent = avFmt(d.total_flights);
   document.getElementById('av-avg-db').textContent = d.avg_db != null ? avFmt1(d.avg_db) + ' dB' : '—';
   document.getElementById('av-max-db').textContent = d.max_db != null ? avFmt1(d.max_db) + ' dB' : '—';
@@ -903,7 +905,7 @@ function avRenderAnac() {
   const ym = monthSel ? monthSel.value : '';
   const monthData = ym && archiveData.by_month && archiveData.by_month[ym];
   const d = (monthData && monthData.night_anac) ? monthData.night_anac : archiveData.night_anac;
-  avRenderMonthSparkline('av-anac-sparkline', 'av-anac-month');
+  avRenderMonthSparkline('av-anac-sparkline', 'av-anac-month', m => m.night_anac && m.night_anac.total_night);
 
   const weekLbl = document.getElementById('av-anac-week-lbl');
   if (weekLbl) {
