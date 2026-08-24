@@ -273,6 +273,14 @@ table.archive-table{width:100%;border-collapse:collapse;}
   .archive-hbar-val{width:110px;font-size:9px;}
 }
 
+/* month sparkline — click a bar to jump to that month (Overview / Night·ANAC) */
+.archive-sparkline{margin-bottom:24px;}
+.archive-sparkline .archive-hbar-row{cursor:pointer;padding:2px 6px;border-radius:3px;transition:background .15s;}
+.archive-sparkline .archive-hbar-row:hover{background:rgba(255,255,255,.05);}
+.archive-sparkline .archive-hbar-row.active .archive-hbar-lbl{color:var(--amber);font-weight:700;}
+.archive-sparkline .archive-hbar-row.active .archive-hbar-fill{background:var(--white);}
+.archive-sparkline .archive-hbar-lbl{width:44px;text-transform:capitalize;}
+
 /* pagination for archive photo galleries */
 .archive-pics-pagination{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;}
 .archive-pics-pagination button{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:transparent;border:1px solid rgba(240,237,232,.15);color:rgba(240,237,232,.6);padding:8px 16px;border-radius:3px;cursor:pointer;transition:all .2s;}
@@ -408,6 +416,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
     <div class="archive-select-row" style="margin-bottom:16px;">
       <select class="archive-select" id="av-overview-month"></select>
     </div>
+    <div class="archive-sparkline" id="av-overview-sparkline"></div>
     <div class="stat-grid">
       <div class="stat-card amber"><div class="stat-val" id="av-total-flights">—</div><div class="stat-lbl" data-i18n="av_lbl_total">Total flights</div></div>
       <div class="stat-card"><div class="stat-val" id="av-avg-db">—</div><div class="stat-lbl" data-i18n="av_lbl_avgdb">Average dB</div></div>
@@ -474,8 +483,12 @@ table.archive-table{width:100%;border-collapse:collapse;}
 
   <!-- ── NIGHT / ANAC ── -->
   <div class="archive-view" id="av-view-anac">
+    <div class="archive-select-row" style="margin-bottom:16px;">
+      <select class="archive-select" id="av-anac-month"></select>
+    </div>
+    <div class="archive-sparkline" id="av-anac-sparkline"></div>
     <div class="warning-hero-card" style="margin-bottom:24px;">
-      <div class="warning-stat night"><div class="warning-val" id="av-anac-week">—</div><div class="warning-lbl" data-i18n="av_anac_week">Night flights (all-time avg/week)</div></div>
+      <div class="warning-stat night"><div class="warning-val" id="av-anac-week">—</div><div class="warning-lbl" id="av-anac-week-lbl" data-i18n="av_anac_week">Night flights (00h–06h)</div></div>
       <div class="warning-stat critical"><div class="warning-val" id="av-anac-critical">—</div><div class="warning-lbl" data-i18n="av_anac_critical">Critical violations</div></div>
       <div class="warning-stat l2"><div class="warning-val" id="av-anac-l2">—</div><div class="warning-lbl" data-i18n="av_anac_l2">Level 2 violations</div></div>
     </div>
@@ -737,14 +750,40 @@ function avRenderRankList(containerId, items, labelKey, flagKey, onClick, opts) 
 }
 
 // ── Overview ──
-function avMonthLabel(ym) {
+function avMonthLabel(ym, short) {
   const [y, m] = ym.split('-').map(Number);
   const localeMap = { fr: 'fr-FR', pt: 'pt-PT', en: 'en-GB' };
-  return new Date(y, m - 1, 1).toLocaleDateString(localeMap[_lang] || 'en-GB', { month: 'long', year: 'numeric' });
+  const opts = short ? { month: 'short' } : { month: 'long', year: 'numeric' };
+  return new Date(y, m - 1, 1).toLocaleDateString(localeMap[_lang] || 'en-GB', opts);
 }
 
-function avPopulateMonthSelect() {
-  const sel = document.getElementById('av-overview-month');
+// Barres cliquables (une par mois) à côté d'un sélecteur — repère visuel des
+// mois avec le plus de trafic + raccourci pour sauter directement dessus.
+function avRenderMonthSparkline(containerId, selectId) {
+  const el = document.getElementById(containerId);
+  const sel = document.getElementById(selectId);
+  if (!el || !sel) return;
+  const cur = sel.value;
+  const months = Object.keys(archiveData.by_month || {}).sort();
+  const max = Math.max(...months.map(ym => archiveData.by_month[ym].total_flights || 0), 1);
+  el.innerHTML = months.map(ym => {
+    const n = archiveData.by_month[ym].total_flights || 0;
+    const pct = Math.max(2, Math.round(n / max * 100));
+    return `<div class="archive-hbar-row${ym === cur ? ' active' : ''}" data-ym="${ym}">
+      <span class="archive-hbar-lbl">${avMonthLabel(ym, true)}</span>
+      <div class="archive-hbar-track"><div class="archive-hbar-fill" style="width:${pct}%"></div></div>
+      <span class="archive-hbar-val">${avFmt(n)}</span>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('[data-ym]').forEach(row => {
+    row.addEventListener('click', () => {
+      sel.value = row.dataset.ym;
+      sel.dispatchEvent(new Event('change'));
+    });
+  });
+}
+
+function avPopulateMonthSelectInto(sel, onChange) {
   const months = Object.keys(archiveData.by_month || {}).sort().reverse();
   const cur = sel.value;
   sel.innerHTML = `<option value="">${avT('av_month_all', 'All time')}</option>` +
@@ -752,8 +791,16 @@ function avPopulateMonthSelect() {
   sel.value = months.includes(cur) ? cur : '';
   if (!sel.dataset.bound) {
     sel.dataset.bound = '1';
-    sel.addEventListener('change', avRenderOverview);
+    sel.addEventListener('change', onChange);
   }
+}
+
+function avPopulateMonthSelect() {
+  avPopulateMonthSelectInto(document.getElementById('av-overview-month'), avRenderOverview);
+}
+
+function avPopulateAnacMonthSelect() {
+  avPopulateMonthSelectInto(document.getElementById('av-anac-month'), avRenderAnac);
 }
 
 function avRenderOverview() {
@@ -761,6 +808,7 @@ function avRenderOverview() {
   const ym = monthSel ? monthSel.value : '';
   const ov = archiveData.overview;
   const d = (ym && archiveData.by_month && archiveData.by_month[ym]) ? archiveData.by_month[ym] : ov;
+  avRenderMonthSparkline('av-overview-sparkline', 'av-overview-month');
   document.getElementById('av-total-flights').textContent = avFmt(d.total_flights);
   document.getElementById('av-avg-db').textContent = d.avg_db != null ? avFmt1(d.avg_db) + ' dB' : '—';
   document.getElementById('av-max-db').textContent = d.max_db != null ? avFmt1(d.max_db) + ' dB' : '—';
@@ -851,7 +899,17 @@ function avLoadAirline(airline) {
 
 // ── Night / ANAC ──
 function avRenderAnac() {
-  const d = archiveData.night_anac;
+  const monthSel = document.getElementById('av-anac-month');
+  const ym = monthSel ? monthSel.value : '';
+  const monthData = ym && archiveData.by_month && archiveData.by_month[ym];
+  const d = (monthData && monthData.night_anac) ? monthData.night_anac : archiveData.night_anac;
+  avRenderMonthSparkline('av-anac-sparkline', 'av-anac-month');
+
+  const weekLbl = document.getElementById('av-anac-week-lbl');
+  if (weekLbl) {
+    const scope = ym ? avMonthLabel(ym) : avT('av_month_all', 'All time');
+    weekLbl.textContent = avT('av_anac_week', 'Night flights (00h–06h)') + ' — ' + scope;
+  }
   const wCritEl = document.getElementById('av-anac-critical');
   const wL2El = document.getElementById('av-anac-l2');
   document.getElementById('av-anac-week').textContent = avFmt(d.total_night);
@@ -1095,6 +1153,7 @@ function avRefreshAll() {
   const alSel = document.getElementById('av-airline-select');
   if (acSel.value) avLoadAircraft(acSel.value);
   if (alSel.value) avLoadAirline(alSel.value);
+  avPopulateAnacMonthSelect();
   avRenderAnac();
   avRenderRare();
   avRenderQuality();
@@ -1110,6 +1169,7 @@ fetch(ARCHIVE_URL + '?t=' + Date.now())
     avPopulateMonthSelect();
     avRenderOverview();
     avPopulateSelects();
+    avPopulateAnacMonthSelect();
     avRenderAnac();
     avRenderRare();
     avRenderQuality();
@@ -1131,7 +1191,7 @@ const T = {
     av_lbl_total:'Total flights', av_lbl_avgdb:'Average dB', av_lbl_maxdb:'Peak dB', av_lbl_avgvib:'Avg. vibration (mg)',
     av_top_airlines:'Top airlines', av_top_aircraft:'Top aircraft models', av_click_hint:'click to explore', av_month_all:'All time',
     av_correlation_title:'Sound × vibration correlation', av_photos_title:'Best photos', av_monthly_trend:'Monthly trend',
-    av_anac_week:'Night flights (00h–06h, all-time)', av_anac_critical:'Critical violations', av_anac_l2:'Level 2 violations',
+    av_anac_week:'Night flights (00h–06h)', av_anac_critical:'Critical violations', av_anac_l2:'Level 2 violations',
     av_anac_offenders:'Top offenders (by airline)', av_anac_infractions:'Infractions',
     av_rare_total:'Rare / military flights detected', av_rare_bytype_title:'By type', av_rare_clear_filter:'show all',
     av_quality_intro:'Transparency panel — known caveats in this dataset, with real counters rather than hidden assumptions.',
@@ -1164,7 +1224,7 @@ const T = {
     av_lbl_total:'Voos totais', av_lbl_avgdb:'dB médio', av_lbl_maxdb:'Pico dB', av_lbl_avgvib:'Vibração média (mg)',
     av_top_airlines:'Principais companhias', av_top_aircraft:'Principais modelos', av_click_hint:'clique para explorar', av_month_all:'Todo o período',
     av_correlation_title:'Correlação som × vibração', av_photos_title:'Melhores fotos', av_monthly_trend:'Tendência mensal',
-    av_anac_week:'Voos noturnos (00h–06h, histórico)', av_anac_critical:'Infrações críticas', av_anac_l2:'Infrações nível 2',
+    av_anac_week:'Voos noturnos (00h–06h)', av_anac_critical:'Infrações críticas', av_anac_l2:'Infrações nível 2',
     av_anac_offenders:'Principais infratores (por companhia)', av_anac_infractions:'Infrações',
     av_rare_total:'Voos raros / militares detetados', av_rare_bytype_title:'Por tipo', av_rare_clear_filter:'mostrar tudo',
     av_quality_intro:'Painel de transparência — limitações conhecidas neste conjunto de dados, com contadores reais em vez de suposições ocultas.',
@@ -1197,7 +1257,7 @@ const T = {
     av_lbl_total:'Vols totaux', av_lbl_avgdb:'dB moyen', av_lbl_maxdb:'Pic dB', av_lbl_avgvib:'Vibration moyenne (mg)',
     av_top_airlines:'Top compagnies', av_top_aircraft:'Top modèles d\'avion', av_click_hint:'cliquer pour explorer', av_month_all:'Tout l\'historique',
     av_correlation_title:'Corrélation son × vibration', av_photos_title:'Meilleures photos', av_monthly_trend:'Tendance mensuelle',
-    av_anac_week:'Vols nocturnes (00h–06h, historique complet)', av_anac_critical:'Infractions critiques', av_anac_l2:'Infractions niveau 2',
+    av_anac_week:'Vols nocturnes (00h–06h)', av_anac_critical:'Infractions critiques', av_anac_l2:'Infractions niveau 2',
     av_anac_offenders:'Principales compagnies (infractions)', av_anac_infractions:'Infractions',
     av_rare_total:'Vols rares / militaires détectés', av_rare_bytype_title:'Par type', av_rare_clear_filter:'tout afficher',
     av_quality_intro:'Panneau de transparence — limites connues de ce jeu de données, avec des compteurs réels plutôt que des suppositions cachées.',
