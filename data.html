@@ -531,15 +531,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <span class="ticker-live" data-i18n="ticker_live">Live</span>
     </div>
     <div class="ticker-col-heads">
-      <span class="ticker-col-head">Date / Heure</span>
+      <span class="ticker-col-head" data-i18n="th_date">Date / Heure</span>
       <span class="ticker-col-head"></span>
-      <span class="ticker-col-head">Vol</span>
-      <span class="ticker-col-head">Compagnie</span>
-      <span class="ticker-col-head hide-sm">Phase</span>
-      <span class="ticker-col-head right hide-sm">Altitude</span>
-      <span class="ticker-col-head right">dB</span>
-      <span class="ticker-col-head right" title="Duration above 70dB SPL">Expo≥70dB</span>
-      <span class="ticker-col-head right hide-sm">Vib</span>
+      <span class="ticker-col-head" data-i18n="th_vol">Vol</span>
+      <span class="ticker-col-head" data-i18n="th_airline">Compagnie</span>
+      <span class="ticker-col-head hide-sm" data-i18n="th_phase">Phase</span>
+      <span class="ticker-col-head right hide-sm" data-i18n="th_alt">Altitude</span>
+      <span class="ticker-col-head right" data-i18n="th_db">dB</span>
+      <span class="ticker-col-head right" title="Duration above 70dB SPL" data-i18n="th_expo">Expo≥70dB</span>
+      <span class="ticker-col-head right hide-sm" data-i18n="th_vib">Vib</span>
     </div>
     <div class="ticker-list" id="tickerList">
       <div class="ticker-empty">Loading…</div>
@@ -979,7 +979,9 @@ const T = {
     tab_archive_teaser:'Archive',
     archive_teaser_label:'Explore further', archive_teaser_title:'Every flight<br><em>cross-referenced</em>',
     archive_teaser_desc:'The numbers above already cover the station\'s complete history. The Archive goes further — cross-referenced by aircraft model, airline, night regulation, and air quality, with full photo galleries for each.',
-    archive_teaser_link:'→ Explore the full archive'
+    archive_teaser_link:'→ Explore the full archive',
+    th_date:'Date / Time', th_vol:'Flight', th_airline:'Airline', th_phase:'Phase',
+    th_alt:'Altitude', th_db:'Max dB', th_expo:'Expo≥70dB', th_vib:'Vib'
   },
   pt: {
     tab_data:'Os Dados', tab_noise:'Dados de Ruído', tab_warning:'⚠ Zona de alerta',
@@ -1029,7 +1031,9 @@ const T = {
     tab_archive_teaser:'Arquivo',
     archive_teaser_label:'Explorar mais', archive_teaser_title:'Cada voo<br><em>analisado em detalhe</em>',
     archive_teaser_desc:'Os números acima já cobrem o histórico completo da estação. O Arquivo vai mais longe — cruzando modelo de aeronave, companhia aérea, regulamentação noturna e qualidade do ar, com galerias de fotos completas associadas a cada seleção.',
-    archive_teaser_link:'→ Explorar o arquivo completo'
+    archive_teaser_link:'→ Explorar o arquivo completo',
+    th_date:'Data / Hora', th_vol:'Voo', th_airline:'Companhia', th_phase:'Fase',
+    th_alt:'Altitude', th_db:'dB Máx', th_expo:'Expo≥70dB', th_vib:'Vib'
   },
   fr: {
     s1_label:'Vols détectés', s1_title:'Les données<br><em>parlent d\'elles-mêmes</em>',
@@ -1076,7 +1080,9 @@ const T = {
     tab_archive_teaser:'Archives',
     archive_teaser_label:'Aller plus loin', archive_teaser_title:'Chaque vol<br><em>recoupé en détail</em>',
     archive_teaser_desc:'Les chiffres ci-dessus couvrent déjà tout l\'historique de la station. Les archives permettent d’aller plus loin en recoupant modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo correspondant à chaque sélection.',
-    archive_teaser_link:'→ Explorer les archives complètes'
+    archive_teaser_link:'→ Explorer les archives complètes',
+    th_date:'Date / Heure', th_vol:'Vol', th_airline:'Compagnie', th_phase:'Phase',
+    th_alt:'Altitude', th_db:'dB Max', th_expo:'Expo≥70dB', th_vib:'Vib'
   }
 };
 
