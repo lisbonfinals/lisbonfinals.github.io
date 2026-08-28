@@ -180,7 +180,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-list{}
 .ticker-col-heads{
   display:grid;
-  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px 72px;
+  grid-template-columns:90px 28px 78px 1fr 68px 100px 62px 76px 72px;
   gap:0;
   padding:8px 20px;
   background:rgba(245,166,35,.04);
@@ -189,11 +189,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-col-head{
   font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;
   color:rgba(245,166,35,.35);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 .ticker-col-head.right{text-align:right;}
 .ticker-row{
   display:grid;
-  grid-template-columns:90px 28px 78px 1fr 110px 68px 100px 62px 72px;
+  grid-template-columns:90px 28px 78px 1fr 68px 100px 62px 76px 72px;
   gap:0;
   align-items:center;
   padding:9px 20px;
@@ -213,6 +214,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-db{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;}
 .ticker-db.loud{color:var(--red);}
 .ticker-db.normal{color:rgba(240,237,232,.6);}
+.ticker-expo{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;color:rgba(240,237,232,.55);}
 .ticker-vib{display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-left:8px;min-width:64px;}
 .ticker-vib-bars{font-family:monospace;font-size:11px;letter-spacing:1px;line-height:1;}
 .ticker-vib-row{display:flex;align-items:center;gap:4px;}
@@ -236,23 +238,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .ticker-flag{order:2;margin-right:6px;font-size:14px;}
   .ticker-callsign{order:3;margin-right:10px;font-size:12px;}
   .ticker-airline{order:4;flex:1;font-size:11px;min-width:0;}
-  /* ligne 2 : route · phase · altitude · dB */
-  .ticker-route{order:5;width:100%;margin-top:4px;font-size:9px;color:rgba(240,237,232,.3);}
-  .ticker-route::before{content:'';display:inline-block;width:0;}
-  .ticker-phase{order:6;font-size:8px;color:rgba(240,237,232,.28);margin-right:12px;margin-top:4px;}
-  .ticker-alt{order:7;text-align:left;margin-right:12px;margin-top:4px;line-height:1.3;}
+  /* ligne 2 : phase · altitude · dB · expo */
+  .ticker-phase{order:5;width:100%;font-size:8px;color:rgba(240,237,232,.28);margin-right:12px;margin-top:4px;}
+  .ticker-alt{order:6;text-align:left;margin-right:12px;margin-top:4px;line-height:1.3;}
   .ticker-alt strong{display:inline;font-size:10px;}
   .ticker-alt-m{display:inline;margin-left:4px;font-size:9px;color:rgba(240,237,232,.28);}
-  .ticker-db{order:8;margin-top:4px;font-size:11px;}
-  /* route + meta sur une seule ligne 2 */
-  .ticker-phase,.ticker-alt,.ticker-db{flex-shrink:0;}
+  .ticker-db{order:7;margin-top:4px;font-size:11px;margin-right:12px;}
+  .ticker-expo{order:8;margin-top:4px;font-size:11px;}
+  .ticker-vib{order:9;margin-top:4px;padding-left:8px;min-width:0;}
+  /* meta sur une seule ligne 2 */
+  .ticker-phase,.ticker-alt,.ticker-db,.ticker-expo,.ticker-vib{flex-shrink:0;}
 }
 /* mobile: collapse to essential columns */
 @media(max-width:480px){
   .ticker-col-heads,
-  .ticker-row{grid-template-columns:72px 22px 64px 1fr 54px;}
+  .ticker-row{grid-template-columns:72px 22px 64px 1fr 54px 56px;}
   .ticker-col-head.hide-sm,.ticker-time-date,
-  .ticker-route,.ticker-phase,.ticker-alt-m{display:none;}
+  .ticker-phase,.ticker-alt,.ticker-vib{display:none;}
   .ticker-alt strong{font-size:9px;}
 }
 
@@ -533,10 +535,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <span class="ticker-col-head"></span>
       <span class="ticker-col-head">Vol</span>
       <span class="ticker-col-head">Compagnie</span>
-      <span class="ticker-col-head hide-sm">Route</span>
       <span class="ticker-col-head hide-sm">Phase</span>
       <span class="ticker-col-head right hide-sm">Altitude</span>
       <span class="ticker-col-head right">dB</span>
+      <span class="ticker-col-head right" title="Duration above 70dB SPL">Expo</span>
       <span class="ticker-col-head right hide-sm">Vib</span>
     </div>
     <div class="ticker-list" id="tickerList">
@@ -745,16 +747,16 @@ function buildTicker(ticker) {
     const timeStr = ts.length >= 16 ? ts.slice(11,16) : (ts.length >= 19 ? ts.slice(11,16) : '—');
     const altFt = f.alt_ft ? Math.round(f.alt_ft) : null;
     const altM  = altFt ? Math.round(altFt * 0.3048) : null;
-    const route = f.route || (f.origin && f.destination ? f.origin + ' → ' + f.destination : (f.origin || f.destination || '—'));
+    const expo = (f.expo_s != null) ? f.expo_s.toFixed(1) + 's' : '—';
     return `<div class="ticker-row">
       <span class="ticker-time"><strong>${timeStr}</strong><span class="ticker-time-date">${dateStr}</span></span>
       <span class="ticker-flag">${f.flag || '✈️'}</span>
       <span class="ticker-callsign">${f.callsign || '—'}</span>
       <span class="ticker-airline">${f.airline || '—'}</span>
-      <span class="ticker-route hide-sm">${route}</span>
       <span class="ticker-phase hide-sm">${f.phase || '—'}</span>
       <span class="ticker-alt hide-sm">${altFt ? '<strong>' + altFt.toLocaleString() + ' ft</strong><span class="ticker-alt-m">' + altM.toLocaleString() + ' m</span>' : '—'}</span>
       <span class="ticker-db ${dbCls}">${db ? db.toFixed(1) + ' dB' : '—'}</span>
+      <span class="ticker-expo">${expo}</span>
       ${(() => {
         const vib = f.vibration_peak;
         if (vib == null) return '<span class="ticker-vib no-data hide-sm"><span class="ticker-vib-val">—</span></span>';
