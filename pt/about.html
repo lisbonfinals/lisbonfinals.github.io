@@ -453,6 +453,16 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
   margin-top: auto;
 }
 .press-card:hover .press-card-link { color: var(--amber); }
+.press-card-langs { display: flex; align-items: center; gap: 8px; margin-top: auto; }
+.press-card-langs-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .08em; color: rgba(240,237,232,0.33);
+}
+.press-card-langs a {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .08em; color: rgba(245,166,35,0.7);
+  text-decoration: none; padding: 3px 9px; border: 1px solid rgba(245,166,35,0.3); border-radius: 3px;
+  transition: color .2s, border-color .2s;
+}
+.press-card-langs a:hover { color: var(--amber); border-color: rgba(245,166,35,0.6); }
 
 /* ── SECTION TAB BAR ── */
 .section-tabs {
@@ -913,16 +923,21 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
   <div class="section-eyebrow">Press</div>
   <h2 class="section-heading">They talk<br><em>about us</em></h2>
   <div class="press-grid">
-    <a class="press-card" href="https://pt.euronews.com/next/2026/09/02/do-ceu-para-o-terraco-portugues-cria-plataforma-que-monitoriza-avioes-sobre-lisboa" target="_blank" rel="noopener noreferrer">
+    <div class="press-card">
       <div class="press-card-top">
         <span class="press-outlet">Euronews</span>
         <span class="press-date">02.09.2026</span>
       </div>
-      <div class="press-card-title">Do céu para o terraço: português cria plataforma que monitoriza aviões sobre Lisboa</div>
-      <p class="press-card-quote">«As medições são completamente neutras e acho que os números também falam por si.»</p>
+      <div class="press-card-title">Meet the man tracking 39,000 flights over Lisbon from his terrace</div>
+      <p class="press-card-quote">"The measurements are completely neutral and I think the figures speak for themselves."</p>
       <div class="press-card-byline">by Diana Rosa Rodrigues</div>
-      <span class="press-card-link">Read the article →</span>
-    </a>
+      <div class="press-card-langs">
+        <span class="press-card-langs-label">Read in</span>
+        <a href="https://pt.euronews.com/next/2026/09/02/do-ceu-para-o-terraco-portugues-cria-plataforma-que-monitoriza-avioes-sobre-lisboa" target="_blank" rel="noopener noreferrer">PT</a>
+        <a href="https://www.euronews.com/next/2026/09/02/from-sky-to-rooftop-portuguese-creates-platform-tracking-planes-over-lisbon" target="_blank" rel="noopener noreferrer">EN</a>
+        <a href="https://fr.news.yahoo.com/ciel-au-toit-portugais-cr%C3%A9e-060310584.html" target="_blank" rel="noopener noreferrer">FR</a>
+      </div>
+    </div>
     <a class="press-card" href="https://www.noticiasaominuto.com/tech/3045049/portugues-usa-ia-para-contar-avioes-e-medir-ruido-na-cidade-de-lisboa" target="_blank" rel="noopener noreferrer">
       <div class="press-card-top">
         <span class="press-outlet">Notícias ao Minuto</span>
