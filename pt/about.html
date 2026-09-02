@@ -1323,7 +1323,6 @@ function applyLang(lang) {
   if (pressEyebrow) pressEyebrow.textContent = t.press_eyebrow;
   const pressHeading = sel('#press .section-heading');
   if (pressHeading) pressHeading.innerHTML = t.press_heading;
-  selAll('.press-card-byline').forEach(el => { el.textContent = t.press_byline; });
   selAll('.press-card-link').forEach(el => { el.textContent = t.press_link; });
 }
 
