@@ -1900,7 +1900,7 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     /* ── gallery strip (infinite scroll) ── */
     var strip = el('gallery-strip');
     if(strip && recent.length > 1){
-      var ghtml=''; var max=Math.min(10,recent.length);
+      var ghtml=''; var max=Math.min(20,recent.length);
       for(var i=1;i<max;i++){
         var g=recent[i];
         var gUrl=getPhotoUrl(g,700);
@@ -1931,8 +1931,14 @@ fetch('https://api.github.com/gists/' + GIST_ID)
             (gTech?'<div class="gc-tech">'+gTech+'</div>':'')+
           '</div></div>';
       }
-      /* infinite scroll: duplicate cards for seamless loop */
-      strip.innerHTML='<div class="gallery-track">'+ghtml+ghtml+'</div>';
+      /* infinite scroll: duplicate cards for seamless loop.
+         Duration scales with card count so scroll speed stays constant
+         (a fixed duration would speed up as more cards get added). */
+      var gCardStep = 483; /* 480px card + 3px gap */
+      var gUniqueCount = max - 1;
+      var gSpeedPxPerS = 90;
+      var gDurationS = Math.max(30, Math.round(gUniqueCount * gCardStep / gSpeedPxPerS));
+      strip.innerHTML='<div class="gallery-track" style="animation-duration:'+gDurationS+'s">'+ghtml+ghtml+'</div>';
     }
   })
   .catch(function(e){ console.warn('Gist error',e); });
