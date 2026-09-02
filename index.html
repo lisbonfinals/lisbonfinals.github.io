@@ -1900,7 +1900,7 @@ fetch('https://api.github.com/gists/' + GIST_ID)
     /* ── gallery strip (infinite scroll) ── */
     var strip = el('gallery-strip');
     if(strip && recent.length > 1){
-      var ghtml=''; var max=Math.min(10,recent.length);
+      var ghtml=''; var max=Math.min(20,recent.length);
       for(var i=1;i<max;i++){
         var g=recent[i];
         var gUrl=getPhotoUrl(g,700);
