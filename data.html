@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Data — Lisbon Finals · LPPT Intelligence</title>
-<meta name="description" content="Live flight data, noise measurements and ANAC violation tracking above Lisbon Airport LPPT.">
+<meta name="description" content="Live flight data, noise measurements and ANAC alert tracking above Lisbon Airport LPPT.">
 <meta name="theme-color" content="#0a0d12">
 <link rel="canonical" href="https://www.lisbonfinals.com/data.html">
 <link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/data.html">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lisbon Finals">
 <meta property="og:title" content="Data — Lisbon Finals · LPPT Intelligence">
-<meta property="og:description" content="Live flight data, noise measurements and ANAC violation tracking above Lisbon Airport LPPT.">
+<meta property="og:description" content="Live flight data, noise measurements and ANAC alert tracking above Lisbon Airport LPPT.">
 <meta property="og:url" content="https://www.lisbonfinals.com/data.html">
 <meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .ticker-vib.no-data .ticker-vib-val{color:rgba(240,237,232,.15);}
 .ticker-empty{padding:24px;text-align:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.28);}
 /* ── TABLET : carte 2 lignes ── */
-@media(max-width:1040px) and (min-width:480px){
+/* Seuil abaissé à 700px (au lieu de 1040) — le tableau à en-têtes tient très
+   bien jusque-là (colonnes fixes ~574px + padding), donc le paysage iPhone/
+   petites tablettes (700-1040px) garde le vrai tableau avec en-têtes plutôt
+   que la carte 2 lignes, qui les masquait inutilement tôt. */
+@media(max-width:700px) and (min-width:480px){
   .ticker-col-heads{display:none;}
   .ticker-row{
     display:flex;flex-wrap:wrap;align-items:baseline;
@@ -608,7 +612,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_conversation">Normal conversation</span><span class="info-row-val">~60 dB</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_traffic">City traffic</span><span class="info-row-val">~70 dB</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_anac">ANAC curfew threshold</span><span class="info-row-val amber">≥ 93 dB</span></div>
-      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_critical">Critical violation</span><span class="info-row-val red">≥ 98.9 dB</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_critical">Critical Alert</span><span class="info-row-val red">≥ 98.9 dB</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_station">Station location</span><span class="info-row-val">38°46'N · 009°08'W</span></div>
     </div>
   </div>
@@ -619,7 +623,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <div style="margin-bottom:40px;">
     <div class="section-label" data-i18n="s3_label">ANAC regulation monitoring</div>
     <h2 class="section-title" data-i18n-html="s3_title">⚠ Warning<br><em>Zone</em></h2>
-    <p class="section-desc" data-i18n="s3_desc">Flights between midnight and 6am above ANAC dB thresholds are violations. This week's record:</p>
+    <p class="section-desc" data-i18n="s3_desc">Operations observed between midnight and 6am are compared against acoustic alert thresholds — an independent record, not an official ruling on infringements. This week's tally:</p>
   </div>
 
   <div class="warning-hero-card">
@@ -632,12 +636,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     </div>
     <div class="warning-stat critical">
       <div class="warning-val" id="w-critical">—</div>
-      <div class="warning-lbl" data-i18n="w_critical_lbl">Critical violations</div>
+      <div class="warning-lbl" data-i18n="w_critical_lbl">Critical Alerts</div>
       <div class="warning-sub">&gt; 98.9 dB · absolute ban</div>
     </div>
     <div class="warning-stat l2">
       <div class="warning-val" id="w-l2">—</div>
-      <div class="warning-lbl" data-i18n="w_l2_lbl">Level 2 violations</div>
+      <div class="warning-lbl" data-i18n="w_l2_lbl">Level 2 Alerts</div>
       <div class="warning-sub">93–95.9 dB outside allowed slots</div>
     </div>
   </div>
@@ -803,7 +807,7 @@ function buildLastInfraction(s) {
   const badge = type === 'critical' ? (tV.badge_critical||'🔴 Critical') : (tV.badge_l2||'🟡 Level 2');
   const desc  = type === 'critical' ? (tV.desc_critical||'Above 98.9 dB between midnight and 6am — unconditionally prohibited') : (tV.desc_l2||'93–95.9 dB during restricted night window');
   el.innerHTML = `
-    <div class="section-label" style="margin-bottom:12px">${tV.last_violation||'Last recorded violation'}</div>
+    <div class="section-label" style="margin-bottom:12px">${tV.last_violation||'Last recorded alert'}</div>
     <div class="violation-card ${type}">
       <div class="violation-badge ${type}">${badge}</div>
       <div class="violation-info">
@@ -955,19 +959,19 @@ const T = {
     lbl_loud_total:'Flights >95 dB total', lbl_avg_night:'Avg night dB (this week)',
     context_title:'Reference levels',
     ref_conversation:'Normal conversation', ref_traffic:'City traffic',
-    ref_anac:'ANAC curfew threshold', ref_critical:'Critical violation', ref_station:'Station location',
+    ref_anac:'ANAC curfew threshold', ref_critical:'Critical Alert', ref_station:'Station location',
     legend_day:'Day (06h–22h)', legend_night:'Night (22h–06h)',
     s3_label:'ANAC regulation monitoring', s3_title:'⚠ Warning<br><em>Zone</em>',
-    s3_desc:'Flights between midnight and 6am above ANAC dB thresholds are violations. This week\'s record:',
-    w_night_lbl:'Night flights this week', w_critical_lbl:'Critical violations', w_l2_lbl:'Level 2 violations',
+    s3_desc:'Operations observed between midnight and 6am are compared against acoustic alert thresholds — an independent record, not an official ruling on infringements. This week\'s tally:',
+    w_night_lbl:'Night flights this week', w_critical_lbl:'Critical Alerts', w_l2_lbl:'Level 2 Alerts',
     timeline_title:'ANAC night curfew · 00h–06h · allowed slots in green',
     legend_restricted:'Restricted (00h30–05h00)', legend_allowed:'Allowed (00h00–00h30 · 05h00–06h00)',
-    anac_note:'ANAC regulations apply to flights ≥ 93 dB SPL between midnight and 6am. Two allowed windows: 00h00–00h30 (last departures) and 05h00–06h00 (early arrivals). Critical violations ≥ 98.9 dB are unconditionally prohibited.',
+    anac_note:'ANAC regulations apply to flights ≥ 93 dB SPL between midnight and 6am. Two allowed windows: 00h00–00h30 (last departures) and 05h00–06h00 (early arrivals). Flights ≥ 98.9 dB fall unconditionally outside those limits and are flagged here as a Critical alert.',
     rule1_title:'Curfew 00:00–06:00', rule1_desc:'Max 91 movements/week · 26/day. No scheduled flights during the night period.',
     rule2_title:'Noisy Aircraft Ban', rule2_desc:'Aircraft >98.9 EPNdB (Levels 8 & 16) strictly prohibited at night.',
     rule3_title:'Level 2 Restriction', rule3_desc:'93–95.9 EPNdB aircraft: only 00:00–00:30 and 05:00–06:00 allowed.',
     rule4_title:'Reverse Thrust Banned', rule4_desc:'Landing reverse thrust is strictly forbidden except in emergencies.',
-    last_violation:'Last recorded violation',
+    last_violation:'Last recorded alert',
     badge_critical:'🔴 Critical', badge_l2:'🟡 Level 2',
     desc_critical:'Above 98.9 dB between midnight and 6am — unconditionally prohibited',
     desc_l2:'93–95.9 dB during restricted night window',
@@ -1007,14 +1011,14 @@ const T = {
     lbl_loud_total:'Voos >95 dB total', lbl_avg_night:'Média noturna dB (esta semana)',
     context_title:'Níveis de referência',
     ref_conversation:'Conversa normal', ref_traffic:'Tráfego urbano',
-    ref_anac:'Limiar ANAC', ref_critical:'Infração crítica', ref_station:'Localização da estação',
+    ref_anac:'Limiar ANAC', ref_critical:'Alerta crítico', ref_station:'Localização da estação',
     legend_day:'Dia (06h–22h)', legend_night:'Noite (22h–06h)',
     s3_label:'Monitorização ANAC', s3_title:'⚠ Zona de<br><em>alerta</em>',
     s3_desc:'As operações observadas entre a meia-noite e as 6h são comparadas com critérios acústicos de alerta. Este é um registo independente, não uma decisão oficial sobre infrações. Balanço desta semana:',
     w_night_lbl:'Voos noturnos esta semana', w_critical_lbl:'Alertas críticos', w_l2_lbl:'Alertas de nível 2',
     timeline_title:'Recolher ANAC · 00h–06h · janelas permitidas a verde',
     legend_restricted:'Restrito (00h30–05h00)', legend_allowed:'Permitido (00h00–00h30 · 05h00–06h00)',
-    anac_note:'A regulamentação ANAC aplica-se a voos ≥ 93 dB SPL entre meia-noite e as 6h. Duas janelas permitidas: 00h00–00h30 (últimas partidas) e 05h00–06h00 (primeiras chegadas). Infrações críticas ≥ 98.9 dB são incondicionalmente proibidas.',
+    anac_note:'A regulamentação ANAC aplica-se a voos ≥ 93 dB SPL entre meia-noite e as 6h. Duas janelas permitidas: 00h00–00h30 (últimas partidas) e 05h00–06h00 (primeiras chegadas). Voos ≥ 98.9 dB ficam incondicionalmente fora desses limites e são assinalados como Alerta crítico.',
     rule1_title:'Recolher 00:00–06:00', rule1_desc:'Máx. 91 movimentos/semana · 26/dia. Sem voos programados durante o período noturno.',
     rule2_title:'Proibição de Aeronaves Ruidosas', rule2_desc:'Aeronaves >98,9 EPNdB (Níveis 8 e 16) estritamente proibidas à noite.',
     rule3_title:'Restrição Nível 2', rule3_desc:'Aeronaves 93–95,9 EPNdB: apenas 00h00–00h30 e 05h00–06h00 permitidas.',
@@ -1056,13 +1060,13 @@ const T = {
     lbl_peak_all:'Pic historique', lbl_loud_total:'Vols >95 dB au total',
     lbl_avg_night:'dB moyen nocturne (cette semaine)',
     ref_conversation:'Conversation normale', ref_traffic:'Circulation urbaine',
-    ref_anac:'Seuil couvre-feu ANAC', ref_critical:'Violation critique',
+    ref_anac:'Seuil couvre-feu ANAC', ref_critical:'Alerte critique',
     s3_label:'Surveillance ANAC', s3_title:'⚠ Zone<br><em>d\'alerte</em>',
     s3_desc:'Les opérations observées entre minuit et 6h sont comparées à des critères acoustiques d’alerte. Il s’agit d’un relevé indépendant, et non d’une qualification officielle des infractions. Bilan de la semaine :',
     w_night_lbl:'Vols nocturnes cette semaine', w_critical_lbl:'Alertes critiques', w_l2_lbl:'Alertes de niveau 2',
     timeline_title:'Couvre-feu ANAC · 00h–06h · créneaux autorisés en vert',
     legend_restricted:'Interdit (00h30–05h00)', legend_allowed:'Autorisé (00h00–00h30 · 05h00–06h00)',
-    anac_note:'La réglementation ANAC s\'applique aux vols ≥ 93 dB SPL entre minuit et 6h. Deux créneaux autorisés : 00h00–00h30 (derniers départs) et 05h00–06h00 (premières arrivées). Les infractions critiques ≥ 98.9 dB sont inconditionnellement interdites.',
+    anac_note:'La réglementation ANAC s\'applique aux vols ≥ 93 dB SPL entre minuit et 6h. Deux créneaux autorisés : 00h00–00h30 (derniers départs) et 05h00–06h00 (premières arrivées). Les vols ≥ 98.9 dB sortent inconditionnellement de ces limites et sont signalés comme Alerte critique.',
     footer:'LISBON FINALS · Données · lisbonfinals.com',
     tab_data:'Les données', tab_noise:'Données acoustiques', tab_warning:'⚠ Zone d\'alerte',
     rule1_title:'Couvre-feu 00:00–06:00', rule1_desc:'Max 91 mouvements/semaine · 26/jour. Aucun vol commercial pendant la période nocturne.',

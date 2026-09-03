@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Noise Report — Lisbon Finals · LPPT Acoustic Monitoring</title>
-<meta name="description" content="Monthly noise monitoring report for Lisbon Airport (LPPT). Flight-by-flight acoustic data, airline rankings, night violation tracking.">
+<meta name="description" content="Monthly noise monitoring report for Lisbon Airport (LPPT). Flight-by-flight acoustic data, airline rankings, night alert tracking.">
 <meta name="theme-color" content="#0a0d12">
 <link rel="canonical" href="https://www.lisbonfinals.com/noise-report.html">
 <link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/noise-report.html">
@@ -675,7 +675,7 @@ footer {
     </div>
     <div class="hero-stat red" style="min-width:160px">
       <div class="hero-stat-val" id="h-rouge">—</div>
-      <div class="hero-stat-lbl" data-i18n="stat_violations">Night Violations</div>
+      <div class="hero-stat-lbl" data-i18n="stat_violations">Night Alerts</div>
       <div id="h-rouge-detail" style="font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.5);margin-top:5px;line-height:1.5"></div>
     </div>
     <div class="hero-stat indigo">
@@ -696,16 +696,7 @@ footer {
 <!-- ── MAIN CONTENT ── -->
 <section class="section">
 
-  <!-- FEATURED REPORT -->
-  <div class="section-header" style="margin-bottom:40px">
-    <div class="section-tag">MONTHLY REPORT</div>
-    <h2 class="section-title"><span class="plain" data-i18n="latest_title1">Latest</span> <span><span data-i18n="latest_title2">Analysis</span></span></h2>
-  </div>
-  <div id="report-container">
-    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><br><br><span data-i18n="loading_txt">Loading report data...</span></div>
-  </div>
-
-  <div class="report-method" aria-label="Report methodology">
+  <div class="report-method" aria-label="Report methodology" style="margin-top:0">
     <div>
       <div class="report-method-title" data-i18n="method_title">How to read this report</div>
       <div class="report-method-copy" data-i18n="method_copy">This is independent residential monitoring from one fixed terrace below the LPPT approach corridor. It is designed to show repeatable local exposure, not to replace certified airport noise mapping.</div>
@@ -725,9 +716,18 @@ footer {
       </div>
       <div class="report-method-item">
         <div class="report-method-k" data-i18n="method_k4">Night Window</div>
-        <div class="report-method-v" data-i18n="method_v4">Violations are scored over our own extended 23:00–06:59 tracking window (a full night's rest for residents) — wider than ANAC's official 00:00–05:59 regulatory window. The ANAC-only breakdown is shown in the analysis above.</div>
+        <div class="report-method-v" data-i18n="method_v4">Alerts are scored over our own extended 23:00–06:59 tracking window (a full night's rest for residents) — wider than ANAC's official 00:00–05:59 regulatory window. The ANAC-only breakdown is shown in the analysis below.</div>
       </div>
     </div>
+  </div>
+
+  <!-- FEATURED REPORT -->
+  <div class="section-header" style="margin-top:56px;margin-bottom:40px">
+    <div class="section-tag">MONTHLY REPORT</div>
+    <h2 class="section-title"><span class="plain" data-i18n="latest_title1">Latest</span> <span><span data-i18n="latest_title2">Analysis</span></span></h2>
+  </div>
+  <div id="report-container">
+    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><br><br><span data-i18n="loading_txt">Loading report data...</span></div>
   </div>
 
   <!-- ARCHIVE -->
@@ -869,7 +869,7 @@ function renderReport(report) {
         </div>
         <div>
           <div class="report-kpi-val" style="color:var(--red)">${(report.rouge_count||0) + (report.jaune_count||0)}</div>
-          <div class="report-kpi-lbl">Night Violations</div>
+          <div class="report-kpi-lbl">Night Alerts</div>
         </div>
       </div>
     </div>
@@ -878,13 +878,13 @@ function renderReport(report) {
 
       <div class="insight-box">
         <div class="insight-box-title">Expert Insight — ${mn} ${report.year}</div>
-        <div class="insight-box-text">${report.insight || '100% of night violations are arrivals — runway 02 approach path crosses Lisbon at 160m altitude. Business jets exceeded commercial noise levels, a regulatory gap worth flagging.'}</div>
+        <div class="insight-box-text">${report.insight || '100% of night alerts are arrivals — runway 02 approach path crosses Lisbon at 160m altitude. Business jets exceeded commercial noise levels, a regulatory gap worth flagging.'}</div>
       </div>
 
       <div class="violations-row">
         <div class="vio-badge red">
           <span class="vio-badge-num">${report.rouge_count||0}</span>
-          <span>🔴 Red Night Violations ≥ ${report.thresh_rouge||'—'} dB</span>
+          <span>🔴 Red Night Alerts ≥ ${report.thresh_rouge||'—'} dB</span>
         </div>
         <div class="vio-badge yellow">
           <span class="vio-badge-num">${report.jaune_count||0}</span>
@@ -930,7 +930,7 @@ function renderReport(report) {
                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v13M5 15l7 7 7-7"/><path d="M3 20h18"/></svg>
                Download Full Report — ${mn} ${report.year}
              </a>
-             <div class="download-meta">PDF · 9 pages · Includes full violation detail &amp; archive</div>`
+             <div class="download-meta">PDF · 9 pages · Includes full alert detail &amp; archive</div>`
           : `<div style="color:var(--gray);font-family:var(--mono);font-size:11px">PDF not yet available — generate from admin dashboard</div>`
         }
       </div>
@@ -975,7 +975,7 @@ function renderArchive(reports, activeIdx) {
         <div>
           <div class="archive-stat-val" style="color:var(--red)">${(r.rouge_count||0)+(r.jaune_count||0)}<span class="archive-stat-tag">Extended · <span style="white-space:nowrap">23h-07h</span></span></div>
           <div class="archive-stat-val" style="color:var(--amber);margin-top:2px">${(r.rouge_count_anac||0)+(r.jaune_count_anac||0)}<span class="archive-stat-tag">ANAC · <span style="white-space:nowrap">00h-06h</span></span></div>
-          <div class="archive-stat-lbl">Violations</div>
+          <div class="archive-stat-lbl">Alerts</div>
         </div>
       </div>
       <div class="archive-card-footer">
@@ -1071,9 +1071,9 @@ const TRANSLATIONS = {
     method_k1: 'Source', method_v1: 'ADS-B flight data paired with station SPL readings.',
     method_k2: 'Limit', method_v2: 'May–June: sonometer capped at 100 dB. From July 2026: new sonometer, up to 130 dB.',
     method_k3: 'Purpose', method_v3: 'A public record for patterns, outliers and night-time disturbance.',
-    method_k4: 'Night Window', method_v4: "Violations are scored over our own extended 23:00–06:59 tracking window (a full night's rest for residents) — wider than ANAC's official 00:00–05:59 regulatory window. The ANAC-only breakdown is shown in the analysis above.",
+    method_k4: 'Night Window', method_v4: "Alerts are scored over our own extended 23:00–06:59 tracking window (a full night's rest for residents) — wider than ANAC's official 00:00–05:59 regulatory window. The ANAC-only breakdown is shown in the analysis below.",
     stat_flights: 'Flights This Month', stat_avg: 'Avg Noise Level',
-    stat_violations: 'Night Violations', stat_night: 'Night Operations',
+    stat_violations: 'Night Alerts', stat_night: 'Night Operations',
     archive_label: 'Archive', loading_txt: 'Loading report data...',
     latest_title1: 'Latest', latest_title2: 'Analysis',
     archive_tag: 'All Reports', archive_title: 'Monthly', archive_title2: 'Archive',
@@ -1094,7 +1094,7 @@ const TRANSLATIONS = {
     method_k1: 'Fonte', method_v1: 'Dados ADS-B de voo cruzados com leituras SPL da estação.',
     method_k2: 'Limite', method_v2: 'Maio–junho: sonómetro limitado a 100 dB. A partir de julho de 2026: novo sonómetro, até 130 dB.',
     method_k3: 'Objetivo', method_v3: 'Um registo público de padrões, anomalias e perturbação noturna.',
-    method_k4: 'Janela Noturna', method_v4: 'As violações são contabilizadas na nossa própria janela alargada de monitorização (23h00–06h59, uma noite de descanso completa para os residentes) — mais ampla do que a janela regulamentar oficial da ANAC (00h00–05h59). A repartição exclusivamente ANAC está disponível na análise acima.',
+    method_k4: 'Janela Noturna', method_v4: 'Os alertas são contabilizados na nossa própria janela alargada de monitorização (23h00–06h59, uma noite de descanso completa para os residentes) — mais ampla do que a janela regulamentar oficial da ANAC (00h00–05h59). A repartição exclusivamente ANAC está disponível na análise abaixo.',
     stat_flights: 'Voos Este Mês', stat_avg: 'Nível Médio de Ruído',
     stat_violations: 'Alertas Noturnos', stat_night: 'Operações Noturnas',
     archive_label: 'Arquivo', loading_txt: 'A carregar dados...',
@@ -1115,7 +1115,7 @@ const TRANSLATIONS = {
     method_k1: 'Source', method_v1: 'Données ADS-B des vols associées aux mesures SPL de la station.',
     method_k2: 'Limite', method_v2: 'Mai–juin : sonomètre plafonné à 100 dB. À partir de juillet 2026 : nouveau sonomètre, jusqu\'à 130 dB.',
     method_k3: 'But', method_v3: 'Un registre public des tendances, anomalies et nuisances nocturnes.',
-    method_k4: 'Fenêtre Nocturne', method_v4: 'Les violations sont comptabilisées sur notre propre fenêtre de suivi étendue (23h00–06h59, une nuit de repos complète pour les résidents) — plus large que la fenêtre réglementaire officielle de l\'ANAC (00h00–05h59). Le détail exclusivement ANAC est disponible dans l\'analyse ci-dessus.',
+    method_k4: 'Fenêtre Nocturne', method_v4: 'Les alertes sont comptabilisées sur notre propre fenêtre de suivi étendue (23h00–06h59, une nuit de repos complète pour les résidents) — plus large que la fenêtre réglementaire officielle de l\'ANAC (00h00–05h59). Le détail exclusivement ANAC est disponible dans l\'analyse ci-dessous.',
     stat_flights: 'Vols ce mois', stat_avg: 'Niveau sonore moyen',
     stat_violations: 'Alertes nocturnes', stat_night: 'Opérations nocturnes',
     archive_label: 'Archives', loading_txt: 'Chargement des données...',
