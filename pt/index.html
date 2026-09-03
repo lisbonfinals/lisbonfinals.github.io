@@ -1066,7 +1066,7 @@ footer {
     <div class="hero-proof" aria-label="Station summary">
       <div class="hero-proof-item">
         <div class="hero-proof-k" data-i18n="proof_where_k">Where</div>
-        <div class="hero-proof-v" data-i18n="proof_where_v">2.6 km from RWY 03</div>
+        <div class="hero-proof-v" data-i18n="proof_where_v">2.6 km from RWY 02</div>
       </div>
       <div class="hero-proof-item">
         <div class="hero-proof-k" data-i18n="proof_measures_k">Measures</div>
@@ -1157,17 +1157,17 @@ footer {
   <div>
     <div class="weather-eyebrow">Atmospheric conditions</div>
     <h2 class="weather-title">The wind<br><em>decides everything.</em></h2>
-    <p class="weather-body">LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 03, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 21, climbing towards the SSW, crossing the terrace before reaching the Tejo.</p>
+    <p class="weather-body">LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 02, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 20, climbing towards the SSW, crossing the terrace before reaching the Tejo.</p>
     <div class="rwy-cards">
       <div class="rwy-card" id="rwy-card-03">
-        <div class="rwy-badge">RWY 03</div>
+        <div class="rwy-badge">RWY 02</div>
         <div>
           <div class="rwy-title">North wind — landing over the terrace ✦</div>
           <div class="rwy-desc">Planes approach from the south and land over my terrace. Close, slow, full-frame — most impactful shots.</div>
         </div>
       </div>
       <div class="rwy-card" id="rwy-card-21">
-        <div class="rwy-badge">RWY 21</div>
+        <div class="rwy-badge">RWY 20</div>
         <div>
           <div class="rwy-title">South wind — takeoff over the terrace</div>
           <div class="rwy-desc">Planes take off and climb over my terrace heading north. Higher, faster — less impactful shots.</div>
@@ -1486,7 +1486,7 @@ footer {
           <circle cx="500" cy="500" r="1.5" fill="#ffddcc"/>
         </svg>
       </div>
-      <div class="footer-radar-meta"><strong>2.6 km</strong> from runway 03 · LPPT</div>
+      <div class="footer-radar-meta"><strong>2.6 km</strong> from runway 02 · LPPT</div>
     </div>
 
     <div class="footer-links">
@@ -1565,10 +1565,10 @@ function cardinal(d){
 function calcRunway(deg,spd){
   // Sous 10kt, le vent est trop faible pour imposer un sens de piste fiable
   // (observé le 1er juillet : 8kt WNW affiché "takeoff" alors que la station
-  // enregistrait des atterrissages sur RWY 03) — on reste non-committal.
+  // enregistrait des atterrissages sur RWY 02) — on reste non-committal.
   if(spd<10) return {rwy:'—',conf:'Calm / variable winds'};
-  if(deg>=315||deg<135) return {rwy:'03',conf:'NNE config — landing over terrace'};
-  return {rwy:'21',conf:'SSW config — takeoff over terrace'};
+  if(deg>=315||deg<135) return {rwy:'02',conf:'NNE config — landing over terrace'};
+  return {rwy:'20',conf:'SSW config — takeoff over terrace'};
 }
 function getPhotoUrl(f, w){
   if(!f) return '';
@@ -1978,7 +1978,7 @@ fetch('https://wttr.in/38.7749,-9.1397?format=j1')
     var ico=el('wc-icon'); if(ico) ico.textContent=WTTR_ICON[code]||'🌤';
     /* activate correct runway card */
     var c03=el('rwy-card-03'), c21=el('rwy-card-21');
-    if(c03&&c21){ c03.classList.toggle('active',rwy.rwy==='03'); c21.classList.toggle('active',rwy.rwy==='21'); }
+    if(c03&&c21){ c03.classList.toggle('active',rwy.rwy==='02'); c21.classList.toggle('active',rwy.rwy==='20'); }
   })
   .catch(function(){});
 
@@ -2019,7 +2019,7 @@ var INDEX_TRANSLATIONS = {
     hero_pill: 'Tracking live · LPPT approach path',
     hero_sub: "A real terrace station under Lisbon Airport's approach path. It photographs each passing aircraft, measures noise and vibration, then publishes the best captures without human input.",
     proof_where_k: 'Where',
-    proof_where_v: '2.6 km from RWY 03',
+    proof_where_v: '2.6 km from RWY 02',
     proof_measures_k: 'Measures',
     proof_measures_v: 'Photo · dB · vibration',
     proof_mode_k: 'Mode',
@@ -2080,7 +2080,7 @@ var INDEX_TRANSLATIONS = {
     ticker_lbl: 'Live Feed',
     wx_eyebrow: 'Atmospheric conditions',
     wx_title: 'The wind<br><em>decides everything.</em>',
-    wx_body: "LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 03, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 21, climbing towards the SSW, crossing the terrace before reaching the Tejo.",
+    wx_body: "LPPT's runway runs SSW–NNE. The wind decides which way traffic flows. With a north wind, aircraft approach from the south — descending over the Tejo and the city centre before touching down on RWY 02, crossing directly over my terrace on final approach. With a south wind, they take off on RWY 20, climbing towards the SSW, crossing the terrace before reaching the Tejo.",
     rwy03_title: 'North wind — landing over the terrace ✶',
     rwy03_desc: 'Planes approach from the south and land over my terrace. Close, slow, full-frame — most impactful shots.',
     rwy21_title: 'South wind — takeoff over the terrace',
@@ -2125,7 +2125,7 @@ var INDEX_TRANSLATIONS = {
     hero_w1: 'Cada', hero_w2: 'avião.', hero_w3: 'Cada ', hero_w4: 'E muito mais.',
     hero_sub: 'Uma estação independente numa varanda sob a aproximação ao LPPT. Observa aeronaves, ruído, vibração e sinais de qualidade do ar — e publica as melhores capturas sem intervenção humana.',
     proof_where_k: 'Onde',
-    proof_where_v: '2,6 km da RWY 03',
+    proof_where_v: '2,6 km da RWY 02',
     proof_measures_k: 'Mede',
     proof_measures_v: 'Foto · dB · vibração',
     proof_mode_k: 'Modo',
@@ -2186,7 +2186,7 @@ var INDEX_TRANSLATIONS = {
     ticker_lbl: 'Feed em directo',
     wx_eyebrow: 'Condições atmosféricas',
     wx_title: 'O vento<br><em>decide tudo.</em>',
-    wx_body: 'A pista do LPPT corre de SSW a NNE. O vento decide o sentido do tráfego. Com vento norte, as aeronaves aproximam-se pelo sul — descendo sobre o Tejo e o centro da cidade antes de aterrar na RWY 03, passando directamente sobre a minha varanda. Com vento sul, descolam pela RWY 21, subindo para SSW e cruzando a varanda antes de atingirem o Tejo.',
+    wx_body: 'A pista do LPPT corre de SSW a NNE. O vento decide o sentido do tráfego. Com vento norte, as aeronaves aproximam-se pelo sul — descendo sobre o Tejo e o centro da cidade antes de aterrar na RWY 02, passando directamente sobre a minha varanda. Com vento sul, descolam pela RWY 20, subindo para SSW e cruzando a varanda antes de atingirem o Tejo.',
     rwy03_title: 'Vento norte — aterragem sobre a varanda ✶',
     rwy03_desc: 'Os aviões aproximam-se pelo sul e aterram sobre a minha varanda. Perto, lentos, em plano completo — os melhores disparos.',
     rwy21_title: 'Vento sul — descolagem sobre a varanda',
@@ -2230,7 +2230,7 @@ var INDEX_TRANSLATIONS = {
     hero_w1: 'Chaque', hero_w2: 'avion.', hero_w3: 'Chaque ', hero_w4: 'Et bien plus encore.',
     hero_sub: 'Une station indépendante installée sur une terrasse sous l’approche LPPT. Elle observe les avions, le bruit, les vibrations et la qualité de l’air — puis publie les meilleures captures sans intervention humaine.',
     proof_where_k: 'Lieu',
-    proof_where_v: '2,6 km de la RWY 03',
+    proof_where_v: '2,6 km de la RWY 02',
     proof_measures_k: 'Mesures',
     proof_measures_v: 'Photo · dB · vibration',
     proof_mode_k: 'Mode',
@@ -2291,7 +2291,7 @@ var INDEX_TRANSLATIONS = {
     ticker_lbl: 'Flux en direct',
     wx_eyebrow: 'Conditions atmosphériques',
     wx_title: 'Le vent<br><em>décide de tout.</em>',
-    wx_body: 'La piste de LPPT s\'étend du SSW au NNE. Le vent décide du sens du trafic. Par vent du nord, les aéronefs approchent par le sud — descendant sur le Tage et le centre-ville avant d\'atterrir sur la RWY 03, passant directement au-dessus de ma terrasse. Par vent du sud, ils décollent sur la RWY 21, montant vers le SSW et survolant la terrasse avant d\'atteindre le Tage.',
+    wx_body: 'La piste de LPPT s\'étend du SSW au NNE. Le vent décide du sens du trafic. Par vent du nord, les aéronefs approchent par le sud — descendant sur le Tage et le centre-ville avant d\'atterrir sur la RWY 02, passant directement au-dessus de ma terrasse. Par vent du sud, ils décollent sur la RWY 20, montant vers le SSW et survolant la terrasse avant d\'atteindre le Tage.',
     rwy03_title: 'Vent du nord — atterrissage au-dessus de la terrasse ✶',
     rwy03_desc: 'Les avions approchent par le sud et atterrissent au-dessus de ma terrasse. Proches, lents, en plan complet — les meilleurs clichés.',
     rwy21_title: 'Vent du sud — décollage au-dessus de la terrasse',
