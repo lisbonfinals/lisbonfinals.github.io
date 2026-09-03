@@ -973,8 +973,8 @@ function renderArchive(reports, activeIdx) {
           <div class="archive-stat-lbl">Avg</div>
         </div>
         <div>
-          <div class="archive-stat-val" style="color:var(--red)">${(r.rouge_count||0)+(r.jaune_count||0)}<span class="archive-stat-tag">ext.</span></div>
-          <div class="archive-stat-val" style="color:var(--amber);margin-top:2px">${(r.rouge_count_anac||0)+(r.jaune_count_anac||0)}<span class="archive-stat-tag">ANAC</span></div>
+          <div class="archive-stat-val" style="color:var(--red)">${(r.rouge_count||0)+(r.jaune_count||0)}<span class="archive-stat-tag">Extended · <span style="white-space:nowrap">23h-07h</span></span></div>
+          <div class="archive-stat-val" style="color:var(--amber);margin-top:2px">${(r.rouge_count_anac||0)+(r.jaune_count_anac||0)}<span class="archive-stat-tag">ANAC · <span style="white-space:nowrap">00h-06h</span></span></div>
           <div class="archive-stat-lbl">Violations</div>
         </div>
       </div>
