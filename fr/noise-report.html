@@ -397,7 +397,8 @@ nav {
 .archive-card:hover { border-color:var(--border2); transform:translateY(-2px); background:rgba(13,17,23,.9); }
 .archive-card-month { font-size:20px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px; }
 .archive-card-year { font-family:var(--mono); font-size:11px; color:var(--gray); margin-bottom:14px; }
-.archive-card-stats { display:flex;gap:16px;margin-bottom:16px; }
+.archive-card-stats { display:flex;flex-wrap:wrap;gap:14px 16px;margin-bottom:16px; }
+.archive-stat-lbl .dim { opacity:.55; text-transform:none; letter-spacing:0; }
 .archive-stat-val { font-family:var(--mono); font-size:16px; font-weight:500; color:var(--white); }
 .archive-stat-lbl { font-size:8px; text-transform:uppercase; letter-spacing:.08em; color:var(--gray); }
 .archive-card-footer {
@@ -973,7 +974,11 @@ function renderArchive(reports, activeIdx) {
         </div>
         <div>
           <div class="archive-stat-val" style="color:var(--red)">${(r.rouge_count||0)+(r.jaune_count||0)}</div>
-          <div class="archive-stat-lbl">Violations</div>
+          <div class="archive-stat-lbl">Violations <span class="dim">(ext.)</span></div>
+        </div>
+        <div>
+          <div class="archive-stat-val" style="color:var(--amber)">${(r.rouge_count_anac||0)+(r.jaune_count_anac||0)}</div>
+          <div class="archive-stat-lbl">Violations <span class="dim">(ANAC)</span></div>
         </div>
       </div>
       <div class="archive-card-footer">
