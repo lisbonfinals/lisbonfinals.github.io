@@ -373,6 +373,15 @@ nav {
 .vio-badge.night { background:var(--indigo-dim); border:1px solid rgba(99,102,241,.25); color:rgba(139,142,246,.9); }
 .vio-badge-num { font-size:22px; font-weight:700; }
 
+.anac-note {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  background:rgba(13,17,23,.5); border:1px solid var(--border);
+  border-radius:10px; padding:12px 18px; margin:0 0 32px;
+  font-family:var(--mono); font-size:11px; color:rgba(240,237,232,.55);
+}
+.anac-note-vals { color:rgba(240,237,232,.85); }
+.anac-note-dim { color:rgba(240,237,232,.4); margin-left:4px; }
+
 /* ── ARCHIVE ── */
 .archive-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px; }
 .archive-card {
@@ -713,6 +722,10 @@ footer {
         <div class="report-method-k" data-i18n="method_k3">Purpose</div>
         <div class="report-method-v" data-i18n="method_v3">A public record for patterns, outliers and night-time disturbance.</div>
       </div>
+      <div class="report-method-item">
+        <div class="report-method-k" data-i18n="method_k4">Night Window</div>
+        <div class="report-method-v" data-i18n="method_v4">Violations are scored over our own extended 23:00–06:59 tracking window (a full night's rest for residents) — wider than ANAC's official 00:00–05:59 regulatory window. The ANAC-only breakdown is shown in the analysis above.</div>
+      </div>
     </div>
   </div>
 
@@ -880,6 +893,11 @@ function renderReport(report) {
           <span class="vio-badge-num">${report.night_pct||0}%</span>
           <span>🌙 Night Operations</span>
         </div>
+      </div>
+
+      <div class="anac-note">
+        <span class="anac-note-label">🛈 Figures above use our extended 23:00–06:59 window. ANAC's official regulatory window (00:00–05:59):</span>
+        <span class="anac-note-vals">🔴 ${report.rouge_count_anac||0} · 🟡 ${report.jaune_count_anac||0}<span class="anac-note-dim"> — ${(report.night_flights_anac||0).toLocaleString()} night flights (${report.night_pct_anac||0}%)</span></span>
       </div>
 
       <div class="podiums-grid">
@@ -1051,6 +1069,7 @@ const TRANSLATIONS = {
     method_k1: 'Source', method_v1: 'ADS-B flight data paired with station SPL readings.',
     method_k2: 'Limit', method_v2: 'May–June: sonometer capped at 100 dB. From July 2026: new sonometer, up to 130 dB.',
     method_k3: 'Purpose', method_v3: 'A public record for patterns, outliers and night-time disturbance.',
+    method_k4: 'Night Window', method_v4: "Violations are scored over our own extended 23:00–06:59 tracking window (a full night's rest for residents) — wider than ANAC's official 00:00–05:59 regulatory window. The ANAC-only breakdown is shown in the analysis above.",
     stat_flights: 'Flights This Month', stat_avg: 'Avg Noise Level',
     stat_violations: 'Night Violations', stat_night: 'Night Operations',
     archive_label: 'Archive', loading_txt: 'Loading report data...',
@@ -1073,6 +1092,7 @@ const TRANSLATIONS = {
     method_k1: 'Fonte', method_v1: 'Dados ADS-B de voo cruzados com leituras SPL da estação.',
     method_k2: 'Limite', method_v2: 'Maio–junho: sonómetro limitado a 100 dB. A partir de julho de 2026: novo sonómetro, até 130 dB.',
     method_k3: 'Objetivo', method_v3: 'Um registo público de padrões, anomalias e perturbação noturna.',
+    method_k4: 'Janela Noturna', method_v4: 'As violações são contabilizadas na nossa própria janela alargada de monitorização (23h00–06h59, uma noite de descanso completa para os residentes) — mais ampla do que a janela regulamentar oficial da ANAC (00h00–05h59). A repartição exclusivamente ANAC está disponível na análise acima.',
     stat_flights: 'Voos Este Mês', stat_avg: 'Nível Médio de Ruído',
     stat_violations: 'Alertas Noturnos', stat_night: 'Operações Noturnas',
     archive_label: 'Arquivo', loading_txt: 'A carregar dados...',
@@ -1093,6 +1113,7 @@ const TRANSLATIONS = {
     method_k1: 'Source', method_v1: 'Données ADS-B des vols associées aux mesures SPL de la station.',
     method_k2: 'Limite', method_v2: 'Mai–juin : sonomètre plafonné à 100 dB. À partir de juillet 2026 : nouveau sonomètre, jusqu\'à 130 dB.',
     method_k3: 'But', method_v3: 'Un registre public des tendances, anomalies et nuisances nocturnes.',
+    method_k4: 'Fenêtre Nocturne', method_v4: 'Les violations sont comptabilisées sur notre propre fenêtre de suivi étendue (23h00–06h59, une nuit de repos complète pour les résidents) — plus large que la fenêtre réglementaire officielle de l\'ANAC (00h00–05h59). Le détail exclusivement ANAC est disponible dans l\'analyse ci-dessus.',
     stat_flights: 'Vols ce mois', stat_avg: 'Niveau sonore moyen',
     stat_violations: 'Alertes nocturnes', stat_night: 'Opérations nocturnes',
     archive_label: 'Archives', loading_txt: 'Chargement des données...',
