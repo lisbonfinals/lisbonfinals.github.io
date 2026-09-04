@@ -173,7 +173,8 @@ function entriesStrip(entriesWithSlug, activeSlug) {
 function chromeNav(activeHref) {
   const links = [
     ['/', 'Live'], ['/data.html', 'Data'], ['/archive.html', 'Archive'],
-    ['/noise-report.html', 'Noise Report'], ['/log.html', "Captain's Log"], ['/about.html', 'About']
+    ['/compare.html', 'Compare'], ['/noise-report.html', 'Noise Report'],
+    ['/log.html', "Captain's Log"], ['/about.html', 'About']
   ];
   const navLinks = links.map(([href, label]) =>
     `<li><a href="${href}"${href === activeHref ? ' class="nav-active"' : ''}>${label}</a></li>`).join('');
