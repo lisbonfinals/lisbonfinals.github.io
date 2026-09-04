@@ -188,18 +188,19 @@ nav {
   line-height: 1.6;
   margin-bottom: 40px;
 }
+.hero-top-row { display:flex; gap:56px; align-items:flex-start; flex-wrap:wrap; }
+.hero-left { flex:1 1 380px; min-width:300px; }
 .hero-method {
-  display:grid;grid-template-columns:1.15fr 1fr;gap:28px;
+  display:grid;grid-template-columns:1fr;gap:16px;
   background:rgba(13,17,23,.72);border:1px solid var(--border);
   border-left:2px solid rgba(245,166,35,.58);border-radius:12px;
-  padding:24px 28px;max-width:920px;margin-bottom:44px;
+  padding:24px 28px;flex:1 1 420px;max-width:560px;margin-bottom:0;
 }
 .hero-stats {
   display: flex; gap: 0;
   border: 1px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
-  max-width: 900px;
   background: rgba(13,17,23,.8);
   backdrop-filter: blur(12px);
 }
@@ -528,7 +529,8 @@ footer {
   .report-featured-header { padding: 18px 20px; flex-direction:column; align-items:flex-start; gap:12px; }
   .report-featured-body { padding: 18px 20px; }
   .report-method { grid-template-columns:1fr;padding:20px; }
-  .hero-method { grid-template-columns:1fr;margin-bottom:32px;padding:20px; }
+  .hero-method { max-width:none;margin-bottom:0;padding:20px; }
+  .hero-top-row { gap:32px; }
   .report-method-item { grid-template-columns:1fr;gap:5px; }
   .report-kpis { gap:12px; flex-wrap:wrap; }
   .report-kpi-val { font-size: 16px; }
@@ -661,12 +663,15 @@ footer {
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <div class="hero-top-row">
+  <div class="hero-left">
   <div class="hero-tag" data-i18n="hero_tag">LPPT Lisbon · Acoustic Monitoring</div>
   <h1 class="hero-title">
     <span data-i18n="hero_title1">Noise</span><br>
     <span class="accent" data-i18n="hero_title2">Report</span><br>
     <span class="light" data-i18n="hero_title3">by the numbers</span>
   </h1>
+  </div>
   <div class="hero-method" aria-label="Report methodology">
     <div>
       <div class="report-method-title" data-i18n="method_title">How to read this report</div>
@@ -694,6 +699,7 @@ footer {
         <div class="report-method-v" data-i18n="method_v5">Not an ANAC-defined level — the regulation only sets Yellow (Level 2) and Red (Critical), nothing in between. Orange tracks that gap on our own, so a loud flight at 97 dB is never silently dropped from the count.</div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -839,7 +845,7 @@ function renderReport(report) {
           <div class="hero-stat-val">${report.avg_db||'—'}<span class="unit"> dB</span></div>
           <div class="hero-stat-lbl">Avg Noise Level</div>
         </div>
-        <div class="hero-stat">
+        <div class="hero-stat indigo">
           <div class="hero-stat-val">${(report.night_flights||0).toLocaleString()}</div>
           <div class="hero-stat-lbl">Night Flights</div>
         </div>
@@ -884,11 +890,7 @@ function renderReport(report) {
       </div>
       ${buildMfrTable(report.top_mfr_noisy)}
 
-      <div class="podium-section-title noisy" style="margin-top:48px">
-        <span class="dot"></span>
-        Night Operations
-      </div>
-      <div class="violations-row">
+      <div class="violations-row" style="margin-top:48px">
         <div class="vio-badge red">
           <span class="vio-badge-num">${report.rouge_count||0}</span>
           <span>🔴 Red Night Alerts ≥ ${report.thresh_rouge||'—'} dB</span>
