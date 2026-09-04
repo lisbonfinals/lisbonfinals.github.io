@@ -190,7 +190,9 @@ nav {
 }
 .hero-method {
   display:grid;grid-template-columns:1.15fr 1fr;gap:28px;
-  max-width:920px;margin-bottom:44px;
+  background:rgba(13,17,23,.72);border:1px solid var(--border);
+  border-left:2px solid rgba(245,166,35,.58);border-radius:12px;
+  padding:24px 28px;max-width:920px;margin-bottom:44px;
 }
 .hero-stats {
   display: flex; gap: 0;
@@ -526,7 +528,7 @@ footer {
   .report-featured-header { padding: 18px 20px; flex-direction:column; align-items:flex-start; gap:12px; }
   .report-featured-body { padding: 18px 20px; }
   .report-method { grid-template-columns:1fr;padding:20px; }
-  .hero-method { grid-template-columns:1fr;margin-bottom:32px; }
+  .hero-method { grid-template-columns:1fr;margin-bottom:32px;padding:20px; }
   .report-method-item { grid-template-columns:1fr;gap:5px; }
   .report-kpis { gap:12px; flex-wrap:wrap; }
   .report-kpi-val { font-size: 16px; }
@@ -706,29 +708,6 @@ footer {
 <!-- ── MAIN CONTENT ── -->
 <section class="section">
 
-  <!-- Moved below the archive selector so it's visually clear these stats
-       react to the month chip you click (Antonio's feedback, 4 sept. 2026) -->
-  <div class="hero-stats" id="hero-stats" style="margin-bottom:32px">
-    <div class="hero-stat amber">
-      <div class="hero-stat-val" id="h-flights">—</div>
-      <div class="hero-stat-lbl" data-i18n="stat_flights">Flights This Month</div>
-      <div id="h-flights-period" style="font-family:var(--mono);font-size:9px;color:rgba(245,166,35,0.5);margin-top:4px;letter-spacing:.08em"></div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-val" id="h-avg"><span class="unit">— dB</span></div>
-      <div class="hero-stat-lbl" data-i18n="stat_avg">Avg Noise Level</div>
-    </div>
-    <div class="hero-stat red" style="min-width:160px">
-      <div class="hero-stat-val" id="h-rouge">—</div>
-      <div class="hero-stat-lbl" data-i18n="stat_violations">Night Alerts</div>
-      <div id="h-rouge-detail" style="font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.5);margin-top:5px;line-height:1.5"></div>
-    </div>
-    <div class="hero-stat indigo">
-      <div class="hero-stat-val" id="h-night">—<span class="unit">%</span></div>
-      <div class="hero-stat-lbl" data-i18n="stat_night">Night Operations</div>
-    </div>
-  </div>
-
   <!-- FEATURED REPORT -->
   <div class="section-header" style="margin-top:56px;margin-bottom:40px">
     <div class="section-tag">MONTHLY REPORT</div>
@@ -840,21 +819,6 @@ function renderReport(report) {
 
   const mn = MONTHS[report.month] || `Month ${report.month}`;
 
-  // Update hero stats
-  const hf = document.getElementById('h-flights');
-  const ha = document.getElementById('h-avg');
-  const hr = document.getElementById('h-rouge');
-  const hn = document.getElementById('h-night');
-  if (hf) hf.textContent = (report.total_flights || 0).toLocaleString();
-  const hfPeriod = document.getElementById('h-flights-period');
-  if (hfPeriod) hfPeriod.textContent = mn + ' ' + report.year;
-  if (ha) ha.innerHTML = `${report.avg_db || '—'}<span class="unit"> dB</span>`;
-  const total_vio = (report.rouge_count || 0) + (report.orange_count || 0) + (report.jaune_count || 0);
-  if (hr) hr.textContent = total_vio;
-  const hrDetail = document.getElementById('h-rouge-detail');
-  if (hrDetail && report.rouge_count) hrDetail.innerHTML = `<div>🔴 ${report.rouge_count} red</div><div>🟠 ${report.orange_count||0} orange</div><div>🟡 ${report.jaune_count} yellow</div>`;
-  if (hn) hn.innerHTML = `${report.night_pct || '—'}<span class="unit">%</span>`;
-
   const html = `
   <div class="report-featured">
     <div class="report-featured-header">
@@ -865,6 +829,32 @@ function renderReport(report) {
     </div>
 
     <div class="report-featured-body">
+
+      <div class="hero-stats" style="margin-bottom:32px">
+        <div class="hero-stat amber">
+          <div class="hero-stat-val">${(report.total_flights||0).toLocaleString()}</div>
+          <div class="hero-stat-lbl">Flights This Month</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">${report.avg_db||'—'}<span class="unit"> dB</span></div>
+          <div class="hero-stat-lbl">Avg Noise Level</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">${(report.night_flights||0).toLocaleString()}</div>
+          <div class="hero-stat-lbl">Night Flights</div>
+        </div>
+        <div class="hero-stat red" style="min-width:160px">
+          <div class="hero-stat-val">${(report.rouge_count||0) + (report.orange_count||0) + (report.jaune_count||0)}</div>
+          <div class="hero-stat-lbl">Night Alerts</div>
+          <div style="font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.5);margin-top:5px;line-height:1.5">
+            <div>🔴 ${report.rouge_count||0} red</div><div>🟠 ${report.orange_count||0} orange</div><div>🟡 ${report.jaune_count||0} yellow</div>
+          </div>
+        </div>
+        <div class="hero-stat indigo">
+          <div class="hero-stat-val">${report.night_pct||0}<span class="unit">%</span></div>
+          <div class="hero-stat-lbl">Night Operations</div>
+        </div>
+      </div>
 
       <div class="insight-box">
         <div class="insight-box-title">Expert Insight — ${mn} ${report.year}</div>
