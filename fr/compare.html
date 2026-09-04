@@ -124,7 +124,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-fact{font-family:var(--mono);font-size:10px;}
 .cmp-fact span{display:block;color:rgba(240,237,232,.32);letter-spacing:.08em;text-transform:uppercase;font-size:8.5px;margin-bottom:3px;}
 .cmp-fact b{color:var(--white);font-weight:500;}
-.cmp-fact-quote{font-family:var(--serif);font-style:italic;font-size:13px;color:rgba(240,237,232,.55);margin-top:10px;line-height:1.5;}
+.cmp-fact-quote{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--amber);opacity:.85;margin-top:10px;line-height:1.5;}
 
 .cmp-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:auto;padding-top:18px;}
 .cmp-stat{background:var(--dark3);border:1px solid var(--border);border-radius:4px;padding:14px 14px;}
@@ -435,7 +435,7 @@ function populateSelects(){
   });
 }
 
-function renderCard(item, otherAvgDb){
+function renderCard(item, otherAvgDb, otherAvgVib){
   const t = T[_lang];
   const wrap = document.createElement('div');
   wrap.className = 'cmp-card';
@@ -480,12 +480,13 @@ function renderCard(item, otherAvgDb){
 
   const stats = document.createElement('div');
   stats.className = 'cmp-stat-grid';
-  const louder = otherAvgDb != null && item.avgDb > otherAvgDb;
+  const louderDb = otherAvgDb != null && item.avgDb > otherAvgDb;
+  const louderVib = item.avgVib != null && otherAvgVib != null && item.avgVib > otherAvgVib;
   stats.innerHTML = `
     <div class="cmp-stat wide"><div class="cmp-stat-val">${fmtInt(item.totalFlights)}</div><div class="cmp-stat-lbl">${t.cmp_stat_flights}</div></div>
-    <div class="cmp-stat${louder ? ' amber' : ''}"><div class="cmp-stat-val">${fmt1(item.avgDb)} dB</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_db}</div></div>
+    <div class="cmp-stat${louderDb ? ' amber' : ''}"><div class="cmp-stat-val">${fmt1(item.avgDb)} dB</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_db}</div></div>
     <div class="cmp-stat"><div class="cmp-stat-val">${item.maxDb != null ? fmt1(item.maxDb) + ' dB' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_db}</div></div>
-    <div class="cmp-stat"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div></div>
+    <div class="cmp-stat${louderVib ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div></div>
     <div class="cmp-stat"><div class="cmp-stat-val">${item.maxVib != null ? fmt1(item.maxVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_vib}</div></div>
   `;
   body.appendChild(stats);
@@ -508,8 +509,8 @@ function cmpRender(){
   grid.innerHTML = '';
   if (!a || !b) { banner.hidden = true; return; }
 
-  grid.appendChild(renderCard(a, b.avgDb));
-  grid.appendChild(renderCard(b, a.avgDb));
+  grid.appendChild(renderCard(a, b.avgDb, b.avgVib));
+  grid.appendChild(renderCard(b, a.avgDb, a.avgVib));
 
   const delta = Math.abs(a.avgDb - b.avgDb);
   banner.hidden = false;
