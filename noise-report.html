@@ -845,7 +845,7 @@ function renderReport(report) {
   const total_vio = (report.rouge_count || 0) + (report.orange_count || 0) + (report.jaune_count || 0);
   if (hr) hr.textContent = total_vio;
   const hrDetail = document.getElementById('h-rouge-detail');
-  if (hrDetail && report.rouge_count) hrDetail.textContent = `🔴 ${report.rouge_count} red · 🟠 ${report.orange_count||0} orange · 🟡 ${report.jaune_count} yellow`;
+  if (hrDetail && report.rouge_count) hrDetail.innerHTML = `<div>🔴 ${report.rouge_count} red</div><div>🟠 ${report.orange_count||0} orange</div><div>🟡 ${report.jaune_count} yellow</div>`;
   if (hn) hn.innerHTML = `${report.night_pct || '—'}<span class="unit">%</span>`;
 
   const html = `
