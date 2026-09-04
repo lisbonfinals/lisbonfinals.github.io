@@ -254,6 +254,32 @@ nav {
 .month-chip:hover { color: var(--white); border-color: var(--border2); }
 .month-chip.active { background: var(--amber-dim); border-color: var(--amber); color: var(--amber); }
 
+/* ── YEAR TRAFFIC STRIP ── */
+.year-strip { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:32px 48px; background:rgba(255,255,255,.012); }
+.year-strip-head { max-width:1200px; margin:0 auto 22px; display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px; }
+.year-strip-label { font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--amber); }
+.year-strip-sub { font-family:var(--mono); font-size:9px; color:rgba(240,237,232,.32); }
+.year-strip-row { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(12,1fr); gap:8px; align-items:end; height:100px; }
+.year-cell { display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:8px; }
+.year-cell-count { font-family:var(--mono); font-size:10px; color:rgba(240,237,232,.6); white-space:nowrap; }
+.year-cell-bar { width:100%; max-width:26px; background:var(--amber-dim); border:1px solid rgba(245,166,35,.35); border-radius:3px 3px 0 0; min-height:4px; transition:all .2s; }
+.year-cell-month { font-family:var(--mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:rgba(240,237,232,.38); }
+.year-cell.has-data { cursor:pointer; }
+.year-cell.has-data:hover .year-cell-bar { background:var(--amber); border-color:var(--amber); }
+.year-cell.has-data:hover .year-cell-count,
+.year-cell.has-data:hover .year-cell-month { color:var(--amber); }
+.year-cell.active .year-cell-bar { background:var(--amber); border-color:var(--amber); }
+.year-cell.active .year-cell-month { color:var(--amber); }
+.year-cell.empty .year-cell-bar { background:transparent; border:1px dashed rgba(240,237,232,.14); }
+.year-cell.empty .year-cell-count { color:rgba(240,237,232,.2); }
+@media(max-width:640px) {
+  .year-strip { padding:24px 20px; }
+  .year-strip-row { gap:4px; height:80px; }
+  .year-cell-bar { max-width:16px; }
+  .year-cell-count { font-size:8px; }
+  .year-cell-month { font-size:7.5px; }
+}
+
 /* ── SECTION ── */
 .section { padding: 56px 48px 80px; max-width: 1200px; margin: 0 auto; }
 .section-header { margin-bottom: 48px; }
@@ -716,6 +742,15 @@ footer {
   </div>
 </section>
 
+<!-- ── YEAR TRAFFIC STRIP ── -->
+<div class="year-strip">
+  <div class="year-strip-head">
+    <span class="year-strip-label" data-i18n="year_strip_label">2026 traffic at a glance</span>
+    <span class="year-strip-sub" data-i18n="year_strip_sub">Flights tracked per month</span>
+  </div>
+  <div class="year-strip-row" id="year-strip-row"></div>
+</div>
+
 <!-- ── MAIN CONTENT ── -->
 <section class="section">
 
@@ -996,6 +1031,39 @@ function renderChips(reports, activeIdx) {
   }).join('');
 }
 
+// ── YEAR TRAFFIC STRIP ───────────────────────────────────────────────────
+// 12 vraies cellules pour l'année en cours (2026, comme le reste du site) :
+// mois avant le lancement de la station (3 mai) ou pas encore clôturé restent
+// vides ("on complète" au fil des mois, cf. process manuel des rapports).
+function renderYearStrip(reports, activeIdx) {
+  const container = document.getElementById('year-strip-row');
+  if (!container) return;
+  const maxFlights = Math.max(1, ...reports.map(r => r.total_flights || 0));
+  const activeReport = reports[activeIdx];
+  const html = [];
+  for (let m = 1; m <= 12; m++) {
+    const idx = reports.findIndex(r => r.year === 2026 && r.month === m);
+    const r = idx >= 0 ? reports[idx] : null;
+    const mn = (MONTHS[m] || '').substring(0, 3);
+    if (r) {
+      const pct = Math.max(6, Math.round((r.total_flights || 0) / maxFlights * 100));
+      const isActive = !!(activeReport && activeReport.year === r.year && activeReport.month === r.month);
+      html.push(`<div class="year-cell has-data${isActive ? ' active' : ''}" onclick="selectReport(${idx})" title="${mn} 2026 — ${(r.total_flights||0).toLocaleString()} flights">
+        <div class="year-cell-count">${(r.total_flights||0).toLocaleString()}</div>
+        <div class="year-cell-bar" style="height:${pct}%"></div>
+        <div class="year-cell-month">${mn}</div>
+      </div>`);
+    } else {
+      html.push(`<div class="year-cell empty" title="${mn} 2026 — no data">
+        <div class="year-cell-count">—</div>
+        <div class="year-cell-bar" style="height:6%"></div>
+        <div class="year-cell-month">${mn}</div>
+      </div>`);
+    }
+  }
+  container.innerHTML = html.join('');
+}
+
 // ── SELECT REPORT ─────────────────────────────────────────────────────────
 let _reports = [];
 function selectReport(idx) {
@@ -1003,6 +1071,7 @@ function selectReport(idx) {
   renderReport(_reports[idx]);
   renderChips(_reports, idx);
   renderArchive(_reports, idx);
+  renderYearStrip(_reports, idx);
   const target = document.getElementById('monthly-report');
   if (target) {
     const navOffset = 100; // fixed nav height + breathing room
@@ -1033,6 +1102,7 @@ async function loadData() {
     renderReport(reports[0]);
     renderChips(reports, 0);
     renderArchive(reports, 0);
+    renderYearStrip(reports, 0);
 
   } catch(e) {
     console.error('Failed to load data:', e);
@@ -1078,6 +1148,7 @@ const TRANSLATIONS = {
     archive_label: 'Archive', loading_txt: 'Loading report data...',
     latest_title1: 'Latest', latest_title2: 'Analysis',
     archive_tag: 'All Reports', archive_title: 'Monthly', archive_title2: 'Archive',
+    year_strip_label: '2026 traffic at a glance', year_strip_sub: 'Flights tracked per month',
     footer_left: 'LISBON FINALS · Noise Report · lisbonfinals.com',
     footer_right: 'Not affiliated with ANA Aeroportos or ANAC',
     hardware_note_old: 'Current microphone capped at 100 dB — actual peak levels may exceed 99.9 dB shown. New calibrated outdoor station coming June 2026.',
@@ -1102,6 +1173,7 @@ const TRANSLATIONS = {
     archive_label: 'Arquivo', loading_txt: 'A carregar dados...',
     latest_title1: 'Última', latest_title2: 'Análise',
     archive_tag: 'Todos os Relatórios', archive_title: 'Arquivo', archive_title2: 'Mensal',
+    year_strip_label: 'Tráfego de 2026 num relance', year_strip_sub: 'Voos registados por mês',
     footer_left: 'LISBON FINALS · Relatório de Ruído · lisbonfinals.com',
     footer_right: 'Sem afiliação com ANA Aeroportos ou ANAC',
     hardware_note_old: 'O microfone atual estava limitado a 100 dB — os níveis de pico reais podem ter excedido os 99,9 dB apresentados. Nova estação exterior calibrada prevista para junho de 2026.',
@@ -1124,6 +1196,7 @@ const TRANSLATIONS = {
     archive_label: 'Archives', loading_txt: 'Chargement des données...',
     latest_title1: 'Dernière', latest_title2: 'Analyse',
     archive_tag: 'Tous les rapports', archive_title: 'Archive', archive_title2: 'Mensuelle',
+    year_strip_label: 'Trafic 2026 en un coup d’œil', year_strip_sub: 'Vols enregistrés par mois',
     footer_left: 'LISBON FINALS · Rapport de Bruit · lisbonfinals.com',
     footer_right: 'Sans affiliation avec ANA Aeroportos ou ANAC',
     hardware_note_old: 'Le microphone actuel était plafonné à 100 dB — les niveaux de pic réels peuvent avoir dépassé les 99,9 dB affichés. Nouvelle station extérieure calibrée prévue pour juin 2026.',
