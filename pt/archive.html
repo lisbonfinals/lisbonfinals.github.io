@@ -275,13 +275,30 @@ table.archive-table{width:100%;border-collapse:collapse;}
   .archive-hbar-val{width:110px;font-size:9px;}
 }
 
-/* month sparkline — click a bar to jump to that month (Overview / Night·ANAC) */
+/* month sparkline — fixed 12-cell grid for the year in view (mirrors Noise
+   Report's year strip), click a cell to jump to that month (Overview /
+   Night·ANAC). A row-per-month list would keep growing forever as months
+   pile up; the select above it still reaches the full history. */
 .archive-sparkline{margin-bottom:24px;}
-.archive-sparkline .archive-hbar-row{cursor:pointer;padding:2px 6px;border-radius:3px;transition:background .15s;}
-.archive-sparkline .archive-hbar-row:hover{background:rgba(255,255,255,.05);}
-.archive-sparkline .archive-hbar-row.active .archive-hbar-lbl{color:var(--amber);font-weight:700;}
-.archive-sparkline .archive-hbar-row.active .archive-hbar-fill{background:var(--white);}
-.archive-sparkline .archive-hbar-lbl{width:44px;text-transform:capitalize;}
+.archive-year-row{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;align-items:end;height:88px;}
+.archive-year-cell{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;cursor:pointer;}
+.archive-year-cell-val{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.55);white-space:nowrap;}
+.archive-year-cell-bar{width:100%;max-width:24px;background:var(--amber-dim);border:1px solid rgba(245,166,35,.35);border-radius:3px 3px 0 0;min-height:4px;transition:all .2s;}
+.archive-year-cell-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:rgba(240,237,232,.38);}
+.archive-year-cell:hover .archive-year-cell-bar{background:var(--amber);border-color:var(--amber);}
+.archive-year-cell:hover .archive-year-cell-val,
+.archive-year-cell:hover .archive-year-cell-lbl{color:var(--amber);}
+.archive-year-cell.active .archive-year-cell-bar{background:var(--amber);border-color:var(--amber);}
+.archive-year-cell.active .archive-year-cell-lbl{color:var(--amber);font-weight:700;}
+.archive-year-cell.empty{cursor:default;}
+.archive-year-cell.empty .archive-year-cell-bar{background:transparent;border:1px dashed rgba(240,237,232,.14);}
+.archive-year-cell.empty .archive-year-cell-val{color:rgba(240,237,232,.2);}
+@media(max-width:640px){
+  .archive-year-row{gap:4px;height:72px;}
+  .archive-year-cell-bar{max-width:16px;}
+  .archive-year-cell-val{font-size:8px;}
+  .archive-year-cell-lbl{font-size:7.5px;}
+}
 
 /* pagination for archive photo galleries */
 .archive-pics-pagination{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;}
@@ -763,26 +780,45 @@ function avMonthLabel(ym, short) {
   return new Date(y, m - 1, 1).toLocaleDateString(localeMap[_lang] || 'en-GB', opts);
 }
 
-// Barres cliquables (une par mois) à côté d'un sélecteur — repère visuel des
-// mois avec le plus de [valueFn] + raccourci pour sauter directement dessus.
+// Grille de 12 cases (une par mois, comme le "year strip" de Noise Report) à
+// côté d'un sélecteur — repère visuel + raccourci pour sauter sur un mois.
 // valueFn(monthData) laisse chaque onglet choisir sa propre métrique (trafic
 // total pour Overview, vols nocturnes pour Nuit·ANAC — pas la même chose).
+// Volontairement limité à l'année en cours plutôt qu'une ligne par mois de
+// tout l'historique : ça ne s'allonge jamais (10+ mois = 10+ lignes oranges
+// géantes sinon) ; l'historique complet reste à un clic via le sélecteur.
 function avRenderMonthSparkline(containerId, selectId, valueFn) {
   const el = document.getElementById(containerId);
   const sel = document.getElementById(selectId);
   if (!el || !sel) return;
   const cur = sel.value;
   const months = Object.keys(archiveData.by_month || {}).sort();
-  const max = Math.max(...months.map(ym => valueFn(archiveData.by_month[ym]) || 0), 1);
-  el.innerHTML = months.map(ym => {
-    const n = valueFn(archiveData.by_month[ym]) || 0;
-    const pct = Math.max(2, Math.round(n / max * 100));
-    return `<div class="archive-hbar-row${ym === cur ? ' active' : ''}" data-ym="${ym}">
-      <span class="archive-hbar-lbl">${avMonthLabel(ym, true)}</span>
-      <div class="archive-hbar-track"><div class="archive-hbar-fill" style="width:${pct}%"></div></div>
-      <span class="archive-hbar-val">${avFmt(n)}</span>
-    </div>`;
-  }).join('');
+  if (!months.length) { el.innerHTML = ''; return; }
+  const year = Number((cur || months[months.length - 1]).slice(0, 4));
+  const yearMonths = months.filter(ym => ym.startsWith(year + '-'));
+  const max = Math.max(...yearMonths.map(ym => valueFn(archiveData.by_month[ym]) || 0), 1);
+  const cells = [];
+  for (let m = 1; m <= 12; m++) {
+    const ym = `${year}-${String(m).padStart(2, '0')}`;
+    const data = archiveData.by_month[ym];
+    const mn = avMonthLabel(ym, true);
+    if (data) {
+      const n = valueFn(data) || 0;
+      const pct = Math.max(6, Math.round(n / max * 100));
+      cells.push(`<div class="archive-year-cell${ym === cur ? ' active' : ''}" data-ym="${ym}" title="${mn} ${year} — ${avFmt(n)}">
+        <span class="archive-year-cell-val">${avFmt(n)}</span>
+        <div class="archive-year-cell-bar" style="height:${pct}%"></div>
+        <span class="archive-year-cell-lbl">${mn}</span>
+      </div>`);
+    } else {
+      cells.push(`<div class="archive-year-cell empty">
+        <span class="archive-year-cell-val">—</span>
+        <div class="archive-year-cell-bar" style="height:6%"></div>
+        <span class="archive-year-cell-lbl">${mn}</span>
+      </div>`);
+    }
+  }
+  el.innerHTML = `<div class="archive-year-row">${cells.join('')}</div>`;
   el.querySelectorAll('[data-ym]').forEach(row => {
     row.addEventListener('click', () => {
       sel.value = row.dataset.ym;
