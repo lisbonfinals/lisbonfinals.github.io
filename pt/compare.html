@@ -113,6 +113,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .cmp-photo-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.25);letter-spacing:.1em;text-transform:uppercase;}
 .cmp-rank{position:absolute;top:12px;left:12px;background:rgba(7,9,13,.75);color:var(--amber);font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:4px 9px;border-radius:3px;backdrop-filter:blur(4px);}
+.cmp-gauge{position:absolute;left:14px;right:14px;bottom:14px;height:7px;border-radius:4px;background:linear-gradient(90deg,#22c55e 0%,#f5a623 50%,#ef4444 100%);box-shadow:0 1px 6px rgba(0,0,0,.5);}
+.cmp-gauge-marker{position:absolute;top:50%;width:15px;height:15px;border-radius:50%;background:#fff;border:2.5px solid rgba(7,9,13,.9);transform:translate(-50%,-50%);box-shadow:0 0 0 2px rgba(255,255,255,.3),0 1px 4px rgba(0,0,0,.6);}
 .cmp-body{padding:22px 22px 26px;display:flex;flex-direction:column;flex:1;}
 .cmp-name{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.15;margin-bottom:4px;}
 .cmp-flag{margin-right:6px;}
@@ -303,7 +305,9 @@ const T = {
     cmp_stat_max_db:'Loudest recorded',
     cmp_stat_avg_vib:'Average vibration',
     cmp_stat_max_vib:'Peak vibration',
-    cmp_rank:'Loudest #{rank} of {total}',
+    cmp_rank_loudest:'Loudest of {n} tracked', cmp_rank_quietest:'Quietest of {n} tracked',
+    cmp_rank_louder:'Louder than {pct}%', cmp_rank_quieter:'Quieter than {pct}%',
+    cmp_gauge_hint:'louder than the rest tracked',
     cmp_diff_louder:'<b>{a}</b> runs about <b>{d} dB</b> louder than <b>{b}</b> on average.',
     cmp_diff_close:'<b>{a}</b> and <b>{b}</b> measure almost the same on average, less than 0.5 dB apart.',
     cmp_profile_manufacturer:'Manufacturer',
@@ -333,7 +337,9 @@ const T = {
     cmp_stat_max_db:'Pico mais alto registado',
     cmp_stat_avg_vib:'Vibração média',
     cmp_stat_max_vib:'Pico de vibração',
-    cmp_rank:'Mais ruidoso #{rank} de {total}',
+    cmp_rank_loudest:'O mais ruidoso de {n}', cmp_rank_quietest:'O mais silencioso de {n}',
+    cmp_rank_louder:'Mais ruidoso que {pct}%', cmp_rank_quieter:'Mais silencioso que {pct}%',
+    cmp_gauge_hint:'mais ruidoso do que o resto',
     cmp_diff_louder:'<b>{a}</b> é, em média, cerca de <b>{d} dB</b> mais ruidoso do que <b>{b}</b>.',
     cmp_diff_close:'<b>{a}</b> e <b>{b}</b> têm níveis médios muito próximos, menos de 0,5 dB de diferença.',
     cmp_profile_manufacturer:'Fabricante',
@@ -363,7 +369,9 @@ const T = {
     cmp_stat_max_db:'Pic le plus élevé enregistré',
     cmp_stat_avg_vib:'Vibration moyenne',
     cmp_stat_max_vib:'Pic de vibration',
-    cmp_rank:'Le plus bruyant #{rank} sur {total}',
+    cmp_rank_loudest:'Le plus bruyant sur {n}', cmp_rank_quietest:'Le plus silencieux sur {n}',
+    cmp_rank_louder:'Plus bruyant que {pct}%', cmp_rank_quieter:'Plus silencieux que {pct}%',
+    cmp_gauge_hint:'plus bruyant que le reste',
     cmp_diff_louder:'<b>{a}</b> est, en moyenne, environ <b>{d} dB</b> plus bruyant que <b>{b}</b>.',
     cmp_diff_close:'<b>{a}</b> et <b>{b}</b> ont des niveaux moyens très proches, moins de 0,5 dB d’écart.',
     cmp_profile_manufacturer:'Constructeur',
@@ -487,10 +495,32 @@ function renderCard(item, otherAvgDb, otherAvgVib){
   } else {
     photo.innerHTML = `<div class="cmp-photo-empty">${t.cmp_no_photo}</div>`;
   }
+  const total = cmpAggByMode[cmpMode].length;
+  // Percentile plutôt que rang brut : "Le plus bruyant #26 sur 33" est vrai
+  // mais illisible (un avion #26 sur 33 est en réalité plutôt silencieux).
+  // On formule toujours dans le sens qui a du sens : bruyant OU silencieux,
+  // jamais les deux mélangés dans la même étiquette.
+  const loudPct = total > 1 ? Math.round((total - item.rank) / (total - 1) * 100) : 100;
+  const quietPct = 100 - loudPct;
   const rankTag = document.createElement('div');
   rankTag.className = 'cmp-rank';
-  rankTag.textContent = t.cmp_rank.replace('{rank}', item.rank).replace('{total}', cmpAggByMode[cmpMode].length);
+  if (total <= 1 || item.rank === 1) {
+    rankTag.innerHTML = `🔊 ${t.cmp_rank_loudest.replace('{n}', total)}`;
+  } else if (item.rank === total) {
+    rankTag.innerHTML = `🍃 ${t.cmp_rank_quietest.replace('{n}', total)}`;
+  } else if (loudPct >= 50) {
+    rankTag.innerHTML = `🔊 ${t.cmp_rank_louder.replace('{pct}', loudPct)}`;
+  } else {
+    rankTag.innerHTML = `🍃 ${t.cmp_rank_quieter.replace('{pct}', quietPct)}`;
+  }
   photo.appendChild(rankTag);
+
+  const gauge = document.createElement('div');
+  gauge.className = 'cmp-gauge';
+  gauge.title = `${loudPct}% ${t.cmp_gauge_hint}`;
+  gauge.innerHTML = `<div class="cmp-gauge-marker" style="left:${loudPct}%"></div>`;
+  photo.appendChild(gauge);
+
   wrap.appendChild(photo);
 
   const body = document.createElement('div');
