@@ -718,7 +718,7 @@ footer {
 <section class="section">
 
   <!-- FEATURED REPORT -->
-  <div class="section-header" style="margin-top:56px;margin-bottom:40px">
+  <div class="section-header" id="monthly-report" style="margin-top:56px;margin-bottom:40px">
     <div class="section-tag">MONTHLY REPORT</div>
     <h2 class="section-title"><span class="plain" data-i18n="latest_title1">Latest</span> <span><span data-i18n="latest_title2">Analysis</span></span></h2>
   </div>
@@ -900,7 +900,7 @@ function renderReport(report) {
       <div class="violations-row">
         <div class="vio-badge red">
           <span class="vio-badge-num">${report.rouge_count||0}</span>
-          <span>🔴 Red Night Alerts ≥ ${report.thresh_rouge||'—'} dB</span>
+          <span>🔴 Red Alerts ≥ ${report.thresh_rouge||'—'} dB</span>
         </div>
         <div class="vio-badge orange">
           <span class="vio-badge-num">${report.orange_count||0}</span>
@@ -908,7 +908,7 @@ function renderReport(report) {
         </div>
         <div class="vio-badge yellow">
           <span class="vio-badge-num">${report.jaune_count||0}</span>
-          <span>🟡 Yellow Warnings ${report.thresh_jaune||'—'}–${report.thresh_jaune_max||'—'} dB</span>
+          <span>🟡 Yellow Alerts ${report.thresh_jaune||'—'}–${report.thresh_jaune_max||'—'} dB</span>
         </div>
       </div>
 
@@ -1001,7 +1001,12 @@ function selectReport(idx) {
   renderReport(_reports[idx]);
   renderChips(_reports, idx);
   renderArchive(_reports, idx);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const target = document.getElementById('monthly-report');
+  if (target) {
+    const navOffset = 100; // fixed nav height + breathing room
+    const y = target.getBoundingClientRect().top + window.scrollY - navOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
 }
 
 // ── LOAD DATA ────────────────────────────────────────────────────────────
