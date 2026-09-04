@@ -272,12 +272,17 @@ nav {
 .year-cell.active .year-cell-month { color:var(--amber); }
 .year-cell.empty .year-cell-bar { background:transparent; border:1px dashed rgba(240,237,232,.14); }
 .year-cell.empty .year-cell-count { color:rgba(240,237,232,.2); }
+.year-strip-foot { max-width:1200px; margin:20px auto 0; text-align:center; font-family:var(--mono); font-size:10px; color:rgba(240,237,232,.38); }
+.year-strip-foot a { color:var(--amber); text-decoration:none; margin-left:8px; }
+.year-strip-foot a:hover { text-decoration:underline; }
 @media(max-width:640px) {
   .year-strip { padding:24px 20px; }
   .year-strip-row { gap:4px; height:80px; }
   .year-cell-bar { max-width:16px; }
   .year-cell-count { font-size:8px; }
   .year-cell-month { font-size:7.5px; }
+  .year-strip-foot { font-size:9px; }
+  .year-strip-foot a { display:block; margin:6px 0 0; }
 }
 
 /* ── SECTION ── */
@@ -749,6 +754,10 @@ footer {
     <span class="year-strip-sub" data-i18n="year_strip_sub">Flights tracked per month</span>
   </div>
   <div class="year-strip-row" id="year-strip-row"></div>
+  <div class="year-strip-foot">
+    <span data-i18n="compare_teaser">Curious how two airlines or aircraft stack up?</span>
+    <a href="/compare.html" data-i18n="compare_teaser_link">Try Compare →</a>
+  </div>
 </div>
 
 <!-- ── MAIN CONTENT ── -->
@@ -1054,7 +1063,12 @@ function renderYearStrip(reports, activeIdx) {
         <div class="year-cell-month">${mn}</div>
       </div>`);
     } else {
-      html.push(`<div class="year-cell empty" title="${mn} 2026 — no data">
+      const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+      // Avant mai (lancement le 3 mai) : la station n'existait pas encore.
+      // À partir de mai sans données : le mois n'est simplement pas clôturé
+      // (process manuel, cf. mémoire — pas la même raison, pas le même message).
+      const reason = m < 5 ? t.year_cell_prelaunch : t.year_cell_pending;
+      html.push(`<div class="year-cell empty" title="${mn} 2026 — ${reason}">
         <div class="year-cell-count">—</div>
         <div class="year-cell-bar" style="height:6%"></div>
         <div class="year-cell-month">${mn}</div>
@@ -1149,6 +1163,8 @@ const TRANSLATIONS = {
     latest_title1: 'Latest', latest_title2: 'Analysis',
     archive_tag: 'All Reports', archive_title: 'Monthly', archive_title2: 'Archive',
     year_strip_label: '2026 traffic at a glance', year_strip_sub: 'Flights tracked per month',
+    year_cell_prelaunch: 'Station not live yet', year_cell_pending: 'Report not published yet',
+    compare_teaser: 'Curious how two airlines or aircraft stack up?', compare_teaser_link: 'Try Compare →',
     footer_left: 'LISBON FINALS · Noise Report · lisbonfinals.com',
     footer_right: 'Not affiliated with ANA Aeroportos or ANAC',
     hardware_note_old: 'Current microphone capped at 100 dB — actual peak levels may exceed 99.9 dB shown. New calibrated outdoor station coming June 2026.',
@@ -1174,6 +1190,8 @@ const TRANSLATIONS = {
     latest_title1: 'Última', latest_title2: 'Análise',
     archive_tag: 'Todos os Relatórios', archive_title: 'Arquivo', archive_title2: 'Mensal',
     year_strip_label: 'Tráfego de 2026 num relance', year_strip_sub: 'Voos registados por mês',
+    year_cell_prelaunch: 'Estação ainda não estava em funcionamento', year_cell_pending: 'Relatório ainda não publicado',
+    compare_teaser: 'Curioso para saber como duas companhias ou aviões se comparam?', compare_teaser_link: 'Experimente o Compare →',
     footer_left: 'LISBON FINALS · Relatório de Ruído · lisbonfinals.com',
     footer_right: 'Sem afiliação com ANA Aeroportos ou ANAC',
     hardware_note_old: 'O microfone atual estava limitado a 100 dB — os níveis de pico reais podem ter excedido os 99,9 dB apresentados. Nova estação exterior calibrada prevista para junho de 2026.',
@@ -1197,6 +1215,8 @@ const TRANSLATIONS = {
     latest_title1: 'Dernière', latest_title2: 'Analyse',
     archive_tag: 'Tous les rapports', archive_title: 'Archive', archive_title2: 'Mensuelle',
     year_strip_label: 'Trafic 2026 en un coup d’œil', year_strip_sub: 'Vols enregistrés par mois',
+    year_cell_prelaunch: 'Station pas encore en service', year_cell_pending: 'Rapport pas encore publié',
+    compare_teaser: 'Curieux de voir comment deux compagnies ou avions se comparent ?', compare_teaser_link: 'Essayer Compare →',
     footer_left: 'LISBON FINALS · Rapport de Bruit · lisbonfinals.com',
     footer_right: 'Sans affiliation avec ANA Aeroportos ou ANAC',
     hardware_note_old: 'Le microphone actuel était plafonné à 100 dB — les niveaux de pic réels peuvent avoir dépassé les 99,9 dB affichés. Nouvelle station extérieure calibrée prévue pour juin 2026.',

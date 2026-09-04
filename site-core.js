@@ -37,7 +37,7 @@
     document.querySelectorAll('a[href^="/"]').forEach(function (link) {
       var href = link.getAttribute('href');
       if (!href || href.indexOf('//') === 0 || /^\/(pt|fr)(?:\/|$)/.test(href)) return;
-      if (!/^\/(?:index\.html|data\.html|archive\.html|noise-report\.html|log\.html|about\.html|host-a-node\.html)?(?:[?#]|$)/.test(href)) return;
+      if (!/^\/(?:index\.html|data\.html|archive\.html|compare\.html|noise-report\.html|log\.html|about\.html|host-a-node\.html)?(?:[?#]|$)/.test(href)) return;
       link.setAttribute('href', '/' + routeLang + (href === '/' ? '/' : href));
     });
   }
