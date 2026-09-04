@@ -113,20 +113,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .cmp-photo-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.25);letter-spacing:.1em;text-transform:uppercase;}
 .cmp-rank{position:absolute;top:12px;left:12px;background:rgba(7,9,13,.75);color:var(--amber);font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:4px 9px;border-radius:3px;backdrop-filter:blur(4px);}
-.cmp-body{padding:22px 22px 26px;}
+.cmp-body{padding:22px 22px 26px;display:flex;flex-direction:column;flex:1;}
 .cmp-name{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.15;margin-bottom:4px;}
 .cmp-flag{margin-right:6px;}
 .cmp-subn{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.32);margin-bottom:18px;}
 
 .cmp-profile{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:18px;}
-.cmp-profile-desc{font-family:var(--sans);font-size:12.5px;line-height:1.7;color:rgba(240,237,232,.6);margin-bottom:12px;}
-.cmp-profile-facts{display:flex;flex-wrap:wrap;gap:10px 22px;}
+.cmp-profile-facts{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:14px;}
+.cmp-profile-desc{font-family:var(--sans);font-size:12.5px;line-height:1.7;color:rgba(240,237,232,.6);}
 .cmp-fact{font-family:var(--mono);font-size:10px;}
 .cmp-fact span{display:block;color:rgba(240,237,232,.32);letter-spacing:.08em;text-transform:uppercase;font-size:8.5px;margin-bottom:3px;}
 .cmp-fact b{color:var(--white);font-weight:500;}
 .cmp-fact-quote{font-family:var(--serif);font-style:italic;font-size:13px;color:rgba(240,237,232,.55);margin-top:10px;line-height:1.5;}
 
-.cmp-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cmp-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:auto;padding-top:18px;}
 .cmp-stat{background:var(--dark3);border:1px solid var(--border);border-radius:4px;padding:14px 14px;}
 .cmp-stat.wide{grid-column:1/-1;}
 .cmp-stat-val{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--white);line-height:1;}
@@ -474,7 +474,7 @@ function renderCard(item, otherAvgDb){
       if (desc.founded_year) facts += `<div class="cmp-fact"><span>${t.cmp_profile_founded}</span><b>${desc.founded_year}</b></div>`;
       if (desc.headquarters) facts += `<div class="cmp-fact"><span>${t.cmp_profile_hq}</span><b>${desc.headquarters}</b></div>`;
     }
-    profile.innerHTML = `<p class="cmp-profile-desc">${desc.description}</p><div class="cmp-profile-facts">${facts}</div>${desc.fun_fact ? `<p class="cmp-fact-quote">${desc.fun_fact}</p>` : ''}`;
+    profile.innerHTML = `<div class="cmp-profile-facts">${facts}</div><p class="cmp-profile-desc">${desc.description}</p>${desc.fun_fact ? `<p class="cmp-fact-quote">${desc.fun_fact}</p>` : ''}`;
     body.appendChild(profile);
   }
 
