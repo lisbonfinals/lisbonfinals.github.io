@@ -189,12 +189,12 @@ nav {
   margin-bottom: 40px;
 }
 .hero-top-row { display:flex; gap:56px; align-items:flex-start; flex-wrap:wrap; }
-.hero-left { flex:1 1 380px; min-width:300px; }
+.hero-left { flex:1 1 340px; max-width:420px; min-width:280px; }
 .hero-method {
   display:grid;grid-template-columns:1fr;gap:16px;
   background:rgba(13,17,23,.72);border:1px solid var(--border);
   border-left:2px solid rgba(245,166,35,.58);border-radius:12px;
-  padding:24px 28px;flex:1 1 420px;max-width:560px;margin-bottom:0;
+  padding:24px 28px;flex:1 1 420px;max-width:760px;margin-bottom:0;
 }
 .hero-stats {
   display: flex; gap: 0;
@@ -302,8 +302,10 @@ nav {
 .podium-section-title .dot { width:6px;height:6px;border-radius:50%;flex-shrink:0; }
 .podium-section-title.noisy .dot { background:var(--red); }
 .podium-section-title.quiet .dot { background:var(--green); }
+.podium-section-title.night .dot { background:var(--indigo); }
 .podium-section-title.noisy { color:rgba(239,68,68,.7); }
 .podium-section-title.quiet { color:rgba(34,197,94,.7); }
+.podium-section-title.night { color:rgba(99,102,241,.75); }
 
 .podium { display:grid;grid-template-columns:repeat(3,1fr);gap:0 8px;align-items:end;margin-bottom:8px; }
 .pod {
@@ -530,6 +532,7 @@ footer {
   .report-featured-body { padding: 18px 20px; }
   .report-method { grid-template-columns:1fr;padding:20px; }
   .hero-method { max-width:none;margin-bottom:0;padding:20px; }
+  .hero-left { max-width:none; }
   .hero-top-row { gap:32px; }
   .report-method-item { grid-template-columns:1fr;gap:5px; }
   .report-kpis { gap:12px; flex-wrap:wrap; }
@@ -890,7 +893,11 @@ function renderReport(report) {
       </div>
       ${buildMfrTable(report.top_mfr_noisy)}
 
-      <div class="violations-row" style="margin-top:48px">
+      <div class="podium-section-title night" style="margin-top:48px">
+        <span class="dot"></span>
+        Night Alerts
+      </div>
+      <div class="violations-row">
         <div class="vio-badge red">
           <span class="vio-badge-num">${report.rouge_count||0}</span>
           <span>🔴 Red Night Alerts ≥ ${report.thresh_rouge||'—'} dB</span>
@@ -902,10 +909,6 @@ function renderReport(report) {
         <div class="vio-badge yellow">
           <span class="vio-badge-num">${report.jaune_count||0}</span>
           <span>🟡 Yellow Warnings ${report.thresh_jaune||'—'}–${report.thresh_jaune_max||'—'} dB</span>
-        </div>
-        <div class="vio-badge night">
-          <span class="vio-badge-num">${report.night_pct||0}%</span>
-          <span>🌙 Night Operations</span>
         </div>
       </div>
 
