@@ -369,6 +369,7 @@ nav {
   font-family: var(--mono); font-size:12px;
 }
 .vio-badge.red { background:var(--red-dim); border:1px solid rgba(239,68,68,.25); }
+.vio-badge.orange { background:rgba(249,115,22,.1); border:1px solid rgba(249,115,22,.25); color:rgba(249,115,22,.9); }
 .vio-badge.yellow { background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.25); color:rgba(245,166,35,.9); }
 .vio-badge.night { background:var(--indigo-dim); border:1px solid rgba(99,102,241,.25); color:rgba(139,142,246,.9); }
 .vio-badge-num { font-size:22px; font-weight:700; }
@@ -841,10 +842,10 @@ function renderReport(report) {
   const hfPeriod = document.getElementById('h-flights-period');
   if (hfPeriod) hfPeriod.textContent = mn + ' ' + report.year;
   if (ha) ha.innerHTML = `${report.avg_db || '—'}<span class="unit"> dB</span>`;
-  const total_vio = (report.rouge_count || 0) + (report.jaune_count || 0);
+  const total_vio = (report.rouge_count || 0) + (report.orange_count || 0) + (report.jaune_count || 0);
   if (hr) hr.textContent = total_vio;
   const hrDetail = document.getElementById('h-rouge-detail');
-  if (hrDetail && report.rouge_count) hrDetail.textContent = `🔴 ${report.rouge_count} red · 🟡 ${report.jaune_count} yellow`;
+  if (hrDetail && report.rouge_count) hrDetail.textContent = `🔴 ${report.rouge_count} red · 🟠 ${report.orange_count||0} orange · 🟡 ${report.jaune_count} yellow`;
   if (hn) hn.innerHTML = `${report.night_pct || '—'}<span class="unit">%</span>`;
 
   const html = `
@@ -868,7 +869,7 @@ function renderReport(report) {
           <div class="report-kpi-lbl">Night Flights</div>
         </div>
         <div>
-          <div class="report-kpi-val" style="color:var(--red)">${(report.rouge_count||0) + (report.jaune_count||0)}</div>
+          <div class="report-kpi-val" style="color:var(--red)">${(report.rouge_count||0) + (report.orange_count||0) + (report.jaune_count||0)}</div>
           <div class="report-kpi-lbl">Night Alerts</div>
         </div>
       </div>
@@ -886,6 +887,10 @@ function renderReport(report) {
           <span class="vio-badge-num">${report.rouge_count||0}</span>
           <span>🔴 Red Night Alerts ≥ ${report.thresh_rouge||'—'} dB</span>
         </div>
+        <div class="vio-badge orange">
+          <span class="vio-badge-num">${report.orange_count||0}</span>
+          <span>🟠 Orange Alerts ${report.thresh_orange_min||'—'}–${report.thresh_orange_max||'—'} dB</span>
+        </div>
         <div class="vio-badge yellow">
           <span class="vio-badge-num">${report.jaune_count||0}</span>
           <span>🟡 Yellow Warnings ${report.thresh_jaune||'—'}–${report.thresh_jaune_max||'—'} dB</span>
@@ -895,10 +900,11 @@ function renderReport(report) {
           <span>🌙 Night Operations</span>
         </div>
       </div>
+      <p style="font-size:11px;color:rgba(240,237,232,.4);margin:-8px 0 20px;line-height:1.6">🟠 Orange is not an ANAC-defined tier — the regulation only sets Yellow (Level 2) and Red (Critical), with nothing in between. Orange tracks that gap on our own, so a loud flight at 97 dB is never silently dropped from the count.</p>
 
       <div class="anac-note">
         <span class="anac-note-label">🛈 Figures above use our extended 23:00–06:59 window. ANAC's official regulatory window (00:00–05:59):</span>
-        <span class="anac-note-vals">🔴 ${report.rouge_count_anac||0} · 🟡 ${report.jaune_count_anac||0}<span class="anac-note-dim"> — ${(report.night_flights_anac||0).toLocaleString()} night flights (${report.night_pct_anac||0}%)</span></span>
+        <span class="anac-note-vals">🔴 ${report.rouge_count_anac||0} · 🟠 ${report.orange_count_anac||0} · 🟡 ${report.jaune_count_anac||0}<span class="anac-note-dim"> — ${(report.night_flights_anac||0).toLocaleString()} night flights (${report.night_pct_anac||0}%)</span></span>
       </div>
 
       <div class="podiums-grid">
@@ -973,8 +979,8 @@ function renderArchive(reports, activeIdx) {
           <div class="archive-stat-lbl">Avg</div>
         </div>
         <div>
-          <div class="archive-stat-val" style="color:var(--red)">${(r.rouge_count||0)+(r.jaune_count||0)}<span class="archive-stat-tag">Extended · <span style="white-space:nowrap">23h-07h</span></span></div>
-          <div class="archive-stat-val" style="color:var(--amber);margin-top:2px">${(r.rouge_count_anac||0)+(r.jaune_count_anac||0)}<span class="archive-stat-tag">ANAC · <span style="white-space:nowrap">00h-06h</span></span></div>
+          <div class="archive-stat-val" style="color:var(--red)">${(r.rouge_count||0)+(r.orange_count||0)+(r.jaune_count||0)}<span class="archive-stat-tag">Extended · <span style="white-space:nowrap">23h-07h</span></span></div>
+          <div class="archive-stat-val" style="color:var(--amber);margin-top:2px">${(r.rouge_count_anac||0)+(r.orange_count_anac||0)+(r.jaune_count_anac||0)}<span class="archive-stat-tag">ANAC · <span style="white-space:nowrap">00h-06h</span></span></div>
           <div class="archive-stat-lbl">Alerts</div>
         </div>
       </div>
