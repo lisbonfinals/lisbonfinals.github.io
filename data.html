@@ -798,7 +798,7 @@ function buildNightTimeline() {
 function buildLastInfraction(s) {
   const el = document.getElementById('lastInfractionCard');
   if (!s.last_infraction_callsign) {
-    el.innerHTML = `<div class="violation-card"><div class="violation-badge ok">✓ Clear</div><div class="violation-info"><div class="violation-title">No violations recorded this period</div></div></div>`;
+    el.innerHTML = `<div class="violation-card"><div class="violation-badge ok">✓ Clear</div><div class="violation-info"><div class="violation-title">No alerts recorded this period</div></div></div>`;
     return;
   }
   const type = s.last_infraction_type || 'l2';
