@@ -1,306 +1,630 @@
 [
   {
     "aircraft_type": "Airbus A320",
-    "description": "L’A320 est un biréacteur monocouloir conçu pour les liaisons court et moyen-courriers. Il a popularisé les commandes de vol électriques numériques dans l’aviation commerciale.",
+    "description": {
+      "en": "The A320 is a twin-engine narrowbody built for short- and medium-haul routes. It helped popularize digital fly-by-wire controls in commercial aviation.",
+      "pt": "O A320 é um bireactor de corredor único concebido para ligações de curto e médio curso. Ajudou a popularizar os comandos de voo eletrónicos digitais na aviação comercial.",
+      "fr": "L’A320 est un biréacteur monocouloir conçu pour les liaisons court et moyen-courriers. Il a popularisé les commandes de vol électriques numériques dans l’aviation commerciale."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 1987,
     "entry_into_service_year": 1988,
-    "fun_fact": "Son cockpit et ses commandes sont largement communs avec les autres appareils de la famille A320."
+    "fun_fact": {
+      "en": "Its cockpit and controls are largely shared with the rest of the A320 family.",
+      "pt": "O seu cockpit e comandos são, em grande parte, comuns aos restantes aparelhos da família A320.",
+      "fr": "Son cockpit et ses commandes sont largement communs avec les autres appareils de la famille A320."
+    }
   },
   {
     "aircraft_type": "Airbus A320neo",
-    "description": "L’A320neo modernise l’A320 avec de nouveaux moteurs et des améliorations aérodynamiques. Il conserve la même vocation de desserte court et moyen-courrier, avec une consommation et une empreinte sonore réduites.",
+    "description": {
+      "en": "The A320neo modernizes the A320 with new engines and aerodynamic refinements. It keeps the same short- and medium-haul role, with lower fuel burn and a smaller noise footprint.",
+      "pt": "O A320neo moderniza o A320 com novos motores e melhorias aerodinâmicas. Mantém a mesma vocação de curto e médio curso, com um consumo e uma pegada sonora reduzidos.",
+      "fr": "L’A320neo modernise l’A320 avec de nouveaux moteurs et des améliorations aérodynamiques. Il conserve la même vocation de desserte court et moyen-courrier, avec une consommation et une empreinte sonore réduites."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 2014,
     "entry_into_service_year": 2016,
-    "fun_fact": "« neo » signifie New Engine Option."
+    "fun_fact": {
+      "en": "\"neo\" stands for New Engine Option.",
+      "pt": "«neo» significa New Engine Option.",
+      "fr": "« neo » signifie New Engine Option."
+    }
   },
   {
     "aircraft_type": "Airbus A321neo",
-    "description": "L’A321neo est la version allongée et remotorisée de la famille A320. Sa capacité et son rayon d’action lui permettent de relier aussi bien des capitales européennes que certaines destinations transatlantiques.",
+    "description": {
+      "en": "The A321neo is the stretched, re-engined version of the A320 family. Its capacity and range let it link European capitals as well as some transatlantic destinations.",
+      "pt": "O A321neo é a versão alongada e remotorizada da família A320. A sua capacidade e autonomia permitem-lhe ligar tanto capitais europeias como alguns destinos transatlânticos.",
+      "fr": "L’A321neo est la version allongée et remotorisée de la famille A320. Sa capacité et son rayon d’action lui permettent de relier aussi bien des capitales européennes que certaines destinations transatlantiques."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 2016,
     "entry_into_service_year": 2017,
-    "fun_fact": "Ses versions LR et XLR étendent nettement le rayon d’action d’un avion monocouloir."
+    "fun_fact": {
+      "en": "Its LR and XLR versions significantly extend the range of a single-aisle aircraft.",
+      "pt": "As suas versões LR e XLR alargam significativamente a autonomia de um avião de corredor único.",
+      "fr": "Ses versions LR et XLR étendent nettement le rayon d’action d’un avion monocouloir."
+    }
   },
   {
     "aircraft_type": "Boeing 737-800",
-    "description": "Le 737-800 est une version allongée de la génération 737 Next Generation. Très répandu, il dessert principalement les réseaux court et moyen-courriers des compagnies traditionnelles et à bas coûts.",
+    "description": {
+      "en": "The 737-800 is a stretched version of the 737 Next Generation family. Very widely used, it mainly serves short- and medium-haul networks for both legacy and low-cost carriers.",
+      "pt": "O 737-800 é uma versão alongada da geração 737 Next Generation. Muito difundido, serve sobretudo as redes de curto e médio curso de companhias tradicionais e low-cost.",
+      "fr": "Le 737-800 est une version allongée de la génération 737 Next Generation. Très répandu, il dessert principalement les réseaux court et moyen-courriers des compagnies traditionnelles et à bas coûts."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 1997,
     "entry_into_service_year": 1998,
-    "fun_fact": "Il peut généralement accueillir autour de 160 à 189 passagers selon l’aménagement."
+    "fun_fact": {
+      "en": "It typically seats around 160 to 189 passengers depending on the cabin layout.",
+      "pt": "Costuma acomodar entre 160 e 189 passageiros, consoante a configuração da cabine.",
+      "fr": "Il peut généralement accueillir autour de 160 à 189 passagers selon l’aménagement."
+    }
   },
   {
     "aircraft_type": "Embraer E190",
-    "description": "L’E190 est un biréacteur régional brésilien pensé pour les lignes où un grand monocouloir serait surdimensionné. Sa cabine à quatre sièges de front évite les sièges du milieu.",
+    "description": {
+      "en": "The E190 is a Brazilian regional twinjet designed for routes where a large narrowbody would be oversized. Its four-abreast cabin has no middle seats.",
+      "pt": "O E190 é um bireactor regional brasileiro pensado para rotas onde um avião de corredor único de grande dimensão seria sobredimensionado. A sua cabine com quatro lugares por fila dispensa lugares do meio.",
+      "fr": "L’E190 est un biréacteur régional brésilien pensé pour les lignes où un grand monocouloir serait surdimensionné. Sa cabine à quatre sièges de front évite les sièges du milieu."
+    },
     "manufacturer": "Embraer",
     "first_flight_year": 2004,
     "entry_into_service_year": 2005,
-    "fun_fact": "Il transporte habituellement une centaine de passagers."
+    "fun_fact": {
+      "en": "It usually carries around a hundred passengers.",
+      "pt": "Transporta habitualmente cerca de uma centena de passageiros.",
+      "fr": "Il transporte habituellement une centaine de passagers."
+    }
   },
   {
     "aircraft_type": "Airbus A321",
-    "description": "L’A321 est la version la plus longue de la famille A320 d’origine. Il offre davantage de sièges tout en gardant un cockpit commun avec ses proches cousins Airbus.",
+    "description": {
+      "en": "The A321 is the longest version of the original A320 family. It offers more seats while keeping a common cockpit with its close Airbus cousins.",
+      "pt": "O A321 é a versão mais longa da família A320 original. Oferece mais lugares mantendo um cockpit comum com os seus primos próximos da Airbus.",
+      "fr": "L’A321 est la version la plus longue de la famille A320 d’origine. Il offre davantage de sièges tout en gardant un cockpit commun avec ses proches cousins Airbus."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 1993,
     "entry_into_service_year": 1994,
-    "fun_fact": "Sa longueur dépasse de près de sept mètres celle de l’A320."
+    "fun_fact": {
+      "en": "It is nearly seven meters longer than the A320.",
+      "pt": "É quase sete metros mais comprido do que o A320.",
+      "fr": "Sa longueur dépasse de près de sept mètres celle de l’A320."
+    }
   },
   {
     "aircraft_type": "Airbus A330-900neo",
-    "description": "L’A330-900neo est un gros-porteur long-courrier dérivé de l’A330-300. Ses moteurs Rolls-Royce Trent 7000 et sa voilure remaniée améliorent son efficacité.",
+    "description": {
+      "en": "The A330-900neo is a long-haul widebody derived from the A330-300. Its Rolls-Royce Trent 7000 engines and reworked wing improve its efficiency.",
+      "pt": "O A330-900neo é um avião de longo curso de grande capacidade derivado do A330-300. Os seus motores Rolls-Royce Trent 7000 e a asa reformulada melhoram a sua eficiência.",
+      "fr": "L’A330-900neo est un gros-porteur long-courrier dérivé de l’A330-300. Ses moteurs Rolls-Royce Trent 7000 et sa voilure remaniée améliorent son efficacité."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 2017,
     "entry_into_service_year": 2018,
-    "fun_fact": "TAP Air Portugal a été la première compagnie à le mettre en service."
+    "fun_fact": {
+      "en": "TAP Air Portugal was the first airline to bring it into service.",
+      "pt": "A TAP Air Portugal foi a primeira companhia a colocá-lo em serviço.",
+      "fr": "TAP Air Portugal a été la première compagnie à le mettre en service."
+    }
   },
   {
     "aircraft_type": "Embraer E195",
-    "description": "L’E195 est la version allongée de la première génération d’E-Jets d’Embraer. Il combine une capacité supérieure à celle de l’E190 avec une cabine toujours dépourvue de siège central.",
+    "description": {
+      "en": "The E195 is the stretched version of Embraer's first-generation E-Jets. It combines higher capacity than the E190 with a cabin that still has no middle seat.",
+      "pt": "O E195 é a versão alongada da primeira geração de E-Jets da Embraer. Combina uma capacidade superior à do E190 com uma cabine que continua sem lugar central.",
+      "fr": "L’E195 est la version allongée de la première génération d’E-Jets d’Embraer. Il combine une capacité supérieure à celle de l’E190 avec une cabine toujours dépourvue de siège central."
+    },
     "manufacturer": "Embraer",
     "first_flight_year": 2004,
     "entry_into_service_year": 2006,
-    "fun_fact": "C’est le plus grand modèle de la famille E-Jet d’origine."
+    "fun_fact": {
+      "en": "It's the largest model in the original E-Jet family.",
+      "pt": "É o maior modelo da família E-Jet original.",
+      "fr": "C’est le plus grand modèle de la famille E-Jet d’origine."
+    }
   },
   {
     "aircraft_type": "Boeing 737 MAX 8",
-    "description": "Le 737 MAX 8 est une évolution du 737 équipée de moteurs CFM LEAP-1B et d’une aérodynamique revue. Il vise les lignes court et moyen-courriers avec une meilleure efficacité que la génération précédente.",
+    "description": {
+      "en": "The 737 MAX 8 is an evolution of the 737 fitted with CFM LEAP-1B engines and reworked aerodynamics. It targets short- and medium-haul routes with better efficiency than the previous generation.",
+      "pt": "O 737 MAX 8 é uma evolução do 737 equipada com motores CFM LEAP-1B e uma aerodinâmica revista. Destina-se a rotas de curto e médio curso com maior eficiência do que a geração anterior.",
+      "fr": "Le 737 MAX 8 est une évolution du 737 équipée de moteurs CFM LEAP-1B et d’une aérodynamique revue. Il vise les lignes court et moyen-courriers avec une meilleure efficacité que la génération précédente."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 2016,
     "entry_into_service_year": 2017,
-    "fun_fact": "Ses ailettes en bout d’aile ont une forme distinctive à deux branches."
+    "fun_fact": {
+      "en": "Its wingtip winglets have a distinctive split, two-branch shape.",
+      "pt": "As suas winglets nas pontas das asas têm uma forma distintiva bifurcada.",
+      "fr": "Ses ailettes en bout d’aile ont une forme distinctive à deux branches."
+    }
   },
   {
     "aircraft_type": "Airbus A319",
-    "description": "L’A319 est une version raccourcie de l’A320, adaptée aux marchés demandant moins de sièges. Il conserve le fuselage, le cockpit et une grande partie des systèmes de la famille.",
+    "description": {
+      "en": "The A319 is a shortened version of the A320, suited to markets that need fewer seats. It keeps the fuselage, cockpit and most of the family's systems.",
+      "pt": "O A319 é uma versão encurtada do A320, adaptada a mercados que exigem menos lugares. Mantém a fuselagem, o cockpit e grande parte dos sistemas da família.",
+      "fr": "L’A319 est une version raccourcie de l’A320, adaptée aux marchés demandant moins de sièges. Il conserve le fuselage, le cockpit et une grande partie des systèmes de la famille."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 1995,
     "entry_into_service_year": 1996,
-    "fun_fact": "Sa taille plus compacte lui donne un bon rayon d’action pour sa catégorie."
+    "fun_fact": {
+      "en": "Its more compact size gives it good range for its category.",
+      "pt": "O seu tamanho mais compacto confere-lhe uma boa autonomia para a sua categoria.",
+      "fr": "Sa taille plus compacte lui donne un bon rayon d’action pour sa catégorie."
+    }
   },
   {
     "aircraft_type": "Boeing 777-300ER",
-    "description": "Le 777-300ER est un gros-porteur long-courrier de grande capacité. Ses deux moteurs GE90 et son autonomie en ont fait un appareil majeur sur les routes intercontinentales.",
+    "description": {
+      "en": "The 777-300ER is a high-capacity long-haul widebody. Its two GE90 engines and range have made it a major aircraft on intercontinental routes.",
+      "pt": "O 777-300ER é um avião de longo curso de grande capacidade. Os seus dois motores GE90 e a sua autonomia tornaram-no um aparelho de referência nas rotas intercontinentais.",
+      "fr": "Le 777-300ER est un gros-porteur long-courrier de grande capacité. Ses deux moteurs GE90 et son autonomie en ont fait un appareil majeur sur les routes intercontinentales."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 2003,
     "entry_into_service_year": 2004,
-    "fun_fact": "Le diamètre de la soufflante de son moteur GE90 est proche de celui du fuselage d’un Boeing 737."
+    "fun_fact": {
+      "en": "The fan diameter of its GE90 engine is close to the width of a Boeing 737's fuselage.",
+      "pt": "O diâmetro da ventoinha do seu motor GE90 aproxima-se do diâmetro da fuselagem de um Boeing 737.",
+      "fr": "Le diamètre de la soufflante de son moteur GE90 est proche de celui du fuselage d’un Boeing 737."
+    }
   },
   {
     "aircraft_type": "Airbus A330-200",
-    "description": "L’A330-200 est une version raccourcie du gros-porteur A330, conçue pour voler plus loin avec une capacité modérée. Il sert aussi bien au transport de passagers qu’à des missions gouvernementales ou militaires dérivées.",
+    "description": {
+      "en": "The A330-200 is a shortened version of the A330 widebody, designed to fly farther with moderate capacity. It serves both passenger transport and derived government or military missions.",
+      "pt": "O A330-200 é uma versão encurtada do avião de longo curso A330, concebida para voar mais longe com uma capacidade moderada. É utilizado tanto no transporte de passageiros como em missões governamentais ou militares derivadas.",
+      "fr": "L’A330-200 est une version raccourcie du gros-porteur A330, conçue pour voler plus loin avec une capacité modérée. Il sert aussi bien au transport de passagers qu’à des missions gouvernementales ou militaires dérivées."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 1997,
     "entry_into_service_year": 1998,
-    "fun_fact": "Son fuselage plus court que celui de l’A330-300 favorise son autonomie."
+    "fun_fact": {
+      "en": "Its fuselage, shorter than the A330-300's, helps extend its range.",
+      "pt": "A sua fuselagem, mais curta do que a do A330-300, favorece a sua autonomia.",
+      "fr": "Son fuselage plus court que celui de l’A330-300 favorise son autonomie."
+    }
   },
   {
     "aircraft_type": "Airbus A220-300",
-    "description": "L’A220-300 est un monocouloir conçu à l’origine par Bombardier sous le nom de CSeries. Optimisé pour environ 120 à 150 passagers, il se distingue par sa cabine lumineuse et ses moteurs de nouvelle génération.",
-    "manufacturer": "Airbus (conçu à l’origine par Bombardier)",
+    "description": {
+      "en": "The A220-300 is a single-aisle jet originally designed by Bombardier under the name CSeries. Optimized for around 120 to 150 passengers, it stands out for its bright cabin and new-generation engines.",
+      "pt": "O A220-300 é um avião de corredor único concebido originalmente pela Bombardier sob o nome CSeries. Otimizado para cerca de 120 a 150 passageiros, distingue-se pela sua cabine luminosa e pelos motores de nova geração.",
+      "fr": "L’A220-300 est un monocouloir conçu à l’origine par Bombardier sous le nom de CSeries. Optimisé pour environ 120 à 150 passagers, il se distingue par sa cabine lumineuse et ses moteurs de nouvelle génération."
+    },
+    "manufacturer": {
+      "en": "Airbus (originally designed by Bombardier)",
+      "pt": "Airbus (concebido originalmente pela Bombardier)",
+      "fr": "Airbus (conçu à l’origine par Bombardier)"
+    },
     "first_flight_year": 2015,
     "entry_into_service_year": 2016,
-    "fun_fact": "Chaque rangée comporte trois sièges d’un côté de l’allée et deux de l’autre."
+    "fun_fact": {
+      "en": "Each row has three seats on one side of the aisle and two on the other.",
+      "pt": "Cada fila tem três lugares de um lado do corredor e dois do outro.",
+      "fr": "Chaque rangée comporte trois sièges d’un côté de l’allée et deux de l’autre."
+    }
   },
   {
     "aircraft_type": "Airbus A330-300",
-    "description": "L’A330-300 est la version initiale et allongée du biréacteur gros-porteur A330. Il est utilisé sur des liaisons régionales à forte demande comme sur des vols long-courriers.",
+    "description": {
+      "en": "The A330-300 is the original, longer version of the A330 widebody twinjet. It is used on high-demand regional routes as well as long-haul flights.",
+      "pt": "O A330-300 é a versão inicial e alongada do bireactor de grande capacidade A330. É utilizado tanto em ligações regionais de forte procura como em voos de longo curso.",
+      "fr": "L’A330-300 est la version initiale et allongée du biréacteur gros-porteur A330. Il est utilisé sur des liaisons régionales à forte demande comme sur des vols long-courriers."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 1992,
     "entry_into_service_year": 1994,
-    "fun_fact": "Il partage une grande partie de sa cellule avec l’Airbus A340 quadriréacteur."
+    "fun_fact": {
+      "en": "It shares much of its airframe with the four-engine Airbus A340.",
+      "pt": "Partilha grande parte da sua célula com o Airbus A340, de quatro reactores.",
+      "fr": "Il partage une grande partie de sa cellule avec l’Airbus A340 quadriréacteur."
+    }
   },
   {
     "aircraft_type": "Boeing 787-9",
-    "description": "Le 787-9 est la version intermédiaire du Dreamliner, un gros-porteur long-courrier construit largement en matériaux composites. Il associe une capacité supérieure au 787-8 à une grande autonomie.",
+    "description": {
+      "en": "The 787-9 is the mid-size version of the Dreamliner, a long-haul widebody built largely from composite materials. It combines higher capacity than the 787-8 with long range.",
+      "pt": "O 787-9 é a versão intermédia do Dreamliner, um avião de longo curso de grande capacidade construído em grande parte em materiais compósitos. Combina uma capacidade superior à do 787-8 com uma grande autonomia.",
+      "fr": "Le 787-9 est la version intermédiaire du Dreamliner, un gros-porteur long-courrier construit largement en matériaux composites. Il associe une capacité supérieure au 787-8 à une grande autonomie."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 2013,
     "entry_into_service_year": 2014,
-    "fun_fact": "Ses hublots s’assombrissent électroniquement au lieu d’utiliser des volets classiques."
+    "fun_fact": {
+      "en": "Its windows dim electronically instead of using traditional shades.",
+      "pt": "As suas janelas escurecem eletronicamente em vez de usarem persianas tradicionais.",
+      "fr": "Ses hublots s’assombrissent électroniquement au lieu d’utiliser des volets classiques."
+    }
   },
   {
     "aircraft_type": "Boeing 777-200",
-    "description": "Le 777-200 est la version fondatrice de la famille 777. Ce gros-porteur biréacteur a été conçu pour les liaisons long-courriers et introduit un pilotage entièrement électrique chez Boeing.",
+    "description": {
+      "en": "The 777-200 is the founding version of the 777 family. This widebody twinjet was designed for long-haul routes and introduced fully fly-by-wire controls at Boeing.",
+      "pt": "O 777-200 é a versão fundadora da família 777. Este bireactor de grande capacidade foi concebido para ligações de longo curso e introduziu os comandos de voo totalmente elétricos na Boeing.",
+      "fr": "Le 777-200 est la version fondatrice de la famille 777. Ce gros-porteur biréacteur a été conçu pour les liaisons long-courriers et introduit un pilotage entièrement électrique chez Boeing."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 1994,
     "entry_into_service_year": 1995,
-    "fun_fact": "Le 777 a été le premier avion commercial entièrement conçu par ordinateur."
+    "fun_fact": {
+      "en": "The 777 was the first commercial aircraft designed entirely by computer.",
+      "pt": "O 777 foi o primeiro avião comercial inteiramente concebido por computador.",
+      "fr": "Le 777 a été le premier avion commercial entièrement conçu par ordinateur."
+    }
   },
   {
     "aircraft_type": "Bombardier CRJ-1000",
-    "description": "Le CRJ-1000 est la version la plus longue de la famille de jets régionaux CRJ. Il transporte autour de 100 passagers sur des liaisons courtes et moyennes.",
+    "description": {
+      "en": "The CRJ-1000 is the longest version of the CRJ regional jet family. It carries around 100 passengers on short and medium routes.",
+      "pt": "O CRJ-1000 é a versão mais longa da família de jatos regionais CRJ. Transporta cerca de 100 passageiros em ligações curtas e médias.",
+      "fr": "Le CRJ-1000 est la version la plus longue de la famille de jets régionaux CRJ. Il transporte autour de 100 passagers sur des liaisons courtes et moyennes."
+    },
     "manufacturer": "Bombardier Aerospace",
     "first_flight_year": 2008,
     "entry_into_service_year": 2010,
-    "fun_fact": "Il dérive d’une lignée commencée avec le jet d’affaires Challenger."
+    "fun_fact": {
+      "en": "It descends from a lineage that began with the Challenger business jet.",
+      "pt": "Deriva de uma linhagem iniciada com o jato executivo Challenger.",
+      "fr": "Il dérive d’une lignée commencée avec le jet d’affaires Challenger."
+    }
   },
   {
     "aircraft_type": "Boeing 737-700",
-    "description": "Le 737-700 est la version courte de la famille 737 Next Generation. Sa capacité contenue et son autonomie en font un appareil flexible pour des lignes peu denses ou relativement longues.",
+    "description": {
+      "en": "The 737-700 is the short version of the 737 Next Generation family. Its modest capacity and range make it a flexible aircraft for thin or relatively long routes.",
+      "pt": "O 737-700 é a versão curta da família 737 Next Generation. A sua capacidade contida e a sua autonomia tornam-no um aparelho flexível para rotas de baixa procura ou relativamente longas.",
+      "fr": "Le 737-700 est la version courte de la famille 737 Next Generation. Sa capacité contenue et son autonomie en font un appareil flexible pour des lignes peu denses ou relativement longues."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 1997,
     "entry_into_service_year": 1998,
-    "fun_fact": "Il a été développé comme successeur direct du 737-300."
+    "fun_fact": {
+      "en": "It was developed as a direct successor to the 737-300.",
+      "pt": "Foi desenvolvido como sucessor direto do 737-300.",
+      "fr": "Il a été développé comme successeur direct du 737-300."
+    }
   },
   {
     "aircraft_type": "Boeing 787-10",
-    "description": "Le 787-10 est la version la plus longue du Dreamliner. Il privilégie la capacité sur des liaisons long-courriers un peu moins étendues que celles de ses deux frères.",
+    "description": {
+      "en": "The 787-10 is the longest version of the Dreamliner. It favors capacity over slightly shorter long-haul ranges than its two siblings.",
+      "pt": "O 787-10 é a versão mais longa do Dreamliner. Privilegia a capacidade em ligações de longo curso ligeiramente mais curtas do que as dos seus dois irmãos.",
+      "fr": "Le 787-10 est la version la plus longue du Dreamliner. Il privilégie la capacité sur des liaisons long-courriers un peu moins étendues que celles de ses deux frères."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 2017,
     "entry_into_service_year": 2018,
-    "fun_fact": "Son fuselage mesure environ 68 mètres, soit près de six mètres de plus que celui du 787-9."
+    "fun_fact": {
+      "en": "Its fuselage measures about 68 meters, nearly six meters longer than the 787-9's.",
+      "pt": "A sua fuselagem mede cerca de 68 metros, quase mais seis metros do que a do 787-9.",
+      "fr": "Son fuselage mesure environ 68 mètres, soit près de six mètres de plus que celui du 787-9."
+    }
   },
   {
     "aircraft_type": "ATR 72 500F",
-    "description": "L’ATR 72-500F est la version cargo, souvent issue d’une conversion, du turbopropulseur régional ATR 72-500. Il est adapté au fret sur des étapes courtes et aux aéroports régionaux.",
+    "description": {
+      "en": "The ATR 72-500F is the cargo version, often a conversion, of the ATR 72-500 regional turboprop. It is suited to short-haul freight and regional airports.",
+      "pt": "O ATR 72-500F é a versão cargueira, frequentemente resultante de uma conversão, do turbo-hélice regional ATR 72-500. É adequado ao transporte de carga em etapas curtas e a aeroportos regionais.",
+      "fr": "L’ATR 72-500F est la version cargo, souvent issue d’une conversion, du turbopropulseur régional ATR 72-500. Il est adapté au fret sur des étapes courtes et aux aéroports régionaux."
+    },
     "manufacturer": "ATR",
     "first_flight_year": 1996,
     "entry_into_service_year": 1997,
-    "fun_fact": "Ses turbopropulseurs sont particulièrement efficaces sur les courtes distances."
+    "fun_fact": {
+      "en": "Its turboprop engines are particularly efficient over short distances.",
+      "pt": "Os seus turbo-hélices são particularmente eficientes em curtas distâncias.",
+      "fr": "Ses turbopropulseurs sont particulièrement efficaces sur les courtes distances."
+    }
   },
   {
     "aircraft_type": "Boeing 787-8",
-    "description": "Le 787-8 est la première et la plus courte version du Dreamliner. Son recours important aux composites, sa cabine pressurisée à plus basse altitude équivalente et ses grands hublots ont marqué une nouvelle génération de long-courriers.",
+    "description": {
+      "en": "The 787-8 is the first and shortest version of the Dreamliner. Its extensive use of composites, cabin pressurized to a lower equivalent altitude, and large windows marked a new generation of long-haul aircraft.",
+      "pt": "O 787-8 é a primeira e mais curta versão do Dreamliner. O seu uso extensivo de materiais compósitos, a cabine pressurizada a uma altitude equivalente mais baixa e as suas grandes janelas marcaram uma nova geração de aviões de longo curso.",
+      "fr": "Le 787-8 est la première et la plus courte version du Dreamliner. Son recours important aux composites, sa cabine pressurisée à plus basse altitude équivalente et ses grands hublots ont marqué une nouvelle génération de long-courriers."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 2009,
     "entry_into_service_year": 2011,
-    "fun_fact": "Environ la moitié de sa structure, en poids, est constituée de matériaux composites."
+    "fun_fact": {
+      "en": "About half its structure, by weight, is made of composite materials.",
+      "pt": "Cerca de metade da sua estrutura, em peso, é composta por materiais compósitos.",
+      "fr": "Environ la moitié de sa structure, en poids, est constituée de matériaux composites."
+    }
   },
   {
     "aircraft_type": "737 490SF",
-    "description": "Ce code désigne un Boeing 737-400 converti du transport de passagers au fret, le suffixe SF signifiant Special Freighter. La grande porte cargo ajoutée au fuselage permet de charger des palettes sur le pont principal.",
-    "manufacturer": "Boeing (conversion cargo)",
+    "description": {
+      "en": "This code designates a Boeing 737-400 converted from passenger transport to freight, with the SF suffix standing for Special Freighter. The large cargo door added to the fuselage allows pallets to be loaded on the main deck.",
+      "pt": "Este código designa um Boeing 737-400 convertido do transporte de passageiros para carga, sendo o sufixo SF referente a Special Freighter. A grande porta de carga acrescentada à fuselagem permite carregar paletes no convés principal.",
+      "fr": "Ce code désigne un Boeing 737-400 converti du transport de passagers au fret, le suffixe SF signifiant Special Freighter. La grande porte cargo ajoutée au fuselage permet de charger des palettes sur le pont principal."
+    },
+    "manufacturer": {
+      "en": "Boeing (cargo conversion)",
+      "pt": "Boeing (conversão cargueira)",
+      "fr": "Boeing (conversion cargo)"
+    },
     "first_flight_year": 1988,
     "entry_into_service_year": 1988,
-    "fun_fact": "Le « 90 » est un code client Boeing historiquement associé à Alaska Airlines."
+    "fun_fact": {
+      "en": "The \"90\" is a Boeing customer code historically associated with Alaska Airlines.",
+      "pt": "O «90» é um código de cliente Boeing historicamente associado à Alaska Airlines.",
+      "fr": "Le « 90 » est un code client Boeing historiquement associé à Alaska Airlines."
+    }
   },
   {
     "aircraft_type": "A300 B4-622RF",
-    "description": "L’A300 B4-622RF est un A300-600R transformé en avion-cargo. Ce biréacteur gros-porteur appartient à la famille qui a lancé Airbus sur le marché civil.",
-    "manufacturer": "Airbus (conversion cargo)",
+    "description": {
+      "en": "The A300 B4-622RF is an A300-600R converted into a freighter. This widebody twinjet belongs to the family that launched Airbus onto the civil market.",
+      "pt": "O A300 B4-622RF é um A300-600R transformado em avião-cargueiro. Este bireactor de grande capacidade pertence à família que lançou a Airbus no mercado civil.",
+      "fr": "L’A300 B4-622RF est un A300-600R transformé en avion-cargo. Ce biréacteur gros-porteur appartient à la famille qui a lancé Airbus sur le marché civil."
+    },
+    "manufacturer": {
+      "en": "Airbus (cargo conversion)",
+      "pt": "Airbus (conversão cargueira)",
+      "fr": "Airbus (conversion cargo)"
+    },
     "first_flight_year": 1987,
     "entry_into_service_year": 1988,
-    "fun_fact": "L’A300 fut le premier gros-porteur biréacteur produit en série."
+    "fun_fact": {
+      "en": "The A300 was the first widebody twinjet produced in series.",
+      "pt": "O A300 foi o primeiro bireactor de grande capacidade produzido em série.",
+      "fr": "L’A300 fut le premier gros-porteur biréacteur produit en série."
+    }
   },
   {
     "aircraft_type": "767 25EBDSF",
-    "description": "Ce code correspond à un Boeing 767-200ER converti en cargo, BDSF signifiant Bedek Special Freighter. Il conserve la cellule long-courrier du 767 tout en recevant une grande porte de chargement latérale.",
-    "manufacturer": "Boeing (conversion cargo par IAI Bedek)",
+    "description": {
+      "en": "This code corresponds to a Boeing 767-200ER converted into a freighter, with BDSF standing for Bedek Special Freighter. It keeps the 767's long-haul airframe while gaining a large side cargo door.",
+      "pt": "Este código corresponde a um Boeing 767-200ER convertido em cargueiro, sendo BDSF referente a Bedek Special Freighter. Mantém a célula de longo curso do 767, recebendo uma grande porta de carga lateral.",
+      "fr": "Ce code correspond à un Boeing 767-200ER converti en cargo, BDSF signifiant Bedek Special Freighter. Il conserve la cellule long-courrier du 767 tout en recevant une grande porte de chargement latérale."
+    },
+    "manufacturer": {
+      "en": "Boeing (cargo conversion by IAI Bedek)",
+      "pt": "Boeing (conversão cargueira pela IAI Bedek)",
+      "fr": "Boeing (conversion cargo par IAI Bedek)"
+    },
     "first_flight_year": 1984,
     "entry_into_service_year": 1984,
-    "fun_fact": "Les conversions prolongent la carrière d’anciens avions de ligne dans le transport de fret."
+    "fun_fact": {
+      "en": "Conversions extend the careers of older airliners into freight transport.",
+      "pt": "As conversões prolongam a carreira de antigos aviões de passageiros no transporte de carga.",
+      "fr": "Les conversions prolongent la carrière d’anciens avions de ligne dans le transport de fret."
+    }
   },
   {
     "aircraft_type": "GL5T",
-    "description": "GL5T est le code OACI du Bombardier Global 5000, un grand jet d’affaires intercontinental. Sa cabine spacieuse et son autonomie permettent de longues liaisons sans escale.",
+    "description": {
+      "en": "GL5T is the ICAO code for the Bombardier Global 5000, a large intercontinental business jet. Its spacious cabin and range allow long nonstop flights.",
+      "pt": "GL5T é o código OACI do Bombardier Global 5000, um grande jato executivo intercontinental. A sua cabine espaçosa e a sua autonomia permitem ligações longas sem escalas.",
+      "fr": "GL5T est le code OACI du Bombardier Global 5000, un grand jet d’affaires intercontinental. Sa cabine spacieuse et son autonomie permettent de longues liaisons sans escale."
+    },
     "manufacturer": "Bombardier Aerospace",
     "first_flight_year": 2003,
     "entry_into_service_year": 2005,
-    "fun_fact": "Selon la version, il peut parcourir environ 9 600 km sans escale."
+    "fun_fact": {
+      "en": "Depending on the version, it can fly about 9,600 km nonstop.",
+      "pt": "Consoante a versão, pode percorrer cerca de 9.600 km sem escalas.",
+      "fr": "Selon la version, il peut parcourir environ 9 600 km sans escale."
+    }
   },
   {
     "aircraft_type": "767 34PER",
-    "description": "Ce code désigne un Boeing 767-300ER doté du code client 4P. C’est un gros-porteur biréacteur long-courrier, apprécié pour sa polyvalence sur des lignes où un appareil plus grand serait excessif.",
+    "description": {
+      "en": "This code designates a Boeing 767-300ER with customer code 4P. It's a long-haul widebody twinjet, valued for its versatility on routes where a larger aircraft would be excessive.",
+      "pt": "Este código designa um Boeing 767-300ER com o código de cliente 4P. É um bireactor de grande capacidade e longo curso, apreciado pela sua versatilidade em rotas onde um aparelho maior seria excessivo.",
+      "fr": "Ce code désigne un Boeing 767-300ER doté du code client 4P. C’est un gros-porteur biréacteur long-courrier, apprécié pour sa polyvalence sur des lignes où un appareil plus grand serait excessif."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 1986,
     "entry_into_service_year": 1988,
-    "fun_fact": "Le suffixe ER signifie Extended Range."
+    "fun_fact": {
+      "en": "The ER suffix stands for Extended Range.",
+      "pt": "O sufixo ER significa Extended Range.",
+      "fr": "Le suffixe ER signifie Extended Range."
+    }
   },
   {
     "aircraft_type": "C56X",
-    "description": "C56X est le code OACI de la famille Cessna Citation Excel/XLS, un jet d’affaires de taille moyenne. Il combine une cabine relativement généreuse avec la capacité d’utiliser des pistes plus courtes que de nombreux appareils comparables.",
+    "description": {
+      "en": "C56X is the ICAO code for the Cessna Citation Excel/XLS family, a mid-size business jet. It combines a relatively generous cabin with the ability to use shorter runways than many comparable aircraft.",
+      "pt": "C56X é o código OACI da família Cessna Citation Excel/XLS, um jato executivo de porte médio. Combina uma cabine relativamente generosa com a capacidade de utilizar pistas mais curtas do que muitos aparelhos comparáveis.",
+      "fr": "C56X est le code OACI de la famille Cessna Citation Excel/XLS, un jet d’affaires de taille moyenne. Il combine une cabine relativement généreuse avec la capacité d’utiliser des pistes plus courtes que de nombreux appareils comparables."
+    },
     "manufacturer": "Cessna (Textron Aviation)",
     "first_flight_year": 1996,
     "entry_into_service_year": 1998,
-    "fun_fact": "Il associe le fuselage du Citation X à une voilure dérivée du Citation Ultra."
+    "fun_fact": {
+      "en": "It pairs the Citation X fuselage with a wing derived from the Citation Ultra.",
+      "pt": "Associa a fuselagem do Citation X a uma asa derivada do Citation Ultra.",
+      "fr": "Il associe le fuselage du Citation X à une voilure dérivée du Citation Ultra."
+    }
   },
   {
     "aircraft_type": "A318 111",
-    "description": "L’A318-111 est une variante de la plus petite version de la famille Airbus A320. Sa taille compacte l’a rendue adaptée aux lignes à faible demande et, dans certains cas, aux services d’affaires haut de gamme.",
+    "description": {
+      "en": "The A318-111 is a variant of the smallest version in the Airbus A320 family. Its compact size has suited it to low-demand routes and, in some cases, high-end business services.",
+      "pt": "O A318-111 é uma variante da mais pequena versão da família Airbus A320. O seu tamanho compacto tornou-o adequado a rotas de baixa procura e, nalguns casos, a serviços executivos de alta gama.",
+      "fr": "L’A318-111 est une variante de la plus petite version de la famille Airbus A320. Sa taille compacte l’a rendue adaptée aux lignes à faible demande et, dans certains cas, aux services d’affaires haut de gamme."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 2002,
     "entry_into_service_year": 2003,
-    "fun_fact": "British Airways l’a autrefois utilisée entre Londres-City et New York avec une escale à Shannon à l’aller."
+    "fun_fact": {
+      "en": "British Airways once used it between London City and New York, with a westbound stop in Shannon.",
+      "pt": "A British Airways utilizou-o outrora entre Londres-City e Nova Iorque, com uma escala em Shannon no sentido de ida.",
+      "fr": "British Airways l’a autrefois utilisée entre Londres-City et New York avec une escale à Shannon à l’aller."
+    }
   },
   {
     "aircraft_type": "Global 6000",
-    "description": "Le Global 6000 est un jet d’affaires intercontinental à grande cabine, issu du Global Express XRS. Il est conçu pour relier de grandes villes éloignées tout en offrant plusieurs espaces de vie à bord.",
+    "description": {
+      "en": "The Global 6000 is an intercontinental business jet with a large cabin, derived from the Global Express XRS. It is designed to link distant major cities while offering several living spaces on board.",
+      "pt": "O Global 6000 é um jato executivo intercontinental de cabine ampla, derivado do Global Express XRS. Foi concebido para ligar grandes cidades distantes, oferecendo vários espaços de convívio a bordo.",
+      "fr": "Le Global 6000 est un jet d’affaires intercontinental à grande cabine, issu du Global Express XRS. Il est conçu pour relier de grandes villes éloignées tout en offrant plusieurs espaces de vie à bord."
+    },
     "manufacturer": "Bombardier Aerospace",
     "first_flight_year": 2005,
     "entry_into_service_year": 2005,
-    "fun_fact": "Le nom Global 6000 a remplacé l’appellation Global Express XRS en 2011."
+    "fun_fact": {
+      "en": "The Global 6000 name replaced the Global Express XRS designation in 2011.",
+      "pt": "O nome Global 6000 substituiu a designação Global Express XRS em 2011.",
+      "fr": "Le nom Global 6000 a remplacé l’appellation Global Express XRS en 2011."
+    }
   },
   {
     "aircraft_type": "Citation Latitude",
-    "description": "Le Citation Latitude est un jet d’affaires de taille moyenne doté d’une cabine où l’on peut se tenir debout. Il vise un équilibre entre confort, autonomie et accès à un grand nombre d’aéroports.",
+    "description": {
+      "en": "The Citation Latitude is a mid-size business jet with a stand-up cabin. It aims for a balance of comfort, range and access to a large number of airports.",
+      "pt": "O Citation Latitude é um jato executivo de porte médio com uma cabine em que é possível estar de pé. Procura um equilíbrio entre conforto, autonomia e acesso a um grande número de aeroportos.",
+      "fr": "Le Citation Latitude est un jet d’affaires de taille moyenne doté d’une cabine où l’on peut se tenir debout. Il vise un équilibre entre confort, autonomie et accès à un grand nombre d’aéroports."
+    },
     "manufacturer": "Cessna (Textron Aviation)",
     "first_flight_year": 2014,
     "entry_into_service_year": 2015,
-    "fun_fact": "Son plancher de cabine est plat, une caractéristique appréciable dans cette catégorie."
+    "fun_fact": {
+      "en": "Its cabin floor is flat, a feature valued in this category.",
+      "pt": "O seu piso de cabine é plano, uma característica apreciada nesta categoria.",
+      "fr": "Son plancher de cabine est plat, une caractéristique appréciable dans cette catégorie."
+    }
   },
   {
     "aircraft_type": "A306",
-    "description": "A306 est le code OACI de l’Airbus A300-600, évolution modernisée du premier gros-porteur Airbus. On le rencontre aujourd’hui surtout dans le fret, même s’il a d’abord été conçu pour les passagers.",
+    "description": {
+      "en": "A306 is the ICAO code for the Airbus A300-600, a modernized evolution of Airbus's first widebody. It is mostly found in freight service today, though it was originally designed for passengers.",
+      "pt": "A306 é o código OACI do Airbus A300-600, evolução modernizada do primeiro avião de longo curso de grande capacidade da Airbus. Encontra-se hoje sobretudo na carga, apesar de ter sido inicialmente concebido para passageiros.",
+      "fr": "A306 est le code OACI de l’Airbus A300-600, évolution modernisée du premier gros-porteur Airbus. On le rencontre aujourd’hui surtout dans le fret, même s’il a d’abord été conçu pour les passagers."
+    },
     "manufacturer": "Airbus",
     "first_flight_year": 1983,
     "entry_into_service_year": 1984,
-    "fun_fact": "Son poste de pilotage à deux personnes a supprimé le besoin d’un mécanicien navigant."
+    "fun_fact": {
+      "en": "Its two-person flight deck removed the need for a flight engineer.",
+      "pt": "O seu cockpit para dois tripulantes eliminou a necessidade de um mecânico de bordo.",
+      "fr": "Son poste de pilotage à deux personnes a supprimé le besoin d’un mécanicien navigant."
+    }
   },
   {
     "aircraft_type": "E390",
-    "description": "E390 est le code du C-390 Millennium, un avion de transport militaire à réaction conçu au Brésil. Il peut transporter des troupes, du fret lourd ou effectuer des missions de ravitaillement en vol.",
+    "description": {
+      "en": "E390 is the code for the C-390 Millennium, a jet-powered military transport aircraft designed in Brazil. It can carry troops, heavy freight, or perform aerial refueling missions.",
+      "pt": "E390 é o código do C-390 Millennium, um avião de transporte militar a jato concebido no Brasil. Pode transportar tropas, carga pesada ou realizar missões de reabastecimento em voo.",
+      "fr": "E390 est le code du C-390 Millennium, un avion de transport militaire à réaction conçu au Brésil. Il peut transporter des troupes, du fret lourd ou effectuer des missions de ravitaillement en vol."
+    },
     "manufacturer": "Embraer",
     "first_flight_year": 2015,
     "entry_into_service_year": 2019,
-    "fun_fact": "Sa soute peut accueillir des véhicules lourds et des hélicoptères démontés."
+    "fun_fact": {
+      "en": "Its cargo hold can accommodate heavy vehicles and disassembled helicopters.",
+      "pt": "O seu porão pode acomodar veículos pesados e helicópteros desmontados.",
+      "fr": "Sa soute peut accueillir des véhicules lourds et des hélicoptères démontés."
+    }
   },
   {
     "aircraft_type": "Challenger 350",
-    "description": "Le Challenger 350 est un jet d’affaires super-intermédiaire, pensé pour les voyages transcontinentaux. Il combine une cabine à plancher plat, une avionique moderne et de bonnes performances au décollage.",
+    "description": {
+      "en": "The Challenger 350 is a super mid-size business jet designed for transcontinental travel. It combines a flat-floor cabin, modern avionics and strong takeoff performance.",
+      "pt": "O Challenger 350 é um jato executivo super-intermédio, pensado para viagens transcontinentais. Combina uma cabine de piso plano, aviónica moderna e um bom desempenho na descolagem.",
+      "fr": "Le Challenger 350 est un jet d’affaires super-intermédiaire, pensé pour les voyages transcontinentaux. Il combine une cabine à plancher plat, une avionique moderne et de bonnes performances au décollage."
+    },
     "manufacturer": "Bombardier Aerospace",
     "first_flight_year": 2013,
     "entry_into_service_year": 2014,
-    "fun_fact": "Il peut relier sans escale de nombreuses paires de villes distantes d’environ 5 900 km."
+    "fun_fact": {
+      "en": "It can nonstop link many city pairs roughly 5,900 km apart.",
+      "pt": "Consegue ligar sem escalas numerosos pares de cidades distantes cerca de 5.900 km.",
+      "fr": "Il peut relier sans escale de nombreuses paires de villes distantes d’environ 5 900 km."
+    }
   },
   {
     "aircraft_type": "Challenger 604",
-    "description": "Le Challenger 604 est un grand jet d’affaires dérivé d’une famille lancée par Canadair. Il a amélioré le modèle 601 avec plus de carburant, une avionique renouvelée et des moteurs modernisés.",
+    "description": {
+      "en": "The Challenger 604 is a large business jet derived from a family launched by Canadair. It improved on the 601 with more fuel capacity, updated avionics and modernized engines.",
+      "pt": "O Challenger 604 é um grande jato executivo derivado de uma família lançada pela Canadair. Melhorou o modelo 601 com mais combustível, aviónica renovada e motores modernizados.",
+      "fr": "Le Challenger 604 est un grand jet d’affaires dérivé d’une famille lancée par Canadair. Il a amélioré le modèle 601 avec plus de carburant, une avionique renouvelée et des moteurs modernisés."
+    },
     "manufacturer": "Bombardier Aerospace",
     "first_flight_year": 1995,
     "entry_into_service_year": 1996,
-    "fun_fact": "Sa large cabine a aussi séduit des opérateurs gouvernementaux et militaires."
+    "fun_fact": {
+      "en": "Its wide cabin has also appealed to government and military operators.",
+      "pt": "A sua cabine ampla também conquistou operadores governamentais e militares.",
+      "fr": "Sa large cabine a aussi séduit des opérateurs gouvernementaux et militaires."
+    }
   },
   {
     "aircraft_type": "767 219ERBDSF",
-    "description": "Ce code identifie un Boeing 767-200ER converti en avion-cargo par IAI Bedek. Le suffixe BDSF signale la transformation, tandis que 19 est l’ancien code client Boeing d’Air New Zealand.",
-    "manufacturer": "Boeing (conversion cargo par IAI Bedek)",
+    "description": {
+      "en": "This code identifies a Boeing 767-200ER converted into a freighter by IAI Bedek. The BDSF suffix marks the conversion, while 19 is the former Boeing customer code for Air New Zealand.",
+      "pt": "Este código identifica um Boeing 767-200ER convertido em avião-cargueiro pela IAI Bedek. O sufixo BDSF assinala a transformação, enquanto 19 é o antigo código de cliente Boeing da Air New Zealand.",
+      "fr": "Ce code identifie un Boeing 767-200ER converti en avion-cargo par IAI Bedek. Le suffixe BDSF signale la transformation, tandis que 19 est l’ancien code client Boeing d’Air New Zealand."
+    },
+    "manufacturer": {
+      "en": "Boeing (cargo conversion by IAI Bedek)",
+      "pt": "Boeing (conversão cargueira pela IAI Bedek)",
+      "fr": "Boeing (conversion cargo par IAI Bedek)"
+    },
     "first_flight_year": 1984,
     "entry_into_service_year": 1984,
-    "fun_fact": "Plusieurs exemplaires de cette variante ont poursuivi leur carrière européenne dans le fret express."
+    "fun_fact": {
+      "en": "Several examples of this variant went on to have European careers in express freight.",
+      "pt": "Vários exemplares desta variante prosseguiram a sua carreira europeia no transporte de carga expresso.",
+      "fr": "Plusieurs exemplaires de cette variante ont poursuivi leur carrière européenne dans le fret express."
+    }
   },
   {
     "aircraft_type": "Boeing 737-900",
-    "description": "Le 737-900 est la version la plus longue de la famille 737 Next Generation. Il a été développé pour offrir davantage de capacité tout en conservant l’architecture générale du 737.",
+    "description": {
+      "en": "The 737-900 is the longest version of the 737 Next Generation family. It was developed to offer more capacity while keeping the 737's overall design.",
+      "pt": "O 737-900 é a versão mais longa da família 737 Next Generation. Foi desenvolvido para oferecer mais capacidade, mantendo a arquitetura geral do 737.",
+      "fr": "Le 737-900 est la version la plus longue de la famille 737 Next Generation. Il a été développé pour offrir davantage de capacité tout en conservant l’architecture générale du 737."
+    },
     "manufacturer": "Boeing",
     "first_flight_year": 2000,
     "entry_into_service_year": 2001,
-    "fun_fact": "La version ultérieure 737-900ER a ajouté des issues afin d’augmenter le nombre maximal de passagers."
+    "fun_fact": {
+      "en": "The later 737-900ER version added extra exits to increase the maximum passenger count.",
+      "pt": "A versão posterior 737-900ER acrescentou saídas adicionais para aumentar o número máximo de passageiros.",
+      "fr": "La version ultérieure 737-900ER a ajouté des issues afin d’augmenter le nombre maximal de passagers."
+    }
   },
   {
     "aircraft_type": "Challenger 850",
-    "description": "Le Challenger 850 est un grand jet d’affaires dérivé du biréacteur régional CRJ200. Il offre une cabine particulièrement vaste pour sa catégorie, au prix d’une autonomie plus modérée que celle des Global.",
+    "description": {
+      "en": "The Challenger 850 is a large business jet derived from the CRJ200 regional twinjet. It offers a particularly spacious cabin for its category, at the cost of more modest range than the Global jets.",
+      "pt": "O Challenger 850 é um grande jato executivo derivado do bireactor regional CRJ200. Oferece uma cabine particularmente ampla para a sua categoria, ao custo de uma autonomia mais modesta do que a dos Global.",
+      "fr": "Le Challenger 850 est un grand jet d’affaires dérivé du biréacteur régional CRJ200. Il offre une cabine particulièrement vaste pour sa catégorie, au prix d’une autonomie plus modérée que celle des Global."
+    },
     "manufacturer": "Bombardier Aerospace",
     "first_flight_year": 1991,
     "entry_into_service_year": 2006,
-    "fun_fact": "Sa cellule provient directement d’un avion de ligne régional."
+    "fun_fact": {
+      "en": "Its airframe comes directly from a regional airliner.",
+      "pt": "A sua célula provém diretamente de um avião de linha regional.",
+      "fr": "Sa cellule provient directement d’un avion de ligne régional."
+    }
   },
   {
     "aircraft_type": "DA 62",
-    "description": "Le DA62 est un avion léger bimoteur à hélices construit en matériaux composites. Il accueille jusqu’à sept personnes et utilise des moteurs diesel aéronautiques pouvant fonctionner au carburéacteur.",
+    "description": {
+      "en": "The DA62 is a light twin-engine propeller aircraft built from composite materials. It seats up to seven people and uses aviation diesel engines that can run on jet fuel.",
+      "pt": "O DA62 é um avião ligeiro bimotor de hélice construído em materiais compósitos. Acomoda até sete pessoas e utiliza motores diesel aeronáuticos capazes de funcionar com combustível de aviação (jet fuel).",
+      "fr": "Le DA62 est un avion léger bimoteur à hélices construit en matériaux composites. Il accueille jusqu’à sept personnes et utilise des moteurs diesel aéronautiques pouvant fonctionner au carburéacteur."
+    },
     "manufacturer": "Diamond Aircraft Industries",
     "first_flight_year": 2012,
     "entry_into_service_year": 2015,
-    "fun_fact": "Ses deux moteurs consomment du Jet A-1, carburant largement disponible dans les aéroports."
+    "fun_fact": {
+      "en": "Its two engines run on Jet A-1, a fuel widely available at airports.",
+      "pt": "Os seus dois motores consomem Jet A-1, um combustível amplamente disponível nos aeroportos.",
+      "fr": "Ses deux moteurs consomment du Jet A-1, carburant largement disponible dans les aéroports."
+    }
   }
 ]

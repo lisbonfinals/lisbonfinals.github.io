@@ -1,378 +1,682 @@
 [
   {
     "airline": "TAP Air Portugal",
-    "description": "Fondée comme compagnie nationale portugaise, TAP relie Lisbonne à l’Europe, aux Amériques et à l’Afrique. Son réseau joue un rôle particulièrement fort entre le Portugal et le Brésil.",
+    "description": {
+      "en": "Founded as Portugal's national carrier, TAP links Lisbon to Europe, the Americas and Africa. Its network plays a particularly strong role between Portugal and Brazil.",
+      "pt": "Fundada como companhia aérea nacional portuguesa, a TAP liga Lisboa à Europa, às Américas e a África. A sua rede desempenha um papel particularmente forte entre Portugal e o Brasil.",
+      "fr": "Fondée comme compagnie nationale portugaise, TAP relie Lisbonne à l’Europe, aux Amériques et à l’Afrique. Son réseau joue un rôle particulièrement fort entre le Portugal et le Brésil."
+    },
     "founded_year": 1945,
-    "headquarters": "Lisbonne, Portugal",
-    "fun_fact": "TAP a été la compagnie de lancement de l’Airbus A330-900neo en 2018."
+    "headquarters": { "en": "Lisbon, Portugal", "pt": "Lisboa, Portugal", "fr": "Lisbonne, Portugal" },
+    "fun_fact": {
+      "en": "TAP was the launch airline for the Airbus A330-900neo in 2018.",
+      "pt": "A TAP foi a companhia de lançamento do Airbus A330-900neo em 2018.",
+      "fr": "TAP a été la compagnie de lancement de l’Airbus A330-900neo en 2018."
+    }
   },
   {
     "airline": "easyJet Europe",
-    "description": "easyJet Europe est la filiale autrichienne créée pour préserver les opérations de l’ensemble easyJet dans l’Union européenne après le Brexit. Elle exploite des vols à bas coûts sous la marque easyJet.",
+    "description": {
+      "en": "easyJet Europe is the Austrian subsidiary created to preserve easyJet group operations within the European Union after Brexit. It operates low-cost flights under the easyJet brand.",
+      "pt": "A easyJet Europe é a filial austríaca criada para preservar as operações do grupo easyJet na União Europeia após o Brexit. Opera voos low-cost sob a marca easyJet.",
+      "fr": "easyJet Europe est la filiale autrichienne créée pour préserver les opérations de l’ensemble easyJet dans l’Union européenne après le Brexit. Elle exploite des vols à bas coûts sous la marque easyJet."
+    },
     "founded_year": 2017,
-    "headquarters": "Vienne, Autriche"
+    "headquarters": { "en": "Vienna, Austria", "pt": "Viena, Áustria", "fr": "Vienne, Autriche" }
   },
   {
     "airline": "Ryanair",
-    "description": "Ryanair est une compagnie irlandaise devenue l’un des principaux acteurs européens du transport à bas coûts. Son modèle repose sur un vaste réseau de liaisons directes et une flotte très standardisée.",
+    "description": {
+      "en": "Ryanair is an Irish airline that became one of Europe's leading low-cost carriers. Its model relies on a vast network of direct routes and a highly standardized fleet.",
+      "pt": "A Ryanair é uma companhia irlandesa que se tornou um dos principais operadores europeus de baixo custo. O seu modelo assenta numa vasta rede de ligações diretas e numa frota muito uniformizada.",
+      "fr": "Ryanair est une compagnie irlandaise devenue l’un des principaux acteurs européens du transport à bas coûts. Son modèle repose sur un vaste réseau de liaisons directes et une flotte très standardisée."
+    },
     "founded_year": 1984,
-    "headquarters": "Swords, Irlande",
-    "fun_fact": "Son premier vol commercial, en 1985, reliait Waterford à Londres-Gatwick avec 15 sièges."
+    "headquarters": { "en": "Swords, Ireland", "pt": "Swords, Irlanda", "fr": "Swords, Irlande" },
+    "fun_fact": {
+      "en": "Its first commercial flight, in 1985, linked Waterford to London Gatwick with 15 seats.",
+      "pt": "O seu primeiro voo comercial, em 1985, ligava Waterford a Londres-Gatwick com 15 lugares.",
+      "fr": "Son premier vol commercial, en 1985, reliait Waterford à Londres-Gatwick avec 15 sièges."
+    }
   },
   {
     "airline": "Malta Air",
-    "description": "Malta Air est une compagnie maltaise du groupe Ryanair. Elle fournit des capacités au réseau du groupe avec des avions immatriculés à Malte.",
+    "description": {
+      "en": "Malta Air is a Maltese airline within the Ryanair group. It provides capacity to the group's network with aircraft registered in Malta.",
+      "pt": "A Malta Air é uma companhia maltesa do grupo Ryanair. Fornece capacidade à rede do grupo com aviões matriculados em Malta.",
+      "fr": "Malta Air est une compagnie maltaise du groupe Ryanair. Elle fournit des capacités au réseau du groupe avec des avions immatriculés à Malte."
+    },
     "founded_year": 2019,
-    "headquarters": "Pietà, Malte"
+    "headquarters": { "en": "Pietà, Malta", "pt": "Pietà, Malta", "fr": "Pietà, Malte" }
   },
   {
     "airline": "Vueling",
-    "description": "Vueling est une compagnie espagnole à bas coûts lancée à Barcelone. Membre du groupe IAG, elle dessert un dense réseau européen et méditerranéen.",
+    "description": {
+      "en": "Vueling is a Spanish low-cost airline launched in Barcelona. A member of the IAG group, it serves a dense European and Mediterranean network.",
+      "pt": "A Vueling é uma companhia espanhola de baixo custo lançada em Barcelona. Membro do grupo IAG, serve uma densa rede europeia e mediterrânica.",
+      "fr": "Vueling est une compagnie espagnole à bas coûts lancée à Barcelone. Membre du groupe IAG, elle dessert un dense réseau européen et méditerranéen."
+    },
     "founded_year": 2004,
-    "headquarters": "El Prat de Llobregat, Espagne"
+    "headquarters": { "en": "El Prat de Llobregat, Spain", "pt": "El Prat de Llobregat, Espanha", "fr": "El Prat de Llobregat, Espagne" }
   },
   {
     "airline": "Lufthansa",
-    "description": "Lufthansa est la principale compagnie allemande et le cœur du Lufthansa Group. Elle opère un réseau mondial principalement autour de ses plateformes de Francfort et Munich.",
+    "description": {
+      "en": "Lufthansa is Germany's leading airline and the core of the Lufthansa Group. It operates a global network centered mainly on its Frankfurt and Munich hubs.",
+      "pt": "A Lufthansa é a principal companhia alemã e o núcleo do Lufthansa Group. Opera uma rede mundial centrada sobretudo nos seus hubs de Frankfurt e Munique.",
+      "fr": "Lufthansa est la principale compagnie allemande et le cœur du Lufthansa Group. Elle opère un réseau mondial principalement autour de ses plateformes de Francfort et Munich."
+    },
     "founded_year": 1953,
-    "headquarters": "Cologne, Allemagne",
-    "fun_fact": "La compagnie actuelle a repris en 1954 le nom et l’emblème de la Lufthansa d’avant-guerre."
+    "headquarters": { "en": "Cologne, Germany", "pt": "Colónia, Alemanha", "fr": "Cologne, Allemagne" },
+    "fun_fact": {
+      "en": "The current airline revived the name and emblem of the pre-war Lufthansa in 1954.",
+      "pt": "A companhia atual retomou, em 1954, o nome e o emblema da Lufthansa de antes da guerra.",
+      "fr": "La compagnie actuelle a repris en 1954 le nom et l’emblème de la Lufthansa d’avant-guerre."
+    }
   },
   {
     "airline": "easyJet",
-    "description": "easyJet est une compagnie britannique à bas coûts lancée avec des vols au départ de Londres-Luton. Elle privilégie les liaisons directes et une présence importante dans les grands aéroports européens.",
+    "description": {
+      "en": "easyJet is a British low-cost airline launched with flights out of London Luton. It favors direct routes and a strong presence at major European airports.",
+      "pt": "A easyJet é uma companhia britânica de baixo custo lançada com voos a partir de Londres-Luton. Privilegia ligações diretas e uma presença forte nos principais aeroportos europeus.",
+      "fr": "easyJet est une compagnie britannique à bas coûts lancée avec des vols au départ de Londres-Luton. Elle privilégie les liaisons directes et une présence importante dans les grands aéroports européens."
+    },
     "founded_year": 1995,
-    "headquarters": "Luton, Royaume-Uni",
-    "fun_fact": "Ses premiers vols reliaient Luton à Glasgow et Édimbourg."
+    "headquarters": { "en": "Luton, United Kingdom", "pt": "Luton, Reino Unido", "fr": "Luton, Royaume-Uni" },
+    "fun_fact": {
+      "en": "Its first flights linked Luton to Glasgow and Edinburgh.",
+      "pt": "Os seus primeiros voos ligavam Luton a Glasgow e Edimburgo.",
+      "fr": "Ses premiers vols reliaient Luton à Glasgow et Édimbourg."
+    }
   },
   {
     "airline": "Transavia France",
-    "description": "Transavia France est la filiale française à bas coûts du groupe Air France-KLM. Elle dessert surtout l’Europe et le bassin méditerranéen au départ de plusieurs bases françaises.",
+    "description": {
+      "en": "Transavia France is the French low-cost subsidiary of the Air France-KLM group. It mainly serves Europe and the Mediterranean basin from several French bases.",
+      "pt": "A Transavia France é a filial francesa de baixo custo do grupo Air France-KLM. Serve sobretudo a Europa e a bacia mediterrânica a partir de várias bases francesas.",
+      "fr": "Transavia France est la filiale française à bas coûts du groupe Air France-KLM. Elle dessert surtout l’Europe et le bassin méditerranéen au départ de plusieurs bases françaises."
+    },
     "founded_year": 2006,
-    "headquarters": "Paray-Vieille-Poste, France"
+    "headquarters": { "en": "Paray-Vieille-Poste, France", "pt": "Paray-Vieille-Poste, França", "fr": "Paray-Vieille-Poste, France" }
   },
   {
     "airline": "Iberia",
-    "description": "Iberia est la compagnie historique espagnole et un membre fondateur du groupe IAG. Son hub de Madrid-Barajas est particulièrement tourné vers l’Amérique latine.",
+    "description": {
+      "en": "Iberia is Spain's historic airline and a founding member of the IAG group. Its Madrid-Barajas hub is particularly oriented toward Latin America.",
+      "pt": "A Iberia é a companhia histórica espanhola e membro fundador do grupo IAG. O seu hub de Madrid-Barajas está particularmente virado para a América Latina.",
+      "fr": "Iberia est la compagnie historique espagnole et un membre fondateur du groupe IAG. Son hub de Madrid-Barajas est particulièrement tourné vers l’Amérique latine."
+    },
     "founded_year": 1927,
-    "headquarters": "Madrid, Espagne",
-    "fun_fact": "Elle a réalisé son premier vol commercial entre Madrid et Barcelone en 1927."
+    "headquarters": { "en": "Madrid, Spain", "pt": "Madrid, Espanha", "fr": "Madrid, Espagne" },
+    "fun_fact": {
+      "en": "It made its first commercial flight between Madrid and Barcelona in 1927.",
+      "pt": "Realizou o seu primeiro voo comercial entre Madrid e Barcelona em 1927.",
+      "fr": "Elle a réalisé son premier vol commercial entre Madrid et Barcelone en 1927."
+    }
   },
   {
     "airline": "Air France",
-    "description": "Air France est née du regroupement de plusieurs compagnies françaises. Avec KLM, elle forme un grand groupe mondial et exploite son principal hub à Paris-Charles-de-Gaulle.",
+    "description": {
+      "en": "Air France was born from the merger of several French airlines. Together with KLM, it forms a major global group and operates its main hub at Paris-Charles de Gaulle.",
+      "pt": "A Air France nasceu do agrupamento de várias companhias francesas. Juntamente com a KLM, forma um grande grupo mundial e opera o seu principal hub em Paris-Charles-de-Gaulle.",
+      "fr": "Air France est née du regroupement de plusieurs compagnies françaises. Avec KLM, elle forme un grand groupe mondial et exploite son principal hub à Paris-Charles-de-Gaulle."
+    },
     "founded_year": 1933,
-    "headquarters": "Tremblay-en-France, France"
+    "headquarters": { "en": "Tremblay-en-France, France", "pt": "Tremblay-en-France, França", "fr": "Tremblay-en-France, France" }
   },
   {
     "airline": "Air Europa",
-    "description": "Air Europa est une compagnie espagnole développée autour des vols loisirs puis réguliers. Depuis Madrid, elle dessert l’Europe et de nombreuses destinations en Amérique latine.",
+    "description": {
+      "en": "Air Europa is a Spanish airline that grew out of leisure charters before moving into scheduled service. From Madrid, it serves Europe and many destinations in Latin America.",
+      "pt": "A Air Europa é uma companhia espanhola desenvolvida a partir de voos de lazer, passando depois a voos regulares. A partir de Madrid, serve a Europa e numerosos destinos na América Latina.",
+      "fr": "Air Europa est une compagnie espagnole développée autour des vols loisirs puis réguliers. Depuis Madrid, elle dessert l’Europe et de nombreuses destinations en Amérique latine."
+    },
     "founded_year": 1986,
-    "headquarters": "Llucmajor, Espagne"
+    "headquarters": { "en": "Llucmajor, Spain", "pt": "Llucmajor, Espanha", "fr": "Llucmajor, Espagne" }
   },
   {
     "airline": "British Airways",
-    "description": "British Airways est née de la fusion des principales compagnies publiques britanniques. Membre du groupe IAG, elle exploite un réseau mondial dominé par Londres-Heathrow.",
+    "description": {
+      "en": "British Airways was born from the merger of Britain's main state-owned airlines. A member of the IAG group, it operates a global network dominated by London Heathrow.",
+      "pt": "A British Airways nasceu da fusão das principais companhias públicas britânicas. Membro do grupo IAG, opera uma rede mundial dominada por Londres-Heathrow.",
+      "fr": "British Airways est née de la fusion des principales compagnies publiques britanniques. Membre du groupe IAG, elle exploite un réseau mondial dominé par Londres-Heathrow."
+    },
     "founded_year": 1974,
-    "headquarters": "Londres, Royaume-Uni"
+    "headquarters": { "en": "London, United Kingdom", "pt": "Londres, Reino Unido", "fr": "Londres, Royaume-Uni" }
   },
   {
     "airline": "Eurowings",
-    "description": "Eurowings est la compagnie loisirs et à bas coûts du Lufthansa Group. Elle dessert surtout des liaisons européennes directes au départ de plusieurs villes allemandes.",
+    "description": {
+      "en": "Eurowings is the leisure and low-cost airline of the Lufthansa Group. It mainly serves direct European routes from several German cities.",
+      "pt": "A Eurowings é a companhia de lazer e baixo custo do Lufthansa Group. Serve sobretudo ligações europeias diretas a partir de várias cidades alemãs.",
+      "fr": "Eurowings est la compagnie loisirs et à bas coûts du Lufthansa Group. Elle dessert surtout des liaisons européennes directes au départ de plusieurs villes allemandes."
+    },
     "founded_year": 1993,
-    "headquarters": "Düsseldorf, Allemagne"
+    "headquarters": { "en": "Düsseldorf, Germany", "pt": "Düsseldorf, Alemanha", "fr": "Düsseldorf, Allemagne" }
   },
   {
     "airline": "Swiss",
-    "description": "SWISS a été créée après la disparition de Swissair, en s’appuyant sur la compagnie régionale Crossair. Membre du Lufthansa Group, elle exploite un réseau international centré sur Zurich.",
+    "description": {
+      "en": "SWISS was created after Swissair's collapse, building on the regional airline Crossair. A member of the Lufthansa Group, it operates an international network centered on Zurich.",
+      "pt": "A SWISS foi criada após o desaparecimento da Swissair, apoiando-se na companhia regional Crossair. Membro do Lufthansa Group, opera uma rede internacional centrada em Zurique.",
+      "fr": "SWISS a été créée après la disparition de Swissair, en s’appuyant sur la compagnie régionale Crossair. Membre du Lufthansa Group, elle exploite un réseau international centré sur Zurich."
+    },
     "founded_year": 2002,
-    "headquarters": "Bâle, Suisse"
+    "headquarters": { "en": "Basel, Switzerland", "pt": "Basileia, Suíça", "fr": "Bâle, Suisse" }
   },
   {
     "airline": "KLM",
-    "description": "KLM est la compagnie nationale néerlandaise et forme avec Air France l’un des grands groupes aériens européens. Son réseau mondial s’organise autour de l’aéroport d’Amsterdam-Schiphol.",
+    "description": {
+      "en": "KLM is the Dutch national airline and, together with Air France, forms one of Europe's major airline groups. Its global network is organized around Amsterdam Schiphol Airport.",
+      "pt": "A KLM é a companhia nacional neerlandesa e forma, juntamente com a Air France, um dos grandes grupos aéreos europeus. A sua rede mundial organiza-se em torno do aeroporto de Amesterdão-Schiphol.",
+      "fr": "KLM est la compagnie nationale néerlandaise et forme avec Air France l’un des grands groupes aériens européens. Son réseau mondial s’organise autour de l’aéroport d’Amsterdam-Schiphol."
+    },
     "founded_year": 1919,
-    "headquarters": "Amstelveen, Pays-Bas",
-    "fun_fact": "KLM est la plus ancienne compagnie aérienne encore en activité sous son nom d’origine."
+    "headquarters": { "en": "Amstelveen, Netherlands", "pt": "Amstelveen, Países Baixos", "fr": "Amstelveen, Pays-Bas" },
+    "fun_fact": {
+      "en": "KLM is the oldest airline still operating under its original name.",
+      "pt": "A KLM é a companhia aérea mais antiga ainda em atividade sob o seu nome original.",
+      "fr": "KLM est la plus ancienne compagnie aérienne encore en activité sous son nom d’origine."
+    }
   },
   {
     "airline": "Turkish Airlines",
-    "description": "Turkish Airlines est la compagnie porte-drapeau de la Turquie. Grâce à sa position à Istanbul, elle a bâti un réseau qui relie un très grand nombre de pays.",
+    "description": {
+      "en": "Turkish Airlines is Turkey's flag carrier. Thanks to its position in Istanbul, it has built a network linking a very large number of countries.",
+      "pt": "A Turkish Airlines é a companhia de bandeira da Turquia. Graças à sua posição em Istambul, construiu uma rede que liga um número muito elevado de países.",
+      "fr": "Turkish Airlines est la compagnie porte-drapeau de la Turquie. Grâce à sa position à Istanbul, elle a bâti un réseau qui relie un très grand nombre de pays."
+    },
     "founded_year": 1933,
-    "headquarters": "Istanbul, Turquie"
+    "headquarters": { "en": "Istanbul, Turkey", "pt": "Istambul, Turquia", "fr": "Istanbul, Turquie" }
   },
   {
     "airline": "Emirates",
-    "description": "Emirates est une compagnie internationale créée à Dubaï. Son modèle repose sur un grand hub reliant l’Europe, l’Asie, l’Afrique, les Amériques et l’Océanie.",
+    "description": {
+      "en": "Emirates is an international airline created in Dubai. Its model relies on a large hub linking Europe, Asia, Africa, the Americas and Oceania.",
+      "pt": "A Emirates é uma companhia internacional criada no Dubai. O seu modelo assenta num grande hub que liga a Europa, a Ásia, África, as Américas e a Oceânia.",
+      "fr": "Emirates est une compagnie internationale créée à Dubaï. Son modèle repose sur un grand hub reliant l’Europe, l’Asie, l’Afrique, les Amériques et l’Océanie."
+    },
     "founded_year": 1985,
-    "headquarters": "Dubaï, Émirats arabes unis",
-    "fun_fact": "Elle est devenue le plus grand opérateur mondial d’Airbus A380."
+    "headquarters": { "en": "Dubai, United Arab Emirates", "pt": "Dubai, Emirados Árabes Unidos", "fr": "Dubaï, Émirats arabes unis" },
+    "fun_fact": {
+      "en": "It became the world's largest operator of the Airbus A380.",
+      "pt": "Tornou-se o maior operador mundial do Airbus A380.",
+      "fr": "Elle est devenue le plus grand opérateur mondial d’Airbus A380."
+    }
   },
   {
     "airline": "Azul",
-    "description": "Azul est une compagnie brésilienne fondée par David Neeleman. Elle s’est développée en reliant de nombreuses villes régionales à ses plateformes nationales, puis en ouvrant des lignes internationales.",
+    "description": {
+      "en": "Azul is a Brazilian airline founded by David Neeleman. It grew by linking many regional cities to its national hubs, later opening international routes.",
+      "pt": "A Azul é uma companhia brasileira fundada por David Neeleman. Desenvolveu-se ligando numerosas cidades regionais aos seus hubs nacionais, abrindo depois rotas internacionais.",
+      "fr": "Azul est une compagnie brésilienne fondée par David Neeleman. Elle s’est développée en reliant de nombreuses villes régionales à ses plateformes nationales, puis en ouvrant des lignes internationales."
+    },
     "founded_year": 2008,
-    "headquarters": "Barueri, Brésil"
+    "headquarters": { "en": "Barueri, Brazil", "pt": "Barueri, Brasil", "fr": "Barueri, Brésil" }
   },
   {
     "airline": "Air Canada",
-    "description": "Air Canada est la principale compagnie aérienne canadienne, créée sous le nom de Trans-Canada Air Lines. Elle dessert un réseau mondial depuis plusieurs hubs, notamment Toronto, Montréal et Vancouver.",
+    "description": {
+      "en": "Air Canada is Canada's leading airline, created under the name Trans-Canada Air Lines. It serves a global network from several hubs, including Toronto, Montreal and Vancouver.",
+      "pt": "A Air Canada é a principal companhia aérea canadiana, criada sob o nome Trans-Canada Air Lines. Serve uma rede mundial a partir de vários hubs, nomeadamente Toronto, Montreal e Vancouver.",
+      "fr": "Air Canada est la principale compagnie aérienne canadienne, créée sous le nom de Trans-Canada Air Lines. Elle dessert un réseau mondial depuis plusieurs hubs, notamment Toronto, Montréal et Vancouver."
+    },
     "founded_year": 1937,
-    "headquarters": "Montréal, Canada"
+    "headquarters": { "en": "Montreal, Canada", "pt": "Montreal, Canadá", "fr": "Montréal, Canada" }
   },
   {
     "airline": "United Airlines",
-    "description": "United est l’une des grandes compagnies historiques des États-Unis. Son réseau intérieur et international s’appuie sur plusieurs hubs, dont Chicago, Denver, Houston et Newark.",
+    "description": {
+      "en": "United is one of the major historic US airlines. Its domestic and international network relies on several hubs, including Chicago, Denver, Houston and Newark.",
+      "pt": "A United é uma das grandes companhias históricas dos Estados Unidos. A sua rede doméstica e internacional apoia-se em vários hubs, entre os quais Chicago, Denver, Houston e Newark.",
+      "fr": "United est l’une des grandes compagnies historiques des États-Unis. Son réseau intérieur et international s’appuie sur plusieurs hubs, dont Chicago, Denver, Houston et Newark."
+    },
     "founded_year": 1926,
-    "headquarters": "Chicago, États-Unis"
+    "headquarters": { "en": "Chicago, United States", "pt": "Chicago, Estados Unidos", "fr": "Chicago, États-Unis" }
   },
   {
     "airline": "Brussels Airlines",
-    "description": "Brussels Airlines est la compagnie belge née de la réunion de SN Brussels Airlines et Virgin Express. Intégrée au Lufthansa Group, elle est particulièrement présente sur les liaisons entre Bruxelles et l’Afrique.",
+    "description": {
+      "en": "Brussels Airlines is the Belgian airline born from the merger of SN Brussels Airlines and Virgin Express. Part of the Lufthansa Group, it has a particularly strong presence on routes between Brussels and Africa.",
+      "pt": "A Brussels Airlines é a companhia belga nascida da fusão da SN Brussels Airlines com a Virgin Express. Integrada no Lufthansa Group, tem uma presença particularmente forte nas ligações entre Bruxelas e África.",
+      "fr": "Brussels Airlines est la compagnie belge née de la réunion de SN Brussels Airlines et Virgin Express. Intégrée au Lufthansa Group, elle est particulièrement présente sur les liaisons entre Bruxelles et l’Afrique."
+    },
     "founded_year": 2006,
-    "headquarters": "Diegem, Belgique"
+    "headquarters": { "en": "Diegem, Belgium", "pt": "Diegem, Bélgica", "fr": "Diegem, Belgique" }
   },
   {
     "airline": "Delta Air Lines",
-    "description": "Delta trouve ses origines dans une entreprise d’épandage aérien du sud des États-Unis. Elle est devenue une grande compagnie mondiale avec un réseau organisé autour d’Atlanta et d’autres hubs américains.",
+    "description": {
+      "en": "Delta traces its origins to a crop-dusting company in the southern United States. It became a major global airline with a network organized around Atlanta and other US hubs.",
+      "pt": "A Delta tem origem numa empresa de pulverização aérea agrícola do sul dos Estados Unidos. Tornou-se uma grande companhia mundial, com uma rede organizada em torno de Atlanta e de outros hubs norte-americanos.",
+      "fr": "Delta trouve ses origines dans une entreprise d’épandage aérien du sud des États-Unis. Elle est devenue une grande compagnie mondiale avec un réseau organisé autour d’Atlanta et d’autres hubs américains."
+    },
     "founded_year": 1925,
-    "headquarters": "Atlanta, États-Unis"
+    "headquarters": { "en": "Atlanta, United States", "pt": "Atlanta, Estados Unidos", "fr": "Atlanta, États-Unis" }
   },
   {
     "airline": "TAAG Angola Airlines",
-    "description": "TAAG est la compagnie nationale angolaise, créée à l’époque coloniale sous un autre nom. Depuis Luanda, elle relie l’Angola à l’Afrique, à l’Europe et aux Amériques.",
+    "description": {
+      "en": "TAAG is Angola's national airline, created during the colonial era under a different name. From Luanda, it links Angola to Africa, Europe and the Americas.",
+      "pt": "A TAAG é a companhia nacional angolana, criada na época colonial sob outro nome. A partir de Luanda, liga Angola a África, à Europa e às Américas.",
+      "fr": "TAAG est la compagnie nationale angolaise, créée à l’époque coloniale sous un autre nom. Depuis Luanda, elle relie l’Angola à l’Afrique, à l’Europe et aux Amériques."
+    },
     "founded_year": 1938,
-    "headquarters": "Luanda, Angola"
+    "headquarters": { "en": "Luanda, Angola", "pt": "Luanda, Angola", "fr": "Luanda, Angola" }
   },
   {
     "airline": "LATAM Airlines",
-    "description": "Dans ces données, LATAM Airlines renvoie à l’opérateur brésilien issu de TAM, fondé en 1961 et intégré au groupe LATAM. Il dessert un vaste réseau intérieur ainsi que des lignes vers l’Europe et les Amériques.",
+    "description": {
+      "en": "In this data, LATAM Airlines refers to the Brazilian operator descended from TAM, founded in 1961 and now part of the LATAM group. It serves an extensive domestic network as well as routes to Europe and the Americas.",
+      "pt": "Nestes dados, LATAM Airlines refere-se ao operador brasileiro herdeiro da TAM, fundada em 1961 e integrada no grupo LATAM. Serve uma vasta rede doméstica, bem como rotas para a Europa e as Américas.",
+      "fr": "Dans ces données, LATAM Airlines renvoie à l’opérateur brésilien issu de TAM, fondé en 1961 et intégré au groupe LATAM. Il dessert un vaste réseau intérieur ainsi que des lignes vers l’Europe et les Amériques."
+    },
     "founded_year": 1961,
-    "headquarters": "São Paulo, Brésil",
-    "fun_fact": "La marque LATAM est née du rapprochement de LAN et TAM annoncé en 2010."
+    "headquarters": { "en": "São Paulo, Brazil", "pt": "São Paulo, Brasil", "fr": "São Paulo, Brésil" },
+    "fun_fact": {
+      "en": "The LATAM brand was born from the merger of LAN and TAM announced in 2010.",
+      "pt": "A marca LATAM nasceu da aproximação entre a LAN e a TAM anunciada em 2010.",
+      "fr": "La marque LATAM est née du rapprochement de LAN et TAM annoncé en 2010."
+    }
   },
   {
     "airline": "Lauda Europe",
-    "description": "Lauda Europe est une compagnie maltaise du groupe Ryanair, créée pour reprendre les activités de Laudamotion. Elle exploite principalement des vols pour le compte du réseau Ryanair.",
+    "description": {
+      "en": "Lauda Europe is a Maltese airline within the Ryanair group, created to take over Laudamotion's operations. It mainly operates flights on behalf of the Ryanair network.",
+      "pt": "A Lauda Europe é uma companhia maltesa do grupo Ryanair, criada para assumir as operações da Laudamotion. Opera sobretudo voos por conta da rede Ryanair.",
+      "fr": "Lauda Europe est une compagnie maltaise du groupe Ryanair, créée pour reprendre les activités de Laudamotion. Elle exploite principalement des vols pour le compte du réseau Ryanair."
+    },
     "founded_year": 2020,
-    "headquarters": "Pietà, Malte"
+    "headquarters": { "en": "Pietà, Malta", "pt": "Pietà, Malta", "fr": "Pietà, Malte" }
   },
   {
     "airline": "Air Transat",
-    "description": "Air Transat est une compagnie canadienne spécialisée dans les voyages loisirs. Elle relie surtout le Canada à l’Europe, aux Caraïbes et au Mexique.",
+    "description": {
+      "en": "Air Transat is a Canadian airline specializing in leisure travel. It mainly links Canada to Europe, the Caribbean and Mexico.",
+      "pt": "A Air Transat é uma companhia canadiana especializada em viagens de lazer. Liga sobretudo o Canadá à Europa, às Caraíbas e ao México.",
+      "fr": "Air Transat est une compagnie canadienne spécialisée dans les voyages loisirs. Elle relie surtout le Canada à l’Europe, aux Caraïbes et au Mexique."
+    },
     "founded_year": 1986,
-    "headquarters": "Montréal, Canada"
+    "headquarters": { "en": "Montreal, Canada", "pt": "Montreal, Canadá", "fr": "Montréal, Canada" }
   },
   {
     "airline": "Air Nostrum",
-    "description": "Air Nostrum est une compagnie régionale espagnole qui opère principalement sous la marque Iberia Regional. Elle relie de nombreuses villes secondaires en Espagne et en Europe avec des avions régionaux.",
+    "description": {
+      "en": "Air Nostrum is a Spanish regional airline that operates mainly under the Iberia Regional brand. It links many secondary cities in Spain and Europe with regional aircraft.",
+      "pt": "A Air Nostrum é uma companhia regional espanhola que opera principalmente sob a marca Iberia Regional. Liga numerosas cidades secundárias em Espanha e na Europa com aviões regionais.",
+      "fr": "Air Nostrum est une compagnie régionale espagnole qui opère principalement sous la marque Iberia Regional. Elle relie de nombreuses villes secondaires en Espagne et en Europe avec des avions régionaux."
+    },
     "founded_year": 1994,
-    "headquarters": "Valence, Espagne"
+    "headquarters": { "en": "Valencia, Spain", "pt": "Valência, Espanha", "fr": "Valence, Espagne" }
   },
   {
     "airline": "Aegean Airlines",
-    "description": "Aegean est la principale compagnie grecque et un membre de Star Alliance. Elle dessert la Grèce, l’Europe et le bassin méditerranéen, avec Athènes comme principale plateforme.",
+    "description": {
+      "en": "Aegean is Greece's leading airline and a Star Alliance member. It serves Greece, Europe and the Mediterranean basin, with Athens as its main hub.",
+      "pt": "A Aegean é a principal companhia grega e membro da Star Alliance. Serve a Grécia, a Europa e a bacia mediterrânica, tendo Atenas como principal hub.",
+      "fr": "Aegean est la principale compagnie grecque et un membre de Star Alliance. Elle dessert la Grèce, l’Europe et le bassin méditerranéen, avec Athènes comme principale plateforme."
+    },
     "founded_year": 1987,
-    "headquarters": "Kifissia, Grèce"
+    "headquarters": { "en": "Kifissia, Greece", "pt": "Kifissia, Grécia", "fr": "Kifissia, Grèce" }
   },
   {
     "airline": "Aer Lingus",
-    "description": "Aer Lingus est la compagnie historique irlandaise, aujourd’hui membre du groupe IAG. Son réseau combine des liaisons européennes et un important programme transatlantique depuis Dublin.",
+    "description": {
+      "en": "Aer Lingus is Ireland's historic airline, now a member of the IAG group. Its network combines European routes with a significant transatlantic program out of Dublin.",
+      "pt": "A Aer Lingus é a companhia histórica irlandesa, atualmente membro do grupo IAG. A sua rede combina ligações europeias com um importante programa transatlântico a partir de Dublin.",
+      "fr": "Aer Lingus est la compagnie historique irlandaise, aujourd’hui membre du groupe IAG. Son réseau combine des liaisons européennes et un important programme transatlantique depuis Dublin."
+    },
     "founded_year": 1936,
-    "headquarters": "Dublin, Irlande",
-    "fun_fact": "Son emblème est un trèfle, symbole immédiatement associé à l’Irlande."
+    "headquarters": { "en": "Dublin, Ireland", "pt": "Dublin, Irlanda", "fr": "Dublin, Irlande" },
+    "fun_fact": {
+      "en": "Its emblem is a shamrock, a symbol instantly associated with Ireland.",
+      "pt": "O seu emblema é um trevo, símbolo imediatamente associado à Irlanda.",
+      "fr": "Son emblème est un trèfle, symbole immédiatement associé à l’Irlande."
+    }
   },
   {
     "airline": "Royal Air Maroc",
-    "description": "Royal Air Maroc est la compagnie nationale marocaine. Son hub de Casablanca relie le Maroc à l’Europe, à l’Afrique, au Moyen-Orient et aux Amériques.",
+    "description": {
+      "en": "Royal Air Maroc is Morocco's national airline. Its Casablanca hub links Morocco to Europe, Africa, the Middle East and the Americas.",
+      "pt": "A Royal Air Maroc é a companhia nacional marroquina. O seu hub em Casablanca liga Marrocos à Europa, a África, ao Médio Oriente e às Américas.",
+      "fr": "Royal Air Maroc est la compagnie nationale marocaine. Son hub de Casablanca relie le Maroc à l’Europe, à l’Afrique, au Moyen-Orient et aux Amériques."
+    },
     "founded_year": 1957,
-    "headquarters": "Casablanca, Maroc"
+    "headquarters": { "en": "Casablanca, Morocco", "pt": "Casablanca, Marrocos", "fr": "Casablanca, Maroc" }
   },
   {
     "airline": "Transavia",
-    "description": "Transavia est une compagnie néerlandaise née dans le transport charter puis devenue un acteur majeur des vols à bas coûts et de loisirs. Elle appartient au groupe Air France-KLM.",
+    "description": {
+      "en": "Transavia is a Dutch airline that started in charter transport before becoming a major player in low-cost and leisure flying. It belongs to the Air France-KLM group.",
+      "pt": "A Transavia é uma companhia neerlandesa nascida no transporte charter, tornando-se depois um agente importante dos voos low-cost e de lazer. Pertence ao grupo Air France-KLM.",
+      "fr": "Transavia est une compagnie néerlandaise née dans le transport charter puis devenue un acteur majeur des vols à bas coûts et de loisirs. Elle appartient au groupe Air France-KLM."
+    },
     "founded_year": 1965,
-    "headquarters": "Haarlemmermeer, Pays-Bas",
-    "fun_fact": "Son premier vol commercial, en 1966, transportait le Nederlands Dans Theater d’Amsterdam à Naples."
+    "headquarters": { "en": "Haarlemmermeer, Netherlands", "pt": "Haarlemmermeer, Países Baixos", "fr": "Haarlemmermeer, Pays-Bas" },
+    "fun_fact": {
+      "en": "Its first commercial flight, in 1966, carried the Nederlands Dans Theater from Amsterdam to Naples.",
+      "pt": "O seu primeiro voo comercial, em 1966, transportou o Nederlands Dans Theater de Amesterdão a Nápoles.",
+      "fr": "Son premier vol commercial, en 1966, transportait le Nederlands Dans Theater d’Amsterdam à Naples."
+    }
   },
   {
     "airline": "Buzz",
-    "description": "Buzz est une compagnie polonaise du groupe Ryanair, issue de Ryanair Sun. Elle assure des vols réguliers et affrétés au sein du réseau du groupe.",
+    "description": {
+      "en": "Buzz is a Polish airline within the Ryanair group, descended from Ryanair Sun. It operates scheduled and charter flights within the group's network.",
+      "pt": "A Buzz é uma companhia polaca do grupo Ryanair, herdeira da Ryanair Sun. Assegura voos regulares e fretados dentro da rede do grupo.",
+      "fr": "Buzz est une compagnie polonaise du groupe Ryanair, issue de Ryanair Sun. Elle assure des vols réguliers et affrétés au sein du réseau du groupe."
+    },
     "founded_year": 2018,
-    "headquarters": "Varsovie, Pologne"
+    "headquarters": { "en": "Warsaw, Poland", "pt": "Varsóvia, Polónia", "fr": "Varsovie, Pologne" }
   },
   {
     "airline": "Finnair",
-    "description": "Finnair est la compagnie nationale finlandaise, fondée sous le nom d’Aero O/Y. Son hub d’Helsinki lui permet de relier l’Europe, l’Asie et l’Amérique du Nord.",
+    "description": {
+      "en": "Finnair is Finland's national airline, founded under the name Aero O/Y. Its Helsinki hub lets it link Europe, Asia and North America.",
+      "pt": "A Finnair é a companhia nacional finlandesa, fundada sob o nome Aero O/Y. O seu hub em Helsínquia permite-lhe ligar a Europa, a Ásia e a América do Norte.",
+      "fr": "Finnair est la compagnie nationale finlandaise, fondée sous le nom d’Aero O/Y. Son hub d’Helsinki lui permet de relier l’Europe, l’Asie et l’Amérique du Nord."
+    },
     "founded_year": 1923,
-    "headquarters": "Vantaa, Finlande"
+    "headquarters": { "en": "Vantaa, Finland", "pt": "Vantaa, Finlândia", "fr": "Vantaa, Finlande" }
   },
   {
     "airline": "Wizz Air",
-    "description": "Wizz Air est une compagnie hongroise à bas coûts qui s’est rapidement développée en Europe centrale et orientale. Son réseau dessert aujourd’hui une grande partie de l’Europe ainsi que des destinations voisines.",
+    "description": {
+      "en": "Wizz Air is a Hungarian low-cost airline that grew rapidly across Central and Eastern Europe. Its network now serves much of Europe as well as nearby destinations.",
+      "pt": "A Wizz Air é uma companhia húngara de baixo custo que se desenvolveu rapidamente na Europa Central e Oriental. A sua rede serve hoje grande parte da Europa, bem como destinos vizinhos.",
+      "fr": "Wizz Air est une compagnie hongroise à bas coûts qui s’est rapidement développée en Europe centrale et orientale. Son réseau dessert aujourd’hui une grande partie de l’Europe ainsi que des destinations voisines."
+    },
     "founded_year": 2003,
-    "headquarters": "Budapest, Hongrie"
+    "headquarters": { "en": "Budapest, Hungary", "pt": "Budapeste, Hungria", "fr": "Budapest, Hongrie" }
   },
   {
     "airline": "Austrian Airlines",
-    "description": "Austrian Airlines est la compagnie nationale autrichienne et fait partie du Lufthansa Group. Son réseau est centré sur Vienne, avec une présence historique forte en Europe centrale et orientale.",
+    "description": {
+      "en": "Austrian Airlines is Austria's national airline and part of the Lufthansa Group. Its network is centered on Vienna, with a strong historic presence in Central and Eastern Europe.",
+      "pt": "A Austrian Airlines é a companhia nacional austríaca e faz parte do Lufthansa Group. A sua rede está centrada em Viena, com uma presença histórica forte na Europa Central e Oriental.",
+      "fr": "Austrian Airlines est la compagnie nationale autrichienne et fait partie du Lufthansa Group. Son réseau est centré sur Vienne, avec une présence historique forte en Europe centrale et orientale."
+    },
     "founded_year": 1957,
-    "headquarters": "Schwechat, Autriche"
+    "headquarters": { "en": "Schwechat, Austria", "pt": "Schwechat, Áustria", "fr": "Schwechat, Autriche" }
   },
   {
     "airline": "American Airlines",
-    "description": "American Airlines est l’une des plus grandes compagnies américaines, issue du regroupement de nombreux opérateurs pionniers. Elle exploite un vaste réseau intérieur et international depuis plusieurs hubs.",
+    "description": {
+      "en": "American Airlines is one of the largest US airlines, formed from the merger of many pioneering operators. It operates an extensive domestic and international network from several hubs.",
+      "pt": "A American Airlines é uma das maiores companhias norte-americanas, resultante do agrupamento de numerosos operadores pioneiros. Opera uma vasta rede doméstica e internacional a partir de vários hubs.",
+      "fr": "American Airlines est l’une des plus grandes compagnies américaines, issue du regroupement de nombreux opérateurs pionniers. Elle exploite un vaste réseau intérieur et international depuis plusieurs hubs."
+    },
     "founded_year": 1926,
-    "headquarters": "Fort Worth, États-Unis"
+    "headquarters": { "en": "Fort Worth, United States", "pt": "Fort Worth, Estados Unidos", "fr": "Fort Worth, États-Unis" }
   },
   {
     "airline": "El Al",
-    "description": "El Al est la compagnie nationale israélienne, créée peu après la fondation de l’État d’Israël. Elle relie son hub de Tel-Aviv à l’Europe, aux Amériques, à l’Asie et à l’Afrique.",
+    "description": {
+      "en": "El Al is Israel's national airline, created shortly after the founding of the State of Israel. It links its Tel Aviv hub to Europe, the Americas, Asia and Africa.",
+      "pt": "A El Al é a companhia nacional israelita, criada pouco depois da fundação do Estado de Israel. Liga o seu hub de Telavive à Europa, às Américas, à Ásia e a África.",
+      "fr": "El Al est la compagnie nationale israélienne, créée peu après la fondation de l’État d’Israël. Elle relie son hub de Tel-Aviv à l’Europe, aux Amériques, à l’Asie et à l’Afrique."
+    },
     "founded_year": 1948,
-    "headquarters": "Lod, Israël"
+    "headquarters": { "en": "Lod, Israel", "pt": "Lod, Israel", "fr": "Lod, Israël" }
   },
   {
     "airline": "Luxair",
-    "description": "Luxair est la compagnie nationale du Luxembourg. Elle dessert surtout des destinations européennes, tout en exploitant une activité importante de vols loisirs.",
+    "description": {
+      "en": "Luxair is Luxembourg's national airline. It mainly serves European destinations while also running a significant leisure flight business.",
+      "pt": "A Luxair é a companhia nacional do Luxemburgo. Serve sobretudo destinos europeus, operando também uma atividade importante de voos de lazer.",
+      "fr": "Luxair est la compagnie nationale du Luxembourg. Elle dessert surtout des destinations européennes, tout en exploitant une activité importante de vols loisirs."
+    },
     "founded_year": 1961,
-    "headquarters": "Sandweiler, Luxembourg"
+    "headquarters": { "en": "Sandweiler, Luxembourg", "pt": "Sandweiler, Luxemburgo", "fr": "Sandweiler, Luxembourg" }
   },
   {
     "airline": "LOT Polish Airlines",
-    "description": "LOT est la compagnie nationale polonaise et l’une des plus anciennes marques aériennes d’Europe. Depuis Varsovie, elle relie la Pologne à l’Europe et à plusieurs destinations long-courriers.",
+    "description": {
+      "en": "LOT is Poland's national airline and one of Europe's oldest airline brands. From Warsaw, it links Poland to Europe and several long-haul destinations.",
+      "pt": "A LOT é a companhia nacional polaca e uma das marcas aéreas mais antigas da Europa. A partir de Varsóvia, liga a Polónia à Europa e a vários destinos de longo curso.",
+      "fr": "LOT est la compagnie nationale polonaise et l’une des plus anciennes marques aériennes d’Europe. Depuis Varsovie, elle relie la Pologne à l’Europe et à plusieurs destinations long-courriers."
+    },
     "founded_year": 1928,
-    "headquarters": "Varsovie, Pologne"
+    "headquarters": { "en": "Warsaw, Poland", "pt": "Varsóvia, Polónia", "fr": "Varsovie, Pologne" }
   },
   {
     "airline": "Swiftair",
-    "description": "Swiftair est une compagnie espagnole spécialisée dans le fret, les vols affrétés et les opérations pour le compte d’autres transporteurs. Sa flotte variée dessert surtout l’Europe et l’Afrique du Nord.",
+    "description": {
+      "en": "Swiftair is a Spanish airline specializing in freight, charter flights and operations on behalf of other carriers. Its varied fleet mainly serves Europe and North Africa.",
+      "pt": "A Swiftair é uma companhia espanhola especializada em carga, voos fretados e operações por conta de outras transportadoras. A sua frota variada serve sobretudo a Europa e o Norte de África.",
+      "fr": "Swiftair est une compagnie espagnole spécialisée dans le fret, les vols affrétés et les opérations pour le compte d’autres transporteurs. Sa flotte variée dessert surtout l’Europe et l’Afrique du Nord."
+    },
     "founded_year": 1986,
-    "headquarters": "Madrid, Espagne"
+    "headquarters": { "en": "Madrid, Spain", "pt": "Madrid, Espanha", "fr": "Madrid, Espagne" }
   },
   {
     "airline": "Air Baltic",
-    "description": "airBaltic est la compagnie lettone qui relie les États baltes à un large réseau européen. Elle a développé son hub principal à Riga autour d’une flotte entièrement composée d’Airbus A220-300.",
+    "description": {
+      "en": "airBaltic is the Latvian airline that links the Baltic states to a wide European network. It built its main hub in Riga around a fleet made up entirely of Airbus A220-300s.",
+      "pt": "A airBaltic é a companhia letã que liga os Estados bálticos a uma ampla rede europeia. Desenvolveu o seu hub principal em Riga em torno de uma frota composta inteiramente por Airbus A220-300.",
+      "fr": "airBaltic est la compagnie lettone qui relie les États baltes à un large réseau européen. Elle a développé son hub principal à Riga autour d’une flotte entièrement composée d’Airbus A220-300."
+    },
     "founded_year": 1995,
-    "headquarters": "Mārupe, Lettonie",
-    "fun_fact": "Elle fut la première compagnie à exploiter commercialement l’appareil aujourd’hui appelé Airbus A220-300."
+    "headquarters": { "en": "Mārupe, Latvia", "pt": "Mārupe, Letónia", "fr": "Mārupe, Lettonie" },
+    "fun_fact": {
+      "en": "It was the first airline to commercially operate the aircraft now known as the Airbus A220-300.",
+      "pt": "Foi a primeira companhia a operar comercialmente o aparelho hoje designado Airbus A220-300.",
+      "fr": "Elle fut la première compagnie à exploiter commercialement l’appareil aujourd’hui appelé Airbus A220-300."
+    }
   },
   {
     "airline": "Pegasus",
-    "description": "Pegasus est une compagnie turque à bas coûts, d’abord lancée comme transporteur charter. Elle dessert un large réseau depuis l’aéroport Sabiha-Gökçen d’Istanbul.",
+    "description": {
+      "en": "Pegasus is a Turkish low-cost airline, originally launched as a charter operator. It serves a wide network from Istanbul's Sabiha Gökçen Airport.",
+      "pt": "A Pegasus é uma companhia turca de baixo custo, inicialmente lançada como operador charter. Serve uma vasta rede a partir do aeroporto Sabiha Gökçen, em Istambul.",
+      "fr": "Pegasus est une compagnie turque à bas coûts, d’abord lancée comme transporteur charter. Elle dessert un large réseau depuis l’aéroport Sabiha-Gökçen d’Istanbul."
+    },
     "founded_year": 1990,
-    "headquarters": "Istanbul, Turquie"
+    "headquarters": { "en": "Istanbul, Turkey", "pt": "Istambul, Turquia", "fr": "Istanbul, Turquie" }
   },
   {
     "airline": "WestJet",
-    "description": "WestJet est une compagnie canadienne née comme transporteur à bas coûts dans l’ouest du pays. Elle est devenue un réseau national et international desservant aussi les États-Unis, les Caraïbes, l’Europe et l’Asie.",
+    "description": {
+      "en": "WestJet is a Canadian airline that began as a low-cost carrier in the west of the country. It grew into a national and international network also serving the United States, the Caribbean, Europe and Asia.",
+      "pt": "A WestJet é uma companhia canadiana nascida como transportadora de baixo custo no oeste do país. Tornou-se numa rede nacional e internacional que serve também os Estados Unidos, as Caraíbas, a Europa e a Ásia.",
+      "fr": "WestJet est une compagnie canadienne née comme transporteur à bas coûts dans l’ouest du pays. Elle est devenue un réseau national et international desservant aussi les États-Unis, les Caraïbes, l’Europe et l’Asie."
+    },
     "founded_year": 1994,
-    "headquarters": "Calgary, Canada"
+    "headquarters": { "en": "Calgary, Canada", "pt": "Calgary, Canadá", "fr": "Calgary, Canada" }
   },
   {
     "airline": "Qatar Airways",
-    "description": "Qatar Airways est la compagnie nationale du Qatar. Depuis son hub de Doha, elle relie un vaste éventail de destinations sur tous les continents habités.",
+    "description": {
+      "en": "Qatar Airways is Qatar's national airline. From its Doha hub, it links a vast range of destinations across every inhabited continent.",
+      "pt": "A Qatar Airways é a companhia nacional do Catar. A partir do seu hub em Doha, liga um vasto leque de destinos em todos os continentes habitados.",
+      "fr": "Qatar Airways est la compagnie nationale du Qatar. Depuis son hub de Doha, elle relie un vaste éventail de destinations sur tous les continents habités."
+    },
     "founded_year": 1993,
-    "headquarters": "Doha, Qatar"
+    "headquarters": { "en": "Doha, Qatar", "pt": "Doha, Catar", "fr": "Doha, Qatar" }
   },
   {
     "airline": "Etihad Airways",
-    "description": "Etihad est la compagnie nationale des Émirats arabes unis basée à Abou Dabi. Elle exploite un réseau international reliant le Moyen-Orient à l’Europe, l’Asie, l’Afrique, l’Australie et l’Amérique du Nord.",
+    "description": {
+      "en": "Etihad is the national airline of the United Arab Emirates, based in Abu Dhabi. It operates an international network linking the Middle East to Europe, Asia, Africa, Australia and North America.",
+      "pt": "A Etihad é a companhia nacional dos Emirados Árabes Unidos, sediada em Abu Dhabi. Opera uma rede internacional que liga o Médio Oriente à Europa, à Ásia, a África, à Austrália e à América do Norte.",
+      "fr": "Etihad est la compagnie nationale des Émirats arabes unis basée à Abou Dabi. Elle exploite un réseau international reliant le Moyen-Orient à l’Europe, l’Asie, l’Afrique, l’Australie et l’Amérique du Nord."
+    },
     "founded_year": 2003,
-    "headquarters": "Abou Dabi, Émirats arabes unis"
+    "headquarters": { "en": "Abu Dhabi, United Arab Emirates", "pt": "Abu Dhabi, Emirados Árabes Unidos", "fr": "Abou Dabi, Émirats arabes unis" }
   },
   {
     "airline": "SAS Scandinavian",
-    "description": "SAS est la compagnie historique commune au Danemark, à la Norvège et à la Suède. Elle relie la Scandinavie au reste de l’Europe et à plusieurs destinations intercontinentales.",
+    "description": {
+      "en": "SAS is the historic airline jointly owned by Denmark, Norway and Sweden. It links Scandinavia to the rest of Europe and to several intercontinental destinations.",
+      "pt": "A SAS é a companhia histórica comum à Dinamarca, à Noruega e à Suécia. Liga a Escandinávia ao resto da Europa e a vários destinos intercontinentais.",
+      "fr": "SAS est la compagnie historique commune au Danemark, à la Norvège et à la Suède. Elle relie la Scandinavie au reste de l’Europe et à plusieurs destinations intercontinentales."
+    },
     "founded_year": 1946,
-    "headquarters": "Solna, Suède",
-    "fun_fact": "Son nom complet d’origine, Scandinavian Airlines System, reflète sa création multinationale."
+    "headquarters": { "en": "Solna, Sweden", "pt": "Solna, Suécia", "fr": "Solna, Suède" },
+    "fun_fact": {
+      "en": "Its original full name, Scandinavian Airlines System, reflects its multinational origins.",
+      "pt": "O seu nome completo original, Scandinavian Airlines System, reflete a sua criação multinacional.",
+      "fr": "Son nom complet d’origine, Scandinavian Airlines System, reflète sa création multinationale."
+    }
   },
   {
     "airline": "NetJets",
-    "description": "NetJets est un opérateur américain d’aviation d’affaires fondé sous le nom d’Executive Jet Airways. Il est surtout connu pour avoir développé le modèle de propriété fractionnée d’avions privés.",
+    "description": {
+      "en": "NetJets is a US business aviation operator founded under the name Executive Jet Airways. It is best known for pioneering the fractional ownership model for private aircraft.",
+      "pt": "A NetJets é um operador norte-americano de aviação executiva fundado sob o nome Executive Jet Airways. É sobretudo conhecida por ter desenvolvido o modelo de propriedade fracionada de aviões privados.",
+      "fr": "NetJets est un opérateur américain d’aviation d’affaires fondé sous le nom d’Executive Jet Airways. Il est surtout connu pour avoir développé le modèle de propriété fractionnée d’avions privés."
+    },
     "founded_year": 1964,
-    "headquarters": "Columbus, États-Unis",
-    "fun_fact": "L’entreprise se présente comme la première société de charter et de gestion de jets privés au monde."
+    "headquarters": { "en": "Columbus, United States", "pt": "Columbus, Estados Unidos", "fr": "Columbus, États-Unis" },
+    "fun_fact": {
+      "en": "The company presents itself as the world's first private jet charter and management company.",
+      "pt": "A empresa apresenta-se como a primeira sociedade de charter e gestão de jatos privados do mundo.",
+      "fr": "L’entreprise se présente comme la première société de charter et de gestion de jets privés au monde."
+    }
   },
   {
     "airline": "Air Serbia",
-    "description": "Air Serbia est la compagnie nationale serbe et l’héritière d’une lignée commencée avec Aeroput. Depuis Belgrade, elle dessert l’Europe, le bassin méditerranéen et plusieurs destinations long-courriers.",
+    "description": {
+      "en": "Air Serbia is Serbia's national airline, heir to a lineage that began with Aeroput. From Belgrade, it serves Europe, the Mediterranean basin and several long-haul destinations.",
+      "pt": "A Air Serbia é a companhia nacional sérvia, herdeira de uma linhagem iniciada com a Aeroput. A partir de Belgrado, serve a Europa, a bacia mediterrânica e vários destinos de longo curso.",
+      "fr": "Air Serbia est la compagnie nationale serbe et l’héritière d’une lignée commencée avec Aeroput. Depuis Belgrade, elle dessert l’Europe, le bassin méditerranéen et plusieurs destinations long-courriers."
+    },
     "founded_year": 1927,
-    "headquarters": "Belgrade, Serbie",
-    "fun_fact": "La marque Air Serbia a remplacé Jat Airways en 2013."
+    "headquarters": { "en": "Belgrade, Serbia", "pt": "Belgrado, Sérvia", "fr": "Belgrade, Serbie" },
+    "fun_fact": {
+      "en": "The Air Serbia brand replaced Jat Airways in 2013.",
+      "pt": "A marca Air Serbia substituiu a Jat Airways em 2013.",
+      "fr": "La marque Air Serbia a remplacé Jat Airways en 2013."
+    }
   },
   {
     "airline": "Volotea",
-    "description": "Volotea est une compagnie espagnole à bas coûts créée pour relier directement les petites et moyennes villes européennes. Son réseau évite souvent les grands hubs et se concentre sur les liaisons transversales.",
+    "description": {
+      "en": "Volotea is a Spanish low-cost airline created to directly link small and medium-sized European cities. Its network often bypasses major hubs and focuses on point-to-point routes.",
+      "pt": "A Volotea é uma companhia espanhola de baixo custo criada para ligar diretamente pequenas e médias cidades europeias. A sua rede evita frequentemente os grandes hubs e concentra-se em ligações transversais.",
+      "fr": "Volotea est une compagnie espagnole à bas coûts créée pour relier directement les petites et moyennes villes européennes. Son réseau évite souvent les grands hubs et se concentre sur les liaisons transversales."
+    },
     "founded_year": 2011,
-    "headquarters": "Castrillón, Espagne"
+    "headquarters": { "en": "Castrillón, Spain", "pt": "Castrillón, Espanha", "fr": "Castrillón, Espagne" }
   },
   {
     "airline": "Unknown US",
-    "description": "Cette étiquette regroupe des vols associés aux États-Unis dont l’opérateur n’a pas pu être identifié dans les données de la station. Elle ne correspond donc pas à une compagnie aérienne déterminée.",
+    "description": {
+      "en": "This label groups flights associated with the United States whose operator could not be identified in the station's data. It does not correspond to a specific airline.",
+      "pt": "Esta etiqueta agrupa voos associados aos Estados Unidos cujo operador não pôde ser identificado nos dados da estação. Não corresponde, portanto, a uma companhia aérea determinada.",
+      "fr": "Cette étiquette regroupe des vols associés aux États-Unis dont l’opérateur n’a pas pu être identifié dans les données de la station. Elle ne correspond donc pas à une compagnie aérienne déterminée."
+    },
     "founded_year": null,
     "headquarters": null
   },
   {
     "airline": "Korean Air",
-    "description": "Korean Air est la principale compagnie de Corée du Sud. Elle exploite depuis Séoul un réseau mondial de passagers et une importante activité de fret.",
+    "description": {
+      "en": "Korean Air is South Korea's leading airline. From Seoul, it operates a global passenger network as well as a significant cargo business.",
+      "pt": "A Korean Air é a principal companhia da Coreia do Sul. Opera a partir de Seul uma rede mundial de passageiros e uma importante atividade de carga.",
+      "fr": "Korean Air est la principale compagnie de Corée du Sud. Elle exploite depuis Séoul un réseau mondial de passagers et une importante activité de fret."
+    },
     "founded_year": 1969,
-    "headquarters": "Séoul, Corée du Sud"
+    "headquarters": { "en": "Seoul, South Korea", "pt": "Seul, Coreia do Sul", "fr": "Séoul, Corée du Sud" }
   },
   {
     "airline": "Fly One",
-    "description": "FLYONE est une compagnie moldave à bas coûts lancée au milieu des années 2010. Elle relie Chișinău à des destinations européennes et moyen-orientales, tout en développant des filiales dans d’autres pays.",
+    "description": {
+      "en": "FLYONE is a Moldovan low-cost airline launched in the mid-2010s. It links Chișinău to European and Middle Eastern destinations, while developing subsidiaries in other countries.",
+      "pt": "A FLYONE é uma companhia moldava de baixo custo lançada em meados da década de 2010. Liga Chișinău a destinos europeus e do Médio Oriente, desenvolvendo também filiais noutros países.",
+      "fr": "FLYONE est une compagnie moldave à bas coûts lancée au milieu des années 2010. Elle relie Chișinău à des destinations européennes et moyen-orientales, tout en développant des filiales dans d’autres pays."
+    },
     "founded_year": 2015,
-    "headquarters": "Chișinău, Moldavie"
+    "headquarters": { "en": "Chișinău, Moldova", "pt": "Chisinau, Moldova", "fr": "Chișinău, Moldavie" }
   },
   {
     "airline": "Ryanair UK",
-    "description": "Ryanair UK est la filiale britannique du groupe Ryanair, dotée de son propre certificat de transporteur aérien. Elle exploite des vols sous le modèle à bas coûts du groupe.",
+    "description": {
+      "en": "Ryanair UK is the British subsidiary of the Ryanair group, holding its own air operator's certificate. It operates flights under the group's low-cost model.",
+      "pt": "A Ryanair UK é a filial britânica do grupo Ryanair, dotada do seu próprio certificado de operador aéreo. Opera voos segundo o modelo de baixo custo do grupo.",
+      "fr": "Ryanair UK est la filiale britannique du groupe Ryanair, dotée de son propre certificat de transporteur aérien. Elle exploite des vols sous le modèle à bas coûts du groupe."
+    },
     "founded_year": 1985,
-    "headquarters": "Aéroport de Londres-Stansted, Royaume-Uni"
+    "headquarters": { "en": "London Stansted Airport, United Kingdom", "pt": "Aeroporto de Londres-Stansted, Reino Unido", "fr": "Aéroport de Londres-Stansted, Royaume-Uni" }
   },
   {
     "airline": "Norwegian Air Sweden",
-    "description": "Norwegian Air Sweden est la filiale suédoise du groupe Norwegian, créée avec son propre certificat de transporteur aérien européen. Elle opère des vols à bas coûts sous la marque Norwegian.",
+    "description": {
+      "en": "Norwegian Air Sweden is the Swedish subsidiary of the Norwegian group, created with its own European air operator's certificate. It operates low-cost flights under the Norwegian brand.",
+      "pt": "A Norwegian Air Sweden é a filial sueca do grupo Norwegian, criada com o seu próprio certificado de operador aéreo europeu. Opera voos de baixo custo sob a marca Norwegian.",
+      "fr": "Norwegian Air Sweden est la filiale suédoise du groupe Norwegian, créée avec son propre certificat de transporteur aérien européen. Elle opère des vols à bas coûts sous la marque Norwegian."
+    },
     "founded_year": 2018,
-    "headquarters": "Stockholm, Suède"
+    "headquarters": { "en": "Stockholm, Sweden", "pt": "Estocolmo, Suécia", "fr": "Stockholm, Suède" }
   },
   {
     "airline": "ASL Airlines Belgium",
-    "description": "ASL Airlines Belgium est une compagnie cargo belge née sous le nom de TNT Airways. Basée à Liège, elle transporte du fret régulier et express pour plusieurs grands clients logistiques.",
+    "description": {
+      "en": "ASL Airlines Belgium is a Belgian cargo airline born under the name TNT Airways. Based in Liège, it carries scheduled and express freight for several major logistics clients.",
+      "pt": "A ASL Airlines Belgium é uma companhia de carga belga nascida sob o nome TNT Airways. Sediada em Liège, transporta carga regular e expresso para vários grandes clientes logísticos.",
+      "fr": "ASL Airlines Belgium est une compagnie cargo belge née sous le nom de TNT Airways. Basée à Liège, elle transporte du fret régulier et express pour plusieurs grands clients logistiques."
+    },
     "founded_year": 1999,
-    "headquarters": "Liège, Belgique"
+    "headquarters": { "en": "Liège, Belgium", "pt": "Liège, Bélgica", "fr": "Liège, Belgique" }
   },
   {
     "airline": "easyJet Switzerland",
-    "description": "easyJet Switzerland est la filiale suisse du groupe easyJet, issue de TEA Basel. Elle exploite des vols à bas coûts principalement depuis Genève et Bâle.",
+    "description": {
+      "en": "easyJet Switzerland is the Swiss subsidiary of the easyJet group, descended from TEA Basel. It operates low-cost flights mainly from Geneva and Basel.",
+      "pt": "A easyJet Switzerland é a filial suíça do grupo easyJet, herdeira da TEA Basel. Opera voos de baixo custo sobretudo a partir de Genebra e Basileia.",
+      "fr": "easyJet Switzerland est la filiale suisse du groupe easyJet, issue de TEA Basel. Elle exploite des vols à bas coûts principalement depuis Genève et Bâle."
+    },
     "founded_year": 1988,
-    "headquarters": "Meyrin, Suisse"
+    "headquarters": { "en": "Meyrin, Switzerland", "pt": "Meyrin, Suíça", "fr": "Meyrin, Suisse" }
   },
   {
     "airline": "Air Algerie",
-    "description": "Air Algérie est la compagnie nationale algérienne. Son réseau relie les villes du pays et dessert notamment l’Europe, l’Afrique, le Moyen-Orient et le Canada.",
+    "description": {
+      "en": "Air Algérie is Algeria's national airline. Its network links cities across the country and serves Europe, Africa, the Middle East and Canada, among others.",
+      "pt": "A Air Algérie é a companhia nacional argelina. A sua rede liga as cidades do país e serve, entre outros, a Europa, África, o Médio Oriente e o Canadá.",
+      "fr": "Air Algérie est la compagnie nationale algérienne. Son réseau relie les villes du pays et dessert notamment l’Europe, l’Afrique, le Moyen-Orient et le Canada."
+    },
     "founded_year": 1947,
-    "headquarters": "Alger, Algérie"
+    "headquarters": { "en": "Algiers, Algeria", "pt": "Argel, Argélia", "fr": "Alger, Algérie" }
   },
   {
     "airline": "Icelandair",
-    "description": "Icelandair est la principale compagnie islandaise, issue de Flugfélag Akureyrar. Sa position géographique lui permet de combiner des liaisons vers l’Europe et l’Amérique du Nord via Keflavík.",
+    "description": {
+      "en": "Icelandair is Iceland's leading airline, descended from Flugfélag Akureyrar. Its geographic position lets it combine routes to Europe and North America via Keflavík.",
+      "pt": "A Icelandair é a principal companhia islandesa, herdeira da Flugfélag Akureyrar. A sua posição geográfica permite-lhe combinar ligações para a Europa e a América do Norte via Keflavík.",
+      "fr": "Icelandair est la principale compagnie islandaise, issue de Flugfélag Akureyrar. Sa position géographique lui permet de combiner des liaisons vers l’Europe et l’Amérique du Nord via Keflavík."
+    },
     "founded_year": 1937,
-    "headquarters": "Reykjavík, Islande",
-    "fun_fact": "Son modèle de correspondance permet aux passagers de faire une escale en Islande entre les deux rives de l’Atlantique."
+    "headquarters": { "en": "Reykjavík, Iceland", "pt": "Reiquiavique, Islândia", "fr": "Reykjavík, Islande" },
+    "fun_fact": {
+      "en": "Its connecting-hub model lets passengers stop over in Iceland between the two shores of the Atlantic.",
+      "pt": "O seu modelo de correspondência permite aos passageiros fazer escala na Islândia entre as duas margens do Atlântico.",
+      "fr": "Son modèle de correspondance permet aux passagers de faire une escale en Islande entre les deux rives de l’Atlantique."
+    }
   },
   {
     "airline": "DHL Air",
-    "description": "DHL Air est la compagnie cargo britannique du réseau logistique DHL. Elle assure principalement des vols de fret express nocturnes vers les plateformes européennes du groupe.",
+    "description": {
+      "en": "DHL Air is the British cargo airline of the DHL logistics network. It mainly operates overnight express freight flights to the group's European hubs.",
+      "pt": "A DHL Air é a companhia de carga britânica da rede logística DHL. Assegura sobretudo voos noturnos de carga expresso para os hubs europeus do grupo.",
+      "fr": "DHL Air est la compagnie cargo britannique du réseau logistique DHL. Elle assure principalement des vols de fret express nocturnes vers les plateformes européennes du groupe."
+    },
     "founded_year": 1982,
-    "headquarters": "Derby, Royaume-Uni"
+    "headquarters": { "en": "Derby, United Kingdom", "pt": "Derby, Reino Unido", "fr": "Derby, Royaume-Uni" }
   },
   {
     "airline": "Norwegian",
-    "description": "Norwegian est une compagnie norvégienne fondée comme opérateur régional puis transformée en transporteur à bas coûts en 2002. Elle se concentre aujourd’hui sur les liaisons court et moyen-courriers en Europe.",
+    "description": {
+      "en": "Norwegian is a Norwegian airline founded as a regional operator, then turned into a low-cost carrier in 2002. It now focuses on short- and medium-haul routes within Europe.",
+      "pt": "A Norwegian é uma companhia norueguesa fundada como operador regional e transformada em transportadora de baixo custo em 2002. Concentra-se hoje em ligações de curto e médio curso na Europa.",
+      "fr": "Norwegian est une compagnie norvégienne fondée comme opérateur régional puis transformée en transporteur à bas coûts en 2002. Elle se concentre aujourd’hui sur les liaisons court et moyen-courriers en Europe."
+    },
     "founded_year": 1993,
-    "headquarters": "Fornebu, Norvège",
-    "fun_fact": "Les empennages de ses avions portent les portraits de personnalités nordiques."
+    "headquarters": { "en": "Fornebu, Norway", "pt": "Fornebu, Noruega", "fr": "Fornebu, Norvège" },
+    "fun_fact": {
+      "en": "Its aircraft tail fins carry portraits of notable Nordic figures.",
+      "pt": "As empenas dos seus aviões apresentam retratos de personalidades nórdicas.",
+      "fr": "Les empennages de ses avions portent les portraits de personnalités nordiques."
+    }
   }
 ]

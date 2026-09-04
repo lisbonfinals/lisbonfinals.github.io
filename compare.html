@@ -409,6 +409,13 @@ let cmpSelA = null, cmpSelB = null;
 
 function fmtInt(n){ return Math.round(n).toLocaleString('en-US'); }
 function fmt1(n){ return (Math.round(n*10)/10).toFixed(1); }
+// Accepte soit une chaîne simple (identique dans toutes les langues, ex. "Airbus"),
+// soit un objet {en,pt,fr} : renvoie la version de la langue active, avec repli en/fr/pt.
+function loc(field){
+  if (field == null) return '';
+  if (typeof field === 'string') return field;
+  return field[_lang] || field.en || field.fr || field.pt || '';
+}
 
 function buildAggregates(mode){
   const nameField = mode === 'aircraft' ? 'aircraft_type' : 'airline';
@@ -495,19 +502,23 @@ function renderCard(item, otherAvgDb, otherAvgVib){
   body.appendChild(name);
 
   const desc = cmpDescriptions[cmpMode][item.name];
-  if (desc && desc.description) {
+  const description = loc(desc && desc.description);
+  if (desc && description) {
+    const manufacturer = loc(desc.manufacturer);
+    const headquarters = loc(desc.headquarters);
+    const funFact = loc(desc.fun_fact);
     const profile = document.createElement('div');
     profile.className = 'cmp-profile';
     let facts = '';
     if (cmpMode === 'aircraft') {
-      if (desc.manufacturer) facts += `<div class="cmp-fact"><span>${t.cmp_profile_manufacturer}</span><b>${desc.manufacturer}</b></div>`;
+      if (manufacturer) facts += `<div class="cmp-fact"><span>${t.cmp_profile_manufacturer}</span><b>${manufacturer}</b></div>`;
       if (desc.first_flight_year) facts += `<div class="cmp-fact"><span>${t.cmp_profile_first_flight}</span><b>${desc.first_flight_year}</b></div>`;
       if (desc.entry_into_service_year) facts += `<div class="cmp-fact"><span>${t.cmp_profile_in_service}</span><b>${desc.entry_into_service_year}</b></div>`;
     } else {
       if (desc.founded_year) facts += `<div class="cmp-fact"><span>${t.cmp_profile_founded}</span><b>${desc.founded_year}</b></div>`;
-      if (desc.headquarters) facts += `<div class="cmp-fact"><span>${t.cmp_profile_hq}</span><b>${desc.headquarters}</b></div>`;
+      if (headquarters) facts += `<div class="cmp-fact"><span>${t.cmp_profile_hq}</span><b>${headquarters}</b></div>`;
     }
-    profile.innerHTML = `<div class="cmp-profile-facts">${facts}</div><p class="cmp-profile-desc">${desc.description}</p>${desc.fun_fact ? `<p class="cmp-fact-quote">${desc.fun_fact}</p>` : ''}`;
+    profile.innerHTML = `<div class="cmp-profile-facts">${facts}</div><p class="cmp-profile-desc">${description}</p>${funFact ? `<p class="cmp-fact-quote">${funFact}</p>` : ''}`;
     body.appendChild(profile);
   }
 
