@@ -135,6 +135,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 .data-error{padding:32px;text-align:center;font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.32);border:1px dashed rgba(240,237,232,.1);border-radius:4px;}
 
+/* ── SHARE ── */
+.cmp-share{margin-top:32px;padding-top:24px;border-top:1px solid var(--border);}
+.cmp-share-label{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:14px;}
+.cmp-share-row{display:flex;flex-wrap:wrap;gap:10px;}
+.cmp-share-btn{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:transparent;border:1px solid rgba(240,237,232,.15);color:rgba(240,237,232,.65);padding:9px 16px;border-radius:4px;cursor:pointer;transition:all .2s;}
+.cmp-share-btn:hover{border-color:rgba(245,166,35,.5);color:var(--amber);}
+
 /* ── FOOTER ── */
 .page-footer{border-top:1px solid var(--border);padding:32px 48px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .footer-left{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);letter-spacing:.08em;}
@@ -242,6 +249,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <div id="cmp-diff-banner" class="cmp-diff-banner" hidden></div>
   <div id="cmp-status" class="data-error" data-i18n="cmp_loading">Loading station data…</div>
   <div class="cmp-grid" id="cmp-grid" hidden></div>
+
+  <div id="cmp-share" class="cmp-share" hidden>
+    <div class="cmp-share-label" data-i18n="cmp_share_label">Share this comparison</div>
+    <div class="cmp-share-row">
+      <button class="cmp-share-btn" data-share="whatsapp" aria-label="WhatsApp">WhatsApp</button>
+      <button class="cmp-share-btn" data-share="facebook" aria-label="Facebook">Facebook</button>
+      <button class="cmp-share-btn" data-share="x" aria-label="X">X</button>
+      <button class="cmp-share-btn" data-share="copy" data-i18n="cmp_share_copy">Copy link</button>
+      <button class="cmp-share-btn" data-share="native" data-i18n="cmp_share_native" hidden>Share…</button>
+    </div>
+  </div>
 </section>
 </main>
 
@@ -293,7 +311,12 @@ const T = {
     cmp_profile_in_service:'In service since',
     cmp_profile_founded:'Founded',
     cmp_profile_hq:'Headquarters',
-    cmp_no_photo:'No photo yet'
+    cmp_no_photo:'No photo yet',
+    cmp_share_label:'Share this comparison',
+    cmp_share_text:'{a} vs {b} — noise & vibration compared, Lisbon Finals',
+    cmp_share_copy:'Copy link',
+    cmp_share_copied:'Copied!',
+    cmp_share_native:'Share…'
   },
   pt: {
     footer:'LISBON FINALS · Dados · lisbonfinals.com',
@@ -318,7 +341,12 @@ const T = {
     cmp_profile_in_service:'Em serviço desde',
     cmp_profile_founded:'Fundação',
     cmp_profile_hq:'Sede',
-    cmp_no_photo:'Ainda sem foto'
+    cmp_no_photo:'Ainda sem foto',
+    cmp_share_label:'Partilhar esta comparação',
+    cmp_share_text:'{a} vs {b} — ruído e vibração comparados, Lisbon Finals',
+    cmp_share_copy:'Copiar link',
+    cmp_share_copied:'Copiado!',
+    cmp_share_native:'Partilhar…'
   },
   fr: {
     footer:'LISBON FINALS · Données · lisbonfinals.com',
@@ -343,7 +371,12 @@ const T = {
     cmp_profile_in_service:'En service depuis',
     cmp_profile_founded:'Fondation',
     cmp_profile_hq:'Siège',
-    cmp_no_photo:'Pas encore de photo'
+    cmp_no_photo:'Pas encore de photo',
+    cmp_share_label:'Partager cette comparaison',
+    cmp_share_text:'{a} vs {b} : bruit et vibration comparés, Lisbon Finals',
+    cmp_share_copy:'Copier le lien',
+    cmp_share_copied:'Copié !',
+    cmp_share_native:'Partager…'
   }
 };
 let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
@@ -495,6 +528,35 @@ function renderCard(item, otherAvgDb, otherAvgVib){
   return wrap;
 }
 
+function buildShareUrl(){
+  const url = new URL(window.location.href);
+  url.search = '';
+  url.searchParams.set('mode', cmpMode);
+  url.searchParams.set('a', cmpSelA.value);
+  url.searchParams.set('b', cmpSelB.value);
+  return url.toString();
+}
+
+function syncUrlState(){
+  if (!cmpSelA.value || !cmpSelB.value) return;
+  window.history.replaceState(null, '', buildShareUrl());
+}
+
+function applyUrlState(){
+  const params = new URLSearchParams(window.location.search);
+  const mode = params.get('mode');
+  const a = params.get('a');
+  const b = params.get('b');
+  if (mode !== 'aircraft' && mode !== 'airline') return;
+  if (!a || !b) return;
+  const items = cmpAggByMode[mode] || (cmpAggByMode[mode] = buildAggregates(mode));
+  if (!items.some(it => it.name === a) || !items.some(it => it.name === b)) return;
+  cmpMode = mode;
+  document.querySelectorAll('.archive-subtab').forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
+  cmpSelA.dataset.selectedName = a;
+  cmpSelB.dataset.selectedName = b;
+}
+
 function cmpRender(){
   if (!cmpArchive) return;
   const t = T[_lang];
@@ -506,8 +568,9 @@ function cmpRender(){
   const b = items.find(it => it.name === cmpSelB.value);
   const grid = document.getElementById('cmp-grid');
   const banner = document.getElementById('cmp-diff-banner');
+  const share = document.getElementById('cmp-share');
   grid.innerHTML = '';
-  if (!a || !b) { banner.hidden = true; return; }
+  if (!a || !b) { banner.hidden = true; if (share) share.hidden = true; return; }
 
   grid.appendChild(renderCard(a, b.avgDb, b.avgVib));
   grid.appendChild(renderCard(b, a.avgDb, a.avgVib));
@@ -521,6 +584,9 @@ function cmpRender(){
     const quieter = a.avgDb > b.avgDb ? b : a;
     banner.innerHTML = t.cmp_diff_louder.replace('{a}', louder.name).replace('{b}', quieter.name).replace('{d}', fmt1(delta));
   }
+
+  if (share) share.hidden = false;
+  syncUrlState();
 }
 
 async function cmpInit(){
@@ -560,13 +626,59 @@ async function cmpInit(){
 
     status.hidden = true;
     grid.hidden = false;
+    if (!cmpAggByMode[cmpMode]) cmpAggByMode[cmpMode] = buildAggregates(cmpMode);
+    applyUrlState();
     cmpRender();
   } catch (e) {
     status.textContent = T[_lang].cmp_error;
   }
 }
 
+function cmpInitShare(){
+  const row = document.getElementById('cmp-share');
+  if (!row) return;
+  const shareText = () => {
+    const t = T[_lang];
+    const items = cmpAggByMode[cmpMode] || [];
+    const a = items.find(it => it.name === cmpSelA.value);
+    const b = items.find(it => it.name === cmpSelB.value);
+    const names = (a && b) ? t.cmp_share_text.replace('{a}', a.name).replace('{b}', b.name) : document.title;
+    return { text: names, url: buildShareUrl() };
+  };
+  row.querySelector('[data-share="whatsapp"]').addEventListener('click', () => {
+    const { text, url } = shareText();
+    window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank', 'noopener');
+  });
+  row.querySelector('[data-share="facebook"]').addEventListener('click', () => {
+    const { url } = shareText();
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'noopener');
+  });
+  row.querySelector('[data-share="x"]').addEventListener('click', () => {
+    const { text, url } = shareText();
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener');
+  });
+  const copyBtn = row.querySelector('[data-share="copy"]');
+  copyBtn.addEventListener('click', async () => {
+    const { url } = shareText();
+    try {
+      await navigator.clipboard.writeText(url);
+      const original = copyBtn.textContent;
+      copyBtn.textContent = T[_lang].cmp_share_copied;
+      setTimeout(() => { copyBtn.textContent = original; }, 1800);
+    } catch (e) { /* clipboard unavailable, silently ignore */ }
+  });
+  const nativeBtn = row.querySelector('[data-share="native"]');
+  if (navigator.share) {
+    nativeBtn.hidden = false;
+    nativeBtn.addEventListener('click', () => {
+      const { text, url } = shareText();
+      navigator.share({ title: document.title, text, url }).catch(() => {});
+    });
+  }
+}
+
 applyLang(_lang);
+cmpInitShare();
 cmpInit();
 </script>
 </body>
