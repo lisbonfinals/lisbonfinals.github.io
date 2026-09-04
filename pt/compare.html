@@ -128,6 +128,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 .cmp-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .cmp-stat{background:var(--dark3);border:1px solid var(--border);border-radius:4px;padding:14px 14px;}
+.cmp-stat.wide{grid-column:1/-1;}
 .cmp-stat-val{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--white);line-height:1;}
 .cmp-stat.amber .cmp-stat-val{color:var(--amber);}
 .cmp-stat-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:7px;}
@@ -362,6 +363,9 @@ function applyLang(lang){
 /* ══════════ COMPARE LOGIC ══════════ */
 const ARCHIVE_URL = 'https://gist.githubusercontent.com/lisbonfinals/1d1de7d0a0c7db86ad141cf0c70e1c0b/raw/lisbon_finals_archive.json';
 const MIN_FLIGHTS = 15;
+// Étiquettes d'opérateur non résolu (ADS-B sans callsign décodé) : pas une
+// entité comparable, à exclure du sélecteur Airlines.
+const AIRLINE_EXCLUDE = ['Unknown US'];
 const DESC_URLS = { aircraft: '/data/aircraft_descriptions.json', airline: '/data/airline_descriptions.json' };
 
 let cmpMode = 'aircraft';
@@ -374,11 +378,12 @@ function fmtInt(n){ return Math.round(n).toLocaleString('en-US'); }
 function fmt1(n){ return (Math.round(n*10)/10).toFixed(1); }
 
 function buildAggregates(mode){
+  const nameField = mode === 'aircraft' ? 'aircraft_type' : 'airline';
   const list = (mode === 'aircraft' ? cmpArchive.aircraft_types : cmpArchive.airlines)
-    .filter(e => e.n >= MIN_FLIGHTS);
+    .filter(e => e.n >= MIN_FLIGHTS)
+    .filter(e => mode !== 'airline' || !AIRLINE_EXCLUDE.includes(e[nameField]));
   const byKey = mode === 'aircraft' ? cmpArchive.by_aircraft : cmpArchive.by_airline;
   const subField = mode === 'aircraft' ? 'airlines' : 'aircraft';
-  const nameField = mode === 'aircraft' ? 'aircraft_type' : 'airline';
 
   const items = list.map(entry => {
     const name = entry[nameField];
@@ -477,7 +482,7 @@ function renderCard(item, otherAvgDb){
   stats.className = 'cmp-stat-grid';
   const louder = otherAvgDb != null && item.avgDb > otherAvgDb;
   stats.innerHTML = `
-    <div class="cmp-stat"><div class="cmp-stat-val">${fmtInt(item.totalFlights)}</div><div class="cmp-stat-lbl">${t.cmp_stat_flights}</div></div>
+    <div class="cmp-stat wide"><div class="cmp-stat-val">${fmtInt(item.totalFlights)}</div><div class="cmp-stat-lbl">${t.cmp_stat_flights}</div></div>
     <div class="cmp-stat${louder ? ' amber' : ''}"><div class="cmp-stat-val">${fmt1(item.avgDb)} dB</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_db}</div></div>
     <div class="cmp-stat"><div class="cmp-stat-val">${item.maxDb != null ? fmt1(item.maxDb) + ' dB' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_db}</div></div>
     <div class="cmp-stat"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div></div>
