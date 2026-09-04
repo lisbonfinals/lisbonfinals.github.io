@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparar — Lisbon Finals · Aviões e Companhias</title>
+<meta name="description" content="Compare dois modelos de avião ou duas companhias aéreas seguidas pelo Lisbon Finals: número de voos, ruído médio e máximo, vibração média e máxima, lado a lado.">
+<meta name="theme-color" content="#0a0d12">
+<link rel="canonical" href="https://www.lisbonfinals.com/pt/compare.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/compare.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/compare.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/compare.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/compare.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816d"></script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="Comparar — Lisbon Finals · Aviões e Companhias">
+<meta property="og:description" content="Compare dois modelos de avião ou duas companhias aéreas seguidas pelo Lisbon Finals: número de voos, ruído médio e máximo, vibração média e máxima, lado a lado.">
+<meta property="og:url" content="https://www.lisbonfinals.com/pt/compare.html">
+<meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Comparar — Lisbon Finals · Aviões e Companhias">
+<meta name="twitter:description" content="Compare dois modelos de avião ou duas companhias aéreas seguidas pelo Lisbon Finals: número de voos, ruído médio e máximo, vibração média e máxima, lado a lado.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://gist.githubusercontent.com">
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#07090d; --dark:#0a0d12; --dark2:#0d1117; --dark3:#111827;
+  --border:#1e2530; --border2:#2a3544;
+  --amber:#f5a623; --amber-dim:rgba(245,166,35,0.10);
+  --white:#f0ede8; --gray:#6b7280;
+  --red:#ef4444; --red-dim:rgba(239,68,68,0.08);
+  --green:#22c55e;
+  --blue:#60a5fa; --blue-dim:rgba(96,165,250,0.08);
+  --sans:'Syne',sans-serif; --mono:'JetBrains Mono',monospace; --serif:'Instrument Serif',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:var(--sans);overflow-x:hidden;}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid var(--amber);outline-offset:4px;}
+
+/* ── NAV (shared pattern across the site) ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,9,13,.98),transparent);backdrop-filter:blur(4px);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-dot{width:28px;height:28px;border:1.5px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
+.nav-dot::after{content:'';width:10px;height:12px;background:var(--amber);border-radius:0;position:absolute;top:50%;left:50%;transform:translate(-50%,-60%) rotate(-20deg);clip-path:polygon(50% 0%,65% 85%,50% 72%,35% 85%);}
+.nav-wordmark{font-size:13px;font-family:var(--mono);font-weight:500;letter-spacing:.12em;color:var(--white);text-transform:uppercase;}
+.nav-wordmark span{color:var(--amber);}
+.nav-links{display:flex;gap:36px;list-style:none;margin-left:auto;}
+.nav-links a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.55);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--amber);}
+.nav-links a.nav-active{color:var(--amber);}
+.nav-links a.nav-noise{color:var(--amber);font-weight:700;}
+.nav-links a.nav-noise:hover{color:#fff;text-shadow:0 0 14px rgba(245,166,35,.6);}
+.nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
+.nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
+.nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px;}
+.lang-group{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+.lang-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.43);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn:hover{color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.38);}
+.lang-btn.active{color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06);}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:12px;}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;}
+.nav-drawer{display:none;flex-direction:column;gap:32px;position:fixed;inset:0;z-index:99;background:rgba(7,9,13,.97);backdrop-filter:blur(12px);align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.nav-drawer.open{display:flex;opacity:1;pointer-events:all;}
+.nav-drawer a{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.6);text-decoration:none;transition:color .2s;}
+.nav-drawer a:hover{color:var(--white);}
+.nav-drawer a.drawer-noise{color:var(--amber);opacity:.8;}
+.nav-drawer a.drawer-ig{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(245,166,35,.4);padding:10px 20px;border-radius:4px;color:var(--amber)!important;font-size:11px;margin-top:8px;}
+.nav-has-dropdown{position:relative;}
+.nav-dropdown{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(7,9,13,.97);border:1px solid rgba(245,166,35,.15);border-radius:4px;padding:16px 0 8px;list-style:none;min-width:160px;backdrop-filter:blur(12px);z-index:200;}
+.nav-has-dropdown::after{content:'';position:absolute;top:100%;left:0;right:0;height:16px;}
+.nav-has-dropdown:hover .nav-dropdown{display:block;}
+.nav-dropdown li a{display:block;padding:9px 18px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.5);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;}
+.nav-dropdown li a:hover{color:var(--amber);background:rgba(245,166,35,.05);}
+.nav-dropdown li+li{border-top:1px solid rgba(240,237,232,.05);}
+
+/* ── SECTION HEADER ── */
+.data-section{padding:96px 48px 80px;max-width:1200px;margin:0 auto;}
+.section-label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-label::before{content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0;}
+.section-title{font-size:clamp(36px,5vw,60px);font-weight:800;line-height:1;letter-spacing:-.02em;color:var(--white);}
+.section-title em{font-family:var(--serif);font-weight:400;font-style:italic;color:rgba(240,237,232,.38);}
+.section-desc{font-family:var(--sans);font-size:14px;line-height:1.8;color:rgba(240,237,232,.43);max-width:560px;margin-top:14px;}
+
+/* ── TABS + PICKER (reused visual language from Archive) ── */
+.archive-subtabs{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0 20px;border-bottom:1px solid var(--border);}
+.archive-subtab{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.43);background:none;border:none;padding:12px 4px;margin-right:20px;cursor:pointer;border-bottom:2px solid transparent;transition:color .2s;}
+.archive-subtab:hover{color:rgba(240,237,232,.7);}
+.archive-subtab.active{color:var(--amber);border-bottom-color:var(--amber);}
+.cmp-min-note{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);letter-spacing:.06em;margin-bottom:22px;}
+
+.cmp-picker-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin-bottom:32px;}
+.archive-select{font-family:var(--mono);font-size:12px;letter-spacing:.02em;background:var(--dark2);border:1px solid var(--border);color:var(--white);padding:13px 16px;border-radius:4px;cursor:pointer;width:100%;}
+.archive-select:hover{border-color:rgba(245,166,35,.4);}
+.cmp-vs{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:rgba(245,166,35,.5);text-align:center;}
+
+/* ── DIFF BANNER ── */
+.cmp-diff-banner{background:linear-gradient(135deg,rgba(245,166,35,.08) 0%,rgba(7,9,13,0) 70%);border:1px solid rgba(245,166,35,.22);border-radius:4px;padding:18px 22px;margin-bottom:28px;font-family:var(--sans);font-size:14px;line-height:1.6;color:rgba(240,237,232,.85);}
+.cmp-diff-banner b{color:var(--amber);}
+
+/* ── COMPARISON CARDS ── */
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.cmp-card{background:var(--dark2);border:1px solid var(--border);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;}
+.cmp-photo{position:relative;background:var(--dark3);}
+.cmp-photo::before{content:'';display:block;padding-top:66%;}
+.cmp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.cmp-photo-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.25);letter-spacing:.1em;text-transform:uppercase;}
+.cmp-rank{position:absolute;top:12px;left:12px;background:rgba(7,9,13,.75);color:var(--amber);font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:4px 9px;border-radius:3px;backdrop-filter:blur(4px);}
+.cmp-body{padding:22px 22px 26px;}
+.cmp-name{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.15;margin-bottom:4px;}
+.cmp-flag{margin-right:6px;}
+.cmp-subn{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.32);margin-bottom:18px;}
+
+.cmp-profile{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:18px;}
+.cmp-profile-desc{font-family:var(--sans);font-size:12.5px;line-height:1.7;color:rgba(240,237,232,.6);margin-bottom:12px;}
+.cmp-profile-facts{display:flex;flex-wrap:wrap;gap:10px 22px;}
+.cmp-fact{font-family:var(--mono);font-size:10px;}
+.cmp-fact span{display:block;color:rgba(240,237,232,.32);letter-spacing:.08em;text-transform:uppercase;font-size:8.5px;margin-bottom:3px;}
+.cmp-fact b{color:var(--white);font-weight:500;}
+.cmp-fact-quote{font-family:var(--serif);font-style:italic;font-size:13px;color:rgba(240,237,232,.55);margin-top:10px;line-height:1.5;}
+
+.cmp-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cmp-stat{background:var(--dark3);border:1px solid var(--border);border-radius:4px;padding:14px 14px;}
+.cmp-stat-val{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--white);line-height:1;}
+.cmp-stat.amber .cmp-stat-val{color:var(--amber);}
+.cmp-stat-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:7px;}
+
+.data-error{padding:32px;text-align:center;font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.32);border:1px dashed rgba(240,237,232,.1);border-radius:4px;}
+
+/* ── FOOTER ── */
+.page-footer{border-top:1px solid var(--border);padding:32px 48px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-left{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);letter-spacing:.08em;}
+.footer-updated{font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.3);letter-spacing:.08em;}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1150px) { .nav-links { display:none; } .nav-burger { display:flex; } }
+@media(max-width:900px){
+  .cmp-grid{grid-template-columns:1fr;}
+  .cmp-picker-row{grid-template-columns:1fr;}
+  .cmp-vs{display:none;}
+}
+@media(max-width:640px){
+  nav,.data-section,.page-footer{padding-left:20px;padding-right:20px;}
+  .nav-clock-wrap{margin-left:auto;padding-left:14px;gap:8px;}
+  .nav-clock{display:none;}
+  .cmp-stat-grid{grid-template-columns:1fr 1fr;}
+}
+@media (prefers-reduced-motion: reduce) {
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="/" onclick="closeDrawer()">Live</a>
+  <a href="/data.html" onclick="closeDrawer()">Data</a>
+  <a href="/archive.html" onclick="closeDrawer()">Archive</a>
+  <a href="/compare.html" style="color:var(--amber)" onclick="closeDrawer()">Compare</a>
+  <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
+  <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
+  <a href="/about.html#the-project" onclick="closeDrawer()">The Project</a>
+  <a href="/about.html#how-it-works" onclick="closeDrawer()">How it works</a>
+  <a href="/about.html#hardware" onclick="closeDrawer()">The Station</a>
+  <a href="/about.html#whats-next" onclick="closeDrawer()">What's next</a>
+  <a href="/about.html#get-involved" onclick="closeDrawer()">Get Involved</a>
+  <a href="/about.html#press" onclick="closeDrawer()">Press</a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
+</div>
+
+<nav aria-label="Primary navigation">
+  <a href="/" class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-wordmark">LISBON <span>FINALS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Live</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/data.html">Data ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/data.html#the-data">The Data</a></li>
+        <li><a href="/data.html#noise-data">Noise Data</a></li>
+        <li><a href="/data.html#warning-zone" class="dd-warning">Warning Zone</a></li>
+      </ul>
+    </li>
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/compare.html" class="nav-active">Compare</a></li>
+    <li><a href="/noise-report.html" class="nav-noise">Noise Report</a></li>
+    <li><a href="/log.html">Captain's Log</a></li>
+    <li class="nav-has-dropdown">
+      <a href="/about.html">About ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/about.html#the-project">The Project</a></li>
+        <li><a href="/about.html#how-it-works">How it works</a></li>
+        <li><a href="/about.html#hardware">The Station</a></li>
+        <li><a href="/about.html#whats-next">What's next</a></li>
+        <li><a href="/about.html#get-involved">Get Involved</a></li>
+        <li><a href="/about.html#press">Press</a></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="nav-clock-wrap">
+    <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
+    <div class="lang-group">
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
+    </div>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<section class="data-section" id="compare-section">
+  <div class="section-label" data-i18n="cmp_label">Head to head</div>
+  <h1 class="section-title" data-i18n-html="cmp_title">Compare<br><em>planes &amp; airlines</em></h1>
+  <p class="section-desc" data-i18n="cmp_desc">Pick two aircraft models or two airlines tracked by the station and compare them side by side: how many flights, how loud, how much they shake the terrace, ranked against everything else measured here.</p>
+
+  <div class="archive-subtabs" role="tablist">
+    <button class="archive-subtab active" data-mode="aircraft" data-i18n="cmp_tab_aircraft">Aircraft</button>
+    <button class="archive-subtab" data-mode="airline" data-i18n="cmp_tab_airline">Airlines</button>
+  </div>
+  <p class="cmp-min-note" data-i18n="cmp_min_note">Only aircraft and airlines with at least 15 tracked flights are listed, for a fair comparison.</p>
+
+  <div class="cmp-picker-row">
+    <select class="archive-select" id="cmp-select-a"></select>
+    <div class="cmp-vs">VS</div>
+    <select class="archive-select" id="cmp-select-b"></select>
+  </div>
+
+  <div id="cmp-diff-banner" class="cmp-diff-banner" hidden></div>
+  <div id="cmp-status" class="data-error" data-i18n="cmp_loading">Loading station data…</div>
+  <div class="cmp-grid" id="cmp-grid" hidden></div>
+</section>
+</main>
+
+<footer class="page-footer">
+  <span class="footer-left" id="footerLeft">LISBON FINALS · Data Intelligence · lisbonfinals.com</span>
+  <span class="footer-updated" id="footerUpdated"></span>
+</footer>
+
+<script>
+function closeDrawer(){const d=document.getElementById('nav-drawer');if(d)d.classList.remove('open');}
+document.getElementById('nav-burger').addEventListener('click',function(){
+  const d=document.getElementById('nav-drawer');
+  const open=!d.classList.contains('open');
+  d.classList.toggle('open',open);
+  this.classList.toggle('open',open);
+  this.setAttribute('aria-expanded',open?'true':'false');
+});
+(function tickClock(){
+  const el=document.getElementById('nav-clock');
+  function upd(){
+    const now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Lisbon'}));
+    const hh=String(now.getHours()).padStart(2,'0'),mm=String(now.getMinutes()).padStart(2,'0'),ss=String(now.getSeconds()).padStart(2,'0');
+    el.innerHTML=`${hh}:${mm}:${ss}<span class="nav-clock-tz">LIS</span>`;
+  }
+  upd();setInterval(upd,1000);
+})();
+
+const T = {
+  en: {
+    footer:'LISBON FINALS · Data Intelligence · lisbonfinals.com',
+    cmp_label:'Head to head',
+    cmp_title:'Compare<br><em>planes &amp; airlines</em>',
+    cmp_desc:'Pick two aircraft models or two airlines tracked by the station and compare them side by side: how many flights, how loud, how much they shake the terrace, ranked against everything else measured here.',
+    cmp_tab_aircraft:'Aircraft',
+    cmp_tab_airline:'Airlines',
+    cmp_min_note:'Only aircraft and airlines with at least 15 tracked flights are listed, for a fair comparison.',
+    cmp_loading:'Loading station data…',
+    cmp_error:"Couldn't load the comparison data. Try reloading the page.",
+    cmp_stat_flights:'Flights tracked',
+    cmp_stat_avg_db:'Average noise',
+    cmp_stat_max_db:'Loudest recorded',
+    cmp_stat_avg_vib:'Average vibration',
+    cmp_stat_max_vib:'Peak vibration',
+    cmp_rank:'Loudest #{rank} of {total}',
+    cmp_diff_louder:'<b>{a}</b> runs about <b>{d} dB</b> louder than <b>{b}</b> on average.',
+    cmp_diff_close:'<b>{a}</b> and <b>{b}</b> measure almost the same on average, less than 0.5 dB apart.',
+    cmp_profile_manufacturer:'Manufacturer',
+    cmp_profile_first_flight:'First flight',
+    cmp_profile_in_service:'In service since',
+    cmp_profile_founded:'Founded',
+    cmp_profile_hq:'Headquarters',
+    cmp_no_photo:'No photo yet'
+  },
+  pt: {
+    footer:'LISBON FINALS · Dados · lisbonfinals.com',
+    cmp_label:'Frente a frente',
+    cmp_title:'Comparar<br><em>aviões e companhias</em>',
+    cmp_desc:'Escolha dois modelos de avião ou duas companhias aéreas seguidos pela estação e compare lado a lado: número de voos, ruído, o quanto fazem vibrar o terraço, e a posição face a tudo o resto já medido aqui.',
+    cmp_tab_aircraft:'Aviões',
+    cmp_tab_airline:'Companhias',
+    cmp_min_note:'Só aparecem aviões e companhias com pelo menos 15 voos registados, para uma comparação justa.',
+    cmp_loading:'A carregar os dados da estação…',
+    cmp_error:'Não foi possível carregar os dados de comparação. Tente recarregar a página.',
+    cmp_stat_flights:'Voos registados',
+    cmp_stat_avg_db:'Ruído médio',
+    cmp_stat_max_db:'Pico mais alto registado',
+    cmp_stat_avg_vib:'Vibração média',
+    cmp_stat_max_vib:'Pico de vibração',
+    cmp_rank:'Mais ruidoso #{rank} de {total}',
+    cmp_diff_louder:'<b>{a}</b> é, em média, cerca de <b>{d} dB</b> mais ruidoso do que <b>{b}</b>.',
+    cmp_diff_close:'<b>{a}</b> e <b>{b}</b> têm níveis médios muito próximos, menos de 0,5 dB de diferença.',
+    cmp_profile_manufacturer:'Fabricante',
+    cmp_profile_first_flight:'Primeiro voo',
+    cmp_profile_in_service:'Em serviço desde',
+    cmp_profile_founded:'Fundação',
+    cmp_profile_hq:'Sede',
+    cmp_no_photo:'Ainda sem foto'
+  },
+  fr: {
+    footer:'LISBON FINALS · Données · lisbonfinals.com',
+    cmp_label:'Face à face',
+    cmp_title:'Comparer<br><em>avions et compagnies</em>',
+    cmp_desc:"Choisissez deux modèles d'avion ou deux compagnies aériennes suivis par la station et comparez-les côte à côte : nombre de vols, bruit, à quel point ils font vibrer la terrasse, et leur position par rapport à tout ce qui a déjà été mesuré ici.",
+    cmp_tab_aircraft:'Avions',
+    cmp_tab_airline:'Compagnies',
+    cmp_min_note:"Seuls les avions et compagnies avec au moins 15 vols enregistrés apparaissent, pour une comparaison juste.",
+    cmp_loading:'Chargement des données de la station…',
+    cmp_error:"Impossible de charger les données de comparaison. Essayez de recharger la page.",
+    cmp_stat_flights:'Vols enregistrés',
+    cmp_stat_avg_db:'Bruit moyen',
+    cmp_stat_max_db:'Pic le plus élevé enregistré',
+    cmp_stat_avg_vib:'Vibration moyenne',
+    cmp_stat_max_vib:'Pic de vibration',
+    cmp_rank:'Le plus bruyant #{rank} sur {total}',
+    cmp_diff_louder:'<b>{a}</b> est, en moyenne, environ <b>{d} dB</b> plus bruyant que <b>{b}</b>.',
+    cmp_diff_close:'<b>{a}</b> et <b>{b}</b> ont des niveaux moyens très proches, moins de 0,5 dB d’écart.',
+    cmp_profile_manufacturer:'Constructeur',
+    cmp_profile_first_flight:'Premier vol',
+    cmp_profile_in_service:'En service depuis',
+    cmp_profile_founded:'Fondation',
+    cmp_profile_hq:'Siège',
+    cmp_no_photo:'Pas encore de photo'
+  }
+};
+let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
+function applyLang(lang){
+  if (!T[lang]) return;
+  _lang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
+  ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
+  const t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => { if (t[el.dataset.i18n] != null) el.textContent = t[el.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { if (t[el.dataset.i18nHtml] != null) el.innerHTML = t[el.dataset.i18nHtml]; });
+  const fl = document.getElementById('footerLeft');
+  if (fl) fl.textContent = t.footer;
+  if (typeof cmpRender === 'function') cmpRender();
+}
+
+/* ══════════ COMPARE LOGIC ══════════ */
+const ARCHIVE_URL = 'https://gist.githubusercontent.com/lisbonfinals/1d1de7d0a0c7db86ad141cf0c70e1c0b/raw/lisbon_finals_archive.json';
+const MIN_FLIGHTS = 15;
+const DESC_URLS = { aircraft: '/data/aircraft_descriptions.json', airline: '/data/airline_descriptions.json' };
+
+let cmpMode = 'aircraft';
+let cmpArchive = null;
+let cmpDescriptions = { aircraft: {}, airline: {} };
+let cmpAggByMode = { aircraft: null, airline: null };
+let cmpSelA = null, cmpSelB = null;
+
+function fmtInt(n){ return Math.round(n).toLocaleString('en-US'); }
+function fmt1(n){ return (Math.round(n*10)/10).toFixed(1); }
+
+function buildAggregates(mode){
+  const list = (mode === 'aircraft' ? cmpArchive.aircraft_types : cmpArchive.airlines)
+    .filter(e => e.n >= MIN_FLIGHTS);
+  const byKey = mode === 'aircraft' ? cmpArchive.by_aircraft : cmpArchive.by_airline;
+  const subField = mode === 'aircraft' ? 'airlines' : 'aircraft';
+  const nameField = mode === 'aircraft' ? 'aircraft_type' : 'airline';
+
+  const items = list.map(entry => {
+    const name = entry[nameField];
+    const detail = byKey[name];
+    const subs = (detail && detail[subField]) || [];
+    let sumN = 0, sumDbWeighted = 0, sumVibWeighted = 0, maxDb = null, maxVib = null;
+    subs.forEach(s => {
+      sumN += s.n;
+      sumDbWeighted += (s.avg_db || 0) * s.n;
+      sumVibWeighted += (s.avg_vib || 0) * s.n;
+      if (s.max_db != null && (maxDb == null || s.max_db > maxDb)) maxDb = s.max_db;
+      if (s.max_vib != null && (maxVib == null || s.max_vib > maxVib)) maxVib = s.max_vib;
+    });
+    const totalFlights = (detail && detail.total_flights) || entry.n;
+    const bestPic = detail && detail.best_pics && detail.best_pics.items && detail.best_pics.items[0];
+    return {
+      name,
+      flag: entry.airline_flag || null,
+      totalFlights,
+      avgDb: sumN ? sumDbWeighted / sumN : null,
+      maxDb,
+      avgVib: sumN ? sumVibWeighted / sumN : null,
+      maxVib,
+      photoUrl: bestPic ? bestPic.photo_url : null
+    };
+  }).filter(it => it.avgDb != null);
+
+  items.sort((a, b) => b.avgDb - a.avgDb);
+  items.forEach((it, i) => { it.rank = i + 1; });
+  items.sort((a, b) => b.totalFlights - a.totalFlights);
+
+  return items;
+}
+
+function populateSelects(){
+  const items = cmpAggByMode[cmpMode];
+  [cmpSelA, cmpSelB].forEach((sel, idx) => {
+    const prevName = sel.dataset.selectedName;
+    sel.innerHTML = '';
+    items.forEach(it => {
+      const opt = document.createElement('option');
+      opt.value = it.name;
+      opt.textContent = `${it.flag ? it.flag + ' ' : ''}${it.name} (${fmtInt(it.totalFlights)})`;
+      sel.appendChild(opt);
+    });
+    const fallbackIdx = idx === 0 ? 0 : Math.min(1, items.length - 1);
+    const stillExists = items.some(it => it.name === prevName);
+    sel.value = stillExists ? prevName : (items[fallbackIdx] ? items[fallbackIdx].name : '');
+  });
+}
+
+function renderCard(item, otherAvgDb){
+  const t = T[_lang];
+  const wrap = document.createElement('div');
+  wrap.className = 'cmp-card';
+
+  const photo = document.createElement('div');
+  photo.className = 'cmp-photo';
+  if (item.photoUrl) {
+    photo.innerHTML = `<img src="${item.photoUrl}" alt="${item.name}" loading="lazy">`;
+  } else {
+    photo.innerHTML = `<div class="cmp-photo-empty">${t.cmp_no_photo}</div>`;
+  }
+  const rankTag = document.createElement('div');
+  rankTag.className = 'cmp-rank';
+  rankTag.textContent = t.cmp_rank.replace('{rank}', item.rank).replace('{total}', cmpAggByMode[cmpMode].length);
+  photo.appendChild(rankTag);
+  wrap.appendChild(photo);
+
+  const body = document.createElement('div');
+  body.className = 'cmp-body';
+
+  const name = document.createElement('h2');
+  name.className = 'cmp-name';
+  name.innerHTML = `${item.flag ? `<span class="cmp-flag">${item.flag}</span>` : ''}${item.name}`;
+  body.appendChild(name);
+
+  const desc = cmpDescriptions[cmpMode][item.name];
+  if (desc && desc.description) {
+    const profile = document.createElement('div');
+    profile.className = 'cmp-profile';
+    let facts = '';
+    if (cmpMode === 'aircraft') {
+      if (desc.manufacturer) facts += `<div class="cmp-fact"><span>${t.cmp_profile_manufacturer}</span><b>${desc.manufacturer}</b></div>`;
+      if (desc.first_flight_year) facts += `<div class="cmp-fact"><span>${t.cmp_profile_first_flight}</span><b>${desc.first_flight_year}</b></div>`;
+      if (desc.entry_into_service_year) facts += `<div class="cmp-fact"><span>${t.cmp_profile_in_service}</span><b>${desc.entry_into_service_year}</b></div>`;
+    } else {
+      if (desc.founded_year) facts += `<div class="cmp-fact"><span>${t.cmp_profile_founded}</span><b>${desc.founded_year}</b></div>`;
+      if (desc.headquarters) facts += `<div class="cmp-fact"><span>${t.cmp_profile_hq}</span><b>${desc.headquarters}</b></div>`;
+    }
+    profile.innerHTML = `<p class="cmp-profile-desc">${desc.description}</p><div class="cmp-profile-facts">${facts}</div>${desc.fun_fact ? `<p class="cmp-fact-quote">${desc.fun_fact}</p>` : ''}`;
+    body.appendChild(profile);
+  }
+
+  const stats = document.createElement('div');
+  stats.className = 'cmp-stat-grid';
+  const louder = otherAvgDb != null && item.avgDb > otherAvgDb;
+  stats.innerHTML = `
+    <div class="cmp-stat"><div class="cmp-stat-val">${fmtInt(item.totalFlights)}</div><div class="cmp-stat-lbl">${t.cmp_stat_flights}</div></div>
+    <div class="cmp-stat${louder ? ' amber' : ''}"><div class="cmp-stat-val">${fmt1(item.avgDb)} dB</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_db}</div></div>
+    <div class="cmp-stat"><div class="cmp-stat-val">${item.maxDb != null ? fmt1(item.maxDb) + ' dB' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_db}</div></div>
+    <div class="cmp-stat"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div></div>
+    <div class="cmp-stat"><div class="cmp-stat-val">${item.maxVib != null ? fmt1(item.maxVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_vib}</div></div>
+  `;
+  body.appendChild(stats);
+
+  wrap.appendChild(body);
+  return wrap;
+}
+
+function cmpRender(){
+  if (!cmpArchive) return;
+  const t = T[_lang];
+  if (!cmpAggByMode[cmpMode]) cmpAggByMode[cmpMode] = buildAggregates(cmpMode);
+  populateSelects();
+
+  const items = cmpAggByMode[cmpMode];
+  const a = items.find(it => it.name === cmpSelA.value);
+  const b = items.find(it => it.name === cmpSelB.value);
+  const grid = document.getElementById('cmp-grid');
+  const banner = document.getElementById('cmp-diff-banner');
+  grid.innerHTML = '';
+  if (!a || !b) { banner.hidden = true; return; }
+
+  grid.appendChild(renderCard(a, b.avgDb));
+  grid.appendChild(renderCard(b, a.avgDb));
+
+  const delta = Math.abs(a.avgDb - b.avgDb);
+  banner.hidden = false;
+  if (delta < 0.5) {
+    banner.innerHTML = t.cmp_diff_close.replace('{a}', a.name).replace('{b}', b.name);
+  } else {
+    const louder = a.avgDb > b.avgDb ? a : b;
+    const quieter = a.avgDb > b.avgDb ? b : a;
+    banner.innerHTML = t.cmp_diff_louder.replace('{a}', louder.name).replace('{b}', quieter.name).replace('{d}', fmt1(delta));
+  }
+}
+
+async function cmpInit(){
+  cmpSelA = document.getElementById('cmp-select-a');
+  cmpSelB = document.getElementById('cmp-select-b');
+  const status = document.getElementById('cmp-status');
+  const grid = document.getElementById('cmp-grid');
+
+  document.querySelectorAll('.archive-subtab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.archive-subtab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      cmpMode = btn.dataset.mode;
+      cmpSelA.dataset.selectedName = '';
+      cmpSelB.dataset.selectedName = '';
+      cmpRender();
+    });
+  });
+  cmpSelA.addEventListener('change', () => { cmpSelA.dataset.selectedName = cmpSelA.value; cmpRender(); });
+  cmpSelB.addEventListener('change', () => { cmpSelB.dataset.selectedName = cmpSelB.value; cmpRender(); });
+
+  try {
+    const [archiveRes, aircraftDescRes, airlineDescRes] = await Promise.allSettled([
+      fetch(ARCHIVE_URL + '?t=' + Date.now()).then(r => r.json()),
+      fetch(DESC_URLS.aircraft).then(r => r.ok ? r.json() : []),
+      fetch(DESC_URLS.airline).then(r => r.ok ? r.json() : [])
+    ]);
+    if (archiveRes.status !== 'fulfilled') throw new Error('archive fetch failed');
+    cmpArchive = archiveRes.value;
+
+    if (aircraftDescRes.status === 'fulfilled' && Array.isArray(aircraftDescRes.value)) {
+      aircraftDescRes.value.forEach(d => { if (d.aircraft_type) cmpDescriptions.aircraft[d.aircraft_type] = d; });
+    }
+    if (airlineDescRes.status === 'fulfilled' && Array.isArray(airlineDescRes.value)) {
+      airlineDescRes.value.forEach(d => { if (d.airline) cmpDescriptions.airline[d.airline] = d; });
+    }
+
+    status.hidden = true;
+    grid.hidden = false;
+    cmpRender();
+  } catch (e) {
+    status.textContent = T[_lang].cmp_error;
+  }
+}
+
+applyLang(_lang);
+cmpInit();
+</script>
+</body>
+</html>
