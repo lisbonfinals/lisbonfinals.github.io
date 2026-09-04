@@ -664,7 +664,22 @@ footer {
     <span data-i18n="hero_sub1">Every flight. Every decibel. Every night.</span><br>
     <span data-i18n="hero_sub2">Independent acoustic monitoring of Lisbon Airport — flight by flight, month by month.</span>
   </p>
-  <div class="hero-stats" id="hero-stats">
+</section>
+
+<!-- ── MONTH SELECTOR ── -->
+<div class="month-bar">
+  <span class="month-bar-label" data-i18n="archive_label">Archive</span>
+  <div class="month-chips" id="month-chips">
+    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
+  </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<section class="section">
+
+  <!-- Moved below the archive selector so it's visually clear these stats
+       react to the month chip you click (Antonio's feedback, 4 sept. 2026) -->
+  <div class="hero-stats" id="hero-stats" style="margin-bottom:32px">
     <div class="hero-stat amber">
       <div class="hero-stat-val" id="h-flights">—</div>
       <div class="hero-stat-lbl" data-i18n="stat_flights">Flights This Month</div>
@@ -684,18 +699,6 @@ footer {
       <div class="hero-stat-lbl" data-i18n="stat_night">Night Operations</div>
     </div>
   </div>
-</section>
-
-<!-- ── MONTH SELECTOR ── -->
-<div class="month-bar">
-  <span class="month-bar-label" data-i18n="archive_label">Archive</span>
-  <div class="month-chips" id="month-chips">
-    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
-  </div>
-</div>
-
-<!-- ── MAIN CONTENT ── -->
-<section class="section">
 
   <div class="report-method" aria-label="Report methodology" style="margin-top:0">
     <div>
