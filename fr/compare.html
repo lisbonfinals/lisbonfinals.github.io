@@ -311,6 +311,9 @@ const T = {
     cmp_diff_louder:'<b>{a}</b> runs about <b>{d} dB</b> louder than <b>{b}</b> on average.',
     cmp_diff_close:'<b>{a}</b> and <b>{b}</b> measure almost the same on average, less than 0.5 dB apart.',
     cmp_profile_manufacturer:'Manufacturer',
+    cmp_profile_length:'Length',
+    cmp_profile_capacity:'Passenger capacity',
+    cmp_profile_cargo_only:'Cargo only',
     cmp_profile_first_flight:'First flight',
     cmp_profile_in_service:'In service since',
     cmp_profile_founded:'Founded',
@@ -343,6 +346,9 @@ const T = {
     cmp_diff_louder:'<b>{a}</b> é, em média, cerca de <b>{d} dB</b> mais ruidoso do que <b>{b}</b>.',
     cmp_diff_close:'<b>{a}</b> e <b>{b}</b> têm níveis médios muito próximos, menos de 0,5 dB de diferença.',
     cmp_profile_manufacturer:'Fabricante',
+    cmp_profile_length:'Comprimento',
+    cmp_profile_capacity:'Capacidade de passageiros',
+    cmp_profile_cargo_only:'Apenas carga',
     cmp_profile_first_flight:'Primeiro voo',
     cmp_profile_in_service:'Em serviço desde',
     cmp_profile_founded:'Fundação',
@@ -375,6 +381,9 @@ const T = {
     cmp_diff_louder:'<b>{a}</b> est, en moyenne, environ <b>{d} dB</b> plus bruyant que <b>{b}</b>.',
     cmp_diff_close:'<b>{a}</b> et <b>{b}</b> ont des niveaux moyens très proches, moins de 0,5 dB d’écart.',
     cmp_profile_manufacturer:'Constructeur',
+    cmp_profile_length:'Longueur',
+    cmp_profile_capacity:'Capacité passagers',
+    cmp_profile_cargo_only:'Cargo uniquement',
     cmp_profile_first_flight:'Premier vol',
     cmp_profile_in_service:'En service depuis',
     cmp_profile_founded:'Fondation',
@@ -542,6 +551,8 @@ function renderCard(item, otherAvgDb, otherAvgVib){
     let facts = '';
     if (cmpMode === 'aircraft') {
       if (manufacturer) facts += `<div class="cmp-fact"><span>${t.cmp_profile_manufacturer}</span><b>${manufacturer}</b></div>`;
+      if (desc.length_m) facts += `<div class="cmp-fact"><span>${t.cmp_profile_length}</span><b>${desc.length_m} m</b></div>`;
+      if (desc.passenger_capacity != null) facts += `<div class="cmp-fact"><span>${t.cmp_profile_capacity}</span><b>${desc.passenger_capacity > 0 ? desc.passenger_capacity : t.cmp_profile_cargo_only}</b></div>`;
       if (desc.first_flight_year) facts += `<div class="cmp-fact"><span>${t.cmp_profile_first_flight}</span><b>${desc.first_flight_year}</b></div>`;
       if (desc.entry_into_service_year) facts += `<div class="cmp-fact"><span>${t.cmp_profile_in_service}</span><b>${desc.entry_into_service_year}</b></div>`;
     } else {

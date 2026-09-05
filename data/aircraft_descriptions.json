@@ -13,7 +13,9 @@
       "en": "Its cockpit and controls are largely shared with the rest of the A320 family.",
       "pt": "O seu cockpit e comandos são, em grande parte, comuns aos restantes aparelhos da família A320.",
       "fr": "Son cockpit et ses commandes sont largement communs avec les autres appareils de la famille A320."
-    }
+    },
+    "length_m": 37.57,
+    "passenger_capacity": 180
   },
   {
     "aircraft_type": "Airbus A320neo",
@@ -29,7 +31,9 @@
       "en": "\"neo\" stands for New Engine Option.",
       "pt": "«neo» significa New Engine Option.",
       "fr": "« neo » signifie New Engine Option."
-    }
+    },
+    "length_m": 37.57,
+    "passenger_capacity": 194
   },
   {
     "aircraft_type": "Airbus A321neo",
@@ -45,7 +49,9 @@
       "en": "Its LR and XLR versions significantly extend the range of a single-aisle aircraft.",
       "pt": "As suas versões LR e XLR alargam significativamente a autonomia de um avião de corredor único.",
       "fr": "Ses versions LR et XLR étendent nettement le rayon d’action d’un avion monocouloir."
-    }
+    },
+    "length_m": 44.51,
+    "passenger_capacity": 244
   },
   {
     "aircraft_type": "Boeing 737-800",
@@ -61,7 +67,9 @@
       "en": "It typically seats around 160 to 189 passengers depending on the cabin layout.",
       "pt": "Costuma acomodar entre 160 e 189 passageiros, consoante a configuração da cabine.",
       "fr": "Il peut généralement accueillir autour de 160 à 189 passagers selon l’aménagement."
-    }
+    },
+    "length_m": 39.47,
+    "passenger_capacity": 189
   },
   {
     "aircraft_type": "Embraer E190",
@@ -77,7 +85,9 @@
       "en": "It usually carries around a hundred passengers.",
       "pt": "Transporta habitualmente cerca de uma centena de passageiros.",
       "fr": "Il transporte habituellement une centaine de passagers."
-    }
+    },
+    "length_m": 36.25,
+    "passenger_capacity": 114
   },
   {
     "aircraft_type": "Airbus A321",
@@ -93,7 +103,9 @@
       "en": "It is nearly seven meters longer than the A320.",
       "pt": "É quase sete metros mais comprido do que o A320.",
       "fr": "Sa longueur dépasse de près de sept mètres celle de l’A320."
-    }
+    },
+    "length_m": 44.51,
+    "passenger_capacity": 220
   },
   {
     "aircraft_type": "Airbus A330-900neo",
@@ -109,7 +121,9 @@
       "en": "TAP Air Portugal was the first airline to bring it into service.",
       "pt": "A TAP Air Portugal foi a primeira companhia a colocá-lo em serviço.",
       "fr": "TAP Air Portugal a été la première compagnie à le mettre en service."
-    }
+    },
+    "length_m": 63.66,
+    "passenger_capacity": 465
   },
   {
     "aircraft_type": "Embraer E195",
@@ -125,7 +139,9 @@
       "en": "It's the largest model in the original E-Jet family.",
       "pt": "É o maior modelo da família E-Jet original.",
       "fr": "C’est le plus grand modèle de la famille E-Jet d’origine."
-    }
+    },
+    "length_m": 38.66,
+    "passenger_capacity": 124
   },
   {
     "aircraft_type": "Boeing 737 MAX 8",
@@ -141,7 +157,9 @@
       "en": "Its wingtip winglets have a distinctive split, two-branch shape.",
       "pt": "As suas winglets nas pontas das asas têm uma forma distintiva bifurcada.",
       "fr": "Ses ailettes en bout d’aile ont une forme distinctive à deux branches."
-    }
+    },
+    "length_m": 39.52,
+    "passenger_capacity": 210
   },
   {
     "aircraft_type": "Airbus A319",
@@ -157,7 +175,9 @@
       "en": "Its more compact size gives it good range for its category.",
       "pt": "O seu tamanho mais compacto confere-lhe uma boa autonomia para a sua categoria.",
       "fr": "Sa taille plus compacte lui donne un bon rayon d’action pour sa catégorie."
-    }
+    },
+    "length_m": 33.84,
+    "passenger_capacity": 156
   },
   {
     "aircraft_type": "Boeing 777-300ER",
@@ -173,7 +193,9 @@
       "en": "The fan diameter of its GE90 engine is close to the width of a Boeing 737's fuselage.",
       "pt": "O diâmetro da ventoinha do seu motor GE90 aproxima-se do diâmetro da fuselagem de um Boeing 737.",
       "fr": "Le diamètre de la soufflante de son moteur GE90 est proche de celui du fuselage d’un Boeing 737."
-    }
+    },
+    "length_m": 73.86,
+    "passenger_capacity": 550
   },
   {
     "aircraft_type": "Airbus A330-200",
@@ -189,7 +211,9 @@
       "en": "Its fuselage, shorter than the A330-300's, helps extend its range.",
       "pt": "A sua fuselagem, mais curta do que a do A330-300, favorece a sua autonomia.",
       "fr": "Son fuselage plus court que celui de l’A330-300 favorise son autonomie."
-    }
+    },
+    "length_m": 58.82,
+    "passenger_capacity": 406
   },
   {
     "aircraft_type": "Airbus A220-300",
@@ -209,7 +233,9 @@
       "en": "Each row has three seats on one side of the aisle and two on the other.",
       "pt": "Cada fila tem três lugares de um lado do corredor e dois do outro.",
       "fr": "Chaque rangée comporte trois sièges d’un côté de l’allée et deux de l’autre."
-    }
+    },
+    "length_m": 38.7,
+    "passenger_capacity": 160
   },
   {
     "aircraft_type": "Airbus A330-300",
@@ -225,7 +251,9 @@
       "en": "It shares much of its airframe with the four-engine Airbus A340.",
       "pt": "Partilha grande parte da sua célula com o Airbus A340, de quatro reactores.",
       "fr": "Il partage une grande partie de sa cellule avec l’Airbus A340 quadriréacteur."
-    }
+    },
+    "length_m": 63.66,
+    "passenger_capacity": 440
   },
   {
     "aircraft_type": "Boeing 787-9",
@@ -241,7 +269,9 @@
       "en": "Its windows dim electronically instead of using traditional shades.",
       "pt": "As suas janelas escurecem eletronicamente em vez de usarem persianas tradicionais.",
       "fr": "Ses hublots s’assombrissent électroniquement au lieu d’utiliser des volets classiques."
-    }
+    },
+    "length_m": 62.81,
+    "passenger_capacity": 420
   },
   {
     "aircraft_type": "Boeing 777-200",
@@ -257,7 +287,9 @@
       "en": "The 777 was the first commercial aircraft designed entirely by computer.",
       "pt": "O 777 foi o primeiro avião comercial inteiramente concebido por computador.",
       "fr": "Le 777 a été le premier avion commercial entièrement conçu par ordinateur."
-    }
+    },
+    "length_m": 63.73,
+    "passenger_capacity": 440
   },
   {
     "aircraft_type": "Bombardier CRJ-1000",
@@ -273,7 +305,9 @@
       "en": "It descends from a lineage that began with the Challenger business jet.",
       "pt": "Deriva de uma linhagem iniciada com o jato executivo Challenger.",
       "fr": "Il dérive d’une lignée commencée avec le jet d’affaires Challenger."
-    }
+    },
+    "length_m": 39.13,
+    "passenger_capacity": 104
   },
   {
     "aircraft_type": "Boeing 737-700",
@@ -289,7 +323,9 @@
       "en": "It was developed as a direct successor to the 737-300.",
       "pt": "Foi desenvolvido como sucessor direto do 737-300.",
       "fr": "Il a été développé comme successeur direct du 737-300."
-    }
+    },
+    "length_m": 33.63,
+    "passenger_capacity": 149
   },
   {
     "aircraft_type": "Boeing 787-10",
@@ -305,7 +341,9 @@
       "en": "Its fuselage measures about 68 meters, nearly six meters longer than the 787-9's.",
       "pt": "A sua fuselagem mede cerca de 68 metros, quase mais seis metros do que a do 787-9.",
       "fr": "Son fuselage mesure environ 68 mètres, soit près de six mètres de plus que celui du 787-9."
-    }
+    },
+    "length_m": 68.28,
+    "passenger_capacity": 440
   },
   {
     "aircraft_type": "ATR 72 500F",
@@ -321,7 +359,9 @@
       "en": "Its turboprop engines are particularly efficient over short distances.",
       "pt": "Os seus turbo-hélices são particularmente eficientes em curtas distâncias.",
       "fr": "Ses turbopropulseurs sont particulièrement efficaces sur les courtes distances."
-    }
+    },
+    "length_m": 27.17,
+    "passenger_capacity": 0
   },
   {
     "aircraft_type": "Boeing 787-8",
@@ -337,7 +377,9 @@
       "en": "About half its structure, by weight, is made of composite materials.",
       "pt": "Cerca de metade da sua estrutura, em peso, é composta por materiais compósitos.",
       "fr": "Environ la moitié de sa structure, en poids, est constituée de matériaux composites."
-    }
+    },
+    "length_m": 56.72,
+    "passenger_capacity": 381
   },
   {
     "aircraft_type": "737 490SF",
@@ -357,7 +399,9 @@
       "en": "The \"90\" is a Boeing customer code historically associated with Alaska Airlines.",
       "pt": "O «90» é um código de cliente Boeing historicamente associado à Alaska Airlines.",
       "fr": "Le « 90 » est un code client Boeing historiquement associé à Alaska Airlines."
-    }
+    },
+    "length_m": 36.45,
+    "passenger_capacity": 0
   },
   {
     "aircraft_type": "A300 B4-622RF",
@@ -377,7 +421,9 @@
       "en": "The A300 was the first widebody twinjet produced in series.",
       "pt": "O A300 foi o primeiro bireactor de grande capacidade produzido em série.",
       "fr": "L’A300 fut le premier gros-porteur biréacteur produit en série."
-    }
+    },
+    "length_m": 54.08,
+    "passenger_capacity": 0
   },
   {
     "aircraft_type": "767 25EBDSF",
@@ -397,7 +443,9 @@
       "en": "Conversions extend the careers of older airliners into freight transport.",
       "pt": "As conversões prolongam a carreira de antigos aviões de passageiros no transporte de carga.",
       "fr": "Les conversions prolongent la carrière d’anciens avions de ligne dans le transport de fret."
-    }
+    },
+    "length_m": 48.51,
+    "passenger_capacity": 0
   },
   {
     "aircraft_type": "GL5T",
@@ -413,7 +461,9 @@
       "en": "Depending on the version, it can fly about 9,600 km nonstop.",
       "pt": "Consoante a versão, pode percorrer cerca de 9.600 km sem escalas.",
       "fr": "Selon la version, il peut parcourir environ 9 600 km sans escale."
-    }
+    },
+    "length_m": 29.5,
+    "passenger_capacity": 17
   },
   {
     "aircraft_type": "767 34PER",
@@ -429,7 +479,9 @@
       "en": "The ER suffix stands for Extended Range.",
       "pt": "O sufixo ER significa Extended Range.",
       "fr": "Le suffixe ER signifie Extended Range."
-    }
+    },
+    "length_m": 54.94,
+    "passenger_capacity": 351
   },
   {
     "aircraft_type": "C56X",
@@ -445,7 +497,9 @@
       "en": "It pairs the Citation X fuselage with a wing derived from the Citation Ultra.",
       "pt": "Associa a fuselagem do Citation X a uma asa derivada do Citation Ultra.",
       "fr": "Il associe le fuselage du Citation X à une voilure dérivée du Citation Ultra."
-    }
+    },
+    "length_m": 16,
+    "passenger_capacity": 9
   },
   {
     "aircraft_type": "A318 111",
@@ -461,7 +515,9 @@
       "en": "British Airways once used it between London City and New York, with a westbound stop in Shannon.",
       "pt": "A British Airways utilizou-o outrora entre Londres-City e Nova Iorque, com uma escala em Shannon no sentido de ida.",
       "fr": "British Airways l’a autrefois utilisée entre Londres-City et New York avec une escale à Shannon à l’aller."
-    }
+    },
+    "length_m": 31.44,
+    "passenger_capacity": 132
   },
   {
     "aircraft_type": "Global 6000",
@@ -477,7 +533,9 @@
       "en": "The Global 6000 name replaced the Global Express XRS designation in 2011.",
       "pt": "O nome Global 6000 substituiu a designação Global Express XRS em 2011.",
       "fr": "Le nom Global 6000 a remplacé l’appellation Global Express XRS en 2011."
-    }
+    },
+    "length_m": 30.3,
+    "passenger_capacity": 17
   },
   {
     "aircraft_type": "Citation Latitude",
@@ -493,7 +551,9 @@
       "en": "Its cabin floor is flat, a feature valued in this category.",
       "pt": "O seu piso de cabine é plano, uma característica apreciada nesta categoria.",
       "fr": "Son plancher de cabine est plat, une caractéristique appréciable dans cette catégorie."
-    }
+    },
+    "length_m": 18.97,
+    "passenger_capacity": 9
   },
   {
     "aircraft_type": "A306",
@@ -509,7 +569,9 @@
       "en": "Its two-person flight deck removed the need for a flight engineer.",
       "pt": "O seu cockpit para dois tripulantes eliminou a necessidade de um mecânico de bordo.",
       "fr": "Son poste de pilotage à deux personnes a supprimé le besoin d’un mécanicien navigant."
-    }
+    },
+    "length_m": 54.08,
+    "passenger_capacity": 361
   },
   {
     "aircraft_type": "E390",
@@ -525,7 +587,9 @@
       "en": "Its cargo hold can accommodate heavy vehicles and disassembled helicopters.",
       "pt": "O seu porão pode acomodar veículos pesados e helicópteros desmontados.",
       "fr": "Sa soute peut accueillir des véhicules lourds et des hélicoptères démontés."
-    }
+    },
+    "length_m": 35.2,
+    "passenger_capacity": 80
   },
   {
     "aircraft_type": "Challenger 350",
@@ -541,7 +605,9 @@
       "en": "It can nonstop link many city pairs roughly 5,900 km apart.",
       "pt": "Consegue ligar sem escalas numerosos pares de cidades distantes cerca de 5.900 km.",
       "fr": "Il peut relier sans escale de nombreuses paires de villes distantes d’environ 5 900 km."
-    }
+    },
+    "length_m": 20.9,
+    "passenger_capacity": 10
   },
   {
     "aircraft_type": "Challenger 604",
@@ -557,7 +623,9 @@
       "en": "Its wide cabin has also appealed to government and military operators.",
       "pt": "A sua cabine ampla também conquistou operadores governamentais e militares.",
       "fr": "Sa large cabine a aussi séduit des opérateurs gouvernementaux et militaires."
-    }
+    },
+    "length_m": 20.85,
+    "passenger_capacity": 12
   },
   {
     "aircraft_type": "767 219ERBDSF",
@@ -577,7 +645,9 @@
       "en": "Several examples of this variant went on to have European careers in express freight.",
       "pt": "Vários exemplares desta variante prosseguiram a sua carreira europeia no transporte de carga expresso.",
       "fr": "Plusieurs exemplaires de cette variante ont poursuivi leur carrière européenne dans le fret express."
-    }
+    },
+    "length_m": 48.51,
+    "passenger_capacity": 0
   },
   {
     "aircraft_type": "Boeing 737-900",
@@ -593,7 +663,9 @@
       "en": "The later 737-900ER version added extra exits to increase the maximum passenger count.",
       "pt": "A versão posterior 737-900ER acrescentou saídas adicionais para aumentar o número máximo de passageiros.",
       "fr": "La version ultérieure 737-900ER a ajouté des issues afin d’augmenter le nombre maximal de passagers."
-    }
+    },
+    "length_m": 42.11,
+    "passenger_capacity": 220
   },
   {
     "aircraft_type": "Challenger 850",
@@ -609,7 +681,9 @@
       "en": "Its airframe comes directly from a regional airliner.",
       "pt": "A sua célula provém diretamente de um avião de linha regional.",
       "fr": "Sa cellule provient directement d’un avion de ligne régional."
-    }
+    },
+    "length_m": 26.77,
+    "passenger_capacity": 14
   },
   {
     "aircraft_type": "DA 62",
@@ -625,6 +699,8 @@
       "en": "Its two engines run on Jet A-1, a fuel widely available at airports.",
       "pt": "Os seus dois motores consomem Jet A-1, um combustível amplamente disponível nos aeroportos.",
       "fr": "Ses deux moteurs consomment du Jet A-1, carburant largement disponible dans les aéroports."
-    }
+    },
+    "length_m": 9.19,
+    "passenger_capacity": 7
   }
 ]
