@@ -702,5 +702,23 @@
     },
     "length_m": 9.19,
     "passenger_capacity": 7
+  },
+  {
+    "aircraft_type": "Boeing 737-600",
+    "description": {
+      "en": "The 737-600 is the smallest member of the Boeing 737 Next Generation family, built for shorter routes with lower passenger demand than the far more common -700 and -800.",
+      "pt": "O 737-600 é o menor membro da família Boeing 737 Next Generation, concebido para rotas mais curtas com menor procura de passageiros do que os muito mais comuns -700 e -800.",
+      "fr": "Le 737-600 est le plus petit membre de la famille Boeing 737 Next Generation, conçu pour des liaisons plus courtes avec une demande de passagers plus faible que les -700 et -800, bien plus répandus."
+    },
+    "manufacturer": "Boeing",
+    "first_flight_year": 1998,
+    "entry_into_service_year": 1999,
+    "fun_fact": {
+      "en": "It's the rarest 737NG variant still flying commercially, only a handful of airlines ever ordered it.",
+      "pt": "É a variante 737NG mais rara ainda em serviço comercial, poucas companhias aéreas alguma vez a encomendaram.",
+      "fr": "C'est la variante 737NG la plus rare encore en service commercial, très peu de compagnies l'ont commandée."
+    },
+    "length_m": 31.24,
+    "passenger_capacity": 132
   }
 ]
