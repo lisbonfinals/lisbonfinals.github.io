@@ -18,11 +18,11 @@ const localizedMeta = {
   },
   pt: {
     'index.html': ['Lisbon Finals — Cada avião sobre uma varanda em Lisboa', 'Uma estação autónoma numa varanda em Lisboa que fotografa aeronaves e regista localmente ruído, vibração e qualidade do ar.'],
-    'data.html': ['Dados — Lisbon Finals · Observação LPPT', 'Deteções de voos e observações acústicas locais independentes sob o corredor de aproximação do Aeroporto de Lisboa.'],
-    'archive.html': ['Arquivo — Lisbon Finals', 'Explora o histórico do Lisbon Finals por aeronave, companhia, operações noturnas, ruído, vibração e qualidade do ar.'],
+    'data.html': ['Dados — Lisbon Finals · Observação LPPT', 'Detecções de voos e observações acústicas locais independentes sob o corredor de aproximação do Aeroporto de Lisboa.'],
+    'archive.html': ['Arquivo — Lisbon Finals', 'Explora o histórico do Lisbon Finals por aeronave, companhia, operações nocturnas, ruído, vibração e qualidade do ar.'],
     'noise-report.html': ['Relatório de Ruído — Lisbon Finals', 'Observações acústicas mensais independentes a partir de uma varanda sob o corredor de aproximação LPPT.'],
-    'log.html': ['Diário do Capitão — Lisbon Finals', 'Atualizações técnicas, notas de campo e observações raras da estação Lisbon Finals.'],
-    'about.html': ['Sobre o projeto — Lisbon Finals', 'Como a estação independente Lisbon Finals deteta, fotografa e mede aeronaves a partir de uma varanda em Lisboa.'],
+    'log.html': ['Diário do Capitão — Lisbon Finals', 'Actualizações técnicas, notas de campo e observações raras da estação Lisbon Finals.'],
+    'about.html': ['Sobre o projecto — Lisbon Finals', 'Como a estação independente Lisbon Finals detecta, fotografa e mede aeronaves a partir de uma varanda em Lisboa.'],
     'host-a-node.html': ['Instalar um nó — Lisbon Finals', 'Vives sob um corredor aéreo? Descobre o que é necessário para instalar um nó independente da Finals Network.']
   },
   fr: {
