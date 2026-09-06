@@ -306,6 +306,8 @@ const T = {
     cmp_stat_max_db:'Loudest recorded',
     cmp_stat_avg_vib:'Average vibration',
     cmp_stat_max_vib:'Peak vibration',
+    cmp_stat_avg_altitude:'Average altitude',
+    cmp_stat_avg_speed:'Average speed',
     cmp_stat_vib_multiple:'~{n}× perception threshold',
     cmp_rank_loudest:'Loudest of {n} tracked', cmp_rank_quietest:'Quietest of {n} tracked',
     cmp_rank_louder:'Louder than {pct}%', cmp_rank_quieter:'Quieter than {pct}%',
@@ -342,6 +344,8 @@ const T = {
     cmp_stat_max_db:'Pico mais alto registado',
     cmp_stat_avg_vib:'Vibração média',
     cmp_stat_max_vib:'Pico de vibração',
+    cmp_stat_avg_altitude:'Altitude média',
+    cmp_stat_avg_speed:'Velocidade média',
     cmp_stat_vib_multiple:'~{n}× o limiar de perceção',
     cmp_rank_loudest:'O mais ruidoso de {n}', cmp_rank_quietest:'O mais silencioso de {n}',
     cmp_rank_louder:'Mais ruidoso que {pct}%', cmp_rank_quieter:'Mais silencioso que {pct}%',
@@ -378,6 +382,8 @@ const T = {
     cmp_stat_max_db:'Pic le plus élevé enregistré',
     cmp_stat_avg_vib:'Vibration moyenne',
     cmp_stat_max_vib:'Pic de vibration',
+    cmp_stat_avg_altitude:'Altitude moyenne',
+    cmp_stat_avg_speed:'Vitesse moyenne',
     cmp_stat_vib_multiple:'~{n}× le seuil de perception',
     cmp_rank_loudest:'Le plus bruyant sur {n}', cmp_rank_quietest:'Le plus silencieux sur {n}',
     cmp_rank_louder:'Plus bruyant que {pct}%', cmp_rank_quieter:'Plus silencieux que {pct}%',
@@ -430,6 +436,8 @@ let cmpSelA = null, cmpSelB = null;
 
 function fmtInt(n){ return Math.round(n).toLocaleString('en-US'); }
 function fmt1(n){ return (Math.round(n*10)/10).toFixed(1); }
+function fmtAltitude(ft){ return fmtInt(ft) + ' ft / ' + fmtInt(ft * 0.3048) + ' m'; }
+function fmtSpeed(kt){ return fmtInt(kt) + ' kt / ' + fmtInt(kt * 1.852) + ' km/h'; }
 // Accepte soit une chaîne simple (identique dans toutes les langues, ex. "Airbus"),
 // soit un objet {en,pt,fr} : renvoie la version de la langue active, avec repli en/fr/pt.
 function loc(field){
@@ -451,10 +459,13 @@ function buildAggregates(mode){
     const detail = byKey[name];
     const subs = (detail && detail[subField]) || [];
     let sumN = 0, sumDbWeighted = 0, sumVibWeighted = 0, maxDb = null, maxVib = null;
+    let sumAltWeighted = 0, sumAltN = 0, sumSpeedWeighted = 0, sumSpeedN = 0;
     subs.forEach(s => {
       sumN += s.n;
       sumDbWeighted += (s.avg_db || 0) * s.n;
       sumVibWeighted += (s.avg_vib || 0) * s.n;
+      if (s.avg_altitude != null) { sumAltWeighted += s.avg_altitude * s.n; sumAltN += s.n; }
+      if (s.avg_speed != null) { sumSpeedWeighted += s.avg_speed * s.n; sumSpeedN += s.n; }
       if (s.max_db != null && (maxDb == null || s.max_db > maxDb)) maxDb = s.max_db;
       if (s.max_vib != null && (maxVib == null || s.max_vib > maxVib)) maxVib = s.max_vib;
     });
@@ -468,6 +479,8 @@ function buildAggregates(mode){
       maxDb,
       avgVib: sumN ? sumVibWeighted / sumN : null,
       maxVib,
+      avgAltitude: sumAltN ? sumAltWeighted / sumAltN : null,
+      avgSpeed: sumSpeedN ? sumSpeedWeighted / sumSpeedN : null,
       photoUrl: bestPic ? bestPic.photo_url : null
     };
   }).filter(it => it.avgDb != null);
@@ -584,6 +597,8 @@ function renderCard(item, otherAvgDb, otherAvgVib){
     <div class="cmp-stat"><div class="cmp-stat-val">${item.maxDb != null ? fmt1(item.maxDb) + ' dB' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_db}</div></div>
     <div class="cmp-stat${louderVib ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div>${vibSub(item.avgVib)}</div>
     <div class="cmp-stat"><div class="cmp-stat-val">${item.maxVib != null ? fmt1(item.maxVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_vib}</div>${vibSub(item.maxVib)}</div>
+    <div class="cmp-stat"><div class="cmp-stat-val">${item.avgAltitude != null ? fmtAltitude(item.avgAltitude) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_altitude}</div></div>
+    <div class="cmp-stat"><div class="cmp-stat-val">${item.avgSpeed != null ? fmtSpeed(item.avgSpeed) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_speed}</div></div>
   `;
   body.appendChild(stats);
 
