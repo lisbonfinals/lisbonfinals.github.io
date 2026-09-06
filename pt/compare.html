@@ -139,6 +139,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-stat.secondary .cmp-stat-val{font-size:13px;color:rgba(240,237,232,.68);}
 .cmp-stat.secondary .cmp-stat-lbl{font-size:7.5px;color:rgba(240,237,232,.3);}
 .cmp-phase-divider{grid-column:1/-1;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.32);padding-top:8px;margin-top:2px;border-top:1px solid var(--border);}
+.cmp-more-toggle{margin-top:16px;background:transparent;border:1px solid var(--border);border-radius:4px;padding:9px 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.5);cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;transition:color .2s,border-color .2s;}
+.cmp-more-toggle:hover{color:var(--amber);border-color:rgba(245,166,35,.3);}
+.cmp-more-arrow{transition:transform .2s;font-size:9px;}
+.cmp-more-toggle.open .cmp-more-arrow{transform:rotate(180deg);}
+.cmp-fleet{margin-top:2px;border:1px solid var(--border);border-top:none;border-radius:0 0 4px 4px;padding:4px 12px;}
+.cmp-fleet-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11px;}
+.cmp-fleet-row:last-child{border-bottom:none;}
+.cmp-fleet-type{color:rgba(240,237,232,.75);}
+.cmp-fleet-n{color:rgba(240,237,232,.4);font-size:10px;}
 
 .data-error{padding:32px;text-align:center;font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.32);border:1px dashed rgba(240,237,232,.1);border-radius:4px;}
 
@@ -334,6 +343,8 @@ const T = {
     cmp_phase_takeoff:'Takeoff',
     cmp_stat_takeoff_altitude:'Average takeoff altitude',
     cmp_stat_takeoff_speed:'Average takeoff speed',
+    cmp_more_info:'More info',
+    cmp_fleet_flights:'flights',
     cmp_stat_vib_multiple:'~{n}× perception threshold',
     cmp_rank_loudest:'Loudest of {n} tracked', cmp_rank_quietest:'Quietest of {n} tracked',
     cmp_rank_louder:'Louder than {pct}%', cmp_rank_quieter:'Quieter than {pct}%',
@@ -394,6 +405,8 @@ const T = {
     cmp_phase_takeoff:'Descolagem',
     cmp_stat_takeoff_altitude:'Altitude média de descolagem',
     cmp_stat_takeoff_speed:'Velocidade média de descolagem',
+    cmp_more_info:'Mais informação',
+    cmp_fleet_flights:'voos',
     cmp_stat_vib_multiple:'~{n}× o limiar de perceção',
     cmp_rank_loudest:'O mais ruidoso de {n}', cmp_rank_quietest:'O mais silencioso de {n}',
     cmp_rank_louder:'Mais ruidoso que {pct}%', cmp_rank_quieter:'Mais silencioso que {pct}%',
@@ -454,6 +467,8 @@ const T = {
     cmp_phase_takeoff:'Décollage',
     cmp_stat_takeoff_altitude:'Altitude moyenne au décollage',
     cmp_stat_takeoff_speed:'Vitesse moyenne au décollage',
+    cmp_more_info:'Plus d\'infos',
+    cmp_fleet_flights:'vols',
     cmp_stat_vib_multiple:'~{n}× le seuil de perception',
     cmp_rank_loudest:'Le plus bruyant sur {n}', cmp_rank_quietest:'Le plus silencieux sur {n}',
     cmp_rank_louder:'Plus bruyant que {pct}%', cmp_rank_quieter:'Plus silencieux que {pct}%',
@@ -556,7 +571,8 @@ function buildAggregates(mode){
       avgSpeedLanding: sumSpeedLandN ? sumSpeedLandWeighted / sumSpeedLandN : null,
       avgAltitudeTakeoff: sumAltTakeN ? sumAltTakeWeighted / sumAltTakeN : null,
       avgSpeedTakeoff: sumSpeedTakeN ? sumSpeedTakeWeighted / sumSpeedTakeN : null,
-      photoUrl: bestPic ? bestPic.photo_url : null
+      photoUrl: bestPic ? bestPic.photo_url : null,
+      fleet: subs
     };
   }).filter(it => it.avgDb != null);
 
@@ -584,7 +600,7 @@ function populateSelects(){
   });
 }
 
-function renderCard(item, otherAvgDb, otherAvgVib){
+function renderCard(item, other){
   const t = T[_lang];
   const wrap = document.createElement('div');
   wrap.className = 'cmp-card';
@@ -657,8 +673,16 @@ function renderCard(item, otherAvgDb, otherAvgVib){
 
   const stats = document.createElement('div');
   stats.className = 'cmp-stat-grid';
-  const louderDb = otherAvgDb != null && item.avgDb > otherAvgDb;
-  const louderVib = item.avgVib != null && otherAvgVib != null && item.avgVib > otherAvgVib;
+  const louderDb = other.avgDb != null && item.avgDb > other.avgDb;
+  const louderMaxDb = item.maxDb != null && other.maxDb != null && item.maxDb > other.maxDb;
+  const louderVib = item.avgVib != null && other.avgVib != null && item.avgVib > other.avgVib;
+  const louderMaxVib = item.maxVib != null && other.maxVib != null && item.maxVib > other.maxVib;
+  // "Plus fort" pour l'altitude = PLUS BAS (plus proche du sol au même point de la trajectoire),
+  // contrairement à toutes les autres stats où plus fort = valeur plus grande.
+  const louderLandAlt = item.avgAltitudeLanding != null && other.avgAltitudeLanding != null && item.avgAltitudeLanding < other.avgAltitudeLanding;
+  const louderLandSpeed = item.avgSpeedLanding != null && other.avgSpeedLanding != null && item.avgSpeedLanding > other.avgSpeedLanding;
+  const louderTakeAlt = item.avgAltitudeTakeoff != null && other.avgAltitudeTakeoff != null && item.avgAltitudeTakeoff < other.avgAltitudeTakeoff;
+  const louderTakeSpeed = item.avgSpeedTakeoff != null && other.avgSpeedTakeoff != null && item.avgSpeedTakeoff > other.avgSpeedTakeoff;
   // Seuil de perception humaine de la vibration en bâtiment, ISO 2631-1 / BS 6472-1 :
   // ~0.015 m/s² (50% des gens la remarquent tout juste) = ~1.5 mg. Sert juste à donner
   // un ordre de grandeur intuitif ("~Nx ce seuil"), pas une équivalence réglementaire
@@ -669,17 +693,34 @@ function renderCard(item, otherAvgDb, otherAvgVib){
   stats.innerHTML = `
     <div class="cmp-stat wide"><div class="cmp-stat-val">${fmtInt(item.totalFlights)}</div><div class="cmp-stat-lbl">${t.cmp_stat_flights}</div></div>
     <div class="cmp-stat${louderDb ? ' amber' : ''}"><div class="cmp-stat-val">${fmt1(item.avgDb)} dB</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_db}</div></div>
-    <div class="cmp-stat"><div class="cmp-stat-val">${item.maxDb != null ? fmt1(item.maxDb) + ' dB' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_db}</div></div>
+    <div class="cmp-stat${louderMaxDb ? ' amber' : ''}"><div class="cmp-stat-val">${item.maxDb != null ? fmt1(item.maxDb) + ' dB' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_db}</div></div>
     <div class="cmp-stat${louderVib ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div>${vibSub(item.avgVib)}</div>
-    <div class="cmp-stat"><div class="cmp-stat-val">${item.maxVib != null ? fmt1(item.maxVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_vib}</div>${vibSub(item.maxVib)}</div>
+    <div class="cmp-stat${louderMaxVib ? ' amber' : ''}"><div class="cmp-stat-val">${item.maxVib != null ? fmt1(item.maxVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_vib}</div>${vibSub(item.maxVib)}</div>
     <div class="cmp-phase-divider">${t.cmp_phase_landing}</div>
-    <div class="cmp-stat secondary"><div class="cmp-stat-val">${item.avgAltitudeLanding != null ? fmtAltitude(item.avgAltitudeLanding) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_landing_altitude}</div></div>
-    <div class="cmp-stat secondary"><div class="cmp-stat-val">${item.avgSpeedLanding != null ? fmtSpeed(item.avgSpeedLanding) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_landing_speed}</div></div>
+    <div class="cmp-stat secondary${louderLandAlt ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgAltitudeLanding != null ? fmtAltitude(item.avgAltitudeLanding) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_landing_altitude}</div></div>
+    <div class="cmp-stat secondary${louderLandSpeed ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgSpeedLanding != null ? fmtSpeed(item.avgSpeedLanding) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_landing_speed}</div></div>
     <div class="cmp-phase-divider">${t.cmp_phase_takeoff}</div>
-    <div class="cmp-stat secondary"><div class="cmp-stat-val">${item.avgAltitudeTakeoff != null ? fmtAltitude(item.avgAltitudeTakeoff) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_takeoff_altitude}</div></div>
-    <div class="cmp-stat secondary"><div class="cmp-stat-val">${item.avgSpeedTakeoff != null ? fmtSpeed(item.avgSpeedTakeoff) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_takeoff_speed}</div></div>
+    <div class="cmp-stat secondary${louderTakeAlt ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgAltitudeTakeoff != null ? fmtAltitude(item.avgAltitudeTakeoff) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_takeoff_altitude}</div></div>
+    <div class="cmp-stat secondary${louderTakeSpeed ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgSpeedTakeoff != null ? fmtSpeed(item.avgSpeedTakeoff) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_takeoff_speed}</div></div>
   `;
   body.appendChild(stats);
+
+  if (cmpMode === 'airline' && item.fleet && item.fleet.length) {
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'cmp-more-toggle';
+    toggle.innerHTML = `<span>${t.cmp_more_info}</span><span class="cmp-more-arrow">▾</span>`;
+    const fleet = document.createElement('div');
+    fleet.className = 'cmp-fleet';
+    fleet.hidden = true;
+    fleet.innerHTML = item.fleet.map(f => `<div class="cmp-fleet-row"><span class="cmp-fleet-type">${loc(f.aircraft_type)}</span><span class="cmp-fleet-n">${fmtInt(f.n)} ${t.cmp_fleet_flights}</span></div>`).join('');
+    toggle.addEventListener('click', () => {
+      fleet.hidden = !fleet.hidden;
+      toggle.classList.toggle('open', !fleet.hidden);
+    });
+    body.appendChild(toggle);
+    body.appendChild(fleet);
+  }
 
   wrap.appendChild(body);
   return wrap;
@@ -729,8 +770,8 @@ function cmpRender(){
   grid.innerHTML = '';
   if (!a || !b) { banner.hidden = true; if (share) share.hidden = true; return; }
 
-  grid.appendChild(renderCard(a, b.avgDb, b.avgVib));
-  grid.appendChild(renderCard(b, a.avgDb, a.avgVib));
+  grid.appendChild(renderCard(a, b));
+  grid.appendChild(renderCard(b, a));
 
   const delta = Math.abs(a.avgDb - b.avgDb);
   banner.hidden = false;
