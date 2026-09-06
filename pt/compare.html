@@ -134,6 +134,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-stat-val{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--white);line-height:1;}
 .cmp-stat.amber .cmp-stat-val{color:var(--amber);}
 .cmp-stat-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:7px;}
+.cmp-stat-sub{font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.28);margin-top:3px;}
 
 .data-error{padding:32px;text-align:center;font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.32);border:1px dashed rgba(240,237,232,.1);border-radius:4px;}
 
@@ -305,6 +306,7 @@ const T = {
     cmp_stat_max_db:'Loudest recorded',
     cmp_stat_avg_vib:'Average vibration',
     cmp_stat_max_vib:'Peak vibration',
+    cmp_stat_vib_multiple:'~{n}× perception threshold',
     cmp_rank_loudest:'Loudest of {n} tracked', cmp_rank_quietest:'Quietest of {n} tracked',
     cmp_rank_louder:'Louder than {pct}%', cmp_rank_quieter:'Quieter than {pct}%',
     cmp_gauge_hint:'louder than the rest tracked',
@@ -340,6 +342,7 @@ const T = {
     cmp_stat_max_db:'Pico mais alto registado',
     cmp_stat_avg_vib:'Vibração média',
     cmp_stat_max_vib:'Pico de vibração',
+    cmp_stat_vib_multiple:'~{n}× o limiar de perceção',
     cmp_rank_loudest:'O mais ruidoso de {n}', cmp_rank_quietest:'O mais silencioso de {n}',
     cmp_rank_louder:'Mais ruidoso que {pct}%', cmp_rank_quieter:'Mais silencioso que {pct}%',
     cmp_gauge_hint:'mais ruidoso do que o resto',
@@ -375,6 +378,7 @@ const T = {
     cmp_stat_max_db:'Pic le plus élevé enregistré',
     cmp_stat_avg_vib:'Vibration moyenne',
     cmp_stat_max_vib:'Pic de vibration',
+    cmp_stat_vib_multiple:'~{n}× le seuil de perception',
     cmp_rank_loudest:'Le plus bruyant sur {n}', cmp_rank_quietest:'Le plus silencieux sur {n}',
     cmp_rank_louder:'Plus bruyant que {pct}%', cmp_rank_quieter:'Plus silencieux que {pct}%',
     cmp_gauge_hint:'plus bruyant que le reste',
@@ -567,12 +571,19 @@ function renderCard(item, otherAvgDb, otherAvgVib){
   stats.className = 'cmp-stat-grid';
   const louderDb = otherAvgDb != null && item.avgDb > otherAvgDb;
   const louderVib = item.avgVib != null && otherAvgVib != null && item.avgVib > otherAvgVib;
+  // Seuil de perception humaine de la vibration en bâtiment, ISO 2631-1 / BS 6472-1 :
+  // ~0.015 m/s² (50% des gens la remarquent tout juste) = ~1.5 mg. Sert juste à donner
+  // un ordre de grandeur intuitif ("~Nx ce seuil"), pas une équivalence réglementaire
+  // stricte (méthodologie de pondération différente de notre pic brut).
+  const VIB_PERCEPTION_MG = 1.5;
+  const vibSub = (mg) => mg == null ? '' :
+    `<div class="cmp-stat-sub">${t.cmp_stat_vib_multiple.replace('{n}', Math.round(mg / VIB_PERCEPTION_MG))}</div>`;
   stats.innerHTML = `
     <div class="cmp-stat wide"><div class="cmp-stat-val">${fmtInt(item.totalFlights)}</div><div class="cmp-stat-lbl">${t.cmp_stat_flights}</div></div>
     <div class="cmp-stat${louderDb ? ' amber' : ''}"><div class="cmp-stat-val">${fmt1(item.avgDb)} dB</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_db}</div></div>
     <div class="cmp-stat"><div class="cmp-stat-val">${item.maxDb != null ? fmt1(item.maxDb) + ' dB' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_db}</div></div>
-    <div class="cmp-stat${louderVib ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div></div>
-    <div class="cmp-stat"><div class="cmp-stat-val">${item.maxVib != null ? fmt1(item.maxVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_vib}</div></div>
+    <div class="cmp-stat${louderVib ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div>${vibSub(item.avgVib)}</div>
+    <div class="cmp-stat"><div class="cmp-stat-val">${item.maxVib != null ? fmt1(item.maxVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_vib}</div>${vibSub(item.maxVib)}</div>
   `;
   body.appendChild(stats);
 

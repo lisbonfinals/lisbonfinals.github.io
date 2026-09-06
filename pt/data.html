@@ -620,6 +620,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_traffic">City traffic</span><span class="info-row-val">~70 dB</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_anac">ANAC curfew threshold</span><span class="info-row-val amber">≥ 93 dB</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_critical">Critical Alert</span><span class="info-row-val red">≥ 98.9 dB</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_vibration">Perceptible vibration (ISO 2631)</span><span class="info-row-val">≈ 1.5 mg</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_station">Station location</span><span class="info-row-val">38°46'N · 009°08'W</span></div>
     </div>
   </div>
@@ -979,7 +980,7 @@ const T = {
     lbl_loud_total:'Flights >95 dB total', lbl_avg_night:'Avg night dB (this week)',
     context_title:'Reference levels',
     ref_conversation:'Normal conversation', ref_traffic:'City traffic',
-    ref_anac:'ANAC curfew threshold', ref_critical:'Critical Alert', ref_station:'Station location',
+    ref_anac:'ANAC curfew threshold', ref_critical:'Critical Alert', ref_vibration:'Perceptible vibration (ISO 2631)', ref_station:'Station location',
     legend_day:'Day (06h–22h)', legend_night:'Night (22h–06h)',
     s3_label:'ANAC regulation monitoring', s3_title:'⚠ Warning<br><em>Zone</em>',
     s3_desc:'Operations observed between midnight and 6am are compared against acoustic alert thresholds — an independent record, not an official ruling on infringements. This week\'s tally:',
@@ -1031,7 +1032,7 @@ const T = {
     lbl_loud_total:'Voos >95 dB total', lbl_avg_night:'Média noturna dB (esta semana)',
     context_title:'Níveis de referência',
     ref_conversation:'Conversa normal', ref_traffic:'Tráfego urbano',
-    ref_anac:'Limiar ANAC', ref_critical:'Alerta crítico', ref_station:'Localização da estação',
+    ref_anac:'Limiar ANAC', ref_critical:'Alerta crítico', ref_vibration:'Vibração percetível (ISO 2631)', ref_station:'Localização da estação',
     legend_day:'Dia (06h–22h)', legend_night:'Noite (22h–06h)',
     s3_label:'Monitorização ANAC', s3_title:'⚠ Zona de<br><em>alerta</em>',
     s3_desc:'As operações observadas entre a meia-noite e as 6h são comparadas com critérios acústicos de alerta. Este é um registo independente, não uma decisão oficial sobre infrações. Balanço desta semana:',
@@ -1080,7 +1081,7 @@ const T = {
     lbl_peak_all:'Pic historique', lbl_loud_total:'Vols >95 dB au total',
     lbl_avg_night:'dB moyen nocturne (cette semaine)',
     ref_conversation:'Conversation normale', ref_traffic:'Circulation urbaine',
-    ref_anac:'Seuil couvre-feu ANAC', ref_critical:'Alerte critique',
+    ref_anac:'Seuil couvre-feu ANAC', ref_critical:'Alerte critique', ref_vibration:'Vibration perceptible (ISO 2631)',
     s3_label:'Surveillance ANAC', s3_title:'⚠ Zone<br><em>d\'alerte</em>',
     s3_desc:'Les opérations observées entre minuit et 6h sont comparées à des critères acoustiques d’alerte. Il s’agit d’un relevé indépendant, et non d’une qualification officielle des infractions. Bilan de la semaine :',
     w_night_lbl:'Vols nocturnes cette semaine', w_critical_lbl:'Alertes critiques', w_l2_lbl:'Alertes de niveau 2',
