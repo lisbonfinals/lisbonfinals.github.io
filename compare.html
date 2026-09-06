@@ -135,6 +135,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-stat.amber .cmp-stat-val{color:var(--amber);}
 .cmp-stat-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:7px;}
 .cmp-stat-sub{font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.28);margin-top:3px;}
+.cmp-stat.secondary{padding:10px 14px;}
+.cmp-stat.secondary .cmp-stat-val{font-size:13px;color:rgba(240,237,232,.68);}
+.cmp-stat.secondary .cmp-stat-lbl{font-size:7.5px;color:rgba(240,237,232,.3);}
+.cmp-phase-divider{grid-column:1/-1;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.32);padding-top:8px;margin-top:2px;border-top:1px solid var(--border);}
 
 .data-error{padding:32px;text-align:center;font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.32);border:1px dashed rgba(240,237,232,.1);border-radius:4px;}
 
@@ -324,8 +328,12 @@ const T = {
     cmp_stat_max_db:'Loudest recorded',
     cmp_stat_avg_vib:'Average vibration',
     cmp_stat_max_vib:'Peak vibration',
-    cmp_stat_avg_altitude:'Average altitude',
-    cmp_stat_avg_speed:'Average speed',
+    cmp_phase_landing:'Landing',
+    cmp_stat_landing_altitude:'Average landing altitude',
+    cmp_stat_landing_speed:'Average landing speed',
+    cmp_phase_takeoff:'Takeoff',
+    cmp_stat_takeoff_altitude:'Average takeoff altitude',
+    cmp_stat_takeoff_speed:'Average takeoff speed',
     cmp_stat_vib_multiple:'~{n}× perception threshold',
     cmp_rank_loudest:'Loudest of {n} tracked', cmp_rank_quietest:'Quietest of {n} tracked',
     cmp_rank_louder:'Louder than {pct}%', cmp_rank_quieter:'Quieter than {pct}%',
@@ -380,8 +388,12 @@ const T = {
     cmp_stat_max_db:'Pico mais alto registado',
     cmp_stat_avg_vib:'Vibração média',
     cmp_stat_max_vib:'Pico de vibração',
-    cmp_stat_avg_altitude:'Altitude média',
-    cmp_stat_avg_speed:'Velocidade média',
+    cmp_phase_landing:'Aterragem',
+    cmp_stat_landing_altitude:'Altitude média de aterragem',
+    cmp_stat_landing_speed:'Velocidade média de aterragem',
+    cmp_phase_takeoff:'Descolagem',
+    cmp_stat_takeoff_altitude:'Altitude média de descolagem',
+    cmp_stat_takeoff_speed:'Velocidade média de descolagem',
     cmp_stat_vib_multiple:'~{n}× o limiar de perceção',
     cmp_rank_loudest:'O mais ruidoso de {n}', cmp_rank_quietest:'O mais silencioso de {n}',
     cmp_rank_louder:'Mais ruidoso que {pct}%', cmp_rank_quieter:'Mais silencioso que {pct}%',
@@ -436,8 +448,12 @@ const T = {
     cmp_stat_max_db:'Pic le plus élevé enregistré',
     cmp_stat_avg_vib:'Vibration moyenne',
     cmp_stat_max_vib:'Pic de vibration',
-    cmp_stat_avg_altitude:'Altitude moyenne',
-    cmp_stat_avg_speed:'Vitesse moyenne',
+    cmp_phase_landing:'Atterrissage',
+    cmp_stat_landing_altitude:'Altitude moyenne à l\'atterrissage',
+    cmp_stat_landing_speed:'Vitesse moyenne à l\'atterrissage',
+    cmp_phase_takeoff:'Décollage',
+    cmp_stat_takeoff_altitude:'Altitude moyenne au décollage',
+    cmp_stat_takeoff_speed:'Vitesse moyenne au décollage',
     cmp_stat_vib_multiple:'~{n}× le seuil de perception',
     cmp_rank_loudest:'Le plus bruyant sur {n}', cmp_rank_quietest:'Le plus silencieux sur {n}',
     cmp_rank_louder:'Plus bruyant que {pct}%', cmp_rank_quieter:'Plus silencieux que {pct}%',
@@ -513,13 +529,16 @@ function buildAggregates(mode){
     const detail = byKey[name];
     const subs = (detail && detail[subField]) || [];
     let sumN = 0, sumDbWeighted = 0, sumVibWeighted = 0, maxDb = null, maxVib = null;
-    let sumAltWeighted = 0, sumAltN = 0, sumSpeedWeighted = 0, sumSpeedN = 0;
+    let sumAltLandWeighted = 0, sumAltLandN = 0, sumSpeedLandWeighted = 0, sumSpeedLandN = 0;
+    let sumAltTakeWeighted = 0, sumAltTakeN = 0, sumSpeedTakeWeighted = 0, sumSpeedTakeN = 0;
     subs.forEach(s => {
       sumN += s.n;
       sumDbWeighted += (s.avg_db || 0) * s.n;
       sumVibWeighted += (s.avg_vib || 0) * s.n;
-      if (s.avg_altitude != null) { sumAltWeighted += s.avg_altitude * s.n; sumAltN += s.n; }
-      if (s.avg_speed != null) { sumSpeedWeighted += s.avg_speed * s.n; sumSpeedN += s.n; }
+      if (s.avg_altitude_landing != null) { sumAltLandWeighted += s.avg_altitude_landing * s.n_landing; sumAltLandN += s.n_landing; }
+      if (s.avg_speed_landing != null) { sumSpeedLandWeighted += s.avg_speed_landing * s.n_landing; sumSpeedLandN += s.n_landing; }
+      if (s.avg_altitude_takeoff != null) { sumAltTakeWeighted += s.avg_altitude_takeoff * s.n_takeoff; sumAltTakeN += s.n_takeoff; }
+      if (s.avg_speed_takeoff != null) { sumSpeedTakeWeighted += s.avg_speed_takeoff * s.n_takeoff; sumSpeedTakeN += s.n_takeoff; }
       if (s.max_db != null && (maxDb == null || s.max_db > maxDb)) maxDb = s.max_db;
       if (s.max_vib != null && (maxVib == null || s.max_vib > maxVib)) maxVib = s.max_vib;
     });
@@ -533,8 +552,10 @@ function buildAggregates(mode){
       maxDb,
       avgVib: sumN ? sumVibWeighted / sumN : null,
       maxVib,
-      avgAltitude: sumAltN ? sumAltWeighted / sumAltN : null,
-      avgSpeed: sumSpeedN ? sumSpeedWeighted / sumSpeedN : null,
+      avgAltitudeLanding: sumAltLandN ? sumAltLandWeighted / sumAltLandN : null,
+      avgSpeedLanding: sumSpeedLandN ? sumSpeedLandWeighted / sumSpeedLandN : null,
+      avgAltitudeTakeoff: sumAltTakeN ? sumAltTakeWeighted / sumAltTakeN : null,
+      avgSpeedTakeoff: sumSpeedTakeN ? sumSpeedTakeWeighted / sumSpeedTakeN : null,
       photoUrl: bestPic ? bestPic.photo_url : null
     };
   }).filter(it => it.avgDb != null);
@@ -651,8 +672,12 @@ function renderCard(item, otherAvgDb, otherAvgVib){
     <div class="cmp-stat"><div class="cmp-stat-val">${item.maxDb != null ? fmt1(item.maxDb) + ' dB' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_db}</div></div>
     <div class="cmp-stat${louderVib ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div>${vibSub(item.avgVib)}</div>
     <div class="cmp-stat"><div class="cmp-stat-val">${item.maxVib != null ? fmt1(item.maxVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_vib}</div>${vibSub(item.maxVib)}</div>
-    <div class="cmp-stat"><div class="cmp-stat-val">${item.avgAltitude != null ? fmtAltitude(item.avgAltitude) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_altitude}</div></div>
-    <div class="cmp-stat"><div class="cmp-stat-val">${item.avgSpeed != null ? fmtSpeed(item.avgSpeed) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_speed}</div></div>
+    <div class="cmp-phase-divider">${t.cmp_phase_landing}</div>
+    <div class="cmp-stat secondary"><div class="cmp-stat-val">${item.avgAltitudeLanding != null ? fmtAltitude(item.avgAltitudeLanding) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_landing_altitude}</div></div>
+    <div class="cmp-stat secondary"><div class="cmp-stat-val">${item.avgSpeedLanding != null ? fmtSpeed(item.avgSpeedLanding) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_landing_speed}</div></div>
+    <div class="cmp-phase-divider">${t.cmp_phase_takeoff}</div>
+    <div class="cmp-stat secondary"><div class="cmp-stat-val">${item.avgAltitudeTakeoff != null ? fmtAltitude(item.avgAltitudeTakeoff) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_takeoff_altitude}</div></div>
+    <div class="cmp-stat secondary"><div class="cmp-stat-val">${item.avgSpeedTakeoff != null ? fmtSpeed(item.avgSpeedTakeoff) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_takeoff_speed}</div></div>
   `;
   body.appendChild(stats);
 
