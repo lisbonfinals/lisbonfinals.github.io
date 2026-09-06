@@ -106,7 +106,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-diff-banner b{color:var(--amber);}
 
 /* ── COMPARISON CARDS ── */
-.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.cmp-fleet-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;margin-top:16px;}
 .cmp-card{background:var(--dark2);border:1px solid var(--border);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;}
 .cmp-photo{position:relative;background:var(--dark3);}
 .cmp-photo::before{content:'';display:block;padding-top:66%;}
@@ -139,7 +140,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-stat.secondary .cmp-stat-val{font-size:13px;color:rgba(240,237,232,.68);}
 .cmp-stat.secondary .cmp-stat-lbl{font-size:7.5px;color:rgba(240,237,232,.3);}
 .cmp-phase-divider{grid-column:1/-1;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.32);padding-top:8px;margin-top:2px;border-top:1px solid var(--border);}
-.cmp-more-toggle{margin-top:16px;background:transparent;border:1px solid var(--border);border-radius:4px;padding:9px 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.5);cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;transition:color .2s,border-color .2s;}
+.cmp-more-toggle{margin-top:0;background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:9px 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.5);cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;transition:color .2s,border-color .2s;}
 .cmp-more-toggle:hover{color:var(--amber);border-color:rgba(245,166,35,.3);}
 .cmp-more-arrow{transition:transform .2s;font-size:9px;}
 .cmp-more-toggle.open .cmp-more-arrow{transform:rotate(180deg);}
@@ -167,6 +168,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media (max-width: 1150px) { .nav-links { display:none; } .nav-burger { display:flex; } }
 @media(max-width:900px){
   .cmp-grid{grid-template-columns:1fr;}
+  .cmp-fleet-grid{grid-template-columns:1fr;}
   .cmp-picker-row{grid-template-columns:1fr;}
   .cmp-vs{display:none;}
 }
@@ -265,6 +267,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <div id="cmp-diff-banner" class="cmp-diff-banner" hidden></div>
   <div id="cmp-status" class="data-error" data-i18n="cmp_loading">Loading station data…</div>
   <div class="cmp-grid" id="cmp-grid" hidden></div>
+  <div class="cmp-fleet-grid" id="cmp-fleet-grid" hidden></div>
 
   <div id="cmp-share" class="cmp-share" hidden>
     <div class="cmp-share-label" data-i18n="cmp_share_label">Share this comparison</div>
@@ -705,24 +708,28 @@ function renderCard(item, other){
   `;
   body.appendChild(stats);
 
-  if (cmpMode === 'airline' && item.fleet && item.fleet.length) {
-    const toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'cmp-more-toggle';
-    toggle.innerHTML = `<span>${t.cmp_more_info}</span><span class="cmp-more-arrow">▾</span>`;
-    const fleet = document.createElement('div');
-    fleet.className = 'cmp-fleet';
-    fleet.hidden = true;
-    fleet.innerHTML = item.fleet.map(f => `<div class="cmp-fleet-row"><span class="cmp-fleet-type">${loc(f.aircraft_type)}</span><span class="cmp-fleet-n">${fmtInt(f.n)} ${t.cmp_fleet_flights}</span></div>`).join('');
-    toggle.addEventListener('click', () => {
-      fleet.hidden = !fleet.hidden;
-      toggle.classList.toggle('open', !fleet.hidden);
-    });
-    body.appendChild(toggle);
-    body.appendChild(fleet);
-  }
-
   wrap.appendChild(body);
+  return wrap;
+}
+
+function renderFleetBlock(item){
+  const t = T[_lang];
+  const wrap = document.createElement('div');
+  if (!item.fleet || !item.fleet.length) return wrap;
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'cmp-more-toggle';
+  toggle.innerHTML = `<span>${t.cmp_more_info}</span><span class="cmp-more-arrow">▾</span>`;
+  const fleet = document.createElement('div');
+  fleet.className = 'cmp-fleet';
+  fleet.hidden = true;
+  fleet.innerHTML = item.fleet.map(f => `<div class="cmp-fleet-row"><span class="cmp-fleet-type">${loc(f.aircraft_type)}</span><span class="cmp-fleet-n">${fmtInt(f.n)} ${t.cmp_fleet_flights}</span></div>`).join('');
+  toggle.addEventListener('click', () => {
+    fleet.hidden = !fleet.hidden;
+    toggle.classList.toggle('open', !fleet.hidden);
+  });
+  wrap.appendChild(toggle);
+  wrap.appendChild(fleet);
   return wrap;
 }
 
@@ -772,6 +779,16 @@ function cmpRender(){
 
   grid.appendChild(renderCard(a, b));
   grid.appendChild(renderCard(b, a));
+
+  const fleetGrid = document.getElementById('cmp-fleet-grid');
+  fleetGrid.innerHTML = '';
+  if (cmpMode === 'airline') {
+    fleetGrid.appendChild(renderFleetBlock(a));
+    fleetGrid.appendChild(renderFleetBlock(b));
+    fleetGrid.hidden = false;
+  } else {
+    fleetGrid.hidden = true;
+  }
 
   const delta = Math.abs(a.avgDb - b.avgDb);
   banner.hidden = false;
