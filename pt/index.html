@@ -1249,7 +1249,7 @@ footer {
         <div class="wlive-item-sub">km</div>
       </div>
     </div>
-    <div class="wlive-footer">Source: wttr.in · LPPT (38.78°N, 9.14°W) · Updates every 5 min</div>
+    <div class="wlive-footer" data-i18n="wlive_footer">Source: wttr.in · LPPT (38.78°N, 9.14°W) · Updates every 5 min</div>
   </div>
 </div>
 
@@ -1748,7 +1748,13 @@ fetch('https://api.github.com/gists/' + GIST_ID)
           var latest = reports[0];
           var badgeEl = el('nav-noise-badge');
           if(badgeEl){
-            var mn = (latest.month_name || '').slice(0,3).toUpperCase();
+            var MONTH_ABBR = {
+              en: ['','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
+              pt: ['','JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'],
+              fr: ['','JAN','FÉV','MAR','AVR','MAI','JUN','JUL','AOÛ','SEP','OCT','NOV','DÉC']
+            };
+            var abbrTable = MONTH_ABBR[_lang] || MONTH_ABBR.en;
+            var mn = latest.month ? (abbrTable[latest.month] || '') : (latest.month_name || '').slice(0,3).toUpperCase();
             var dbTxt = latest.avg_db != null ? latest.avg_db.toFixed(1)+'dB' : '';
             badgeEl.textContent = (mn ? mn+' ' : '') + dbTxt;
           }
@@ -2161,6 +2167,7 @@ var INDEX_TRANSLATIONS = {
     rwy21_title: 'South wind — takeoff over the terrace',
     rwy21_desc: 'Planes take off and climb over my terrace heading north. Higher, faster — less impactful shots.',
     wlive_source: 'LPPT · Live weather',
+    wlive_footer: 'Source: wttr.in · LPPT (38.78°N, 9.14°W) · Updates every 5 min',
     wlive_wind: 'Wind',
     wlive_runway: 'Active runway',
     wlive_wdir: 'Wind direction',
@@ -2285,6 +2292,7 @@ var INDEX_TRANSLATIONS = {
     rwy21_title: 'Vento sul — descolagem sobre a varanda',
     rwy21_desc: 'Os aviões descolam e sobem sobre a minha varanda em direcção a norte. Mais alto, mais rápido — disparos menos impactantes.',
     wlive_source: 'LPPT · Tempo em directo',
+    wlive_footer: 'Fonte: wttr.in · LPPT (38.78°N, 9.14°W) · Actualizado a cada 5 min',
     wlive_wind: 'Vento',
     wlive_runway: 'Pista activa',
     wlive_wdir: 'Direcção do vento',
@@ -2408,6 +2416,7 @@ var INDEX_TRANSLATIONS = {
     rwy21_title: 'Vent du sud — décollage au-dessus de la terrasse',
     rwy21_desc: 'Les avions décollent et montent au-dessus de ma terrasse en direction du nord. Plus haut, plus rapide — clichés moins impactants.',
     wlive_source: 'LPPT · Météo en direct',
+    wlive_footer: 'Source : wttr.in · LPPT (38.78°N, 9.14°W) · Mise à jour toutes les 5 min',
     wlive_wind: 'Vent',
     wlive_runway: 'Piste active',
     wlive_wdir: 'Direction du vent',
@@ -2587,6 +2596,7 @@ function applyLang(lang) {
   var r21t = q('#rwy-card-21 .rwy-title'); if (r21t) r21t.textContent = t.rwy21_title;
   var r21d = q('#rwy-card-21 .rwy-desc'); if (r21d) r21d.textContent = t.rwy21_desc;
   var wlSrc = q('.wlive-source'); if (wlSrc) wlSrc.textContent = t.wlive_source;
+  var wlFooter = q('.wlive-footer'); if (wlFooter && t.wlive_footer) wlFooter.textContent = t.wlive_footer;
   var wlLbls = qa('.wlive-item-lbl');
   if (wlLbls[0]) wlLbls[0].textContent = t.wlive_wind;
   if (wlLbls[1]) wlLbls[1].textContent = t.wlive_runway;
