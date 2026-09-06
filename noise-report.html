@@ -491,6 +491,7 @@ nav {
   color:rgba(240,237,232,.34);
 }
 .report-method-v { font-family:var(--mono);font-size:10px;line-height:1.6;color:rgba(240,237,232,.54); }
+.report-method-v a { color:var(--amber); text-decoration:underline; text-underline-offset:2px; }
 
 /* ── HARDWARE NOTE ── */
 .hardware-note {
@@ -728,7 +729,7 @@ footer {
       </div>
       <div class="report-method-item">
         <div class="report-method-k" data-i18n="method_k2">Limit</div>
-        <div class="report-method-v" data-i18n="method_v2">May–June: sonometer capped at 100 dB. From July 2026: new sonometer, up to 130 dB.</div>
+        <div class="report-method-v" data-i18n-html="method_v2">May–June: sonometer capped at 100 dB. From July 2026: new sonometer, up to 130 dB.</div>
       </div>
       <div class="report-method-item">
         <div class="report-method-k" data-i18n="method_k3">Purpose</div>
@@ -1171,7 +1172,7 @@ const TRANSLATIONS = {
     method_title: 'How to read this report',
     method_copy: 'This is independent residential monitoring from one fixed terrace below the LPPT approach corridor. It is designed to show repeatable local exposure, not to replace certified airport noise mapping.',
     method_k1: 'Source', method_v1: 'ADS-B flight data paired with station SPL readings.',
-    method_k2: 'Limit', method_v2: 'May–June: sonometer capped at 100 dB. From July 2026: new sonometer, up to 130 dB.',
+    method_k2: 'Limit', method_v2: 'May–June: sonometer capped at 100 dB. From July 2026: new sonometer, up to 130 dB. <a href="/journal/2026-09-06-fifteen-lines-across-three-reports-we-d-write-differently-now.html">A few June–August readings were later found to be sensor artifacts and corrected.</a>',
     method_k3: 'Purpose', method_v3: 'A public record for patterns, outliers and night-time disturbance.',
     method_k4: 'Night Window', method_v4: "Alerts are scored over our own extended 23:00–06:59 tracking window (a full night's rest for residents) — wider than ANAC's official 00:00–05:59 regulatory window. Thresholds are ANAC's own fixed noise limits (98.9 dB critical / 93.0–95.9 dB level 2), applied consistently across all months. The ANAC-only breakdown is shown in the analysis below.",
     method_k5: '🟠 Orange Tier', method_v5: "Not an ANAC-defined level — the regulation only sets Yellow (Level 2) and Red (Critical), nothing in between. Orange tracks that gap on our own, so a loud flight at 97 dB is never silently dropped from the count.",
@@ -1216,7 +1217,7 @@ const TRANSLATIONS = {
     method_title: 'Como ler este relatório',
     method_copy: 'Esta é uma monitorização residencial independente a partir de uma varanda fixa sob o corredor de aproximação LPPT. Serve para mostrar uma exposição local observada de forma consistente, não para substituir cartografia de ruído aeroportuária certificada.',
     method_k1: 'Fonte', method_v1: 'Dados ADS-B de voo cruzados com leituras SPL da estação.',
-    method_k2: 'Limite', method_v2: 'Maio–junho: sonómetro limitado a 100 dB. A partir de julho de 2026: novo sonómetro, até 130 dB.',
+    method_k2: 'Limite', method_v2: 'Maio–junho: sonómetro limitado a 100 dB. A partir de julho de 2026: novo sonómetro, até 130 dB. <a href="/journal/2026-09-06-fifteen-lines-across-three-reports-we-d-write-differently-now.html">Algumas leituras de junho–agosto foram depois identificadas como artefactos do sensor e corrigidas.</a>',
     method_k3: 'Objectivo', method_v3: 'Um registo público de padrões, anomalias e perturbação nocturna.',
     method_k4: 'Janela Nocturna', method_v4: 'Os alertas são contabilizados na nossa própria janela alargada de monitorização (23h00–06h59, uma noite de descanso completa para os residentes) — mais ampla do que a janela regulamentar oficial da ANAC (00h00–05h59). Os limiares são os valores fixos da própria ANAC (98,9 dB crítico / 93,0–95,9 dB nível 2), aplicados de forma consistente em todos os meses. A repartição exclusivamente ANAC está disponível na análise abaixo.',
     method_k5: '🟠 Nível Laranja', method_v5: 'Não é um nível definido pela ANAC — o regulamento define apenas Amarelo (Nível 2) e Vermelho (Crítico), sem nada entre os dois. O Laranja acompanha essa lacuna por conta própria, para que um voo ruidoso a 97 dB nunca desapareça silenciosamente da contagem.',
@@ -1259,7 +1260,7 @@ const TRANSLATIONS = {
     method_title: 'Comment lire ce rapport',
     method_copy: 'Il s’agit d’une surveillance résidentielle indépendante depuis une terrasse fixe sous le couloir d’approche LPPT. Elle documente une exposition locale mesurée de façon cohérente, sans remplacer une cartographie acoustique aéroportuaire certifiée.',
     method_k1: 'Source', method_v1: 'Données ADS-B des vols associées aux mesures SPL de la station.',
-    method_k2: 'Limite', method_v2: 'Mai–juin : sonomètre plafonné à 100 dB. À partir de juillet 2026 : nouveau sonomètre, jusqu\'à 130 dB.',
+    method_k2: 'Limite', method_v2: 'Mai–juin : sonomètre plafonné à 100 dB. À partir de juillet 2026 : nouveau sonomètre, jusqu\'à 130 dB. <a href="/journal/2026-09-06-fifteen-lines-across-three-reports-we-d-write-differently-now.html">Quelques relevés de juin à août se sont révélés être des artefacts du capteur, depuis corrigés.</a>',
     method_k3: 'But', method_v3: 'Un registre public des tendances, anomalies et nuisances nocturnes.',
     method_k4: 'Fenêtre Nocturne', method_v4: 'Les alertes sont comptabilisées sur notre propre fenêtre de suivi étendue (23h00–06h59, une nuit de repos complète pour les résidents) — plus large que la fenêtre réglementaire officielle de l\'ANAC (00h00–05h59). Les seuils sont les valeurs fixes propres à l\'ANAC (98,9 dB critique / 93,0–95,9 dB niveau 2), appliquées de façon cohérente sur tous les mois. Le détail exclusivement ANAC est disponible dans l\'analyse ci-dessous.',
     method_k5: '🟠 Niveau Orange', method_v5: 'Ce n\'est pas un niveau défini par l\'ANAC — la réglementation ne fixe que Jaune (Niveau 2) et Rouge (Critique), sans rien entre les deux. Orange suit cet écart de façon indépendante, pour qu\'un vol bruyant à 97 dB ne disparaisse jamais silencieusement du décompte.',
@@ -1284,6 +1285,10 @@ function applyLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
   });
   ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
   currentLang = lang;
