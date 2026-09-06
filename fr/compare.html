@@ -106,8 +106,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-diff-banner b{color:var(--amber);}
 
 /* ── COMPARISON CARDS ── */
-.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.cmp-fleet-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;margin-top:16px;}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;grid-template-areas:"cardA cardB";}
+.cmp-grid.has-fleet{grid-template-areas:"cardA cardB" "fleetA fleetB";}
+.cmp-fleet-block{align-self:start;}
 .cmp-card{background:var(--dark2);border:1px solid var(--border);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;}
 .cmp-photo{position:relative;background:var(--dark3);}
 .cmp-photo::before{content:'';display:block;padding-top:66%;}
@@ -167,8 +168,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 /* ── RESPONSIVE ── */
 @media (max-width: 1150px) { .nav-links { display:none; } .nav-burger { display:flex; } }
 @media(max-width:900px){
-  .cmp-grid{grid-template-columns:1fr;}
-  .cmp-fleet-grid{grid-template-columns:1fr;}
+  .cmp-grid{grid-template-columns:1fr;grid-template-areas:"cardA" "cardB";}
+  .cmp-grid.has-fleet{grid-template-areas:"cardA" "fleetA" "cardB" "fleetB";}
   .cmp-picker-row{grid-template-columns:1fr;}
   .cmp-vs{display:none;}
 }
@@ -267,7 +268,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <div id="cmp-diff-banner" class="cmp-diff-banner" hidden></div>
   <div id="cmp-status" class="data-error" data-i18n="cmp_loading">Loading station data…</div>
   <div class="cmp-grid" id="cmp-grid" hidden></div>
-  <div class="cmp-fleet-grid" id="cmp-fleet-grid" hidden></div>
 
   <div id="cmp-share" class="cmp-share" hidden>
     <div class="cmp-share-label" data-i18n="cmp_share_label">Share this comparison</div>
@@ -715,6 +715,7 @@ function renderCard(item, other){
 function renderFleetBlock(item){
   const t = T[_lang];
   const wrap = document.createElement('div');
+  wrap.className = 'cmp-fleet-block';
   if (!item.fleet || !item.fleet.length) return wrap;
   const toggle = document.createElement('button');
   toggle.type = 'button';
@@ -777,17 +778,23 @@ function cmpRender(){
   grid.innerHTML = '';
   if (!a || !b) { banner.hidden = true; if (share) share.hidden = true; return; }
 
-  grid.appendChild(renderCard(a, b));
-  grid.appendChild(renderCard(b, a));
+  const cardA = renderCard(a, b);
+  const cardB = renderCard(b, a);
+  cardA.style.gridArea = 'cardA';
+  cardB.style.gridArea = 'cardB';
+  grid.appendChild(cardA);
+  grid.appendChild(cardB);
 
-  const fleetGrid = document.getElementById('cmp-fleet-grid');
-  fleetGrid.innerHTML = '';
   if (cmpMode === 'airline') {
-    fleetGrid.appendChild(renderFleetBlock(a));
-    fleetGrid.appendChild(renderFleetBlock(b));
-    fleetGrid.hidden = false;
+    const fleetA = renderFleetBlock(a);
+    const fleetB = renderFleetBlock(b);
+    fleetA.style.gridArea = 'fleetA';
+    fleetB.style.gridArea = 'fleetB';
+    grid.appendChild(fleetA);
+    grid.appendChild(fleetB);
+    grid.classList.add('has-fleet');
   } else {
-    fleetGrid.hidden = true;
+    grid.classList.remove('has-fleet');
   }
 
   const delta = Math.abs(a.avgDb - b.avgDb);
