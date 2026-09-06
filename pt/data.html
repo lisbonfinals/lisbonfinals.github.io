@@ -420,21 +420,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 <!-- DRAWER -->
 <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
-  <a href="/" onclick="closeDrawer()">Live</a>
-  <a href="/data.html" style="color:var(--amber)" onclick="closeDrawer()">The Data</a>
-  <a href="/data.html#noise-data" onclick="closeDrawer()">Noise Data</a>
-  <a href="/data.html#warning-zone" class="drawer-warning" onclick="closeDrawer()">Warning Zone</a>
-  <a href="/archive.html" onclick="closeDrawer()">Archive</a>
-  <a href="/compare.html" onclick="closeDrawer()">Compare</a>
-  <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()">Noise Report</a>
-  <a href="/log.html" onclick="closeDrawer()">Captain's Log</a>
-  <a href="/about.html#the-project" onclick="closeDrawer()">The Project</a>
-  <a href="/about.html#how-it-works" onclick="closeDrawer()">How it works</a>
-  <a href="/about.html#hardware" onclick="closeDrawer()">The Station</a>
-  <a href="/about.html#whats-next" onclick="closeDrawer()">What's next</a>
-  <a href="/about.html#get-involved" onclick="closeDrawer()">Get Involved</a>
-  <a href="/about.html#press" onclick="closeDrawer()">Press</a>
-  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()">Follow @lisbon.finals</a>
+  <a href="/" onclick="closeDrawer()"><span data-i18n="nav_live">Live</span></a>
+  <a href="/data.html" style="color:var(--amber)" onclick="closeDrawer()"><span data-i18n="nav_dd_the_data">The Data</span></a>
+  <a href="/data.html#noise-data" onclick="closeDrawer()"><span data-i18n="nav_dd_noise_data">Noise Data</span></a>
+  <a href="/data.html#warning-zone" class="drawer-warning" onclick="closeDrawer()"><span data-i18n="nav_dd_warning_zone">Warning Zone</span></a>
+  <a href="/archive.html" onclick="closeDrawer()"><span data-i18n="nav_archive">Archive</span></a>
+  <a href="/compare.html" onclick="closeDrawer()"><span data-i18n="nav_compare">Compare</span></a>
+  <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()"><span data-i18n="nav_noise_report">Noise Report</span></a>
+  <a href="/log.html" onclick="closeDrawer()"><span data-i18n="nav_log">Captain's Log</span></a>
+  <a href="/about.html#the-project" onclick="closeDrawer()"><span data-i18n="nav_dd_the_project">The Project</span></a>
+  <a href="/about.html#how-it-works" onclick="closeDrawer()"><span data-i18n="nav_dd_how_it_works">How it works</span></a>
+  <a href="/about.html#hardware" onclick="closeDrawer()"><span data-i18n="nav_dd_the_station">The Station</span></a>
+  <a href="/about.html#whats-next" onclick="closeDrawer()"><span data-i18n="nav_dd_whats_next">What's next</span></a>
+  <a href="/about.html#get-involved" onclick="closeDrawer()"><span data-i18n="nav_dd_get_involved">Get Involved</span></a>
+  <a href="/about.html#press" onclick="closeDrawer()"><span data-i18n="nav_dd_press">Press</span></a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()"><span data-i18n="nav_follow_ig">Follow @lisbon.finals</span></a>
 </div>
 
 <nav aria-label="Primary navigation">
@@ -443,28 +443,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     <span class="nav-wordmark">LISBON <span>FINALS</span></span>
   </a>
   <ul class="nav-links">
-    <li><a href="/">Live</a></li>
+    <li><a href="/"><span data-i18n="nav_live">Live</span></a></li>
     <li class="nav-has-dropdown">
-      <a href="/data.html" class="nav-active">Data ▾</a>
+      <a href="/data.html" class="nav-active"><span data-i18n="nav_data">Data ▾</span></a>
       <ul class="nav-dropdown">
-        <li><a href="/data.html#the-data" style="color:var(--amber)">The Data</a></li>
-        <li><a href="/data.html#noise-data">Noise Data</a></li>
-        <li><a href="/data.html#warning-zone" class="dd-warning">Warning Zone</a></li>
+        <li><a href="/data.html#the-data" style="color:var(--amber)"><span data-i18n="nav_dd_the_data">The Data</span></a></li>
+        <li><a href="/data.html#noise-data"><span data-i18n="nav_dd_noise_data">Noise Data</span></a></li>
+        <li><a href="/data.html#warning-zone" class="dd-warning"><span data-i18n="nav_dd_warning_zone">Warning Zone</span></a></li>
       </ul>
     </li>
-    <li><a href="/archive.html">Archive</a></li>
-    <li><a href="/compare.html">Compare</a></li>
-    <li><a href="/noise-report.html" class="nav-noise">Noise Report</a></li>
-    <li><a href="/log.html">Captain's Log</a></li>
+    <li><a href="/archive.html"><span data-i18n="nav_archive">Archive</span></a></li>
+    <li><a href="/compare.html"><span data-i18n="nav_compare">Compare</span></a></li>
+    <li><a href="/noise-report.html" class="nav-noise"><span data-i18n="nav_noise_report">Noise Report</span></a></li>
+    <li><a href="/log.html"><span data-i18n="nav_log">Captain's Log</span></a></li>
     <li class="nav-has-dropdown">
-      <a href="/about.html">About ▾</a>
+      <a href="/about.html"><span data-i18n="nav_about">About ▾</span></a>
       <ul class="nav-dropdown">
-        <li><a href="/about.html#the-project">The Project</a></li>
-        <li><a href="/about.html#how-it-works">How it works</a></li>
-        <li><a href="/about.html#hardware">The Station</a></li>
-        <li><a href="/about.html#whats-next">What's next</a></li>
-        <li><a href="/about.html#get-involved">Get Involved</a></li>
-        <li><a href="/about.html#press">Press</a></li>
+        <li><a href="/about.html#the-project"><span data-i18n="nav_dd_the_project">The Project</span></a></li>
+        <li><a href="/about.html#how-it-works"><span data-i18n="nav_dd_how_it_works">How it works</span></a></li>
+        <li><a href="/about.html#hardware"><span data-i18n="nav_dd_the_station">The Station</span></a></li>
+        <li><a href="/about.html#whats-next"><span data-i18n="nav_dd_whats_next">What's next</span></a></li>
+        <li><a href="/about.html#get-involved"><span data-i18n="nav_dd_get_involved">Get Involved</span></a></li>
+        <li><a href="/about.html#press"><span data-i18n="nav_dd_press">Press</span></a></li>
       </ul>
     </li>
   </ul>
@@ -957,6 +957,24 @@ document.getElementById('nav-burger').addEventListener('click', () => {
 // ── i18n ──
 const T = {
   en: {
+    nav_live:'Live',
+    nav_dd_the_data:'The Data',
+    nav_dd_noise_data:'Noise Data',
+    nav_dd_warning_zone:'Warning Zone',
+    nav_dd_data_short:'Data',
+    nav_archive:'Archive',
+    nav_compare:'Compare',
+    nav_noise_report:'Noise Report',
+    nav_log:'Captain\'s Log',
+    nav_dd_the_project:'The Project',
+    nav_dd_how_it_works:'How it works',
+    nav_dd_the_station:'The Station',
+    nav_dd_whats_next:'What\'s next',
+    nav_dd_get_involved:'Get Involved',
+    nav_dd_press:'Press',
+    nav_follow_ig:'Follow @lisbon.finals',
+    nav_data:'Data ▾',
+    nav_about:'About ▾',
     tab_data:'The Data', tab_noise:'Noise Data', tab_warning:'⚠ Warning Zone',
     s1_label:'Flight intelligence', s1_title:'The data<br><em>speaks for itself</em>',
     s1_desc:'Every aircraft detected over our terrace since May 3, 2026 — ADS-B telemetry combined with real-time acoustic measurements.',
@@ -1009,6 +1027,24 @@ const T = {
     th_alt:'Altitude', th_db:'Max dB', th_expo:'Expo≥70dB', th_vib:'Vib'
   },
   pt: {
+    nav_live:'Ao Vivo',
+    nav_dd_the_data:'Os Dados',
+    nav_dd_noise_data:'Dados de Ruído',
+    nav_dd_warning_zone:'Zona de alerta',
+    nav_dd_data_short:'Dados',
+    nav_archive:'Arquivo',
+    nav_compare:'Comparar',
+    nav_noise_report:'Relatório de Ruído',
+    nav_log:'Diário do Capitão',
+    nav_dd_the_project:'O Projeto',
+    nav_dd_how_it_works:'Como funciona',
+    nav_dd_the_station:'A Estação',
+    nav_dd_whats_next:'O que vem aí',
+    nav_dd_get_involved:'Participar',
+    nav_dd_press:'Imprensa',
+    nav_follow_ig:'Seguir @lisbon.finals',
+    nav_data:'Dados ▾',
+    nav_about:'Sobre ▾',
     tab_data:'Os Dados', tab_noise:'Dados de Ruído', tab_warning:'⚠ Zona de alerta',
     s1_label:'Inteligência de voo', s1_title:'Os dados<br><em>falam por si</em>',
     s1_desc:'Cada aeronave detetada sobre a varanda desde 3 de maio de 2026 — telemetria ADS-B combinada com medições acústicas em tempo real.',
@@ -1061,6 +1097,24 @@ const T = {
     th_alt:'Altitude', th_db:'dB Máx', th_expo:'Expo≥70dB', th_vib:'Vib'
   },
   fr: {
+    nav_live:'En Direct',
+    nav_dd_the_data:'Les données',
+    nav_dd_noise_data:'Données acoustiques',
+    nav_dd_warning_zone:'Zone d\'alerte',
+    nav_dd_data_short:'Données',
+    nav_archive:'Archives',
+    nav_compare:'Comparer',
+    nav_noise_report:'Rapport de Bruit',
+    nav_log:'Journal du Capitaine',
+    nav_dd_the_project:'Le Projet',
+    nav_dd_how_it_works:'Comment ça marche',
+    nav_dd_the_station:'La Station',
+    nav_dd_whats_next:'À venir',
+    nav_dd_get_involved:'Participer',
+    nav_dd_press:'Presse',
+    nav_follow_ig:'Suivre @lisbon.finals',
+    nav_data:'Données ▾',
+    nav_about:'À propos ▾',
     s1_label:'Vols détectés', s1_title:'Les données<br><em>parlent d\'elles-mêmes</em>',
     s1_desc:'Chaque aéronef détecté au-dessus de notre terrasse depuis le 3 mai 2026 — télémétrie ADS-B combinée avec des mesures acoustiques en temps réel.',
     method_kicker:'Comment lire',
