@@ -75,14 +75,48 @@ async function buildLocalizedPages() {
   }
 }
 
+// Labels match the filter_* translations already used on log.html — keep in sync.
 const CAT_META = {
-  fix:       { emoji: '🛠️', label: 'Fix' },
-  capture:   { emoji: '📸', label: 'Capture' },
-  hardware:  { emoji: '⚙️', label: 'Hardware' },
-  rare:      { emoji: '✈️', label: 'Rare Find' },
-  stats:     { emoji: '📊', label: 'Stats' },
-  note:      { emoji: '📝', label: 'Note' },
-  milestone: { emoji: '🏆', label: 'Milestone' }
+  en: {
+    fix:       { emoji: '🛠️', label: 'Fix' },
+    capture:   { emoji: '📸', label: 'Capture' },
+    hardware:  { emoji: '⚙️', label: 'Hardware' },
+    rare:      { emoji: '✈️', label: 'Rare Find' },
+    stats:     { emoji: '📊', label: 'Stats' },
+    note:      { emoji: '📝', label: 'Note' },
+    milestone: { emoji: '🏆', label: 'Milestone' }
+  },
+  pt: {
+    fix:       { emoji: '🛠️', label: 'Fix' },
+    capture:   { emoji: '📸', label: 'Captura' },
+    hardware:  { emoji: '⚙️', label: 'Hardware' },
+    rare:      { emoji: '✈️', label: 'Raro' },
+    stats:     { emoji: '📊', label: 'Stats' },
+    note:      { emoji: '📝', label: 'Nota' },
+    milestone: { emoji: '🏆', label: 'Marco' }
+  },
+  fr: {
+    fix:       { emoji: '🛠️', label: 'Fix' },
+    capture:   { emoji: '📸', label: 'Capture' },
+    hardware:  { emoji: '⚙️', label: 'Matériel' },
+    rare:      { emoji: '✈️', label: 'Rare' },
+    stats:     { emoji: '📊', label: 'Stats' },
+    note:      { emoji: '📝', label: 'Note' },
+    milestone: { emoji: '🏆', label: 'Étape' }
+  }
+};
+
+// Reused across chromeNav() (article chrome) and the journal article template.
+const NAV_LABELS = {
+  en: { live: 'Live', data: 'Data', archive: 'Archive', compare: 'Compare', noise: 'Noise Report', log: "Captain's Log", about: 'About' },
+  pt: { live: 'Ao Vivo', data: 'Dados', archive: 'Arquivo', compare: 'Comparar', noise: 'Relatório de Ruído', log: 'Diário do Capitão', about: 'Sobre' },
+  fr: { live: 'En Direct', data: 'Données', archive: 'Archives', compare: 'Comparer', noise: 'Rapport de Bruit', log: 'Journal du Capitaine', about: 'À propos' }
+};
+
+const JOURNAL_CHROME = {
+  en: { backLink: "← Captain's Log", allEntries: 'All Entries', captainSig: 'The Captain', allEntriesFooter: '← All entries' },
+  pt: { backLink: '← Diário do Capitão', allEntries: 'Todas as Entradas', captainSig: 'O Capitão', allEntriesFooter: '← Todas as entradas' },
+  fr: { backLink: '← Journal du Capitaine', allEntries: 'Toutes les Entrées', captainSig: 'Le Capitaine', allEntriesFooter: '← Toutes les entrées' }
 };
 
 function chromeStyles() {
@@ -158,29 +192,49 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .log-all-item.active .log-all-item-title{color:var(--white)}`;
 }
 
-function entriesStrip(entriesWithSlug, activeSlug) {
+// journalHref(lang, slug) -> /journal/<slug>.html (en) or /pt/journal/<slug>.html (pt/fr)
+function journalHref(lang, slug) {
+  const prefix = lang === 'en' ? '' : `/${lang}`;
+  return `${prefix}/journal/${slug}.html`;
+}
+
+function entryTitle(entry, lang) {
+  if (lang === 'pt' && entry.title_pt) return entry.title_pt;
+  if (lang === 'fr' && entry.title_fr) return entry.title_fr;
+  return entry.title;
+}
+
+function entryBody(entry, lang) {
+  if (lang === 'pt' && entry.body_pt) return entry.body_pt;
+  if (lang === 'fr' && entry.body_fr) return entry.body_fr;
+  return entry.body;
+}
+
+function entriesStrip(entriesWithSlug, activeSlug, lang) {
+  const chrome = JOURNAL_CHROME[lang];
   const items = entriesWithSlug.map(({ entry, slug }) =>
-    `<a class="log-all-item${slug === activeSlug ? ' active' : ''}" href="/journal/${slug}.html">
+    `<a class="log-all-item${slug === activeSlug ? ' active' : ''}" href="${journalHref(lang, slug)}">
       <div class="log-all-item-date">${esc(entry.date)}</div>
-      <div class="log-all-item-title">${esc(entry.title)}</div>
+      <div class="log-all-item-title">${esc(entryTitle(entry, lang))}</div>
     </a>`).join('');
   return `<div class="log-all-wrap">
-  <div class="log-all-label">All Entries</div>
+  <div class="log-all-label">${esc(chrome.allEntries)}</div>
   <div class="log-all-strip">${items}</div>
 </div>`;
 }
 
-function chromeNav(activeHref) {
+function chromeNav(activeHref, lang) {
+  const nav = NAV_LABELS[lang];
   const links = [
-    ['/', 'Live'], ['/data.html', 'Data'], ['/archive.html', 'Archive'],
-    ['/compare.html', 'Compare'], ['/noise-report.html', 'Noise Report'],
-    ['/log.html', "Captain's Log"], ['/about.html', 'About']
+    [pagePath(lang, 'index.html'), nav.live], [pagePath(lang, 'data.html'), nav.data], [pagePath(lang, 'archive.html'), nav.archive],
+    [pagePath(lang, 'compare.html'), nav.compare], [pagePath(lang, 'noise-report.html'), nav.noise],
+    [pagePath(lang, 'log.html'), nav.log], [pagePath(lang, 'about.html'), nav.about]
   ];
   const navLinks = links.map(([href, label]) =>
     `<li><a href="${href}"${href === activeHref ? ' class="nav-active"' : ''}>${label}</a></li>`).join('');
   const drawerLinks = links.map(([href, label]) => `<a href="${href}" onclick="closeDrawer()">${label}</a>`).join('\n  ');
   return `<nav aria-label="Primary navigation">
-  <a href="/" class="nav-logo"><div class="nav-dot"></div><span class="nav-wordmark">LISBON <span>FINALS</span></span></a>
+  <a href="${pagePath(lang, 'index.html')}" class="nav-logo"><div class="nav-dot"></div><span class="nav-wordmark">LISBON <span>FINALS</span></span></a>
   <ul class="nav-links">${navLinks}</ul>
   <div class="nav-clock-wrap"><span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span></div>
   <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -214,38 +268,42 @@ document.getElementById('nav-burger').addEventListener('click', () => {
 })();`;
 }
 
-function articleTemplate(entry, slug, entriesWithSlug) {
-  const url = `${base}/journal/${slug}.html`;
-  const description = (entry.body || entry.title).replace(/\s+/g, ' ').slice(0, 158);
-  const paragraphs = String(entry.body || '').split(/\n\n|\n/).filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('\n');
-  const cat = CAT_META[entry.category] || { emoji: '📝', label: entry.category || 'Field note' };
+function articleTemplate(entry, slug, entriesWithSlug, lang) {
+  const chrome = JOURNAL_CHROME[lang];
+  const logHref = pagePath(lang, 'log.html');
+  const title = entryTitle(entry, lang);
+  const body = entryBody(entry, lang);
+  const url = `${base}${journalHref(lang, slug)}`;
+  const description = (body || title).replace(/\s+/g, ' ').slice(0, 158);
+  const paragraphs = String(body || '').split(/\n\n|\n/).filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('\n');
+  const cat = CAT_META[lang][entry.category] || { emoji: '📝', label: entry.category || 'Field note' };
   const schema = JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'BlogPosting', headline: entry.title,
+    '@context': 'https://schema.org', '@type': 'BlogPosting', headline: title,
     datePublished: `${entry.date}T${entry.time || '12:00'}:00+01:00`, dateModified: `${entry.date}T${entry.time || '12:00'}:00+01:00`,
-    mainEntityOfPage: url, url, author: { '@type': 'Person', name: 'The Captain' },
+    mainEntityOfPage: url, url, author: { '@type': 'Person', name: chrome.captainSig },
     publisher: { '@type': 'Organization', name: 'Lisbon Finals', url: `${base}/` },
-    articleSection: entry.category || 'field note', inLanguage: 'en', spatialCoverage: 'Lisbon, Portugal'
+    articleSection: entry.category || 'field note', inLanguage: lang === 'pt' ? 'pt-PT' : lang, spatialCoverage: 'Lisbon, Portugal'
   }).replaceAll('<', '\\u003c');
   return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(entry.title)} — Lisbon Finals</title><meta name="description" content="${esc(description)}">
+<html lang="${lang === 'pt' ? 'pt-PT' : lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(title)} — Lisbon Finals</title><meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${url}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site-core.css"><script src="/site-core.js"><\/script>
-<meta property="og:type" content="article"><meta property="og:title" content="${esc(entry.title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}">
+<meta property="og:type" content="article"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}">
 <script type="application/ld+json">${schema}<\/script>
 <style>${chromeStyles()}</style></head><body>
-${chromeNav('/log.html')}
+${chromeNav(logHref, lang)}
 <main class="article-shell">
-${entriesStrip(entriesWithSlug, slug)}
-<a href="/log.html" class="back-link">← Captain's Log</a>
+${entriesStrip(entriesWithSlug, slug, lang)}
+<a href="${logHref}" class="back-link">${chrome.backLink}</a>
 <div class="article-kicker"><span class="log-cat log-cat-${esc(entry.category || 'note')}">${cat.emoji} ${esc(cat.label)}</span><span class="article-date">${esc(entry.date)}${entry.time ? ' ' + esc(entry.time) : ''}</span></div>
-<h1 class="article-title">${esc(entry.title)}</h1><div class="article-rule"></div>
+<h1 class="article-title">${esc(title)}</h1><div class="article-rule"></div>
 <article class="article-body">${paragraphs}</article>
-<div class="article-sig">— The Captain · 38°46'N · 009°08'W · Lisbon, Portugal</div>
+<div class="article-sig">— ${esc(chrome.captainSig)} · 38°46'N · 009°08'W · Lisbon, Portugal</div>
 </main>
-<footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="/log.html" class="footer-back">← All entries</a></footer>
+<footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="${logHref}" class="footer-back">${chrome.allEntriesFooter}</a></footer>
 <script>${chromeScript()}
 document.querySelector('.log-all-item.active')?.scrollIntoView({inline:'center',block:'nearest'});<\/script>
 </body></html>`;
@@ -273,7 +331,7 @@ function reportTemplate(report, slug) {
 <meta property="og:type" content="article"><meta property="og:title" content="Noise Report — ${esc(month)} ${report.year}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}">
 <script type="application/ld+json">${schema}<\/script>
 <style>${chromeStyles()}</style></head><body>
-${chromeNav('/noise-report.html')}
+${chromeNav('/noise-report.html', 'en')}
 <main class="article-shell">
 <a href="/noise-report.html" class="back-link">← Noise Reports</a>
 <div class="article-kicker"><span class="article-date">LPPT Lisbon · Independent monthly observation</span></div>
@@ -307,11 +365,22 @@ async function buildContent() {
   await fs.mkdir(journalOut, { recursive: true });
   await fs.mkdir(reportsOut, { recursive: true });
 
+  // Slug is always derived from the English title — one canonical slug shared
+  // by the en/pt/fr copies of a given article.
   const entriesWithSlug = entries.map(entry => ({ entry, slug: `${entry.date}-${slugify(entry.title)}` }));
-  const journalPages = [];
+  const journalPages = [];   // all languages, for sitemap.xml
+  const journalPagesEn = []; // English only, for feed.xml
   for (const { entry, slug } of entriesWithSlug) {
-    await fs.writeFile(path.join(journalOut, `${slug}.html`), articleTemplate(entry, slug, entriesWithSlug));
-    journalPages.push({ loc: `${base}/journal/${slug}.html`, lastmod: entry.date, entry, slug });
+    await fs.writeFile(path.join(journalOut, `${slug}.html`), articleTemplate(entry, slug, entriesWithSlug, 'en'));
+    const enPage = { loc: `${base}/journal/${slug}.html`, lastmod: entry.date, entry, slug };
+    journalPages.push(enPage);
+    journalPagesEn.push(enPage);
+    for (const lang of ['pt', 'fr']) {
+      const langOut = path.join(root, lang, 'journal');
+      await fs.mkdir(langOut, { recursive: true });
+      await fs.writeFile(path.join(langOut, `${slug}.html`), articleTemplate(entry, slug, entriesWithSlug, lang));
+      journalPages.push({ loc: `${base}${journalHref(lang, slug)}`, lastmod: entry.date, entry, slug });
+    }
   }
   const reportPages = [];
   for (const report of reports) {
@@ -328,7 +397,7 @@ async function buildContent() {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${allUrls.map(item => `  <url><loc>${esc(item.loc)}</loc><lastmod>${item.lastmod}</lastmod></url>`).join('\n')}\n</urlset>\n`;
   await fs.writeFile(path.join(root, 'sitemap.xml'), sitemap);
 
-  const feedEntries = journalPages.slice(0, 20).map(({ entry, loc }) => `<entry><title>${esc(entry.title)}</title><link href="${loc}"/><id>${loc}</id><updated>${entry.date}T${entry.time || '12:00'}:00+01:00</updated><summary>${esc(String(entry.body || '').replace(/\s+/g, ' ').slice(0, 280))}</summary></entry>`).join('\n');
+  const feedEntries = journalPagesEn.slice(0, 20).map(({ entry, loc }) => `<entry><title>${esc(entry.title)}</title><link href="${loc}"/><id>${loc}</id><updated>${entry.date}T${entry.time || '12:00'}:00+01:00</updated><summary>${esc(String(entry.body || '').replace(/\s+/g, ' ').slice(0, 280))}</summary></entry>`).join('\n');
   await fs.writeFile(path.join(root, 'feed.xml'), `<?xml version="1.0" encoding="utf-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom"><title>Lisbon Finals — Captain's Log</title><link href="${base}/feed.xml" rel="self"/><link href="${base}/log.html"/><id>${base}/log.html</id><updated>${entries[0]?.date || '2026-08-16'}T${entries[0]?.time || '12:00'}:00+01:00</updated>${feedEntries}</feed>\n`);
 }
 

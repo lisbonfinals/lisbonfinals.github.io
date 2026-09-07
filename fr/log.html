@@ -780,7 +780,7 @@ nav {
 <script>
 const JOURNAL_URL = 'https://gist.githubusercontent.com/lisbonfinals/2edb053ac9f9c91047c1b36f706d302c/raw/journal.json';
 
-const CAT_LABELS = {
+const CAT_LABELS_EN = {
   fix:      '🛠️ Fix',
   capture:  '📸 Capture',
   hardware: '⚙️ Hardware',
@@ -790,15 +790,39 @@ const CAT_LABELS = {
   milestone: '🏆 Milestone'
 };
 
+// Reuses the same filter_* labels already translated for the category filter bar,
+// so a card's category badge always matches the active-filter wording.
+function catLabel(cat) {
+  const t = (typeof LOG_TRANSLATIONS !== 'undefined' && LOG_TRANSLATIONS[_lang]) || {};
+  return t['filter_' + cat] || CAT_LABELS_EN[cat] || cat;
+}
+
+// Journal entries carry title/body in English plus optional _pt/_fr fields
+// (added by the translation pipeline). Falls back to English when a
+// translation is missing (e.g. a brand-new entry not yet translated).
+function localizedTitle(e) {
+  if (_lang === 'pt' && e.title_pt) return e.title_pt;
+  if (_lang === 'fr' && e.title_fr) return e.title_fr;
+  return e.title;
+}
+function localizedBody(e) {
+  if (_lang === 'pt' && e.body_pt) return e.body_pt;
+  if (_lang === 'fr' && e.body_fr) return e.body_fr;
+  return e.body;
+}
+
 function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 function entryUrl(entry) {
+  // Slug is always derived from the English title -- it's the one canonical
+  // slug shared by the en/pt/fr copies of a given article (build-discovery.mjs).
   const slug = String(entry.title || '')
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
-  return '/journal/' + entry.date + '-' + slug + '.html';
+  const prefix = (_lang === 'pt' || _lang === 'fr') ? '/' + _lang : '';
+  return prefix + '/journal/' + entry.date + '-' + slug + '.html';
 }
 
 let _allEntries = [];
@@ -806,12 +830,13 @@ let _activeFilter = 'all';
 
 function renderGrid(entries) {
   const grid = document.getElementById('logGrid');
+  const t = LOG_TRANSLATIONS[_lang] || LOG_TRANSLATIONS.en;
   const filtered = _activeFilter === 'all'
     ? entries
     : entries.filter(e => e.category === _activeFilter);
 
   if (!filtered.length) {
-    grid.innerHTML = '<div class="log-empty">No entries in this category yet.</div>';
+    grid.innerHTML = `<div class="log-empty">${esc(t.log_empty_category)}</div>`;
     return;
   }
 
@@ -819,23 +844,25 @@ function renderGrid(entries) {
   const secondary = rest.slice(0, 3);
 
   // ── Featured ──
-  const featExcerpt = (feat.body || feat.title || '').slice(0, 420);
+  const featTitle = localizedTitle(feat);
+  const featBody = localizedBody(feat);
+  const featExcerpt = (featBody || featTitle || '').slice(0, 420);
   const featHtml = `
     <div class="log-featured-wrap">
       <a class="log-featured-card${feat.pinned ? ' pinned' : ''}${feat.category === 'milestone' ? ' milestone' : ''}" href="${entryUrl(feat)}" style="color:inherit;text-decoration:none">
         <div>
           <div class="log-card-top">
-            <span class="log-cat log-cat-${esc(feat.category)}">${esc(CAT_LABELS[feat.category] || feat.category)}</span>
+            <span class="log-cat log-cat-${esc(feat.category)}">${esc(catLabel(feat.category))}</span>
             <span class="log-ts">${esc(feat.date)}${feat.time ? ' ' + esc(feat.time) : ''}</span>
           </div>
-          <div class="log-featured-title">${esc(feat.title)}</div>
+          <div class="log-featured-title">${esc(featTitle)}</div>
           <div class="log-featured-divider"></div>
-          <div class="log-featured-body">${esc(featExcerpt)}${featExcerpt.length < (feat.body||'').length ? '…' : ''}</div>
+          <div class="log-featured-body">${esc(featExcerpt)}${featExcerpt.length < (featBody||'').length ? '…' : ''}</div>
         </div>
         <div class="log-featured-aside">
-          <span class="log-featured-latest">Latest Entry</span>
+          <span class="log-featured-latest">${esc(t.log_latest_entry)}</span>
           <span class="log-featured-date-big">${esc(feat.date)}</span>
-          <span class="log-featured-read">Read entry →</span>
+          <span class="log-featured-read">${esc(t.log_read_entry)}</span>
         </div>
       </a>
     </div>`;
@@ -845,18 +872,20 @@ function renderGrid(entries) {
     <div class="log-secondary-wrap">
       <div class="log-secondary-grid">
         ${secondary.map(e => {
-          const ex = (e.body || e.title || '').slice(0, 200);
+          const eTitle = localizedTitle(e);
+          const eBody = localizedBody(e);
+          const ex = (eBody || eTitle || '').slice(0, 200);
           const entryNum = String(_allEntries.length - _allEntries.indexOf(e)).padStart(2, '0');
           return `<a class="log-card${e.pinned ? ' pinned' : ''}${e.category === 'milestone' ? ' milestone' : ''}" href="${entryUrl(e)}" style="color:inherit;text-decoration:none">
             <div class="log-card-top">
-              <span class="log-cat log-cat-${esc(e.category)}">${esc(CAT_LABELS[e.category] || e.category)}</span>
+              <span class="log-cat log-cat-${esc(e.category)}">${esc(catLabel(e.category))}</span>
               <span class="log-ts">${esc(e.date)}</span>
             </div>
-            <div class="log-card-title">${esc(e.title)}</div>
+            <div class="log-card-title">${esc(eTitle)}</div>
             <div class="log-card-divider"></div>
-            <div class="log-card-body">${esc(ex)}${ex.length < (e.body||'').length ? '…' : ''}</div>
+            <div class="log-card-body">${esc(ex)}${ex.length < (eBody||'').length ? '…' : ''}</div>
             <div class="log-card-footer">
-              <span class="log-card-sig">— The Captain</span>
+              <span class="log-card-sig">— ${esc(t.log_captain_sig)}</span>
               <span class="log-card-entry">Entry #${entryNum}</span>
             </div>
           </a>`;
@@ -867,12 +896,12 @@ function renderGrid(entries) {
   // ── All entries strip (always shows all entries) ──
   const stripHtml = `
     <div class="log-all-wrap">
-      <div class="log-all-label">All Entries</div>
+      <div class="log-all-label">${esc(t.log_all_entries)}</div>
       <div class="log-all-strip">
         ${_allEntries.map((e, i) => `
           <a class="log-all-item${i === 0 ? ' active' : ''}" href="${entryUrl(e)}" style="color:inherit;text-decoration:none">
             <div class="log-all-item-date">${esc(e.date)}</div>
-            <div class="log-all-item-title">${esc(e.title)}</div>
+            <div class="log-all-item-title">${esc(localizedTitle(e))}</div>
           </a>`).join('')}
       </div>
     </div>`;
@@ -883,26 +912,28 @@ function renderGrid(entries) {
 function openModal(idx) {
   const e = _allEntries[idx];
   if (!e) return;
+  const t = LOG_TRANSLATIONS[_lang] || LOG_TRANSLATIONS.en;
   // Update active strip item
   document.querySelectorAll('.log-all-item').forEach((el, i) => {
     el.classList.toggle('active', i === idx);
   });
   const entryNum = String(_allEntries.length - idx).padStart(2, '0');
-  const bodyParagraphs = (e.body || '')
+  const eTitle = localizedTitle(e);
+  const bodyParagraphs = (localizedBody(e) || '')
     .split(/\n\n|\n/).filter(p => p.trim())
     .map(p => `<p>${esc(p)}</p>`).join('');
 
   document.getElementById('modalInner').innerHTML = `
     <div class="log-modal-meta">
-      <span class="log-cat log-cat-${esc(e.category)}">${esc(CAT_LABELS[e.category] || e.category)}</span>
+      <span class="log-cat log-cat-${esc(e.category)}">${esc(catLabel(e.category))}</span>
       <span class="log-ts">${esc(e.date)} ${esc(e.time || '')}</span>
       <span class="log-modal-coords">${e.pinned ? '📌 ' : ''}38°46'N · 009°08'W</span>
     </div>
-    <div class="log-modal-title">${esc(e.title)}</div>
+    <div class="log-modal-title">${esc(eTitle)}</div>
     <div class="log-modal-divider"></div>
-    <div class="log-modal-body">${bodyParagraphs || '<p>' + esc(e.title) + '</p>'}</div>
+    <div class="log-modal-body">${bodyParagraphs || '<p>' + esc(eTitle) + '</p>'}</div>
     <div class="log-modal-sig">
-      — The Captain, Lisbon Finals HQ &nbsp;·&nbsp; Entry #${entryNum} · ${esc(e.date)}
+      — ${esc(t.log_captain_sig)}, Lisbon Finals HQ &nbsp;·&nbsp; Entry #${entryNum} · ${esc(e.date)}
     </div>`;
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -934,6 +965,17 @@ document.getElementById('filters').addEventListener('click', e => {
 });
 
 // Load from Gist
+function updateEntryMeta() {
+  const t = LOG_TRANSLATIONS[_lang] || LOG_TRANSLATIONS.en;
+  const n = _allEntries.length;
+  const noun = n === 1 ? t.log_entry_singular : t.log_entry_plural;
+  document.getElementById('entryCount').textContent = `${n} ${noun}`;
+  if (_allEntries[0]) {
+    const lastEntryDate = (_allEntries.find(e => !e.pinned) || _allEntries[0]).date;
+    document.getElementById('footerUpdated').textContent = t.log_last_entry_prefix + lastEntryDate;
+  }
+}
+
 fetch(JOURNAL_URL + '?t=' + Date.now())
   .then(r => r.json())
   .then(data => {
@@ -943,16 +985,13 @@ fetch(JOURNAL_URL + '?t=' + Date.now())
       if (!a.pinned && b.pinned) return 1;
       return new Date(b.date) - new Date(a.date);
     });
-    document.getElementById('entryCount').textContent = `${_allEntries.length} entr${_allEntries.length !== 1 ? 'ies' : 'y'}`;
-    if (_allEntries[0]) {
-      const lastEntryDate = (_allEntries.find(e => !e.pinned) || _allEntries[0]).date;
-      document.getElementById('footerUpdated').textContent = 'Last entry: ' + lastEntryDate;
-    }
+    updateEntryMeta();
     renderGrid(_allEntries);
   })
   .catch(() => {
+    const t = LOG_TRANSLATIONS[_lang] || LOG_TRANSLATIONS.en;
     document.getElementById('logGrid').innerHTML =
-      '<div class="log-empty">Could not load entries. Check back soon.</div>';
+      `<div class="log-empty">${t.log_load_error}</div>`;
   });
 
 // Nav drawer
@@ -1009,6 +1048,15 @@ const LOG_TRANSLATIONS = {
     filter_note: '📝 Nota',
     filter_milestone: '🏆 Marco',
     footer_left: 'LISBON FINALS · Diário do Capitão · lisbonfinals.com',
+    log_all_entries: 'Todas as Entradas',
+    log_latest_entry: 'Última Entrada',
+    log_read_entry: 'Ler entrada →',
+    log_captain_sig: 'O Capitão',
+    log_last_entry_prefix: 'Última entrada: ',
+    log_empty_category: 'Ainda não há entradas nesta categoria.',
+    log_load_error: 'Não foi possível carregar as entradas. Tenta novamente em breve.',
+    log_entry_singular: 'entrada',
+    log_entry_plural: 'entradas',
   },
   en: {
     nav_live:'Live',
@@ -1047,6 +1095,15 @@ const LOG_TRANSLATIONS = {
     filter_note: '📝 Note',
     filter_milestone: '🏆 Milestone',
     footer_left: "LISBON FINALS · Captain's Log · lisbonfinals.com",
+    log_all_entries: 'All Entries',
+    log_latest_entry: 'Latest Entry',
+    log_read_entry: 'Read entry →',
+    log_captain_sig: 'The Captain',
+    log_last_entry_prefix: 'Last entry: ',
+    log_empty_category: 'No entries in this category yet.',
+    log_load_error: 'Could not load entries. Check back soon.',
+    log_entry_singular: 'entry',
+    log_entry_plural: 'entries',
   },
   fr: {
     nav_live:'En Direct',
@@ -1085,6 +1142,15 @@ const LOG_TRANSLATIONS = {
     filter_note: '📝 Note',
     filter_milestone: '🏆 Étape',
     footer_left: 'LISBON FINALS · Journal de bord · lisbonfinals.com',
+    log_all_entries: 'Toutes les Entrées',
+    log_latest_entry: 'Dernière Entrée',
+    log_read_entry: "Lire l'entrée →",
+    log_captain_sig: 'Le Capitaine',
+    log_last_entry_prefix: 'Dernière entrée : ',
+    log_empty_category: 'Aucune entrée dans cette catégorie pour le moment.',
+    log_load_error: 'Impossible de charger les entrées. Réessaie bientôt.',
+    log_entry_singular: 'entrée',
+    log_entry_plural: 'entrées',
   }
 };
 
@@ -1123,6 +1189,11 @@ function applyLang(lang) {
     if (filterLabels[i]) btn.textContent = filterLabels[i];
   });
   alignCopilotStripWidth();
+  // Re-render journal content in the new language (title/body/category labels)
+  if (typeof _allEntries !== 'undefined' && _allEntries.length) {
+    updateEntryMeta();
+    renderGrid(_allEntries);
+  }
 }
 
 // On desktop, match the strip to the real span of the two action cells below.
