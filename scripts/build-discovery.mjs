@@ -301,7 +301,7 @@ ${entriesStrip(entriesWithSlug, slug, lang)}
 <div class="article-kicker"><span class="log-cat log-cat-${esc(entry.category || 'note')}">${cat.emoji} ${esc(cat.label)}</span><span class="article-date">${esc(entry.date)}${entry.time ? ' ' + esc(entry.time) : ''}</span></div>
 <h1 class="article-title">${esc(title)}</h1><div class="article-rule"></div>
 <article class="article-body">${paragraphs}</article>
-<div class="article-sig">— ${esc(chrome.captainSig)} · 38°46'N · 009°08'W · Lisbon, Portugal</div>
+<div class="article-sig">— ${esc(chrome.captainSig)} · 38°45'N · 009°09'W · Lisbon, Portugal</div>
 </main>
 <footer class="page-footer"><span class="footer-left">LISBON FINALS · lisbonfinals.com</span><a href="${logHref}" class="footer-back">${chrome.allEntriesFooter}</a></footer>
 <script>${chromeScript()}
