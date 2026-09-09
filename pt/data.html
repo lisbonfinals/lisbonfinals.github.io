@@ -338,6 +338,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .compare-source.live::before{background:rgba(74,222,128,.85);}
 .compare-source.provisional{background:rgba(245,166,35,.1);color:rgba(245,166,35,.75);}
 .compare-source.provisional::before{background:rgba(245,166,35,.75);}
+.compare-source.own{background:rgba(245,166,35,.1);color:rgba(245,166,35,.75);}
+.compare-source.own::before{background:rgba(245,166,35,.75);}
 .compare-rows{position:relative;}
 .compare-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(240,237,232,.04);}
 .compare-row:last-child{border-bottom:none;}
@@ -728,6 +730,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
         <div class="compare-name" data-i18n="expert_lf_name">Peak + Duration</div>
         <div class="compare-mainval" id="et-peak-max">—</div>
         <div class="compare-mainlbl" id="et-peak-date">dB — loudest single pass, —</div>
+        <div class="compare-source own" data-i18n="expert_source_own">Citizen metric — Lisbon Finals</div>
         <div class="compare-rows">
           <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_avgpeak">Average peak per flight</span><span class="compare-row-val" id="et-peak-avg">—</span></div>
           <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_flights">Flights measured</span><span class="compare-row-val" id="et-peak-flights">—</span></div>
@@ -1256,8 +1259,8 @@ const T = {
     expert_gap_title:'Reading the gap',
     expert_gap_copy:'A single loud pass barely moves a 24-hour Leq_dn average — but it\'s very much part of the lived experience below the flight path. That\'s the point of showing both: <strong>Leq_dn</strong> tells you what the regulator sees over a full day; <strong>peak + duration</strong> tells you what any single overflight actually sounded like.',
     expert_week_title:'Last 7 days · Leq_dn', expert_th_date:'Date', expert_th_day:'Day', expert_th_night:'Night', expert_th_total:'Leq_dn',
-    expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (±2dB agreement validated on Sept 8/9, 2026). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
-    expert_source_official:'Official — SensorGrid', expert_source_provisional:'Provisional — LF estimate',
+    expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
+    expert_source_official:'Official — SensorGrid', expert_source_provisional:'Provisional — LF estimate', expert_source_own:'Citizen metric — Lisbon Finals',
     expert_maturity:'Daily accumulation started Sept 3, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
     expert_peak_todaylbl:'loudest single pass, today'
   },
@@ -1339,8 +1342,8 @@ const T = {
     expert_gap_title:'Como ler a diferença',
     expert_gap_copy:'Uma única passagem ruidosa dificilmente altera uma média Leq_dn de 24 horas — mas faz muito parte da experiência vivida por quem está sob a rota de voo. É esse o objectivo de mostrar ambos: o <strong>Leq_dn</strong> mostra o que o regulador vê ao longo de um dia inteiro; <strong>pico + duração</strong> mostra como soou realmente cada passagem individual.',
     expert_week_title:'Últimos 7 dias · Leq_dn', expert_th_date:'Data', expert_th_day:'Dia', expert_th_night:'Noite', expert_th_total:'Leq_dn',
-    expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância dentro de ±2dB validada a 8/9 de setembro de 2026). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
-    expert_source_official:'Oficial — SensorGrid', expert_source_provisional:'Provisório — estimativa LF',
+    expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
+    expert_source_official:'Oficial — SensorGrid', expert_source_provisional:'Provisório — estimativa LF', expert_source_own:'Métrica cidadã — Lisbon Finals',
     expert_maturity:'A acumulação diária começou a 3 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
     expert_peak_todaylbl:'pico mais alto, hoje'
   },
@@ -1424,8 +1427,8 @@ const T = {
     expert_gap_title:'Comprendre l\'écart',
     expert_gap_copy:'Un seul passage bruyant fait à peine bouger une moyenne Leq_dn sur 24h — mais ça fait bel et bien partie de l\'expérience vécue sous la trajectoire des avions. C\'est tout l\'intérêt de montrer les deux : le <strong>Leq_dn</strong> montre ce que voit le régulateur sur une journée entière ; le <strong>pic + durée</strong> montre à quoi ressemblait vraiment un passage donné.',
     expert_week_title:'7 derniers jours · Leq_dn', expert_th_date:'Date', expert_th_day:'Jour', expert_th_night:'Nuit', expert_th_total:'Leq_dn',
-    expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord à ±2dB validé les 8/9 sept 2026). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
-    expert_source_official:'Officiel — SensorGrid', expert_source_provisional:'Provisoire — estimation LF',
+    expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
+    expert_source_official:'Officiel — SensorGrid', expert_source_provisional:'Provisoire — estimation LF', expert_source_own:'Mesure citoyenne — Lisbon Finals',
     expert_maturity:'Accumulation quotidienne démarrée le 3 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
     expert_peak_todaylbl:'pic le plus fort, aujourd\'hui'
   }
