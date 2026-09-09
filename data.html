@@ -681,8 +681,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <!-- ── EXPERT MODE ── -->
   <div class="expert-toggle-row">
     <div>
-      <div class="expert-toggle-label">🔬 Expert Mode</div>
-      <div class="expert-toggle-sub">Compare our metric against the official regulatory methodology</div>
+      <div class="expert-toggle-label" data-i18n="expert_label">🔬 Expert Mode</div>
+      <div class="expert-toggle-sub" data-i18n="expert_sub">Compare our metric against the official regulatory methodology</div>
     </div>
     <label class="et-switch">
       <input type="checkbox" id="expertToggle" onchange="document.getElementById('expertPanel').classList.toggle('open', this.checked)">
@@ -693,8 +693,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <div class="expert-panel" id="expertPanel">
     <div class="method-strip" style="margin:24px 0 28px;">
       <div>
-        <div class="method-kicker">Why two numbers</div>
-        <div class="method-copy" style="max-width:760px;">
+        <div class="method-kicker" data-i18n="expert_why_kicker">Why two numbers</div>
+        <div class="method-copy" style="max-width:760px;" data-i18n-html="expert_why_copy">
           Aircraft noise can be measured two legitimate ways:<br><br>
           1. <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> is the regulatory standard — the same methodology basis used across the EU, including Lisbon Airport's own official noise report. It averages sound energy over a full day/night cycle, weighting night events +10dB.<br><br>
           2. <strong style="color:rgba(240,237,232,.8)">Peak + duration</strong> is what Lisbon Finals measures directly — how loud each individual pass gets, and how long it stays above 70dB, repeated roughly <span id="et-flights-count">—</span> times a day.<br><br>
@@ -705,31 +705,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
     <div class="compare-grid">
       <div class="compare-card official">
-        <div class="compare-kicker">Regulatory methodology</div>
+        <div class="compare-kicker" data-i18n="expert_official_kicker">Regulatory methodology</div>
         <div class="compare-name">Leq_dn</div>
         <div class="compare-mainval" id="et-leqdn-total">—</div>
         <div class="compare-mainlbl" id="et-leqdn-date">dB — —</div>
         <div class="compare-rows">
-          <div class="compare-row"><span class="compare-row-lbl">Day (06h–22h)</span><span class="compare-row-val" id="et-leqdn-day">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl">Night (22h–06h, +10dB)</span><span class="compare-row-val" id="et-leqdn-night">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl">Events counted</span><span class="compare-row-val" id="et-leqdn-events">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_day">Day (06h–22h)</span><span class="compare-row-val" id="et-leqdn-day">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_night">Night (22h–06h, +10dB)</span><span class="compare-row-val" id="et-leqdn-night">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_events">Events counted</span><span class="compare-row-val" id="et-leqdn-events">—</span></div>
         </div>
       </div>
       <div class="compare-card lf">
-        <div class="compare-kicker">Lisbon Finals metric</div>
-        <div class="compare-name">Peak + Duration</div>
+        <div class="compare-kicker" data-i18n="expert_lf_kicker">Lisbon Finals metric</div>
+        <div class="compare-name" data-i18n="expert_lf_name">Peak + Duration</div>
         <div class="compare-mainval" id="et-peak-max">—</div>
         <div class="compare-mainlbl" id="et-peak-date">dB — loudest single pass, —</div>
         <div class="compare-rows">
-          <div class="compare-row"><span class="compare-row-lbl">Flights measured</span><span class="compare-row-val" id="et-peak-flights">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl">Events ≥70dB</span><span class="compare-row-val" id="et-peak-events">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_flights">Flights measured</span><span class="compare-row-val" id="et-peak-flights">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_events70">Events ≥70dB</span><span class="compare-row-val" id="et-peak-events">—</span></div>
         </div>
       </div>
     </div>
 
     <div class="divergence-note">
-      <div class="divergence-title">Reading the gap</div>
-      <div class="divergence-copy">
+      <div class="divergence-title" data-i18n="expert_gap_title">Reading the gap</div>
+      <div class="divergence-copy" data-i18n-html="expert_gap_copy">
         A single loud pass barely moves a 24-hour Leq_dn average — but it's very much part of the lived experience
         below the flight path. That's the point of showing both: <strong>Leq_dn</strong> tells you what the
         regulator sees over a full day; <strong>peak + duration</strong> tells you what any single overflight actually
@@ -738,23 +738,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     </div>
 
     <div class="lva-week">
-      <div class="lva-week-title">Last 7 days · Leq_dn</div>
+      <div class="lva-week-title" data-i18n="expert_week_title">Last 7 days · Leq_dn</div>
       <div class="lva-week-row head">
-        <div class="lva-week-head-cell">Date</div>
+        <div class="lva-week-head-cell" data-i18n="expert_th_date">Date</div>
         <div class="lva-week-head-cell"></div>
-        <div class="lva-week-head-cell right">Day</div>
-        <div class="lva-week-head-cell right">Night</div>
-        <div class="lva-week-head-cell right">Leq_dn</div>
+        <div class="lva-week-head-cell right" data-i18n="expert_th_day">Day</div>
+        <div class="lva-week-head-cell right" data-i18n="expert_th_night">Night</div>
+        <div class="lva-week-head-cell right" data-i18n="expert_th_total">Leq_dn</div>
       </div>
       <div id="et-week-rows"></div>
     </div>
 
     <div class="source-note">
-      Leq_dn computed independently by Lisbon Finals from its own SPL measurements, using the standard day/night
+      <span data-i18n-html="expert_source_note">Leq_dn computed independently by Lisbon Finals from its own SPL measurements, using the standard day/night
       formula (day 06h–22h / night 22h–06h, +10dB penalty). Cross-checked against
       <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">Alessandro Annunziato's SensorGrid network</a>
-      — professional agreement within ±2dB on validated days. Not identical to any third-party platform's own calculation.
-      <div class="maturity-flag">Daily accumulation started Sept 3, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.</div>
+      — professional agreement within ±2dB on validated days. Not identical to any third-party platform's own calculation.</span>
+      <div class="maturity-flag" data-i18n="expert_maturity">Daily accumulation started Sept 3, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.</div>
     </div>
   </div>
 </section>
@@ -857,6 +857,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 <script>
 const GIST_URL = 'https://gist.githubusercontent.com/lisbonfinals/2edb053ac9f9c91047c1b36f706d302c/raw/lisbon_finals.json';
+let lastGistData = null; // cache pour re-remplir les valeurs dynamiques (Expert Mode) après un changement de langue
 
 function fmt(n) { return (n != null && n !== '') ? Number(n).toLocaleString() : '—'; }
 function fmtDb(db) { return (db && db > 0) ? db.toFixed(1) + ' dB' : '—'; }
@@ -953,8 +954,9 @@ function buildExpertMode(lvaDaily, s) {
   // côté LF (pic+durée) : donnée live du jour en cours, clairement datée à part —
   // pas la même journée calendaire que le Leq_dn (qui porte sur la dernière
   // journée COMPLETE), volontairement, chaque carte affiche sa propre date.
+  const tE = T[_lang] || T.en;
   document.getElementById('et-peak-max').textContent = s && s.peak_today_db ? s.peak_today_db.toFixed(1) : '—';
-  document.getElementById('et-peak-date').textContent = 'dB — loudest single pass, today';
+  document.getElementById('et-peak-date').textContent = 'dB — ' + (tE.expert_peak_todaylbl || 'loudest single pass, today');
   document.getElementById('et-peak-flights').textContent = s ? fmt(s.active_today) : '—';
   document.getElementById('et-peak-events').textContent = fmt(latest.n_events_total);
 
@@ -1029,6 +1031,7 @@ fetch(GIST_URL + '?t=' + Date.now())
   })
   .then(data => {
     const s = data.stats || {};
+    lastGistData = data;
 
     // Section 1 — flight stats
     document.getElementById('s1-flights').textContent = fmt(s.total_flights);
@@ -1210,7 +1213,19 @@ const T = {
     archive_teaser_desc:'The numbers above already cover the station\'s complete history. The Archive goes further — cross-referenced by aircraft model, airline, night regulation, and air quality, with full photo galleries for each.',
     archive_teaser_link:'→ Explore the full archive',
     th_date:'Date / Time', th_vol:'Flight', th_airline:'Airline', th_phase:'Phase',
-    th_alt:'Altitude', th_db:'Max dB', th_expo:'Expo≥70dB', th_vib:'Vib'
+    th_alt:'Altitude', th_db:'Max dB', th_expo:'Expo≥70dB', th_vib:'Vib',
+    expert_label:'🔬 Expert Mode', expert_sub:'Compare our metric against the official regulatory methodology',
+    expert_why_kicker:'Why two numbers',
+    expert_why_copy:'Aircraft noise can be measured two legitimate ways:<br><br>1. <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> is the regulatory standard — the same methodology basis used across the EU, including Lisbon Airport\'s own official noise report. It averages sound energy over a full day/night cycle, weighting night events +10dB.<br><br>2. <strong style="color:rgba(240,237,232,.8)">Peak + duration</strong> is what Lisbon Finals measures directly — how loud each individual pass gets, and how long it stays above 70dB, repeated roughly <span id="et-flights-count">—</span> times a day.<br><br>Neither is "more correct": Leq_dn is the number regulators use to set limits; peak+duration is closer to what a person actually experiences during a single overflight.',
+    expert_official_kicker:'Regulatory methodology', expert_lf_kicker:'Lisbon Finals metric', expert_lf_name:'Peak + Duration',
+    expert_row_day:'Day (06h–22h)', expert_row_night:'Night (22h–06h, +10dB)', expert_row_events:'Events counted',
+    expert_row_flights:'Flights measured', expert_row_events70:'Events ≥70dB',
+    expert_gap_title:'Reading the gap',
+    expert_gap_copy:'A single loud pass barely moves a 24-hour Leq_dn average — but it\'s very much part of the lived experience below the flight path. That\'s the point of showing both: <strong>Leq_dn</strong> tells you what the regulator sees over a full day; <strong>peak + duration</strong> tells you what any single overflight actually sounded like.',
+    expert_week_title:'Last 7 days · Leq_dn', expert_th_date:'Date', expert_th_day:'Day', expert_th_night:'Night', expert_th_total:'Leq_dn',
+    expert_source_note:'Leq_dn computed independently by Lisbon Finals from its own SPL measurements, using the standard day/night formula (day 06h–22h / night 22h–06h, +10dB penalty). Cross-checked against <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">Alessandro Annunziato\'s SensorGrid network</a> — professional agreement within ±2dB on validated days. Not identical to any third-party platform\'s own calculation.',
+    expert_maturity:'Daily accumulation started Sept 3, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
+    expert_peak_todaylbl:'loudest single pass, today'
   },
   pt: {
     nav_live:'Ao Vivo',
@@ -1280,7 +1295,19 @@ const T = {
     archive_teaser_desc:'Os números acima já cobrem o histórico completo da estação. O Arquivo vai mais longe — cruzando modelo de aeronave, companhia aérea, regulamentação nocturna e qualidade do ar, com galerias de fotos completas associadas a cada selecção.',
     archive_teaser_link:'→ Explorar o arquivo completo',
     th_date:'Data / Hora', th_vol:'Voo', th_airline:'Companhia', th_phase:'Fase',
-    th_alt:'Altitude', th_db:'dB Máx', th_expo:'Expo≥70dB', th_vib:'Vib'
+    th_alt:'Altitude', th_db:'dB Máx', th_expo:'Expo≥70dB', th_vib:'Vib',
+    expert_label:'🔬 Modo Perito', expert_sub:'Compare a nossa métrica com a metodologia regulamentar oficial',
+    expert_why_kicker:'Porquê dois números',
+    expert_why_copy:'O ruído de aeronaves pode ser medido de duas formas legítimas:<br><br>1. O <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> é o padrão regulamentar — a mesma base metodológica usada em toda a UE, incluindo o próprio relatório oficial de ruído do Aeroporto de Lisboa. Faz a média da energia sonora ao longo de um ciclo completo dia/noite, com uma penalização de +10dB para eventos nocturnos.<br><br>2. <strong style="color:rgba(240,237,232,.8)">Pico + duração</strong> é o que a Lisbon Finals mede directamente — quão alto fica cada passagem individual, e durante quanto tempo se mantém acima de 70dB, repetido cerca de <span id="et-flights-count">—</span> vezes por dia.<br><br>Nenhum dos dois é "mais correcto": o Leq_dn é o número que os reguladores usam para definir limites; pico+duração está mais próximo do que uma pessoa realmente sente durante uma única passagem.',
+    expert_official_kicker:'Metodologia regulamentar', expert_lf_kicker:'Métrica Lisbon Finals', expert_lf_name:'Pico + Duração',
+    expert_row_day:'Dia (06h–22h)', expert_row_night:'Noite (22h–06h, +10dB)', expert_row_events:'Eventos contabilizados',
+    expert_row_flights:'Voos medidos', expert_row_events70:'Eventos ≥70dB',
+    expert_gap_title:'Como ler a diferença',
+    expert_gap_copy:'Uma única passagem ruidosa dificilmente altera uma média Leq_dn de 24 horas — mas faz muito parte da experiência vivida por quem está sob a rota de voo. É esse o objectivo de mostrar ambos: o <strong>Leq_dn</strong> mostra o que o regulador vê ao longo de um dia inteiro; <strong>pico + duração</strong> mostra como soou realmente cada passagem individual.',
+    expert_week_title:'Últimos 7 dias · Leq_dn', expert_th_date:'Data', expert_th_day:'Dia', expert_th_night:'Noite', expert_th_total:'Leq_dn',
+    expert_source_note:'Leq_dn calculado de forma independente pela Lisbon Finals a partir das suas próprias medições de SPL, usando a fórmula-padrão dia/noite (dia 06h–22h / noite 22h–06h, penalização de +10dB). Verificado de forma cruzada com a <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">rede SensorGrid de Alessandro Annunziato</a> — concordância profissional dentro de ±2dB em dias validados. Não idêntico ao cálculo próprio de nenhuma plataforma terceira.',
+    expert_maturity:'A acumulação diária começou a 3 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
+    expert_peak_todaylbl:'pico mais alto, hoje'
   },
   fr: {
     nav_live:'En Direct',
@@ -1352,7 +1379,19 @@ const T = {
     archive_teaser_desc:'Les chiffres ci-dessus couvrent déjà tout l\'historique de la station. Les archives permettent d’aller plus loin en recoupant modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo correspondant à chaque sélection.',
     archive_teaser_link:'→ Explorer les archives complètes',
     th_date:'Date / Heure', th_vol:'Vol', th_airline:'Compagnie', th_phase:'Phase',
-    th_alt:'Altitude', th_db:'dB Max', th_expo:'Expo≥70dB', th_vib:'Vib'
+    th_alt:'Altitude', th_db:'dB Max', th_expo:'Expo≥70dB', th_vib:'Vib',
+    expert_label:'🔬 Mode Expert', expert_sub:'Comparer notre métrique à la méthodologie réglementaire officielle',
+    expert_why_kicker:'Pourquoi deux chiffres',
+    expert_why_copy:'Le bruit aérien peut se mesurer de deux façons légitimes :<br><br>1. Le <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> est la norme réglementaire — la même base méthodologique utilisée dans toute l\'UE, y compris par le rapport officiel de bruit de l\'aéroport de Lisbonne lui-même. Il moyenne l\'énergie sonore sur un cycle jour/nuit complet, avec une pénalité de +10dB pour les événements nocturnes.<br><br>2. Le <strong style="color:rgba(240,237,232,.8)">pic + durée</strong> est ce que Lisbon Finals mesure directement — l\'intensité de chaque passage individuel, et sa durée au-dessus de 70dB, répété environ <span id="et-flights-count">—</span> fois par jour.<br><br>Aucun des deux n\'est "plus juste" : le Leq_dn est le chiffre que les régulateurs utilisent pour fixer des limites ; le pic+durée est plus proche de ce qu\'une personne ressent réellement pendant un seul passage.',
+    expert_official_kicker:'Méthodologie réglementaire', expert_lf_kicker:'Métrique Lisbon Finals', expert_lf_name:'Pic + Durée',
+    expert_row_day:'Jour (06h–22h)', expert_row_night:'Nuit (22h–06h, +10dB)', expert_row_events:'Événements comptés',
+    expert_row_flights:'Vols mesurés', expert_row_events70:'Événements ≥70dB',
+    expert_gap_title:'Comprendre l\'écart',
+    expert_gap_copy:'Un seul passage bruyant fait à peine bouger une moyenne Leq_dn sur 24h — mais ça fait bel et bien partie de l\'expérience vécue sous la trajectoire des avions. C\'est tout l\'intérêt de montrer les deux : le <strong>Leq_dn</strong> montre ce que voit le régulateur sur une journée entière ; le <strong>pic + durée</strong> montre à quoi ressemblait vraiment un passage donné.',
+    expert_week_title:'7 derniers jours · Leq_dn', expert_th_date:'Date', expert_th_day:'Jour', expert_th_night:'Nuit', expert_th_total:'Leq_dn',
+    expert_source_note:'Leq_dn calculé de façon indépendante par Lisbon Finals à partir de ses propres mesures SPL, avec la formule standard jour/nuit (jour 06h–22h / nuit 22h–06h, pénalité +10dB). Recoupé avec le <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">réseau SensorGrid d\'Alessandro Annunziato</a> — accord professionnel à ±2dB sur les jours validés. Pas identique au calcul propre d\'une plateforme tierce.',
+    expert_maturity:'Accumulation quotidienne démarrée le 3 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
+    expert_peak_todaylbl:'pic le plus fort, aujourd\'hui'
   }
 };
 
@@ -1372,6 +1411,10 @@ function applyLang(lang) {
   });
   const fl = document.getElementById('footerLeft');
   if (fl) fl.textContent = t.footer;
+  // data-i18n-html vient d'écraser le contenu du bloc Expert Mode (innerHTML
+  // remplacé en entier) — les valeurs dynamiques qu'il contenait (nombre de
+  // vols/jour) doivent être réinjectées à partir des dernières données Gist.
+  if (lastGistData) buildExpertMode(lastGistData.lva_daily, lastGistData.stats);
 }
 function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[_lang]||'en'); }
 applyLang(_lang);
