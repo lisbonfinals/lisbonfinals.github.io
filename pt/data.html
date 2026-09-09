@@ -340,6 +340,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .compare-source.provisional::before{background:rgba(245,166,35,.75);}
 .compare-source.own{background:rgba(245,166,35,.1);color:rgba(245,166,35,.75);}
 .compare-source.own::before{background:rgba(245,166,35,.75);}
+.cmp-more-toggle{margin-top:16px;background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:9px 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.5);cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;transition:color .2s,border-color .2s;}
+.cmp-more-toggle:hover{color:var(--amber);border-color:rgba(245,166,35,.3);}
+.cmp-more-arrow{transition:transform .2s;font-size:9px;}
+.cmp-more-toggle.open .cmp-more-arrow{transform:rotate(180deg);}
+.expert-lva-panel{margin-top:12px;}
+.expert-lva-copy{font-size:12px;line-height:1.7;color:rgba(240,237,232,.5);margin-top:10px;}
 .compare-rows{position:relative;}
 .compare-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(240,237,232,.04);}
 .compare-row:last-child{border-bottom:none;}
@@ -724,6 +730,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
           <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden">Lden (EU standard)</span><span class="compare-row-val" id="et-leqdn-lden">—</span></div>
           <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_events">Events counted</span><span class="compare-row-val" id="et-leqdn-events">—</span></div>
         </div>
+        <div class="cmp-more-toggle" id="et-lva-toggle" hidden onclick="const p=document.getElementById('et-lva-panel');p.hidden=!p.hidden;this.classList.toggle('open',!p.hidden);">
+          <span data-i18n="expert_more_info">More info</span><span class="cmp-more-arrow">▾</span>
+        </div>
+        <div class="expert-lva-panel" id="et-lva-panel" hidden>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lva">LVA — Italian standard (OpenSky-verified)</span><span class="compare-row-val" id="et-lva-val">—</span></div>
+          <div class="expert-lva-copy" data-i18n="expert_lva_copy">LVA (Livello di Valutazione Aeroportuale) is Italy's national event-based airport noise standard — instead of averaging all ambient sound, it counts and weights individual aircraft noise events. This event-based philosophy isn't unique to Italy: many countries use similar approaches (SEL — Sound Exposure Level, an international ISO standard used by the FAA, ICAO and UK airports; threshold-crossing event counts elsewhere). Italy has simply codified it into this specific national regulation.</div>
+        </div>
       </div>
       <div class="compare-card lf">
         <div class="compare-kicker" data-i18n="expert_lf_kicker">Lisbon Finals metric</div>
@@ -970,6 +983,18 @@ function buildExpertMode(lvaDaily, s) {
     const srcEl = document.getElementById('et-leqdn-source');
     srcEl.textContent = tE.expert_source_official || 'Official — SensorGrid';
     srcEl.className = 'compare-source live';
+    // LVA (norme italienne, event-based) — uniquement dispo cote donnee officielle,
+    // pas de calcul LF equivalent, donc le bloc "More info" reste cache sans elle.
+    const lvaToggle = document.getElementById('et-lva-toggle');
+    const lvaVal = off.lva_coupled != null ? off.lva_coupled : off.lva;
+    if (lvaVal != null) {
+      document.getElementById('et-lva-val').textContent = lvaVal.toFixed(1) + ' dB';
+      lvaToggle.hidden = false;
+    } else {
+      lvaToggle.hidden = true;
+      document.getElementById('et-lva-panel').hidden = true;
+      lvaToggle.classList.remove('open');
+    }
   } else {
     document.getElementById('et-leqdn-total').textContent = latest.leq_dn != null ? latest.leq_dn.toFixed(1) : '—';
     document.getElementById('et-leqdn-day').textContent = latest.leq_day_period != null ? latest.leq_day_period.toFixed(1) + ' dB' : '—';
@@ -978,6 +1003,9 @@ function buildExpertMode(lvaDaily, s) {
     const srcEl = document.getElementById('et-leqdn-source');
     srcEl.textContent = tE.expert_source_provisional || 'Provisional — Lisbon Finals estimate';
     srcEl.className = 'compare-source provisional';
+    document.getElementById('et-lva-toggle').hidden = true;
+    document.getElementById('et-lva-panel').hidden = true;
+    document.getElementById('et-lva-toggle').classList.remove('open');
   }
   document.getElementById('et-leqdn-date').textContent = 'dB — ' + fmtShortDate(latestDate);
   document.getElementById('et-leqdn-events').textContent = fmt(latest.n_events_total);
@@ -1262,7 +1290,10 @@ const T = {
     expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
     expert_source_official:'Official — SensorGrid', expert_source_provisional:'Provisional — LF estimate', expert_source_own:'Citizen metric — Lisbon Finals',
     expert_maturity:'Daily accumulation started Sept 3, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
-    expert_peak_todaylbl:'loudest single pass, today'
+    expert_peak_todaylbl:'loudest single pass, today',
+    expert_more_info:'More info',
+    expert_row_lva:'LVA — Italian standard (OpenSky-verified)',
+    expert_lva_copy:'LVA (Livello di Valutazione Aeroportuale) is Italy\'s national event-based airport noise standard — instead of averaging all ambient sound, it counts and weights individual aircraft noise events. This event-based philosophy isn\'t unique to Italy: many countries use similar approaches (SEL — Sound Exposure Level, an international ISO standard used by the FAA, ICAO and UK airports; threshold-crossing event counts elsewhere). Italy has simply codified it into this specific national regulation.'
   },
   pt: {
     nav_live:'Ao Vivo',
@@ -1345,7 +1376,10 @@ const T = {
     expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
     expert_source_official:'Oficial — SensorGrid', expert_source_provisional:'Provisório — estimativa LF', expert_source_own:'Métrica cidadã — Lisbon Finals',
     expert_maturity:'A acumulação diária começou a 3 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
-    expert_peak_todaylbl:'pico mais alto, hoje'
+    expert_peak_todaylbl:'pico mais alto, hoje',
+    expert_more_info:'Mais informação',
+    expert_row_lva:'LVA — norma italiana (verificada via OpenSky)',
+    expert_lva_copy:'O LVA (Livello di Valutazione Aeroportuale) é a norma nacional italiana de ruído aeroportuário, baseada em eventos — em vez de fazer a média de todo o som ambiente, conta e pondera os eventos individuais de ruído de aeronaves. Esta filosofia baseada em eventos não é exclusiva da Itália: muitos países usam abordagens semelhantes (SEL — Sound Exposure Level, uma norma internacional ISO usada pela FAA, ICAO e aeroportos britânicos; contagens de eventos acima de um limiar noutros países). A Itália limitou-se a codificá-la nesta regulamentação nacional específica.'
   },
   fr: {
     nav_live:'En Direct',
@@ -1430,7 +1464,10 @@ const T = {
     expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
     expert_source_official:'Officiel — SensorGrid', expert_source_provisional:'Provisoire — estimation LF', expert_source_own:'Mesure citoyenne — Lisbon Finals',
     expert_maturity:'Accumulation quotidienne démarrée le 3 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
-    expert_peak_todaylbl:'pic le plus fort, aujourd\'hui'
+    expert_peak_todaylbl:'pic le plus fort, aujourd\'hui',
+    expert_more_info:'Plus d\'infos',
+    expert_row_lva:'LVA — norme italienne (vérifiée OpenSky)',
+    expert_lva_copy:'Le LVA (Livello di Valutazione Aeroportuale) est la norme nationale italienne de bruit aéroportuaire, basée sur les événements — au lieu de moyenner tout le son ambiant, il compte et pondère les événements sonores individuels liés aux avions. Cette philosophie événementielle n\'est pas propre à l\'Italie : de nombreux pays utilisent des approches similaires (SEL — Sound Exposure Level, une norme internationale ISO utilisée par la FAA, l\'ICAO et les aéroports britanniques ; des comptages d\'événements au-dessus d\'un seuil ailleurs). L\'Italie l\'a simplement codifiée dans cette réglementation nationale spécifique.'
   }
 };
 
