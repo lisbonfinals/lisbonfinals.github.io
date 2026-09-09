@@ -306,6 +306,59 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .info-row-val.red{color:var(--red);}
 .info-row-val.amber{color:var(--amber);}
 
+/* ── EXPERT MODE ── */
+.expert-toggle-row{display:flex;align-items:center;gap:14px;margin:32px 0 0;padding:16px 20px;background:var(--dark2);border:1px solid var(--border);border-radius:4px;}
+.expert-toggle-label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:rgba(240,237,232,.75);flex:1;}
+.expert-toggle-sub{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.32);margin-top:3px;}
+.et-switch{position:relative;width:42px;height:22px;flex-shrink:0;cursor:pointer;}
+.et-switch input{opacity:0;width:0;height:0;position:absolute;}
+.et-switch-track{position:absolute;inset:0;background:rgba(240,237,232,.12);border:1px solid var(--border2);border-radius:20px;transition:.2s;}
+.et-switch-thumb{position:absolute;top:2px;left:2px;width:16px;height:16px;background:rgba(240,237,232,.5);border-radius:50%;transition:.2s;}
+.et-switch input:checked + .et-switch-track{background:rgba(245,166,35,.18);border-color:rgba(245,166,35,.5);}
+.et-switch input:checked + .et-switch-track .et-switch-thumb{transform:translateX(20px);background:var(--amber);}
+.expert-panel{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s ease,margin .4s ease;}
+.expert-panel.open{max-height:3000px;opacity:1;margin-top:24px;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.compare-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:26px;position:relative;overflow:hidden;}
+.compare-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;}
+.compare-card.official::before{background:radial-gradient(ellipse at top left,rgba(96,165,250,.07),transparent 60%);}
+.compare-card.lf::before{background:radial-gradient(ellipse at top left,rgba(245,166,35,.07),transparent 60%);}
+.compare-card:hover::before{opacity:1;}
+.compare-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px;position:relative;}
+.compare-card.official .compare-kicker{color:var(--blue);}
+.compare-card.lf .compare-kicker{color:var(--amber);}
+.compare-name{font-family:var(--sans);font-size:16px;font-weight:700;color:var(--white);margin-bottom:18px;position:relative;}
+.compare-mainval{font-family:var(--mono);font-size:40px;font-weight:500;line-height:1;position:relative;}
+.compare-card.official .compare-mainval{color:var(--blue);}
+.compare-card.lf .compare-mainval{color:var(--amber);}
+.compare-mainlbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);margin:6px 0 20px;position:relative;}
+.compare-rows{position:relative;}
+.compare-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(240,237,232,.04);}
+.compare-row:last-child{border-bottom:none;}
+.compare-row-lbl{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.43);}
+.compare-row-val{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--white);}
+.divergence-note{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-bottom:20px;}
+.divergence-title{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:10px;}
+.divergence-copy{font-size:13px;line-height:1.75;color:rgba(240,237,232,.56);}
+.divergence-copy strong{color:var(--white);font-weight:600;}
+.lva-week{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:20px;}
+.lva-week-title{padding:14px 20px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);}
+.lva-week-row{display:grid;grid-template-columns:100px 1fr 90px 90px 90px;gap:0;padding:10px 20px;align-items:center;border-bottom:1px solid rgba(240,237,232,.04);}
+.lva-week-row:last-child{border-bottom:none;}
+.lva-week-row.head{background:rgba(245,166,35,.04);border-bottom:1px solid var(--border);}
+.lva-week-head-cell{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,166,35,.35);}
+.lva-week-head-cell.right{text-align:right;}
+.lva-week-date{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.75);}
+.lva-week-bar-wrap{display:flex;align-items:center;}
+.lva-week-bar{height:4px;background:var(--blue);border-radius:2px;opacity:.55;}
+.lva-week-val{font-family:var(--mono);font-size:11px;color:var(--white);text-align:right;}
+.source-note{font-family:var(--mono);font-size:10px;line-height:1.9;color:rgba(240,237,232,.34);}
+.source-note a{color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3);}
+.source-note a:hover{border-bottom-color:var(--amber);}
+.maturity-flag{display:flex;align-items:center;gap:6px;color:rgba(245,166,35,.55);margin-top:8px;}
+.maturity-flag::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(245,166,35,.55);flex-shrink:0;}
+@media (max-width:820px){.compare-grid{grid-template-columns:1fr;}.lva-week-row{grid-template-columns:70px 1fr 60px 60px 60px;font-size:10px;}}
+
 /* ── WARNING ZONE ── */
 .warning-hero-card{background:linear-gradient(135deg,rgba(239,68,68,.06) 0%,rgba(7,9,13,0) 60%);border:1px solid rgba(239,68,68,.2);border-radius:4px;padding:36px;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px;}
 .warning-stat{text-align:center;}
@@ -624,6 +677,86 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_station">Station location</span><span class="info-row-val">38°45'N · 009°09'W</span></div>
     </div>
   </div>
+
+  <!-- ── EXPERT MODE ── -->
+  <div class="expert-toggle-row">
+    <div>
+      <div class="expert-toggle-label">🔬 Expert Mode</div>
+      <div class="expert-toggle-sub">Compare our metric against the official regulatory methodology</div>
+    </div>
+    <label class="et-switch">
+      <input type="checkbox" id="expertToggle" onchange="document.getElementById('expertPanel').classList.toggle('open', this.checked)">
+      <div class="et-switch-track"><div class="et-switch-thumb"></div></div>
+    </label>
+  </div>
+
+  <div class="expert-panel" id="expertPanel">
+    <div class="method-strip" style="margin:24px 0 28px;">
+      <div>
+        <div class="method-kicker">Why two numbers</div>
+        <div class="method-copy" style="max-width:760px;">
+          Aircraft noise can be measured two legitimate ways:<br><br>
+          1. <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> is the regulatory standard — the same methodology basis used across the EU, including Lisbon Airport's own official noise report. It averages sound energy over a full day/night cycle, weighting night events +10dB.<br><br>
+          2. <strong style="color:rgba(240,237,232,.8)">Peak + duration</strong> is what Lisbon Finals measures directly — how loud each individual pass gets, and how long it stays above 70dB, repeated roughly <span id="et-flights-count">—</span> times a day.<br><br>
+          Neither is "more correct": Leq_dn is the number regulators use to set limits; peak+duration is closer to what a person actually experiences during a single overflight.
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-card official">
+        <div class="compare-kicker">Regulatory methodology</div>
+        <div class="compare-name">Leq_dn</div>
+        <div class="compare-mainval" id="et-leqdn-total">—</div>
+        <div class="compare-mainlbl" id="et-leqdn-date">dB — —</div>
+        <div class="compare-rows">
+          <div class="compare-row"><span class="compare-row-lbl">Day (06h–22h)</span><span class="compare-row-val" id="et-leqdn-day">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl">Night (22h–06h, +10dB)</span><span class="compare-row-val" id="et-leqdn-night">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl">Events counted</span><span class="compare-row-val" id="et-leqdn-events">—</span></div>
+        </div>
+      </div>
+      <div class="compare-card lf">
+        <div class="compare-kicker">Lisbon Finals metric</div>
+        <div class="compare-name">Peak + Duration</div>
+        <div class="compare-mainval" id="et-peak-max">—</div>
+        <div class="compare-mainlbl" id="et-peak-date">dB — loudest single pass, —</div>
+        <div class="compare-rows">
+          <div class="compare-row"><span class="compare-row-lbl">Flights measured</span><span class="compare-row-val" id="et-peak-flights">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl">Events ≥70dB</span><span class="compare-row-val" id="et-peak-events">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divergence-note">
+      <div class="divergence-title">Reading the gap</div>
+      <div class="divergence-copy">
+        A single loud pass barely moves a 24-hour Leq_dn average — but it's very much part of the lived experience
+        below the flight path. That's the point of showing both: <strong>Leq_dn</strong> tells you what the
+        regulator sees over a full day; <strong>peak + duration</strong> tells you what any single overflight actually
+        sounded like.
+      </div>
+    </div>
+
+    <div class="lva-week">
+      <div class="lva-week-title">Last 7 days · Leq_dn</div>
+      <div class="lva-week-row head">
+        <div class="lva-week-head-cell">Date</div>
+        <div class="lva-week-head-cell"></div>
+        <div class="lva-week-head-cell right">Day</div>
+        <div class="lva-week-head-cell right">Night</div>
+        <div class="lva-week-head-cell right">Leq_dn</div>
+      </div>
+      <div id="et-week-rows"></div>
+    </div>
+
+    <div class="source-note">
+      Leq_dn computed independently by Lisbon Finals from its own SPL measurements, using the standard day/night
+      formula (day 06h–22h / night 22h–06h, +10dB penalty). Cross-checked against
+      <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">Alessandro Annunziato's SensorGrid network</a>
+      — professional agreement within ±2dB on validated days. Not identical to any third-party platform's own calculation.
+      <div class="maturity-flag">Daily accumulation started Sept 3, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.</div>
+    </div>
+  </div>
 </section>
 
 <!-- ══ SECTION 3: WARNING ZONE ══ -->
@@ -793,6 +926,56 @@ function buildTicker(ticker) {
   }).join('');
 }
 
+// ── Build Expert Mode (Leq_dn vs peak+duration) ──
+function fmtShortDate(iso) {
+  // '2026-09-08' -> 'Sep 8'
+  const d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function buildExpertMode(lvaDaily, s) {
+  const dates = Object.keys(lvaDaily || {}).sort();
+  if (!dates.length) return;
+
+  // dernière journée COMPLETE dispo (l'entrée la plus récente est souvent
+  // partielle si elle correspond à aujourd'hui, calculée par le cron de
+  // 00h15 sur la veille — donc en pratique la dernière clé est déjà "hier")
+  const latestDate = dates[dates.length - 1];
+  const latest = lvaDaily[latestDate];
+
+  document.getElementById('et-leqdn-total').textContent = latest.leq_dn != null ? latest.leq_dn.toFixed(1) : '—';
+  document.getElementById('et-leqdn-date').textContent = 'dB — ' + fmtShortDate(latestDate);
+  document.getElementById('et-leqdn-day').textContent = latest.leq_day_period != null ? latest.leq_day_period.toFixed(1) + ' dB' : '—';
+  document.getElementById('et-leqdn-night').textContent = latest.leq_night_period != null ? latest.leq_night_period.toFixed(1) + ' dB' : '—';
+  document.getElementById('et-leqdn-events').textContent = fmt(latest.n_events_total);
+  document.getElementById('et-flights-count').textContent = fmt(latest.n_flights_total);
+
+  // côté LF (pic+durée) : donnée live du jour en cours, clairement datée à part —
+  // pas la même journée calendaire que le Leq_dn (qui porte sur la dernière
+  // journée COMPLETE), volontairement, chaque carte affiche sa propre date.
+  document.getElementById('et-peak-max').textContent = s && s.peak_today_db ? s.peak_today_db.toFixed(1) : '—';
+  document.getElementById('et-peak-date').textContent = 'dB — loudest single pass, today';
+  document.getElementById('et-peak-flights').textContent = s ? fmt(s.active_today) : '—';
+  document.getElementById('et-peak-events').textContent = fmt(latest.n_events_total);
+
+  // tableau 7 jours
+  const rows = dates.slice(-7).reverse().map(d => {
+    const e = lvaDaily[d];
+    const dayVal = e.leq_day_period != null ? e.leq_day_period.toFixed(1) : '—';
+    const nightVal = e.leq_night_period != null ? e.leq_night_period.toFixed(1) : '—';
+    const totalVal = e.leq_dn != null ? e.leq_dn.toFixed(1) : '—';
+    const barPct = e.leq_dn ? Math.min(100, Math.round((e.leq_dn / 80) * 100)) : 0;
+    return `<div class="lva-week-row">
+      <div class="lva-week-date">${fmtShortDate(d)}</div>
+      <div class="lva-week-bar-wrap"><div class="lva-week-bar" style="width:${barPct}%"></div></div>
+      <div class="lva-week-val">${dayVal}</div>
+      <div class="lva-week-val">${nightVal}</div>
+      <div class="lva-week-val" style="color:var(--blue)">${totalVal}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('et-week-rows').innerHTML = rows;
+}
+
 // ── Build night timeline ──
 function buildNightTimeline() {
   const el = document.getElementById('nightTimeline');
@@ -868,6 +1051,9 @@ fetch(GIST_URL + '?t=' + Date.now())
     document.getElementById('n-peak-flight').textContent = s.peak_noise_flight || '—';
     document.getElementById('n-loud').textContent = fmt(s.loud_flights_95db);
     document.getElementById('n-avg-night').textContent = fmtDb(s.avg_night_db);
+
+    // Expert Mode
+    buildExpertMode(data.lva_daily, s);
 
     // Section 3 — warning zone
     const wNight = document.getElementById('w-night-total');
