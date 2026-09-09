@@ -1787,14 +1787,22 @@ fetch('https://api.github.com/gists/' + GIST_ID)
           set('stat-peak', s.peak_noise_db.toFixed(1)+' dB');
           if(s.peak_callsign){ set('stat-peak-sub', s.peak_callsign); }
         }
-        /* ── featured Captain's Log badge (today only, cf. /journal "Feature on homepage") ── */
+        /* ── featured Captain's Log badge (rolling 24h from publish, cf. /journal
+           "Feature on homepage" — expiry now decided server-side in
+           _build_featured_log(), not by a date-equality check here: a fl
+           object being present at all already means it's still within the
+           window, re-checking fl.date === today would just re-impose the
+           old midnight cutoff and undo that fix) ── */
         (function(){
           var badge = document.getElementById('hero-log-badge');
           if (!badge) return;
           var fl = s.featured_log;
-          var todayLis = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Lisbon' });
-          if (fl && fl.title && fl.date === todayLis) {
-            document.getElementById('hero-log-title').textContent = fl.title;
+          if (fl && fl.title) {
+            var curLang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
+            var title = curLang === 'pt' ? (fl.title_pt || fl.title)
+                      : curLang === 'fr' ? (fl.title_fr || fl.title)
+                      : fl.title;
+            document.getElementById('hero-log-title').textContent = title;
             badge.style.display = 'flex';
           } else {
             badge.style.display = 'none';
