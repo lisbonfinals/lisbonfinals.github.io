@@ -280,10 +280,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .noise-chart-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px 20px 14px;margin-bottom:16px;}
 .noise-chart-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:16px;}
 .noise-chart{display:flex;align-items:flex-end;gap:3px;height:100px;}
-.noise-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;}
-.noise-bar{width:100%;border-radius:2px 2px 0 0;transition:height .6s ease;min-height:2px;background:rgba(245,166,35,.2);}
+.noise-bar-wrap{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;}
+.noise-bar{width:100%;border-radius:2px 2px 0 0;transition:height .6s ease,background .15s ease;min-height:2px;background:rgba(245,166,35,.2);cursor:pointer;}
 .noise-bar.night{background:rgba(99,102,241,.4);}
 .noise-bar.active{background:var(--amber);}
+.noise-bar-wrap:hover .noise-bar{filter:brightness(1.3);}
+.noise-bar-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--dark);border:1px solid var(--border);border-radius:3px;padding:5px 8px;font-family:var(--mono);font-size:10px;white-space:nowrap;color:var(--white);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease;z-index:5;}
+.noise-bar-tip strong{color:var(--amber);}
+.noise-bar-wrap:hover .noise-bar-tip{opacity:1;transform:translateX(-50%) translateY(0);}
 .noise-chart-legend{display:flex;gap:16px;margin-top:10px;}
 .legend-item{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.38);display:flex;align-items:center;gap:6px;}
 .legend-dot{width:8px;height:8px;border-radius:2px;}
@@ -902,7 +906,10 @@ function buildNoiseChart(byHour) {
     const isNight = h < 6 || h >= 22;
     const isNow = h === now;
     const cls = isNow ? 'active' : isNight ? 'night' : '';
+    const hourLbl = String(h).padStart(2, '0') + 'h';
+    const dbLbl = db > 0 ? db.toFixed(1) + ' dB' : '—';
     return `<div class="noise-bar-wrap">
+      <div class="noise-bar-tip">${hourLbl} · <strong>${dbLbl}</strong></div>
       <div class="noise-bar ${cls}" style="height:${pct || 2}%"></div>
     </div>`;
   }).join('');
