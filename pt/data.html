@@ -1053,12 +1053,13 @@ function buildExpertMode(lvaDaily, s) {
     const nightVal = useOff ? (eOff.leq_night != null ? eOff.leq_night.toFixed(1) : '—') : (e.leq_night_period != null ? e.leq_night_period.toFixed(1) : '—');
     const totalNum = useOff ? eOff.leq_dn : e.leq_dn;
     const totalVal = totalNum != null ? totalNum.toFixed(1) : '—';
-    // Deux bâtonnets distincts pour comparer visuellement, même quand les deux
-    // sont disponibles : bleu = officiel SensorGrid (vide si absent ce jour-là,
-    // cohérent avec le badge "Provisional"), orange = notre calcul LF
-    // indépendant (toujours présent).
-    const officialNum = eOff && eOff.leq_dn != null ? eOff.leq_dn : null;
-    const officialBarPct = officialNum ? Math.min(100, Math.round((officialNum / 80) * 100)) : 0;
+    // Deux bâtonnets : bleu = même valeur que le chiffre "Leq_dn" affiché à
+    // droite (officiel si dispo, sinon notre calcul LF en repli — TOUJOURS
+    // présent, comme avant l'ajout du 2e bâtonnet), orange = notre calcul LF
+    // indépendant à part, pour comparaison visuelle directe. Les deux se
+    // confondent quand il n'y a pas d'officiel ce jour-là — normal, c'est la
+    // même donnée dans ce cas.
+    const officialBarPct = totalNum ? Math.min(100, Math.round((totalNum / 80) * 100)) : 0;
     const lfBarPct = e.leq_dn ? Math.min(100, Math.round((e.leq_dn / 80) * 100)) : 0;
     // Peak moyen + expo ≥70dB : toujours NOTRE mesure (pas de version "officielle"
     // équivalente côté SensorGrid), même donnée que la carte live "Peak + Duration"
