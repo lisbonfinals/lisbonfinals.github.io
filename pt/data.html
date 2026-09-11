@@ -400,6 +400,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .lva-chart-val.official{fill:var(--blue);}
 .lva-chart-val.lf{fill:var(--amber);}
 .lva-chart-daylabel{font-family:var(--mono);font-size:9px;fill:rgba(240,237,232,.38);}
+.lva-chart-wide{margin-bottom:20px;}
+.lva-chart-zeroline{stroke:rgba(240,237,232,.15);stroke-width:1;stroke-dasharray:3,3;}
 @media (max-width:700px){.lva-charts{grid-template-columns:1fr;}}
 
 /* ── WARNING ZONE ── */
@@ -812,14 +814,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
         <div class="lva-chart-title" data-i18n="expert_chart_leqdn_title">Leq_dn trend</div>
         <div class="lva-chart-legend">
           <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><span data-i18n="expert_legend_official">Official</span></div>
-          <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span data-i18n="expert_legend_lf">Lisbon Finals</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span data-i18n="expert_legend_lf">LF Leq_dn</span></div>
         </div>
         <div id="et-chart-leqdn"></div>
       </div>
       <div class="lva-chart-box">
-        <div class="lva-chart-title" data-i18n="expert_chart_expo_title">Total exposure ≥70dB trend</div>
+        <div class="lva-chart-title" data-i18n="expert_chart_expo_title">Total exposure ≥70dB trend (minutes)</div>
         <div id="et-chart-expo"></div>
       </div>
+    </div>
+
+    <div class="lva-chart-box lva-chart-wide">
+      <div class="lva-chart-title" data-i18n="expert_chart_pct_title">Day-over-day change · official Leq_dn vs peak avg</div>
+      <div class="lva-chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><span data-i18n="expert_legend_official_leqdn">Official Leq_dn</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span data-i18n="expert_legend_peakavg">Peak avg</span></div>
+      </div>
+      <div id="et-chart-pct"></div>
     </div>
 
     <div class="source-note">
@@ -1105,7 +1116,7 @@ function buildExpertMode(lvaDaily, s) {
 // Polylines droites entre les points (pas de lissage bezier) : honnête sur
 // le fait qu'on a seulement 7 valeurs discrètes, pas une mesure continue.
 function buildWeekCharts(weekDates) {
-  const W = 640, H = 130, padL = 28, padR = 10, padT = 16, padB = 22;
+  const W = 640, H = 130, padL = 28, padR = 24, padT = 16, padB = 22;
   const plotW = W - padL - padR, plotH = H - padT - padB;
   const n = weekDates.length;
   const xAt = i => n > 1 ? padL + (i / (n - 1)) * plotW : padL + plotW / 2;
@@ -1122,15 +1133,29 @@ function buildWeekCharts(weekDates) {
     return v => padT + plotH - ((v - min) / range) * plotH * 0.82 - plotH * 0.09;
   }
 
-  function buildSeries(values, cls, yAt) {
+  function buildSeries(values, cls, yAt, fmt, labelDy) {
+    fmt = fmt || (v => v.toFixed(1));
+    labelDy = labelDy != null ? labelDy : -7;
     const pts = values.map((v, i) => v != null ? `${xAt(i)},${yAt(v)}` : null);
     const segments = pts.filter(p => p).join(' ');
     if (!segments) return '';
     const dots = values.map((v, i) => v == null ? '' :
       `<circle class="lva-chart-dot ${cls}" cx="${xAt(i)}" cy="${yAt(v)}" r="2.5"></circle>
-       <text class="lva-chart-val ${cls}" x="${xAt(i)}" y="${yAt(v) - 7}" text-anchor="middle">${v.toFixed(1)}</text>`
+       <text class="lva-chart-val ${cls}" x="${xAt(i)}" y="${yAt(v) + labelDy}" text-anchor="middle">${fmt(v)}</text>`
     ).join('');
     return `<polyline class="lva-chart-line ${cls}" points="${segments}"></polyline>${dots}`;
+  }
+
+  // Variation jour-sur-jour en % — comparable même entre deux métriques
+  // d'unités/échelles différentes (Leq_dn en dB vs Peak avg en dB mais avec
+  // une plage très différente). Choix d'Antonio (vs % indexé sur le 1er
+  // jour) : reste valable sur une fenêtre plus longue plus tard, pas besoin
+  // de choisir un jour de référence fixe.
+  function dayOverDayPct(values) {
+    return values.map((v, i) => {
+      if (i === 0 || v == null || values[i - 1] == null || values[i - 1] === 0) return null;
+      return (v - values[i - 1]) / values[i - 1] * 100;
+    });
   }
 
   const dayLabels = weekDates.map((d, i) =>
@@ -1162,6 +1187,32 @@ function buildWeekCharts(weekDates) {
       ${buildSeries(expoVals, 'lf', expoYAt)}
       ${dayLabels}
     </svg>`;
+
+  // Chart 3 — variation jour-sur-jour (%) : Leq_dn OFFICIEL (pas de repli LF,
+  // volontaire — on compare la vraie donnée réglementaire) vs Peak avg LF.
+  const peakVals = weekDates.map(d => lastGistData?.lva_daily?.[d]?.avg_peak_db ?? null);
+  const officialPct = dayOverDayPct(officialVals);
+  const peakPct = dayOverDayPct(peakVals);
+  const pctFmt = v => (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
+  const hasPct = officialPct.some(v => v != null) || peakPct.some(v => v != null);
+  if (hasPct) {
+    const pctYAt = yScale(officialPct, peakPct, [0]);
+    document.getElementById('et-chart-pct').innerHTML =
+      `<svg class="lva-chart-svg" viewBox="0 0 ${W} ${H}">
+        <line class="lva-chart-zeroline" x1="${padL}" x2="${W - padR}" y1="${pctYAt(0)}" y2="${pctYAt(0)}"></line>
+        ${buildSeries(officialPct, 'official', pctYAt, pctFmt, -7)}
+        ${buildSeries(peakPct, 'lf', pctYAt, pctFmt, 14)}
+        ${dayLabels}
+      </svg>`;
+  } else {
+    document.getElementById('et-chart-pct').innerHTML =
+      `<div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.3);padding:30px 0;text-align:center;">${tEChart('expert_chart_pct_empty', 'Not enough consecutive days yet')}</div>`;
+  }
+}
+
+function tEChart(key, fallback) {
+  const t = (T[_lang] || T.en)[key];
+  return t || fallback;
 }
 
 // ── Build night timeline ──
@@ -1410,7 +1461,8 @@ const T = {
     expert_gap_title:'Reading the gap',
     expert_gap_copy:'A single loud pass barely moves a 24-hour Leq_dn average — but it\'s very much part of the lived experience below the flight path. That\'s the point of showing both: <strong>Leq_dn</strong> tells you what the regulator sees over a full day; <strong>peak + duration</strong> tells you what any single overflight actually sounded like.',
     expert_week_title:'Last 7 days · Leq_dn', expert_th_date:'Date', expert_th_day:'Day', expert_th_night:'Night', expert_th_total:'Leq_dn', expert_th_peak:'Peak avg', expert_th_expo:'Expo ≥70dB',
-    expert_chart_leqdn_title:'Leq_dn trend', expert_chart_expo_title:'Total exposure ≥70dB trend', expert_legend_official:'Official', expert_legend_lf:'Lisbon Finals',
+    expert_chart_leqdn_title:'Leq_dn trend', expert_chart_expo_title:'Total exposure ≥70dB trend (minutes)', expert_legend_official:'Official', expert_legend_lf:'LF Leq_dn',
+    expert_chart_pct_title:'Day-over-day change · official Leq_dn vs peak avg', expert_legend_official_leqdn:'Official Leq_dn', expert_legend_peakavg:'Peak avg', expert_chart_pct_empty:'Not enough consecutive days yet',
     expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
     expert_source_official:'Official — SensorGrid', expert_source_provisional:'Provisional — LF estimate', expert_source_own:'Citizen metric — Lisbon Finals',
     expert_maturity:'Daily accumulation started Sept 3, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
@@ -1498,7 +1550,8 @@ const T = {
     expert_gap_title:'Como ler a diferença',
     expert_gap_copy:'Uma única passagem ruidosa dificilmente altera uma média Leq_dn de 24 horas — mas faz muito parte da experiência vivida por quem está sob a rota de voo. É esse o objectivo de mostrar ambos: o <strong>Leq_dn</strong> mostra o que o regulador vê ao longo de um dia inteiro; <strong>pico + duração</strong> mostra como soou realmente cada passagem individual.',
     expert_week_title:'Últimos 7 dias · Leq_dn', expert_th_date:'Data', expert_th_day:'Dia', expert_th_night:'Noite', expert_th_total:'Leq_dn', expert_th_peak:'Pico médio', expert_th_expo:'Expo ≥70dB',
-    expert_chart_leqdn_title:'Tendência Leq_dn', expert_chart_expo_title:'Tendência exposição total ≥70dB', expert_legend_official:'Oficial', expert_legend_lf:'Lisbon Finals',
+    expert_chart_leqdn_title:'Tendência Leq_dn', expert_chart_expo_title:'Tendência exposição total ≥70dB (minutos)', expert_legend_official:'Oficial', expert_legend_lf:'LF Leq_dn',
+    expert_chart_pct_title:'Variação dia a dia · Leq_dn oficial vs pico médio', expert_legend_official_leqdn:'Leq_dn oficial', expert_legend_peakavg:'Pico médio', expert_chart_pct_empty:'Ainda sem dias consecutivos suficientes',
     expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
     expert_source_official:'Oficial — SensorGrid', expert_source_provisional:'Provisório — estimativa LF', expert_source_own:'Métrica cidadã — Lisbon Finals',
     expert_maturity:'A acumulação diária começou a 3 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
@@ -1588,7 +1641,8 @@ const T = {
     expert_gap_title:'Comprendre l\'écart',
     expert_gap_copy:'Un seul passage bruyant fait à peine bouger une moyenne Leq_dn sur 24h — mais ça fait bel et bien partie de l\'expérience vécue sous la trajectoire des avions. C\'est tout l\'intérêt de montrer les deux : le <strong>Leq_dn</strong> montre ce que voit le régulateur sur une journée entière ; le <strong>pic + durée</strong> montre à quoi ressemblait vraiment un passage donné.',
     expert_week_title:'7 derniers jours · Leq_dn', expert_th_date:'Date', expert_th_day:'Jour', expert_th_night:'Nuit', expert_th_total:'Leq_dn', expert_th_peak:'Pic moyen', expert_th_expo:'Expo ≥70dB',
-    expert_chart_leqdn_title:'Tendance Leq_dn', expert_chart_expo_title:'Tendance exposition totale ≥70dB', expert_legend_official:'Officiel', expert_legend_lf:'Lisbon Finals',
+    expert_chart_leqdn_title:'Tendance Leq_dn', expert_chart_expo_title:'Tendance exposition totale ≥70dB (minutes)', expert_legend_official:'Officiel', expert_legend_lf:'LF Leq_dn',
+    expert_chart_pct_title:'Variation jour sur jour · Leq_dn officiel vs pic moyen', expert_legend_official_leqdn:'Leq_dn officiel', expert_legend_peakavg:'Pic moyen', expert_chart_pct_empty:'Pas encore assez de jours consécutifs',
     expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
     expert_source_official:'Officiel — SensorGrid', expert_source_provisional:'Provisoire — estimation LF', expert_source_own:'Mesure citoyenne — Lisbon Finals',
     expert_maturity:'Accumulation quotidienne démarrée le 3 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
