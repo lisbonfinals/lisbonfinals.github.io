@@ -372,8 +372,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .lva-week-head-cell{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,166,35,.35);}
 .lva-week-head-cell.right{text-align:right;}
 .lva-week-date{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.75);}
-.lva-week-bar-wrap{display:flex;align-items:center;}
-.lva-week-bar{height:4px;background:var(--blue);border-radius:2px;opacity:.55;}
+.lva-week-bar-wrap{display:flex;flex-direction:column;justify-content:center;gap:3px;}
+.lva-week-bar{height:4px;border-radius:2px;opacity:.55;}
+.lva-week-bar.official{background:var(--blue);}
+.lva-week-bar.lf{background:var(--amber);}
 .lva-week-val{font-family:var(--mono);font-size:11px;color:var(--white);text-align:right;}
 .source-note{font-family:var(--mono);font-size:10px;line-height:1.9;color:rgba(240,237,232,.34);}
 .source-note a{color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3);}
@@ -1051,15 +1053,25 @@ function buildExpertMode(lvaDaily, s) {
     const nightVal = useOff ? (eOff.leq_night != null ? eOff.leq_night.toFixed(1) : '—') : (e.leq_night_period != null ? e.leq_night_period.toFixed(1) : '—');
     const totalNum = useOff ? eOff.leq_dn : e.leq_dn;
     const totalVal = totalNum != null ? totalNum.toFixed(1) : '—';
-    const barPct = totalNum ? Math.min(100, Math.round((totalNum / 80) * 100)) : 0;
+    // Deux bâtonnets distincts pour comparer visuellement, même quand les deux
+    // sont disponibles : bleu = officiel SensorGrid (vide si absent ce jour-là,
+    // cohérent avec le badge "Provisional"), orange = notre calcul LF
+    // indépendant (toujours présent).
+    const officialNum = eOff && eOff.leq_dn != null ? eOff.leq_dn : null;
+    const officialBarPct = officialNum ? Math.min(100, Math.round((officialNum / 80) * 100)) : 0;
+    const lfBarPct = e.leq_dn ? Math.min(100, Math.round((e.leq_dn / 80) * 100)) : 0;
     // Peak moyen + expo ≥70dB : toujours NOTRE mesure (pas de version "officielle"
     // équivalente côté SensorGrid), même donnée que la carte live "Peak + Duration"
-    // une fois la journée close.
+    // une fois la journée close. Expo = temps TOTAL cumulé (somme de tous les
+    // vols du jour), pas une moyenne par vol.
     const peakVal = e.avg_peak_db != null ? e.avg_peak_db.toFixed(1) : '—';
-    const expoVal = e.avg_duration_over_70_s != null ? e.avg_duration_over_70_s.toFixed(1) + 's' : '—';
+    const expoVal = e.total_duration_over_70_s != null ? (e.total_duration_over_70_s / 60).toFixed(1) + 'min' : '—';
     return `<div class="lva-week-row">
       <div class="lva-week-date">${fmtShortDate(d)}</div>
-      <div class="lva-week-bar-wrap"><div class="lva-week-bar" style="width:${barPct}%"></div></div>
+      <div class="lva-week-bar-wrap">
+        <div class="lva-week-bar official" style="width:${officialBarPct}%"></div>
+        <div class="lva-week-bar lf" style="width:${lfBarPct}%"></div>
+      </div>
       <div class="lva-week-val lva-week-daynight">${dayVal}</div>
       <div class="lva-week-val lva-week-daynight">${nightVal}</div>
       <div class="lva-week-val" style="color:var(--blue)">${totalVal}</div>
