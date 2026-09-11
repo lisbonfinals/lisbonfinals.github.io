@@ -828,7 +828,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       formula (day 06h–22h / night 22h–06h, +10dB penalty). Cross-checked against
       <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">Alessandro Annunziato's SensorGrid network</a>
       — professional agreement within ±2dB on validated days. Not identical to any third-party platform's own calculation.</span>
-      <div class="maturity-flag" data-i18n="expert_maturity">Daily accumulation started Sept 3, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.</div>
+      <div class="maturity-flag" data-i18n="expert_maturity">Official data available since Sept 8, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.</div>
     </div>
   </div>
 </section>
@@ -1073,8 +1073,14 @@ function buildExpertMode(lvaDaily, s) {
   document.getElementById('et-peak-events').textContent = s ? fmt(s.events_over_70_today) : '—';
   document.getElementById('et-peak-avgdur').textContent = s && s.avg_duration_over_70_today != null ? s.avg_duration_over_70_today.toFixed(1) + ' s' : '—';
 
-  // tableau 7 jours — même priorité officiel > notre calcul que la carte principale
-  const rows = dates.slice(-7).reverse().map(d => {
+  // tableau 7 jours — ne montre que les jours avec donnée officielle Alessandro
+  // (pas de repli LF ici, cf. décision du 11 sept). Filtre d'abord sur les
+  // jours officiels, PUIS prend les 7 derniers — pour l'instant ça donne
+  // moins de 7 lignes (données officielles démarrées le 8 sept), et ça
+  // roulera normalement sur les 7 derniers une fois plus de jours accumulés.
+  const officialDates = dates.filter(d => lvaDaily[d]?.official?.leq_dn != null);
+  const weekDates = officialDates.slice(-7);
+  const rows = weekDates.slice().reverse().map(d => {
     const e = lvaDaily[d];
     const eOff = e.official;
     // Day/Night/Leq_dn = TOUJOURS la donnée officielle Alessandro, jamais notre
@@ -1103,7 +1109,7 @@ function buildExpertMode(lvaDaily, s) {
   }).join('');
   document.getElementById('et-week-rows').innerHTML = rows;
 
-  buildWeekCharts(dates.slice(-7));
+  buildWeekCharts(weekDates);
 }
 
 // ── Build week trend charts (Leq_dn officiel+LF, Expo totale) ──
@@ -1457,7 +1463,7 @@ const T = {
     expert_chart_pct_title:'Day-over-day change · official Leq_dn vs peak avg', expert_legend_official_leqdn:'Official Leq_dn', expert_legend_peakavg:'Peak avg', expert_chart_pct_empty:'Not enough consecutive days yet',
     expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
     expert_source_official:'Official — SensorGrid', expert_source_provisional:'Provisional — LF estimate', expert_source_own:'Citizen metric — Lisbon Finals',
-    expert_maturity:'Daily accumulation started Sept 3, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
+    expert_maturity:'Official data available since Sept 8, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
     expert_peak_todaylbl:'loudest single pass, today',
     expert_more_info:'More info',
     expert_row_lva:'LVA — Italian standard (OpenSky-verified)',
@@ -1546,7 +1552,7 @@ const T = {
     expert_chart_pct_title:'Variação dia a dia · Leq_dn oficial vs pico médio', expert_legend_official_leqdn:'Leq_dn oficial', expert_legend_peakavg:'Pico médio', expert_chart_pct_empty:'Ainda sem dias consecutivos suficientes',
     expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
     expert_source_official:'Oficial — SensorGrid', expert_source_provisional:'Provisório — estimativa LF', expert_source_own:'Métrica cidadã — Lisbon Finals',
-    expert_maturity:'A acumulação diária começou a 3 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
+    expert_maturity:'Dados oficiais disponíveis desde 8 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
     expert_peak_todaylbl:'pico mais alto, hoje',
     expert_more_info:'Mais informação',
     expert_row_lva:'LVA — norma italiana (verificada via OpenSky)',
@@ -1637,7 +1643,7 @@ const T = {
     expert_chart_pct_title:'Variation jour sur jour · Leq_dn officiel vs pic moyen', expert_legend_official_leqdn:'Leq_dn officiel', expert_legend_peakavg:'Pic moyen', expert_chart_pct_empty:'Pas encore assez de jours consécutifs',
     expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
     expert_source_official:'Officiel — SensorGrid', expert_source_provisional:'Provisoire — estimation LF', expert_source_own:'Mesure citoyenne — Lisbon Finals',
-    expert_maturity:'Accumulation quotidienne démarrée le 3 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
+    expert_maturity:'Données officielles disponibles depuis le 8 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
     expert_peak_todaylbl:'pic le plus fort, aujourd\'hui',
     expert_more_info:'Plus d\'infos',
     expert_row_lva:'LVA — norme italienne (vérifiée OpenSky)',
