@@ -137,7 +137,7 @@ nav {
   object-fit: cover; object-position: 40% 14%;
 }
 @media (max-width: 900px) {
-  .about-hero-bg img { object-position: 44% 0%; }
+  .about-hero-bg img { object-position: center 20%; }
 }
 .about-hero-vignette {
   position: absolute; inset: 0;
@@ -692,7 +692,10 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
 <!-- HERO -->
 <header class="about-hero about-section" id="the-project">
   <div class="about-hero-bg">
-    <img src="/ressources/about-hero-terrace.jpg" alt="A plane on final approach over Lisbon Finals' terrace station" loading="eager">
+    <picture>
+      <source media="(max-width: 900px)" srcset="/ressources/about-hero-terrace-mobile.jpg">
+      <img src="/ressources/about-hero-terrace.jpg" alt="A plane on final approach over Lisbon Finals' terrace station" loading="eager">
+    </picture>
   </div>
   <div class="about-hero-vignette"></div>
   <div class="about-hero-eyebrow">The project</div>
