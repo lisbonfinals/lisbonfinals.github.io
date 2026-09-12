@@ -9,6 +9,10 @@
   text-shadow: none !important;
 }
 
+.nav-links a.nav-noise:not(.nav-active):hover {
+  color: var(--amber) !important;
+}
+
 .nav-links a.nav-noise.nav-active,
 .nav-drawer a.drawer-noise.drawer-active {
   color: var(--amber) !important;
