@@ -126,8 +126,24 @@ nav {
 
 /* ── HERO ── */
 .about-hero {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border); border-radius: 4px;
   padding: 100px 48px 80px;
-  max-width: 1200px; margin: 0 auto;
+  max-width: 1200px; margin: 40px auto 0;
+}
+.about-hero-bg { position: absolute; inset: 0; z-index: 0; }
+.about-hero-bg img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 38%;
+}
+.about-hero-vignette {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(10,13,18,.94) 0%, rgba(10,13,18,.78) 42%, rgba(10,13,18,.42) 100%),
+    linear-gradient(to top, rgba(10,13,18,.92) 0%, rgba(10,13,18,.15) 40%, rgba(10,13,18,.15) 100%);
+}
+.about-hero-eyebrow, .about-hero-title, .about-hero-sub, .about-hero-stats {
+  position: relative; z-index: 2;
 }
 .about-hero-eyebrow {
   font-family: var(--mono); font-size: 10px; letter-spacing: .2em;
@@ -672,6 +688,10 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
 
 <!-- HERO -->
 <header class="about-hero about-section" id="the-project">
+  <div class="about-hero-bg">
+    <img src="/ressources/about-hero-terrace.jpg" alt="A plane on final approach over Lisbon Finals' terrace station" loading="eager">
+  </div>
+  <div class="about-hero-vignette"></div>
   <div class="about-hero-eyebrow">The project</div>
   <h1 class="about-hero-title">A personal<br>experiment</h1>
   <p class="about-hero-sub">Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became an independent autonomous station — local evidence, not official airport data — tracking noise levels, flight routes, airline patterns and atmospheric data from a Lisbon terrace facing the LPPT approach path.</p>
