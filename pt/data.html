@@ -1106,6 +1106,9 @@ function buildExpertMode(lvaDaily, s) {
     // une fois la journée close. Expo = temps TOTAL cumulé (somme de tous les
     // vols du jour), pas une moyenne par vol.
     const peakVal = e.avg_peak_db != null ? e.avg_peak_db.toFixed(1) : '—';
+    // Vols trackés (ADS-B) ce jour-là jamais passés au-dessus de 70dB — même
+    // champ que la carte live "Events <70dB", ici sur l'historique lva_daily
+    // (n_flights_no_event, déjà calculé par lva_metrics.py, jamais exposé avant).
     const silentVal = e.n_flights_no_event != null ? fmt(e.n_flights_no_event) : '—';
     const expoVal = e.total_duration_over_70_s != null ? (e.total_duration_over_70_s / 60).toFixed(1) + 'min' : '—';
     // Meteo "dominante" du jour (voir lva_metrics.py::run_daily) — temperature
