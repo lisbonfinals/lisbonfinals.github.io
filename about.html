@@ -168,6 +168,16 @@ nav {
   font-family: var(--sans); font-size: 15px; line-height: 1.8; color: rgba(240,237,232,0.5);
   max-width: 620px;
 }
+.about-hero-grid {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 48px;
+}
+.about-hero-text { flex: 1; min-width: 0; }
+.about-hero-stamp { flex-shrink: 0; width: 200px; padding-top: 8px; }
+.about-hero-stamp img { width: 100%; height: auto; display: block; opacity: .94; }
+@media (max-width: 900px) {
+  .about-hero-grid { flex-direction: column-reverse; align-items: center; text-align: left; }
+  .about-hero-stamp { width: 140px; margin-bottom: 8px; }
+}
 
 /* ── STEPS ── */
 .steps-section {
@@ -672,9 +682,16 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
 
 <!-- HERO -->
 <header class="about-hero about-section" id="the-project">
-  <div class="about-hero-eyebrow">The project</div>
-  <h1 class="about-hero-title">A personal<br>experiment</h1>
-  <p class="about-hero-sub">Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became an independent autonomous station — local evidence, not official airport data — tracking noise levels, flight routes, airline patterns and atmospheric data from a Lisbon terrace facing the LPPT approach path.</p>
+  <div class="about-hero-grid">
+    <div class="about-hero-text">
+      <div class="about-hero-eyebrow">The project</div>
+      <h1 class="about-hero-title">A personal<br>experiment</h1>
+      <p class="about-hero-sub">Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became an independent autonomous station — local evidence, not official airport data — tracking noise levels, flight routes, airline patterns and atmospheric data from a Lisbon terrace facing the LPPT approach path.</p>
+    </div>
+    <div class="about-hero-stamp">
+      <img id="about-hero-stamp-img" src="/ressources/lisbon_finals_citizen_science_stamp_en.png" alt="Citizen Science Project — Active since 3 May 2026" loading="lazy">
+    </div>
+  </div>
   <div class="about-hero-stats">
     <div>
       <div class="about-stat-val" style="color:rgba(240,237,232,.47);font-size:18px;letter-spacing:.04em;" data-i18n="stat_since_val">3 May 2026</div>
@@ -1310,6 +1327,8 @@ function applyLang(lang) {
   if (title) title.innerHTML = `${t.title_1}<br>${t.title_2}`;
   const sub = sel('.about-hero-sub');
   if (sub) sub.innerHTML = t.sub;
+  const stampImg = document.getElementById('about-hero-stamp-img');
+  if (stampImg) stampImg.src = `/ressources/lisbon_finals_citizen_science_stamp_${lang}.png`;
   const pipeLabel = sel('.pipeline-label');
   if (pipeLabel) pipeLabel.textContent = t.pipeline_label;
   const hwTitle = sel('.section-heading');
