@@ -169,14 +169,20 @@ nav {
   max-width: 620px;
 }
 .about-hero-grid {
-  display: flex; align-items: flex-start; justify-content: space-between; gap: 48px;
+  display: flex; align-items: center; justify-content: space-between; gap: 48px;
 }
 .about-hero-text { flex: 1; min-width: 0; }
-.about-hero-stamp { flex-shrink: 0; width: 200px; padding-top: 8px; }
+.about-hero-stamp {
+  flex-shrink: 0; width: 232px; box-sizing: border-box; padding: 22px;
+  display: flex; align-items: center; justify-content: center;
+  background: #0d1117; border: 1px solid var(--border); border-radius: 4px;
+  text-decoration: none; transition: border-color .2s, background .2s;
+}
+.about-hero-stamp:hover { border-color: rgba(245,166,35,.3); background: rgba(245,166,35,.03); }
 .about-hero-stamp img { width: 100%; height: auto; display: block; opacity: .94; }
 @media (max-width: 900px) {
   .about-hero-grid { flex-direction: column-reverse; align-items: center; text-align: left; }
-  .about-hero-stamp { width: 140px; margin-bottom: 8px; }
+  .about-hero-stamp { width: 168px; padding: 16px; margin-bottom: 8px; }
 }
 
 /* ── STEPS ── */
@@ -688,9 +694,9 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
       <h1 class="about-hero-title">A personal<br>experiment</h1>
       <p class="about-hero-sub">Lisbon Finals started as a simple question: could a Raspberry Pi on a terrace automatically photograph every plane that flies overhead — and post it to Instagram without any human input?<br><br>The answer, after months of iteration, is yes. What began as a weekend project became an independent autonomous station — local evidence, not official airport data — tracking noise levels, flight routes, airline patterns and atmospheric data from a Lisbon terrace facing the LPPT approach path.</p>
     </div>
-    <div class="about-hero-stamp">
+    <a href="#get-involved" class="about-hero-stamp" aria-label="Jump to Get Involved">
       <img id="about-hero-stamp-img" src="/ressources/lisbon_finals_citizen_science_stamp_en.png" alt="Citizen Science Project — Active since 3 May 2026" loading="lazy">
-    </div>
+    </a>
   </div>
   <div class="about-hero-stats">
     <div>
