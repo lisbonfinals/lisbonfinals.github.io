@@ -131,13 +131,13 @@ nav {
   padding: 68px 48px 80px;
   max-width: 1200px; margin: 40px auto 0;
 }
-.about-hero-bg { position: absolute; inset: 0; z-index: 0; }
+.about-hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: auto; z-index: 0; aspect-ratio: 16 / 9; }
 .about-hero-bg img {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: 40% 14%;
+  object-fit: cover; object-position: 62% 30%;
 }
 @media (max-width: 900px) {
-  .about-hero-bg { top: 0; left: 0; right: 0; bottom: auto; aspect-ratio: 375 / 865; }
+  .about-hero-bg { aspect-ratio: 375 / 865; }
   .about-hero-bg img { object-position: center 20%; }
 }
 .about-hero-vignette {
@@ -695,7 +695,7 @@ a.hw-item .hw-name::after { content: ' \2192'; color: var(--amber); }
   <div class="about-hero-bg">
     <picture>
       <source media="(max-width: 900px)" srcset="/ressources/about-hero-night-plane-mobile.jpg?v=1">
-      <img src="/ressources/about-hero-night-plane-mobile.jpg?v=1" alt="A plane on final approach over Lisbon Finals' terrace station at night" loading="eager">
+      <img src="/ressources/about-hero-night-plane-desktop.jpg?v=1" alt="A plane on final approach over Lisbon Finals' terrace station at night" loading="eager">
     </picture>
   </div>
   <div class="about-hero-vignette"></div>
