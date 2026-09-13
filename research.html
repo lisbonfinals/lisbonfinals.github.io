@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Data — Lisbon Finals · LPPT Intelligence</title>
+<meta name="description" content="Open flight and acoustic datasets from Lisbon Finals, packaged for academic and citizen-science use — monthly flight events and continuous ambient noise/vibration logs, CSV, free to reuse.">
+<meta name="theme-color" content="#0a0d12">
+<link rel="canonical" href="https://www.lisbonfinals.com/research.html">
+<link rel="alternate" hreflang="en" href="https://www.lisbonfinals.com/research.html">
+<link rel="alternate" hreflang="pt-PT" href="https://www.lisbonfinals.com/pt/research.html">
+<link rel="alternate" hreflang="fr" href="https://www.lisbonfinals.com/fr/research.html">
+<link rel="alternate" hreflang="x-default" href="https://www.lisbonfinals.com/research.html">
+<link rel="stylesheet" href="/site-core.css?v=20260816b">
+<script src="/site-core.js?v=20260816d"></script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lisbon Finals">
+<meta property="og:title" content="Research Data — Lisbon Finals · LPPT Intelligence">
+<meta property="og:description" content="Open flight and acoustic datasets from Lisbon Finals, packaged for academic and citizen-science use.">
+<meta property="og:url" content="https://www.lisbonfinals.com/research.html">
+<meta property="og:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Research Data — Lisbon Finals · LPPT Intelligence">
+<meta name="twitter:description" content="Open flight and acoustic datasets from Lisbon Finals, packaged for academic and citizen-science use.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtjccssx1/image/upload/c_fill,w_1200,h_630,q_auto,f_jpg/v1781725627/lisbon_TAP2401781714012.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="alternate" type="application/atom+xml" title="Lisbon Finals Captain's Log" href="/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Lisbon Finals flight and acoustic observations — research exports","description":"Monthly flight-event tables and continuous ambient SPL/vibration logs from one fixed terrace below the LPPT approach corridor, packaged as CSV for academic and citizen-science use.","url":"https://www.lisbonfinals.com/research.html","creator":{"@type":"Organization","name":"Lisbon Finals","url":"https://www.lisbonfinals.com/"},"spatialCoverage":{"@type":"Place","name":"Lisbon, Portugal"},"license":"https://creativecommons.org/licenses/by/4.0/","isAccessibleForFree":true,"inLanguage":["en","pt-PT","fr"]}</script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#07090d; --dark:#0a0d12; --dark2:#0d1117; --dark3:#111827;
+  --border:#1e2530; --border2:#2a3544;
+  --amber:#f5a623; --amber-dim:rgba(245,166,35,0.10);
+  --white:#f0ede8; --gray:#6b7280;
+  --red:#ef4444; --red-dim:rgba(239,68,68,0.08);
+  --green:#22c55e;
+  --blue:#60a5fa; --blue-dim:rgba(96,165,250,0.08);
+  --sans:'Syne',sans-serif; --mono:'JetBrains Mono',monospace; --serif:'Instrument Serif',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:var(--sans);overflow-x:hidden;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:4px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,9,13,.98),transparent);backdrop-filter:blur(4px);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-dot{width:28px;height:28px;border:1.5px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
+.nav-dot::after{content:'';width:10px;height:12px;background:var(--amber);border-radius:0;position:absolute;top:50%;left:50%;transform:translate(-50%,-60%) rotate(-20deg);clip-path:polygon(50% 0%,65% 85%,50% 72%,35% 85%);}
+.nav-wordmark{font-size:13px;font-family:var(--mono);font-weight:500;letter-spacing:.12em;color:var(--white);text-transform:uppercase;}
+.nav-wordmark span{color:var(--amber);}
+.nav-links{display:flex;gap:36px;list-style:none;margin-left:auto;}
+.nav-links a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.55);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--amber);}
+.nav-links a.nav-active{color:var(--amber);}
+.nav-links a.nav-noise{color:var(--amber);font-weight:700;}
+.nav-links a.nav-noise:hover{color:#fff;text-shadow:0 0 14px rgba(245,166,35,.6);}
+.nav-clock-wrap{display:flex;align-items:center;gap:14px;margin-left:36px;padding-left:20px;border-left:1px solid rgba(245,166,35,.12);}
+.nav-clock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:rgba(245,166,35,.45);white-space:nowrap;}
+.nav-clock-tz{font-size:8px;letter-spacing:.12em;color:rgba(245,166,35,.22);text-transform:uppercase;margin-left:5px;}
+.lang-group{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+.lang-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;border:1px solid rgba(240,237,232,.12);border-radius:2px;background:transparent;color:rgba(240,237,232,.43);padding:5px 9px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.lang-btn:hover{color:rgba(240,237,232,.7);border-color:rgba(240,237,232,.38);}
+.lang-btn.active{color:var(--amber);border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.06);}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:12px;}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;}
+.nav-drawer{display:none;flex-direction:column;gap:32px;position:fixed;inset:0;z-index:99;background:rgba(7,9,13,.97);backdrop-filter:blur(12px);align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.nav-drawer.open{display:flex;opacity:1;pointer-events:all;}
+.nav-drawer a{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.6);text-decoration:none;transition:color .2s;}
+.nav-drawer a:hover{color:var(--white);}
+.nav-drawer a.drawer-warning{color:rgba(248,113,113,.6);}
+.nav-drawer a.drawer-noise{color:var(--amber);opacity:.8;}
+.nav-drawer a.drawer-ig{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(245,166,35,.4);padding:10px 20px;border-radius:4px;color:var(--amber)!important;font-size:11px;margin-top:8px;}
+.nav-has-dropdown{position:relative;}
+.nav-dropdown{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(7,9,13,.97);border:1px solid rgba(245,166,35,.15);border-radius:4px;padding:16px 0 8px;list-style:none;min-width:160px;backdrop-filter:blur(12px);z-index:200;}
+.nav-has-dropdown::after{content:'';position:absolute;top:100%;left:0;right:0;height:16px;}
+.nav-has-dropdown:hover .nav-dropdown{display:block;}
+.nav-dropdown li a{display:block;padding:9px 18px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.5);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;}
+.nav-dropdown li a:hover{color:var(--amber);background:rgba(245,166,35,.05);}
+.nav-dropdown li a.dd-warning{color:rgba(248,113,113,.6);}
+.nav-dropdown li+li{border-top:1px solid rgba(240,237,232,.05);}
+@media (max-width:1150px){
+  .nav-links,.nav-clock-wrap{display:none;}
+  .nav-burger{display:flex;}
+}
+
+/* ── PAGE ── */
+main{padding-top:96px;}
+.data-section{padding:56px 48px 72px;max-width:1000px;margin:0 auto;}
+.data-section+.data-section{border-top:1px solid var(--border);}
+.section-label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-label::before{content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0;}
+.section-title{font-size:clamp(32px,4.4vw,52px);font-weight:800;line-height:1.03;letter-spacing:-.02em;color:var(--white);}
+.section-title em{font-family:var(--serif);font-weight:400;font-style:italic;color:rgba(240,237,232,.38);}
+.section-desc{font-family:var(--sans);font-size:14px;line-height:1.8;color:rgba(240,237,232,.5);max-width:640px;margin-top:16px;}
+
+.method-strip{display:grid;gap:10px;margin:28px 0 0;padding-left:22px;border-left:1px solid rgba(245,166,35,.42);}
+.method-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);}
+.method-copy{font-size:13px;line-height:1.8;color:rgba(240,237,232,.56);max-width:680px;}
+.method-copy strong{color:rgba(240,237,232,.85);}
+
+.res-group-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,232,.38);margin:0 0 14px;}
+.res-updated{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.3);margin-top:-8px;margin-bottom:22px;}
+.res-card{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;background:var(--dark2);border:1px solid var(--border);border-radius:4px;flex-wrap:wrap;}
+.res-card+.res-card{margin-top:10px;}
+.res-card-name{font-family:var(--mono);font-size:12px;color:var(--white);font-weight:500;}
+.res-card-meta{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.4);margin-top:4px;}
+.res-card-dl{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.3);border-radius:3px;padding:8px 14px;cursor:pointer;transition:all .15s;text-decoration:none;flex-shrink:0;white-space:nowrap;}
+.res-card-dl:hover{background:rgba(245,166,35,.18);border-color:var(--amber);}
+.res-note{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.32);margin-top:14px;display:flex;align-items:center;gap:8px;}
+.res-note::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(245,166,35,.5);flex-shrink:0;}
+
+.schema-list{display:grid;gap:14px;margin-top:20px;}
+.schema-item{border-top:1px solid rgba(240,237,232,.06);padding-top:12px;display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:baseline;}
+.schema-k{font-family:var(--mono);font-size:11px;color:var(--amber);white-space:nowrap;}
+.schema-v{font-family:var(--sans);font-size:13px;line-height:1.6;color:rgba(240,237,232,.56);}
+@media (max-width:600px){.schema-item{grid-template-columns:1fr;gap:4px;}}
+
+.res-license{background:rgba(13,17,23,.72);border:1px solid var(--border);border-left:2px solid rgba(245,166,35,.58);border-radius:12px;padding:22px 24px;margin-top:24px;}
+.res-license-title{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.res-license-copy{font-size:13px;line-height:1.75;color:rgba(240,237,232,.56);}
+.res-license-copy code{font-family:var(--mono);font-size:12px;background:rgba(240,237,232,.06);padding:2px 6px;border-radius:3px;color:rgba(240,237,232,.75);}
+.res-contact{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.5);margin-top:14px;}
+.res-contact a{color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3);}
+.res-contact a:hover{border-color:var(--amber);}
+
+/* ── HERO ── */
+.res-hero{padding:56px 48px 40px;max-width:1000px;margin:0 auto;}
+
+/* ── FOOTER ── */
+.about-footer{border-top:1px solid var(--border);padding:32px 48px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.about-footer-left{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);letter-spacing:.08em;}
+.about-footer-ig{font-family:var(--mono);font-size:10px;color:rgba(245,166,35,.5);text-decoration:none;letter-spacing:.08em;border:1px solid rgba(245,166,35,.2);padding:6px 14px;border-radius:3px;transition:all .2s;}
+.about-footer-ig:hover{color:var(--amber);border-color:rgba(245,166,35,.5);}
+
+@media (max-width:820px){
+  .res-hero,.data-section{padding-left:20px;padding-right:20px;}
+  .res-card{flex-direction:column;align-items:flex-start;}
+  .res-card-dl{align-self:stretch;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="/" onclick="closeDrawer()"><span data-i18n="nav_live">Live</span></a>
+  <a href="/data.html#the-data" onclick="closeDrawer()"><span data-i18n="nav_dd_the_data">The Data</span></a>
+  <a href="/data.html#noise-data" onclick="closeDrawer()"><span data-i18n="nav_dd_noise_data">Noise Data</span></a>
+  <a href="/data.html#warning-zone" class="drawer-warning" onclick="closeDrawer()"><span data-i18n="nav_dd_warning_zone">Warning Zone</span></a>
+  <a href="/archive.html" onclick="closeDrawer()"><span data-i18n="nav_archive">Archive</span></a>
+  <a href="/compare.html" onclick="closeDrawer()"><span data-i18n="nav_compare">Compare</span></a>
+  <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()"><span data-i18n="nav_noise_report">Noise Report</span></a>
+  <a href="/log.html" onclick="closeDrawer()"><span data-i18n="nav_log">Captain's Log</span></a>
+  <a href="/research.html" style="color:var(--amber);" onclick="closeDrawer()"><span data-i18n="nav_research">Research Data</span></a>
+  <a href="/about.html#the-project" onclick="closeDrawer()"><span data-i18n="nav_dd_the_project">The Project</span></a>
+  <a href="/about.html#get-involved" onclick="closeDrawer()"><span data-i18n="nav_dd_get_involved">Get Involved</span></a>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()"><span data-i18n="nav_follow_ig">Follow @lisbon.finals</span></a>
+</div>
+
+<nav aria-label="Primary navigation">
+  <a href="/index.html" class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-wordmark">LISBON <span>FINALS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/"><span data-i18n="nav_live">Live</span></a></li>
+    <li class="nav-has-dropdown">
+      <a href="/data.html" class="nav-data-trigger"><span data-i18n="nav_data">Data ▾</span></a>
+      <ul class="nav-dropdown">
+        <li><a href="/data.html#the-data"><span data-i18n="nav_dd_the_data">The Data</span></a></li>
+        <li><a href="/data.html#noise-data"><span data-i18n="nav_dd_noise_data">Noise Data</span></a></li>
+        <li><a href="/data.html#warning-zone" class="dd-warning"><span data-i18n="nav_dd_warning_zone">Warning Zone</span></a></li>
+      </ul>
+    </li>
+    <li><a href="/archive.html"><span data-i18n="nav_archive">Archive</span></a></li>
+    <li><a href="/compare.html"><span data-i18n="nav_compare">Compare</span></a></li>
+    <li><a href="/noise-report.html" class="nav-noise"><span data-i18n="nav_noise_report">Noise Report</span></a></li>
+    <li><a href="/log.html"><span data-i18n="nav_log">Captain's Log</span></a></li>
+    <li><a href="/research.html" class="nav-active"><span data-i18n="nav_research">Research Data</span></a></li>
+  </ul>
+  <div class="nav-clock-wrap">
+    <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
+    <div class="lang-group">
+      <button class="lang-btn active" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" id="lang-fr" aria-label="Passer le site en francais">FR</button>
+    </div>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+
+  <div class="res-hero">
+    <div class="section-label" data-i18n="hero_label">For researchers &amp; educators</div>
+    <h1 class="section-title" data-i18n-html="hero_title">Open<br><em>the archive</em></h1>
+    <p class="section-desc" data-i18n="hero_desc">Everything below comes from the same independent station behind the rest of this site — one fixed terrace under the LPPT approach path, no official airport data mixed in. Free to reuse for coursework, papers or your own analysis. If you publish something with it, we'd genuinely like to hear about it.</p>
+    <div class="method-strip">
+      <div class="method-kicker" data-i18n="hero_why_kicker">Why this exists</div>
+      <div class="method-copy" data-i18n="hero_why_copy">Lisbon Finals has always been a citizen-science project first — a single sensor, openly measuring, rather than a claim of official authority. Opening the raw exports is the natural next step: anyone teaching or studying airport noise gets real, dated, local measurements instead of having to take our on-site summaries at face value.</div>
+    </div>
+  </div>
+
+  <section class="data-section">
+    <div class="section-label" data-i18n="flights_label">Flight events</div>
+    <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);" data-i18n="flights_title">One row per detected aircraft</h2>
+    <p class="section-desc" data-i18n="flights_desc">Every flight the station captured: callsign, aircraft type and airline when identified, flight phase, altitude and speed, plus the acoustic reading tied to that exact pass — peak level, time spent above 70dB, and peak vibration on the terrace. One CSV per month, since the station's first day.</p>
+    <div class="res-updated" data-i18n="flights_updated">Files current as of 13 Sept 2026 — regenerated periodically, not live.</div>
+
+    <div id="res-flights-list">
+      <div class="res-card"><div><div class="res-card-name">flights_2026-05.csv</div><div class="res-card-meta">9,120 flights · 869 KB</div></div><a class="res-card-dl" href="/research-data/flights_2026-05.csv" download data-i18n="dl_btn">Download CSV</a></div>
+      <div class="res-card"><div><div class="res-card-name">flights_2026-06.csv</div><div class="res-card-meta">9,634 flights · 949 KB</div></div><a class="res-card-dl" href="/research-data/flights_2026-06.csv" download data-i18n="dl_btn">Download CSV</a></div>
+      <div class="res-card"><div><div class="res-card-name">flights_2026-07.csv</div><div class="res-card-meta">10,450 flights · 1.0 MB</div></div><a class="res-card-dl" href="/research-data/flights_2026-07.csv" download data-i18n="dl_btn">Download CSV</a></div>
+      <div class="res-card"><div><div class="res-card-name">flights_2026-08.csv</div><div class="res-card-meta">10,549 flights · 1.1 MB</div></div><a class="res-card-dl" href="/research-data/flights_2026-08.csv" download data-i18n="dl_btn">Download CSV</a></div>
+      <div class="res-card"><div><div class="res-card-name">flights_2026-09.csv</div><div class="res-card-meta"><span data-i18n="in_progress">in progress</span> · 4,301 <span data-i18n="flights_word">flights</span> · 445 KB</div></div><a class="res-card-dl" href="/research-data/flights_2026-09.csv" download data-i18n="dl_btn">Download CSV</a></div>
+    </div>
+
+    <div class="schema-list">
+      <div class="schema-item"><div class="schema-k">date, time</div><div class="schema-v" data-i18n="sch_flight_datetime">Detection date/time, UTC.</div></div>
+      <div class="schema-item"><div class="schema-k">callsign</div><div class="schema-v" data-i18n="sch_flight_callsign">ADS-B callsign, or the aircraft's ICAO hex code when no callsign was broadcast.</div></div>
+      <div class="schema-item"><div class="schema-k">registration, aircraft_type, airline</div><div class="schema-v" data-i18n="sch_flight_id">Identified when the aircraft's transponder data resolves to a known registration — left blank otherwise.</div></div>
+      <div class="schema-item"><div class="schema-k">phase, direction</div><div class="schema-v" data-i18n="sch_flight_phase">Landing / takeoff / cruise, and arrival/departure.</div></div>
+      <div class="schema-item"><div class="schema-k">altitude_ft, speed_kmh</div><div class="schema-v" data-i18n="sch_flight_alt">Altitude and ground speed at closest point to the station.</div></div>
+      <div class="schema-item"><div class="schema-k">spl_db, spl_duration_above_s</div><div class="schema-v" data-i18n="sch_flight_spl">Peak sound level measured on the terrace, and seconds spent above the 70dB threshold during that single pass.</div></div>
+      <div class="schema-item"><div class="schema-k">vibration_peak_mg</div><div class="schema-v" data-i18n="sch_flight_vib">Peak terrace vibration during the pass, in milli-g.</div></div>
+      <div class="schema-item"><div class="schema-k">wind_speed_kmh, wind_dir_deg</div><div class="schema-v" data-i18n="sch_flight_wind">Ambient wind at the time of detection, when logged.</div></div>
+    </div>
+  </section>
+
+  <section class="data-section">
+    <div class="section-label" data-i18n="cont_label">Continuous ambient data</div>
+    <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);" data-i18n="cont_title">The raw signal, not just the events</h2>
+    <p class="section-desc" data-i18n-html="cont_desc">Sound and vibration sampled roughly once per second, around the clock — not just when a flight is detected. This is the same continuous log the station uses internally to catch its own measurement glitches, so it's a genuine working dataset, not a demo export.</p>
+    <div class="res-note" data-i18n="cont_note">Shorter history than the flight tables: continuous logging only started once this need came up.</div>
+    <div class="res-updated" data-i18n="flights_updated">Files current as of 13 Sept 2026 — regenerated periodically, not live.</div>
+
+    <div id="res-continuous-list">
+      <div class="res-card"><div><div class="res-card-name">continuous_spl.csv</div><div class="res-card-meta">3–13 Sept 2026 · 868,545 <span data-i18n="readings_word">readings</span> (1/s) · 24.9 MB</div></div><a class="res-card-dl" href="/research-data/continuous_spl.csv" download data-i18n="dl_btn">Download CSV</a></div>
+      <div class="res-card"><div><div class="res-card-name">continuous_vibration.csv</div><div class="res-card-meta">7–13 Sept 2026 · 506,175 <span data-i18n="readings_word">readings</span> (1/s) · 14.8 MB</div></div><a class="res-card-dl" href="/research-data/continuous_vibration.csv" download data-i18n="dl_btn">Download CSV</a></div>
+    </div>
+
+    <div class="schema-list">
+      <div class="schema-item"><div class="schema-k">date, timestamp</div><div class="schema-v" data-i18n="sch_cont_ts">Calendar day, and Unix epoch (UTC) for the individual reading.</div></div>
+      <div class="schema-item"><div class="schema-k">spl_db / vib_mg</div><div class="schema-v" data-i18n="sch_cont_val">Instantaneous sound level (dB) or vibration (milli-g) at that second — a sample, not a running average.</div></div>
+    </div>
+  </section>
+
+  <section class="data-section">
+    <div class="section-label" data-i18n="license_label">Using this data</div>
+    <div class="res-license">
+      <div class="res-license-title" data-i18n="license_title">License &amp; attribution</div>
+      <div class="res-license-copy" data-i18n-html="license_copy">Released under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--amber)">CC BY 4.0</a> — reuse, adapt and redistribute freely, with credit. A line like <code>Data: Lisbon Finals (lisbonfinals.com)</code> in your methodology section or references is enough.</div>
+    </div>
+    <div class="method-strip">
+      <div class="method-kicker" data-i18n="caveat_kicker">Worth knowing before you crunch the numbers</div>
+      <div class="method-copy" data-i18n="caveat_copy">This is one consumer-grade sensor (IEC 651 type 2, ±1.5dB manufacturer tolerance) on one terrace, not a calibrated reference network — treat it as local, independent evidence, and cross-check anything load-bearing for your own conclusions.</div>
+    </div>
+    <div class="res-contact" data-i18n-html="contact_line">Questions about the data, or planning to use it for a course or a paper? Write to <a href="mailto:lisbon.final.spots@gmail.com">lisbon.final.spots@gmail.com</a> — always happy to hear what it's used for.</div>
+  </section>
+
+</main>
+
+<footer class="about-footer">
+  <span class="about-footer-left" data-i18n="footer_left">LISBON FINALS · Research Data · lisbonfinals.com</span>
+  <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="about-footer-ig" data-i18n="footer_ig">Follow on Instagram →</a>
+</footer>
+
+<script>
+const drawer = document.getElementById('nav-drawer');
+function closeDrawer() {
+  drawer.classList.remove('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', 'false');
+}
+document.getElementById('nav-burger').addEventListener('click', () => {
+  const open = drawer.classList.toggle('open');
+  document.getElementById('nav-burger')?.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+
+(function navClock(){
+  const el = document.getElementById('nav-clock');
+  if (!el) return;
+  function tick(){
+    const s = new Date().toLocaleTimeString('pt-PT',{timeZone:'Europe/Lisbon',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    el.innerHTML = s + '<span class="nav-clock-tz">LIS</span>';
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+const T = {
+  en: {
+    nav_live:'Live', nav_dd_the_data:'The Data', nav_dd_noise_data:'Noise Data', nav_dd_warning_zone:'Warning Zone',
+    nav_archive:'Archive', nav_compare:'Compare', nav_noise_report:'Noise Report', nav_log:'Captain\'s Log',
+    nav_research:'Research Data', nav_dd_the_project:'The Project', nav_dd_get_involved:'Get Involved', nav_follow_ig:'Follow @lisbon.finals',
+    nav_data:'Data ▾',
+    hero_label:'For researchers & educators',
+    hero_title:'Open<br><em>the archive</em>',
+    hero_desc:'Everything below comes from the same independent station behind the rest of this site — one fixed terrace under the LPPT approach path, no official airport data mixed in. Free to reuse for coursework, papers or your own analysis. If you publish something with it, we\'d genuinely like to hear about it.',
+    hero_why_kicker:'Why this exists',
+    hero_why_copy:'Lisbon Finals has always been a citizen-science project first — a single sensor, openly measuring, rather than a claim of official authority. Opening the raw exports is the natural next step: anyone teaching or studying airport noise gets real, dated, local measurements instead of having to take our on-site summaries at face value.',
+    flights_label:'Flight events',
+    flights_title:'One row per detected aircraft',
+    flights_desc:'Every flight the station captured: callsign, aircraft type and airline when identified, flight phase, altitude and speed, plus the acoustic reading tied to that exact pass — peak level, time spent above 70dB, and peak vibration on the terrace. One CSV per month, since the station\'s first day.',
+    flights_updated:'Files current as of 13 Sept 2026 — regenerated periodically, not live.',
+    in_progress:'in progress', flights_word:'flights', readings_word:'readings', dl_btn:'Download CSV',
+    sch_flight_datetime:'Detection date/time, UTC.',
+    sch_flight_callsign:'ADS-B callsign, or the aircraft\'s ICAO hex code when no callsign was broadcast.',
+    sch_flight_id:'Identified when the aircraft\'s transponder data resolves to a known registration — left blank otherwise.',
+    sch_flight_phase:'Landing / takeoff / cruise, and arrival/departure.',
+    sch_flight_alt:'Altitude and ground speed at closest point to the station.',
+    sch_flight_spl:'Peak sound level measured on the terrace, and seconds spent above the 70dB threshold during that single pass.',
+    sch_flight_vib:'Peak terrace vibration during the pass, in milli-g.',
+    sch_flight_wind:'Ambient wind at the time of detection, when logged.',
+    cont_label:'Continuous ambient data',
+    cont_title:'The raw signal, not just the events',
+    cont_desc:'Sound and vibration sampled roughly once per second, around the clock — not just when a flight is detected. This is the same continuous log the station uses internally to catch its own measurement glitches, so it\'s a genuine working dataset, not a demo export.',
+    cont_note:'Shorter history than the flight tables: continuous logging only started once this need came up.',
+    sch_cont_ts:'Calendar day, and Unix epoch (UTC) for the individual reading.',
+    sch_cont_val:'Instantaneous sound level (dB) or vibration (milli-g) at that second — a sample, not a running average.',
+    license_label:'Using this data', license_title:'License & attribution',
+    license_copy:'Released under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--amber)">CC BY 4.0</a> — reuse, adapt and redistribute freely, with credit. A line like <code>Data: Lisbon Finals (lisbonfinals.com)</code> in your methodology section or references is enough.',
+    caveat_kicker:'Worth knowing before you crunch the numbers',
+    caveat_copy:'This is one consumer-grade sensor (IEC 651 type 2, ±1.5dB manufacturer tolerance) on one terrace, not a calibrated reference network — treat it as local, independent evidence, and cross-check anything load-bearing for your own conclusions.',
+    contact_line:'Questions about the data, or planning to use it for a course or a paper? Write to <a href="mailto:lisbon.final.spots@gmail.com">lisbon.final.spots@gmail.com</a> — always happy to hear what it\'s used for.',
+    footer_left:'LISBON FINALS · Research Data · lisbonfinals.com', footer_ig:'Follow on Instagram →',
+  },
+  pt: {
+    nav_live:'Ao Vivo', nav_dd_the_data:'Os Dados', nav_dd_noise_data:'Dados de Ruído', nav_dd_warning_zone:'Zona de alerta',
+    nav_archive:'Arquivo', nav_compare:'Comparar', nav_noise_report:'Relatório de Ruído', nav_log:'Diário do Capitão',
+    nav_research:'Dados para Investigação', nav_dd_the_project:'O Projecto', nav_dd_get_involved:'Participar', nav_follow_ig:'Seguir @lisbon.finals',
+    nav_data:'Dados ▾',
+    hero_label:'Para investigadores e docentes',
+    hero_title:'Abrir<br><em>o arquivo</em>',
+    hero_desc:'Tudo abaixo vem da mesma estação independente que alimenta o resto deste site — uma varanda fixa sob a rota de aproximação ao LPPT, sem dados oficiais do aeroporto misturados. Livre para reutilizar em trabalhos académicos, artigos ou análises próprias. Se publicares algo com isto, gostaríamos genuinamente de saber.',
+    hero_why_kicker:'Porquê isto existe',
+    hero_why_copy:'O Lisbon Finals sempre foi, antes de mais, um projecto de ciência cidadã — um único sensor, a medir abertamente, sem pretender autoridade oficial. Abrir os dados brutos é o passo seguinte natural: quem ensina ou estuda ruído aeroportuário passa a ter medições reais, datadas e locais, em vez de ter de confiar apenas nos nossos resumos.',
+    flights_label:'Eventos por voo',
+    flights_title:'Uma linha por aeronave detectada',
+    flights_desc:'Todos os voos captados pela estação: indicativo, tipo de aeronave e companhia quando identificados, fase de voo, altitude e velocidade, mais a leitura acústica associada a essa passagem exacta — pico, tempo acima de 70dB, e vibração de pico na varanda. Um CSV por mês, desde o primeiro dia da estação.',
+    flights_updated:'Ficheiros actualizados a 13 de Setembro de 2026 — regenerados periodicamente, não em tempo real.',
+    in_progress:'em curso', flights_word:'voos', readings_word:'leituras', dl_btn:'Descarregar CSV',
+    sch_flight_datetime:'Data/hora de detecção, UTC.',
+    sch_flight_callsign:'Indicativo ADS-B, ou o código hexadecimal ICAO quando nenhum indicativo foi transmitido.',
+    sch_flight_id:'Identificados quando os dados do transponder correspondem a um registo conhecido — em branco caso contrário.',
+    sch_flight_phase:'Aterragem / descolagem / cruzeiro, e chegada/partida.',
+    sch_flight_alt:'Altitude e velocidade no ponto mais próximo da estação.',
+    sch_flight_spl:'Nível sonoro de pico medido na varanda, e segundos acima do limiar de 70dB durante essa passagem.',
+    sch_flight_vib:'Vibração de pico na varanda durante a passagem, em mili-g.',
+    sch_flight_wind:'Vento ambiente no momento da detecção, quando registado.',
+    cont_label:'Dados ambientais contínuos',
+    cont_title:'O sinal bruto, não apenas os eventos',
+    cont_desc:'Som e vibração amostrados aproximadamente uma vez por segundo, 24 horas por dia — não apenas quando um voo é detectado. É o mesmo registo contínuo que a estação usa internamente para detectar as suas próprias falhas de medição — um conjunto de dados de trabalho real, não uma amostra de demonstração.',
+    cont_note:'Histórico mais curto do que as tabelas de voos: o registo contínuo só começou quando esta necessidade surgiu.',
+    sch_cont_ts:'Dia do calendário, e epoch Unix (UTC) da leitura individual.',
+    sch_cont_val:'Nível sonoro instantâneo (dB) ou vibração (mili-g) nesse segundo — uma amostra, não uma média corrida.',
+    license_label:'Utilizar estes dados', license_title:'Licença e atribuição',
+    license_copy:'Disponibilizado sob <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--amber)">CC BY 4.0</a> — reutiliza, adapta e redistribui livremente, com crédito. Uma linha como <code>Dados: Lisbon Finals (lisbonfinals.com)</code> na secção de metodologia ou referências é suficiente.',
+    caveat_kicker:'Vale a pena saber antes de analisar os números',
+    caveat_copy:'Trata-se de um sensor de gama de consumo (IEC 651 tipo 2, tolerância do fabricante de ±1,5dB) numa única varanda, não uma rede de referência calibrada — trata como evidência local e independente, e confirma de forma cruzada tudo o que for decisivo para as tuas próprias conclusões.',
+    contact_line:'Perguntas sobre os dados, ou a pensar usá-los numa disciplina ou artigo? Escreve para <a href="mailto:lisbon.final.spots@gmail.com">lisbon.final.spots@gmail.com</a> — temos sempre gosto em saber para que são usados.',
+    footer_left:'LISBON FINALS · Dados para Investigação · lisbonfinals.com', footer_ig:'Seguir no Instagram →',
+  },
+  fr: {
+    nav_live:'En Direct', nav_dd_the_data:'Les données', nav_dd_noise_data:'Données acoustiques', nav_dd_warning_zone:'Zone d\'alerte',
+    nav_archive:'Archives', nav_compare:'Comparer', nav_noise_report:'Rapport de Bruit', nav_log:'Journal du Capitaine',
+    nav_research:'Données de recherche', nav_dd_the_project:'Le Projet', nav_dd_get_involved:'Participer', nav_follow_ig:'Suivre @lisbon.finals',
+    nav_data:'Données ▾',
+    hero_label:'Pour chercheurs et enseignants',
+    hero_title:'Ouvrir<br><em>les archives</em>',
+    hero_desc:'Tout ce qui suit provient de la même station indépendante qui alimente le reste de ce site — une terrasse fixe sous le couloir d\'approche du LPPT, sans aucune donnée officielle de l\'aéroport mélangée. Libre de réutilisation pour un cours, un mémoire ou votre propre analyse. Si vous publiez quelque chose avec, on aimerait sincèrement le savoir.',
+    hero_why_kicker:'Pourquoi ça existe',
+    hero_why_copy:'Lisbon Finals a toujours été, avant tout, un projet de science citoyenne — un seul capteur, qui mesure ouvertement, sans prétendre à une autorité officielle. Ouvrir les exports bruts est la suite logique : quiconque enseigne ou étudie le bruit aéroportuaire obtient des mesures réelles, datées et locales, plutôt que de devoir prendre nos résumés pour argent comptant.',
+    flights_label:'Événements par vol',
+    flights_title:'Une ligne par appareil détecté',
+    flights_desc:'Chaque vol capté par la station : indicatif, type d\'appareil et compagnie quand identifiés, phase de vol, altitude et vitesse, plus la mesure acoustique associée à ce passage précis — pic, durée au-dessus de 70dB, et vibration de pic sur la terrasse. Un CSV par mois, depuis le premier jour de la station.',
+    flights_updated:'Fichiers à jour au 13 septembre 2026 — régénérés périodiquement, pas en direct.',
+    in_progress:'en cours', flights_word:'vols', readings_word:'relevés', dl_btn:'Télécharger le CSV',
+    sch_flight_datetime:'Date/heure de détection, UTC.',
+    sch_flight_callsign:'Indicatif ADS-B, ou le code hexadécimal ICAO de l\'appareil quand aucun indicatif n\'a été diffusé.',
+    sch_flight_id:'Identifiés quand les données du transpondeur correspondent à une immatriculation connue — laissé vide sinon.',
+    sch_flight_phase:'Atterrissage / décollage / croisière, et arrivée/départ.',
+    sch_flight_alt:'Altitude et vitesse sol au point le plus proche de la station.',
+    sch_flight_spl:'Niveau sonore de pic mesuré sur la terrasse, et secondes passées au-dessus du seuil de 70dB durant ce passage.',
+    sch_flight_vib:'Vibration de pic sur la terrasse durant le passage, en milli-g.',
+    sch_flight_wind:'Vent ambiant au moment de la détection, quand il est enregistré.',
+    cont_label:'Données ambiantes continues',
+    cont_title:'Le signal brut, pas seulement les événements',
+    cont_desc:'Son et vibration échantillonnés environ une fois par seconde, en continu — pas seulement quand un vol est détecté. C\'est le même flux continu que la station utilise en interne pour repérer ses propres anomalies de mesure — un vrai jeu de données de travail, pas un export de démonstration.',
+    cont_note:'Historique plus court que les tableaux de vols : l\'enregistrement continu n\'a démarré que lorsque ce besoin est apparu.',
+    sch_cont_ts:'Jour calendaire, et epoch Unix (UTC) du relevé individuel.',
+    sch_cont_val:'Niveau sonore instantané (dB) ou vibration (milli-g) à cette seconde — un échantillon, pas une moyenne glissante.',
+    license_label:'Utiliser ces données', license_title:'Licence et attribution',
+    license_copy:'Publié sous <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--amber)">CC BY 4.0</a> — réutilisez, adaptez et redistribuez librement, avec attribution. Une ligne du type <code>Données : Lisbon Finals (lisbonfinals.com)</code> dans votre méthodologie ou vos références suffit.',
+    caveat_kicker:'À savoir avant d\'exploiter les chiffres',
+    caveat_copy:'Il s\'agit d\'un capteur grand public (IEC 651 type 2, tolérance constructeur ±1,5dB) sur une seule terrasse, pas un réseau de référence calibré — à traiter comme un témoignage local et indépendant, et à recouper pour tout ce qui est déterminant dans vos propres conclusions.',
+    contact_line:'Des questions sur les données, ou l\'idée de les utiliser pour un cours ou un mémoire ? Écrivez à <a href="mailto:lisbon.final.spots@gmail.com">lisbon.final.spots@gmail.com</a> — toujours ravis de savoir à quoi elles servent.',
+    footer_left:'LISBON FINALS · Données de recherche · lisbonfinals.com', footer_ig:'Suivre sur Instagram →',
+  }
+};
+
+let _lang = window.LF_ROUTE_LANG || localStorage.getItem('lf_lang') || 'en';
+
+function applyLang(lang) {
+  if (!T[lang]) return;
+  _lang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
+  localStorage.setItem('lf_lang', lang);
+  const t = T[lang];
+  ['en','pt','fr'].forEach(l => { const b = document.getElementById('lang-'+l); if(b) b.classList.toggle('active', l===lang); });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    if (t[el.dataset.i18n] != null) el.textContent = t[el.dataset.i18n];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    if (t[el.dataset.i18nHtml] != null) el.innerHTML = t[el.dataset.i18nHtml];
+  });
+}
+applyLang(_lang);
+</script>
+<script data-goatcounter="https://lisbonfinals.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
