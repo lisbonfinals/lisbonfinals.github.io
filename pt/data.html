@@ -400,8 +400,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .wind-module-kicker::before{content:'';width:18px;height:1px;background:var(--amber);flex-shrink:0;}
 .wind-module-title{font-family:var(--sans);font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.04;letter-spacing:-.01em;color:var(--white);}
 .wind-module-title em{font-family:var(--serif);font-weight:400;font-style:italic;color:rgba(240,237,232,.38);}
-.wind-showing{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.5);}
-.wind-showing b{color:var(--amber);font-weight:500;}
 .wind-latest-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.45);background:transparent;border:1px solid var(--border);border-radius:3px;padding:5px 10px;cursor:pointer;transition:all .15s;}
 .wind-latest-btn:hover{color:var(--amber);border-color:rgba(245,166,35,.3);}
 .wind-desc{font-size:13px;line-height:1.7;color:rgba(240,237,232,.5);max-width:680px;margin:10px 0 22px;}
@@ -416,7 +414,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 #wm-needle{transform-origin:150px 150px;transition:transform 1s cubic-bezier(.65,0,.35,1);}
 .wind-readout-deg{font-family:var(--sans);font-weight:800;font-size:52px;line-height:1;color:var(--amber);font-variant-numeric:tabular-nums;}
 .wind-readout-lbl{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-top:2px;}
-.wind-day-nav{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;}
+.wind-day-nav{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;margin-bottom:10px;}
+.wind-day-nav-date{display:flex;align-items:baseline;justify-content:center;gap:6px;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.5);text-align:center;white-space:nowrap;}
+.wind-day-nav-date b{color:var(--amber);font-weight:500;font-size:13px;}
 .wind-nav-btn{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:rgba(240,237,232,.5);background:transparent;border:1px solid var(--border);border-radius:3px;padding:7px 12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px;}
 .wind-nav-btn:hover:not(:disabled){color:var(--amber);border-color:rgba(245,166,35,.3);background:var(--amber-dim);}
 .wind-nav-btn:disabled{opacity:.3;cursor:default;}
@@ -874,10 +874,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
           <div class="wind-module-kicker" data-i18n="wind_kicker">Wind module</div>
           <div class="wind-module-title" data-i18n-html="wind_title">Wind<br><em>rotation</em></div>
         </div>
-        <div class="wind-showing">
-          <span data-i18n="wind_showing">Showing</span> <b id="wm-showing-date">—</b>
-          <button class="wind-latest-btn" id="wm-latest-btn" data-i18n="wind_latest_btn" onclick="loadWindDay(null)">Latest complete day</button>
-        </div>
+        <button class="wind-latest-btn" id="wm-latest-btn" data-i18n="wind_latest_btn" onclick="loadWindDay(null)">Latest complete day</button>
       </div>
       <div class="wind-desc" data-i18n-html="wind_desc">Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against the real average aircraft heading tracked that slot — so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.</div>
 
@@ -928,6 +925,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
         <div class="wind-right-col">
           <div class="wind-day-nav">
             <button class="wind-nav-btn" id="wm-prev-btn" onclick="stepWindDay(-1)" aria-label="Previous day"><span aria-hidden="true">‹</span> <span data-i18n="wind_prev_day">Previous day</span></button>
+            <div class="wind-day-nav-date"><span data-i18n="wind_showing">Showing</span> <b id="wm-showing-date">—</b></div>
             <button class="wind-nav-btn" id="wm-next-btn" onclick="stepWindDay(1)" aria-label="Next day"><span data-i18n="wind_next_day">Next day</span> <span aria-hidden="true">›</span></button>
           </div>
           <div class="wind-bin-list" id="wm-bin-list"></div>
