@@ -829,8 +829,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
           <span data-i18n="expert_more_info">More info</span><span class="cmp-more-arrow">▾</span>
         </div>
         <div class="expert-lva-panel" id="et-lva-panel" hidden>
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lva">LVA — Italian standard (OpenSky-verified)</span><span class="compare-row-val" id="et-lva-val">—</span></div>
-          <div class="expert-lva-copy" data-i18n="expert_lva_copy">LVA (Livello di Valutazione Aeroportuale) is Italy's national event-based airport noise standard — instead of averaging all ambient sound, it counts and weights individual aircraft noise events. This event-based philosophy isn't unique to Italy: many countries use similar approaches (SEL — Sound Exposure Level, an international ISO standard used by the FAA, ICAO and UK airports; threshold-crossing event counts elsewhere). Italy has simply codified it into this specific national regulation.</div>
+          <div class="expert-lva-copy" data-i18n="expert_lden_copy">Lden uses its own three-period split — day, evening and night — not the two-period day/night above, which is why the two figures don't simply relate to each other.</div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden_day">Day (07h–20h)</span><span class="compare-row-val" id="et-lden-day">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden_eve">Evening (20h–23h, +5dB)</span><span class="compare-row-val" id="et-lden-eve">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden_night">Night (23h–07h, +10dB)</span><span class="compare-row-val" id="et-lden-night">—</span></div>
+          <div class="compare-row" id="et-lva-row" hidden><span class="compare-row-lbl" data-i18n="expert_row_lva">LVA — Italian standard (OpenSky-verified)</span><span class="compare-row-val" id="et-lva-val">—</span></div>
+          <div class="expert-lva-copy" id="et-lva-copy-el" hidden data-i18n="expert_lva_copy">LVA (Livello di Valutazione Aeroportuale) is Italy's national event-based airport noise standard — instead of averaging all ambient sound, it counts and weights individual aircraft noise events. This event-based philosophy isn't unique to Italy: many countries use similar approaches (SEL — Sound Exposure Level, an international ISO standard used by the FAA, ICAO and UK airports; threshold-crossing event counts elsewhere). Italy has simply codified it into this specific national regulation.</div>
+          <div class="expert-lva-copy" data-i18n="expert_daily_caveat">All figures on this page are single-day calculations — not the multi-year representative averages official EU strategic noise maps are built from.</div>
         </div>
       </div>
       <div class="compare-card lf">
@@ -1215,18 +1220,26 @@ function buildExpertMode(lvaDaily, s) {
     const srcEl = document.getElementById('et-leqdn-source');
     srcEl.textContent = tE.expert_source_official || 'Official — SensorGrid';
     srcEl.className = 'compare-source live';
-    // LVA (norme italienne, event-based) — uniquement dispo cote donnee officielle,
-    // pas de calcul LF equivalent, donc le bloc "More info" reste cache sans elle.
+    // "More info" : ventilation Lden (jour/soirée/nuit — périodes légales PT,
+    // Decreto-Lei n.º 9/2007 art. 3º, différentes du découpage jour/nuit du
+    // Leq_dn ci-dessus) + LVA italien si dispo ce jour-là (pas de calcul LF
+    // équivalent pour le LVA, donc sa ligne reste cachée sans donnée).
+    document.getElementById('et-lden-day').textContent = off.lden_day != null ? off.lden_day.toFixed(1) + ' dB' : '—';
+    document.getElementById('et-lden-eve').textContent = off.lden_eve != null ? off.lden_eve.toFixed(1) + ' dB' : '—';
+    document.getElementById('et-lden-night').textContent = off.lden_night != null ? off.lden_night.toFixed(1) + ' dB' : '—';
     const lvaToggle = document.getElementById('et-lva-toggle');
+    const lvaRow = document.getElementById('et-lva-row');
+    const lvaCopyEl = document.getElementById('et-lva-copy-el');
     const lvaVal = off.lva_coupled != null ? off.lva_coupled : off.lva;
     if (lvaVal != null) {
       document.getElementById('et-lva-val').textContent = lvaVal.toFixed(1) + ' dB';
-      lvaToggle.hidden = false;
+      lvaRow.hidden = false;
+      lvaCopyEl.hidden = false;
     } else {
-      lvaToggle.hidden = true;
-      document.getElementById('et-lva-panel').hidden = true;
-      lvaToggle.classList.remove('open');
+      lvaRow.hidden = true;
+      lvaCopyEl.hidden = true;
     }
+    lvaToggle.hidden = off.lden_day == null && lvaVal == null;
   } else {
     document.getElementById('et-leqdn-total').textContent = latest.leq_dn != null ? latest.leq_dn.toFixed(1) : '—';
     document.getElementById('et-leqdn-day').textContent = latest.leq_day_period != null ? latest.leq_day_period.toFixed(1) + ' dB' : '—';
@@ -1825,6 +1838,9 @@ const T = {
     expert_maturity:'Official data available since Sept 8, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
     expert_peak_todaylbl:'loudest single pass, today',
     expert_more_info:'More info',
+    expert_lden_copy:'Lden uses its own three-period split — day, evening and night — not the two-period day/night above, which is why the two figures don\'t simply relate to each other.',
+    expert_row_lden_day:'Day (07h–20h)', expert_row_lden_eve:'Evening (20h–23h, +5dB)', expert_row_lden_night:'Night (23h–07h, +10dB)',
+    expert_daily_caveat:'All figures on this page are single-day calculations — not the multi-year representative averages official EU strategic noise maps are built from.',
     expert_row_lva:'LVA — Italian standard (OpenSky-verified)',
     expert_lva_copy:'LVA (Livello di Valutazione Aeroportuale) is Italy\'s national event-based airport noise standard — instead of averaging all ambient sound, it counts and weights individual aircraft noise events. This event-based philosophy isn\'t unique to Italy: many countries use similar approaches (SEL — Sound Exposure Level, an international ISO standard used by the FAA, ICAO and UK airports; threshold-crossing event counts elsewhere). Italy has simply codified it into this specific national regulation.'
   },
@@ -1924,6 +1940,9 @@ const T = {
     expert_maturity:'Dados oficiais disponíveis desde 8 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
     expert_peak_todaylbl:'pico mais alto, hoje',
     expert_more_info:'Mais informação',
+    expert_lden_copy:'O Lden usa a sua própria divisão em três períodos — dia, entardecer e noite — diferente da divisão dia/noite acima, por isso os dois valores não se relacionam directamente.',
+    expert_row_lden_day:'Dia (07h–20h)', expert_row_lden_eve:'Entardecer (20h–23h, +5dB)', expert_row_lden_night:'Noite (23h–07h, +10dB)',
+    expert_daily_caveat:'Todos os valores nesta página são cálculos de um único dia — não as médias representativas plurianuais em que assentam os mapas estratégicos de ruído da UE.',
     expert_row_lva:'LVA — norma italiana (verificada via OpenSky)',
     expert_lva_copy:'O LVA (Livello di Valutazione Aeroportuale) é a norma nacional italiana de ruído aeroportuário, baseada em eventos — em vez de fazer a média de todo o som ambiente, conta e pondera os eventos individuais de ruído de aeronaves. Esta filosofia baseada em eventos não é exclusiva da Itália: muitos países usam abordagens semelhantes (SEL — Sound Exposure Level, uma norma internacional ISO usada pela FAA, ICAO e aeroportos britânicos; contagens de eventos acima de um limiar noutros países). A Itália limitou-se a codificá-la nesta regulamentação nacional específica.'
   },
@@ -2025,6 +2044,9 @@ const T = {
     expert_maturity:'Données officielles disponibles depuis le 8 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
     expert_peak_todaylbl:'pic le plus fort, aujourd\'hui',
     expert_more_info:'Plus d\'infos',
+    expert_lden_copy:'Le Lden utilise son propre découpage en trois périodes — jour, soirée et nuit — différent du découpage jour/nuit ci-dessus, c\'est pourquoi les deux chiffres ne se déduisent pas simplement l\'un de l\'autre.',
+    expert_row_lden_day:'Jour (07h–20h)', expert_row_lden_eve:'Soirée (20h–23h, +5dB)', expert_row_lden_night:'Nuit (23h–07h, +10dB)',
+    expert_daily_caveat:'Toutes les valeurs de cette page sont des calculs sur une seule journée — pas les moyennes représentatives pluriannuelles sur lesquelles reposent les cartes stratégiques de bruit de l\'UE.',
     expert_row_lva:'LVA — norme italienne (vérifiée OpenSky)',
     expert_lva_copy:'Le LVA (Livello di Valutazione Aeroportuale) est la norme nationale italienne de bruit aéroportuaire, basée sur les événements — au lieu de moyenner tout le son ambiant, il compte et pondère les événements sonores individuels liés aux avions. Cette philosophie événementielle n\'est pas propre à l\'Italie : de nombreux pays utilisent des approches similaires (SEL — Sound Exposure Level, une norme internationale ISO utilisée par la FAA, l\'ICAO et les aéroports britanniques ; des comptages d\'événements au-dessus d\'un seuil ailleurs). L\'Italie l\'a simplement codifiée dans cette réglementation nationale spécifique.'
   }
