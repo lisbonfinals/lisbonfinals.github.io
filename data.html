@@ -405,8 +405,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .wind-readout{text-align:center;font-family:var(--mono);}
 .wind-readout-deg{font-family:var(--sans);font-weight:800;font-size:42px;line-height:1;color:var(--amber);font-variant-numeric:tabular-nums;}
 .wind-readout-lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-top:2px;}
-.wind-readout-sub{font-size:9.5px;color:rgba(240,237,232,.4);letter-spacing:.04em;margin-top:10px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-.wind-readout-sub b{color:rgba(240,237,232,.75);font-weight:500;}
 .wind-bin-list{display:flex;flex-direction:column;}
 .wind-bin-row{display:grid;grid-template-columns:64px 46px 1fr auto;align-items:center;gap:12px;padding:8px 10px;border-radius:3px;cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s;font-family:var(--mono);}
 .wind-bin-row:hover{background:rgba(240,237,232,.03);}
@@ -418,8 +416,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .wind-bin-bar-fill{position:absolute;inset:0 auto 0 0;background:rgba(240,237,232,.25);border-radius:2px;}
 .wind-bin-row.active .wind-bin-bar-fill{background:var(--amber);}
 .wind-bin-peak{font-size:10.5px;color:var(--white);text-align:right;font-variant-numeric:tabular-nums;}
-.wind-caveat{font-family:var(--mono);font-size:10px;line-height:1.8;color:rgba(240,237,232,.34);margin-top:18px;padding-top:14px;border-top:1px solid var(--border);}
-.wind-caveat b{color:rgba(240,237,232,.6);font-weight:500;}
+.wind-caveat-box{background:rgba(13,17,23,.72);border:1px solid var(--border);border-left:2px solid rgba(245,166,35,.58);border-radius:12px;padding:18px 22px;margin-top:20px;}
+.wind-caveat-title{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+.wind-method-list{display:grid;gap:9px;}
+.wind-method-item{display:grid;grid-template-columns:104px 1fr;gap:16px;border-top:1px solid rgba(240,237,232,.06);padding-top:9px;}
+.wind-method-item:first-child{border-top:none;padding-top:0;}
+.wind-method-k{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.34);}
+.wind-method-v{font-family:var(--mono);font-size:10px;line-height:1.6;color:rgba(240,237,232,.54);}
+@media (max-width:600px){.wind-method-item{grid-template-columns:1fr;gap:4px;}}
 .lva-week-wind-btn{display:inline-flex;align-items:center;gap:3px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.25);border-radius:10px;color:var(--amber);cursor:pointer;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;margin-left:8px;transition:all .15s;line-height:1;}
 .lva-week-wind-btn:hover{background:rgba(245,166,35,.18);border-color:var(--amber);}
 @media (max-width:820px){.compare-grid{grid-template-columns:1fr;}.lva-week-row{font-size:10px;}.wind-stage{grid-template-columns:1fr;}}
@@ -897,26 +901,44 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
           <div class="wind-readout">
             <div class="wind-readout-deg" id="wm-deg">—°</div>
             <div class="wind-readout-lbl" id="wm-label">—</div>
-            <div class="wind-readout-sub">
-              <span data-i18n="wind_speed_lbl">speed</span> <b id="wm-speed">—</b>
-              <span data-i18n="wind_temp_lbl">temp</span> <b id="wm-temp">—</b>
-              <span data-i18n="wind_press_lbl">press</span> <b id="wm-press">—</b>
-            </div>
-            <div class="wind-readout-sub">
-              <span data-i18n="wind_rwy_lbl">vs runway</span> <b id="wm-rwy">—</b>
-              <span data-i18n="wind_spread_lbl">spread</span> <b id="wm-std">—</b>
-            </div>
-            <div class="wind-readout-sub" id="wm-phase-row">
-              <span data-i18n="wind_arrivals_lbl">arrivals</span> <b id="wm-arr" style="color:var(--red);">—</b>
-              <span data-i18n="wind_departures_lbl">departures</span> <b id="wm-dep" style="color:var(--green);">—</b>
+            <div class="compare-rows" style="margin-top:16px;text-align:left;">
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_speed_lbl">Speed</span><span class="compare-row-val" id="wm-speed">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_temp_lbl">Temp</span><span class="compare-row-val" id="wm-temp">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_press_lbl">Pressure</span><span class="compare-row-val" id="wm-press">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_rwy_lbl">vs runway</span><span class="compare-row-val" id="wm-rwy">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_spread_lbl">Spread</span><span class="compare-row-val" id="wm-std">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_arrivals_lbl">Arrivals</span><span class="compare-row-val" id="wm-arr" style="color:var(--red);">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_departures_lbl">Departures</span><span class="compare-row-val" id="wm-dep" style="color:var(--green);">—</span></div>
             </div>
           </div>
         </div>
         <div class="wind-bin-list" id="wm-bin-list"></div>
       </div>
 
-      <div class="wind-caveat" data-i18n-html="wind_caveat">
-        <b>How to read this.</b> The needle is the circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values). "Spread" is the circular standard deviation — small means steady wind, large means it was actively turning within that slot. Temperature and pressure read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep. Arrivals/departures come from the same per-flight direction field used elsewhere on the site — most days here are almost entirely arrivals, but active runway configuration (itself largely wind-driven) occasionally flips a day to mostly departures.
+      <div class="wind-caveat-box">
+        <div class="wind-caveat-title" data-i18n="wind_method_title">How to read this</div>
+        <div class="wind-method-list">
+          <div class="wind-method-item">
+            <div class="wind-method-k" data-i18n="wind_method_k1">Needle</div>
+            <div class="wind-method-v" data-i18n="wind_method_v1">Circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values).</div>
+          </div>
+          <div class="wind-method-item">
+            <div class="wind-method-k" data-i18n="wind_method_k2">Spread</div>
+            <div class="wind-method-v" data-i18n="wind_method_v2">Circular standard deviation: small means steady wind, large means it was actively turning within that slot.</div>
+          </div>
+          <div class="wind-method-item">
+            <div class="wind-method-k" data-i18n="wind_method_k3">Wind vs heading</div>
+            <div class="wind-method-v" data-i18n-html="wind_method_v3">Compares the wind against the real average aircraft heading tracked that slot, not a fixed runway bearing, so it stays correct whichever runway end was active that day. A "*" means no flight in that slot had heading data, so it fell back to runway 02/20's own bearing as an approximation.</div>
+          </div>
+          <div class="wind-method-item">
+            <div class="wind-method-k" data-i18n="wind_method_k4">Traffic</div>
+            <div class="wind-method-v" data-i18n="wind_method_v4">Arrivals/departures come from the same per-flight direction field used elsewhere on the site. Most days here are almost entirely arrivals, but active runway configuration (itself largely wind-driven) occasionally flips a day to mostly departures.</div>
+          </div>
+          <div class="wind-method-item">
+            <div class="wind-method-k" data-i18n="wind_method_k5">Weather data</div>
+            <div class="wind-method-v" data-i18n-html="wind_method_v5">Temperature/pressure read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep.</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1704,10 +1726,15 @@ const T = {
     expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
     wind_kicker:'Wind module', wind_title:'Wind rotation', wind_showing:'Showing', wind_latest_btn:'Latest complete day',
     wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against runway 02/20\'s fixed bearing, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.',
-    wind_speed_lbl:'speed', wind_temp_lbl:'temp', wind_press_lbl:'press', wind_rwy_lbl:'vs runway', wind_spread_lbl:'spread',
+    wind_speed_lbl:'Speed', wind_temp_lbl:'Temp', wind_press_lbl:'Pressure', wind_rwy_lbl:'vs runway', wind_spread_lbl:'Spread',
     wind_rwy_headwind:'headwind', wind_rwy_tailwind:'tailwind', wind_rwy_crosswind:'crosswind',
-    wind_arrivals_lbl:'arrivals', wind_departures_lbl:'departures', wind_view_btn:'View',
-    wind_caveat:'<b>How to read this.</b><br><br>1. <strong style="color:rgba(240,237,232,.8)">Needle</strong> — the circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values).<br><br>2. <strong style="color:rgba(240,237,232,.8)">Spread</strong> — the circular standard deviation: small means steady wind, large means it was actively turning within that slot.<br><br>3. <strong style="color:rgba(240,237,232,.8)">Headwind / tailwind / crosswind</strong> — compares the wind against the real average aircraft heading tracked that slot, not a fixed runway bearing, so it stays correct whichever runway end was active that day. A "*" means no flight in that slot had heading data, so it fell back to runway 02/20\'s own bearing as an approximation.<br><br>4. <strong style="color:rgba(240,237,232,.8)">Arrivals / departures</strong> — the same per-flight direction field used elsewhere on the site. Most days here are almost entirely arrivals, but active runway configuration (itself largely wind-driven) occasionally flips a day to mostly departures.<br><br>5. <strong style="color:rgba(240,237,232,.8)">Temperature / pressure</strong> — read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep.',
+    wind_arrivals_lbl:'Arrivals', wind_departures_lbl:'Departures', wind_view_btn:'View',
+    wind_method_title:'How to read this',
+    wind_method_k1:'Needle', wind_method_v1:'Circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values).',
+    wind_method_k2:'Spread', wind_method_v2:'Circular standard deviation: small means steady wind, large means it was actively turning within that slot.',
+    wind_method_k3:'Wind vs heading', wind_method_v3:'Compares the wind against the real average aircraft heading tracked that slot, not a fixed runway bearing, so it stays correct whichever runway end was active that day. A "*" means no flight in that slot had heading data, so it fell back to runway 02/20\'s own bearing as an approximation.',
+    wind_method_k4:'Traffic', wind_method_v4:'Arrivals/departures come from the same per-flight direction field used elsewhere on the site. Most days here are almost entirely arrivals, but active runway configuration (itself largely wind-driven) occasionally flips a day to mostly departures.',
+    wind_method_k5:'Weather data', wind_method_v5:'Temperature/pressure read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep.',
     expert_source_official:'Official — SensorGrid', expert_source_provisional:'Provisional — LF estimate', expert_source_own:'Citizen metric — Lisbon Finals',
     expert_maturity:'Official data available since Sept 8, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
     expert_peak_todaylbl:'loudest single pass, today',
@@ -1799,10 +1826,15 @@ const T = {
     expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
     wind_kicker:'Módulo de vento', wind_title:'Rotação do vento', wind_showing:'A mostrar', wind_latest_btn:'Último dia completo',
     wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo fixo da pista 02/20 — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Conhecido localmente como a <em>Nortada</em>.',
-    wind_speed_lbl:'velocidade', wind_temp_lbl:'temp.', wind_press_lbl:'pressão', wind_rwy_lbl:'vs pista', wind_spread_lbl:'dispersão',
+    wind_speed_lbl:'Velocidade', wind_temp_lbl:'Temp.', wind_press_lbl:'Pressão', wind_rwy_lbl:'vs pista', wind_spread_lbl:'Dispersão',
     wind_rwy_headwind:'vento de proa', wind_rwy_tailwind:'vento de cauda', wind_rwy_crosswind:'vento cruzado',
-    wind_arrivals_lbl:'chegadas', wind_departures_lbl:'partidas', wind_view_btn:'Ver',
-    wind_caveat:'<b>Como ler isto.</b><br><br>1. <strong style="color:rgba(240,237,232,.8)">Agulha</strong> — a direcção média circular do vento por janela de 3h, a partir do valor bruto em graus (não a etiqueta de 16 pontos, que esconde os valores intermédios).<br><br>2. <strong style="color:rgba(240,237,232,.8)">Dispersão</strong> — o desvio-padrão circular: pequeno significa vento estável, grande significa que estava a rodar activamente nessa janela.<br><br>3. <strong style="color:rgba(240,237,232,.8)">Vento de proa / cauda / cruzado</strong> — compara o vento com o rumo médio real dos aviões nessa janela, não um rumo fixo de pista, por isso mantém-se correcto seja qual for a pista activa nesse dia. Um "*" significa que nenhum voo nessa janela tinha dados de rumo, recorrendo então ao rumo da pista 02/20 como aproximação.<br><br>4. <strong style="color:rgba(240,237,232,.8)">Chegadas / partidas</strong> — o mesmo campo de direcção usado noutras partes do site. A maioria dos dias aqui é quase só chegadas, mas a configuração de pista activa (em grande parte ditada pelo vento) por vezes inverte um dia para maioritariamente partidas.<br><br>5. <strong style="color:rgba(240,237,232,.8)">Temperatura / pressão</strong> — mostram "—" antes de 11 Set 2026 ~22h: o registo meteorológico só começou a capturá-las nessa noite, embora velocidade/direcção do vento remontem a 7 Set.',
+    wind_arrivals_lbl:'Chegadas', wind_departures_lbl:'Partidas', wind_view_btn:'Ver',
+    wind_method_title:'Como ler isto',
+    wind_method_k1:'Agulha', wind_method_v1:'Direcção média circular do vento por janela de 3h, a partir do valor bruto em graus (não a etiqueta de 16 pontos, que esconde os valores intermédios).',
+    wind_method_k2:'Dispersão', wind_method_v2:'Desvio-padrão circular: pequeno significa vento estável, grande significa que estava a rodar activamente nessa janela.',
+    wind_method_k3:'Vento vs rumo', wind_method_v3:'Compara o vento com o rumo médio real dos aviões nessa janela, não um rumo fixo de pista, por isso mantém-se correcto seja qual for a pista activa nesse dia. Um "*" significa que nenhum voo nessa janela tinha dados de rumo, recorrendo então ao rumo da pista 02/20 como aproximação.',
+    wind_method_k4:'Tráfego', wind_method_v4:'Chegadas/partidas vêm do mesmo campo de direcção usado noutras partes do site. A maioria dos dias aqui é quase só chegadas, mas a configuração de pista activa (em grande parte ditada pelo vento) por vezes inverte um dia para maioritariamente partidas.',
+    wind_method_k5:'Dados meteo', wind_method_v5:'Temperatura/pressão mostram "—" antes de 11 Set 2026 ~22h: o registo meteorológico só começou a capturá-las nessa noite, embora velocidade/direcção do vento remontem a 7 Set.',
     expert_source_official:'Oficial — SensorGrid', expert_source_provisional:'Provisório — estimativa LF', expert_source_own:'Métrica cidadã — Lisbon Finals',
     expert_maturity:'Dados oficiais disponíveis desde 8 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
     expert_peak_todaylbl:'pico mais alto, hoje',
@@ -1896,10 +1928,15 @@ const T = {
     expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
     wind_kicker:'Module vent', wind_title:'Rotation du vent', wind_showing:'Affichage', wind_latest_btn:'Dernier jour complet',
     wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap fixe de la piste 02/20, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Connu localement sous le nom de <em>Nortada</em>.',
-    wind_speed_lbl:'vitesse', wind_temp_lbl:'temp.', wind_press_lbl:'pression', wind_rwy_lbl:'vs piste', wind_spread_lbl:'dispersion',
+    wind_speed_lbl:'Vitesse', wind_temp_lbl:'Temp.', wind_press_lbl:'Pression', wind_rwy_lbl:'vs piste', wind_spread_lbl:'Dispersion',
     wind_rwy_headwind:'vent de face', wind_rwy_tailwind:'vent arrière', wind_rwy_crosswind:'traversier',
-    wind_arrivals_lbl:'arrivées', wind_departures_lbl:'départs', wind_view_btn:'Voir',
-    wind_caveat:'<b>Comment lire ceci.</b><br><br>1. <strong style="color:rgba(240,237,232,.8)">Aiguille</strong> — la direction moyenne circulaire du vent par tranche de 3h, calculée à partir du degré brut (pas de l\'étiquette à 16 points, qui masque les valeurs intermédiaires).<br><br>2. <strong style="color:rgba(240,237,232,.8)">Dispersion</strong> — l\'écart-type circulaire : petit signifie un vent stable, grand signifie qu\'il tournait activement pendant cette tranche.<br><br>3. <strong style="color:rgba(240,237,232,.8)">Vent de face / arrière / traversier</strong> — compare le vent au cap réel moyen des avions sur cette tranche, pas un cap de piste fixe, donc ça reste juste quelle que soit la piste active ce jour-là. Un « * » signifie qu\'aucun vol de cette tranche n\'avait de donnée de cap, on retombe alors sur le cap de la piste 02/20 comme approximation.<br><br>4. <strong style="color:rgba(240,237,232,.8)">Arrivées / départs</strong> — le même champ de direction utilisé ailleurs sur le site. La plupart des jours ici sont presque uniquement des arrivées, mais la configuration de piste active (en grande partie dictée par le vent) fait parfois basculer une journée vers une majorité de départs.<br><br>5. <strong style="color:rgba(240,237,232,.8)">Température / pression</strong> — affichent "—" avant le 11 sept 2026 ~22h : le capteur météo n\'a commencé à les enregistrer que ce soir-là, bien que vitesse/direction du vent remontent au 7 sept.',
+    wind_arrivals_lbl:'Arrivées', wind_departures_lbl:'Départs', wind_view_btn:'Voir',
+    wind_method_title:'Comment lire ceci',
+    wind_method_k1:'Aiguille', wind_method_v1:'Direction moyenne circulaire du vent par tranche de 3h, calculée à partir du degré brut (pas de l\'étiquette à 16 points, qui masque les valeurs intermédiaires).',
+    wind_method_k2:'Dispersion', wind_method_v2:'Écart-type circulaire : petit signifie un vent stable, grand signifie qu\'il tournait activement pendant cette tranche.',
+    wind_method_k3:'Vent vs cap', wind_method_v3:'Compare le vent au cap réel moyen des avions sur cette tranche, pas un cap de piste fixe, donc ça reste juste quelle que soit la piste active ce jour-là. Un « * » signifie qu\'aucun vol de cette tranche n\'avait de donnée de cap, on retombe alors sur le cap de la piste 02/20 comme approximation.',
+    wind_method_k4:'Trafic', wind_method_v4:'Arrivées/départs viennent du même champ de direction utilisé ailleurs sur le site. La plupart des jours ici sont presque uniquement des arrivées, mais la configuration de piste active (en grande partie dictée par le vent) fait parfois basculer une journée vers une majorité de départs.',
+    wind_method_k5:'Données météo', wind_method_v5:'Température/pression affichent "—" avant le 11 sept 2026 ~22h : le capteur météo n\'a commencé à les enregistrer que ce soir-là, bien que vitesse/direction du vent remontent au 7 sept.',
     expert_source_official:'Officiel — SensorGrid', expert_source_provisional:'Provisoire — estimation LF', expert_source_own:'Mesure citoyenne — Lisbon Finals',
     expert_maturity:'Données officielles disponibles depuis le 8 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
     expert_peak_todaylbl:'pic le plus fort, aujourd\'hui',
