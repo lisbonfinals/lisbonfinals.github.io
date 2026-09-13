@@ -409,6 +409,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 #wm-needle{transform-origin:150px 150px;transition:transform 1s cubic-bezier(.65,0,.35,1);}
 .wind-readout-deg{font-family:var(--sans);font-weight:800;font-size:52px;line-height:1;color:var(--amber);font-variant-numeric:tabular-nums;}
 .wind-readout-lbl{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-top:2px;}
+.wind-day-nav{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;}
+.wind-nav-btn{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:rgba(240,237,232,.5);background:transparent;border:1px solid var(--border);border-radius:3px;padding:7px 12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px;}
+.wind-nav-btn:hover:not(:disabled){color:var(--amber);border-color:rgba(245,166,35,.3);background:var(--amber-dim);}
+.wind-nav-btn:disabled{opacity:.3;cursor:default;}
 .wind-bin-list{display:flex;flex-direction:column;}
 .wind-bin-row{display:grid;grid-template-columns:64px 46px 1fr auto;align-items:center;gap:12px;padding:8px 10px;border-radius:3px;cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s;font-family:var(--mono);}
 .wind-bin-row:hover{background:rgba(240,237,232,.03);}
@@ -918,6 +922,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
           </div>
         </div>
         <div class="wind-right-col">
+          <div class="wind-day-nav">
+            <button class="wind-nav-btn" id="wm-prev-btn" onclick="stepWindDay(-1)" aria-label="Previous day"><span aria-hidden="true">‹</span> <span data-i18n="wind_prev_day">Previous day</span></button>
+            <button class="wind-nav-btn" id="wm-next-btn" onclick="stepWindDay(1)" aria-label="Next day"><span data-i18n="wind_next_day">Next day</span> <span aria-hidden="true">›</span></button>
+          </div>
           <div class="wind-bin-list" id="wm-bin-list"></div>
           <div class="wind-caveat-box">
             <div class="wind-caveat-title" data-i18n="wind_method_title">How to read this</div>
@@ -1320,14 +1328,32 @@ function windHeadingRelation(windDeg, headingDeg){
   else label = tE.wind_rwy_crosswind || 'crosswind';
   return usedFallback ? label + ' *' : label;
 }
+function windAvailableDates(){
+  const lvaDaily = window._lvaDailyCache || {};
+  return Object.keys(lvaDaily).filter(d => lvaDaily[d] && lvaDaily[d].wind_bins && lvaDaily[d].wind_bins.length).sort();
+}
+function stepWindDay(delta){
+  const dates = windAvailableDates();
+  const cur = window._currentWindDate;
+  const i = dates.indexOf(cur);
+  if (i === -1) return;
+  const j = i + delta;
+  if (j < 0 || j >= dates.length) return;
+  loadWindDay(dates[j], false);
+}
 function loadWindDay(dateStr, scrollTo){
   const lvaDaily = window._lvaDailyCache;
   if (!lvaDaily) return;
   const date = dateStr || window._latestCompleteDate;
   const entry = lvaDaily[date];
   const bins = entry && entry.wind_bins;
+  window._currentWindDate = date;
   document.getElementById('wm-showing-date').textContent = fmtShortDate(date);
   document.getElementById('wm-latest-btn').style.display = (date === window._latestCompleteDate) ? 'none' : '';
+  const dates = windAvailableDates();
+  const idx = dates.indexOf(date);
+  document.getElementById('wm-prev-btn').disabled = (idx <= 0);
+  document.getElementById('wm-next-btn').disabled = (idx === -1 || idx >= dates.length - 1);
   if (scrollTo){
     const el = document.getElementById('wind-module');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1730,7 +1756,7 @@ const T = {
     expert_chart_expo_title:'Total exposure ≥70dB trend (minutes)',
     expert_chart_pct_title:'Day-over-day change · official Leq_dn vs peak avg', expert_legend_official_leqdn:'Official Leq_dn', expert_legend_peakavg:'Peak avg', expert_chart_pct_empty:'Not enough consecutive days yet',
     expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
-    wind_kicker:'Wind module', wind_title:'Wind rotation', wind_showing:'Showing', wind_latest_btn:'Latest complete day',
+    wind_kicker:'Wind module', wind_title:'Wind rotation', wind_showing:'Showing', wind_latest_btn:'Latest complete day', wind_prev_day:'Previous day', wind_next_day:'Next day',
     wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against the real average aircraft heading tracked that slot, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.',
     wind_speed_lbl:'Speed', wind_temp_lbl:'Temp', wind_press_lbl:'Pressure', wind_rwy_lbl:'vs heading', wind_spread_lbl:'Spread',
     wind_rwy_headwind:'headwind', wind_rwy_tailwind:'tailwind', wind_rwy_crosswind:'crosswind',
@@ -1830,7 +1856,7 @@ const T = {
     expert_chart_expo_title:'Tendência exposição total ≥70dB (minutos)',
     expert_chart_pct_title:'Variação dia a dia · Leq_dn oficial vs pico médio', expert_legend_official_leqdn:'Leq_dn oficial', expert_legend_peakavg:'Pico médio', expert_chart_pct_empty:'Ainda sem dias consecutivos suficientes',
     expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
-    wind_kicker:'Módulo de vento', wind_title:'Rotação do vento', wind_showing:'A mostrar', wind_latest_btn:'Último dia completo',
+    wind_kicker:'Módulo de vento', wind_title:'Rotação do vento', wind_showing:'A mostrar', wind_latest_btn:'Último dia completo', wind_prev_day:'Dia anterior', wind_next_day:'Dia seguinte',
     wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo médio real dos aviões nessa janela — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Conhecido localmente como a <em>Nortada</em>.',
     wind_speed_lbl:'Velocidade', wind_temp_lbl:'Temp.', wind_press_lbl:'Pressão', wind_rwy_lbl:'vs rumo', wind_spread_lbl:'Dispersão',
     wind_rwy_headwind:'vento de proa', wind_rwy_tailwind:'vento de cauda', wind_rwy_crosswind:'vento cruzado',
@@ -1932,7 +1958,7 @@ const T = {
     expert_chart_expo_title:'Tendance exposition totale ≥70dB (minutes)',
     expert_chart_pct_title:'Variation jour sur jour · Leq_dn officiel vs pic moyen', expert_legend_official_leqdn:'Leq_dn officiel', expert_legend_peakavg:'Pic moyen', expert_chart_pct_empty:'Pas encore assez de jours consécutifs',
     expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
-    wind_kicker:'Module vent', wind_title:'Rotation du vent', wind_showing:'Affichage', wind_latest_btn:'Dernier jour complet',
+    wind_kicker:'Module vent', wind_title:'Rotation du vent', wind_showing:'Affichage', wind_latest_btn:'Dernier jour complet', wind_prev_day:'Jour précédent', wind_next_day:'Jour suivant',
     wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap réel moyen des avions sur cette tranche, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Connu localement sous le nom de <em>Nortada</em>.',
     wind_speed_lbl:'Vitesse', wind_temp_lbl:'Temp.', wind_press_lbl:'Pression', wind_rwy_lbl:'vs cap', wind_spread_lbl:'Dispersion',
     wind_rwy_headwind:'vent de face', wind_rwy_tailwind:'vent arrière', wind_rwy_crosswind:'traversier',
