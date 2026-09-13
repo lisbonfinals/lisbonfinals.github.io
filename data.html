@@ -1275,12 +1275,22 @@ function windCompassName(deg){
   for (const c of WIND_COMPASS_ABBR) if (Math.abs(c[0]-deg) < Math.abs(best[0]-deg)) best = c;
   return best[1];
 }
-function windRwyRelation(deg){
+// Compares wind-FROM direction against the actual average aircraft heading
+// for that bin (mean_heading_deg, from real ADS-B tracks) rather than a
+// fixed runway constant — correct whichever runway config was active that
+// day. Falls back to the runway's own bearing only when no flight in the
+// bin has heading data (very rare; flagged in the UI when it happens).
+function windHeadingRelation(windDeg, headingDeg){
   const tE = T[_lang] || T.en;
-  const diff = Math.min(Math.abs(deg-RWY_HEADING_DEG), Math.abs(deg-(RWY_HEADING_DEG+180)), 360-Math.abs(deg-RWY_HEADING_DEG));
-  if (diff < 35) return tE.wind_rwy_aligned || 'aligned';
-  if (diff > 55) return tE.wind_rwy_crosswind || 'crosswind';
-  return tE.wind_rwy_oblique || 'oblique';
+  const usedFallback = headingDeg == null;
+  const ref = usedFallback ? RWY_HEADING_DEG : headingDeg;
+  let diff = Math.abs(windDeg - ref) % 360;
+  if (diff > 180) diff = 360 - diff;
+  let label;
+  if (diff <= 45) label = tE.wind_rwy_headwind || 'headwind';
+  else if (diff >= 135) label = tE.wind_rwy_tailwind || 'tailwind';
+  else label = tE.wind_rwy_crosswind || 'crosswind';
+  return usedFallback ? label + ' *' : label;
 }
 function loadWindDay(dateStr, scrollTo){
   const lvaDaily = window._lvaDailyCache;
@@ -1326,7 +1336,7 @@ function selectWindBin(bins, i){
     needle.style.transform = `rotate(${b.mean_deg}deg)`;
     document.getElementById('wm-deg').textContent = Math.round(b.mean_deg) + '°';
     document.getElementById('wm-label').textContent = windCompassName(b.mean_deg);
-    document.getElementById('wm-rwy').textContent = windRwyRelation(b.mean_deg);
+    document.getElementById('wm-rwy').textContent = windHeadingRelation(b.mean_deg, b.mean_heading_deg);
   } else {
     document.getElementById('wm-deg').textContent = '—°';
     document.getElementById('wm-label').textContent = '—';
@@ -1695,9 +1705,9 @@ const T = {
     wind_kicker:'Wind module', wind_title:'Wind rotation', wind_showing:'Showing', wind_latest_btn:'Latest complete day',
     wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against runway 02/20\'s fixed bearing, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.',
     wind_speed_lbl:'speed', wind_temp_lbl:'temp', wind_press_lbl:'press', wind_rwy_lbl:'vs runway', wind_spread_lbl:'spread',
-    wind_rwy_aligned:'aligned', wind_rwy_crosswind:'crosswind', wind_rwy_oblique:'oblique',
+    wind_rwy_headwind:'headwind', wind_rwy_tailwind:'tailwind', wind_rwy_crosswind:'crosswind',
     wind_arrivals_lbl:'arrivals', wind_departures_lbl:'departures', wind_view_btn:'View',
-    wind_caveat:'<b>How to read this.</b> The needle is the circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values). "Spread" is the circular standard deviation, small means steady wind, large means it was actively turning within that slot. Temperature and pressure read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep. Arrivals/departures come from the same per-flight direction field used elsewhere on the site, most days here are almost entirely arrivals, but active runway configuration (itself largely wind-driven) occasionally flips a day to mostly departures.',
+    wind_caveat:'<b>How to read this.</b> The needle is the circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values). "Spread" is the circular standard deviation, small means steady wind, large means it was actively turning within that slot. Temperature and pressure read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep. Arrivals/departures come from the same per-flight direction field used elsewhere on the site, most days here are almost entirely arrivals, but active runway configuration (itself largely wind-driven) occasionally flips a day to mostly departures. Headwind/tailwind/crosswind compares the wind against the real average aircraft heading tracked that slot (not a fixed runway bearing), so it stays correct whichever runway end was active that day. A "*" means no flight in that slot had heading data, so it fell back to runway 02/20\'s own bearing as an approximation.',
     expert_source_official:'Official — SensorGrid', expert_source_provisional:'Provisional — LF estimate', expert_source_own:'Citizen metric — Lisbon Finals',
     expert_maturity:'Official data available since Sept 8, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
     expert_peak_todaylbl:'loudest single pass, today',
@@ -1790,9 +1800,9 @@ const T = {
     wind_kicker:'Módulo de vento', wind_title:'Rotação do vento', wind_showing:'A mostrar', wind_latest_btn:'Último dia completo',
     wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo fixo da pista 02/20 — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Conhecido localmente como a <em>Nortada</em>.',
     wind_speed_lbl:'velocidade', wind_temp_lbl:'temp.', wind_press_lbl:'pressão', wind_rwy_lbl:'vs pista', wind_spread_lbl:'dispersão',
-    wind_rwy_aligned:'alinhado', wind_rwy_crosswind:'vento cruzado', wind_rwy_oblique:'oblíquo',
+    wind_rwy_headwind:'vento de proa', wind_rwy_tailwind:'vento de cauda', wind_rwy_crosswind:'vento cruzado',
     wind_arrivals_lbl:'chegadas', wind_departures_lbl:'partidas', wind_view_btn:'Ver',
-    wind_caveat:'<b>Como ler isto.</b> A agulha é a direcção média circular do vento por janela de 3h, a partir do valor bruto em graus (não a etiqueta de 16 pontos, que esconde os valores intermédios). "Dispersão" é o desvio-padrão circular — pequeno significa vento estável, grande significa que estava a rodar activamente nessa janela. Temperatura e pressão mostram "—" antes de 11 Set 2026 ~22h: o registo meteorológico só começou a capturá-las nessa noite, embora velocidade/direcção do vento remontem a 7 Set. Chegadas/partidas vêm do mesmo campo de direcção usado noutras partes do site — a maioria dos dias aqui é quase só chegadas, mas a configuração de pista activa (em grande parte ditada pelo vento) por vezes inverte um dia para maioritariamente partidas.',
+    wind_caveat:'<b>Como ler isto.</b> A agulha é a direcção média circular do vento por janela de 3h, a partir do valor bruto em graus (não a etiqueta de 16 pontos, que esconde os valores intermédios). "Dispersão" é o desvio-padrão circular — pequeno significa vento estável, grande significa que estava a rodar activamente nessa janela. Temperatura e pressão mostram "—" antes de 11 Set 2026 ~22h: o registo meteorológico só começou a capturá-las nessa noite, embora velocidade/direcção do vento remontem a 7 Set. Chegadas/partidas vêm do mesmo campo de direcção usado noutras partes do site — a maioria dos dias aqui é quase só chegadas, mas a configuração de pista activa (em grande parte ditada pelo vento) por vezes inverte um dia para maioritariamente partidas. Vento de proa/cauda/cruzado compara o vento com o rumo médio real dos aviões nessa janela (não um rumo fixo de pista), por isso mantém-se correcto seja qual for a pista activa nesse dia. Um "*" significa que nenhum voo nessa janela tinha dados de rumo, recorrendo então ao rumo da pista 02/20 como aproximação.',
     expert_source_official:'Oficial — SensorGrid', expert_source_provisional:'Provisório — estimativa LF', expert_source_own:'Métrica cidadã — Lisbon Finals',
     expert_maturity:'Dados oficiais disponíveis desde 8 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
     expert_peak_todaylbl:'pico mais alto, hoje',
@@ -1887,9 +1897,9 @@ const T = {
     wind_kicker:'Module vent', wind_title:'Rotation du vent', wind_showing:'Affichage', wind_latest_btn:'Dernier jour complet',
     wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap fixe de la piste 02/20, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Connu localement sous le nom de <em>Nortada</em>.',
     wind_speed_lbl:'vitesse', wind_temp_lbl:'temp.', wind_press_lbl:'pression', wind_rwy_lbl:'vs piste', wind_spread_lbl:'dispersion',
-    wind_rwy_aligned:'aligné', wind_rwy_crosswind:'traversier', wind_rwy_oblique:'oblique',
+    wind_rwy_headwind:'vent de face', wind_rwy_tailwind:'vent arrière', wind_rwy_crosswind:'traversier',
     wind_arrivals_lbl:'arrivées', wind_departures_lbl:'départs', wind_view_btn:'Voir',
-    wind_caveat:'<b>Comment lire ceci.</b> L\'aiguille indique la direction moyenne circulaire du vent par tranche de 3h, calculée à partir du degré brut (pas de l\'étiquette à 16 points, qui masque les valeurs intermédiaires). "Dispersion" est l\'écart-type circulaire — petit signifie un vent stable, grand signifie qu\'il tournait activement pendant cette tranche. Température et pression affichent "—" avant le 11 sept 2026 ~22h : le capteur météo n\'a commencé à les enregistrer que ce soir-là, bien que vitesse/direction du vent remontent au 7 sept. Arrivées/départs viennent du même champ de direction utilisé ailleurs sur le site — la plupart des jours ici sont presque uniquement des arrivées, mais la configuration de piste active (en grande partie dictée par le vent) fait parfois basculer une journée vers une majorité de départs.',
+    wind_caveat:'<b>Comment lire ceci.</b> L\'aiguille indique la direction moyenne circulaire du vent par tranche de 3h, calculée à partir du degré brut (pas de l\'étiquette à 16 points, qui masque les valeurs intermédiaires). "Dispersion" est l\'écart-type circulaire — petit signifie un vent stable, grand signifie qu\'il tournait activement pendant cette tranche. Température et pression affichent "—" avant le 11 sept 2026 ~22h : le capteur météo n\'a commencé à les enregistrer que ce soir-là, bien que vitesse/direction du vent remontent au 7 sept. Arrivées/départs viennent du même champ de direction utilisé ailleurs sur le site — la plupart des jours ici sont presque uniquement des arrivées, mais la configuration de piste active (en grande partie dictée par le vent) fait parfois basculer une journée vers une majorité de départs. Vent de face/arrière/traversier compare le vent au cap réel moyen des avions sur cette tranche (pas un cap de piste fixe), donc ça reste juste quelle que soit la piste active ce jour-là. Un « * » signifie qu\'aucun vol de cette tranche n\'avait de donnée de cap, on retombe alors sur le cap de la piste 02/20 comme approximation.',
     expert_source_official:'Officiel — SensorGrid', expert_source_provisional:'Provisoire — estimation LF', expert_source_own:'Mesure citoyenne — Lisbon Finals',
     expert_maturity:'Données officielles disponibles depuis le 8 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
     expert_peak_todaylbl:'pic le plus fort, aujourd\'hui',
