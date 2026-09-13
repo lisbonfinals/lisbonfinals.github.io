@@ -398,13 +398,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .wind-latest-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.45);background:transparent;border:1px solid var(--border);border-radius:3px;padding:5px 10px;cursor:pointer;transition:all .15s;}
 .wind-latest-btn:hover{color:var(--amber);border-color:rgba(245,166,35,.3);}
 .wind-desc{font-size:13px;line-height:1.7;color:rgba(240,237,232,.5);max-width:680px;margin:10px 0 22px;}
-.wind-stage{display:grid;grid-template-columns:minmax(320px,420px) minmax(340px,560px);gap:40px;max-width:1000px;}
-.wind-compass-wrap{position:relative;width:100%;max-width:320px;aspect-ratio:1;margin:0 auto 18px;}
+.wind-stage{display:grid;grid-template-columns:minmax(280px,340px) minmax(200px,260px) minmax(340px,520px);gap:32px;max-width:1180px;}
+.wind-compass-col{text-align:center;}
+.wind-compass-wrap{position:relative;width:100%;max-width:280px;aspect-ratio:1;margin:0 auto 18px;}
+.wind-details-col{display:flex;align-items:center;}
+.wind-details-col .compare-rows{width:100%;}
 .wind-compass-wrap svg{width:100%;height:100%;overflow:visible;}
 #wm-needle{transform-origin:150px 150px;transition:transform 1s cubic-bezier(.65,0,.35,1);}
-.wind-readout{text-align:center;font-family:var(--mono);}
 .wind-readout-deg{font-family:var(--sans);font-weight:800;font-size:42px;line-height:1;color:var(--amber);font-variant-numeric:tabular-nums;}
-.wind-readout-lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-top:2px;}
+.wind-readout-lbl{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-top:2px;}
 .wind-bin-list{display:flex;flex-direction:column;}
 .wind-bin-row{display:grid;grid-template-columns:64px 46px 1fr auto;align-items:center;gap:12px;padding:8px 10px;border-radius:3px;cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s;font-family:var(--mono);}
 .wind-bin-row:hover{background:rgba(240,237,232,.03);}
@@ -868,10 +870,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
           <button class="wind-latest-btn" id="wm-latest-btn" data-i18n="wind_latest_btn" onclick="loadWindDay(null)">Latest complete day</button>
         </div>
       </div>
-      <div class="wind-desc" data-i18n-html="wind_desc">Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against runway 02/20's fixed bearing — so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.</div>
+      <div class="wind-desc" data-i18n-html="wind_desc">Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against the real average aircraft heading tracked that slot — so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.</div>
 
       <div class="wind-stage">
-        <div>
+        <div class="wind-compass-col">
           <div class="wind-compass-wrap">
             <svg viewBox="0 0 300 300">
               <circle cx="150" cy="150" r="118" fill="none" stroke="#1e2530" stroke-width="1"/>
@@ -898,18 +900,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
               </g>
             </svg>
           </div>
-          <div class="wind-readout">
-            <div class="wind-readout-deg" id="wm-deg">—°</div>
-            <div class="wind-readout-lbl" id="wm-label">—</div>
-            <div class="compare-rows" style="margin-top:16px;text-align:left;">
-              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_speed_lbl">Speed</span><span class="compare-row-val" id="wm-speed">—</span></div>
-              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_temp_lbl">Temp</span><span class="compare-row-val" id="wm-temp">—</span></div>
-              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_press_lbl">Pressure</span><span class="compare-row-val" id="wm-press">—</span></div>
-              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_rwy_lbl">vs runway</span><span class="compare-row-val" id="wm-rwy">—</span></div>
-              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_spread_lbl">Spread</span><span class="compare-row-val" id="wm-std">—</span></div>
-              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_arrivals_lbl">Arrivals</span><span class="compare-row-val" id="wm-arr" style="color:var(--red);">—</span></div>
-              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_departures_lbl">Departures</span><span class="compare-row-val" id="wm-dep" style="color:var(--green);">—</span></div>
-            </div>
+          <div class="wind-readout-deg" id="wm-deg">—°</div>
+          <div class="wind-readout-lbl" id="wm-label">—</div>
+        </div>
+        <div class="wind-details-col">
+          <div class="compare-rows">
+            <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_speed_lbl">Speed</span><span class="compare-row-val" id="wm-speed">—</span></div>
+            <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_temp_lbl">Temp</span><span class="compare-row-val" id="wm-temp">—</span></div>
+            <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_press_lbl">Pressure</span><span class="compare-row-val" id="wm-press">—</span></div>
+            <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_rwy_lbl">vs runway</span><span class="compare-row-val" id="wm-rwy">—</span></div>
+            <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_spread_lbl">Spread</span><span class="compare-row-val" id="wm-std">—</span></div>
+            <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_arrivals_lbl">Arrivals</span><span class="compare-row-val" id="wm-arr" style="color:var(--red);">—</span></div>
+            <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_departures_lbl">Departures</span><span class="compare-row-val" id="wm-dep" style="color:var(--green);">—</span></div>
           </div>
         </div>
         <div class="wind-bin-list" id="wm-bin-list"></div>
@@ -1725,8 +1727,8 @@ const T = {
     expert_chart_pct_title:'Day-over-day change · official Leq_dn vs peak avg', expert_legend_official_leqdn:'Official Leq_dn', expert_legend_peakavg:'Peak avg', expert_chart_pct_empty:'Not enough consecutive days yet',
     expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
     wind_kicker:'Wind module', wind_title:'Wind rotation', wind_showing:'Showing', wind_latest_btn:'Latest complete day',
-    wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against runway 02/20\'s fixed bearing, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.',
-    wind_speed_lbl:'Speed', wind_temp_lbl:'Temp', wind_press_lbl:'Pressure', wind_rwy_lbl:'vs runway', wind_spread_lbl:'Spread',
+    wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against the real average aircraft heading tracked that slot, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.',
+    wind_speed_lbl:'Speed', wind_temp_lbl:'Temp', wind_press_lbl:'Pressure', wind_rwy_lbl:'vs heading', wind_spread_lbl:'Spread',
     wind_rwy_headwind:'headwind', wind_rwy_tailwind:'tailwind', wind_rwy_crosswind:'crosswind',
     wind_arrivals_lbl:'Arrivals', wind_departures_lbl:'Departures', wind_view_btn:'View',
     wind_method_title:'How to read this',
@@ -1825,8 +1827,8 @@ const T = {
     expert_chart_pct_title:'Variação dia a dia · Leq_dn oficial vs pico médio', expert_legend_official_leqdn:'Leq_dn oficial', expert_legend_peakavg:'Pico médio', expert_chart_pct_empty:'Ainda sem dias consecutivos suficientes',
     expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
     wind_kicker:'Módulo de vento', wind_title:'Rotação do vento', wind_showing:'A mostrar', wind_latest_btn:'Último dia completo',
-    wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo fixo da pista 02/20 — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Conhecido localmente como a <em>Nortada</em>.',
-    wind_speed_lbl:'Velocidade', wind_temp_lbl:'Temp.', wind_press_lbl:'Pressão', wind_rwy_lbl:'vs pista', wind_spread_lbl:'Dispersão',
+    wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo médio real dos aviões nessa janela — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Conhecido localmente como a <em>Nortada</em>.',
+    wind_speed_lbl:'Velocidade', wind_temp_lbl:'Temp.', wind_press_lbl:'Pressão', wind_rwy_lbl:'vs rumo', wind_spread_lbl:'Dispersão',
     wind_rwy_headwind:'vento de proa', wind_rwy_tailwind:'vento de cauda', wind_rwy_crosswind:'vento cruzado',
     wind_arrivals_lbl:'Chegadas', wind_departures_lbl:'Partidas', wind_view_btn:'Ver',
     wind_method_title:'Como ler isto',
@@ -1927,8 +1929,8 @@ const T = {
     expert_chart_pct_title:'Variation jour sur jour · Leq_dn officiel vs pic moyen', expert_legend_official_leqdn:'Leq_dn officiel', expert_legend_peakavg:'Pic moyen', expert_chart_pct_empty:'Pas encore assez de jours consécutifs',
     expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
     wind_kicker:'Module vent', wind_title:'Rotation du vent', wind_showing:'Affichage', wind_latest_btn:'Dernier jour complet',
-    wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap fixe de la piste 02/20, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Connu localement sous le nom de <em>Nortada</em>.',
-    wind_speed_lbl:'Vitesse', wind_temp_lbl:'Temp.', wind_press_lbl:'Pression', wind_rwy_lbl:'vs piste', wind_spread_lbl:'Dispersion',
+    wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap réel moyen des avions sur cette tranche, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Connu localement sous le nom de <em>Nortada</em>.',
+    wind_speed_lbl:'Vitesse', wind_temp_lbl:'Temp.', wind_press_lbl:'Pression', wind_rwy_lbl:'vs cap', wind_spread_lbl:'Dispersion',
     wind_rwy_headwind:'vent de face', wind_rwy_tailwind:'vent arrière', wind_rwy_crosswind:'traversier',
     wind_arrivals_lbl:'Arrivées', wind_departures_lbl:'Départs', wind_view_btn:'Voir',
     wind_method_title:'Comment lire ceci',
