@@ -353,6 +353,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .compare-source.provisional{background:rgba(245,166,35,.1);color:rgba(245,166,35,.75);}
 .compare-source.provisional::before{background:rgba(245,166,35,.75);}
 .compare-source.own{background:rgba(245,166,35,.1);color:rgba(245,166,35,.75);}
+.compare-card.live-today{grid-column:1 / -1;}
+.compare-live-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;}
+.compare-live-main{text-align:right;}
+.compare-live-main .compare-mainval{font-size:32px;}
+.compare-live-main .compare-mainlbl{margin:4px 0 0;}
+.compare-live-stats{display:flex;gap:28px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid rgba(240,237,232,.06);position:relative;}
+.compare-live-stat{display:flex;flex-direction:column;gap:4px;}
+.compare-live-stat .cls-val{font-family:var(--mono);font-size:18px;color:var(--amber);font-variant-numeric:tabular-nums;}
+.compare-live-stat .cls-lbl{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.4);white-space:nowrap;}
+@media (max-width:600px){.compare-live-top{flex-direction:column;} .compare-live-main{text-align:left;} .compare-live-stats{gap:18px;}}
 .compare-source.own::before{background:rgba(245,166,35,.75);}
 .cmp-more-toggle{position:relative;margin-top:16px;background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:9px 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.5);cursor:pointer;display:flex;align-items:center;justify-content:space-between;width:100%;transition:color .2s,border-color .2s;}
 .cmp-more-toggle:hover{color:var(--amber);border-color:rgba(245,166,35,.3);}
@@ -824,17 +834,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       </div>
       <div class="compare-card lf">
         <div class="compare-kicker" data-i18n="expert_lf_kicker">Lisbon Finals metric</div>
-        <div class="compare-period live"><span class="live-dot"></span><span data-i18n="expert_period_live">Live · today, still counting</span></div>
+        <div class="compare-period complete" id="et-lf-period"><span id="et-lf-period-icon">✓</span><span id="et-lf-period-label" data-i18n="expert_period_complete">Complete day</span> · <span id="et-lf-perioddate">—</span></div>
         <div class="compare-name" data-i18n="expert_lf_name">Peak + Duration</div>
-        <div class="compare-mainval" id="et-peak-max">—</div>
-        <div class="compare-mainlbl" id="et-peak-date">dB — loudest single pass, —</div>
+        <div class="compare-mainval" id="et-lf-avgpeak">—</div>
+        <div class="compare-mainlbl" data-i18n="expert_peak_avglbl">dB — average peak per flight</div>
         <div class="compare-source own" data-i18n="expert_source_own">Citizen metric — Lisbon Finals</div>
         <div class="compare-rows">
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_avgpeak">Average peak per flight</span><span class="compare-row-val" id="et-peak-avg">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_flights">Flights measured</span><span class="compare-row-val" id="et-peak-flights">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_events70">Events ≥70dB</span><span class="compare-row-val" id="et-peak-events">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n-html="expert_row_events_under70">Events &lt;70dB</span><span class="compare-row-val" id="et-peak-events-under">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_avgduration">Average duration ≥70dB</span><span class="compare-row-val" id="et-peak-avgdur">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_flights">Flights measured</span><span class="compare-row-val" id="et-lf-flights">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_events70">Events ≥70dB</span><span class="compare-row-val" id="et-lf-events">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n-html="expert_row_events_under70">Events &lt;70dB</span><span class="compare-row-val" id="et-lf-events-under">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_avgduration">Average duration ≥70dB</span><span class="compare-row-val" id="et-lf-avgdur">—</span></div>
+        </div>
+      </div>
+      <div class="compare-card lf live-today">
+        <div class="compare-live-top">
+          <div>
+            <div class="compare-kicker" data-i18n="expert_live_kicker">Today, still counting</div>
+            <div class="compare-period live"><span class="live-dot"></span><span data-i18n="expert_period_live">Live · today, still counting</span></div>
+          </div>
+          <div class="compare-live-main">
+            <div class="compare-mainval" id="et-live-peak">—</div>
+            <div class="compare-mainlbl" id="et-live-peak-lbl">dB — loudest single pass, —</div>
+          </div>
+        </div>
+        <div class="compare-live-stats">
+          <div class="compare-live-stat"><span class="cls-val" id="et-live-avgpeak">—</span><span class="cls-lbl" data-i18n="expert_row_avgpeak">Average peak per flight</span></div>
+          <div class="compare-live-stat"><span class="cls-val" id="et-live-flights">—</span><span class="cls-lbl" data-i18n="expert_row_flights">Flights measured</span></div>
+          <div class="compare-live-stat"><span class="cls-val" id="et-live-events">—</span><span class="cls-lbl" data-i18n="expert_row_events70">Events ≥70dB</span></div>
+          <div class="compare-live-stat"><span class="cls-val" id="et-live-events-under">—</span><span class="cls-lbl" data-i18n-html="expert_row_events_under70">Events &lt;70dB</span></div>
+          <div class="compare-live-stat"><span class="cls-val" id="et-live-avgdur">—</span><span class="cls-lbl" data-i18n="expert_row_avgduration">Average duration ≥70dB</span></div>
         </div>
       </div>
     </div>
@@ -1234,16 +1262,40 @@ function buildExpertMode(lvaDaily, s) {
   document.getElementById('et-leqdn-perioddate').textContent = fmtShortDate(latestDate);
   document.getElementById('et-flights-count').textContent = fmt(latest.n_flights_total);
 
-  // côté LF (pic+durée) : donnée live du jour en cours, clairement datée à part —
-  // pas la même journée calendaire que le Leq_dn (qui porte sur la dernière
-  // journée COMPLETE), volontairement, chaque carte affiche sa propre date.
-  document.getElementById('et-peak-max').textContent = s && s.peak_today_db ? s.peak_today_db.toFixed(1) : '—';
-  document.getElementById('et-peak-date').textContent = 'dB — ' + (tE.expert_peak_todaylbl || 'loudest single pass, today');
-  document.getElementById('et-peak-avg').textContent = s && s.avg_peak_today_db != null ? s.avg_peak_today_db.toFixed(1) + ' dB' : '—';
-  document.getElementById('et-peak-flights').textContent = s ? fmt(s.active_today) : '—';
-  document.getElementById('et-peak-events').textContent = s ? fmt(s.events_over_70_today) : '—';
-  document.getElementById('et-peak-events-under').textContent = s && s.events_under_70_today != null ? fmt(s.events_under_70_today) : '—';
-  document.getElementById('et-peak-avgdur').textContent = s && s.avg_duration_over_70_today != null ? s.avg_duration_over_70_today.toFixed(1) + ' s' : '—';
+  // côté LF (pic+durée) : carte principale alignée sur la même journée COMPLETE
+  // que Leq_dn (latestDate/latest, déjà résolus plus haut) — même jour, deux
+  // moyennes comparables (Leq_dn vs pic moyen par vol), au lieu de comparer un
+  // pic instantané du jour en cours à une moyenne de la veille.
+  document.getElementById('et-lf-avgpeak').textContent = latest.avg_peak_db != null ? latest.avg_peak_db.toFixed(1) : '—';
+  document.getElementById('et-lf-flights').textContent = fmt(latest.n_flights_total);
+  document.getElementById('et-lf-events').textContent = fmt(latest.n_events_total);
+  document.getElementById('et-lf-events-under').textContent = latest.n_flights_no_event != null ? fmt(latest.n_flights_no_event) : '—';
+  document.getElementById('et-lf-avgdur').textContent = latest.avg_duration_over_70_s != null ? latest.avg_duration_over_70_s.toFixed(1) + ' s' : '—';
+  document.getElementById('et-lf-perioddate').textContent = fmtShortDate(latestDate);
+  const lfPeriodEl = document.getElementById('et-lf-period');
+  const lfPeriodLabel = document.getElementById('et-lf-period-label');
+  if (latestDate === todayLis) {
+    lfPeriodEl.className = 'compare-period live';
+    document.getElementById('et-lf-period-icon').outerHTML = '<span class="live-dot" id="et-lf-period-icon"></span>';
+    lfPeriodLabel.dataset.i18n = 'expert_period_live_short';
+    lfPeriodLabel.textContent = tE.expert_period_live_short || 'Live';
+  } else {
+    lfPeriodEl.className = 'compare-period complete';
+    document.getElementById('et-lf-period-icon').outerHTML = '<span id="et-lf-period-icon">✓</span>';
+    lfPeriodLabel.dataset.i18n = 'expert_period_complete';
+    lfPeriodLabel.textContent = tE.expert_period_complete || 'Complete day';
+  }
+
+  // Carte "Today, still counting" — tout ce qui est réellement en direct,
+  // séparé de la comparaison principale ci-dessus (qui doit rester stable et
+  // datée une fois publiée).
+  document.getElementById('et-live-peak').textContent = s && s.peak_today_db ? s.peak_today_db.toFixed(1) : '—';
+  document.getElementById('et-live-peak-lbl').textContent = 'dB — ' + (tE.expert_peak_todaylbl || 'loudest single pass, today');
+  document.getElementById('et-live-avgpeak').textContent = s && s.avg_peak_today_db != null ? s.avg_peak_today_db.toFixed(1) + ' dB' : '—';
+  document.getElementById('et-live-flights').textContent = s ? fmt(s.active_today) : '—';
+  document.getElementById('et-live-events').textContent = s ? fmt(s.events_over_70_today) : '—';
+  document.getElementById('et-live-events-under').textContent = s && s.events_under_70_today != null ? fmt(s.events_under_70_today) : '—';
+  document.getElementById('et-live-avgdur').textContent = s && s.avg_duration_over_70_today != null ? s.avg_duration_over_70_today.toFixed(1) + ' s' : '—';
 
   // tableau 7 jours — ne montre que les jours avec donnée officielle Alessandro
   // (pas de repli LF ici, cf. décision du 11 sept). Filtre d'abord sur les
@@ -1747,7 +1799,7 @@ const T = {
     th_alt:'Altitude', th_db:'Max dB', th_expo:'Expo≥70dB', th_vib:'Vib',
     expert_label:'More data', expert_title:'Expert<br><em>mode</em>', expert_why_kicker:'Why two numbers',
     expert_why_copy:'Aircraft noise can be measured two legitimate ways:<br><br>1. <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> is the regulatory standard — the same methodology basis used across the EU, including Lisbon Airport\'s own official noise report. It averages sound energy over a full day/night cycle, weighting night events +10dB.<br><br>2. <strong style="color:rgba(240,237,232,.8)">Peak + duration</strong> is what Lisbon Finals measures directly — how loud each individual pass gets, and how long it stays above 70dB, repeated roughly <span id="et-flights-count">—</span> times a day.<br><br>Neither is "more correct": Leq_dn is the number regulators use to set limits; peak+duration is closer to what a person actually experiences during a single overflight.',
-    expert_official_kicker:'Regulatory methodology', expert_lf_kicker:'Lisbon Finals metric', expert_lf_name:'Peak + Duration',
+    expert_official_kicker:'Regulatory methodology', expert_lf_kicker:'Lisbon Finals metric', expert_lf_name:'Peak + Duration', expert_live_kicker:'Today, still counting', expert_peak_avglbl:'dB — average peak per flight',
     expert_period_complete:'Complete day', expert_period_live:'Live, today, still counting', expert_period_live_short:'Live',
     expert_row_day:'Day (06h–22h)', expert_row_night:'Night (22h–06h, +10dB)', expert_row_lden:'Lden (EU standard)',
     expert_row_flights:'Flights measured', expert_row_events70:'Events ≥70dB', expert_row_events_under70:'Events &lt;70dB', expert_row_avgpeak:'Average peak per flight', expert_row_avgduration:'Average duration ≥70dB',
@@ -1846,7 +1898,7 @@ const T = {
     th_alt:'Altitude', th_db:'dB Máx', th_expo:'Expo≥70dB', th_vib:'Vib',
     expert_label:'Mais dados', expert_title:'Modo<br><em>perito</em>', expert_why_kicker:'Porquê dois números',
     expert_why_copy:'O ruído de aeronaves pode ser medido de duas formas legítimas:<br><br>1. O <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> é o padrão regulamentar — a mesma base metodológica usada em toda a UE, incluindo o próprio relatório oficial de ruído do Aeroporto de Lisboa. Faz a média da energia sonora ao longo de um ciclo completo dia/noite, com uma penalização de +10dB para eventos nocturnos.<br><br>2. <strong style="color:rgba(240,237,232,.8)">Pico + duração</strong> é o que a Lisbon Finals mede directamente — quão alto fica cada passagem individual, e durante quanto tempo se mantém acima de 70dB, repetido cerca de <span id="et-flights-count">—</span> vezes por dia.<br><br>Nenhum dos dois é "mais correcto": o Leq_dn é o número que os reguladores usam para definir limites; pico+duração está mais próximo do que uma pessoa realmente sente durante uma única passagem.',
-    expert_official_kicker:'Metodologia regulamentar', expert_lf_kicker:'Métrica Lisbon Finals', expert_lf_name:'Pico + Duração',
+    expert_official_kicker:'Metodologia regulamentar', expert_lf_kicker:'Métrica Lisbon Finals', expert_lf_name:'Pico + Duração', expert_live_kicker:'Hoje, a contar', expert_peak_avglbl:'dB — pico médio por voo',
     expert_period_complete:'Dia completo', expert_period_live:'Ao vivo, hoje, a contar', expert_period_live_short:'Ao vivo',
     expert_row_day:'Dia (06h–22h)', expert_row_night:'Noite (22h–06h, +10dB)', expert_row_lden:'Lden (padrão UE)',
     expert_row_flights:'Voos medidos', expert_row_events70:'Eventos ≥70dB', expert_row_events_under70:'Eventos &lt;70dB', expert_row_avgpeak:'Pico médio por voo', expert_row_avgduration:'Duração média ≥70dB',
@@ -1947,7 +1999,7 @@ const T = {
     th_alt:'Altitude', th_db:'dB Max', th_expo:'Expo≥70dB', th_vib:'Vib',
     expert_label:'Plus de données', expert_title:'Mode<br><em>Expert</em>', expert_why_kicker:'Pourquoi deux chiffres',
     expert_why_copy:'Le bruit aérien peut se mesurer de deux façons légitimes :<br><br>1. Le <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> est la norme réglementaire — la même base méthodologique utilisée dans toute l\'UE, y compris par le rapport officiel de bruit de l\'aéroport de Lisbonne lui-même. Il moyenne l\'énergie sonore sur un cycle jour/nuit complet, avec une pénalité de +10dB pour les événements nocturnes.<br><br>2. Le <strong style="color:rgba(240,237,232,.8)">pic + durée</strong> est ce que Lisbon Finals mesure directement — l\'intensité de chaque passage individuel, et sa durée au-dessus de 70dB, répété environ <span id="et-flights-count">—</span> fois par jour.<br><br>Aucun des deux n\'est "plus juste" : le Leq_dn est le chiffre que les régulateurs utilisent pour fixer des limites ; le pic+durée est plus proche de ce qu\'une personne ressent réellement pendant un seul passage.',
-    expert_official_kicker:'Méthodologie réglementaire', expert_lf_kicker:'Métrique Lisbon Finals', expert_lf_name:'Pic + Durée',
+    expert_official_kicker:'Méthodologie réglementaire', expert_lf_kicker:'Métrique Lisbon Finals', expert_lf_name:'Pic + Durée', expert_live_kicker:'Aujourd\'hui, en cours', expert_peak_avglbl:'dB — pic moyen par vol',
     expert_period_complete:'Journée complète', expert_period_live:'En direct, aujourd\'hui, en cours', expert_period_live_short:'En direct',
     expert_row_day:'Jour (06h–22h)', expert_row_night:'Nuit (22h–06h, +10dB)', expert_row_lden:'Lden (norme UE)',
     expert_row_flights:'Vols mesurés', expert_row_events70:'Événements ≥70dB', expert_row_events_under70:'Événements &lt;70dB', expert_row_avgpeak:'Pic moyen par vol', expert_row_avgduration:'Durée moyenne ≥70dB',
