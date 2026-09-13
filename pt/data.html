@@ -868,6 +868,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       </div>
     </div>
 
+    <div class="lva-charts">
+      <div class="lva-chart-box">
+        <div class="lva-chart-title" data-i18n="expert_chart_pct_title">Day-over-day change · official Leq_dn vs peak avg</div>
+        <div class="lva-chart-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><span data-i18n="expert_legend_official_leqdn">Official Leq_dn</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span data-i18n="expert_legend_peakavg">Peak avg</span></div>
+        </div>
+        <div id="et-chart-pct"></div>
+      </div>
+      <div class="lva-chart-box">
+        <div class="lva-chart-title" data-i18n="expert_chart_expo_title">Total exposure ≥70dB trend (minutes)</div>
+        <div id="et-chart-expo"></div>
+      </div>
+    </div>
+
     <div class="wind-module" id="wind-module">
       <div class="wind-module-head">
         <div>
@@ -955,21 +970,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="lva-charts">
-      <div class="lva-chart-box">
-        <div class="lva-chart-title" data-i18n="expert_chart_pct_title">Day-over-day change · official Leq_dn vs peak avg</div>
-        <div class="lva-chart-legend">
-          <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><span data-i18n="expert_legend_official_leqdn">Official Leq_dn</span></div>
-          <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span data-i18n="expert_legend_peakavg">Peak avg</span></div>
-        </div>
-        <div id="et-chart-pct"></div>
-      </div>
-      <div class="lva-chart-box">
-        <div class="lva-chart-title" data-i18n="expert_chart_expo_title">Total exposure ≥70dB trend (minutes)</div>
-        <div id="et-chart-expo"></div>
       </div>
     </div>
 
