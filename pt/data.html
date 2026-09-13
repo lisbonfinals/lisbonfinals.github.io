@@ -367,7 +367,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .lva-week{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:20px;}
 .lva-week-title{padding:14px 20px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);}
 .lva-week-scroll{overflow-x:auto;}
-.lva-week-row{display:grid;grid-template-columns:100px 65px 65px 70px 85px 130px 90px 65px 75px 85px;gap:0;padding:10px 20px;align-items:center;border-bottom:1px solid rgba(240,237,232,.04);width:max-content;min-width:100%;}
+.lva-week-row{display:grid;grid-template-columns:100px 65px 65px 70px 85px 130px 90px 65px 75px 150px;gap:0;padding:10px 20px;align-items:center;border-bottom:1px solid rgba(240,237,232,.04);width:max-content;min-width:100%;}
 .lva-week-row:last-child{border-bottom:none;}
 .lva-week-row.head{background:rgba(245,166,35,.04);border-bottom:1px solid var(--border);}
 .lva-week-head-cell{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.3);}
@@ -377,6 +377,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .lva-week-head-cell.grp-wx{color:rgba(34,197,94,.6);}
 .lva-week-date{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.75);}
 .lva-week-val{font-family:var(--mono);font-size:11px;color:var(--white);text-align:right;}
+.lva-week-val-wind{display:flex;align-items:center;justify-content:flex-end;gap:6px;white-space:nowrap;}
 .lva-week-lf-group{border-left:2px solid rgba(245,166,35,.3);padding-left:14px;margin-left:6px;}
 .lva-week-wx-group{border-left:2px solid rgba(34,197,94,.3);padding-left:14px;margin-left:6px;}
 .source-note{font-family:var(--mono);font-size:10px;line-height:1.9;color:rgba(240,237,232,.34);}
@@ -397,15 +398,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .wind-latest-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.45);background:transparent;border:1px solid var(--border);border-radius:3px;padding:5px 10px;cursor:pointer;transition:all .15s;}
 .wind-latest-btn:hover{color:var(--amber);border-color:rgba(245,166,35,.3);}
 .wind-desc{font-size:13px;line-height:1.7;color:rgba(240,237,232,.5);max-width:680px;margin:10px 0 22px;}
-.wind-stage{display:grid;grid-template-columns:minmax(240px,300px) 1fr;gap:24px;}
-.wind-compass-wrap{position:relative;width:100%;max-width:230px;aspect-ratio:1;margin:0 auto 14px;}
+.wind-stage{display:grid;grid-template-columns:minmax(340px,480px) minmax(380px,1fr);gap:40px;align-items:start;}
+.wind-left-col{display:flex;flex-direction:column;gap:20px;}
+.wind-right-col{display:flex;flex-direction:column;gap:20px;}
+.wind-compass-col{text-align:center;}
+.wind-compass-wrap{position:relative;width:100%;max-width:360px;aspect-ratio:1;margin:0 auto 18px;}
+.wind-details-col{display:flex;align-items:center;}
+.wind-details-col .compare-rows{width:100%;}
 .wind-compass-wrap svg{width:100%;height:100%;overflow:visible;}
 #wm-needle{transform-origin:150px 150px;transition:transform 1s cubic-bezier(.65,0,.35,1);}
-.wind-readout{text-align:center;font-family:var(--mono);}
-.wind-readout-deg{font-family:var(--sans);font-weight:800;font-size:34px;line-height:1;color:var(--amber);font-variant-numeric:tabular-nums;}
-.wind-readout-lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-top:2px;}
-.wind-readout-sub{font-size:9.5px;color:rgba(240,237,232,.4);letter-spacing:.04em;margin-top:10px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-.wind-readout-sub b{color:rgba(240,237,232,.75);font-weight:500;}
+.wind-readout-deg{font-family:var(--sans);font-weight:800;font-size:52px;line-height:1;color:var(--amber);font-variant-numeric:tabular-nums;}
+.wind-readout-lbl{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-top:2px;}
 .wind-bin-list{display:flex;flex-direction:column;}
 .wind-bin-row{display:grid;grid-template-columns:64px 46px 1fr auto;align-items:center;gap:12px;padding:8px 10px;border-radius:3px;cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s;font-family:var(--mono);}
 .wind-bin-row:hover{background:rgba(240,237,232,.03);}
@@ -417,10 +420,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .wind-bin-bar-fill{position:absolute;inset:0 auto 0 0;background:rgba(240,237,232,.25);border-radius:2px;}
 .wind-bin-row.active .wind-bin-bar-fill{background:var(--amber);}
 .wind-bin-peak{font-size:10.5px;color:var(--white);text-align:right;font-variant-numeric:tabular-nums;}
-.wind-caveat{font-family:var(--mono);font-size:10px;line-height:1.8;color:rgba(240,237,232,.34);margin-top:18px;padding-top:14px;border-top:1px solid var(--border);}
-.wind-caveat b{color:rgba(240,237,232,.6);font-weight:500;}
-.lva-week-wind-btn{background:transparent;border:none;color:rgba(240,237,232,.3);cursor:pointer;font-size:11px;padding:2px 4px;margin-left:6px;transition:color .15s;line-height:1;}
-.lva-week-wind-btn:hover{color:var(--amber);}
+.wind-caveat-box{background:rgba(13,17,23,.72);border:1px solid var(--border);border-left:2px solid rgba(245,166,35,.58);border-radius:12px;padding:18px 22px;margin-top:20px;}
+.wind-caveat-title{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+.wind-method-list{display:grid;gap:9px;}
+.wind-method-item{border-top:1px solid rgba(240,237,232,.06);padding-top:9px;}
+.wind-method-item:first-child{border-top:none;padding-top:0;}
+.wind-method-k{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.34);margin-bottom:4px;}
+.wind-method-v{font-family:var(--mono);font-size:10px;line-height:1.6;color:rgba(240,237,232,.54);}
+.lva-week-wind-btn{display:inline-flex;align-items:center;gap:3px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.25);border-radius:10px;color:var(--amber);cursor:pointer;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;margin-left:8px;transition:all .15s;line-height:1;}
+.lva-week-wind-btn:hover{background:rgba(245,166,35,.18);border-color:var(--amber);}
 @media (max-width:820px){.compare-grid{grid-template-columns:1fr;}.lva-week-row{font-size:10px;}.wind-stage{grid-template-columns:1fr;}}
 
 /* ── WEEK TREND CHARTS ── */
@@ -833,69 +841,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       </div>
     </div>
 
-    <div class="wind-module" id="wind-module">
-      <div class="wind-module-head">
-        <div>
-          <div class="wind-module-kicker" data-i18n="wind_kicker">Wind module</div>
-          <div class="wind-module-title" data-i18n="wind_title">Wind rotation</div>
-        </div>
-        <div class="wind-showing">
-          <span data-i18n="wind_showing">Showing</span> <b id="wm-showing-date">—</b>
-          <button class="wind-latest-btn" id="wm-latest-btn" data-i18n="wind_latest_btn" onclick="loadWindDay(null)">Latest complete day</button>
-        </div>
-      </div>
-      <div class="wind-desc" data-i18n-html="wind_desc">Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against runway 02/20's fixed bearing — so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.</div>
-
-      <div class="wind-stage">
-        <div>
-          <div class="wind-compass-wrap">
-            <svg viewBox="0 0 300 300">
-              <circle cx="150" cy="150" r="118" fill="none" stroke="#1e2530" stroke-width="1"/>
-              <circle cx="150" cy="150" r="86" fill="none" stroke="#1e2530" stroke-width="1"/>
-              <g stroke="#2a3544" stroke-width="1">
-                <line x1="150" y1="26" x2="150" y2="38"/><line x1="150" y1="262" x2="150" y2="274"/>
-                <line x1="26" y1="150" x2="38" y2="150"/><line x1="262" y1="150" x2="274" y2="150"/>
-              </g>
-              <text x="150" y="20" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#6b7280">N</text>
-              <text x="150" y="288" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#6b7280">S</text>
-              <text x="14" y="154" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#6b7280">W</text>
-              <text x="286" y="154" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#6b7280">E</text>
-              <g transform="rotate(20 150 150)">
-                <line x1="150" y1="72" x2="150" y2="228" stroke="#60a5fa" stroke-width="5" stroke-linecap="round" opacity=".85"/>
-                <line x1="150" y1="72" x2="150" y2="228" stroke="#0d1117" stroke-width="1" stroke-dasharray="4 4" opacity=".6"/>
-              </g>
-              <circle cx="150" cy="150" r="4.5" fill="#60a5fa"/>
-              <text x="196" y="76" font-family="JetBrains Mono" font-size="8" fill="#60a5fa" letter-spacing="1">RWY 02</text>
-              <text x="88" y="230" font-family="JetBrains Mono" font-size="8" fill="#60a5fa" letter-spacing="1">RWY 20</text>
-              <g id="wm-needle">
-                <line x1="150" y1="150" x2="150" y2="44" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
-                <path d="M150,44 L142,62 L158,62 Z" fill="#f5a623"/>
-                <circle cx="150" cy="150" r="7" fill="#f5a623"/><circle cx="150" cy="150" r="2.5" fill="#0a0d12"/>
-              </g>
-            </svg>
-          </div>
-          <div class="wind-readout">
-            <div class="wind-readout-deg" id="wm-deg">—°</div>
-            <div class="wind-readout-lbl" id="wm-label">—</div>
-            <div class="wind-readout-sub">
-              <span data-i18n="wind_speed_lbl">speed</span> <b id="wm-speed">—</b>
-              <span data-i18n="wind_temp_lbl">temp</span> <b id="wm-temp">—</b>
-              <span data-i18n="wind_press_lbl">press</span> <b id="wm-press">—</b>
-            </div>
-            <div class="wind-readout-sub">
-              <span data-i18n="wind_rwy_lbl">vs runway</span> <b id="wm-rwy">—</b>
-              <span data-i18n="wind_spread_lbl">spread</span> <b id="wm-std">—</b>
-            </div>
-          </div>
-        </div>
-        <div class="wind-bin-list" id="wm-bin-list"></div>
-      </div>
-
-      <div class="wind-caveat" data-i18n-html="wind_caveat">
-        <b>How to read this.</b> The needle is the circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values). "Spread" is the circular standard deviation — small means steady wind, large means it was actively turning within that slot. Temperature and pressure read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep.
-      </div>
-    </div>
-
     <div class="lva-week">
       <div class="lva-week-title" data-i18n="expert_week_title">Last 7 days · Leq_dn</div>
       <div class="lva-week-scroll">
@@ -912,6 +857,94 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
         <div class="lva-week-head-cell right grp-wx" data-i18n="expert_th_windspeed">Wind</div>
       </div>
       <div id="et-week-rows"></div>
+      </div>
+    </div>
+
+    <div class="wind-module" id="wind-module">
+      <div class="wind-module-head">
+        <div>
+          <div class="wind-module-kicker" data-i18n="wind_kicker">Wind module</div>
+          <div class="wind-module-title" data-i18n="wind_title">Wind rotation</div>
+        </div>
+        <div class="wind-showing">
+          <span data-i18n="wind_showing">Showing</span> <b id="wm-showing-date">—</b>
+          <button class="wind-latest-btn" id="wm-latest-btn" data-i18n="wind_latest_btn" onclick="loadWindDay(null)">Latest complete day</button>
+        </div>
+      </div>
+      <div class="wind-desc" data-i18n-html="wind_desc">Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against the real average aircraft heading tracked that slot — so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.</div>
+
+      <div class="wind-stage">
+        <div class="wind-left-col">
+          <div class="wind-compass-col">
+            <div class="wind-compass-wrap">
+              <svg viewBox="0 0 300 300">
+                <circle cx="150" cy="150" r="118" fill="none" stroke="#1e2530" stroke-width="1"/>
+                <circle cx="150" cy="150" r="86" fill="none" stroke="#1e2530" stroke-width="1"/>
+                <g stroke="#2a3544" stroke-width="1">
+                  <line x1="150" y1="26" x2="150" y2="38"/><line x1="150" y1="262" x2="150" y2="274"/>
+                  <line x1="26" y1="150" x2="38" y2="150"/><line x1="262" y1="150" x2="274" y2="150"/>
+                </g>
+                <text x="150" y="20" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#6b7280">N</text>
+                <text x="150" y="288" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#6b7280">S</text>
+                <text x="14" y="154" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#6b7280">W</text>
+                <text x="286" y="154" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#6b7280">E</text>
+                <g transform="rotate(20 150 150)">
+                  <line x1="150" y1="72" x2="150" y2="228" stroke="#60a5fa" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+                  <line x1="150" y1="72" x2="150" y2="228" stroke="#0d1117" stroke-width="1" stroke-dasharray="4 4" opacity=".6"/>
+                </g>
+                <circle cx="150" cy="150" r="4.5" fill="#60a5fa"/>
+                <text x="196" y="76" font-family="JetBrains Mono" font-size="8" fill="#60a5fa" letter-spacing="1">RWY 02</text>
+                <text x="88" y="230" font-family="JetBrains Mono" font-size="8" fill="#60a5fa" letter-spacing="1">RWY 20</text>
+                <g id="wm-needle">
+                  <line x1="150" y1="150" x2="150" y2="44" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M150,44 L142,62 L158,62 Z" fill="#f5a623"/>
+                  <circle cx="150" cy="150" r="7" fill="#f5a623"/><circle cx="150" cy="150" r="2.5" fill="#0a0d12"/>
+                </g>
+              </svg>
+            </div>
+            <div class="wind-readout-deg" id="wm-deg">—°</div>
+            <div class="wind-readout-lbl" id="wm-label">—</div>
+          </div>
+          <div class="wind-details-col">
+            <div class="compare-rows">
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_speed_lbl">Speed</span><span class="compare-row-val" id="wm-speed">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_temp_lbl">Temp</span><span class="compare-row-val" id="wm-temp">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_press_lbl">Pressure</span><span class="compare-row-val" id="wm-press">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_rwy_lbl">vs heading</span><span class="compare-row-val" id="wm-rwy">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_spread_lbl">Spread</span><span class="compare-row-val" id="wm-std">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_arrivals_lbl">Arrivals</span><span class="compare-row-val" id="wm-arr" style="color:var(--red);">—</span></div>
+              <div class="compare-row"><span class="compare-row-lbl" data-i18n="wind_departures_lbl">Departures</span><span class="compare-row-val" id="wm-dep" style="color:var(--green);">—</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="wind-right-col">
+          <div class="wind-bin-list" id="wm-bin-list"></div>
+          <div class="wind-caveat-box">
+            <div class="wind-caveat-title" data-i18n="wind_method_title">How to read this</div>
+            <div class="wind-method-list">
+              <div class="wind-method-item">
+                <div class="wind-method-k" data-i18n="wind_method_k1">Needle</div>
+                <div class="wind-method-v" data-i18n="wind_method_v1">Circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values).</div>
+              </div>
+              <div class="wind-method-item">
+                <div class="wind-method-k" data-i18n="wind_method_k2">Spread</div>
+                <div class="wind-method-v" data-i18n="wind_method_v2">Circular standard deviation: small means steady wind, large means it was actively turning within that slot.</div>
+              </div>
+              <div class="wind-method-item">
+                <div class="wind-method-k" data-i18n="wind_method_k3">Wind vs heading</div>
+                <div class="wind-method-v" data-i18n-html="wind_method_v3">Compares the wind against the real average aircraft heading tracked that slot, not a fixed runway bearing, so it stays correct whichever runway end was active that day. A "*" means no flight in that slot had heading data, so it fell back to runway 02/20's own bearing as an approximation.</div>
+              </div>
+              <div class="wind-method-item">
+                <div class="wind-method-k" data-i18n="wind_method_k4">Traffic</div>
+                <div class="wind-method-v" data-i18n="wind_method_v4">Arrivals/departures come from the same per-flight direction field used elsewhere on the site. Most days here are almost entirely arrivals, but active runway configuration (itself largely wind-driven) occasionally flips a day to mostly departures.</div>
+              </div>
+              <div class="wind-method-item">
+                <div class="wind-method-k" data-i18n="wind_method_k5">Weather data</div>
+                <div class="wind-method-v" data-i18n-html="wind_method_v5">Temperature/pressure read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep.</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1247,7 +1280,7 @@ function buildExpertMode(lvaDaily, s) {
       <div class="lva-week-val" style="color:var(--amber)">${expoVal}</div>
       <div class="lva-week-val lva-week-wx-group" style="color:var(--green)">${tempVal}</div>
       <div class="lva-week-val" style="color:var(--green)">${windDirVal}</div>
-      <div class="lva-week-val" style="color:var(--green)">${windSpeedVal}${e.wind_bins ? `<button class="lva-week-wind-btn" onclick="loadWindDay('${d}')" title="View wind rotation for this day" aria-label="View wind rotation for ${d}">↗</button>` : ''}</div>
+      <div class="lva-week-val lva-week-val-wind" style="color:var(--green)"><span>${windSpeedVal}</span>${e.wind_bins ? `<button class="lva-week-wind-btn" onclick="loadWindDay('${d}', true)" title="View wind rotation for this day" aria-label="View wind rotation for ${d}">${tE.wind_view_btn || 'View'} →</button>` : ''}</div>
     </div>`;
   }).join('');
   document.getElementById('et-week-rows').innerHTML = rows;
@@ -1270,14 +1303,24 @@ function windCompassName(deg){
   for (const c of WIND_COMPASS_ABBR) if (Math.abs(c[0]-deg) < Math.abs(best[0]-deg)) best = c;
   return best[1];
 }
-function windRwyRelation(deg){
+// Compares wind-FROM direction against the actual average aircraft heading
+// for that bin (mean_heading_deg, from real ADS-B tracks) rather than a
+// fixed runway constant — correct whichever runway config was active that
+// day. Falls back to the runway's own bearing only when no flight in the
+// bin has heading data (very rare; flagged in the UI when it happens).
+function windHeadingRelation(windDeg, headingDeg){
   const tE = T[_lang] || T.en;
-  const diff = Math.min(Math.abs(deg-RWY_HEADING_DEG), Math.abs(deg-(RWY_HEADING_DEG+180)), 360-Math.abs(deg-RWY_HEADING_DEG));
-  if (diff < 35) return tE.wind_rwy_aligned || 'aligned';
-  if (diff > 55) return tE.wind_rwy_crosswind || 'crosswind';
-  return tE.wind_rwy_oblique || 'oblique';
+  const usedFallback = headingDeg == null;
+  const ref = usedFallback ? RWY_HEADING_DEG : headingDeg;
+  let diff = Math.abs(windDeg - ref) % 360;
+  if (diff > 180) diff = 360 - diff;
+  let label;
+  if (diff <= 45) label = tE.wind_rwy_headwind || 'headwind';
+  else if (diff >= 135) label = tE.wind_rwy_tailwind || 'tailwind';
+  else label = tE.wind_rwy_crosswind || 'crosswind';
+  return usedFallback ? label + ' *' : label;
 }
-function loadWindDay(dateStr){
+function loadWindDay(dateStr, scrollTo){
   const lvaDaily = window._lvaDailyCache;
   if (!lvaDaily) return;
   const date = dateStr || window._latestCompleteDate;
@@ -1285,6 +1328,10 @@ function loadWindDay(dateStr){
   const bins = entry && entry.wind_bins;
   document.getElementById('wm-showing-date').textContent = fmtShortDate(date);
   document.getElementById('wm-latest-btn').style.display = (date === window._latestCompleteDate) ? 'none' : '';
+  if (scrollTo){
+    const el = document.getElementById('wind-module');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   const listEl = document.getElementById('wm-bin-list');
   listEl.innerHTML = '';
   if (!bins || !bins.length){
@@ -1317,7 +1364,7 @@ function selectWindBin(bins, i){
     needle.style.transform = `rotate(${b.mean_deg}deg)`;
     document.getElementById('wm-deg').textContent = Math.round(b.mean_deg) + '°';
     document.getElementById('wm-label').textContent = windCompassName(b.mean_deg);
-    document.getElementById('wm-rwy').textContent = windRwyRelation(b.mean_deg);
+    document.getElementById('wm-rwy').textContent = windHeadingRelation(b.mean_deg, b.mean_heading_deg);
   } else {
     document.getElementById('wm-deg').textContent = '—°';
     document.getElementById('wm-label').textContent = '—';
@@ -1327,6 +1374,9 @@ function selectWindBin(bins, i){
   document.getElementById('wm-temp').textContent = b.avg_temp_c != null ? b.avg_temp_c.toFixed(1) + '°C' : '—';
   document.getElementById('wm-press').textContent = b.avg_pressure_hpa != null ? b.avg_pressure_hpa.toFixed(1) + ' hPa' : '—';
   document.getElementById('wm-std').textContent = (b.circ_std_deg != null && b.n_flights > 1) ? '±' + Math.abs(b.circ_std_deg).toFixed(1) + '°' : 'n/a';
+  const nArr = b.n_arrivals || 0, nDep = b.n_departures || 0;
+  document.getElementById('wm-arr').textContent = nArr + (b.avg_peak_db_arrivals != null ? ' (' + b.avg_peak_db_arrivals.toFixed(1) + ' dB)' : '');
+  document.getElementById('wm-dep').textContent = nDep + (b.avg_peak_db_departures != null ? ' (' + b.avg_peak_db_departures.toFixed(1) + ' dB)' : '');
   document.querySelectorAll('.wind-bin-row').forEach((r, ri) => r.classList.toggle('active', ri === i));
 }
 
@@ -1681,10 +1731,16 @@ const T = {
     expert_chart_pct_title:'Day-over-day change · official Leq_dn vs peak avg', expert_legend_official_leqdn:'Official Leq_dn', expert_legend_peakavg:'Peak avg', expert_chart_pct_empty:'Not enough consecutive days yet',
     expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
     wind_kicker:'Wind module', wind_title:'Wind rotation', wind_showing:'Showing', wind_latest_btn:'Latest complete day',
-    wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against runway 02/20\'s fixed bearing, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.',
-    wind_speed_lbl:'speed', wind_temp_lbl:'temp', wind_press_lbl:'press', wind_rwy_lbl:'vs runway', wind_spread_lbl:'spread',
-    wind_rwy_aligned:'aligned', wind_rwy_crosswind:'crosswind', wind_rwy_oblique:'oblique',
-    wind_caveat:'<b>How to read this.</b> The needle is the circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values). "Spread" is the circular standard deviation, small means steady wind, large means it was actively turning within that slot. Temperature and pressure read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep.',
+    wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against the real average aircraft heading tracked that slot, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. Known locally as the <em>Nortada</em>.',
+    wind_speed_lbl:'Speed', wind_temp_lbl:'Temp', wind_press_lbl:'Pressure', wind_rwy_lbl:'vs heading', wind_spread_lbl:'Spread',
+    wind_rwy_headwind:'headwind', wind_rwy_tailwind:'tailwind', wind_rwy_crosswind:'crosswind',
+    wind_arrivals_lbl:'Arrivals', wind_departures_lbl:'Departures', wind_view_btn:'View',
+    wind_method_title:'How to read this',
+    wind_method_k1:'Needle', wind_method_v1:'Circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values).',
+    wind_method_k2:'Spread', wind_method_v2:'Circular standard deviation: small means steady wind, large means it was actively turning within that slot.',
+    wind_method_k3:'Wind vs heading', wind_method_v3:'Compares the wind against the real average aircraft heading tracked that slot, not a fixed runway bearing, so it stays correct whichever runway end was active that day. A "*" means no flight in that slot had heading data, so it fell back to runway 02/20\'s own bearing as an approximation.',
+    wind_method_k4:'Traffic', wind_method_v4:'Arrivals/departures come from the same per-flight direction field used elsewhere on the site. Most days here are almost entirely arrivals, but active runway configuration (itself largely wind-driven) occasionally flips a day to mostly departures.',
+    wind_method_k5:'Weather data', wind_method_v5:'Temperature/pressure read "—" before 11 Sep 2026 ~22h: the weather logger only started capturing them that evening, though wind speed/direction go back to 7 Sep.',
     expert_source_official:'Official — SensorGrid', expert_source_provisional:'Provisional — LF estimate', expert_source_own:'Citizen metric — Lisbon Finals',
     expert_maturity:'Official data available since Sept 8, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
     expert_peak_todaylbl:'loudest single pass, today',
@@ -1775,10 +1831,16 @@ const T = {
     expert_chart_pct_title:'Variação dia a dia · Leq_dn oficial vs pico médio', expert_legend_official_leqdn:'Leq_dn oficial', expert_legend_peakavg:'Pico médio', expert_chart_pct_empty:'Ainda sem dias consecutivos suficientes',
     expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
     wind_kicker:'Módulo de vento', wind_title:'Rotação do vento', wind_showing:'A mostrar', wind_latest_btn:'Último dia completo',
-    wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo fixo da pista 02/20 — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Conhecido localmente como a <em>Nortada</em>.',
-    wind_speed_lbl:'velocidade', wind_temp_lbl:'temp.', wind_press_lbl:'pressão', wind_rwy_lbl:'vs pista', wind_spread_lbl:'dispersão',
-    wind_rwy_aligned:'alinhado', wind_rwy_crosswind:'vento cruzado', wind_rwy_oblique:'oblíquo',
-    wind_caveat:'<b>Como ler isto.</b> A agulha é a direcção média circular do vento por janela de 3h, a partir do valor bruto em graus (não a etiqueta de 16 pontos, que esconde os valores intermédios). "Dispersão" é o desvio-padrão circular — pequeno significa vento estável, grande significa que estava a rodar activamente nessa janela. Temperatura e pressão mostram "—" antes de 11 Set 2026 ~22h: o registo meteorológico só começou a capturá-las nessa noite, embora velocidade/direcção do vento remontem a 7 Set.',
+    wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo médio real dos aviões nessa janela — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Conhecido localmente como a <em>Nortada</em>.',
+    wind_speed_lbl:'Velocidade', wind_temp_lbl:'Temp.', wind_press_lbl:'Pressão', wind_rwy_lbl:'vs rumo', wind_spread_lbl:'Dispersão',
+    wind_rwy_headwind:'vento de proa', wind_rwy_tailwind:'vento de cauda', wind_rwy_crosswind:'vento cruzado',
+    wind_arrivals_lbl:'Chegadas', wind_departures_lbl:'Partidas', wind_view_btn:'Ver',
+    wind_method_title:'Como ler isto',
+    wind_method_k1:'Agulha', wind_method_v1:'Direcção média circular do vento por janela de 3h, a partir do valor bruto em graus (não a etiqueta de 16 pontos, que esconde os valores intermédios).',
+    wind_method_k2:'Dispersão', wind_method_v2:'Desvio-padrão circular: pequeno significa vento estável, grande significa que estava a rodar activamente nessa janela.',
+    wind_method_k3:'Vento vs rumo', wind_method_v3:'Compara o vento com o rumo médio real dos aviões nessa janela, não um rumo fixo de pista, por isso mantém-se correcto seja qual for a pista activa nesse dia. Um "*" significa que nenhum voo nessa janela tinha dados de rumo, recorrendo então ao rumo da pista 02/20 como aproximação.',
+    wind_method_k4:'Tráfego', wind_method_v4:'Chegadas/partidas vêm do mesmo campo de direcção usado noutras partes do site. A maioria dos dias aqui é quase só chegadas, mas a configuração de pista activa (em grande parte ditada pelo vento) por vezes inverte um dia para maioritariamente partidas.',
+    wind_method_k5:'Dados meteo', wind_method_v5:'Temperatura/pressão mostram "—" antes de 11 Set 2026 ~22h: o registo meteorológico só começou a capturá-las nessa noite, embora velocidade/direcção do vento remontem a 7 Set.',
     expert_source_official:'Oficial — SensorGrid', expert_source_provisional:'Provisório — estimativa LF', expert_source_own:'Métrica cidadã — Lisbon Finals',
     expert_maturity:'Dados oficiais disponíveis desde 8 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
     expert_peak_todaylbl:'pico mais alto, hoje',
@@ -1871,10 +1933,16 @@ const T = {
     expert_chart_pct_title:'Variation jour sur jour · Leq_dn officiel vs pic moyen', expert_legend_official_leqdn:'Leq_dn officiel', expert_legend_peakavg:'Pic moyen', expert_chart_pct_empty:'Pas encore assez de jours consécutifs',
     expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
     wind_kicker:'Module vent', wind_title:'Rotation du vent', wind_showing:'Affichage', wind_latest_btn:'Dernier jour complet',
-    wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap fixe de la piste 02/20, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Connu localement sous le nom de <em>Nortada</em>.',
-    wind_speed_lbl:'vitesse', wind_temp_lbl:'temp.', wind_press_lbl:'pression', wind_rwy_lbl:'vs piste', wind_spread_lbl:'dispersion',
-    wind_rwy_aligned:'aligné', wind_rwy_crosswind:'traversier', wind_rwy_oblique:'oblique',
-    wind_caveat:'<b>Comment lire ceci.</b> L\'aiguille indique la direction moyenne circulaire du vent par tranche de 3h, calculée à partir du degré brut (pas de l\'étiquette à 16 points, qui masque les valeurs intermédiaires). "Dispersion" est l\'écart-type circulaire — petit signifie un vent stable, grand signifie qu\'il tournait activement pendant cette tranche. Température et pression affichent "—" avant le 11 sept 2026 ~22h : le capteur météo n\'a commencé à les enregistrer que ce soir-là, bien que vitesse/direction du vent remontent au 7 sept.',
+    wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap réel moyen des avions sur cette tranche, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Connu localement sous le nom de <em>Nortada</em>.',
+    wind_speed_lbl:'Vitesse', wind_temp_lbl:'Temp.', wind_press_lbl:'Pression', wind_rwy_lbl:'vs cap', wind_spread_lbl:'Dispersion',
+    wind_rwy_headwind:'vent de face', wind_rwy_tailwind:'vent arrière', wind_rwy_crosswind:'traversier',
+    wind_arrivals_lbl:'Arrivées', wind_departures_lbl:'Départs', wind_view_btn:'Voir',
+    wind_method_title:'Comment lire ceci',
+    wind_method_k1:'Aiguille', wind_method_v1:'Direction moyenne circulaire du vent par tranche de 3h, calculée à partir du degré brut (pas de l\'étiquette à 16 points, qui masque les valeurs intermédiaires).',
+    wind_method_k2:'Dispersion', wind_method_v2:'Écart-type circulaire : petit signifie un vent stable, grand signifie qu\'il tournait activement pendant cette tranche.',
+    wind_method_k3:'Vent vs cap', wind_method_v3:'Compare le vent au cap réel moyen des avions sur cette tranche, pas un cap de piste fixe, donc ça reste juste quelle que soit la piste active ce jour-là. Un « * » signifie qu\'aucun vol de cette tranche n\'avait de donnée de cap, on retombe alors sur le cap de la piste 02/20 comme approximation.',
+    wind_method_k4:'Trafic', wind_method_v4:'Arrivées/départs viennent du même champ de direction utilisé ailleurs sur le site. La plupart des jours ici sont presque uniquement des arrivées, mais la configuration de piste active (en grande partie dictée par le vent) fait parfois basculer une journée vers une majorité de départs.',
+    wind_method_k5:'Données météo', wind_method_v5:'Température/pression affichent "—" avant le 11 sept 2026 ~22h : le capteur météo n\'a commencé à les enregistrer que ce soir-là, bien que vitesse/direction du vent remontent au 7 sept.',
     expert_source_official:'Officiel — SensorGrid', expert_source_provisional:'Provisoire — estimation LF', expert_source_own:'Mesure citoyenne — Lisbon Finals',
     expert_maturity:'Données officielles disponibles depuis le 8 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
     expert_peak_todaylbl:'pic le plus fort, aujourd\'hui',
