@@ -39,6 +39,7 @@
   --red:#ef4444; --red-dim:rgba(239,68,68,0.08);
   --green:#22c55e;
   --blue:#60a5fa; --blue-dim:rgba(96,165,250,0.08);
+  --blue-light:#93c5fd; --blue-light-dim:rgba(147,197,253,0.08);
   --sans:'Syne',sans-serif; --mono:'JetBrains Mono',monospace; --serif:'Instrument Serif',serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -327,18 +328,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .et-switch input:checked + .et-switch-track .et-switch-thumb{transform:translateX(20px);background:var(--amber);}
 .expert-panel{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s ease,margin .4s ease;}
 .expert-panel.open{max-height:12000px;opacity:1;margin-top:24px;}
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px;}
 .compare-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:26px;position:relative;overflow:hidden;}
 .compare-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;}
 .compare-card.official::before{background:radial-gradient(ellipse at top left,rgba(96,165,250,.07),transparent 60%);}
+.compare-card.lden::before{background:radial-gradient(ellipse at top left,rgba(147,197,253,.07),transparent 60%);}
 .compare-card.lf::before{background:radial-gradient(ellipse at top left,rgba(245,166,35,.07),transparent 60%);}
 .compare-card:hover::before{opacity:1;}
 .compare-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px;position:relative;}
 .compare-card.official .compare-kicker{color:var(--blue);}
+.compare-card.lden .compare-kicker{color:var(--blue-light);}
 .compare-card.lf .compare-kicker{color:var(--amber);}
 .compare-name{font-family:var(--sans);font-size:16px;font-weight:700;color:var(--white);margin-bottom:18px;position:relative;}
 .compare-mainval{font-family:var(--mono);font-size:40px;font-weight:500;line-height:1;position:relative;}
 .compare-card.official .compare-mainval{color:var(--blue);}
+.compare-card.lden .compare-mainval{color:var(--blue-light);}
+.compare-card.lden .compare-mainval.over-limit{color:var(--red);}
 .compare-card.lf .compare-mainval{color:var(--amber);}
 .compare-mainlbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);margin:6px 0 10px;position:relative;}
 .compare-period{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:20px;margin-bottom:14px;position:relative;}
@@ -383,7 +388,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .lva-week{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:20px;}
 .lva-week-title{padding:14px 20px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);}
 .lva-week-scroll{overflow-x:auto;}
-.lva-week-row{display:grid;grid-template-columns:100px 65px 65px 70px 85px 130px 90px 65px 75px 150px;gap:0;padding:10px 20px;align-items:center;border-bottom:1px solid rgba(240,237,232,.04);width:max-content;min-width:100%;}
+.lva-week-row{display:grid;grid-template-columns:100px 65px 65px 70px 65px 85px 130px 90px 65px 75px 150px;gap:0;padding:10px 20px;align-items:center;border-bottom:1px solid rgba(240,237,232,.04);width:max-content;min-width:100%;}
 .lva-week-row:last-child{border-bottom:none;}
 .lva-week-row.head{background:rgba(245,166,35,.04);border-bottom:1px solid var(--border);}
 .lva-week-head-cell{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.3);}
@@ -461,12 +466,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .lva-chart-svg{width:100%;height:auto;display:block;}
 .lva-chart-line{fill:none;stroke-width:2;}
 .lva-chart-line.official{stroke:var(--blue);}
+.lva-chart-line.lden{stroke:var(--blue-light);}
 .lva-chart-line.lf{stroke:var(--amber);}
 .lva-chart-dot.official{fill:var(--blue);}
+.lva-chart-dot.lden{fill:var(--blue-light);}
 .lva-chart-dot.lf{fill:var(--amber);}
 .lva-chart-val{font-family:var(--mono);font-size:9px;}
 .lva-chart-val.official{fill:var(--blue);}
+.lva-chart-val.lden{fill:var(--blue-light);}
 .lva-chart-val.lf{fill:var(--amber);}
+.lva-chart-limitline{stroke:var(--red);stroke-width:1;stroke-dasharray:4,3;opacity:.7;}
+.lva-chart-limitlabel{font-family:var(--mono);font-size:9px;fill:var(--red);opacity:.85;}
 .lva-chart-daylabel{font-family:var(--mono);font-size:9px;fill:rgba(240,237,232,.38);}
 .lva-chart-zeroline{stroke:rgba(240,237,232,.15);stroke-width:1;stroke-dasharray:3,3;}
 @media (max-width:700px){.lva-charts{grid-template-columns:1fr;}}
@@ -814,7 +824,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
     <div class="compare-grid">
       <div class="compare-card official">
-        <div class="compare-kicker" data-i18n="expert_official_kicker">Regulatory methodology</div>
+        <div class="compare-kicker" data-i18n="expert_official_kicker">Day-night average</div>
         <div class="compare-period complete" id="et-leqdn-period"><span id="et-leqdn-period-icon">✓</span><span id="et-leqdn-period-label" data-i18n="expert_period_complete">Complete day</span> · <span id="et-leqdn-perioddate">—</span></div>
         <div class="compare-name">Leq_dn</div>
         <div class="compare-mainval" id="et-leqdn-total">—</div>
@@ -823,16 +833,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
         <div class="compare-rows">
           <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_day">Day (06h–22h)</span><span class="compare-row-val" id="et-leqdn-day">—</span></div>
           <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_night">Night (22h–06h, +10dB)</span><span class="compare-row-val" id="et-leqdn-night">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden">Lden (EU standard)</span><span class="compare-row-val" id="et-leqdn-lden">—</span></div>
+        </div>
+      </div>
+      <div class="compare-card lden">
+        <div class="compare-kicker" data-i18n="expert_lden_kicker">EU / Portugal — regulatory standard</div>
+        <div class="compare-period complete" id="et-lden-period"><span id="et-lden-period-icon">✓</span><span id="et-lden-period-label" data-i18n="expert_period_complete">Complete day</span> · <span id="et-lden-perioddate">—</span></div>
+        <div class="compare-name">Lden</div>
+        <div class="compare-mainval" id="et-lden-total">—</div>
+        <div class="compare-mainlbl" data-i18n="expert_lden_mainlbl">dB — legal limit 65 dB</div>
+        <div class="compare-source" id="et-lden-source">—</div>
+        <div class="compare-rows">
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden_day">Day (07h–20h)</span><span class="compare-row-val" id="et-lden-day">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden_eve">Evening (20h–23h, +5dB)</span><span class="compare-row-val" id="et-lden-eve">—</span></div>
+          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden_night">Night (23h–07h, +10dB)</span><span class="compare-row-val" id="et-lden-night">—</span></div>
         </div>
         <div class="cmp-more-toggle" id="et-lva-toggle" hidden onclick="const p=document.getElementById('et-lva-panel');p.hidden=!p.hidden;this.classList.toggle('open',!p.hidden);">
           <span data-i18n="expert_more_info">More info</span><span class="cmp-more-arrow">▾</span>
         </div>
         <div class="expert-lva-panel" id="et-lva-panel" hidden>
-          <div class="expert-lva-copy" data-i18n="expert_lden_copy">Lden uses its own three-period split — day, evening and night — not the two-period day/night above, which is why the two figures don't simply relate to each other.</div>
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden_day">Day (07h–20h)</span><span class="compare-row-val" id="et-lden-day">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden_eve">Evening (20h–23h, +5dB)</span><span class="compare-row-val" id="et-lden-eve">—</span></div>
-          <div class="compare-row"><span class="compare-row-lbl" data-i18n="expert_row_lden_night">Night (23h–07h, +10dB)</span><span class="compare-row-val" id="et-lden-night">—</span></div>
+          <div class="expert-lva-copy" data-i18n="expert_lden_copy">Lden uses its own three-period split — day, evening and night — different from the two-period day/night split used by Leq_dn on the other card, which is why the two figures don't simply relate to each other.</div>
           <div class="compare-row" id="et-lva-row" hidden><span class="compare-row-lbl" data-i18n="expert_row_lva">LVA — Italian standard (OpenSky-verified)</span><span class="compare-row-val" id="et-lva-val">—</span></div>
           <div class="expert-lva-copy" id="et-lva-copy-el" hidden data-i18n="expert_lva_copy">LVA (Livello di Valutazione Aeroportuale) is Italy's national event-based airport noise standard — instead of averaging all ambient sound, it counts and weights individual aircraft noise events. This event-based philosophy isn't unique to Italy: many countries use similar approaches (SEL — Sound Exposure Level, an international ISO standard used by the FAA, ICAO and UK airports; threshold-crossing event counts elsewhere). Italy has simply codified it into this specific national regulation.</div>
           <div class="expert-lva-copy" data-i18n="expert_daily_caveat">All figures on this page are single-day calculations — not the multi-year representative averages official EU strategic noise maps are built from.</div>
@@ -891,6 +910,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
         <div class="lva-week-head-cell right grp-off" data-i18n="expert_th_day">Day</div>
         <div class="lva-week-head-cell right grp-off" data-i18n="expert_th_night">Night</div>
         <div class="lva-week-head-cell right grp-off" data-i18n="expert_th_total">Leq_dn</div>
+        <div class="lva-week-head-cell right grp-off" data-i18n="expert_th_lden" title="Lden — EU/Portugal legal standard, 65dB limit">Lden</div>
         <div class="lva-week-head-cell right grp-lf lva-week-lf-group" data-i18n="expert_th_peak">Peak avg</div>
         <div class="lva-week-head-cell right grp-lf" data-i18n="expert_th_silent" title="Flights tracked that stayed under 70dB">Planes under 70dB</div>
         <div class="lva-week-head-cell right grp-lf" data-i18n="expert_th_expo">Expo ≥70dB</div>
@@ -904,14 +924,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
     <div class="lva-charts">
       <div class="lva-chart-box">
-        <div class="lva-chart-title" data-i18n="expert_chart_pct_title">Day-over-day change · official Leq_dn vs peak avg</div>
+        <div class="lva-chart-title" data-i18n="expert_chart_pct_title">Day-over-day change · Leq_dn, Lden &amp; peak avg</div>
         <div class="lva-chart-legend">
           <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><span data-i18n="expert_legend_official_leqdn">Official Leq_dn</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--blue-light)"></div><span data-i18n="expert_legend_lden">Lden</span></div>
           <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span data-i18n="expert_legend_peakavg">Peak avg</span></div>
         </div>
         <div id="et-chart-pct"></div>
       </div>
       <div class="lva-chart-box">
+        <div class="lva-chart-title" data-i18n="expert_chart_lden_title">Lden vs the 65dB legal limit</div>
+        <div class="lva-chart-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--blue-light)"></div><span data-i18n="expert_legend_lden">Lden</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div><span data-i18n="expert_legend_limit">65dB limit (Art. 11 RGR)</span></div>
+        </div>
+        <div id="et-chart-lden"></div>
+      </div>
+      <div class="lva-chart-box" style="grid-column:1/-1">
         <div class="lva-chart-title" data-i18n="expert_chart_expo_title">Total exposure ≥70dB trend (minutes)</div>
         <div id="et-chart-expo"></div>
       </div>
@@ -1216,17 +1245,30 @@ function buildExpertMode(lvaDaily, s) {
     document.getElementById('et-leqdn-total').textContent = off.leq_dn.toFixed(1);
     document.getElementById('et-leqdn-day').textContent = off.leq_day != null ? off.leq_day.toFixed(1) + ' dB' : '—';
     document.getElementById('et-leqdn-night').textContent = off.leq_night != null ? off.leq_night.toFixed(1) + ' dB' : '—';
-    document.getElementById('et-leqdn-lden').textContent = off.lden != null ? off.lden.toFixed(1) + ' dB' : '—';
     const srcEl = document.getElementById('et-leqdn-source');
     srcEl.textContent = tE.expert_source_official || 'Official — SensorGrid';
     srcEl.className = 'compare-source live';
-    // "More info" : ventilation Lden (jour/soirée/nuit — périodes légales PT,
-    // Decreto-Lei n.º 9/2007 art. 3º, différentes du découpage jour/nuit du
-    // Leq_dn ci-dessus) + LVA italien si dispo ce jour-là (pas de calcul LF
-    // équivalent pour le LVA, donc sa ligne reste cachée sans donnée).
+
+    // Carte Lden — même source (off), mais métrique légalement distincte
+    // (3 périodes UE, seuil légal 65dB Art.11 RGR, cf. session du 14 sept).
+    // Pas de repli LF possible : notre pipeline ne calcule pas de Lden.
+    const ldenTotalEl = document.getElementById('et-lden-total');
+    const LDEN_LEGAL_LIMIT_DB = 65;
+    if (off.lden != null) {
+      ldenTotalEl.textContent = off.lden.toFixed(1);
+      ldenTotalEl.classList.toggle('over-limit', off.lden >= LDEN_LEGAL_LIMIT_DB);
+    } else {
+      ldenTotalEl.textContent = '—';
+      ldenTotalEl.classList.remove('over-limit');
+    }
+    const ldenSrcEl = document.getElementById('et-lden-source');
+    ldenSrcEl.textContent = tE.expert_source_official || 'Official — SensorGrid';
+    ldenSrcEl.className = 'compare-source live';
     document.getElementById('et-lden-day').textContent = off.lden_day != null ? off.lden_day.toFixed(1) + ' dB' : '—';
     document.getElementById('et-lden-eve').textContent = off.lden_eve != null ? off.lden_eve.toFixed(1) + ' dB' : '—';
     document.getElementById('et-lden-night').textContent = off.lden_night != null ? off.lden_night.toFixed(1) + ' dB' : '—';
+    // "More info" : LVA italien si dispo ce jour-là (pas de calcul LF
+    // équivalent pour le LVA, donc sa ligne reste cachée sans donnée).
     const lvaToggle = document.getElementById('et-lva-toggle');
     const lvaRow = document.getElementById('et-lva-row');
     const lvaCopyEl = document.getElementById('et-lva-copy-el');
@@ -1244,10 +1286,21 @@ function buildExpertMode(lvaDaily, s) {
     document.getElementById('et-leqdn-total').textContent = latest.leq_dn != null ? latest.leq_dn.toFixed(1) : '—';
     document.getElementById('et-leqdn-day').textContent = latest.leq_day_period != null ? latest.leq_day_period.toFixed(1) + ' dB' : '—';
     document.getElementById('et-leqdn-night').textContent = latest.leq_night_period != null ? latest.leq_night_period.toFixed(1) + ' dB' : '—';
-    document.getElementById('et-leqdn-lden').textContent = '—';
     const srcEl = document.getElementById('et-leqdn-source');
     srcEl.textContent = tE.expert_source_provisional || 'Provisional — Lisbon Finals estimate';
     srcEl.className = 'compare-source provisional';
+
+    // Pas de flux officiel ce jour-là -> pas de Lden non plus (aucun repli LF).
+    const ldenTotalEl = document.getElementById('et-lden-total');
+    ldenTotalEl.textContent = '—';
+    ldenTotalEl.classList.remove('over-limit');
+    document.getElementById('et-lden-day').textContent = '—';
+    document.getElementById('et-lden-eve').textContent = '—';
+    document.getElementById('et-lden-night').textContent = '—';
+    const ldenSrcEl = document.getElementById('et-lden-source');
+    ldenSrcEl.textContent = tE.expert_source_provisional || 'Provisional — Lisbon Finals estimate';
+    ldenSrcEl.className = 'compare-source provisional';
+
     document.getElementById('et-lva-toggle').hidden = true;
     document.getElementById('et-lva-panel').hidden = true;
     document.getElementById('et-lva-toggle').classList.remove('open');
@@ -1260,20 +1313,26 @@ function buildExpertMode(lvaDaily, s) {
   // auquel cas afficher "Complete day" serait faux). Compare explicitement
   // a la date du jour (fuseau Lisbonne) plutot que de le supposer.
   const todayLis = new Date().toLocaleDateString('en-CA', {timeZone:'Europe/Lisbon'});
-  const periodEl = document.getElementById('et-leqdn-period');
-  const periodLabel = document.getElementById('et-leqdn-period-label');
-  if (latestDate === todayLis) {
-    periodEl.className = 'compare-period live';
-    document.getElementById('et-leqdn-period-icon').outerHTML = '<span class="live-dot" id="et-leqdn-period-icon"></span>';
-    periodLabel.dataset.i18n = 'expert_period_live_short';
-    periodLabel.textContent = tE.expert_period_live_short || 'Live';
-  } else {
-    periodEl.className = 'compare-period complete';
-    document.getElementById('et-leqdn-period-icon').outerHTML = '<span id="et-leqdn-period-icon">✓</span>';
-    periodLabel.dataset.i18n = 'expert_period_complete';
-    periodLabel.textContent = tE.expert_period_complete || 'Complete day';
+  // Factorisé (Leq_dn + Lden partagent le même badge "complete/live", même
+  // journée off) — évite de dupliquer cette logique carte par carte.
+  function setPeriodBadge(prefix) {
+    const periodEl = document.getElementById(`et-${prefix}-period`);
+    const periodLabel = document.getElementById(`et-${prefix}-period-label`);
+    if (latestDate === todayLis) {
+      periodEl.className = 'compare-period live';
+      document.getElementById(`et-${prefix}-period-icon`).outerHTML = `<span class="live-dot" id="et-${prefix}-period-icon"></span>`;
+      periodLabel.dataset.i18n = 'expert_period_live_short';
+      periodLabel.textContent = tE.expert_period_live_short || 'Live';
+    } else {
+      periodEl.className = 'compare-period complete';
+      document.getElementById(`et-${prefix}-period-icon`).outerHTML = `<span id="et-${prefix}-period-icon">✓</span>`;
+      periodLabel.dataset.i18n = 'expert_period_complete';
+      periodLabel.textContent = tE.expert_period_complete || 'Complete day';
+    }
+    document.getElementById(`et-${prefix}-perioddate`).textContent = fmtShortDate(latestDate);
   }
-  document.getElementById('et-leqdn-perioddate').textContent = fmtShortDate(latestDate);
+  setPeriodBadge('leqdn');
+  setPeriodBadge('lden');
   document.getElementById('et-flights-count').textContent = fmt(latest.n_flights_total);
 
   // côté LF (pic+durée) : carte principale alignée sur la même journée COMPLETE
@@ -1330,6 +1389,12 @@ function buildExpertMode(lvaDaily, s) {
     const nightVal = eOff && eOff.leq_night != null ? eOff.leq_night.toFixed(1) : '—';
     const totalNum = eOff ? eOff.leq_dn : null;
     const totalVal = totalNum != null ? totalNum.toFixed(1) : '—';
+    // Lden — même source (eOff), métrique légale distincte (65dB, Art.11 RGR).
+    // Aucun repli LF possible (pas de calcul Lden côté LF), donc '—' si absent.
+    const LDEN_LEGAL_LIMIT_DB = 65;
+    const ldenNum = eOff ? eOff.lden : null;
+    const ldenVal = ldenNum != null ? ldenNum.toFixed(1) : '—';
+    const ldenOverLimit = ldenNum != null && ldenNum >= LDEN_LEGAL_LIMIT_DB;
     // Peak moyen + expo ≥70dB : toujours NOTRE mesure (pas de version "officielle"
     // équivalente côté SensorGrid), même donnée que la carte live "Peak + Duration"
     // une fois la journée close. Expo = temps TOTAL cumulé (somme de tous les
@@ -1351,6 +1416,7 @@ function buildExpertMode(lvaDaily, s) {
       <div class="lva-week-val" style="color:var(--blue)">${dayVal}</div>
       <div class="lva-week-val" style="color:var(--blue)">${nightVal}</div>
       <div class="lva-week-val" style="color:var(--blue)">${totalVal}</div>
+      <div class="lva-week-val" style="color:${ldenOverLimit ? 'var(--red)' : 'var(--blue-light)'};font-weight:${ldenOverLimit ? '700' : '400'}" title="${ldenOverLimit ? 'Above the 65dB EU/Portugal legal limit (Lden)' : ''}">${ldenVal}</div>
       <div class="lva-week-val lva-week-lf-group" style="color:var(--amber)">${peakVal}</div>
       <div class="lva-week-val" style="color:var(--amber)">${silentVal}</div>
       <div class="lva-week-val" style="color:var(--amber)">${expoVal}</div>
@@ -1536,6 +1602,33 @@ function buildWeekCharts(weekDates) {
     return off && off.leq_dn != null ? off.leq_dn : null;
   });
 
+  // Lden — même source officielle, métrique légale distincte (65dB, Art.11
+  // RGR). Aucun repli LF (pas de calcul Lden côté LF), donc null si absent
+  // ce jour-là, comme officialVals ci-dessus.
+  const LDEN_LEGAL_LIMIT_DB = 65;
+  const ldenVals = weekDates.map(d => {
+    const off = lastGistData?.lva_daily?.[d]?.official;
+    return off && off.lden != null ? off.lden : null;
+  });
+
+  // Chart dédié — Lden en valeur absolue vs la limite légale de 65dB (ligne
+  // de référence fixe), pour visualiser directement un éventuel dépassement
+  // — un %Δ jour-sur-jour ne le montre pas (demande Antonio, 14 sept).
+  const hasLden = ldenVals.some(v => v != null);
+  if (hasLden) {
+    const ldenYAt = yScale(ldenVals, [LDEN_LEGAL_LIMIT_DB]);
+    document.getElementById('et-chart-lden').innerHTML =
+      `<svg class="lva-chart-svg" viewBox="0 0 ${W} ${H}">
+        <line class="lva-chart-limitline" x1="${padL}" x2="${W - padR}" y1="${ldenYAt(LDEN_LEGAL_LIMIT_DB)}" y2="${ldenYAt(LDEN_LEGAL_LIMIT_DB)}"></line>
+        <text class="lva-chart-limitlabel" x="${padL + 2}" y="${ldenYAt(LDEN_LEGAL_LIMIT_DB) - 4}">65dB</text>
+        ${buildSeries(ldenVals, 'lden', ldenYAt)}
+        ${dayLabels}
+      </svg>`;
+  } else {
+    document.getElementById('et-chart-lden').innerHTML =
+      `<div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.3);padding:30px 0;text-align:center;">${tEChart('expert_chart_pct_empty', 'Not enough consecutive days yet')}</div>`;
+  }
+
   // Chart — Expo ≥70dB totale (minutes)
   const expoVals = weekDates.map(d => {
     const s = lastGistData?.lva_daily?.[d]?.total_duration_over_70_s;
@@ -1548,19 +1641,24 @@ function buildWeekCharts(weekDates) {
       ${dayLabels}
     </svg>`;
 
-  // Chart 3 — variation jour-sur-jour (%) : Leq_dn OFFICIEL (pas de repli LF,
-  // volontaire — on compare la vraie donnée réglementaire) vs Peak avg LF.
+  // Chart 3 — variation jour-sur-jour (%) : Leq_dn OFFICIEL + Lden (pas de
+  // repli LF pour aucun des deux, volontaire — on compare la vraie donnée
+  // réglementaire) vs Peak avg LF. Lden ajouté le 14 sept (demande Antonio) :
+  // montre les points de divergence/convergence entre les 2 métriques
+  // officielles, souvent liés à un même événement (trafic, météo).
   const peakVals = weekDates.map(d => lastGistData?.lva_daily?.[d]?.avg_peak_db ?? null);
   const officialPct = dayOverDayPct(officialVals);
+  const ldenPct = dayOverDayPct(ldenVals);
   const peakPct = dayOverDayPct(peakVals);
   const pctFmt = v => (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
-  const hasPct = officialPct.some(v => v != null) || peakPct.some(v => v != null);
+  const hasPct = officialPct.some(v => v != null) || ldenPct.some(v => v != null) || peakPct.some(v => v != null);
   if (hasPct) {
-    const pctYAt = yScale(officialPct, peakPct, [0]);
+    const pctYAt = yScale(officialPct, ldenPct, peakPct, [0]);
     document.getElementById('et-chart-pct').innerHTML =
       `<svg class="lva-chart-svg" viewBox="0 0 ${W} ${H}">
         <line class="lva-chart-zeroline" x1="${padL}" x2="${W - padR}" y1="${pctYAt(0)}" y2="${pctYAt(0)}"></line>
         ${buildSeries(officialPct, 'official', pctYAt, pctFmt, -7)}
+        ${buildSeries(ldenPct, 'lden', pctYAt, pctFmt, 21)}
         ${buildSeries(peakPct, 'lf', pctYAt, pctFmt, 14)}
         ${dayLabels}
       </svg>`;
@@ -1813,15 +1911,17 @@ const T = {
     th_alt:'Altitude', th_db:'Max dB', th_expo:'Expo≥70dB', th_vib:'Vib',
     expert_label:'More data', expert_title:'Expert<br><em>mode</em>', expert_why_kicker:'Why two numbers',
     expert_why_copy:'Aircraft noise can be measured two legitimate ways:<br><br>1. <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> is the regulatory standard — the same methodology basis used across the EU, including Lisbon Airport\'s own official noise report. It averages sound energy over a full day/night cycle, weighting night events +10dB.<br><br>2. <strong style="color:rgba(240,237,232,.8)">Peak + duration</strong> is what Lisbon Finals measures directly — how loud each individual pass gets, and how long it stays above 70dB, repeated roughly <span id="et-flights-count">—</span> times a day.<br><br>Neither is "more correct": Leq_dn is the number regulators use to set limits; peak+duration is closer to what a person actually experiences during a single overflight.',
-    expert_official_kicker:'Regulatory methodology', expert_lf_kicker:'Lisbon Finals metric', expert_lf_name:'Peak + Duration', expert_live_kicker:'Today, still counting', expert_peak_avglbl:'dB — average peak per flight',
+    expert_official_kicker:'Day-night average', expert_lden_kicker:'EU / Portugal — regulatory standard', expert_lf_kicker:'Lisbon Finals metric', expert_lf_name:'Peak + Duration', expert_live_kicker:'Today, still counting', expert_peak_avglbl:'dB — average peak per flight',
+    expert_lden_mainlbl:'dB — legal limit 65 dB',
     expert_period_complete:'Complete day', expert_period_live:'Live, today, still counting', expert_period_live_short:'Live',
-    expert_row_day:'Day (06h–22h)', expert_row_night:'Night (22h–06h, +10dB)', expert_row_lden:'Lden (EU standard)',
+    expert_row_day:'Day (06h–22h)', expert_row_night:'Night (22h–06h, +10dB)',
     expert_row_flights:'Flights measured', expert_row_events70:'Events ≥70dB', expert_row_events_under70:'Events &lt;70dB', expert_row_avgpeak:'Average peak per flight', expert_row_avgduration:'Average duration ≥70dB',
     expert_gap_title:'Reading the gap',
     expert_gap_copy:'A single loud pass barely moves a 24-hour Leq_dn average — but it\'s very much part of the lived experience below the flight path. That\'s the point of showing both: <strong>Leq_dn</strong> tells you what the regulator sees over a full day; <strong>peak + duration</strong> tells you what any single overflight actually sounded like.',
-    expert_week_title:'Last 7 days · Leq_dn', expert_th_date:'Date', expert_th_day:'Day', expert_th_night:'Night', expert_th_total:'Leq_dn', expert_th_peak:'Peak avg', expert_th_silent:'Planes under 70dB', expert_th_expo:'Expo ≥70dB', expert_th_temp:'Temp', expert_th_winddir:'Wind dir', expert_th_windspeed:'Wind',
+    expert_week_title:'Last 7 days · Leq_dn', expert_th_date:'Date', expert_th_day:'Day', expert_th_night:'Night', expert_th_total:'Leq_dn', expert_th_lden:'Lden', expert_th_peak:'Peak avg', expert_th_silent:'Planes under 70dB', expert_th_expo:'Expo ≥70dB', expert_th_temp:'Temp', expert_th_winddir:'Wind dir', expert_th_windspeed:'Wind',
     expert_chart_expo_title:'Total exposure ≥70dB trend (minutes)',
-    expert_chart_pct_title:'Day-over-day change · official Leq_dn vs peak avg', expert_legend_official_leqdn:'Official Leq_dn', expert_legend_peakavg:'Peak avg', expert_chart_pct_empty:'Not enough consecutive days yet',
+    expert_chart_pct_title:'Day-over-day change · Leq_dn, Lden & peak avg', expert_legend_official_leqdn:'Official Leq_dn', expert_legend_lden:'Lden', expert_legend_limit:'65dB limit (Art. 11 RGR)', expert_legend_peakavg:'Peak avg', expert_chart_pct_empty:'Not enough consecutive days yet',
+    expert_chart_lden_title:'Lden vs the 65dB legal limit',
     expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
     wind_kicker:'Wind module', wind_title:'Wind<br><em>rotation</em>', wind_showing:'Showing', wind_latest_btn:'Latest complete day', wind_prev_day:'Previous day', wind_next_day:'Next day',
     wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against the real average aircraft heading tracked that slot, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. A steady spell of wind from the north, common here in summer, is what\'s locally known as the <em>Nortada</em>.',
@@ -1838,7 +1938,7 @@ const T = {
     expert_maturity:'Official data available since Sept 8, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.',
     expert_peak_todaylbl:'loudest single pass, today',
     expert_more_info:'More info',
-    expert_lden_copy:'Lden uses its own three-period split — day, evening and night — not the two-period day/night above, which is why the two figures don\'t simply relate to each other.',
+    expert_lden_copy:'Lden uses its own three-period split — day, evening and night — different from the two-period day/night split used by Leq_dn on the other card, which is why the two figures don\'t simply relate to each other.',
     expert_row_lden_day:'Day (07h–20h)', expert_row_lden_eve:'Evening (20h–23h, +5dB)', expert_row_lden_night:'Night (23h–07h, +10dB)',
     expert_daily_caveat:'All figures on this page are single-day calculations — not the multi-year representative averages official EU strategic noise maps are built from.',
     expert_row_lva:'LVA — Italian standard (OpenSky-verified)',
@@ -1915,15 +2015,17 @@ const T = {
     th_alt:'Altitude', th_db:'dB Máx', th_expo:'Expo≥70dB', th_vib:'Vib',
     expert_label:'Mais dados', expert_title:'Modo<br><em>perito</em>', expert_why_kicker:'Porquê dois números',
     expert_why_copy:'O ruído de aeronaves pode ser medido de duas formas legítimas:<br><br>1. O <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> é o padrão regulamentar — a mesma base metodológica usada em toda a UE, incluindo o próprio relatório oficial de ruído do Aeroporto de Lisboa. Faz a média da energia sonora ao longo de um ciclo completo dia/noite, com uma penalização de +10dB para eventos nocturnos.<br><br>2. <strong style="color:rgba(240,237,232,.8)">Pico + duração</strong> é o que a Lisbon Finals mede directamente — quão alto fica cada passagem individual, e durante quanto tempo se mantém acima de 70dB, repetido cerca de <span id="et-flights-count">—</span> vezes por dia.<br><br>Nenhum dos dois é "mais correcto": o Leq_dn é o número que os reguladores usam para definir limites; pico+duração está mais próximo do que uma pessoa realmente sente durante uma única passagem.',
-    expert_official_kicker:'Metodologia regulamentar', expert_lf_kicker:'Métrica Lisbon Finals', expert_lf_name:'Pico + Duração', expert_live_kicker:'Hoje, a contar', expert_peak_avglbl:'dB — pico médio por voo',
+    expert_official_kicker:'Média dia-noite', expert_lden_kicker:'UE / Portugal — norma regulamentar', expert_lf_kicker:'Métrica Lisbon Finals', expert_lf_name:'Pico + Duração', expert_live_kicker:'Hoje, a contar', expert_peak_avglbl:'dB — pico médio por voo',
+    expert_lden_mainlbl:'dB — limite legal 65 dB',
     expert_period_complete:'Dia completo', expert_period_live:'Ao vivo, hoje, a contar', expert_period_live_short:'Ao vivo',
-    expert_row_day:'Dia (06h–22h)', expert_row_night:'Noite (22h–06h, +10dB)', expert_row_lden:'Lden (padrão UE)',
+    expert_row_day:'Dia (06h–22h)', expert_row_night:'Noite (22h–06h, +10dB)',
     expert_row_flights:'Voos medidos', expert_row_events70:'Eventos ≥70dB', expert_row_events_under70:'Eventos &lt;70dB', expert_row_avgpeak:'Pico médio por voo', expert_row_avgduration:'Duração média ≥70dB',
     expert_gap_title:'Como ler a diferença',
     expert_gap_copy:'Uma única passagem ruidosa dificilmente altera uma média Leq_dn de 24 horas — mas faz muito parte da experiência vivida por quem está sob a rota de voo. É esse o objectivo de mostrar ambos: o <strong>Leq_dn</strong> mostra o que o regulador vê ao longo de um dia inteiro; <strong>pico + duração</strong> mostra como soou realmente cada passagem individual.',
-    expert_week_title:'Últimos 7 dias · Leq_dn', expert_th_date:'Data', expert_th_day:'Dia', expert_th_night:'Noite', expert_th_total:'Leq_dn', expert_th_peak:'Pico médio', expert_th_silent:'Aviões abaixo de 70dB', expert_th_expo:'Expo ≥70dB', expert_th_temp:'Temp.', expert_th_winddir:'Direção', expert_th_windspeed:'Vento',
+    expert_week_title:'Últimos 7 dias · Leq_dn', expert_th_date:'Data', expert_th_day:'Dia', expert_th_night:'Noite', expert_th_total:'Leq_dn', expert_th_lden:'Lden', expert_th_peak:'Pico médio', expert_th_silent:'Aviões abaixo de 70dB', expert_th_expo:'Expo ≥70dB', expert_th_temp:'Temp.', expert_th_winddir:'Direção', expert_th_windspeed:'Vento',
     expert_chart_expo_title:'Tendência exposição total ≥70dB (minutos)',
-    expert_chart_pct_title:'Variação dia a dia · Leq_dn oficial vs pico médio', expert_legend_official_leqdn:'Leq_dn oficial', expert_legend_peakavg:'Pico médio', expert_chart_pct_empty:'Ainda sem dias consecutivos suficientes',
+    expert_chart_pct_title:'Variação dia a dia · Leq_dn, Lden e pico médio', expert_legend_official_leqdn:'Leq_dn oficial', expert_legend_lden:'Lden', expert_legend_limit:'limite de 65dB (Art. 11 RGR)', expert_legend_peakavg:'Pico médio', expert_chart_pct_empty:'Ainda sem dias consecutivos suficientes',
+    expert_chart_lden_title:'Lden vs o limite legal de 65dB',
     expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
     wind_kicker:'Módulo de vento', wind_title:'Rotação<br><em>do vento</em>', wind_showing:'A mostrar', wind_latest_btn:'Último dia completo', wind_prev_day:'Dia anterior', wind_next_day:'Dia seguinte',
     wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo médio real dos aviões nessa janela — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Um período estável de vento de norte, comum aqui no verão, é o que localmente se chama a <em>Nortada</em>.',
@@ -1940,7 +2042,7 @@ const T = {
     expert_maturity:'Dados oficiais disponíveis desde 8 de setembro de 2026 — ainda é um conjunto de dados jovem; vistas de tendência semanal/mensal seguir-se-ão à medida que mais dias se acumularem.',
     expert_peak_todaylbl:'pico mais alto, hoje',
     expert_more_info:'Mais informação',
-    expert_lden_copy:'O Lden usa a sua própria divisão em três períodos — dia, entardecer e noite — diferente da divisão dia/noite acima, por isso os dois valores não se relacionam directamente.',
+    expert_lden_copy:'O Lden usa a sua própria divisão em três períodos — dia, entardecer e noite — diferente da divisão dia/noite de duas partes usada pelo Leq_dn no outro cartão, por isso os dois valores não se relacionam directamente.',
     expert_row_lden_day:'Dia (07h–20h)', expert_row_lden_eve:'Entardecer (20h–23h, +5dB)', expert_row_lden_night:'Noite (23h–07h, +10dB)',
     expert_daily_caveat:'Todos os valores nesta página são cálculos de um único dia — não as médias representativas plurianuais em que assentam os mapas estratégicos de ruído da UE.',
     expert_row_lva:'LVA — norma italiana (verificada via OpenSky)',
@@ -2019,15 +2121,17 @@ const T = {
     th_alt:'Altitude', th_db:'dB Max', th_expo:'Expo≥70dB', th_vib:'Vib',
     expert_label:'Plus de données', expert_title:'Mode<br><em>Expert</em>', expert_why_kicker:'Pourquoi deux chiffres',
     expert_why_copy:'Le bruit aérien peut se mesurer de deux façons légitimes :<br><br>1. Le <strong style="color:rgba(240,237,232,.8)">Leq_dn</strong> est la norme réglementaire — la même base méthodologique utilisée dans toute l\'UE, y compris par le rapport officiel de bruit de l\'aéroport de Lisbonne lui-même. Il moyenne l\'énergie sonore sur un cycle jour/nuit complet, avec une pénalité de +10dB pour les événements nocturnes.<br><br>2. Le <strong style="color:rgba(240,237,232,.8)">pic + durée</strong> est ce que Lisbon Finals mesure directement — l\'intensité de chaque passage individuel, et sa durée au-dessus de 70dB, répété environ <span id="et-flights-count">—</span> fois par jour.<br><br>Aucun des deux n\'est "plus juste" : le Leq_dn est le chiffre que les régulateurs utilisent pour fixer des limites ; le pic+durée est plus proche de ce qu\'une personne ressent réellement pendant un seul passage.',
-    expert_official_kicker:'Méthodologie réglementaire', expert_lf_kicker:'Métrique Lisbon Finals', expert_lf_name:'Pic + Durée', expert_live_kicker:'Aujourd\'hui, en cours', expert_peak_avglbl:'dB — pic moyen par vol',
+    expert_official_kicker:'Moyenne jour-nuit', expert_lden_kicker:'UE / Portugal — norme réglementaire', expert_lf_kicker:'Métrique Lisbon Finals', expert_lf_name:'Pic + Durée', expert_live_kicker:'Aujourd\'hui, en cours', expert_peak_avglbl:'dB — pic moyen par vol',
+    expert_lden_mainlbl:'dB — limite légale 65 dB',
     expert_period_complete:'Journée complète', expert_period_live:'En direct, aujourd\'hui, en cours', expert_period_live_short:'En direct',
-    expert_row_day:'Jour (06h–22h)', expert_row_night:'Nuit (22h–06h, +10dB)', expert_row_lden:'Lden (norme UE)',
+    expert_row_day:'Jour (06h–22h)', expert_row_night:'Nuit (22h–06h, +10dB)',
     expert_row_flights:'Vols mesurés', expert_row_events70:'Événements ≥70dB', expert_row_events_under70:'Événements &lt;70dB', expert_row_avgpeak:'Pic moyen par vol', expert_row_avgduration:'Durée moyenne ≥70dB',
     expert_gap_title:'Comprendre l\'écart',
     expert_gap_copy:'Un seul passage bruyant fait à peine bouger une moyenne Leq_dn sur 24h — mais ça fait bel et bien partie de l\'expérience vécue sous la trajectoire des avions. C\'est tout l\'intérêt de montrer les deux : le <strong>Leq_dn</strong> montre ce que voit le régulateur sur une journée entière ; le <strong>pic + durée</strong> montre à quoi ressemblait vraiment un passage donné.',
-    expert_week_title:'7 derniers jours · Leq_dn', expert_th_date:'Date', expert_th_day:'Jour', expert_th_night:'Nuit', expert_th_total:'Leq_dn', expert_th_peak:'Pic moyen', expert_th_silent:'Avions sous 70dB', expert_th_expo:'Expo ≥70dB', expert_th_temp:'Temp.', expert_th_winddir:'Direction', expert_th_windspeed:'Vent',
+    expert_week_title:'7 derniers jours · Leq_dn', expert_th_date:'Date', expert_th_day:'Jour', expert_th_night:'Nuit', expert_th_total:'Leq_dn', expert_th_lden:'Lden', expert_th_peak:'Pic moyen', expert_th_silent:'Avions sous 70dB', expert_th_expo:'Expo ≥70dB', expert_th_temp:'Temp.', expert_th_winddir:'Direction', expert_th_windspeed:'Vent',
     expert_chart_expo_title:'Tendance exposition totale ≥70dB (minutes)',
-    expert_chart_pct_title:'Variation jour sur jour · Leq_dn officiel vs pic moyen', expert_legend_official_leqdn:'Leq_dn officiel', expert_legend_peakavg:'Pic moyen', expert_chart_pct_empty:'Pas encore assez de jours consécutifs',
+    expert_chart_pct_title:'Variation jour sur jour · Leq_dn, Lden et pic moyen', expert_legend_official_leqdn:'Leq_dn officiel', expert_legend_lden:'Lden', expert_legend_limit:'limite de 65dB (Art. 11 RGR)', expert_legend_peakavg:'Pic moyen', expert_chart_pct_empty:'Pas encore assez de jours consécutifs',
+    expert_chart_lden_title:'Lden vs la limite légale de 65dB',
     expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
     wind_kicker:'Module vent', wind_title:'Rotation<br><em>du vent</em>', wind_showing:'Affichage', wind_latest_btn:'Dernier jour complet', wind_prev_day:'Jour précédent', wind_next_day:'Jour suivant',
     wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap réel moyen des avions sur cette tranche, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Une période stable de vent du nord, fréquente ici en été, est ce qu\'on appelle localement la <em>Nortada</em>.',
@@ -2044,7 +2148,7 @@ const T = {
     expert_maturity:'Données officielles disponibles depuis le 8 septembre 2026 — dataset encore jeune, les vues tendance semaine/mois arriveront avec plus de jours accumulés.',
     expert_peak_todaylbl:'pic le plus fort, aujourd\'hui',
     expert_more_info:'Plus d\'infos',
-    expert_lden_copy:'Le Lden utilise son propre découpage en trois périodes — jour, soirée et nuit — différent du découpage jour/nuit ci-dessus, c\'est pourquoi les deux chiffres ne se déduisent pas simplement l\'un de l\'autre.',
+    expert_lden_copy:'Le Lden utilise son propre découpage en trois périodes — jour, soirée et nuit — différent du découpage jour/nuit en deux parties utilisé par le Leq_dn sur l\'autre carte, c\'est pourquoi les deux chiffres ne se déduisent pas simplement l\'un de l\'autre.',
     expert_row_lden_day:'Jour (07h–20h)', expert_row_lden_eve:'Soirée (20h–23h, +5dB)', expert_row_lden_night:'Nuit (23h–07h, +10dB)',
     expert_daily_caveat:'Toutes les valeurs de cette page sont des calculs sur une seule journée — pas les moyennes représentatives pluriannuelles sur lesquelles reposent les cartes stratégiques de bruit de l\'UE.',
     expert_row_lva:'LVA — norme italienne (vérifiée OpenSky)',
