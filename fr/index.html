@@ -2025,6 +2025,12 @@ var WTTR_ICON={113:'☀️',116:'⛅',119:'☁️',122:'☁️',143:'🌫',176:'
 var WMO_ICON={0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌦',55:'🌦',
   56:'🌧',57:'🌧',61:'🌧',63:'🌧',65:'🌧',66:'🌧',67:'🌧',71:'❄️',73:'❄️',75:'❄️',
   77:'❄️',80:'🌦',81:'🌦',82:'🌦',85:'🌨',86:'🌨',95:'⛈',96:'⛈',99:'⛈'};
+var weatherSourceLabel='wttr.in';
+function updateWlFooter(){
+  var wlFooter=document.querySelector('.wlive-footer');
+  var tpl=(typeof INDEX_TRANSLATIONS!=='undefined'&&INDEX_TRANSLATIONS[_lang]&&INDEX_TRANSLATIONS[_lang].wlive_footer)||'';
+  if(wlFooter&&tpl) wlFooter.textContent=tpl.replace('{src}',weatherSourceLabel);
+}
 function applyWeather(temp,windKmh,dir,visKm,icon,desc){
   var card=cardinal(dir),rwy=calcRunway(dir,windKmh),kt=Math.round(windKmh*.539957);
   var ts=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
@@ -2049,13 +2055,17 @@ function applyWeather(temp,windKmh,dir,visKm,icon,desc){
   var c03=el('rwy-card-03'), c21=el('rwy-card-21');
   if(c03&&c21){ c03.classList.toggle('active',rwy.rwy==='02'); c21.classList.toggle('active',rwy.rwy==='20'); }
 }
-fetch('https://wttr.in/38.7749,-9.1397?format=j1')
+/* fetch() n'a pas de timeout par défaut — sans ça, une connexion qui reste
+   ouverte sans jamais répondre (vécu avec wttr.in en panne le 14/09) fait
+   attendre le repli Open-Meteo 20-30s (délai propre au navigateur). */
+fetch('https://wttr.in/38.7749,-9.1397?format=j1', {signal: AbortSignal.timeout(6000)})
   .then(function(r){ if(!r.ok) throw new Error('wttr http '+r.status); return r.json(); })
   .then(function(d){
     var c=d.current_condition&&d.current_condition[0]; if(!c) throw new Error('wttr empty');
     var temp=parseInt(c.temp_C),wind=parseInt(c.windspeedKmph),dir=parseInt(c.winddirDegree);
     var vis=parseInt(c.visibility),code=parseInt(c.weatherCode)||0;
     var desc=(c.weatherDesc&&c.weatherDesc[0]&&c.weatherDesc[0].value)||'';
+    weatherSourceLabel='wttr.in'; updateWlFooter();
     applyWeather(temp,wind,dir,vis,WTTR_ICON[code]||'🌤',desc);
   })
   .catch(function(){
@@ -2067,6 +2077,7 @@ fetch('https://wttr.in/38.7749,-9.1397?format=j1')
         var c=d.current; if(!c) return;
         var temp=Math.round(c.temperature_2m),wind=Math.round(c.wind_speed_10m),dir=Math.round(c.wind_direction_10m);
         var vis=Math.round((c.visibility||0)/1000),code=c.weather_code;
+        weatherSourceLabel='Open-Meteo'; updateWlFooter();
         applyWeather(temp,wind,dir,vis,WMO_ICON[code]||'🌤','');
       })
       .catch(function(){});
@@ -2194,7 +2205,7 @@ var INDEX_TRANSLATIONS = {
     rwy21_title: 'South wind — takeoff over the terrace',
     rwy21_desc: 'Planes take off and climb over my terrace heading north. Higher, faster — less impactful shots.',
     wlive_source: 'LPPT · Live weather',
-    wlive_footer: 'Source: wttr.in · LPPT (38.78°N, 9.14°W) · Updates every 5 min',
+    wlive_footer: 'Source: {src} · LPPT (38.78°N, 9.14°W) · Updates every 5 min',
     wlive_wind: 'Wind',
     wlive_runway: 'Active runway',
     wlive_wdir: 'Wind direction',
@@ -2319,7 +2330,7 @@ var INDEX_TRANSLATIONS = {
     rwy21_title: 'Vento sul — descolagem sobre a varanda',
     rwy21_desc: 'Os aviões descolam e sobem sobre a minha varanda em direcção a norte. Mais alto, mais rápido — disparos menos impactantes.',
     wlive_source: 'LPPT · Tempo em directo',
-    wlive_footer: 'Fonte: wttr.in · LPPT (38.78°N, 9.14°W) · Actualizado a cada 5 min',
+    wlive_footer: 'Fonte: {src} · LPPT (38.78°N, 9.14°W) · Actualizado a cada 5 min',
     wlive_wind: 'Vento',
     wlive_runway: 'Pista activa',
     wlive_wdir: 'Direcção do vento',
@@ -2443,7 +2454,7 @@ var INDEX_TRANSLATIONS = {
     rwy21_title: 'Vent du sud — décollage au-dessus de la terrasse',
     rwy21_desc: 'Les avions décollent et montent au-dessus de ma terrasse en direction du nord. Plus haut, plus rapide — clichés moins impactants.',
     wlive_source: 'LPPT · Météo en direct',
-    wlive_footer: 'Source : wttr.in · LPPT (38.78°N, 9.14°W) · Mise à jour toutes les 5 min',
+    wlive_footer: 'Source : {src} · LPPT (38.78°N, 9.14°W) · Mise à jour toutes les 5 min',
     wlive_wind: 'Vent',
     wlive_runway: 'Piste active',
     wlive_wdir: 'Direction du vent',
@@ -2623,7 +2634,7 @@ function applyLang(lang) {
   var r21t = q('#rwy-card-21 .rwy-title'); if (r21t) r21t.textContent = t.rwy21_title;
   var r21d = q('#rwy-card-21 .rwy-desc'); if (r21d) r21d.textContent = t.rwy21_desc;
   var wlSrc = q('.wlive-source'); if (wlSrc) wlSrc.textContent = t.wlive_source;
-  var wlFooter = q('.wlive-footer'); if (wlFooter && t.wlive_footer) wlFooter.textContent = t.wlive_footer;
+  updateWlFooter();
   var wlLbls = qa('.wlive-item-lbl');
   if (wlLbls[0]) wlLbls[0].textContent = t.wlive_wind;
   if (wlLbls[1]) wlLbls[1].textContent = t.wlive_runway;
