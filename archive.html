@@ -265,6 +265,18 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .mchart-bar.pollution{background:rgba(96,165,250,.65);}
 .mchart-line-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
 .mchart-xaxis{display:flex;gap:2px;margin-top:8px;padding-left:46px;}
+/* PM2.5 x temperature overlay — one plot, dual axis, so the two lines can be read
+   against each other instead of guessed across two stacked rows. Flights barely
+   varies day to day, so it steps down to a quiet reference strip below instead
+   of a full panel. Validated on mockup 15 sept 2026. */
+.mchart-panel-label-row{display:flex;gap:20px;flex-wrap:wrap;}
+.mchart-overlay-body{display:grid;grid-template-columns:36px 1fr 36px;column-gap:10px;}
+.mchart-overlay-body .mchart-yaxis,.mchart-overlay-body .mchart-plot,.mchart-overlay-body .mchart-yaxis-right{height:200px;}
+.mchart-yaxis-right{position:relative;}
+.mchart-flights-strip{margin-top:4px;}
+.mchart-flights-strip-label{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.3);margin-bottom:6px;}
+.mchart-flights-strip-note{text-transform:none;letter-spacing:0;color:rgba(240,237,232,.2);margin-left:8px;}
+.mchart-flights-strip-plot{position:relative;height:26px;margin-left:46px;}
 /* 2x2 grid variant — one independently-scaled card per metric, instead of stacked
    64px rows sharing one axis (each metric's own range was getting flattened to the
    same row height). Used by Expert Mode's Lden/Peak/Wind/Exposure chart. */
@@ -1164,31 +1176,13 @@ function avRenderPollutionChart(gran) {
 
   const tooltip = (s) => `${s.label}: ${s.flights} ${avT('av_flights_lower', 'flights')}, ${s.avg_pm25 != null ? s.avg_pm25.toFixed(1) : '—'} µg/m³${s.avg_temp != null ? ', ' + s.avg_temp.toFixed(1) + '°C' : ''}`;
 
-  const barsPanel = (ticks, cls, valueKey, fmt) => `
-    <div class="mchart-panel-body">
-      <div class="mchart-yaxis">${avYAxisHtml(ticks.ticks, fmt)}</div>
-      <div class="mchart-plot">
-        ${avGridlinesHtml(ticks.ticks)}
-        <div class="mchart-bars">${shown.map(s => {
-          const v = s[valueKey];
-          const h = v != null ? Math.max(1, Math.round(v / (ticks.max || 1) * 100)) : 0;
-          return `<div class="mchart-bar-wrap" title="${avAttr(tooltip(s))}"><div class="mchart-bar ${cls}" style="height:${h}%"></div></div>`;
-        }).join('')}</div>
-      </div>
-    </div>`;
+  const pmBarsHtml = shown.map(s => {
+    const v = s.avg_pm25;
+    const h = v != null ? Math.max(1, Math.round(v / (pmTicks.max || 1) * 100)) : 0;
+    return `<div class="mchart-bar-wrap" title="${avAttr(tooltip(s))}"><div class="mchart-bar pollution" style="height:${h}%"></div></div>`;
+  }).join('');
 
-  const flightsHtml = `
-    <div class="mchart-panel">
-      <div class="mchart-panel-label"><div class="legend-dot" style="background:rgba(245,166,35,.65)"></div><span>${avT('av_poll_legend_flights', 'Flights')}</span></div>
-      ${barsPanel(flightsTicks, 'flights', 'flights', (v) => avFmt(v))}
-    </div>`;
-  const pmHtml = `
-    <div class="mchart-panel">
-      <div class="mchart-panel-label"><div class="legend-dot" style="background:rgba(96,165,250,.65)"></div><span>${avT('av_poll_legend_pm', 'Avg. PM2.5')}</span></div>
-      ${barsPanel(pmTicks, 'pollution', 'avg_pm25', (v) => avFmt1(v))}
-    </div>`;
-
-  let tempHtml = '';
+  let tempLineSvg = '', tempRightAxisHtml = '';
   if (tempTicks) {
     const lo = tempTicks.ticks[0], hi = tempTicks.ticks[tempTicks.ticks.length - 1], range = (hi - lo) || 1;
     const points = shown.map((s, i) => s.avg_temp == null ? null : [(i + 0.5) / n * 100, 100 - (s.avg_temp - lo) / range * 100]);
@@ -1196,24 +1190,51 @@ function avRenderPollutionChart(gran) {
     let current = [];
     points.forEach(p => { if (p) current.push(p); else { if (current.length > 1) segments.push(current); current = []; } });
     if (current.length > 1) segments.push(current);
-    const svgLines = segments.map(seg => `<polyline points="${seg.map(p => p.join(',')).join(' ')}" fill="none" stroke="#ff6b6b" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('')
+    tempLineSvg = segments.map(seg => `<polyline points="${seg.map(p => p.join(',')).join(' ')}" fill="none" stroke="#ff6b6b" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('')
       + points.map(p => p ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="#ff6b6b"/>` : '').join('');
-    tempHtml = `
-      <div class="mchart-panel">
-        <div class="mchart-panel-label"><div class="legend-dot" style="background:#ff6b6b;border-radius:50%;"></div><span>${avT('av_poll_legend_temp', 'Outside temperature')}</span></div>
-        <div class="mchart-panel-body">
-          <div class="mchart-yaxis">${avYAxisHtml(tempTicks.ticks, (v) => Math.round(v) + '°')}</div>
-          <div class="mchart-plot">
-            ${avGridlinesHtml(tempTicks.ticks)}
-            <svg class="mchart-line-svg" preserveAspectRatio="none" viewBox="0 0 100 100">${svgLines}</svg>
-          </div>
-        </div>
-      </div>`;
+    tempRightAxisHtml = tempTicks.ticks.map(t => {
+      const y = Math.round((t - lo) / range * 100);
+      return `<span class="mchart-ytick" style="bottom:${y}%;left:0;right:auto;color:#ff6b6b;">${Math.round(t)}°</span>`;
+    }).join('');
   }
+
+  // PM2.5 (barres) et température (ligne) fusionnées sur un seul plot à double axe —
+  // empilées en rangées séparées, impossible de voir si elles évoluent ensemble.
+  const overlayHtml = `
+    <div class="mchart-panel">
+      <div class="mchart-panel-label-row">
+        <div class="mchart-panel-label"><div class="legend-dot" style="background:rgba(96,165,250,.65)"></div><span>${avT('av_poll_legend_pm', 'Avg. PM2.5')}</span></div>
+        <div class="mchart-panel-label"><div class="legend-dot" style="background:#ff6b6b;border-radius:50%;"></div><span>${avT('av_poll_legend_temp', 'Outside temperature')}</span></div>
+      </div>
+      <div class="mchart-overlay-body">
+        <div class="mchart-yaxis">${avYAxisHtml(pmTicks.ticks, (v) => avFmt1(v))}</div>
+        <div class="mchart-plot">
+          ${avGridlinesHtml(pmTicks.ticks)}
+          <div class="mchart-bars">${pmBarsHtml}</div>
+          <svg class="mchart-line-svg" preserveAspectRatio="none" viewBox="0 0 100 100">${tempLineSvg}</svg>
+        </div>
+        <div class="mchart-yaxis-right">${tempRightAxisHtml}</div>
+      </div>
+    </div>`;
+
+  // Vols : quasi identique d'un jour à l'autre, ravalé en simple bande de repère
+  // (contexte : un pic de PM2.5 coïncide-t-il avec un pic de trafic ?) plutôt
+  // qu'un panneau à part entière qui n'apportait rien.
+  const flightsHtml = `
+    <div class="mchart-panel mchart-flights-strip">
+      <div class="mchart-flights-strip-label">${avT('av_poll_legend_flights', 'Flights')}<span class="mchart-flights-strip-note">${avT('av_poll_flights_note', 'for context only, barely varies')}</span></div>
+      <div class="mchart-flights-strip-plot">
+        <div class="mchart-bars">${shown.map(s => {
+          const v = s.flights;
+          const h = v != null ? Math.max(1, Math.round(v / (flightsTicks.max || 1) * 100)) : 0;
+          return `<div class="mchart-bar-wrap" title="${avAttr(tooltip(s))}"><div class="mchart-bar flights" style="height:${h}%"></div></div>`;
+        }).join('')}</div>
+      </div>
+    </div>`;
 
   const xAxisHtml = `<div class="mchart-xaxis">${shown.map((s, i) => `<span>${(i % xStep === 0 || i === n - 1) ? avShortXLabel(s.label, gran) : ''}</span>`).join('')}</div>`;
 
-  document.getElementById('av-poll-multichart').innerHTML = flightsHtml + pmHtml + tempHtml + xAxisHtml;
+  document.getElementById('av-poll-multichart').innerHTML = overlayHtml + flightsHtml + xAxisHtml;
 }
 
 function avRenderPollution() {
@@ -1459,7 +1480,7 @@ const T = {
     av_poll_avg:'Average PM2.5', av_poll_max:'Peak PM2.5', av_poll_coverage:'Sensor coverage', av_poll_coverage_since:'sensor installed 12 May 2026',
     av_poll_dist:'Air quality distribution', av_poll_chart_title:'Traffic × PM2.5 over time',
     av_gran_day:'Day', av_gran_week:'Week', av_gran_month:'Month',
-    av_poll_legend_flights:'Flights', av_poll_legend_pm:'Avg. PM2.5', av_poll_legend_temp:'Outside temperature',
+    av_poll_legend_flights:'Flights', av_poll_legend_pm:'Avg. PM2.5', av_poll_legend_temp:'Outside temperature', av_poll_flights_note:'for context only, barely varies',
     av_expert_intro:'Full history of the station\'s regulatory noise metric (Lden, EU/Portugal standard) and wind trend — for today\'s live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.',
     av_expert_week_title:'7-day table · Lden', av_expert_chart_title:'Lden, peak, wind & exposure over time',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Day', av_expert_th_lden_eve:'Evening', av_expert_th_lden_night:'Night', av_expert_th_lden:'Lden', av_expert_th_peak:'Peak avg', av_expert_th_silent:'Planes under 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp', av_expert_th_winddir:'Wind dir', av_expert_th_windspeed:'Wind',
@@ -1514,7 +1535,7 @@ const T = {
     av_poll_avg:'PM2.5 médio', av_poll_max:'Pico PM2.5', av_poll_coverage:'Cobertura do sensor', av_poll_coverage_since:'sensor instalado a 12 de maio de 2026',
     av_poll_dist:'Distribuição da qualidade do ar', av_poll_chart_title:'Tráfego × PM2.5 ao longo do tempo',
     av_gran_day:'Dia', av_gran_week:'Semana', av_gran_month:'Mês',
-    av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_legend_temp:'Temperatura exterior',
+    av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_legend_temp:'Temperatura exterior', av_poll_flights_note:'apenas contexto, varia pouco',
     av_expert_intro:'Histórico completo da métrica regulamentar de ruído da estação (Lden, norma UE/Portugal) e da tendência do vento — para os valores em directo de hoje e a metodologia, ver <a href="data.html#expert-mode" class="av-link">Dados → Modo Perito</a>.',
     av_expert_week_title:'Tabela de 7 dias · Lden', av_expert_chart_title:'Lden, pico, vento e exposição ao longo do tempo',
     av_expert_th_date:'Data', av_expert_th_lden_day:'Dia', av_expert_th_lden_eve:'Entardecer', av_expert_th_lden_night:'Noite', av_expert_th_lden:'Lden', av_expert_th_peak:'Pico médio', av_expert_th_silent:'Aviões abaixo de 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direcção', av_expert_th_windspeed:'Vento',
@@ -1569,7 +1590,7 @@ const T = {
     av_poll_avg:'PM2.5 moyen', av_poll_max:'Pic PM2.5', av_poll_coverage:'Couverture du capteur', av_poll_coverage_since:'capteur installé le 12 mai 2026',
     av_poll_dist:'Répartition de la qualité de l\'air', av_poll_chart_title:'Trafic × PM2.5 dans le temps',
     av_gran_day:'Jour', av_gran_week:'Semaine', av_gran_month:'Mois',
-    av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_legend_temp:'Température extérieure',
+    av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_legend_temp:'Température extérieure', av_poll_flights_note:'contexte uniquement, varie peu',
     av_expert_intro:'Historique complet de la métrique réglementaire de bruit de la station (Lden, norme UE/Portugal) et de la tendance du vent — pour les chiffres en direct d\'aujourd\'hui et la méthodologie, voir <a href="data.html#expert-mode" class="av-link">Données → Mode Expert</a>.',
     av_expert_week_title:'Tableau 7 jours · Lden', av_expert_chart_title:'Lden, pic, vent et exposition dans le temps',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Jour', av_expert_th_lden_eve:'Soirée', av_expert_th_lden_night:'Nuit', av_expert_th_lden:'Lden', av_expert_th_peak:'Pic moyen', av_expert_th_silent:'Avions sous 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direction', av_expert_th_windspeed:'Vent',
