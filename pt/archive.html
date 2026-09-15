@@ -1058,9 +1058,13 @@ function avRenderRare() {
   avRenderRankList('av-rare-bytype', d.by_type, 'rare_type', null, avSetRareFilter,
     { labelFn: (it) => avRareTypeLabel(it.rare_type), activeValue: avRareFilter });
 
-  const militaryWithAirline = d.flights.filter(f => f.rare_type === 'military' && f.airline).length;
+  // Lit le compte déjà calculé côté backend (stats_engine.py::data_quality) plutôt que
+  // de re-dériver ici avec une règle différente — sinon un propriétaire résolu du genre
+  // "Portuguese Air Force" fait ressortir cet avertissement alors que le nom confirme le
+  // tag militaire au lieu de le contredire (bug corrigé le 15 sept 2026 des deux côtés).
+  const militarySuspectCount = archiveData.quality?.military_suspect_count || 0;
   const caveatEl = document.getElementById('av-rare-caveat');
-  if (militaryWithAirline > 0) {
+  if (militarySuspectCount > 0) {
     caveatEl.style.display = '';
     caveatEl.innerHTML = `<b>${avT('av_rare_caveat_title','⚠ Suspected false positives')}</b> — ${avT('av_rare_caveat_desc','some flights tagged "military" resolve to a known commercial airline — most likely a hex-range classification overlap, not an actual military aircraft. See Data Quality for exact counts.')}`;
   } else {
@@ -1457,7 +1461,7 @@ const T = {
     av_col_total:'Total', av_col_critical:'Critical', av_col_orange:'Orange', av_col_l2:'Level 2', av_anac_orange_note:'Orange is not an ANAC-defined tier — the regulation only sets Critical (>98.9 dB) and Level 2 (93.0–95.9 dB), with nothing in between. Orange tracks that gap on our own, so a loud flight at 97 dB is never silently dropped from the count.',
     av_total_lower:'total', av_showing_first:'showing first', av_col_datetime:'Date / Time', av_col_flight:'Flight', av_col_type:'Type',
     av_rare_caveat_title:'⚠ Suspected false positives',
-    av_rare_caveat_desc:'some flights tagged "military" resolve to a known commercial airline — most likely a hex-range classification overlap, not an actual military aircraft. See <span class="av-link" onclick="avGotoQuality()">Data Quality</span> for exact counts.',
+    av_rare_caveat_desc:'a few flights tagged "military" resolve to a private/charter operator rather than a government or armed-forces owner — likely a hex-range classification overlap catching civil traffic in a broad country-level block, not necessarily an actual military aircraft. See <span class="av-link" onclick="avGotoQuality()">Data Quality</span> for exact counts.',
     av_col_canonical:'Canonical name', av_col_variants:'Merged variants',
     av_updated:'Updated', av_error:'Archive data unavailable — check back shortly.'
   },
@@ -1512,7 +1516,7 @@ const T = {
     av_col_total:'Total', av_col_critical:'Crítica', av_col_orange:'Laranja', av_col_l2:'Nível 2', av_anac_orange_note:'Laranja não é um nível definido pela ANAC — o regulamento define apenas Crítico (>98,9 dB) e Nível 2 (93,0–95,9 dB), sem nada entre os dois. O Laranja acompanha essa lacuna por conta própria, para que um voo ruidoso a 97 dB nunca desapareça silenciosamente da contagem.',
     av_total_lower:'total', av_showing_first:'a mostrar os primeiros', av_col_datetime:'Data / Hora', av_col_flight:'Voo', av_col_type:'Tipo',
     av_rare_caveat_title:'⚠ Suspeita de falsos positivos',
-    av_rare_caveat_desc:'alguns voos etiquetados como "militar" correspondem a uma companhia aérea comercial conhecida — provavelmente uma sobreposição na classificação por intervalo hex, não uma aeronave militar real. Ver <span class="av-link" onclick="avGotoQuality()">Qualidade dos Dados</span> para contagens exactas.',
+    av_rare_caveat_desc:'alguns voos etiquetados como "militar" correspondem a um operador privado/charter em vez de um proprietário governamental ou militar — provavelmente uma sobreposição na classificação por intervalo hex, que capta tráfico civil num bloco de país demasiado amplo, não necessariamente uma aeronave militar real. Ver <span class="av-link" onclick="avGotoQuality()">Qualidade dos Dados</span> para contagens exactas.',
     av_col_canonical:'Nome canónico', av_col_variants:'Variantes fundidas',
     av_updated:'Actualizado', av_error:'Dados do arquivo indisponíveis — tente novamente em breve.'
   },
@@ -1567,7 +1571,7 @@ const T = {
     av_col_total:'Total', av_col_critical:'Critique', av_col_orange:'Orange', av_col_l2:'Niveau 2', av_anac_orange_note:'Orange n\'est pas un palier défini par l\'ANAC — la réglementation ne fixe que Critique (>98,9 dB) et Niveau 2 (93,0–95,9 dB), sans rien entre les deux. Orange suit cet écart de façon indépendante, pour qu\'un vol bruyant à 97 dB ne disparaisse jamais silencieusement du décompte.',
     av_total_lower:'total', av_showing_first:'affichage des', av_col_datetime:'Date / Heure', av_col_flight:'Vol', av_col_type:'Type',
     av_rare_caveat_title:'⚠ Suspicion de faux positifs',
-    av_rare_caveat_desc:'certains vols étiquetés "militaire" correspondent à une compagnie commerciale connue — probablement un chevauchement de classification par plage hex, pas un vrai avion militaire. Voir <span class="av-link" onclick="avGotoQuality()">Qualité des données</span> pour les chiffres exacts.',
+    av_rare_caveat_desc:'quelques vols étiquetés "militaire" correspondent à un opérateur privé/charter plutôt qu\'à un propriétaire gouvernemental ou militaire — probablement un chevauchement de classification par plage hex, qui capte du trafic civil dans un bloc pays trop large, pas forcément un vrai avion militaire. Voir <span class="av-link" onclick="avGotoQuality()">Qualité des données</span> pour les chiffres exacts.',
     av_col_canonical:'Nom canonique', av_col_variants:'Variantes fusionnées',
     av_updated:'Mis à jour', av_error:'Données d\'archive indisponibles — réessayez sous peu.'
   }
