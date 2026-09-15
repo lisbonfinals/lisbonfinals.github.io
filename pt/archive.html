@@ -226,6 +226,11 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-pic-badge{position:absolute;top:8px;left:8px;background:rgba(7,9,13,.7);color:var(--blue);font-family:var(--mono);font-size:8px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;}
 .archive-pic-badge.instagram{color:#e1799a;}
 .archive-pic-db{position:absolute;bottom:8px;right:8px;background:rgba(7,9,13,.7);color:var(--red,#e6553f);font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:3px;z-index:1;}
+.archive-pic-rare{font-weight:700;letter-spacing:.03em;text-transform:uppercase;}
+.archive-pic-rare.military{color:#f97316;}
+.archive-pic-rare.bizjet{color:var(--blue);}
+.archive-pic-rare.heavy{color:var(--amber);}
+.archive-pic-rare.unusual,.archive-pic-rare.special_livery{color:rgba(240,237,232,.75);}
 .archive-pic-meta{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(transparent,rgba(7,9,13,.9));font-family:var(--mono);font-size:9px;color:var(--white);}
 .archive-pic-meta b{color:var(--amber);}
 
@@ -737,7 +742,7 @@ function avRenderPics(containerId, paginationId, items, page, onPage) {
       ${p.score != null ? `<div class="archive-pic-score">★ ${Number(p.score).toFixed(1)}</div>` : ''}
       ${p.is_instagram ? `<div class="archive-pic-badge instagram">${avT('av_instagram_badge','instagram')}</div>` : `<div class="archive-pic-badge">${avT('av_gallery_badge','gallery')}</div>`}
       ${p.spl_db != null ? `<div class="archive-pic-db">${Math.round(p.spl_db)} dB</div>` : ''}
-      <div class="archive-pic-meta"><b>${p.callsign || '—'}</b> · ${p.airline || '—'}<br>${p.aircraft_type || ''} · ${p.date || ''}</div>
+      <div class="archive-pic-meta"><b>${p.callsign || '—'}</b> · ${p.airline || '—'}${p.rare_type ? ` · <span class="archive-pic-rare ${p.rare_type}">${avRareTypeLabel(p.rare_type)}</span>` : ''}<br>${p.aircraft_type || ''} · ${p.date || ''}</div>
     </a>`).join('') : `<div class="archive-empty" style="grid-column:1/-1">${avT('av_no_photos','No photos available for this selection.')}</div>`;
   const pages = Math.max(1, Math.ceil(items.length / AV_PAGE_SIZE));
   const pag = document.getElementById(paginationId);
