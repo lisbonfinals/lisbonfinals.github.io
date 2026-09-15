@@ -429,9 +429,9 @@ table.archive-table{width:100%;border-collapse:collapse;}
     <button class="archive-subtab" data-view="airline" data-i18n="av_tab_airline">By Airline</button>
     <button class="archive-subtab" data-view="anac" data-i18n="av_tab_anac">Night · ANAC</button>
     <button class="archive-subtab" data-view="rare" data-i18n="av_tab_rare">Rare · Military</button>
+    <button class="archive-subtab" data-view="expertmode" data-i18n="av_tab_expertmode">Expert Mode</button>
     <button class="archive-subtab" data-view="quality" data-i18n="av_tab_quality">Data Quality</button>
     <button class="archive-subtab" data-view="pollution" data-i18n="av_tab_pollution">Air Quality</button>
-    <button class="archive-subtab" data-view="expertmode" data-i18n="av_tab_expertmode">Expert Mode</button>
   </div>
 
   <!-- ── OVERVIEW ── -->
@@ -587,7 +587,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
 
   <!-- ── EXPERT MODE (Lden / vent / exposition) ── -->
   <div class="archive-view" id="av-view-expertmode">
-    <div class="archive-note" data-i18n-html="av_expert_intro">Full history of the station's regulatory noise metric (Lden, EU/Portugal standard) and wind trend — for today's live figures and methodology, see <a href="data.html#noise-data" class="av-link">Data → Expert Mode</a>.</div>
+    <div class="archive-note" data-i18n-html="av_expert_intro">Full history of the station's regulatory noise metric (Lden, EU/Portugal standard) and wind trend — for today's live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.</div>
 
     <div class="archive-table-wrap">
       <div class="archive-table-title">
@@ -718,6 +718,14 @@ document.querySelectorAll('.archive-subtab').forEach(btn => {
     document.getElementById('av-view-' + btn.dataset.view).classList.add('active');
   });
 });
+
+// Arrivée directe sur un onglet précis via #<data-view> (ex. lien "More data"
+// depuis data.html) — sinon on atterrit toujours sur Overview, pas l'onglet
+// visé par le lien.
+if (location.hash) {
+  const targetBtn = document.querySelector(`.archive-subtab[data-view="${location.hash.slice(1)}"]`);
+  if (targetBtn) targetBtn.click();
+}
 
 function avRenderPics(containerId, paginationId, items, page, onPage) {
   const el = document.getElementById(containerId);
@@ -1432,7 +1440,7 @@ const T = {
     av_poll_dist:'Air quality distribution', av_poll_chart_title:'Traffic × PM2.5 over time',
     av_gran_day:'Day', av_gran_week:'Week', av_gran_month:'Month',
     av_poll_legend_flights:'Flights', av_poll_legend_pm:'Avg. PM2.5', av_poll_legend_temp:'Outside temperature',
-    av_expert_intro:'Full history of the station\'s regulatory noise metric (Lden, EU/Portugal standard) and wind trend — for today\'s live figures and methodology, see <a href="data.html#noise-data" class="av-link">Data → Expert Mode</a>.',
+    av_expert_intro:'Full history of the station\'s regulatory noise metric (Lden, EU/Portugal standard) and wind trend — for today\'s live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.',
     av_expert_week_title:'7-day table · Lden', av_expert_chart_title:'Lden, peak, wind & exposure over time',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Day', av_expert_th_lden_eve:'Evening', av_expert_th_lden_night:'Night', av_expert_th_lden:'Lden', av_expert_th_peak:'Peak avg', av_expert_th_silent:'Planes under 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp', av_expert_th_winddir:'Wind dir', av_expert_th_windspeed:'Wind',
     av_expert_legend_lden:'Lden (65dB limit dashed)', av_expert_legend_peak:'Peak avg', av_expert_legend_wind:'Wind avg (km/h)', av_expert_legend_expo:'Exposure ≥70dB (min)', av_expert_chart_empty:'Not enough consecutive periods yet',
@@ -1487,7 +1495,7 @@ const T = {
     av_poll_dist:'Distribuição da qualidade do ar', av_poll_chart_title:'Tráfego × PM2.5 ao longo do tempo',
     av_gran_day:'Dia', av_gran_week:'Semana', av_gran_month:'Mês',
     av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_legend_temp:'Temperatura exterior',
-    av_expert_intro:'Histórico completo da métrica regulamentar de ruído da estação (Lden, norma UE/Portugal) e da tendência do vento — para os valores em directo de hoje e a metodologia, ver <a href="data.html#noise-data" class="av-link">Dados → Modo Perito</a>.',
+    av_expert_intro:'Histórico completo da métrica regulamentar de ruído da estação (Lden, norma UE/Portugal) e da tendência do vento — para os valores em directo de hoje e a metodologia, ver <a href="data.html#expert-mode" class="av-link">Dados → Modo Perito</a>.',
     av_expert_week_title:'Tabela de 7 dias · Lden', av_expert_chart_title:'Lden, pico, vento e exposição ao longo do tempo',
     av_expert_th_date:'Data', av_expert_th_lden_day:'Dia', av_expert_th_lden_eve:'Entardecer', av_expert_th_lden_night:'Noite', av_expert_th_lden:'Lden', av_expert_th_peak:'Pico médio', av_expert_th_silent:'Aviões abaixo de 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direcção', av_expert_th_windspeed:'Vento',
     av_expert_legend_lden:'Lden (limite 65dB tracejado)', av_expert_legend_peak:'Pico médio', av_expert_legend_wind:'Vento médio (km/h)', av_expert_legend_expo:'Exposição ≥70dB (min)', av_expert_chart_empty:'Ainda sem períodos consecutivos suficientes',
@@ -1542,7 +1550,7 @@ const T = {
     av_poll_dist:'Répartition de la qualité de l\'air', av_poll_chart_title:'Trafic × PM2.5 dans le temps',
     av_gran_day:'Jour', av_gran_week:'Semaine', av_gran_month:'Mois',
     av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_legend_temp:'Température extérieure',
-    av_expert_intro:'Historique complet de la métrique réglementaire de bruit de la station (Lden, norme UE/Portugal) et de la tendance du vent — pour les chiffres en direct d\'aujourd\'hui et la méthodologie, voir <a href="data.html#noise-data" class="av-link">Données → Mode Expert</a>.',
+    av_expert_intro:'Historique complet de la métrique réglementaire de bruit de la station (Lden, norme UE/Portugal) et de la tendance du vent — pour les chiffres en direct d\'aujourd\'hui et la méthodologie, voir <a href="data.html#expert-mode" class="av-link">Données → Mode Expert</a>.',
     av_expert_week_title:'Tableau 7 jours · Lden', av_expert_chart_title:'Lden, pic, vent et exposition dans le temps',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Jour', av_expert_th_lden_eve:'Soirée', av_expert_th_lden_night:'Nuit', av_expert_th_lden:'Lden', av_expert_th_peak:'Pic moyen', av_expert_th_silent:'Avions sous 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direction', av_expert_th_windspeed:'Vent',
     av_expert_legend_lden:'Lden (limite 65dB en pointillés)', av_expert_legend_peak:'Pic moyen', av_expert_legend_wind:'Vent moyen (km/h)', av_expert_legend_expo:'Exposition ≥70dB (min)', av_expert_chart_empty:'Pas encore assez de périodes consécutives',
