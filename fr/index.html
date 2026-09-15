@@ -2042,7 +2042,7 @@ function applyWeather(temp,windKmh,dir,visKm,icon,desc){
   set('rs-updated','LPPT · '+ts);
   set('wc-temp',  temp+'°C');
   set('wc-cond',  desc||'');
-  set('wc-wind',  kt+' kt');
+  var wcWindEl=el('wc-wind'); if(wcWindEl) wcWindEl.innerHTML=windKmh+' km/h<span class="ti-unit">/ '+kt+' kt</span>';
   set('wc-wdir',  dir+'° '+card);
   set('wc-runway','RWY '+rwy.rwy);
   set('wc-rwyconf',rwy.conf);
