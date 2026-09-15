@@ -311,6 +311,55 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .info-row-val.red{color:var(--red);}
 .info-row-val.amber{color:var(--amber);}
 
+/* ── DECIBEL QUICK REFERENCE (CTA + modal) ── */
+.dbref-cta{
+  display:inline-flex;align-items:center;gap:8px;margin-top:20px;cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dark);background:var(--amber);border:1px solid var(--amber);
+  padding:11px 20px;border-radius:3px;transition:all .2s;
+}
+.dbref-cta:hover{background:transparent;color:var(--amber);}
+.info-card-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:10px;flex-wrap:wrap;}
+.info-card-title-row .info-card-title{margin-bottom:0;}
+.dbref-inline-link{
+  font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(245,166,35,.6);background:none;border:none;cursor:pointer;padding:0;transition:color .2s;
+}
+.dbref-inline-link:hover{color:var(--amber);}
+
+.dbref-modal-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(7,9,13,0.92);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;padding:40px 20px;
+}
+.dbref-modal-overlay.open{display:flex;}
+.dbref-modal{
+  background:var(--dark2);border:1px solid rgba(245,166,35,0.25);
+  border-radius:4px;padding:36px;max-width:640px;width:100%;max-height:82vh;overflow-y:auto;
+  position:relative;
+}
+.dbref-modal-close{
+  position:absolute;top:16px;right:20px;background:none;border:none;
+  color:rgba(240,237,232,0.43);font-family:var(--mono);font-size:11px;cursor:pointer;letter-spacing:.1em;
+}
+.dbref-modal-close:hover{color:var(--white);}
+.dbref-modal-title{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--white);margin-bottom:14px;padding-right:60px;}
+.dbref-modal-intro{font-family:var(--sans);font-size:13.5px;line-height:1.7;color:rgba(240,237,232,.6);margin-bottom:22px;}
+.dbref-table{width:100%;border-collapse:collapse;margin-bottom:22px;}
+.dbref-table th{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);text-align:left;padding:0 10px 8px 0;border-bottom:1px solid var(--border);}
+.dbref-table td{font-family:var(--mono);font-size:11.5px;color:rgba(240,237,232,.75);padding:9px 10px 9px 0;border-bottom:1px solid rgba(240,237,232,.04);vertical-align:top;}
+.dbref-table td:first-child{color:var(--white);font-weight:600;white-space:nowrap;}
+.dbref-table tr.warn td:first-child{color:var(--amber);}
+.dbref-table tr.danger td:first-child{color:var(--red);}
+.dbref-tip{background:var(--amber-dim,rgba(245,166,35,.08));border:1px solid rgba(245,166,35,.25);border-radius:4px;padding:16px 18px;}
+.dbref-tip-title{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+.dbref-tip-body{font-family:var(--sans);font-size:12.5px;line-height:1.65;color:rgba(240,237,232,.65);}
+@media(max-width:640px){
+  .dbref-modal{padding:26px 18px;}
+  .dbref-table{font-size:10.5px;}
+  .dbref-table th,.dbref-table td{padding-right:6px;}
+}
+
 /* ── EXPERT MODE ── */
 .expert-toggle-row{display:flex;align-items:flex-start;gap:16px;margin:32px 0 0;padding:24px;background:var(--dark2);border:1px solid var(--border);border-radius:4px;flex-wrap:wrap;}
 .expert-module-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
@@ -656,6 +705,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     <div class="section-label" data-i18n="s1_label">Flight intelligence</div>
     <h1 class="section-title" data-i18n-html="s1_title">The data<br><em>speaks for itself</em></h1>
     <p class="section-desc" data-i18n="s1_desc">Every aircraft detected over our terrace since May 3, 2026 — ADS-B telemetry combined with real-time acoustic measurements.</p>
+    <button class="dbref-cta" onclick="openDbRefModal()">🔊 <span data-i18n="dbref_cta">Quick reference: decibels</span></button>
   </div>
 
   <div class="method-strip" aria-label="Data methodology">
@@ -773,7 +823,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="info-row"><span class="info-row-lbl" data-i18n="lbl_avg_night">Avg night dB (this week)</span><span class="info-row-val" id="n-avg-night">—</span></div>
     </div>
     <div class="info-card">
-      <div class="info-card-title" data-i18n="context_title">Reference levels</div>
+      <div class="info-card-title-row">
+        <div class="info-card-title" data-i18n="context_title">Reference levels</div>
+        <button class="dbref-inline-link" onclick="openDbRefModal()" data-i18n="dbref_inline_link">→ everyday examples</button>
+      </div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_conversation">Normal conversation</span><span class="info-row-val">~60 dB</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_traffic">City traffic</span><span class="info-row-val">~70 dB</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_anac">ANAC curfew threshold</span><span class="info-row-val amber">≥ 93 dB</span></div>
@@ -1091,6 +1144,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     </div>
   </div>
 </section>
+
+<!-- ── DECIBEL QUICK REFERENCE MODAL ── -->
+<div class="dbref-modal-overlay" id="dbrefOverlay" onclick="closeDbRefModal(event)">
+  <div class="dbref-modal">
+    <button class="dbref-modal-close" onclick="closeDbRefModal()" data-i18n="dbref_close">✕ Close</button>
+    <div class="dbref-modal-title" data-i18n="dbref_modal_title">Quick reference: decibels</div>
+    <p class="dbref-modal-intro" data-i18n="dbref_modal_intro">The decibel (dB) scale measures sound intensity. It isn't linear — every +10dB roughly doubles how loud it feels, even though it means ten times more acoustic energy. Here's what different levels actually feel like:</p>
+    <table class="dbref-table">
+      <thead><tr>
+        <th data-i18n="dbref_th_level">Level</th>
+        <th data-i18n="dbref_th_perception">Perception</th>
+        <th data-i18n="dbref_th_example">Everyday example</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>0 dB</td><td data-i18n="dbref_row1_perception">Threshold of hearing</td><td data-i18n="dbref_row1_example">Anechoic chamber</td></tr>
+        <tr><td>10–20 dB</td><td data-i18n="dbref_row2_perception">Extremely quiet</td><td data-i18n="dbref_row2_example">Rustling leaves, calm breathing</td></tr>
+        <tr><td>30–40 dB</td><td data-i18n="dbref_row3_perception">Very quiet</td><td data-i18n="dbref_row3_example">Bedroom at night, library</td></tr>
+        <tr><td>50–60 dB</td><td data-i18n="dbref_row4_perception">Quiet / moderate</td><td data-i18n="dbref_row4_example">Normal conversation, quiet office</td></tr>
+        <tr><td>70–80 dB</td><td data-i18n="dbref_row5_perception">Loud (tiring over time)</td><td data-i18n="dbref_row5_example">Vacuum cleaner, heavy traffic</td></tr>
+        <tr class="warn"><td>85 dB</td><td data-i18n="dbref_row6_perception">Hearing-risk threshold</td><td data-i18n="dbref_row6_example">Prolonged exposure starts to matter</td></tr>
+        <tr class="warn"><td>90–100 dB</td><td data-i18n="dbref_row7_perception">Very loud</td><td data-i18n="dbref_row7_example">Lawnmower, car horn, headphones at max</td></tr>
+        <tr class="danger"><td>105–110 dB</td><td data-i18n="dbref_row8_perception">Immediate risk</td><td data-i18n="dbref_row8_example">Rock concert, chainsaw</td></tr>
+        <tr class="danger"><td>120 dB</td><td data-i18n="dbref_row9_perception">Pain threshold</td><td data-i18n="dbref_row9_example">Aircraft takeoff at 100m, F1 circuit</td></tr>
+        <tr class="danger"><td>140 dB</td><td data-i18n="dbref_row10_perception">Extreme danger</td><td data-i18n="dbref_row10_example">Gunshot, explosion</td></tr>
+      </tbody>
+    </table>
+    <div class="dbref-tip">
+      <div class="dbref-tip-title" data-i18n="dbref_tip_title">Did you know?</div>
+      <div class="dbref-tip-body" data-i18n="dbref_tip_body">The decibel scale is logarithmic: a +10dB increase means 10× more acoustic energy, which the ear perceives as roughly twice as loud. So a normal conversation (60dB) actually carries about 1,000× more acoustic energy than a quiet bedroom (30dB) — which is why hearing fatigues so fast past 85dB.</div>
+    </div>
+  </div>
+</div>
 
 </main>
 <footer class="page-footer">
@@ -1707,7 +1792,16 @@ const io = new IntersectionObserver(entries => {
 sections.forEach(s => io.observe(s));
 
 // ── Nav ──
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDrawer(); closeDbRefModal(); } });
+function openDbRefModal() {
+  document.getElementById('dbrefOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDbRefModal(e) {
+  if (e && e.target !== document.getElementById('dbrefOverlay')) return;
+  document.getElementById('dbrefOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 const drawer = document.getElementById('nav-drawer');
 function closeDrawer() {
   drawer.classList.remove('open');
@@ -1765,6 +1859,22 @@ const T = {
     context_title:'Reference levels',
     ref_conversation:'Normal conversation', ref_traffic:'City traffic',
     ref_anac:'ANAC curfew threshold', ref_critical:'Critical Alert', ref_vibration:'Perceptible vibration (ISO 2631)', ref_station:'Station location',
+    dbref_cta:'Quick reference: decibels', dbref_inline_link:'→ everyday examples', dbref_close:'✕ Close',
+    dbref_modal_title:'Quick reference: decibels',
+    dbref_modal_intro:'The decibel (dB) scale measures sound intensity. It isn\'t linear — every +10dB roughly doubles how loud it feels, even though it means ten times more acoustic energy. Here\'s what different levels actually feel like:',
+    dbref_th_level:'Level', dbref_th_perception:'Perception', dbref_th_example:'Everyday example',
+    dbref_row1_perception:'Threshold of hearing', dbref_row1_example:'Anechoic chamber',
+    dbref_row2_perception:'Extremely quiet', dbref_row2_example:'Rustling leaves, calm breathing',
+    dbref_row3_perception:'Very quiet', dbref_row3_example:'Bedroom at night, library',
+    dbref_row4_perception:'Quiet / moderate', dbref_row4_example:'Normal conversation, quiet office',
+    dbref_row5_perception:'Loud (tiring over time)', dbref_row5_example:'Vacuum cleaner, heavy traffic',
+    dbref_row6_perception:'Hearing-risk threshold', dbref_row6_example:'Prolonged exposure starts to matter',
+    dbref_row7_perception:'Very loud', dbref_row7_example:'Lawnmower, car horn, headphones at max',
+    dbref_row8_perception:'Immediate risk', dbref_row8_example:'Rock concert, chainsaw',
+    dbref_row9_perception:'Pain threshold', dbref_row9_example:'Aircraft takeoff at 100m, F1 circuit',
+    dbref_row10_perception:'Extreme danger', dbref_row10_example:'Gunshot, explosion',
+    dbref_tip_title:'Did you know?',
+    dbref_tip_body:'The decibel scale is logarithmic: a +10dB increase means 10× more acoustic energy, which the ear perceives as roughly twice as loud. So a normal conversation (60dB) actually carries about 1,000× more acoustic energy than a quiet bedroom (30dB) — which is why hearing fatigues so fast past 85dB.',
     legend_day:'Day (06h–22h)', legend_night:'Night (22h–06h)',
     s3_label:'ANAC regulation monitoring', s3_title:'⚠ Warning<br><em>Zone</em>',
     s3_desc:'Operations observed between midnight and 6am are compared against acoustic alert thresholds — an independent record, not an official ruling on infringements. This week\'s tally:',
@@ -1868,6 +1978,22 @@ const T = {
     context_title:'Níveis de referência',
     ref_conversation:'Conversa normal', ref_traffic:'Tráfego urbano',
     ref_anac:'Limiar ANAC', ref_critical:'Alerta crítico', ref_vibration:'Vibração perceptível (ISO 2631)', ref_station:'Localização da estação',
+    dbref_cta:'Referência rápida: decibéis', dbref_inline_link:'→ exemplos do dia-a-dia', dbref_close:'✕ Fechar',
+    dbref_modal_title:'Referência rápida: decibéis',
+    dbref_modal_intro:'A escala de decibéis (dB) mede a intensidade do som. Não é linear — cada +10dB duplica aproximadamente a sensação de volume, apesar de representar dez vezes mais energia acústica. Eis o que cada nível representa na prática:',
+    dbref_th_level:'Nível', dbref_th_perception:'Percepção', dbref_th_example:'Exemplo do dia-a-dia',
+    dbref_row1_perception:'Limiar da audição', dbref_row1_example:'Câmara anecóica',
+    dbref_row2_perception:'Extremamente silencioso', dbref_row2_example:'Folhas a abanar, respiração calma',
+    dbref_row3_perception:'Muito calmo', dbref_row3_example:'Quarto à noite, biblioteca',
+    dbref_row4_perception:'Calmo / moderado', dbref_row4_example:'Conversa normal, escritório tranquilo',
+    dbref_row5_perception:'Ruidoso (cansativo a longo prazo)', dbref_row5_example:'Aspirador, trânsito intenso',
+    dbref_row6_perception:'Limiar de risco auditivo', dbref_row6_example:'A exposição prolongada começa a ser um risco',
+    dbref_row7_perception:'Muito ruidoso', dbref_row7_example:'Corta-relva, buzina, auscultadores no máximo',
+    dbref_row8_perception:'Risco imediato', dbref_row8_example:'Concerto de rock, motosserra',
+    dbref_row9_perception:'Limiar da dor', dbref_row9_example:'Descolagem de avião a 100m, circuito de F1',
+    dbref_row10_perception:'Perigo extremo', dbref_row10_example:'Tiro, explosão',
+    dbref_tip_title:'Sabia que?',
+    dbref_tip_body:'A escala de decibéis é logarítmica: um aumento de 10dB representa 10× mais energia acústica, percebida pelo ouvido como aproximadamente o dobro do volume. Uma conversa normal (60dB) transporta assim cerca de 1000× mais energia acústica do que um quarto calmo (30dB) — por isso a audição cansa tão depressa acima dos 85dB.',
     legend_day:'Dia (06h–22h)', legend_night:'Noite (22h–06h)',
     s3_label:'Monitorização ANAC', s3_title:'⚠ Zona de<br><em>alerta</em>',
     s3_desc:'As operações observadas entre a meia-noite e as 6h são comparadas com critérios acústicos de alerta. Este é um registo independente, não uma decisão oficial sobre infrações. Balanço desta semana:',
@@ -1972,6 +2098,22 @@ const T = {
     context_title:'Niveaux de référence',
     ref_conversation:'Conversation normale', ref_traffic:'Circulation urbaine',
     ref_anac:'Seuil couvre-feu ANAC', ref_critical:'Alerte critique', ref_vibration:'Vibration perceptible (ISO 2631)', ref_station:'Emplacement de la station',
+    dbref_cta:'Repère rapide : les décibels', dbref_inline_link:'→ exemples du quotidien', dbref_close:'✕ Fermer',
+    dbref_modal_title:'Repère rapide : les décibels',
+    dbref_modal_intro:'L\'échelle des décibels (dB) mesure l\'intensité sonore. Elle n\'est pas linéaire — chaque +10dB double environ la sensation de volume, alors qu\'elle représente dix fois plus d\'énergie acoustique. Voici ce que chaque niveau représente concrètement :',
+    dbref_th_level:'Niveau', dbref_th_perception:'Perception', dbref_th_example:'Exemple du quotidien',
+    dbref_row1_perception:'Seuil de l\'audition', dbref_row1_example:'Chambre anéchoïque',
+    dbref_row2_perception:'Extrêmement calme', dbref_row2_example:'Bruissement de feuilles, respiration',
+    dbref_row3_perception:'Très calme', dbref_row3_example:'Chambre la nuit, bibliothèque',
+    dbref_row4_perception:'Calme / modéré', dbref_row4_example:'Conversation normale, bureau tranquille',
+    dbref_row5_perception:'Bruyant (fatigant à long terme)', dbref_row5_example:'Aspirateur, trafic dense',
+    dbref_row6_perception:'Seuil de risque auditif', dbref_row6_example:'L\'exposition prolongée devient un risque',
+    dbref_row7_perception:'Très bruyant', dbref_row7_example:'Tondeuse, klaxon, casque au maximum',
+    dbref_row8_perception:'Risque immédiat', dbref_row8_example:'Concert de rock, tronçonneuse',
+    dbref_row9_perception:'Seuil de la douleur', dbref_row9_example:'Décollage d\'avion à 100m, circuit de F1',
+    dbref_row10_perception:'Danger extrême', dbref_row10_example:'Coup de feu, explosion',
+    dbref_tip_title:'Le saviez-vous ?',
+    dbref_tip_body:'L\'échelle des décibels est logarithmique : une hausse de 10dB représente 10 fois plus d\'énergie sonore, perçue par l\'oreille comme environ un doublement du volume. Une conversation normale (60dB) transporte ainsi environ 1000 fois plus d\'énergie acoustique qu\'une chambre calme (30dB) — d\'où la fatigue auditive rapide au-delà de 85dB.',
     legend_day:'Jour (06h–22h)', legend_night:'Nuit (22h–06h)',
     s3_label:'Surveillance ANAC', s3_title:'⚠ Zone<br><em>d\'alerte</em>',
     s3_desc:'Les opérations observées entre minuit et 6h sont comparées à des critères acoustiques d’alerte. Il s’agit d’un relevé indépendant, et non d’une qualification officielle des infractions. Bilan de la semaine :',
