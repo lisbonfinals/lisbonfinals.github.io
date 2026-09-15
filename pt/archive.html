@@ -265,6 +265,13 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .mchart-bar.pollution{background:rgba(96,165,250,.65);}
 .mchart-line-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
 .mchart-xaxis{display:flex;gap:2px;margin-top:8px;padding-left:46px;}
+/* 2x2 grid variant — one independently-scaled card per metric, instead of stacked
+   64px rows sharing one axis (each metric's own range was getting flattened to the
+   same row height). Used by Expert Mode's Lden/Peak/Wind/Exposure chart. */
+.mchart-2x2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.mchart-card{background:var(--dark3);border:1px solid var(--border);border-radius:4px;padding:16px 14px 12px;}
+.mchart-card .mchart-yaxis,.mchart-card .mchart-plot{height:150px;}
+@media(max-width:720px){.mchart-2x2{grid-template-columns:1fr;}}
 .mchart-xaxis span{flex:1;min-width:0;text-align:center;font-family:var(--mono);font-size:8px;color:rgba(240,237,232,.32);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 /* horizontal bar rows — correlation chart, quality distribution */
@@ -614,7 +621,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
           <button class="archive-gran-btn" data-gran="monthly" data-i18n="av_gran_month">Month</button>
         </div>
       </div>
-      <div class="mchart" id="av-expert-multichart"></div>
+      <div class="mchart-2x2" id="av-expert-multichart"></div>
     </div>
   </div>
 </section>
@@ -1291,9 +1298,14 @@ function avRenderExpertCharts(gran) {
   const xStep = Math.max(1, Math.round(n / 6));
   const LDEN_LEGAL_LIMIT_DB = 65;
 
-  const linePanel = (vals, ticks, color, labelKey, labelFallback, extraSvg) => {
+  // Une card par métrique (grille 2x2) — chacune avec sa propre échelle Y et son
+  // propre axe X, plutôt que 4 lignes empilées de 64px partageant un seul axe
+  // (une variation de 40min d'exposition et une variation de 3dB de Lden étaient
+  // dessinées à la même hauteur visuelle). Cf. mockup validé le 15 sept 2026.
+  const cardPanel = (vals, ticks, color, labelKey, labelFallback, extraSvg) => {
+    const ownXAxis = `<div class="mchart-xaxis">${shown.map((s, i) => `<span>${(i % xStep === 0 || i === n - 1) ? avShortXLabel(s.label, gran) : ''}</span>`).join('')}</div>`;
     if (vals.filter(v => v != null).length < 2) {
-      return `<div class="mchart-panel">
+      return `<div class="mchart-card">
         <div class="mchart-panel-label"><div class="legend-dot" style="background:${color};border-radius:50%;"></div><span>${avT(labelKey, labelFallback)}</span></div>
         <div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.3);padding:20px 0;text-align:center;">${avT('av_expert_chart_empty', 'Not enough consecutive periods yet')}</div>
       </div>`;
@@ -1306,7 +1318,7 @@ function avRenderExpertCharts(gran) {
     if (current.length > 1) segments.push(current);
     const svgLines = segments.map(seg => `<polyline points="${seg.map(p => p.join(',')).join(' ')}" fill="none" stroke="${color}" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('')
       + points.map(p => p ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="${color}"/>` : '').join('');
-    return `<div class="mchart-panel">
+    return `<div class="mchart-card">
       <div class="mchart-panel-label"><div class="legend-dot" style="background:${color};border-radius:50%;"></div><span>${avT(labelKey, labelFallback)}</span></div>
       <div class="mchart-panel-body">
         <div class="mchart-yaxis">${avYAxisHtml(ticks.ticks, (v) => Math.round(v))}</div>
@@ -1315,6 +1327,7 @@ function avRenderExpertCharts(gran) {
           <svg class="mchart-line-svg" preserveAspectRatio="none" viewBox="0 0 100 100">${svgLines}${extraSvg ? extraSvg(lo, range) : ''}</svg>
         </div>
       </div>
+      ${ownXAxis}
     </div>`;
   };
 
@@ -1324,15 +1337,13 @@ function avRenderExpertCharts(gran) {
     const y = 100 - (LDEN_LEGAL_LIMIT_DB - lo) / range * 100;
     return `<line x1="0" x2="100" y1="${y}" y2="${y}" stroke="var(--red)" stroke-width="0.6" stroke-dasharray="2,2" opacity=".7" vector-effect="non-scaling-stroke"/>`;
   };
-  const ldenHtml = linePanel(ldenVals, ldenTicks, 'var(--blue)', 'av_expert_legend_lden', 'Lden (65dB limit dashed)', limitLine);
-  const peakHtml = linePanel(shown.map(s => s.avg_peak_db), avAxisTicks(shown.map(s => s.avg_peak_db), false), 'var(--amber)', 'av_expert_legend_peak', 'Peak avg');
-  const windHtml = linePanel(shown.map(s => s.avg_wind_kmh), avAxisTicks(shown.map(s => s.avg_wind_kmh), true), 'var(--green)', 'av_expert_legend_wind', 'Wind avg (km/h)');
+  const ldenHtml = cardPanel(ldenVals, ldenTicks, 'var(--blue)', 'av_expert_legend_lden', 'Lden (65dB limit dashed)', limitLine);
+  const peakHtml = cardPanel(shown.map(s => s.avg_peak_db), avAxisTicks(shown.map(s => s.avg_peak_db), false), 'var(--amber)', 'av_expert_legend_peak', 'Peak avg');
+  const windHtml = cardPanel(shown.map(s => s.avg_wind_kmh), avAxisTicks(shown.map(s => s.avg_wind_kmh), true), 'var(--green)', 'av_expert_legend_wind', 'Wind avg (km/h)');
   const expoValsMin = shown.map(s => s.total_duration_over_70_s != null ? s.total_duration_over_70_s / 60 : null);
-  const expoHtml = linePanel(expoValsMin, avAxisTicks(expoValsMin, true), '#ff6b6b', 'av_expert_legend_expo', 'Exposure ≥70dB (min)');
+  const expoHtml = cardPanel(expoValsMin, avAxisTicks(expoValsMin, true), '#ff6b6b', 'av_expert_legend_expo', 'Exposure ≥70dB (min)');
 
-  const xAxisHtml = `<div class="mchart-xaxis">${shown.map((s, i) => `<span>${(i % xStep === 0 || i === n - 1) ? avShortXLabel(s.label, gran) : ''}</span>`).join('')}</div>`;
-
-  document.getElementById('av-expert-multichart').innerHTML = ldenHtml + peakHtml + windHtml + expoHtml + xAxisHtml;
+  document.getElementById('av-expert-multichart').innerHTML = ldenHtml + peakHtml + windHtml + expoHtml;
 }
 
 function avRenderExpertMode() {
