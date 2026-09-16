@@ -134,10 +134,65 @@ main{padding-top:96px;}
 .about-footer-ig{font-family:var(--mono);font-size:10px;color:rgba(245,166,35,.5);text-decoration:none;letter-spacing:.08em;border:1px solid rgba(245,166,35,.2);padding:6px 14px;border-radius:3px;transition:all .2s;}
 .about-footer-ig:hover{color:var(--amber);border-color:rgba(245,166,35,.5);}
 
+
+/* -- ACCESS GATE -- */
+.gate-wrap{padding:0 48px 8px;max-width:1000px;margin:0 auto;}
+.gate{
+  background:linear-gradient(180deg,rgba(13,17,23,.9),rgba(10,13,18,.9));
+  border:1px solid var(--border); border-left:2px solid var(--amber);
+  border-radius:10px; padding:30px 32px 28px;
+  transition:opacity .5s ease, transform .5s ease, max-height .6s ease, margin .5s ease, padding .5s ease;
+  overflow:hidden; max-height:900px;
+}
+.gate.collapsed{opacity:0; max-height:0; padding-top:0; padding-bottom:0; margin:0; border-width:0; pointer-events:none; transform:translateY(-8px);}
+.gate-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.gate-title{font-family:var(--sans);font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--white);margin-bottom:8px;}
+.gate-desc{font-family:var(--sans);font-size:13px;line-height:1.7;color:rgba(240,237,232,.52);max-width:580px;margin-bottom:24px;}
+.gate-field{margin-bottom:20px;}
+.gate-label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.62);margin-bottom:10px;}
+.gate-label .opt{color:rgba(240,237,232,.32);text-transform:none;letter-spacing:0;font-size:10px;}
+.purpose-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.purpose-pill{font-family:var(--mono); font-size:11px; letter-spacing:.02em; background:var(--dark2); border:1px solid var(--border2); border-radius:20px; color:rgba(240,237,232,.68); padding:9px 16px; cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:7px;}
+.purpose-pill:hover{border-color:rgba(245,166,35,.5); color:var(--white);}
+.purpose-pill .dot{width:6px;height:6px;border-radius:50%;border:1px solid rgba(240,237,232,.4);flex-shrink:0;transition:all .15s;}
+.purpose-pill.active{background:rgba(245,166,35,.1); border-color:var(--amber); color:var(--amber);}
+.purpose-pill.active .dot{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,166,35,.18);}
+.gate-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.gate-input{width:100%; background:var(--dark2); border:1px solid var(--border2); border-radius:5px; color:var(--white); font-family:var(--sans); font-size:13px; padding:11px 13px; transition:border-color .15s;}
+.gate-input::placeholder{color:rgba(240,237,232,.3);}
+.gate-input:focus{outline:none; border-color:var(--amber);}
+.gate-checkbox{display:flex; align-items:flex-start; gap:9px; margin-top:11px; cursor:pointer; transition:opacity .2s;}
+.gate-checkbox.disabled{opacity:.4; cursor:not-allowed;}
+.gate-checkbox input{position:absolute; opacity:0; width:1px; height:1px;}
+.checkbox-box{flex-shrink:0; width:15px; height:15px; margin-top:1px; border-radius:3px; border:1px solid var(--border2); background:var(--dark2); position:relative; transition:all .15s;}
+.gate-checkbox input:checked + .checkbox-box{background:var(--amber); border-color:var(--amber);}
+.gate-checkbox input:checked + .checkbox-box::after{content:''; position:absolute; left:4px; top:1px; width:4px; height:8px; border:solid var(--black); border-width:0 1.6px 1.6px 0; transform:rotate(40deg);}
+.gate-checkbox input:focus-visible + .checkbox-box{outline:2px solid var(--amber); outline-offset:2px;}
+.checkbox-text{font-family:var(--mono); font-size:10.5px; line-height:1.5; color:rgba(240,237,232,.55);}
+.gate-checkbox.nudge .checkbox-box{animation:gate-nudge .35s;}
+@keyframes gate-nudge{0%,100%{border-color:var(--border2);} 30%{border-color:var(--amber); box-shadow:0 0 0 3px rgba(245,166,35,.18);} }
+.gate-actions{display:flex; align-items:center; gap:18px; margin-top:24px; flex-wrap:wrap;}
+.gate-submit{font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--black); background:var(--amber); border:1px solid var(--amber); border-radius:5px; padding:13px 24px; cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:9px;}
+.gate-submit:hover:not(:disabled){background:#ffb943; box-shadow:0 0 0 4px rgba(245,166,35,.14);}
+.gate-submit:disabled{background:var(--dark3); border-color:var(--border2); color:rgba(240,237,232,.3); cursor:not-allowed;}
+.gate-skip{font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:rgba(240,237,232,.4); text-decoration:underline; text-decoration-color:rgba(240,237,232,.2); text-underline-offset:3px; cursor:pointer; background:none; border:none;}
+.gate-skip:hover{color:rgba(240,237,232,.65);}
+.gate-note{display:flex; align-items:flex-start; gap:9px; margin-top:22px; padding-top:20px; border-top:1px solid var(--border); font-family:var(--mono); font-size:10.5px; line-height:1.7; color:rgba(240,237,232,.4);}
+.gate-note svg{flex-shrink:0; margin-top:2px;}
+.unlock-banner{display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:10.5px; color:rgba(34,197,94,.85); background:rgba(34,197,94,.08); border:1px solid rgba(34,197,94,.28); border-radius:5px; padding:10px 14px; margin:0; opacity:0; max-height:0; overflow:hidden; transition:opacity .4s ease .1s, max-height .4s ease, margin .4s ease;}
+.unlock-banner.show{opacity:1; max-height:60px; margin-bottom:22px;}
+.unlock-banner .pip{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.2);flex-shrink:0;}
+.unlock-banner button{margin-left:auto;background:none;border:none;color:rgba(34,197,94,.6);font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;text-decoration:underline;cursor:pointer;}
+.unlock-banner button:hover{color:var(--green);}
+.gated-content{max-height:0; opacity:0; filter:blur(4px); transform:translateY(6px); overflow:hidden; transition:max-height .6s ease, opacity .5s ease .1s, filter .5s ease .1s, transform .5s ease .1s;}
+.gated-content.show{max-height:6000px; opacity:1; filter:blur(0); transform:translateY(0);}
+
 @media (max-width:820px){
-  .res-hero,.data-section{padding-left:20px;padding-right:20px;}
+  .res-hero,.data-section,.gate-wrap{padding-left:20px;padding-right:20px;}
   .res-card{flex-direction:column;align-items:flex-start;}
   .res-card-dl{align-self:stretch;text-align:center;}
+  .gate{padding:24px 20px;}
+  .gate-row{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -204,6 +259,63 @@ main{padding-top:96px;}
     </div>
   </div>
 
+  <div class="gate-wrap">
+    <form class="gate" id="gate" onsubmit="return gateUnlock(event)">
+      <div class="gate-kicker" data-i18n="gate_kicker">Before you open the archive</div>
+      <div class="gate-title" data-i18n="gate_title">One question: why does this data interest you?</div>
+      <p class="gate-desc" data-i18n="gate_desc">It helps us understand who uses the work of a volunteer-run station &mdash; and, if you'd like, lets us notify you when new months of data are added. No account needed.</p>
+
+      <div class="gate-field">
+        <label class="gate-label"><span data-i18n="gate_purpose_label">You're mostly&hellip;</span> <span class="opt" data-i18n="gate_purpose_hint">&mdash; pick one</span></label>
+        <div class="purpose-grid" id="purposeGrid">
+          <button type="button" class="purpose-pill" data-v="recherche"><span class="dot"></span><span data-i18n="gate_p_recherche">Academic research</span></button>
+          <button type="button" class="purpose-pill" data-v="institution"><span class="dot"></span><span data-i18n="gate_p_institution">Institution / authority</span></button>
+          <button type="button" class="purpose-pill" data-v="pro"><span class="dot"></span><span data-i18n="gate_p_pro">Industry professional</span></button>
+          <button type="button" class="purpose-pill" data-v="media"><span class="dot"></span><span data-i18n="gate_p_media">Press / media</span></button>
+          <button type="button" class="purpose-pill" data-v="passionne"><span class="dot"></span><span data-i18n="gate_p_passionne">Aviation enthusiast</span></button>
+          <button type="button" class="purpose-pill" data-v="autre"><span class="dot"></span><span data-i18n="gate_p_autre">Other</span></button>
+        </div>
+      </div>
+
+      <div class="gate-row">
+        <div class="gate-field" style="margin-bottom:0;">
+          <label class="gate-label"><span data-i18n="gate_org_label">Organisation</span> <span class="opt" data-i18n="gate_org_hint">&mdash; optional</span></label>
+          <input class="gate-input" type="text" id="gateOrg" data-i18n-ph="gate_org_ph" placeholder="University, outlet, airline...">
+        </div>
+        <div class="gate-field" style="margin-bottom:0;">
+          <label class="gate-label"><span data-i18n="gate_email_label">Email</span> <span class="opt" data-i18n="gate_email_hint">&mdash; optional</span></label>
+          <input class="gate-input" type="email" id="gateEmail" data-i18n-ph="gate_email_ph" placeholder="you@example.com" oninput="onGateEmailInput()">
+          <label class="gate-checkbox disabled" id="gateConsentRow">
+            <input type="checkbox" id="gateEmailConsent" disabled>
+            <span class="checkbox-box"></span>
+            <span class="checkbox-text" data-i18n="gate_consent_text">Email me when a new month of data is published &mdash; nothing else.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="gate-actions">
+        <button type="submit" class="gate-submit" id="gateSubmitBtn" disabled>
+          <span data-i18n="gate_submit">See the data</span>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6h7M6 2.5 9.5 6 6 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="gate-skip" data-i18n="gate_skip" onclick="gateUnlock(null,'autre')">Skip this question</button>
+      </div>
+
+      <div class="gate-note">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-top:1px;"><circle cx="12" cy="12" r="9.5" stroke="rgba(240,237,232,.4)" stroke-width="1.3"/><path d="M12 8v5M12 16h.01" stroke="rgba(240,237,232,.4)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <span data-i18n="gate_note">No account, no password, no name required. Nothing here is sold or shared &mdash; see the CC BY 4.0 license below.</span>
+      </div>
+    </form>
+
+    <div class="unlock-banner" id="unlockBanner">
+      <span class="pip"></span>
+      <span id="unlockText"><span data-i18n="gate_unlock">Access unlocked &mdash; enjoy the data.</span> <span id="unlockEmailSuffix" data-i18n="gate_unlock_email_suffix" style="display:none;">You're on the update list.</span></span>
+      <button type="button" data-i18n="gate_reset" onclick="gateReset()">Answer again</button>
+    </div>
+  </div>
+
+  <div class="gated-content" id="gatedContent">
+
   <section class="data-section">
     <div class="section-label" data-i18n="flights_label">Flight events</div>
     <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);" data-i18n="flights_title">One row per detected aircraft</h2>
@@ -247,6 +359,8 @@ main{padding-top:96px;}
       <div class="schema-item"><div class="schema-k">spl_db / vib_mg</div><div class="schema-v" data-i18n="sch_cont_val">Instantaneous sound level (dB) or vibration (milli-g) at that second — a sample, not a running average.</div></div>
     </div>
   </section>
+
+  </div>
 
   <section class="data-section">
     <div class="section-label" data-i18n="license_label">Using this data</div>
@@ -324,6 +438,19 @@ const T = {
     caveat_kicker:'Worth knowing before you crunch the numbers',
     caveat_copy:'This is one consumer-grade sensor (IEC 651 type 2, ±1.5dB manufacturer tolerance) on one terrace, not a calibrated reference network — treat it as local, independent evidence, and cross-check anything load-bearing for your own conclusions.',
     contact_line:'Questions about the data, or planning to use it for a course or a paper? Write to <a href="mailto:chronos@lisbonfinals.com">chronos@lisbonfinals.com</a> — always happy to hear what it\'s used for.',
+    gate_kicker:'Before you open the archive',
+    gate_title:'One question: why does this data interest you?',
+    gate_desc:'It helps us understand who uses the work of a volunteer-run station — and, if you\'d like, lets us notify you when new months of data are added. No account needed.',
+    gate_purpose_label:'You\'re mostly…', gate_purpose_hint:'— pick one',
+    gate_p_recherche:'Academic research', gate_p_institution:'Institution / authority', gate_p_pro:'Industry professional',
+    gate_p_media:'Press / media', gate_p_passionne:'Aviation enthusiast', gate_p_autre:'Other',
+    gate_org_label:'Organisation', gate_org_hint:'— optional', gate_org_ph:'University, outlet, airline...',
+    gate_email_label:'Email', gate_email_hint:'— optional', gate_email_ph:'you@example.com',
+    gate_consent_text:'Email me when a new month of data is published — nothing else.',
+    gate_submit:'See the data', gate_skip:'Skip this question',
+    gate_note:'No account, no password, no name required. Nothing here is sold or shared — see the CC BY 4.0 license below.',
+    gate_unlock:'Access unlocked — enjoy the data.', gate_unlock_email_suffix:'You\'re on the update list.',
+    gate_reset:'Answer again',
     footer_left:'LISBON FINALS · Research Data · lisbonfinals.com', footer_ig:'Follow on Instagram →',
   },
   pt: {
@@ -360,6 +487,19 @@ const T = {
     caveat_kicker:'Vale a pena saber antes de analisar os números',
     caveat_copy:'Trata-se de um sensor de gama de consumo (IEC 651 tipo 2, tolerância do fabricante de ±1,5dB) numa única varanda, não uma rede de referência calibrada — trata como evidência local e independente, e confirma de forma cruzada tudo o que for decisivo para as tuas próprias conclusões.',
     contact_line:'Perguntas sobre os dados, ou a pensar usá-los numa disciplina ou artigo? Escreve para <a href="mailto:chronos@lisbonfinals.com">chronos@lisbonfinals.com</a> — temos sempre gosto em saber para que são usados.',
+    gate_kicker:'Antes de abrir o arquivo',
+    gate_title:'Uma pergunta: porque é que estes dados lhe interessam?',
+    gate_desc:'Ajuda-nos a perceber quem utiliza o trabalho de uma estação voluntária — e, se quiser, permite avisá-lo quando adicionarmos novos meses de dados. Sem conta necessária.',
+    gate_purpose_label:'É sobretudo…', gate_purpose_hint:'— escolha uma opção',
+    gate_p_recherche:'Investigação académica', gate_p_institution:'Instituição ou autoridade', gate_p_pro:'Profissional do sector',
+    gate_p_media:'Imprensa / média', gate_p_passionne:'Apaixonado por aviação', gate_p_autre:'Outro',
+    gate_org_label:'Organização', gate_org_hint:'— facultativo', gate_org_ph:'Universidade, órgão de comunicação, companhia...',
+    gate_email_label:'Email', gate_email_hint:'— facultativo', gate_email_ph:'voce@exemplo.com',
+    gate_consent_text:'Escrever-me quando sair um novo mês de dados — nada mais.',
+    gate_submit:'Ver os dados', gate_skip:'Saltar esta pergunta',
+    gate_note:'Sem conta, sem palavra-passe, sem nome exigido. Nada disto é vendido nem partilhado — ver a licença CC BY 4.0 mais abaixo.',
+    gate_unlock:'Acesso activado — boa exploração.', gate_unlock_email_suffix:'Ficou na lista de actualizações.',
+    gate_reset:'Responder de novo',
     footer_left:'LISBON FINALS · Dados para Investigação · lisbonfinals.com', footer_ig:'Seguir no Instagram →',
   },
   fr: {
@@ -396,6 +536,19 @@ const T = {
     caveat_kicker:'À savoir avant d\'exploiter les chiffres',
     caveat_copy:'Il s\'agit d\'un capteur grand public (IEC 651 type 2, tolérance constructeur ±1,5dB) sur une seule terrasse, pas un réseau de référence calibré — à traiter comme un témoignage local et indépendant, et à recouper pour tout ce qui est déterminant dans vos propres conclusions.',
     contact_line:'Des questions sur les données, ou l\'idée de les utiliser pour un cours ou un mémoire ? Écrivez à <a href="mailto:chronos@lisbonfinals.com">chronos@lisbonfinals.com</a> — toujours ravis de savoir à quoi elles servent.',
+    gate_kicker:'Avant d\'ouvrir l\'archive',
+    gate_title:'Une seule question : pourquoi ces données vous intéressent ?',
+    gate_desc:'Ça nous aide à savoir qui utilise le travail d\'une station bénévole — et, si vous le souhaitez, à vous prévenir quand on ajoute des mois de données. Pas de compte à créer.',
+    gate_purpose_label:'Vous êtes plutôt…', gate_purpose_hint:'— un choix suffit',
+    gate_p_recherche:'Recherche académique', gate_p_institution:'Institution / autorité', gate_p_pro:'Professionnel du secteur',
+    gate_p_media:'Presse / média', gate_p_passionne:'Passionné(e) d\'aviation', gate_p_autre:'Autre',
+    gate_org_label:'Organisation', gate_org_hint:'— facultatif', gate_org_ph:'Université, média, compagnie...',
+    gate_email_label:'Email', gate_email_hint:'— facultatif', gate_email_ph:'vous@exemple.com',
+    gate_consent_text:'M\'écrire quand un nouveau mois de données sort — rien d\'autre.',
+    gate_submit:'Voir les données', gate_skip:'Passer cette question',
+    gate_note:'Pas de compte, pas de mot de passe, pas de nom exigé. Rien de tout ça n\'est vendu ni partagé — voir la licence CC BY 4.0 plus bas.',
+    gate_unlock:'Accès activé — bonne exploration.', gate_unlock_email_suffix:'Vous êtes sur la liste des mises à jour.',
+    gate_reset:'Revoir le formulaire',
     footer_left:'LISBON FINALS · Données de recherche · lisbonfinals.com', footer_ig:'Suivre sur Instagram →',
   }
 };
@@ -415,8 +568,90 @@ function applyLang(lang) {
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     if (t[el.dataset.i18nHtml] != null) el.innerHTML = t[el.dataset.i18nHtml];
   });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    if (t[el.dataset.i18nPh] != null) el.placeholder = t[el.dataset.i18nPh];
+  });
 }
 applyLang(_lang);
+</script>
+
+<script>
+(function(){
+  var grid = document.getElementById('purposeGrid');
+  var submitBtn = document.getElementById('gateSubmitBtn');
+  var emailInput = document.getElementById('gateEmail');
+  var orgInput = document.getElementById('gateOrg');
+  var emailConsent = document.getElementById('gateEmailConsent');
+  var consentRow = document.getElementById('gateConsentRow');
+  var selectedPurpose = null;
+  var RESEARCH_ACCESS_ENDPOINT = 'https://lisbon-finals-production.up.railway.app/api/research-access';
+
+  grid.addEventListener('click', function(e){
+    var pill = e.target.closest('.purpose-pill');
+    if (!pill) return;
+    grid.querySelectorAll('.purpose-pill').forEach(function(p){ p.classList.remove('active'); });
+    pill.classList.add('active');
+    selectedPurpose = pill.dataset.v;
+    submitBtn.disabled = false;
+  });
+
+  window.onGateEmailInput = function(){
+    var hasEmail = emailInput.value.trim().length > 0;
+    emailConsent.disabled = !hasEmail;
+    consentRow.classList.toggle('disabled', !hasEmail);
+    if (!hasEmail) emailConsent.checked = false;
+  };
+
+  window.gateUnlock = function(e, forceVal){
+    if (e) e.preventDefault();
+    var hasEmail = emailInput.value.trim().length > 0;
+    if (hasEmail && !emailConsent.checked) {
+      consentRow.classList.remove('nudge');
+      void consentRow.offsetWidth;
+      consentRow.classList.add('nudge');
+      return false;
+    }
+    var purpose = forceVal || selectedPurpose || 'autre';
+    var consented = hasEmail && emailConsent.checked;
+
+    document.getElementById('gate').classList.add('collapsed');
+    document.getElementById('gatedContent').classList.add('show');
+    document.getElementById('unlockEmailSuffix').style.display = consented ? '' : 'none';
+    document.getElementById('unlockBanner').classList.add('show');
+    try { sessionStorage.setItem('lf_research_unlocked', '1'); } catch(err) {}
+
+    fetch(RESEARCH_ACCESS_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        purpose: purpose,
+        organisation: orgInput.value.trim(),
+        email: consented ? emailInput.value.trim() : '',
+        email_consent: consented
+      })
+    }).catch(function(){});
+    return false;
+  };
+
+  window.gateReset = function(){
+    document.getElementById('gate').classList.remove('collapsed');
+    document.getElementById('gatedContent').classList.remove('show');
+    document.getElementById('unlockBanner').classList.remove('show');
+    grid.querySelectorAll('.purpose-pill').forEach(function(p){ p.classList.remove('active'); });
+    selectedPurpose = null;
+    submitBtn.disabled = true;
+    emailInput.value = ''; orgInput.value = ''; emailConsent.checked = false;
+    onGateEmailInput();
+    try { sessionStorage.removeItem('lf_research_unlocked'); } catch(err) {}
+  };
+
+  try {
+    if (sessionStorage.getItem('lf_research_unlocked') === '1') {
+      document.getElementById('gate').classList.add('collapsed');
+      document.getElementById('gatedContent').classList.add('show');
+    }
+  } catch(err) {}
+})();
 </script>
 <script data-goatcounter="https://lisbonfinals.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
