@@ -200,28 +200,29 @@ main{padding-top:96px;}
 
 <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
   <a href="/" onclick="closeDrawer()"><span data-i18n="nav_live">Live</span></a>
-  <a href="/data.html#the-data" onclick="closeDrawer()"><span data-i18n="nav_dd_the_data">The Data</span></a>
-  <a href="/data.html#noise-data" onclick="closeDrawer()"><span data-i18n="nav_dd_noise_data">Noise Data</span></a>
-  <a href="/data.html#warning-zone" class="drawer-warning" onclick="closeDrawer()"><span data-i18n="nav_dd_warning_zone">Warning Zone</span></a>
+  <a href="/data.html" onclick="closeDrawer()"><span data-i18n="nav_dd_data_short">Data</span></a>
   <a href="/archive.html" onclick="closeDrawer()"><span data-i18n="nav_archive">Archive</span></a>
   <a href="/compare.html" onclick="closeDrawer()"><span data-i18n="nav_compare">Compare</span></a>
   <a href="/noise-report.html" class="drawer-noise" onclick="closeDrawer()"><span data-i18n="nav_noise_report">Noise Report</span></a>
   <a href="/log.html" onclick="closeDrawer()"><span data-i18n="nav_log">Captain's Log</span></a>
-  <a href="/research.html" style="color:var(--amber);" onclick="closeDrawer()"><span data-i18n="nav_research">Research Data</span></a>
   <a href="/about.html#the-project" onclick="closeDrawer()"><span data-i18n="nav_dd_the_project">The Project</span></a>
+  <a href="/about.html#how-it-works" onclick="closeDrawer()"><span data-i18n="nav_dd_how_it_works">How it works</span></a>
+  <a href="/about.html#hardware" onclick="closeDrawer()"><span data-i18n="nav_dd_the_station">The Station</span></a>
+  <a href="/about.html#whats-next" onclick="closeDrawer()"><span data-i18n="nav_dd_whats_next">What's next</span></a>
   <a href="/about.html#get-involved" onclick="closeDrawer()"><span data-i18n="nav_dd_get_involved">Get Involved</span></a>
+  <a href="/about.html#press" onclick="closeDrawer()"><span data-i18n="nav_dd_press">Press</span></a>
   <a href="https://www.instagram.com/lisbon.finals/" target="_blank" rel="noopener noreferrer" class="drawer-ig" onclick="closeDrawer()"><span data-i18n="nav_follow_ig">Follow @lisbon.finals</span></a>
 </div>
 
 <nav aria-label="Primary navigation">
-  <a href="/index.html" class="nav-logo">
+  <a href="/" class="nav-logo">
     <div class="nav-dot"></div>
     <span class="nav-wordmark">LISBON <span>FINALS</span></span>
   </a>
   <ul class="nav-links">
     <li><a href="/"><span data-i18n="nav_live">Live</span></a></li>
     <li class="nav-has-dropdown">
-      <a href="/data.html" class="nav-data-trigger"><span data-i18n="nav_data">Data ▾</span></a>
+      <a href="/data.html"><span data-i18n="nav_data">Data ▾</span></a>
       <ul class="nav-dropdown">
         <li><a href="/data.html#the-data"><span data-i18n="nav_dd_the_data">The Data</span></a></li>
         <li><a href="/data.html#noise-data"><span data-i18n="nav_dd_noise_data">Noise Data</span></a></li>
@@ -232,14 +233,24 @@ main{padding-top:96px;}
     <li><a href="/compare.html"><span data-i18n="nav_compare">Compare</span></a></li>
     <li><a href="/noise-report.html" class="nav-noise"><span data-i18n="nav_noise_report">Noise Report</span></a></li>
     <li><a href="/log.html"><span data-i18n="nav_log">Captain's Log</span></a></li>
-    <li><a href="/research.html" class="nav-active"><span data-i18n="nav_research">Research Data</span></a></li>
+    <li class="nav-has-dropdown">
+      <a href="/about.html"><span data-i18n="nav_about">About ▾</span></a>
+      <ul class="nav-dropdown">
+        <li><a href="/about.html#the-project"><span data-i18n="nav_dd_the_project">The Project</span></a></li>
+        <li><a href="/about.html#how-it-works"><span data-i18n="nav_dd_how_it_works">How it works</span></a></li>
+        <li><a href="/about.html#hardware"><span data-i18n="nav_dd_the_station">The Station</span></a></li>
+        <li><a href="/about.html#whats-next"><span data-i18n="nav_dd_whats_next">What's next</span></a></li>
+        <li><a href="/about.html#get-involved"><span data-i18n="nav_dd_get_involved">Get Involved</span></a></li>
+        <li><a href="/about.html#press"><span data-i18n="nav_dd_press">Press</span></a></li>
+      </ul>
+    </li>
   </ul>
   <div class="nav-clock-wrap">
     <span class="nav-clock" id="nav-clock">00:00:00<span class="nav-clock-tz">LIS</span></span>
     <div class="lang-group">
-      <button class="lang-btn active" id="lang-en" aria-label="Switch language to English">EN</button>
-      <button class="lang-btn" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
-      <button class="lang-btn" id="lang-fr" aria-label="Passer le site en francais">FR</button>
+      <button class="lang-btn active" onclick="applyLang('en')" id="lang-en" aria-label="Switch language to English">EN</button>
+      <button class="lang-btn" onclick="applyLang('pt')" id="lang-pt" aria-label="Mudar idioma para portugues">PT</button>
+      <button class="lang-btn" onclick="applyLang('fr')" id="lang-fr" aria-label="Passer le site en francais">FR</button>
     </div>
   </div>
   <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-controls="nav-drawer" aria-expanded="false">
@@ -408,7 +419,8 @@ const T = {
     nav_live:'Live', nav_dd_the_data:'The Data', nav_dd_noise_data:'Noise Data', nav_dd_warning_zone:'Warning Zone',
     nav_archive:'Archive', nav_compare:'Compare', nav_noise_report:'Noise Report', nav_log:'Captain\'s Log',
     nav_research:'Research Data', nav_dd_the_project:'The Project', nav_dd_get_involved:'Get Involved', nav_follow_ig:'Follow @lisbon.finals',
-    nav_data:'Data ▾',
+    nav_dd_data_short:'Data', nav_dd_how_it_works:'How it works', nav_dd_the_station:'The Station', nav_dd_whats_next:'What\'s next', nav_dd_press:'Press',
+    nav_data:'Data ▾', nav_about:'About ▾',
     hero_label:'For researchers & educators',
     hero_title:'Open<br><em>the archive</em>',
     hero_desc:'Everything below comes from the same independent station behind the rest of this site — one fixed terrace under the LPPT approach path, no official airport data mixed in. Free to reuse for coursework, papers or your own analysis. If you publish something with it, we\'d genuinely like to hear about it.',
@@ -457,7 +469,8 @@ const T = {
     nav_live:'Ao Vivo', nav_dd_the_data:'Os Dados', nav_dd_noise_data:'Dados de Ruído', nav_dd_warning_zone:'Zona de alerta',
     nav_archive:'Arquivo', nav_compare:'Comparar', nav_noise_report:'Relatório de Ruído', nav_log:'Diário do Capitão',
     nav_research:'Dados para Investigação', nav_dd_the_project:'O Projecto', nav_dd_get_involved:'Participar', nav_follow_ig:'Seguir @lisbon.finals',
-    nav_data:'Dados ▾',
+    nav_dd_data_short:'Dados', nav_dd_how_it_works:'Como funciona', nav_dd_the_station:'A Estação', nav_dd_whats_next:'O que vem aí', nav_dd_press:'Imprensa',
+    nav_data:'Dados ▾', nav_about:'Sobre ▾',
     hero_label:'Para investigadores e docentes',
     hero_title:'Abrir<br><em>o arquivo</em>',
     hero_desc:'Tudo abaixo vem da mesma estação independente que alimenta o resto deste site — uma varanda fixa sob a rota de aproximação ao LPPT, sem dados oficiais do aeroporto misturados. Livre para reutilizar em trabalhos académicos, artigos ou análises próprias. Se publicares algo com isto, gostaríamos genuinamente de saber.',
@@ -506,7 +519,8 @@ const T = {
     nav_live:'En Direct', nav_dd_the_data:'Les données', nav_dd_noise_data:'Données acoustiques', nav_dd_warning_zone:'Zone d\'alerte',
     nav_archive:'Archives', nav_compare:'Comparer', nav_noise_report:'Rapport de Bruit', nav_log:'Journal du Capitaine',
     nav_research:'Données de recherche', nav_dd_the_project:'Le Projet', nav_dd_get_involved:'Participer', nav_follow_ig:'Suivre @lisbon.finals',
-    nav_data:'Données ▾',
+    nav_dd_data_short:'Données', nav_dd_how_it_works:'Comment ça marche', nav_dd_the_station:'La Station', nav_dd_whats_next:'À venir', nav_dd_press:'Presse',
+    nav_data:'Données ▾', nav_about:'À propos ▾',
     hero_label:'Pour chercheurs et enseignants',
     hero_title:'Ouvrir<br><em>les archives</em>',
     hero_desc:'Tout ce qui suit provient de la même station indépendante qui alimente le reste de ce site — une terrasse fixe sous le couloir d\'approche du LPPT, sans aucune donnée officielle de l\'aéroport mélangée. Libre de réutilisation pour un cours, un mémoire ou votre propre analyse. Si vous publiez quelque chose avec, on aimerait sincèrement le savoir.',

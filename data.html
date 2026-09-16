@@ -596,6 +596,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .night-legend{display:flex;gap:16px;margin-top:12px;}
 
 /* ── FOOTER ── */
+
+/* -- EXPLORE MORE (banner vers Archive/Noise Report/Research) -- */
+.explore-more{padding:40px 48px;max-width:1200px;margin:0 auto;border-top:1px solid var(--border);}
+.explore-more-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.explore-more-kicker::before{content:'';width:24px;height:1px;background:var(--amber);flex-shrink:0;}
+.explore-more-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.explore-more-step{position:relative;text-decoration:none;display:flex;flex-direction:column;padding:0 0 0 18px;border-left:1px solid rgba(245,166,35,.34);transition:border-color .2s;}
+.explore-more-step::before{content:'';position:absolute;left:-4px;top:4px;width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 8px rgba(245,166,35,.06);}
+.explore-more-step:hover{border-color:rgba(245,166,35,.75);}
+.explore-more-step-title{font-size:16px;font-weight:800;color:var(--white);line-height:1.15;margin-bottom:8px;}
+.explore-more-step-desc{font-size:12px;line-height:1.7;color:rgba(240,237,232,.44);}
+.explore-more-step-arrow{font-family:var(--mono);font-size:10px;color:var(--amber);margin-top:12px;letter-spacing:.08em;text-transform:uppercase;}
 .page-footer{border-top:1px solid var(--border);padding:32px 48px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .footer-left{font-family:var(--mono);font-size:9px;color:rgba(240,237,232,.28);letter-spacing:.08em;}
 .footer-updated{font-family:var(--mono);font-size:9px;color:rgba(245,166,35,.3);letter-spacing:.08em;}
@@ -620,7 +632,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .nav-burger{display:flex;}
 }
 @media(max-width:640px){
-  nav,.data-section,.section-tabs-inner,.page-footer{padding-left:20px;padding-right:20px;}
+  nav,.data-section,.section-tabs-inner,.page-footer,.explore-more{padding-left:20px;padding-right:20px;}
+  .explore-more-steps{grid-template-columns:1fr;gap:20px;}
   .nav-clock-wrap{margin-left:auto;padding-left:14px;gap:8px;}
   .nav-clock{display:none;}
   .section-tabs{overflow-x:auto;scrollbar-width:none;}
@@ -1216,6 +1229,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     </div>
   </div>
 </div>
+
+<section class="explore-more" aria-label="More on this site">
+  <div class="explore-more-kicker" data-i18n="explore_kicker">Go deeper</div>
+  <div class="explore-more-steps">
+    <a href="/archive.html" class="explore-more-step">
+      <div class="explore-more-step-title" data-i18n="explore_archive_t">Browse the full archive</div>
+      <div class="explore-more-step-desc" data-i18n="explore_archive_d">Every month, every flight, since day one.</div>
+      <div class="explore-more-step-arrow" data-i18n="explore_archive_a">Open archive</div>
+    </a>
+    <a href="/noise-report.html" class="explore-more-step">
+      <div class="explore-more-step-title" data-i18n="explore_noise_t">Read the noise report</div>
+      <div class="explore-more-step-desc" data-i18n="explore_noise_d">Monthly signal, night operations, station limits.</div>
+      <div class="explore-more-step-arrow" data-i18n="explore_noise_a">View reports</div>
+    </a>
+    <a href="/research.html" class="explore-more-step">
+      <div class="explore-more-step-title" data-i18n="explore_research_t">Download the raw data</div>
+      <div class="explore-more-step-desc" data-i18n="explore_research_d">CSV exports, free to reuse for research or coursework.</div>
+      <div class="explore-more-step-arrow" data-i18n="explore_research_a">Research data</div>
+    </a>
+  </div>
+</section>
 
 </main>
 <footer class="page-footer">
@@ -2027,7 +2061,11 @@ const T = {
     expert_row_lden_day:'Day (07h–20h)', expert_row_lden_eve:'Evening (20h–23h, +5dB)', expert_row_lden_night:'Night (23h–07h, +10dB)',
     expert_daily_caveat:'All figures on this page are single-day calculations — not the multi-year representative averages official EU strategic noise maps are built from.',
     expert_row_lva:'LVA — Italian standard (OpenSky-verified)',
-    expert_lva_copy:'LVA (Livello di Valutazione Aeroportuale) is Italy\'s national event-based airport noise standard — instead of averaging all ambient sound, it counts and weights individual aircraft noise events. This event-based philosophy isn\'t unique to Italy: many countries use similar approaches (SEL — Sound Exposure Level, an international ISO standard used by the FAA, ICAO and UK airports; threshold-crossing event counts elsewhere). Italy has simply codified it into this specific national regulation.'
+    expert_lva_copy:'LVA (Livello di Valutazione Aeroportuale) is Italy\'s national event-based airport noise standard — instead of averaging all ambient sound, it counts and weights individual aircraft noise events. This event-based philosophy isn\'t unique to Italy: many countries use similar approaches (SEL — Sound Exposure Level, an international ISO standard used by the FAA, ICAO and UK airports; threshold-crossing event counts elsewhere). Italy has simply codified it into this specific national regulation.',
+    explore_kicker:'Go deeper',
+    explore_archive_t:'Browse the full archive', explore_archive_d:'Every month, every flight, since day one.', explore_archive_a:'Open archive',
+    explore_noise_t:'Read the noise report', explore_noise_d:'Monthly signal, night operations, station limits.', explore_noise_a:'View reports',
+    explore_research_t:'Download the raw data', explore_research_d:'CSV exports, free to reuse for research or coursework.', explore_research_a:'Research data'
   },
   pt: {
     nav_live:'Ao Vivo',
@@ -2147,7 +2185,11 @@ const T = {
     expert_row_lden_day:'Dia (07h–20h)', expert_row_lden_eve:'Entardecer (20h–23h, +5dB)', expert_row_lden_night:'Noite (23h–07h, +10dB)',
     expert_daily_caveat:'Todos os valores nesta página são cálculos de um único dia — não as médias representativas plurianuais em que assentam os mapas estratégicos de ruído da UE.',
     expert_row_lva:'LVA — norma italiana (verificada via OpenSky)',
-    expert_lva_copy:'O LVA (Livello di Valutazione Aeroportuale) é a norma nacional italiana de ruído aeroportuário, baseada em eventos — em vez de fazer a média de todo o som ambiente, conta e pondera os eventos individuais de ruído de aeronaves. Esta filosofia baseada em eventos não é exclusiva da Itália: muitos países usam abordagens semelhantes (SEL — Sound Exposure Level, uma norma internacional ISO usada pela FAA, ICAO e aeroportos britânicos; contagens de eventos acima de um limiar noutros países). A Itália limitou-se a codificá-la nesta regulamentação nacional específica.'
+    expert_lva_copy:'O LVA (Livello di Valutazione Aeroportuale) é a norma nacional italiana de ruído aeroportuário, baseada em eventos — em vez de fazer a média de todo o som ambiente, conta e pondera os eventos individuais de ruído de aeronaves. Esta filosofia baseada em eventos não é exclusiva da Itália: muitos países usam abordagens semelhantes (SEL — Sound Exposure Level, uma norma internacional ISO usada pela FAA, ICAO e aeroportos britânicos; contagens de eventos acima de um limiar noutros países). A Itália limitou-se a codificá-la nesta regulamentação nacional específica.',
+    explore_kicker:'Ir mais fundo',
+    explore_archive_t:'Ver o arquivo completo', explore_archive_d:'Todos os meses, todos os voos, desde o primeiro dia.', explore_archive_a:'Abrir arquivo',
+    explore_noise_t:'Ler o relatório de ruído', explore_noise_d:'Sinal mensal, operações nocturnas, limites da estação.', explore_noise_a:'Ver relatórios',
+    explore_research_t:'Descarregar os dados brutos', explore_research_d:'Exportações CSV, livres para investigação ou trabalhos académicos.', explore_research_a:'Dados para investigação'
   },
   fr: {
     nav_live:'En Direct',
@@ -2269,7 +2311,11 @@ const T = {
     expert_row_lden_day:'Jour (07h–20h)', expert_row_lden_eve:'Soirée (20h–23h, +5dB)', expert_row_lden_night:'Nuit (23h–07h, +10dB)',
     expert_daily_caveat:'Toutes les valeurs de cette page sont des calculs sur une seule journée — pas les moyennes représentatives pluriannuelles sur lesquelles reposent les cartes stratégiques de bruit de l\'UE.',
     expert_row_lva:'LVA — norme italienne (vérifiée OpenSky)',
-    expert_lva_copy:'Le LVA (Livello di Valutazione Aeroportuale) est la norme nationale italienne de bruit aéroportuaire, basée sur les événements — au lieu de moyenner tout le son ambiant, il compte et pondère les événements sonores individuels liés aux avions. Cette philosophie événementielle n\'est pas propre à l\'Italie : de nombreux pays utilisent des approches similaires (SEL — Sound Exposure Level, une norme internationale ISO utilisée par la FAA, l\'ICAO et les aéroports britanniques ; des comptages d\'événements au-dessus d\'un seuil ailleurs). L\'Italie l\'a simplement codifiée dans cette réglementation nationale spécifique.'
+    expert_lva_copy:'Le LVA (Livello di Valutazione Aeroportuale) est la norme nationale italienne de bruit aéroportuaire, basée sur les événements — au lieu de moyenner tout le son ambiant, il compte et pondère les événements sonores individuels liés aux avions. Cette philosophie événementielle n\'est pas propre à l\'Italie : de nombreux pays utilisent des approches similaires (SEL — Sound Exposure Level, une norme internationale ISO utilisée par la FAA, l\'ICAO et les aéroports britanniques ; des comptages d\'événements au-dessus d\'un seuil ailleurs). L\'Italie l\'a simplement codifiée dans cette réglementation nationale spécifique.',
+    explore_kicker:'Aller plus loin',
+    explore_archive_t:'Parcourir les archives complètes', explore_archive_d:'Chaque mois, chaque vol, depuis le premier jour.', explore_archive_a:'Ouvrir les archives',
+    explore_noise_t:'Lire le rapport de bruit', explore_noise_d:'Signal mensuel, opérations nocturnes, limites de la station.', explore_noise_a:'Voir les rapports',
+    explore_research_t:'Télécharger les données brutes', explore_research_d:'Exports CSV, libres pour la recherche ou un mémoire.', explore_research_a:'Données de recherche'
   }
 };
 
