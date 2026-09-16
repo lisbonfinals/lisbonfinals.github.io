@@ -945,13 +945,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       </div>
     </div>
 
-    <div class="source-note">
-      <span data-i18n-html="expert_source_note">Regulatory figures (Leq_dn, Lden) are pulled directly from
-      <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">Alessandro Annunziato's SensorGrid network</a>
-      official calculation for this station, cross-checked against Lisbon Finals' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF's own provisional estimate, clearly marked as such above.</span>
-      <div class="maturity-flag" data-i18n="expert_maturity">Official data available since Sept 8, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.</div>
-    </div>
-
     <div class="lva-week">
       <div class="lva-week-title" data-i18n="expert_week_title">Last 7 days · Lden</div>
       <div class="lva-week-scroll">
@@ -1000,6 +993,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
         </div>
         <div id="et-chart-wind"></div>
       </div>
+    </div>
+
+    <div class="divergence-note">
+      <div class="divergence-title" data-i18n="expert_source_title">Data source</div>
+      <div class="divergence-copy" data-i18n-html="expert_source_note">Regulatory figures (Leq_dn, Lden) are pulled directly from
+      <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">Alessandro Annunziato's SensorGrid network</a>
+      official calculation for this station, cross-checked against Lisbon Finals' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF's own provisional estimate, clearly marked as such above.</div>
+      <div class="maturity-flag" data-i18n="expert_maturity">Official data available since Sept 8, 2026 — still a young dataset, weekly/monthly trend views will follow as more days accumulate.</div>
     </div>
     <a class="expert-more-data-link" href="archive.html#expertmode" data-i18n="expert_more_data_link">More data &amp; full history →</a>
 
@@ -2007,6 +2008,7 @@ const T = {
     expert_chart_lden_title:'Lden vs the 65dB legal limit', expert_chart_expo_title:'Total exposure ≥70dB trend (minutes)',
     expert_chart_wind_title:'Wind speed & dominant direction (km/h)', expert_legend_wind:'Wind avg',
     expert_more_data_link:'More data & full history →',
+    expert_source_title:'Data source',
     expert_source_note:'Regulatory figures (Leq_dn, Lden) are pulled directly from <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">Alessandro Annunziato\'s SensorGrid network</a> official calculation for this station, cross-checked against Lisbon Finals\' own independent Leq_dn (professional agreement within ±2dB). When the official feed is unavailable for a given day, this card falls back to LF\'s own provisional estimate, clearly marked as such above.',
     wind_kicker:'Wind module', wind_title:'Wind<br><em>rotation</em>', wind_showing:'Showing', wind_latest_btn:'Latest complete day', wind_prev_day:'Previous day', wind_next_day:'Next day',
     wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against the real average aircraft heading tracked that slot, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. A steady spell of wind from the north, common here in summer, is what\'s locally known as the <em>Nortada</em>.',
@@ -2127,6 +2129,7 @@ const T = {
     expert_chart_lden_title:'Lden vs o limite legal de 65dB', expert_chart_expo_title:'Tendência exposição total ≥70dB (minutos)',
     expert_chart_wind_title:'Velocidade e direcção dominante do vento (km/h)', expert_legend_wind:'Vento médio',
     expert_more_data_link:'Mais dados e histórico completo →',
+    expert_source_title:'Fonte dos dados',
     expert_source_note:'Os valores regulamentares (Leq_dn, Lden) vêm directamente do cálculo oficial da <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">rede SensorGrid de Alessandro Annunziato</a> para esta estação, verificado de forma cruzada com o cálculo próprio e independente da Lisbon Finals (concordância profissional dentro de ±2dB). Quando o feed oficial não está disponível nesse dia, este cartão recorre à estimativa própria e provisória da LF, claramente assinalada como tal acima.',
     wind_kicker:'Módulo de vento', wind_title:'Rotação<br><em>do vento</em>', wind_showing:'A mostrar', wind_latest_btn:'Último dia completo', wind_prev_day:'Dia anterior', wind_next_day:'Dia seguinte',
     wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo médio real dos aviões nessa janela — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Um período estável de vento de norte, comum aqui no verão, é o que localmente se chama a <em>Nortada</em>.',
@@ -2249,6 +2252,7 @@ const T = {
     expert_chart_lden_title:'Lden vs la limite légale de 65dB', expert_chart_expo_title:'Tendance exposition totale ≥70dB (minutes)',
     expert_chart_wind_title:'Vitesse et direction dominante du vent (km/h)', expert_legend_wind:'Vent moyen',
     expert_more_data_link:'Plus de données et historique complet →',
+    expert_source_title:'Source des données',
     expert_source_note:'Les chiffres réglementaires (Leq_dn, Lden) viennent directement du calcul officiel du <a href="https://malpensadb.comune.taino.va.it" target="_blank" rel="noopener" class="ref-official">réseau SensorGrid d\'Alessandro Annunziato</a> pour cette station, recoupé avec le calcul propre et indépendant de Lisbon Finals (accord professionnel à ±2dB). Quand le flux officiel n\'est pas disponible pour un jour donné, cette carte bascule sur notre propre estimation provisoire, clairement indiquée comme telle ci-dessus.',
     wind_kicker:'Module vent', wind_title:'Rotation<br><em>du vent</em>', wind_showing:'Affichage', wind_latest_btn:'Dernier jour complet', wind_prev_day:'Jour précédent', wind_next_day:'Jour suivant',
     wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap réel moyen des avions sur cette tranche, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Une période stable de vent du nord, fréquente ici en été, est ce qu\'on appelle localement la <em>Nortada</em>.',
