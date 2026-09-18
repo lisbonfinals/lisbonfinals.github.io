@@ -864,7 +864,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_traffic">City traffic</span><span class="info-row-val">~70 dB</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_anac">ANAC curfew threshold</span><span class="info-row-val amber">≥ 93 dB</span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_critical">Critical Alert</span><span class="info-row-val red">≥ 98.9 dB</span></div>
-      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_vibration">Perceptible vibration (ISO 2631)</span><span class="info-row-val">≈ 1.5 mg</span></div>
+      <div class="info-row"><span class="info-row-lbl" data-i18n="ref_vibration">Perceptible vibration (ISO 2631)</span><span class="info-row-val">≈ 1.5 mg <button class="dbref-inline-link" style="margin-left:8px" onclick="openVibRefModal()" data-i18n="vibref_inline_link">→ vibration examples</button></span></div>
       <div class="info-row"><span class="info-row-lbl" data-i18n="ref_station">Station location</span><span class="info-row-val">38°45'N · 009°09'W</span></div>
     </div>
   </div>
@@ -1226,6 +1226,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     <div class="dbref-tip">
       <div class="dbref-tip-title" data-i18n="dbref_tip_title">Did you know?</div>
       <div class="dbref-tip-body" data-i18n="dbref_tip_body">The decibel scale is logarithmic: a +10dB increase means 10× more acoustic energy, which the ear perceives as roughly twice as loud. So a normal conversation (60dB) actually carries about 1,000× more acoustic energy than a quiet bedroom (30dB) — which is why hearing fatigues so fast past 85dB.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIBRATION QUICK REFERENCE MODAL ── -->
+<div class="dbref-modal-overlay" id="vibrefOverlay" onclick="closeVibRefModal(event)">
+  <div class="dbref-modal">
+    <button class="dbref-modal-close" onclick="closeVibRefModal()" data-i18n="vibref_close">✕ Close</button>
+    <div class="dbref-modal-title" data-i18n="vibref_modal_title">Quick reference: vibration</div>
+    <p class="dbref-modal-intro" data-i18n="vibref_modal_intro">The milli-g (mg) scale measures acceleration — how much the structure actually moves when an aircraft passes overhead. Unlike decibels, it's linear: twice the mg is twice the acceleration, felt directly through the floor rather than heard. Here's what different levels feel like on this terrace:</p>
+    <table class="dbref-table">
+      <thead><tr>
+        <th data-i18n="vibref_th_level">Level</th>
+        <th data-i18n="vibref_th_perception">Perception</th>
+        <th data-i18n="vibref_th_example">Example</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>&lt; 1.5 mg</td><td data-i18n="vibref_row1_perception">Below the human perception threshold</td><td data-i18n="vibref_row1_example">No one would notice</td></tr>
+        <tr><td>1.5–20 mg</td><td data-i18n="vibref_row2_perception">Just perceptible — soft</td><td data-i18n="vibref_row2_example">A distant or high pass</td></tr>
+        <tr><td>20–50 mg</td><td data-i18n="vibref_row3_perception">Clearly felt</td><td data-i18n="vibref_row3_example">A typical landing pass</td></tr>
+        <tr class="warn"><td>50–80 mg</td><td data-i18n="vibref_row4_perception">Noticeable shake</td><td data-i18n="vibref_row4_example">A closer, heavier aircraft</td></tr>
+        <tr class="danger"><td>≥ 80 mg</td><td data-i18n="vibref_row5_perception">Strong, unmistakable</td><td data-i18n="vibref_row5_example">A loud widebody directly overhead</td></tr>
+      </tbody>
+    </table>
+    <div class="dbref-tip">
+      <div class="dbref-tip-title" data-i18n="dbref_tip_title">Did you know?</div>
+      <div class="dbref-tip-body" data-i18n="vibref_tip_body">Unlike sound, which travels through the air, this is the building itself moving — sensed through the floor, not the ears. The ~1.5mg threshold (row one) comes from ISO 2631-1 / BS 6472-1, the standard for human perception of building vibration. Everything above that is this station's own classification, built from thousands of real measured passes.</div>
     </div>
   </div>
 </div>
@@ -1919,7 +1946,7 @@ const io = new IntersectionObserver(entries => {
 sections.forEach(s => io.observe(s));
 
 // ── Nav ──
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDrawer(); closeDbRefModal(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDrawer(); closeDbRefModal(); closeVibRefModal(); } });
 function openDbRefModal() {
   document.getElementById('dbrefOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1927,6 +1954,15 @@ function openDbRefModal() {
 function closeDbRefModal(e) {
   if (e && e.target !== document.getElementById('dbrefOverlay')) return;
   document.getElementById('dbrefOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function openVibRefModal() {
+  document.getElementById('vibrefOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeVibRefModal(e) {
+  if (e && e.target !== document.getElementById('vibrefOverlay')) return;
+  document.getElementById('vibrefOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
 const drawer = document.getElementById('nav-drawer');
@@ -2002,6 +2038,16 @@ const T = {
     dbref_row10_perception:'Extreme danger', dbref_row10_example:'Gunshot, explosion',
     dbref_tip_title:'Did you know?',
     dbref_tip_body:'The decibel scale is logarithmic: a +10dB increase means 10× more acoustic energy, which the ear perceives as roughly twice as loud. So a normal conversation (60dB) actually carries about 1,000× more acoustic energy than a quiet bedroom (30dB) — which is why hearing fatigues so fast past 85dB.',
+    vibref_inline_link:'→ vibration examples', vibref_close:'✕ Close',
+    vibref_modal_title:'Quick reference: vibration',
+    vibref_modal_intro:'The milli-g (mg) scale measures acceleration — how much the structure actually moves when an aircraft passes overhead. Unlike decibels, it\'s linear: twice the mg is twice the acceleration, felt directly through the floor rather than heard. Here\'s what different levels feel like on this terrace:',
+    vibref_th_level:'Level', vibref_th_perception:'Perception', vibref_th_example:'Example',
+    vibref_row1_perception:'Below the human perception threshold', vibref_row1_example:'No one would notice',
+    vibref_row2_perception:'Just perceptible — soft', vibref_row2_example:'A distant or high pass',
+    vibref_row3_perception:'Clearly felt', vibref_row3_example:'A typical landing pass',
+    vibref_row4_perception:'Noticeable shake', vibref_row4_example:'A closer, heavier aircraft',
+    vibref_row5_perception:'Strong, unmistakable', vibref_row5_example:'A loud widebody directly overhead',
+    vibref_tip_body:'Unlike sound, which travels through the air, this is the building itself moving — sensed through the floor, not the ears. The ~1.5mg threshold (row one) comes from ISO 2631-1 / BS 6472-1, the standard for human perception of building vibration. Everything above that is this station\'s own classification, built from thousands of real measured passes.',
     legend_day:'Day (06h–22h)', legend_night:'Night (22h–06h)',
     s3_label:'ANAC regulation monitoring', s3_title:'⚠ Warning<br><em>Zone</em>',
     s3_desc:'Operations observed between midnight and 6am are compared against acoustic alert thresholds — an independent record, not an official ruling on infringements. This week\'s tally:',
@@ -2126,6 +2172,16 @@ const T = {
     dbref_row10_perception:'Perigo extremo', dbref_row10_example:'Tiro, explosão',
     dbref_tip_title:'Sabia que?',
     dbref_tip_body:'A escala de decibéis é logarítmica: um aumento de 10dB representa 10× mais energia acústica, percebida pelo ouvido como aproximadamente o dobro do volume. Uma conversa normal (60dB) transporta assim cerca de 1000× mais energia acústica do que um quarto calmo (30dB) — por isso a audição cansa tão depressa acima dos 85dB.',
+    vibref_inline_link:'→ exemplos de vibração', vibref_close:'✕ Fechar',
+    vibref_modal_title:'Referência rápida: vibração',
+    vibref_modal_intro:'A escala de mili-g (mg) mede a aceleração — o quanto a estrutura realmente se move quando um avião passa por cima. Ao contrário dos decibéis, é linear: o dobro de mg é o dobro da aceleração, sentida directamente através do chão, não ouvida. Eis o que cada nível representa neste terraço:',
+    vibref_th_level:'Nível', vibref_th_perception:'Percepção', vibref_th_example:'Exemplo',
+    vibref_row1_perception:'Abaixo do limiar de percepção humana', vibref_row1_example:'Ninguém notaria',
+    vibref_row2_perception:'Apenas perceptível — suave', vibref_row2_example:'Uma passagem distante ou alta',
+    vibref_row3_perception:'Claramente sentido', vibref_row3_example:'Uma aterragem típica',
+    vibref_row4_perception:'Sacudidela forte', vibref_row4_example:'Um avião mais próximo ou mais pesado',
+    vibref_row5_perception:'Intensa, inconfundível', vibref_row5_example:'Um avião de grande porte mesmo por cima',
+    vibref_tip_body:'Ao contrário do som, que viaja pelo ar, isto é o próprio edifício a mover-se — sentido através do chão, não pelos ouvidos. O limiar de ~1,5mg (primeira linha) vem da norma ISO 2631-1 / BS 6472-1, a referência para a percepção humana de vibração em edifícios. Tudo acima disso é a classificação própria desta estação, construída a partir de milhares de passagens reais medidas.',
     legend_day:'Dia (06h–22h)', legend_night:'Noite (22h–06h)',
     s3_label:'Monitorização ANAC', s3_title:'⚠ Zona de<br><em>alerta</em>',
     s3_desc:'As operações observadas entre a meia-noite e as 6h são comparadas com critérios acústicos de alerta. Este é um registo independente, não uma decisão oficial sobre infrações. Balanço desta semana:',
@@ -2251,6 +2307,16 @@ const T = {
     dbref_row10_perception:'Danger extrême', dbref_row10_example:'Coup de feu, explosion',
     dbref_tip_title:'Le saviez-vous ?',
     dbref_tip_body:'L\'échelle des décibels est logarithmique : une hausse de 10dB représente 10 fois plus d\'énergie sonore, perçue par l\'oreille comme environ un doublement du volume. Une conversation normale (60dB) transporte ainsi environ 1000 fois plus d\'énergie acoustique qu\'une chambre calme (30dB) — d\'où la fatigue auditive rapide au-delà de 85dB.',
+    vibref_inline_link:'→ exemples de vibration', vibref_close:'✕ Fermer',
+    vibref_modal_title:'Repère rapide : la vibration',
+    vibref_modal_intro:'L\'échelle en milli-g (mg) mesure l\'accélération — à quel point la structure bouge réellement quand un avion passe au-dessus. Contrairement aux décibels, elle est linéaire : deux fois plus de mg, c\'est deux fois plus d\'accélération, ressentie directement par le sol plutôt qu\'entendue. Voici ce que chaque niveau représente sur cette terrasse :',
+    vibref_th_level:'Niveau', vibref_th_perception:'Perception', vibref_th_example:'Exemple',
+    vibref_row1_perception:'Sous le seuil de perception humaine', vibref_row1_example:'Personne ne le remarquerait',
+    vibref_row2_perception:'Juste perceptible — doux', vibref_row2_example:'Un passage distant ou en altitude',
+    vibref_row3_perception:'Clairement ressenti', vibref_row3_example:'Un atterrissage typique',
+    vibref_row4_perception:'Secousse forte', vibref_row4_example:'Un avion plus proche ou plus lourd',
+    vibref_row5_perception:'Intense, sans équivoque', vibref_row5_example:'Un gros-porteur juste au-dessus',
+    vibref_tip_body:'Contrairement au son, qui voyage dans l\'air, c\'est le bâtiment lui-même qui bouge — ressenti par le sol, pas par les oreilles. Le seuil d\'environ 1,5mg (première ligne) vient de la norme ISO 2631-1 / BS 6472-1, la référence pour la perception humaine des vibrations dans un bâtiment. Tout ce qui est au-dessus est notre propre classification, construite à partir de milliers de passages réels mesurés.',
     legend_day:'Jour (06h–22h)', legend_night:'Nuit (22h–06h)',
     s3_label:'Surveillance ANAC', s3_title:'⚠ Zone<br><em>d\'alerte</em>',
     s3_desc:'Les opérations observées entre minuit et 6h sont comparées à des critères acoustiques d’alerte. Il s’agit d’un relevé indépendant, et non d’une qualification officielle des infractions. Bilan de la semaine :',
