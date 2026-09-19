@@ -1614,12 +1614,20 @@ function calcRunway(deg,spd){
   if(deg>=315||deg<135) return {rwy:'02',conf:'NNE config — landing over terrace'};
   return {rwy:'20',conf:'SSW config — takeoff over terrace'};
 }
+function cldThumb(url, w){
+  /* Insère une transformation Cloudinary (taille+format+qualité auto) dans une
+     URL déjà toute faite, pour ne plus livrer l'original pleine résolution à
+     chaque vignette (bande passante Cloudinary, cf. quota Free) — sans jamais
+     toucher l'URL originale (les liens "pleine résolution" la gardent intacte). */
+  if(!url || url.indexOf('res.cloudinary.com')===-1 || url.indexOf('/upload/')===-1) return url;
+  return url.replace('/upload/', '/upload/w_'+(w||900)+',q_auto,f_auto/');
+}
 function getPhotoUrl(f, w){
   if(!f) return '';
   /* direct Cloudinary URL (from latest.json 'url' field) */
-  if(f.url && f.url.startsWith('http')) return f.url;
-  if(f.cloudinary_url && f.cloudinary_url.startsWith('http')) return f.cloudinary_url;
-  if(f.photo_url && f.photo_url.startsWith('http')) return f.photo_url;
+  if(f.url && f.url.startsWith('http')) return cldThumb(f.url, w);
+  if(f.cloudinary_url && f.cloudinary_url.startsWith('http')) return cldThumb(f.cloudinary_url, w);
+  if(f.photo_url && f.photo_url.startsWith('http')) return cldThumb(f.photo_url, w);
   var fname = f.filename || f.photo_filename || '';
   if(!fname) return '';
   var pid = fname.replace(/\s+/g,'_').replace(/\.[^.]+$/, '');

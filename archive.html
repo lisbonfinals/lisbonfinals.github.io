@@ -753,13 +753,19 @@ if (location.hash) {
   if (targetBtn) targetBtn.click();
 }
 
+function avCldThumb(url, w) {
+  /* Vignette Cloudinary (taille+format+qualité auto) pour l'affichage grille —
+     l'URL originale (href, pleine résolution) n'est jamais touchée. */
+  if (!url || url.indexOf('res.cloudinary.com') === -1 || url.indexOf('/upload/') === -1) return url;
+  return url.replace('/upload/', '/upload/w_' + (w || 400) + ',q_auto,f_auto/');
+}
 function avRenderPics(containerId, paginationId, items, page, onPage) {
   const el = document.getElementById(containerId);
   const start = (page - 1) * AV_PAGE_SIZE, end = start + AV_PAGE_SIZE;
   const slice = items.slice(start, end);
   el.innerHTML = slice.length ? slice.map(p => `
     <a class="archive-pic-card" href="${p.photo_url}" target="_blank" rel="noopener noreferrer" title="${avT('av_pic_open','Open full resolution')}">
-      <img src="${p.photo_url}" alt="${p.callsign || ''}">
+      <img src="${avCldThumb(p.photo_url, 400)}" alt="${p.callsign || ''}" loading="lazy">
       ${p.score != null ? `<div class="archive-pic-score">★ ${Number(p.score).toFixed(1)}</div>` : ''}
       ${p.is_instagram ? `<div class="archive-pic-badge instagram">${avT('av_instagram_badge','instagram')}</div>` : `<div class="archive-pic-badge">${avT('av_gallery_badge','gallery')}</div>`}
       ${p.spl_db != null ? `<div class="archive-pic-db">${Math.round(p.spl_db)} dB</div>` : ''}

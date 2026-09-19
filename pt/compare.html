@@ -603,6 +603,12 @@ function populateSelects(){
   });
 }
 
+function cmpCldThumb(url, w) {
+  /* Vignette Cloudinary (taille+format+qualité auto) — pas de lien pleine
+     résolution sur cette page, rien d'autre à préserver. */
+  if (!url || url.indexOf('res.cloudinary.com') === -1 || url.indexOf('/upload/') === -1) return url;
+  return url.replace('/upload/', '/upload/w_' + (w || 500) + ',q_auto,f_auto/');
+}
 function renderCard(item, other){
   const t = T[_lang];
   const wrap = document.createElement('div');
@@ -611,7 +617,7 @@ function renderCard(item, other){
   const photo = document.createElement('div');
   photo.className = 'cmp-photo';
   if (item.photoUrl) {
-    photo.innerHTML = `<img src="${item.photoUrl}" alt="${item.name}" loading="lazy">`;
+    photo.innerHTML = `<img src="${cmpCldThumb(item.photoUrl, 500)}" alt="${item.name}" loading="lazy">`;
   } else {
     photo.innerHTML = `<div class="cmp-photo-empty">${t.cmp_no_photo}</div>`;
   }
