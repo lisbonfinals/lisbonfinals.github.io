@@ -540,6 +540,7 @@ nav {
 .sts-num { font-family:var(--mono);font-weight:500;font-size:26px;color:var(--white);letter-spacing:-.01em;line-height:1;margin-bottom:6px; }
 .sts-num.amber { color:var(--amber); }
 .sts-num.blue { color:#60a5fa; }
+.sts-num.red { color:#ef4444; }
 .sts-num.dim { color:rgba(240,237,232,.4); }
 .sts-lbl { font-family:var(--mono);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.32); }
 @media(max-width:768px){
@@ -1310,6 +1311,10 @@ footer {
         <div class="sts-lbl" data-i18n="sts_arrivals_lbl">Arrivals today</div>
       </div>
       <div class="sts-item">
+        <div class="sts-num red" id="sts-helicopter">—</div>
+        <div class="sts-lbl" data-i18n="sts_helicopter_lbl">Helicopter passes</div>
+      </div>
+      <div class="sts-item">
         <div class="sts-num dim" id="sts-diff">—</div>
         <div class="sts-lbl" data-i18n="sts_diff_lbl">Unclassified</div>
       </div>
@@ -1779,8 +1784,9 @@ fetch('https://api.github.com/gists/' + GIST_ID)
         if(s.active_today != null){ set('sts-flights', s.active_today); }
         if(s.departures_today != null){ set('sts-departures', s.departures_today); }
         if(s.arrivals_today != null){ set('sts-arrivals', s.arrivals_today); }
+        set('sts-helicopter', s.helicopter_today || 0);
         if(s.active_today != null && s.departures_today != null && s.arrivals_today != null){
-          set('sts-diff', Math.max(0, s.active_today - s.departures_today - s.arrivals_today));
+          set('sts-diff', Math.max(0, s.active_today - s.departures_today - s.arrivals_today - (s.helicopter_today || 0)));
         }
         if(s.peak_noise_db > 0){ set('rs-peak', s.peak_noise_db.toFixed(1)+' dB'); }
         /* ── stats row big numbers ── */
@@ -2203,6 +2209,7 @@ var INDEX_TRANSLATIONS = {
     sts_flights_lbl: 'Flights today',
     sts_departures_lbl: 'Departures today',
     sts_arrivals_lbl: 'Arrivals today',
+    sts_helicopter_lbl: 'Helicopter passes',
     sts_diff_lbl: 'Unclassified',
     ticker_lbl: 'Live Feed',
     wx_eyebrow: 'Atmospheric conditions',
@@ -2328,6 +2335,7 @@ var INDEX_TRANSLATIONS = {
     sts_flights_lbl: 'Voos hoje',
     sts_departures_lbl: 'Descolagens hoje',
     sts_arrivals_lbl: 'Aterragens hoje',
+    sts_helicopter_lbl: 'Passagens de helicóptero',
     sts_diff_lbl: 'Não classificados',
     ticker_lbl: 'Feed em directo',
     wx_eyebrow: 'Condições atmosféricas',
@@ -2452,6 +2460,7 @@ var INDEX_TRANSLATIONS = {
     sts_flights_lbl: 'Vols aujourd\'hui',
     sts_departures_lbl: 'Décollages aujourd\'hui',
     sts_arrivals_lbl: 'Atterrissages aujourd\'hui',
+    sts_helicopter_lbl: 'Passages d\'hélicoptère',
     sts_diff_lbl: 'Non classifiés',
     ticker_lbl: 'Flux en direct',
     wx_eyebrow: 'Conditions atmosphériques',
