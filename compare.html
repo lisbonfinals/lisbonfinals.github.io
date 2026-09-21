@@ -816,6 +816,22 @@ function cmpRender(){
   grid.appendChild(cardA);
   grid.appendChild(cardB);
 
+  // Aligne les stats des 2 cartes quelle que soit la longueur du descriptif
+  // (demandé par Antonio le 21 sept) — les cartes sont côte à côte seulement
+  // au-dessus de 900px (cf. media query plus bas), pas la peine d'égaliser
+  // en layout empilé mobile.
+  const profileA = cardA.querySelector('.cmp-profile');
+  const profileB = cardB.querySelector('.cmp-profile');
+  if (profileA && profileB) {
+    profileA.style.minHeight = '';
+    profileB.style.minHeight = '';
+    if (window.innerWidth > 900) {
+      const maxH = Math.max(profileA.offsetHeight, profileB.offsetHeight);
+      profileA.style.minHeight = maxH + 'px';
+      profileB.style.minHeight = maxH + 'px';
+    }
+  }
+
   if (cmpMode === 'airline') {
     const fleetA = renderFleetBlock(a);
     const fleetB = renderFleetBlock(b);
