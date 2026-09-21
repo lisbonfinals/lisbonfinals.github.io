@@ -1591,11 +1591,11 @@ function _applyRankBadge(){
   if(!airline){ badge.style.display='none'; return; }
   var q = window._monthlyQuietest, n = window._monthlyNoisiest;
   if(q && airline.toLowerCase().indexOf(q.toLowerCase()) !== -1){
-    badge.textContent = '🟢 Quietest this month';
+    badge.textContent = '🟢 Quietest airline this month';
     badge.className = 'ls-rank-badge quietest';
     badge.style.display = 'block';
   } else if(n && airline.toLowerCase().indexOf(n.toLowerCase()) !== -1){
-    badge.textContent = '🔴 Noisiest this month';
+    badge.textContent = '🔴 Noisiest airline this month';
     badge.className = 'ls-rank-badge noisiest';
     badge.style.display = 'block';
   } else {
