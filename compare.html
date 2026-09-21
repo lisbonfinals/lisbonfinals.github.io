@@ -145,6 +145,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-more-toggle:hover{color:var(--amber);border-color:rgba(245,166,35,.3);}
 .cmp-more-arrow{transition:transform .2s;font-size:9px;}
 .cmp-more-toggle.open .cmp-more-arrow{transform:rotate(180deg);}
+.cmp-phase-toggle{margin-top:12px;}
+.cmp-phase-panel{margin-top:2px;border:1px solid var(--border);border-top:none;border-radius:0 0 4px 4px;padding:10px 12px 12px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cmp-phase-panel[hidden]{display:none;}
 .cmp-fleet{margin-top:2px;border:1px solid var(--border);border-top:none;border-radius:0 0 4px 4px;padding:4px 12px;}
 .cmp-fleet-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11px;}
 .cmp-fleet-row:last-child{border-bottom:none;}
@@ -346,6 +349,7 @@ const T = {
     cmp_phase_takeoff:'Takeoff',
     cmp_stat_takeoff_altitude:'Average takeoff altitude',
     cmp_stat_takeoff_speed:'Average takeoff speed',
+    cmp_phase_detail:'Landing / takeoff detail',
     cmp_more_info:'More info',
     cmp_fleet_flights:'flights',
     cmp_stat_vib_multiple:'~{n}× perception threshold',
@@ -408,6 +412,7 @@ const T = {
     cmp_phase_takeoff:'Descolagem',
     cmp_stat_takeoff_altitude:'Altitude média de descolagem',
     cmp_stat_takeoff_speed:'Velocidade média de descolagem',
+    cmp_phase_detail:'Detalhe de aterragem / descolagem',
     cmp_more_info:'Mais informação',
     cmp_fleet_flights:'voos',
     cmp_stat_vib_multiple:'~{n}× o limiar de perceção',
@@ -470,6 +475,7 @@ const T = {
     cmp_phase_takeoff:'Décollage',
     cmp_stat_takeoff_altitude:'Altitude moyenne au décollage',
     cmp_stat_takeoff_speed:'Vitesse moyenne au décollage',
+    cmp_phase_detail:'Détail atterrissage / décollage',
     cmp_more_info:'Plus d\'infos',
     cmp_fleet_flights:'vols',
     cmp_stat_vib_multiple:'~{n}× le seuil de perception',
@@ -705,6 +711,20 @@ function renderCard(item, other){
     <div class="cmp-stat${louderMaxDb ? ' amber' : ''}"><div class="cmp-stat-val">${item.maxDb != null ? fmt1(item.maxDb) + ' dB' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_db}</div></div>
     <div class="cmp-stat${louderVib ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgVib != null ? fmt1(item.avgVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_avg_vib}</div>${vibSub(item.avgVib)}</div>
     <div class="cmp-stat${louderMaxVib ? ' amber' : ''}"><div class="cmp-stat-val">${item.maxVib != null ? fmt1(item.maxVib) + ' mg' : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_max_vib}</div>${vibSub(item.maxVib)}</div>
+  `;
+  body.appendChild(stats);
+
+  // Landing/Takeoff derrière un toggle (demandé par Antonio le 21 sept — même
+  // pattern que le toggle "More info" de la flotte plus bas, moins de bruit
+  // visuel par défaut sur la fiche).
+  const phaseToggle = document.createElement('button');
+  phaseToggle.type = 'button';
+  phaseToggle.className = 'cmp-more-toggle cmp-phase-toggle';
+  phaseToggle.innerHTML = `<span>${t.cmp_phase_detail}</span><span class="cmp-more-arrow">▾</span>`;
+  const phasePanel = document.createElement('div');
+  phasePanel.className = 'cmp-phase-panel';
+  phasePanel.hidden = true;
+  phasePanel.innerHTML = `
     <div class="cmp-phase-divider">${t.cmp_phase_landing}</div>
     <div class="cmp-stat secondary${louderLandAlt ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgAltitudeLanding != null ? fmtAltitude(item.avgAltitudeLanding) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_landing_altitude}</div></div>
     <div class="cmp-stat secondary${louderLandSpeed ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgSpeedLanding != null ? fmtSpeed(item.avgSpeedLanding) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_landing_speed}</div></div>
@@ -712,7 +732,12 @@ function renderCard(item, other){
     <div class="cmp-stat secondary${louderTakeAlt ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgAltitudeTakeoff != null ? fmtAltitude(item.avgAltitudeTakeoff) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_takeoff_altitude}</div></div>
     <div class="cmp-stat secondary${louderTakeSpeed ? ' amber' : ''}"><div class="cmp-stat-val">${item.avgSpeedTakeoff != null ? fmtSpeed(item.avgSpeedTakeoff) : '—'}</div><div class="cmp-stat-lbl">${t.cmp_stat_takeoff_speed}</div></div>
   `;
-  body.appendChild(stats);
+  phaseToggle.addEventListener('click', () => {
+    phasePanel.hidden = !phasePanel.hidden;
+    phaseToggle.classList.toggle('open', !phasePanel.hidden);
+  });
+  body.appendChild(phaseToggle);
+  body.appendChild(phasePanel);
 
   wrap.appendChild(body);
   return wrap;
