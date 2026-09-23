@@ -1853,7 +1853,11 @@ fetch(GIST_URL + '?t=' + Date.now())
     document.getElementById('s1-flights').textContent = fmt(s.total_flights);
     document.getElementById('s1-photos').textContent = fmt(s.total_photos);
     const pct = s.total_flights ? Math.round(s.total_photos / s.total_flights * 100) : 0;
-    document.getElementById('s1-photos-pct').textContent = pct + '% detection rate';
+    // Période ajoutée le 23 sept 2026 (point 3 audit Codex) — la tuile
+    // voisine "Flights tracked" a déjà son "since May 3, 2026", celle-ci ne
+    // l'avait pas alors que le total porte sur la même fenêtre.
+    const tSinceTxt = (T[_lang] || T['en']).lbl_since || '';
+    document.getElementById('s1-photos-pct').textContent = pct + '% detection rate · ' + tSinceTxt;
     document.getElementById('s1-today').textContent = fmt(s.active_today);
     document.getElementById('s1-rush').textContent = s.rush_hour != null ? 'rush hour: ' + s.rush_hour + 'h' : 'rush hour: —';
     document.getElementById('s1-loud').textContent = fmt(s.loud_flights_95db);
@@ -1867,9 +1871,15 @@ fetch(GIST_URL + '?t=' + Date.now())
     document.getElementById('n-rush').textContent = s.rush_hour != null ? s.rush_hour + 'h' : '—';
     // info cards
     document.getElementById('n-peak-all').textContent = fmtDb(s.peak_noise_db);
-    document.getElementById('n-peak-flight').textContent = s.peak_noise_flight || '—';
+    // Date du record ajoutée le 23 sept 2026 (point 3 audit Codex, lisibilité :
+    // un "all-time peak" sans date ne dit pas depuis quand il tient).
+    const peakDateTxt = s.peak_noise_date ? ' · ' + fmtShortDate(s.peak_noise_date) + ', ' + s.peak_noise_date.slice(0, 4) : '';
+    document.getElementById('n-peak-flight').textContent = (s.peak_noise_flight || '—') + peakDateTxt;
     document.getElementById('n-loud').textContent = fmt(s.loud_flights_95db);
-    document.getElementById('n-avg-night').textContent = fmtDb(s.avg_night_db);
+    // Nombre de vols derrière la moyenne ajouté le 23 sept 2026 (même point 3).
+    const tFlightsWord = (T[_lang] || T['en']).word_flights || 'flights';
+    const nightCountTxt = s.avg_night_db_count ? ' (' + fmt(s.avg_night_db_count) + ' ' + tFlightsWord + ')' : '';
+    document.getElementById('n-avg-night').textContent = fmtDb(s.avg_night_db) + nightCountTxt;
 
     // Expert Mode
     buildExpertMode(data.lva_daily, s);
@@ -2014,11 +2024,12 @@ const T = {
     s2_label:'Acoustic monitoring', s2_title:'Noise data<br><em>for everyone</em>',
     s2_desc:'Real SPL measurements taken at ground level on the terrace facing runway 02. Every pass, every decibel, fully timestamped.',
     noise_report_link:'→ Full noise report',
-    chart_title:'Average dB by hour (today) · SPL',
+    chart_title:'Average peak dB by hour (today)',
     lbl_peak_today:'Peak today', lbl_alltime_peak:'All-time peak',
     lbl_flights_today:'Flights today', lbl_rush_hour:'Rush hour',
     peak_title:'Noise record', lbl_peak_all:'All-time peak', lbl_peak_flight:'Loudest flight',
     lbl_loud_total:'Flights >95 dB total', lbl_avg_night:'Avg night dB (this week)',
+    word_flights:'flights',
     context_title:'Reference levels',
     ref_conversation:'Normal conversation', ref_traffic:'City traffic',
     ref_anac:'ANAC curfew threshold', ref_critical:'Critical Alert', ref_vibration:'Perceptible vibration (ISO 2631)', ref_station:'Station location',
@@ -2148,11 +2159,12 @@ const T = {
     s2_label:'Monitorização acústica', s2_title:'Dados de ruído<br><em>para todos</em>',
     s2_desc:'Medições SPL reais ao nível do solo na varanda virada para a pista 02. Cada passagem, cada decibel, totalmente registado.',
     noise_report_link:'→ Relatório completo de ruído',
-    chart_title:'dB médio por hora (hoje) · SPL',
+    chart_title:'Pico médio dB por hora (hoje)',
     lbl_peak_today:'Pico hoje', lbl_alltime_peak:'Pico histórico',
     lbl_flights_today:'Voos hoje', lbl_rush_hour:'Hora de pico',
     peak_title:'Registo de ruído', lbl_peak_all:'Pico histórico', lbl_peak_flight:'Voo mais ruidoso',
     lbl_loud_total:'Voos >95 dB total', lbl_avg_night:'Média nocturna dB (esta semana)',
+    word_flights:'voos',
     context_title:'Níveis de referência',
     ref_conversation:'Conversa normal', ref_traffic:'Tráfego urbano',
     ref_anac:'Limiar ANAC', ref_critical:'Alerta crítico', ref_vibration:'Vibração perceptível (ISO 2631)', ref_station:'Localização da estação',
@@ -2282,12 +2294,13 @@ const T = {
     s2_label:'Surveillance acoustique', s2_title:'Données acoustiques<br><em>pour tous</em>',
     s2_desc:'Mesures SPL réelles au niveau du sol sur la terrasse face à la piste 02. Chaque passage, chaque décibel, horodaté.',
     noise_report_link:'→ Rapport de bruit complet',
-    chart_title:'dB moyen par heure (aujourd\'hui) · SPL',
+    chart_title:'Pic moyen dB par heure (aujourd\'hui)',
     lbl_peak_today:'Pic aujourd\'hui', lbl_avg_today:'Moyenne aujourd\'hui',
     lbl_alltime_peak:'Pic historique',
     peak_title:'Record de bruit', lbl_peak_flight:'Vol le plus bruyant',
     lbl_peak_all:'Pic historique', lbl_loud_total:'Vols >95 dB au total',
     lbl_avg_night:'dB moyen nocturne (cette semaine)',
+    word_flights:'vols',
     context_title:'Niveaux de référence',
     ref_conversation:'Conversation normale', ref_traffic:'Circulation urbaine',
     ref_anac:'Seuil couvre-feu ANAC', ref_critical:'Alerte critique', ref_vibration:'Vibration perceptible (ISO 2631)', ref_station:'Emplacement de la station',

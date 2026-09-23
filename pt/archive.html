@@ -468,7 +468,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
     <div class="archive-sparkline" id="av-overview-sparkline"></div>
     <div class="stat-grid">
       <div class="stat-card amber"><div class="stat-val" id="av-total-flights">—</div><div class="stat-lbl" data-i18n="av_lbl_total">Total flights</div></div>
-      <div class="stat-card"><div class="stat-val" id="av-avg-db">—</div><div class="stat-lbl" data-i18n="av_lbl_avgdb">Average dB</div></div>
+      <div class="stat-card"><div class="stat-val" id="av-avg-db">—</div><div class="stat-lbl" data-i18n="av_lbl_avgdb">Avg. peak dB per flight</div></div>
       <div class="stat-card red"><div class="stat-val" id="av-max-db">—</div><div class="stat-lbl" data-i18n="av_lbl_maxdb">Peak dB</div></div>
       <div class="stat-card blue"><div class="stat-val" id="av-avg-vib">—</div><div class="stat-lbl" data-i18n="av_lbl_avgvib">Avg. vibration (mg)</div></div>
     </div>
@@ -576,9 +576,9 @@ table.archive-table{width:100%;border-collapse:collapse;}
     <div class="archive-note" data-i18n="av_quality_intro">Transparency panel — known caveats in this dataset, with real counters rather than hidden assumptions.</div>
     <div class="archive-note" data-i18n-html="av_q_airline_methodology"><b>How airlines are identified.</b> Each aircraft is matched to an airline via its live radio callsign first — the most reliable signal we have. When no callsign is available, we fall back to external registry lookups, which are occasionally wrong or outdated. On 22 July 2026 we audited every aircraft with conflicting airline labels across sightings and corrected ~1,070 aircraft (~6,700 flights) where a live callsign contradicted a weaker guess. One editorial call worth flagging: Malta-registered (9H-) aircraft split between two real Ryanair Group entities with different fleets — Malta Air (Boeing 737) and Lauda Europe (Airbus A320/A321) — we now separate them by aircraft type rather than lumping both under "Ryanair". On 19 September 2026 we found a related case with Norwegian Group: it holds two real, separate Air Operator Certificates — Norwegian (Norway, LN- registrations) and Norwegian Air Sweden (Sweden, SE- registrations) — kept apart for the same reason as Malta Air/Lauda Europe above. Our registry fallback was occasionally returning the verbose official designation ("Norwegian Air Shuttle AOC", "Norwegian Air Sweden AOC"/"AOC AB") alongside the short name already used elsewhere on the site for that same entity, creating spurious duplicates. We merged those verbose variants into their matching short name (9 aircraft, 17 flights) without merging the two AOCs together.</div>
     <div class="stat-grid">
-      <div class="stat-card"><div class="stat-val" id="av-q-capped-pct">—</div><div class="stat-lbl" data-i18n="av_q_capped">dB readings capped at 100</div></div>
-      <div class="stat-card"><div class="stat-val" id="av-q-types">—</div><div class="stat-lbl" data-i18n="av_q_types">Aircraft models (raw → merged)</div></div>
-      <div class="stat-card red"><div class="stat-val" id="av-q-military-pct">—</div><div class="stat-lbl" data-i18n="av_q_military">Suspected false-positive "military" tags</div></div>
+      <div class="stat-card"><div class="stat-val" id="av-q-capped-pct">—</div><div class="stat-lbl" data-i18n="av_q_capped">dB readings capped at 100</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
+      <div class="stat-card"><div class="stat-val" id="av-q-types">—</div><div class="stat-lbl" data-i18n="av_q_types">Aircraft models (raw → merged)</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
+      <div class="stat-card red"><div class="stat-val" id="av-q-military-pct">—</div><div class="stat-lbl" data-i18n="av_q_military">Suspected false-positive "military" tags</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
     </div>
     <div class="archive-table-wrap">
       <div class="archive-table-title" data-i18n="av_q_groups">Merged aircraft model groups (naming duplicates)</div>
@@ -613,7 +613,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
 
   <!-- ── EXPERT MODE (Lden / vent / exposition) ── -->
   <div class="archive-view" id="av-view-expertmode">
-    <div class="archive-note" data-i18n-html="av_expert_intro">Full history of the station's regulatory noise metric (Lden, EU/Portugal standard) and wind trend — for today's live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.</div>
+    <div class="archive-note" data-i18n-html="av_expert_intro">Full history of the station's regulatory noise metric (Lden, EU/Portugal standard) and wind trend. "Peak avg" below is the average peak dB per flight for that day — for today's live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.</div>
 
     <div class="archive-table-wrap">
       <div class="archive-table-title">
@@ -730,7 +730,8 @@ function _avRenderSortableTable(tableId) {
   const ths = st.columns.map(c => {
     const active = st.sortKey === c.key;
     const arrow = active ? `<span class="sort-arrow">${st.sortDir === 'asc' ? '▲' : '▼'}</span>` : '';
-    return `<th class="sortable-th" onclick="avSortTableClick('${tableId}','${c.key}')">${c.label}${arrow}</th>`;
+    const tip = c.tooltip ? ` title="${c.tooltip}"` : '';
+    return `<th class="sortable-th"${tip} onclick="avSortTableClick('${tableId}','${c.key}')">${c.label}${arrow}</th>`;
   }).join('');
   const body = st.rows.length ? st.rows.map(st.rowFn).join('') : avEmptyRow(st.columns.length);
   el.innerHTML = `<thead><tr>${ths}</tr></thead><tbody>${body}</tbody>`;
@@ -978,13 +979,13 @@ function avLoadAircraft(type) {
   _avExpandSource.aircraft = d.best_pics.items;
   avInitSortableTable('av-aircraft-table', d.airlines,
     [{key:'airline',label:avT('av_col_airline','Airline')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'},
-     {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number'}, {key:'max_db',label:avT('av_col_maxdb','Max dB'),type:'number'},
+     {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number',tooltip:avT('av_col_avgdb_tip','Average peak dB per flight')}, {key:'max_db',label:avT('av_col_maxdb','Max dB'),type:'number'},
      {key:'avg_vib',label:avT('av_col_avgvib','Avg vib'),type:'number'}, {key:'max_vib',label:avT('av_col_maxvib','Max vib'),type:'number'}],
     r => `<tr class="expandable" data-expand-key="${avAttr(r.airline)}" data-expand-label="${avAttr(r.airline)}"><td class="name-cell">${r.airline_flag || ''} ${r.airline}</td><td>${avFmt(r.n)}</td><td>${r.avg_db != null ? avFmt1(r.avg_db) : '—'}</td><td>${r.max_db != null ? avFmt1(r.max_db) : '—'}</td><td>${r.avg_vib != null ? avFmt1(r.avg_vib) : '—'}</td><td>${r.max_vib != null ? avFmt1(r.max_vib) : '—'}</td></tr>`,
     'n', 'desc');
   avEnableRowExpand(document.getElementById('av-aircraft-table'), 'aircraft', 'airline');
   avInitSortableTable('av-aircraft-monthly', d.monthly_trend,
-    [{key:'month',label:avT('av_col_month','Month')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'}, {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number'}],
+    [{key:'month',label:avT('av_col_month','Month')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'}, {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number',tooltip:avT('av_col_avgdb_tip','Average peak dB per flight')}],
     m => `<tr><td>${m.month}</td><td>${avFmt(m.n)}</td><td>${m.avg_db != null ? avFmt1(m.avg_db) : '—'}</td></tr>`,
     'month', 'asc');
   const paginate = (p) => { avPicsPage.aircraft = p; avRenderPics('av-aircraft-pics', 'av-aircraft-pics-pagination', d.best_pics.items, p, paginate); };
@@ -998,13 +999,13 @@ function avLoadAirline(airline) {
   _avExpandSource.airline = d.best_pics.items;
   avInitSortableTable('av-airline-table', d.aircraft,
     [{key:'aircraft_type',label:avT('av_col_aircraft','Aircraft model')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'},
-     {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number'}, {key:'max_db',label:avT('av_col_maxdb','Max dB'),type:'number'},
+     {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number',tooltip:avT('av_col_avgdb_tip','Average peak dB per flight')}, {key:'max_db',label:avT('av_col_maxdb','Max dB'),type:'number'},
      {key:'avg_vib',label:avT('av_col_avgvib','Avg vib'),type:'number'}, {key:'max_vib',label:avT('av_col_maxvib','Max vib'),type:'number'}],
     r => `<tr class="expandable" data-expand-key="${avAttr(r.aircraft_type)}" data-expand-label="${avAttr(r.aircraft_type)}"><td class="name-cell">${r.aircraft_type}</td><td>${avFmt(r.n)}</td><td>${r.avg_db != null ? avFmt1(r.avg_db) : '—'}</td><td>${r.max_db != null ? avFmt1(r.max_db) : '—'}</td><td>${r.avg_vib != null ? avFmt1(r.avg_vib) : '—'}</td><td>${r.max_vib != null ? avFmt1(r.max_vib) : '—'}</td></tr>`,
     'n', 'desc');
   avEnableRowExpand(document.getElementById('av-airline-table'), 'airline', 'aircraft_type');
   avInitSortableTable('av-airline-monthly', d.monthly_trend,
-    [{key:'month',label:avT('av_col_month','Month')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'}, {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number'}],
+    [{key:'month',label:avT('av_col_month','Month')}, {key:'n',label:avT('av_col_flights','Flights'),type:'number'}, {key:'avg_db',label:avT('av_col_avgdb','Avg dB'),type:'number',tooltip:avT('av_col_avgdb_tip','Average peak dB per flight')}],
     m => `<tr><td>${m.month}</td><td>${avFmt(m.n)}</td><td>${m.avg_db != null ? avFmt1(m.avg_db) : '—'}</td></tr>`,
     'month', 'asc');
   const paginate = (p) => { avPicsPage.airline = p; avRenderPics('av-airline-pics', 'av-airline-pics-pagination', d.best_pics.items, p, paginate); };
@@ -1300,7 +1301,7 @@ function avRenderExpertTable(offset) {
     <th>${avT('av_expert_th_lden_eve', 'Evening')}</th>
     <th>${avT('av_expert_th_lden_night', 'Night')}</th>
     <th>${avT('av_expert_th_lden', 'Lden')}</th>
-    <th>${avT('av_expert_th_peak', 'Peak avg')}</th>
+    <th title="${avT('av_expert_th_peak_tip', 'Average peak dB per flight')}">${avT('av_expert_th_peak', 'Peak avg')}</th>
     <th>${avT('av_expert_th_silent', 'Planes under 70dB')}</th>
     <th>${avT('av_expert_th_expo', 'Expo ≥70dB')}</th>
     <th>${avT('av_expert_th_temp', 'Temp')}</th>
@@ -1494,7 +1495,8 @@ const T = {
     s4_desc:'The station\'s complete dataset since day one — cross-referenced by aircraft model, airline, night regulation, and air quality, with full photo galleries for each.',
     av_tab_overview:'Overview', av_tab_aircraft:'By Aircraft', av_tab_airline:'By Airline',
     av_tab_anac:'Night · ANAC', av_tab_rare:'Rare · Military', av_tab_quality:'Data Quality', av_tab_pollution:'Air Quality', av_tab_expertmode:'Expert Mode',
-    av_lbl_total:'Total flights', av_lbl_avgdb:'Average dB', av_lbl_maxdb:'Peak dB', av_lbl_avgvib:'Avg. vibration (mg)',
+    av_lbl_total:'Total flights', av_lbl_avgdb:'Avg. peak dB per flight', av_lbl_maxdb:'Peak dB', av_lbl_avgvib:'Avg. vibration (mg)',
+    av_col_avgdb_tip:'Average peak dB per flight', av_expert_th_peak_tip:'Average peak dB per flight',
     av_top_airlines:'Top airlines', av_top_aircraft:'Top aircraft models', av_click_hint:'click to explore', av_month_all:'All time',
     av_correlation_title:'Sound × vibration correlation', av_photos_title:'Best photos', av_monthly_trend:'Monthly trend',
     av_anac_week:'Night flights (00h–06h)', av_anac_critical:'Critical Alerts', av_anac_orange:'Orange Alerts', av_anac_l2:'Level 2 Alerts',
@@ -1509,7 +1511,7 @@ const T = {
     av_poll_dist:'Air quality distribution', av_poll_chart_title:'Traffic × PM2.5 over time',
     av_gran_day:'Day', av_gran_week:'Week', av_gran_month:'Month',
     av_poll_legend_flights:'Flights', av_poll_legend_pm:'Avg. PM2.5', av_poll_legend_temp:'Outside temperature', av_poll_flights_note:'for context only, barely varies',
-    av_expert_intro:'Full history of the station\'s regulatory noise metric (Lden, EU/Portugal standard) and wind trend — for today\'s live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.',
+    av_expert_intro:'Full history of the station\'s regulatory noise metric (Lden, EU/Portugal standard) and wind trend. "Peak avg" below is the average peak dB per flight for that day — for today\'s live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.',
     av_expert_week_title:'7-day table · Lden', av_expert_chart_title:'Lden, peak, wind & exposure over time',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Day', av_expert_th_lden_eve:'Evening', av_expert_th_lden_night:'Night', av_expert_th_lden:'Lden', av_expert_th_peak:'Peak avg', av_expert_th_silent:'Planes under 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp', av_expert_th_winddir:'Wind dir', av_expert_th_windspeed:'Wind',
     av_expert_legend_lden:'Lden (65dB limit dashed)', av_expert_legend_peak:'Peak avg', av_expert_legend_wind:'Wind avg (km/h)', av_expert_legend_expo:'Exposure ≥70dB (min)', av_expert_chart_empty:'Not enough consecutive periods yet',
@@ -1549,7 +1551,8 @@ const T = {
     s4_desc:'O conjunto de dados completo da estação desde o primeiro dia — cruzado por modelo de aeronave, companhia aérea, regulamentação nocturna e qualidade do ar, com galerias de fotos completas para cada um.',
     av_tab_overview:'Visão geral', av_tab_aircraft:'Por Aeronave', av_tab_airline:'Por Companhia',
     av_tab_anac:'Noite · ANAC', av_tab_rare:'Raros · Militares', av_tab_quality:'Qualidade dos Dados', av_tab_pollution:'Qualidade do Ar', av_tab_expertmode:'Modo Perito',
-    av_lbl_total:'Voos totais', av_lbl_avgdb:'dB médio', av_lbl_maxdb:'Pico dB', av_lbl_avgvib:'Vibração média (mg)',
+    av_lbl_total:'Voos totais', av_lbl_avgdb:'Pico médio dB por voo', av_lbl_maxdb:'Pico dB', av_lbl_avgvib:'Vibração média (mg)',
+    av_col_avgdb_tip:'Pico médio dB por voo', av_expert_th_peak_tip:'Pico médio dB por voo',
     av_top_airlines:'Principais companhias', av_top_aircraft:'Principais modelos', av_click_hint:'clique para explorar', av_month_all:'Todo o período',
     av_correlation_title:'Correlação som × vibração', av_photos_title:'Melhores fotos', av_monthly_trend:'Tendência mensal',
     av_anac_week:'Voos nocturnos (00h–06h)', av_anac_critical:'Alertas críticos', av_anac_orange:'Alertas laranja', av_anac_l2:'Alertas de nível 2',
@@ -1564,7 +1567,7 @@ const T = {
     av_poll_dist:'Distribuição da qualidade do ar', av_poll_chart_title:'Tráfego × PM2.5 ao longo do tempo',
     av_gran_day:'Dia', av_gran_week:'Semana', av_gran_month:'Mês',
     av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_legend_temp:'Temperatura exterior', av_poll_flights_note:'apenas contexto, varia pouco',
-    av_expert_intro:'Histórico completo da métrica regulamentar de ruído da estação (Lden, norma UE/Portugal) e da tendência do vento — para os valores em directo de hoje e a metodologia, ver <a href="data.html#expert-mode" class="av-link">Dados → Modo Perito</a>.',
+    av_expert_intro:'Histórico completo da métrica regulamentar de ruído da estação (Lden, norma UE/Portugal) e da tendência do vento. "Pico médio" abaixo é o pico médio em dB por voo nesse dia — para os valores em directo de hoje e a metodologia, ver <a href="data.html#expert-mode" class="av-link">Dados → Modo Perito</a>.',
     av_expert_week_title:'Tabela de 7 dias · Lden', av_expert_chart_title:'Lden, pico, vento e exposição ao longo do tempo',
     av_expert_th_date:'Data', av_expert_th_lden_day:'Dia', av_expert_th_lden_eve:'Entardecer', av_expert_th_lden_night:'Noite', av_expert_th_lden:'Lden', av_expert_th_peak:'Pico médio', av_expert_th_silent:'Aviões abaixo de 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direcção', av_expert_th_windspeed:'Vento',
     av_expert_legend_lden:'Lden (limite 65dB tracejado)', av_expert_legend_peak:'Pico médio', av_expert_legend_wind:'Vento médio (km/h)', av_expert_legend_expo:'Exposição ≥70dB (min)', av_expert_chart_empty:'Ainda sem períodos consecutivos suficientes',
@@ -1604,7 +1607,8 @@ const T = {
     s4_desc:'L\'ensemble des observations de la station depuis le premier jour — recoupées par modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo correspondant à chaque sélection.',
     av_tab_overview:'Vue d\'ensemble', av_tab_aircraft:'Par modèle d\'avion', av_tab_airline:'Par compagnie',
     av_tab_anac:'Nuit · ANAC', av_tab_rare:'Rares · Militaires', av_tab_quality:'Qualité des données', av_tab_pollution:'Qualité de l\'air', av_tab_expertmode:'Mode Expert',
-    av_lbl_total:'Vols totaux', av_lbl_avgdb:'dB moyen', av_lbl_maxdb:'Pic dB', av_lbl_avgvib:'Vibration moyenne (mg)',
+    av_lbl_total:'Vols totaux', av_lbl_avgdb:'Pic moyen dB par vol', av_lbl_maxdb:'Pic dB', av_lbl_avgvib:'Vibration moyenne (mg)',
+    av_col_avgdb_tip:'Pic moyen dB par vol', av_expert_th_peak_tip:'Pic moyen dB par vol',
     av_top_airlines:'Top compagnies', av_top_aircraft:'Top modèles d\'avion', av_click_hint:'cliquer pour explorer', av_month_all:'Tout l\'historique',
     av_correlation_title:'Corrélation son × vibration', av_photos_title:'Meilleures photos', av_monthly_trend:'Tendance mensuelle',
     av_anac_week:'Vols nocturnes (00h–06h)', av_anac_critical:'Alertes critiques', av_anac_orange:'Alertes orange', av_anac_l2:'Alertes de niveau 2',
@@ -1619,7 +1623,7 @@ const T = {
     av_poll_dist:'Répartition de la qualité de l\'air', av_poll_chart_title:'Trafic × PM2.5 dans le temps',
     av_gran_day:'Jour', av_gran_week:'Semaine', av_gran_month:'Mois',
     av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_legend_temp:'Température extérieure', av_poll_flights_note:'contexte uniquement, varie peu',
-    av_expert_intro:'Historique complet de la métrique réglementaire de bruit de la station (Lden, norme UE/Portugal) et de la tendance du vent — pour les chiffres en direct d\'aujourd\'hui et la méthodologie, voir <a href="data.html#expert-mode" class="av-link">Données → Mode Expert</a>.',
+    av_expert_intro:'Historique complet de la métrique réglementaire de bruit de la station (Lden, norme UE/Portugal) et de la tendance du vent. « Pic moyen » ci-dessous est le pic moyen en dB par vol ce jour-là — pour les chiffres en direct d\'aujourd\'hui et la méthodologie, voir <a href="data.html#expert-mode" class="av-link">Données → Mode Expert</a>.',
     av_expert_week_title:'Tableau 7 jours · Lden', av_expert_chart_title:'Lden, pic, vent et exposition dans le temps',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Jour', av_expert_th_lden_eve:'Soirée', av_expert_th_lden_night:'Nuit', av_expert_th_lden:'Lden', av_expert_th_peak:'Pic moyen', av_expert_th_silent:'Avions sous 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direction', av_expert_th_windspeed:'Vent',
     av_expert_legend_lden:'Lden (limite 65dB en pointillés)', av_expert_legend_peak:'Pic moyen', av_expert_legend_wind:'Vent moyen (km/h)', av_expert_legend_expo:'Exposition ≥70dB (min)', av_expert_chart_empty:'Pas encore assez de périodes consécutives',

@@ -893,7 +893,8 @@ function renderReport(report) {
         </div>
         <div class="hero-stat">
           <div class="hero-stat-val">${report.avg_db||'—'}<span class="unit"> dB</span></div>
-          <div class="hero-stat-lbl">Avg Noise Level</div>
+          <div class="hero-stat-lbl">Avg Peak dB</div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--gray);margin-top:5px">per flight, this month</div>
         </div>
         <div class="hero-stat indigo">
           <div class="hero-stat-val">${(report.night_flights||0).toLocaleString()}</div>
@@ -921,14 +922,14 @@ function renderReport(report) {
         <div>
           <div class="podium-section-title noisy">
             <span class="dot"></span>
-            Noisiest Airlines — Avg dB
+            Noisiest Airlines — Avg Peak dB <span style="font-family:var(--mono);font-size:9px;text-transform:none;letter-spacing:0;color:var(--gray)">per flight</span>
           </div>
           ${buildPodium(report.top_airlines_noisy, 'n')}
         </div>
         <div>
           <div class="podium-section-title quiet">
             <span class="dot"></span>
-            Quietest Airlines — Avg dB
+            Quietest Airlines — Avg Peak dB <span style="font-family:var(--mono);font-size:9px;text-transform:none;letter-spacing:0;color:var(--gray)">per flight</span>
           </div>
           ${buildPodium(report.top_airlines_quiet, 'q')}
         </div>
@@ -936,7 +937,7 @@ function renderReport(report) {
 
       <div class="podium-section-title noisy" style="margin-top:8px">
         <span class="dot"></span>
-        Manufacturers — Noise Ranking
+        Manufacturers — Noise Ranking <span style="font-family:var(--mono);font-size:9px;text-transform:none;letter-spacing:0;color:var(--gray)">avg. peak dB per flight</span>
       </div>
       ${buildMfrTable(report.top_mfr_noisy)}
 
