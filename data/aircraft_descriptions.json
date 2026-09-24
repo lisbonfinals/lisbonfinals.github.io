@@ -738,5 +738,23 @@
     },
     "length_m": 31.24,
     "passenger_capacity": 132
+  },
+  {
+    "aircraft_type": "737NG 6D6",
+    "description": {
+      "en": "737NG 6D6 is the Boeing 737-600 built for Air Algérie, the smallest member of the 737 Next Generation family. It serves shorter routes with lower demand than the far more common -700 and -800.",
+      "pt": "737NG 6D6 é o Boeing 737-600 construído para a Air Algérie, o menor membro da família 737 Next Generation. Serve rotas mais curtas e com menos procura do que os muito mais comuns -700 e -800.",
+      "fr": "Le 737NG 6D6 est le Boeing 737-600 construit pour Air Algérie, le plus petit membre de la famille 737 Next Generation. Il dessert des lignes plus courtes, avec une demande plus faible que les -700 et -800, bien plus répandus."
+    },
+    "manufacturer": "Boeing",
+    "first_flight_year": 1998,
+    "entry_into_service_year": 1999,
+    "fun_fact": {
+      "en": "Its first example, 7T-VJQ, joined Air Algérie in April 2002.",
+      "pt": "O seu primeiro exemplar, 7T-VJQ, entrou ao serviço da Air Algérie em abril de 2002.",
+      "fr": "Son premier exemplaire, 7T-VJQ, a rejoint Air Algérie en avril 2002."
+    },
+    "length_m": 31.24,
+    "passenger_capacity": 101
   }
 ]
