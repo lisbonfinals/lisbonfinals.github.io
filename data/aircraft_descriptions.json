@@ -686,6 +686,24 @@
     "passenger_capacity": 14
   },
   {
+    "aircraft_type": "CL60",
+    "description": {
+      "en": "CL60 is the ICAO type code of the Challenger 600 family (600, 601, 604 and later variants), large business jets originally launched by Canadair. It was one of the first wide-cabin business jets, and several versions still fly today.",
+      "pt": "CL60 é o código OACI da família Challenger 600 (600, 601, 604 e variantes posteriores), grandes jatos executivos lançados originalmente pela Canadair. Foi um dos primeiros jatos executivos de cabine larga, e várias versões ainda voam hoje.",
+      "fr": "CL60 est le code OACI de la famille Challenger 600 (600, 601, 604 et variantes ultérieures), de grands jets d’affaires lancés à l’origine par Canadair. Ce fut l’un des premiers jets d’affaires à cabine large, et plusieurs versions volent encore aujourd’hui."
+    },
+    "manufacturer": "Bombardier Aerospace",
+    "first_flight_year": 1978,
+    "entry_into_service_year": 1980,
+    "fun_fact": {
+      "en": "Its airframe was the starting point for the CRJ regional jet family.",
+      "pt": "A sua fuselagem serviu de ponto de partida para a família de jatos regionais CRJ.",
+      "fr": "Sa cellule a servi de point de départ à la famille de jets régionaux CRJ."
+    },
+    "length_m": 20.85,
+    "passenger_capacity": 12
+  },
+  {
     "aircraft_type": "DA 62",
     "description": {
       "en": "The DA62 is a light twin-engine propeller aircraft built from composite materials. It seats up to seven people and uses aviation diesel engines that can run on jet fuel.",
