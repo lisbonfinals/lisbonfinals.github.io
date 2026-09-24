@@ -678,5 +678,140 @@
       "pt": "As empenas dos seus aviões apresentam retratos de personalidades nórdicas.",
       "fr": "Les empennages de ses avions portent les portraits de personnalités nordiques."
     }
+  },
+  {
+    "airline": "Cabo Verde Airlines",
+    "description": {
+      "en": "Cabo Verde Airlines is the national airline of Cape Verde. Founded in 1958 as TACV, it took its current commercial name in 2018. Its hub is on the island of Sal.",
+      "pt": "A Cabo Verde Airlines é a companhia aérea nacional de Cabo Verde. Fundada em 1958 como TACV, adoptou o nome comercial actual em 2018. O seu hub fica na ilha do Sal.",
+      "fr": "Cabo Verde Airlines est la compagnie nationale du Cap-Vert. Fondée en 1958 sous le nom de TACV, elle a adopté son nom commercial actuel en 2018. Son hub se trouve sur l’île de Sal."
+    },
+    "founded_year": 1958,
+    "headquarters": { "en": "Sal, Cape Verde", "pt": "Sal, Cabo Verde", "fr": "Sal, Cap-Vert" },
+    "fun_fact": {
+      "en": "Its first Boeing 737 MAX 8 joined the fleet in July 2023.",
+      "pt": "O seu primeiro Boeing 737 MAX 8 juntou-se à frota em julho de 2023.",
+      "fr": "Son premier Boeing 737 MAX 8 a rejoint la flotte en juillet 2023."
+    }
+  },
+  {
+    "airline": "Star Air",
+    "description": {
+      "en": "Star Air is a Danish cargo airline of the Maersk group, also known as Maersk Air Cargo. It flies freighters, mainly Boeing 767s, for express carriers such as UPS.",
+      "pt": "A Star Air é uma companhia aérea dinamarquesa de carga do grupo Maersk, também conhecida como Maersk Air Cargo. Opera aviões de carga, sobretudo Boeing 767, para transportadores expresso como a UPS.",
+      "fr": "Star Air est une compagnie aérienne cargo danoise du groupe Maersk, aussi connue sous le nom de Maersk Air Cargo. Elle exploite des avions cargo, surtout des Boeing 767, pour des transporteurs express comme UPS."
+    },
+    "founded_year": 1987,
+    "headquarters": { "en": "Copenhagen, Denmark", "pt": "Copenhaga, Dinamarca", "fr": "Copenhague, Danemark" },
+    "fun_fact": {
+      "en": "A 1993 deal with UPS launched its operations from Cologne/Bonn with Boeing 727s.",
+      "pt": "Um acordo com a UPS, em 1993, lançou as suas operações a partir de Colónia/Bona com Boeing 727.",
+      "fr": "Un accord avec UPS, en 1993, a lancé ses opérations depuis Cologne/Bonn avec des Boeing 727."
+    }
+  },
+  {
+    "airline": "Bulgaria Air",
+    "description": {
+      "en": "Bulgaria Air is the flag carrier of Bulgaria, founded in 2002 as the successor to the insolvent Balkan Bulgarian Airlines. Based in Sofia, it operates Airbus and Embraer jets on short- and medium-haul routes.",
+      "pt": "A Bulgaria Air é a companhia de bandeira da Bulgária, fundada em 2002 como sucessora da falida Balkan Bulgarian Airlines. Sediada em Sófia, opera jatos Airbus e Embraer em rotas de curto e médio curso.",
+      "fr": "Bulgaria Air est la compagnie nationale de la Bulgarie, fondée en 2002 pour succéder à Balkan Bulgarian Airlines, en faillite. Basée à Sofia, elle exploite des Airbus et des Embraer sur des lignes court et moyen-courriers."
+    },
+    "founded_year": 2002,
+    "headquarters": { "en": "Sofia, Bulgaria", "pt": "Sófia, Bulgária", "fr": "Sofia, Bulgarie" },
+    "fun_fact": {
+      "en": "Its first Airbus A220 was delivered in 2023.",
+      "pt": "O seu primeiro Airbus A220 foi entregue em 2023.",
+      "fr": "Son premier Airbus A220 a été livré en 2023."
+    }
+  },
+  {
+    "airline": "Azores Airlines",
+    "description": {
+      "en": "Azores Airlines is the international airline of the SATA group, based in Ponta Delgada in the Azores. It connects the archipelago with mainland Portugal, Europe and North America.",
+      "pt": "A Azores Airlines é a companhia internacional do grupo SATA, com sede em Ponta Delgada, nos Açores. Liga o arquipélago ao continente português, à Europa e à América do Norte.",
+      "fr": "Azores Airlines est la compagnie internationale du groupe SATA, basée à Ponta Delgada, aux Açores. Elle relie l’archipel au Portugal continental, à l’Europe et à l’Amérique du Nord."
+    },
+    "founded_year": 1990,
+    "headquarters": { "en": "Ponta Delgada, Azores, Portugal", "pt": "Ponta Delgada, Açores, Portugal", "fr": "Ponta Delgada, Açores, Portugal" },
+    "fun_fact": {
+      "en": "It began in 1990 as OceanAir, became SATA Internacional in 1998 and adopted its current name in 2015.",
+      "pt": "Nasceu em 1990 como OceanAir, passou a SATA Internacional em 1998 e adoptou o nome actual em 2015.",
+      "fr": "Née en 1990 sous le nom d’OceanAir, elle est devenue SATA Internacional en 1998 puis a pris son nom actuel en 2015."
+    }
+  },
+  {
+    "airline": "Capital Airlines",
+    "description": {
+      "en": "Capital Airlines, officially Beijing Capital Airlines, is a Chinese airline of the Hainan Airlines group. It began in 1995 as Deer Jet and has carried its current name since 2010.",
+      "pt": "A Capital Airlines, oficialmente Beijing Capital Airlines, é uma companhia aérea chinesa do grupo Hainan Airlines. Nasceu em 1995 como Deer Jet e tem o nome actual desde 2010.",
+      "fr": "Capital Airlines, officiellement Beijing Capital Airlines, est une compagnie aérienne chinoise du groupe Hainan Airlines. Née en 1995 sous le nom de Deer Jet, elle porte son nom actuel depuis 2010."
+    },
+    "founded_year": 1995,
+    "headquarters": { "en": "Beijing, China", "pt": "Pequim, China", "fr": "Pékin, Chine" },
+    "fun_fact": {
+      "en": "In summer 2026 it opened a direct Beijing to Lisbon route, flown with Airbus A330s.",
+      "pt": "No verão de 2026 abriu uma ligação sem escalas entre Pequim e Lisboa, operada com Airbus A330.",
+      "fr": "À l’été 2026, elle a ouvert une liaison directe Pékin-Lisbonne, assurée en Airbus A330."
+    }
+  },
+  {
+    "airline": "Nouvelair Tunisie",
+    "description": {
+      "en": "Nouvelair Tunisie is a Tunisian airline based in Monastir. It flies mostly Airbus A320s and links Tunisia with Europe.",
+      "pt": "A Nouvelair Tunisie é uma companhia aérea tunisina sediada em Monastir. Opera sobretudo Airbus A320 e liga a Tunísia à Europa.",
+      "fr": "Nouvelair Tunisie est une compagnie aérienne tunisienne basée à Monastir. Elle exploite surtout des Airbus A320 et relie la Tunisie à l’Europe."
+    },
+    "founded_year": 1989,
+    "headquarters": { "en": "Monastir, Tunisia", "pt": "Monastir, Tunísia", "fr": "Monastir, Tunisie" },
+    "fun_fact": {
+      "en": "It began as Air Liberté Tunisie in 1989 and started flying on 21 March 1990.",
+      "pt": "Começou como Air Liberté Tunisie em 1989 e iniciou os voos a 21 de março de 1990.",
+      "fr": "Elle a débuté sous le nom d’Air Liberté Tunisie en 1989 et a commencé à voler le 21 mars 1990."
+    }
+  },
+  {
+    "airline": "VistaJet",
+    "description": {
+      "en": "VistaJet is a Malta-based private aviation company that operates a large fleet of business jets. Customers pay for the hours they fly instead of buying an aircraft.",
+      "pt": "A VistaJet é uma empresa de aviação privada sediada em Malta, que opera uma grande frota de jatos executivos. Os clientes pagam as horas de voo em vez de comprarem uma aeronave.",
+      "fr": "VistaJet est une société d’aviation privée basée à Malte, qui exploite une grande flotte de jets d’affaires. Les clients paient les heures volées au lieu d’acheter un avion."
+    },
+    "founded_year": 2004,
+    "headquarters": { "en": "Luqa, Malta", "pt": "Luqa, Malta", "fr": "Luqa, Malte" },
+    "fun_fact": {
+      "en": "It moved its corporate headquarters to Malta in March 2016.",
+      "pt": "Transferiu a sua sede para Malta em março de 2016.",
+      "fr": "Elle a transféré son siège à Malte en mars 2016."
+    }
+  },
+  {
+    "airline": "Air X Charter",
+    "description": {
+      "en": "Air X Charter, known as AirX, is a Malta-based private jet operator and one of the largest in Europe. It offers charters, aircraft management and leasing.",
+      "pt": "A Air X Charter, conhecida como AirX, é um operador de jatos privados sediado em Malta e um dos maiores da Europa. Oferece voos fretados, gestão e leasing de aeronaves.",
+      "fr": "Air X Charter, connue sous le nom d’AirX, est un opérateur de jets privés basé à Malte et l’un des plus importants d’Europe. Elle propose des vols affrétés, la gestion et la location d’avions."
+    },
+    "founded_year": 2011,
+    "headquarters": { "en": "Kalkara, Malta", "pt": "Kalkara, Malta", "fr": "Kalkara, Malte" },
+    "fun_fact": {
+      "en": "Its fleet ranges from Challenger 850 business jets to an Airbus A340.",
+      "pt": "A sua frota vai de jatos executivos Challenger 850 a um Airbus A340.",
+      "fr": "Sa flotte va des jets d’affaires Challenger 850 à un Airbus A340."
+    }
+  },
+  {
+    "airline": "Sky Express Greece",
+    "description": {
+      "en": "Sky Express is a Greek airline based in Heraklion, on Crete. It links Greek islands and the mainland with each other and with international destinations, mainly with Airbus A320neo jets.",
+      "pt": "A Sky Express é uma companhia aérea grega sediada em Heraclião, em Creta. Liga ilhas e continente gregos entre si e a destinos internacionais, sobretudo com jatos Airbus A320neo.",
+      "fr": "Sky Express est une compagnie aérienne grecque basée à Héraklion, en Crète. Elle relie les îles et le continent grecs entre eux et à des destinations internationales, surtout avec des Airbus A320neo."
+    },
+    "founded_year": 2005,
+    "headquarters": { "en": "Heraklion, Greece", "pt": "Heraclião, Grécia", "fr": "Héraklion, Grèce" },
+    "fun_fact": {
+      "en": "It was founded in 2005 by two former Olympic Airlines executives.",
+      "pt": "Foi fundada em 2005 por dois antigos dirigentes da Olympic Airlines.",
+      "fr": "Elle a été fondée en 2005 par deux anciens dirigeants d’Olympic Airlines."
+    }
   }
 ]
