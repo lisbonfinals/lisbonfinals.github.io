@@ -242,6 +242,48 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-note.warn{border-color:rgba(239,68,68,.25);}
 .archive-note.warn b{color:var(--red);}
 
+/* ── Qualité des données : bloc compagnies (26 sept 2026) ── */
+.av-aq-h{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin:8px 0 12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.av-aq-h em{font-style:normal;opacity:.7;text-transform:none;letter-spacing:0;}
+.av-aq-title{font-family:var(--sans);font-size:20px;font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin-bottom:6px;color:var(--white);}
+.av-aq-lede{font-family:var(--sans);font-size:13px;line-height:1.7;color:rgba(240,237,232,.6);max-width:66ch;margin-bottom:18px;}
+.av-aq-cascade{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.av-aq-step{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:start;padding:16px 20px;border-bottom:1px solid var(--border);}
+.av-aq-step:last-child{border-bottom:none;}
+.av-aq-n{font-family:var(--mono);font-size:22px;font-weight:300;color:var(--blue);line-height:1;}
+.av-aq-step:last-child .av-aq-n{color:rgba(240,237,232,.38);}
+.av-aq-step h3{font-family:var(--sans);font-size:14px;font-weight:600;margin-bottom:4px;color:var(--white);}
+.av-aq-step p{font-family:var(--sans);font-size:12px;line-height:1.65;color:rgba(240,237,232,.6);max-width:62ch;}
+.av-aq-step code{font-family:var(--mono);font-size:11px;color:var(--white);background:var(--dark3);border:1px solid var(--border);padding:1px 5px;border-radius:2px;}
+.av-aq-pill{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:2px;white-space:nowrap;border:1px solid;}
+.av-aq-pill.hi{color:var(--green);border-color:rgba(34,197,94,.35);}
+.av-aq-pill.mid{color:var(--blue);border-color:rgba(96,165,250,.35);}
+.av-aq-pill.lo{color:var(--amber);border-color:rgba(245,166,35,.35);}
+.av-aq-pill.none{color:rgba(240,237,232,.38);border-color:var(--border2);}
+.av-aq-legend{display:flex;flex-wrap:wrap;gap:10px 28px;margin:12px 0 24px;font-family:var(--sans);font-size:12px;color:rgba(240,237,232,.6);line-height:1.6;}
+.av-aq-legend b{font-weight:400;margin-right:6px;}
+.av-aq-2col{grid-template-columns:repeat(2,1fr);}
+.av-aq-choices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px;}
+.av-aq-choice{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:18px 20px;}
+.av-aq-tag{font-family:var(--mono);font-size:10px;color:var(--amber);margin-bottom:8px;letter-spacing:.04em;}
+.av-aq-choice h3{font-family:var(--sans);font-size:14px;font-weight:600;margin-bottom:6px;color:var(--white);}
+.av-aq-choice p{font-family:var(--sans);font-size:12px;line-height:1.65;color:rgba(240,237,232,.6);}
+.archive-table td.av-aq-text{font-family:var(--sans);font-size:12px;line-height:1.6;white-space:normal;min-width:320px;vertical-align:top;}
+.archive-table td.av-aq-text b{color:var(--white);font-weight:600;}
+.archive-table td.av-aq-date{vertical-align:top;color:rgba(240,237,232,.6);font-variant-numeric:tabular-nums;}
+.archive-table td.av-aq-qty,.archive-table th.av-aq-qty{text-align:right;vertical-align:top;font-variant-numeric:tabular-nums;}
+.av-aq-kind{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:2px;margin-right:6px;vertical-align:1px;}
+.av-aq-kind.fix{color:var(--blue);background:rgba(96,165,250,.08);}
+.av-aq-kind.fill{color:var(--blue);background:rgba(96,165,250,.08);}
+.av-aq-kind.merge{color:var(--amber);background:rgba(245,166,35,.08);}
+.av-aq-kind.split{color:var(--green);background:rgba(34,197,94,.08);}
+.av-aq-foot{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin:-14px 0 32px;line-height:1.6;}
+@media (max-width:700px){
+  .av-aq-2col,.av-aq-choices{grid-template-columns:1fr;}
+  .av-aq-step{grid-template-columns:32px 1fr;}
+  .av-aq-step .av-aq-pill{grid-column:2;justify-self:start;}
+}
+
 /* mini bar chart */
 .archive-chart-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px 20px 14px;margin-bottom:24px;}
 .archive-chart-title{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
@@ -574,7 +616,30 @@ table.archive-table{width:100%;border-collapse:collapse;}
   <!-- ── DATA QUALITY ── -->
   <div class="archive-view" id="av-view-quality">
     <div class="archive-note" data-i18n="av_quality_intro">Transparency panel — known caveats in this dataset, with real counters rather than hidden assumptions.</div>
-    <div class="archive-note" data-i18n-html="av_q_airline_methodology"><b>How airlines are identified.</b> Each aircraft is matched to an airline via its live radio callsign first — the most reliable signal we have. When no callsign is available, we fall back to external registry lookups, which are occasionally wrong or outdated. On 22 July 2026 we audited every aircraft with conflicting airline labels across sightings and corrected ~1,070 aircraft (~6,700 flights) where a live callsign contradicted a weaker guess. One editorial call worth flagging: Malta-registered (9H-) aircraft split between two real Ryanair Group entities with different fleets — Malta Air (Boeing 737) and Lauda Europe (Airbus A320/A321) — we now separate them by aircraft type rather than lumping both under "Ryanair". On 19 September 2026 we found a related case with Norwegian Group: it holds two real, separate Air Operator Certificates — Norwegian (Norway, LN- registrations) and Norwegian Air Sweden (Sweden, SE- registrations) — kept apart for the same reason as Malta Air/Lauda Europe above. Our registry fallback was occasionally returning the verbose official designation ("Norwegian Air Shuttle AOC", "Norwegian Air Sweden AOC"/"AOC AB") alongside the short name already used elsewhere on the site for that same entity, creating spurious duplicates. We merged those verbose variants into their matching short name (9 aircraft, 17 flights) without merging the two AOCs together.</div>
+    <div class="av-aq-h"><span data-i18n="av_aq_method_h">Airlines · method</span></div>
+    <h2 class="av-aq-title" data-i18n="av_aq_title">How we identify an aircraft's airline</h2>
+    <p class="av-aq-lede" data-i18n="av_aq_lede"></p>
+    <div class="av-aq-cascade">
+      <div class="av-aq-step"><div class="av-aq-n">1</div><div><h3 data-i18n="av_aq_s1_t"></h3><p data-i18n-html="av_aq_s1_p"></p></div><span class="av-aq-pill hi" data-i18n="av_aq_s1_pill"></span></div>
+      <div class="av-aq-step"><div class="av-aq-n">2</div><div><h3 data-i18n="av_aq_s2_t"></h3><p data-i18n="av_aq_s2_p"></p></div><span class="av-aq-pill mid" data-i18n="av_aq_s2_pill"></span></div>
+      <div class="av-aq-step"><div class="av-aq-n">3</div><div><h3 data-i18n="av_aq_s3_t"></h3><p data-i18n="av_aq_s3_p"></p></div><span class="av-aq-pill lo" data-i18n="av_aq_s3_pill"></span></div>
+      <div class="av-aq-step"><div class="av-aq-n">4</div><div><h3 data-i18n="av_aq_s4_t"></h3><p data-i18n="av_aq_s4_p"></p></div><span class="av-aq-pill none" data-i18n="av_aq_s4_pill"></span></div>
+    </div>
+    <div class="av-aq-legend"><span><b>🇵🇹</b><span data-i18n="av_aq_leg_flag"></span></span><span><b>✈️</b><span data-i18n="av_aq_leg_plane"></span></span></div>
+    <div class="stat-grid av-aq-2col">
+      <div class="stat-card green"><div class="stat-val" id="av-aq-identified-pct">—</div><div class="stat-lbl" data-i18n="av_aq_identified">Flights with an identified airline</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
+      <div class="stat-card amber"><div class="stat-val" id="av-aq-unidentified">—</div><div class="stat-lbl" data-i18n="av_aq_unidentified">Flights with no airline</div><div class="stat-sub" id="av-aq-unidentified-sub">—</div></div>
+    </div>
+    <div class="av-aq-h"><span data-i18n="av_aq_choices_h"></span><em data-i18n="av_aq_choices_em"></em></div>
+    <div class="av-aq-choices">
+      <div class="av-aq-choice"><div class="av-aq-tag" data-i18n="av_aq_c1_tag"></div><h3 data-i18n="av_aq_c1_t"></h3><p data-i18n="av_aq_c1_p"></p></div>
+      <div class="av-aq-choice"><div class="av-aq-tag" data-i18n="av_aq_c2_tag"></div><h3 data-i18n="av_aq_c2_t"></h3><p data-i18n="av_aq_c2_p"></p></div>
+    </div>
+    <div class="av-aq-h"><span data-i18n="av_aq_hist_h"></span><em data-i18n="av_aq_hist_em"></em></div>
+    <div class="archive-table-wrap">
+      <div class="archive-table-scroll"><table class="archive-table" id="av-aq-history"></table></div>
+    </div>
+    <p class="av-aq-foot" data-i18n="av_aq_foot"></p>
     <div class="stat-grid">
       <div class="stat-card"><div class="stat-val" id="av-q-capped-pct">—</div><div class="stat-lbl" data-i18n="av_q_capped">dB readings capped at 100</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
       <div class="stat-card"><div class="stat-val" id="av-q-types">—</div><div class="stat-lbl" data-i18n="av_q_types">Aircraft models (raw → merged)</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
@@ -1114,9 +1179,57 @@ function avRenderRare() {
   paginate(avPicsPage.rare);
 }
 
+// ── Historique des corrections compagnies (onglet Qualité des données) ──
+// Ajouter une correction = ajouter une ligne EN TÊTE (plus récente d'abord).
+// kind : merge | fix | fill | split ; approx:true affiche « ≈ ».
+const AV_AIRLINE_HISTORY = [
+  { date:'2026-09-26', kind:'merge', qty:21,
+    en:'<b>Sky Express Greece</b> and <b>Sky Express</b> merged. Same airline, same fleet, two labels depending on the source.',
+    pt:'<b>Sky Express Greece</b> e <b>Sky Express</b> reunidas. A mesma companhia e a mesma frota, com dois nomes consoante a fonte.',
+    fr:'<b>Sky Express Greece</b> et <b>Sky Express</b> réunies. Même compagnie, même flotte, deux libellés différents selon la source.' },
+  { date:'2026-09-26', kind:'fill', qty:1100, approx:true,
+    en:'Flights left <b>without an airline</b> although the aircraft was known. Added step 2 (same aircraft seen elsewhere), a second registry (hexdb.io) and 9 missing airline codes, including Transavia and DHL (European Air Transport).',
+    pt:'Voos que ficaram <b>sem companhia</b> embora o avião fosse conhecido. Acrescentámos a etapa 2 (o mesmo avião visto noutros voos), um segundo registo (hexdb.io) e 9 códigos de companhias em falta, incluindo a Transavia e a DHL (European Air Transport).',
+    fr:'Vols restés <b>sans compagnie</b> alors que l\'avion était connu. Ajout de l\'étape 2 (même avion vu ailleurs), d\'un second registre (hexdb.io) et de 9 codes de compagnies manquants, dont Transavia et DHL (European Air Transport).' },
+  { date:'2026-09-19', kind:'merge', qty:74,
+    en:'Duplicate labels: <b>Norwegian</b> ("AOC" variants), <b>TAAG Angola Airlines</b>, <b>Cabo Verde Airlines</b>.',
+    pt:'Nomes em duplicado: <b>Norwegian</b> (variantes "AOC"), <b>TAAG Angola Airlines</b>, <b>Cabo Verde Airlines</b>.',
+    fr:'Libellés en double : <b>Norwegian</b> (variantes « AOC »), <b>TAAG Angola Airlines</b>, <b>Cabo Verde Airlines</b>.' },
+  { date:'2026-07-22', kind:'split', qty:460, approx:true,
+    en:'Ryanair Group: <b>Malta Air</b> and <b>Lauda Europe</b> told apart (see above). Genuine Eurowings, Wizz Air and LOT flights that had been overwritten by mistake got their airline back.',
+    pt:'Grupo Ryanair: <b>Malta Air</b> e <b>Lauda Europe</b> distinguidas (ver acima). Os voos verdadeiros da Eurowings, Wizz Air e LOT, sobrescritos por engano, recuperaram a sua companhia.',
+    fr:'Groupe Ryanair : <b>Malta Air</b> et <b>Lauda Europe</b> distinguées (voir plus haut). Les vrais vols Eurowings, Wizz Air et LOT, écrasés par erreur, ont retrouvé leur compagnie.' },
+  { date:'2026-07-22', kind:'fix', qty:6700, approx:true,
+    en:'Full audit: when a real radio callsign contradicted a registry estimate, the callsign now wins, past flights included.',
+    pt:'Auditoria completa: quando um indicativo de rádio real contradizia uma estimativa do registo, o indicativo passa a prevalecer, incluindo nos voos passados.',
+    fr:'Audit complet : quand un indicatif radio réel contredisait une estimation du registre, l\'indicatif l\'emporte désormais, y compris pour les vols passés.' },
+  { date:'2026-07-16', kind:'fix', qty:2,
+    en:'Two <b>Delta Air Lines</b> Airbus shown as "Air Algérie": their hex code started with that airline\'s code letters.',
+    pt:'Dois Airbus da <b>Delta Air Lines</b> apresentados como "Air Algérie": o seu código hex começava pelas letras do código dessa companhia.',
+    fr:'Deux Airbus <b>Delta Air Lines</b> affichés « Air Algérie » : leur code hex commençait par les lettres du code de cette compagnie.' },
+];
+function avRenderAirlineQuality() {
+  const loc = _lang === 'pt' ? 'pt-PT' : (_lang === 'fr' ? 'fr-FR' : 'en-GB');
+  const total = (archiveData.overview && archiveData.overview.total_flights) || archiveData.quality.total_flights || 0;
+  const identified = Object.values(archiveData.by_airline || {}).reduce((s, a) => s + (a.total_flights || 0), 0);
+  const missing = Math.max(0, total - identified);
+  const pct = total ? (100 * identified / total) : null;
+  document.getElementById('av-aq-identified-pct').textContent = pct == null ? '—' : pct.toLocaleString(loc, {minimumFractionDigits:1, maximumFractionDigits:1}) + ' %';
+  document.getElementById('av-aq-unidentified').textContent = missing.toLocaleString(loc);
+  document.getElementById('av-aq-unidentified-sub').textContent = avT('av_aq_out_of', 'out of {n} flights').replace('{n}', total.toLocaleString(loc));
+  const rows = AV_AIRLINE_HISTORY.map(h => {
+    const d = new Date(h.date + 'T12:00:00').toLocaleDateString(loc, {day:'numeric', month:'short', year:'numeric'});
+    const q = (h.approx ? '≈ ' : '') + h.qty.toLocaleString(loc);
+    return `<tr><td class="av-aq-date">${d}</td><td class="av-aq-text"><span class="av-aq-kind ${h.kind}">${avT('av_aq_k_' + h.kind, h.kind)}</span>${h[_lang] || h.en}</td><td class="av-aq-qty">${q}</td></tr>`;
+  }).join('');
+  document.getElementById('av-aq-history').innerHTML =
+    `<thead><tr><th>${avT('av_aq_col_date','Date')}</th><th>${avT('av_aq_col_fix','Correction')}</th><th class="av-aq-qty">${avT('av_aq_col_qty','Flights affected')}</th></tr></thead><tbody>${rows}</tbody>`;
+}
+
 // ── Data Quality ──
 function avRenderQuality() {
   const d = archiveData.quality;
+  avRenderAirlineQuality();
   document.getElementById('av-q-capped-pct').textContent = d.db_capped_pct + '%';
   document.getElementById('av-q-types').textContent = d.aircraft_types_before + ' → ' + d.aircraft_types_after;
   document.getElementById('av-q-military-pct').textContent = d.military_suspect_pct + '%';
@@ -1503,7 +1616,44 @@ const T = {
     av_anac_offenders:'Top companies (by alerts)', av_anac_infractions:'Alerts',
     av_rare_total:'Rare / military flights detected', av_rare_bytype_title:'By type', av_rare_clear_filter:'show all',
     av_quality_intro:'Transparency panel — known caveats in this dataset, with real counters rather than hidden assumptions.',
-    av_q_airline_methodology:'<b>How airlines are identified.</b> Each aircraft is matched to an airline via its live radio callsign first — the most reliable signal we have. When no callsign is available, we fall back to external registry lookups, which are occasionally wrong or outdated. On 22 July 2026 we audited every aircraft with conflicting airline labels across sightings and corrected ~1,070 aircraft (~6,700 flights) where a live callsign contradicted a weaker guess. One editorial call worth flagging: Malta-registered (9H-) aircraft split between two real Ryanair Group entities with different fleets — Malta Air (Boeing 737) and Lauda Europe (Airbus A320/A321) — we now separate them by aircraft type rather than lumping both under "Ryanair". On 19 September 2026 we found a related case with Norwegian Group: it holds two real, separate Air Operator Certificates — Norwegian (Norway, LN- registrations) and Norwegian Air Sweden (Sweden, SE- registrations) — kept apart for the same reason as Malta Air/Lauda Europe above. Our registry fallback was occasionally returning the verbose official designation ("Norwegian Air Shuttle AOC", "Norwegian Air Sweden AOC"/"AOC AB") alongside the short name already used elsewhere on the site for that same entity, creating spurious duplicates. We merged those verbose variants into their matching short name (9 aircraft, 17 flights) without merging the two AOCs together.',
+    av_aq_method_h:'Airlines · method',
+    av_aq_title:'How we identify an aircraft\'s airline',
+    av_aq_lede:'For each flight we try these sources in order and stop at the first one that answers. Every aircraft broadcasts a unique, permanent radio address (hex code): that is what lets us recognise the same airframe from one flight to the next.',
+    av_aq_s1_t:'The flight\'s radio callsign',
+    av_aq_s1_p:'The code the aircraft broadcasts in flight, e.g. <code>TAP96AW</code> for TAP Air Portugal. It names the airline actually operating that flight.',
+    av_aq_s1_pill:'Most reliable',
+    av_aq_s2_t:'The same aircraft, seen on other flights',
+    av_aq_s2_p:'Some aircraft reach the station before broadcasting their callsign. If all their other passes point to one single airline, we use it.',
+    av_aq_s2_pill:'Reliable',
+    av_aq_s3_t:'Aircraft registries',
+    av_aq_s3_p:'Public databases adsbdb.com, then hexdb.io as a backup. They give the declared owner, which can be a leasing company or outdated information.',
+    av_aq_s3_pill:'Estimate',
+    av_aq_s4_t:'Unidentified',
+    av_aq_s4_p:'No source knows the aircraft: often a military aircraft, a private jet or an airframe too new for the registries. We leave it blank rather than guess.',
+    av_aq_s4_pill:'Blank',
+    av_aq_leg_flag:'Country flag: airline confirmed by a radio callsign',
+    av_aq_leg_plane:'Airline inferred from a registry, not confirmed',
+    av_aq_identified:'Flights with an identified airline',
+    av_aq_unidentified:'Flights with no airline',
+    av_aq_out_of:'out of {n} flights',
+    av_aq_choices_h:'Airlines · editorial choices',
+    av_aq_choices_em:'what we keep apart, and why',
+    av_aq_c1_tag:'9H- · Malta',
+    av_aq_c1_t:'Malta Air and Lauda Europe kept apart',
+    av_aq_c1_p:'Two real Ryanair Group airlines, both registered in Malta, with different fleets: Malta Air flies Boeing 737s, Lauda Europe flies Airbus A320/A321s. We tell them apart by aircraft type rather than filing everything under "Ryanair". Private jets registered in Malta are never assigned to this group.',
+    av_aq_c2_tag:'LN- / SE- · Norway, Sweden',
+    av_aq_c2_t:'Norwegian and Norwegian Air Sweden kept apart',
+    av_aq_c2_p:'Norwegian Group holds two separate Air Operator Certificates, one Norwegian and one Swedish. In regulatory terms these are two airlines, so we keep them apart, as with Malta Air and Lauda Europe.',
+    av_aq_hist_h:'Airlines · correction history',
+    av_aq_hist_em:'most recent first',
+    av_aq_col_date:'Date',
+    av_aq_col_fix:'Correction',
+    av_aq_col_qty:'Flights affected',
+    av_aq_k_merge:'Merge',
+    av_aq_k_fix:'Fixed',
+    av_aq_k_fill:'Filled in',
+    av_aq_k_split:'Split',
+    av_aq_foot:'Each correction also applies to flights already archived, not just new ones.',
     av_q_capped:'dB readings capped at 100', av_q_types:'Aircraft models (raw → merged)',
     av_q_military:'Suspected false-positive "military" tags', av_q_groups:'Merged aircraft model groups (naming duplicates)',
     av_poll_intro:'Ambient PM sensor readings captured alongside each flight event — a timing reference, not proof that aircraft caused the reading (a barbecue or cigarette on the terrace affects it just as much).',
@@ -1559,7 +1709,44 @@ const T = {
     av_anac_offenders:'Principais companhias (por alertas)', av_anac_infractions:'Alertas',
     av_rare_total:'Voos raros / militares detectados', av_rare_bytype_title:'Por tipo', av_rare_clear_filter:'mostrar tudo',
     av_quality_intro:'Painel de transparência — limitações conhecidas neste conjunto de dados, com contadores reais em vez de suposições ocultas.',
-    av_q_airline_methodology:'<b>Como identificamos as companhias aéreas.</b> Cada aeronave é primeiro associada a uma companhia através do seu indicativo de rádio em directo — o sinal mais fiável de que dispomos. Quando não existe um indicativo, recorremos a bases de registo externas, por vezes incorrectas ou desatualizadas. Em 22 de julho de 2026 auditámos todas as aeronaves com etiquetas de companhia contraditórias entre avistamentos e corrigimos ~1.070 aeronaves (~6.700 voos) em que um indicativo real contradizia uma estimativa menos fiável. Uma decisão editorial a destacar: as aeronaves matriculadas em Malta (9H-) dividem-se entre duas entidades reais do grupo Ryanair com frotas diferentes — Malta Air (Boeing 737) e Lauda Europe (Airbus A320/A321) — agora separamo-las por tipo de aeronave em vez de as juntar todas sob "Ryanair". Em 19 de setembro de 2026 encontrámos um caso semelhante com o grupo Norwegian: opera dois Certificados de Operador Aéreo (AOC) reais e distintos — Norwegian (Noruega, matrículas LN-) e Norwegian Air Sweden (Suécia, matrículas SE-) — mantidos separados pela mesma razão que a Malta Air/Lauda Europe acima. A nossa base de registo externa devolvia por vezes a designação oficial extensa ("Norwegian Air Shuttle AOC", "Norwegian Air Sweden AOC"/"AOC AB") a par do nome curto já usado noutros locais do site para essa mesma entidade, criando duplicados espúrios. Fundimos essas variantes extensas no respetivo nome curto (9 aeronaves, 17 voos) sem fundir os dois AOC entre si.',
+    av_aq_method_h:'Companhias aéreas · método',
+    av_aq_title:'Como identificamos a companhia de um avião',
+    av_aq_lede:'Para cada voo, consultamos estas fontes por ordem e paramos na primeira que responde. Cada avião emite um endereço de rádio único e permanente (código hex): é isso que nos permite reconhecer o mesmo aparelho de um voo para o outro.',
+    av_aq_s1_t:'O indicativo de rádio do voo',
+    av_aq_s1_p:'O código que o avião emite em voo, por exemplo <code>TAP96AW</code> para a TAP Air Portugal. Indica a companhia que opera efectivamente esse voo.',
+    av_aq_s1_pill:'O mais fiável',
+    av_aq_s2_t:'O mesmo avião, visto noutros voos',
+    av_aq_s2_p:'Alguns aviões passam pela estação antes de emitirem o indicativo. Se todas as suas outras passagens apontam para uma única companhia, usamo-la.',
+    av_aq_s2_pill:'Fiável',
+    av_aq_s3_t:'Registos de matrícula',
+    av_aq_s3_p:'Bases públicas adsbdb.com e, em alternativa, hexdb.io. Indicam o proprietário declarado, que pode ser uma empresa de leasing ou uma informação desactualizada.',
+    av_aq_s3_pill:'Estimativa',
+    av_aq_s4_t:'Não identificado',
+    av_aq_s4_p:'Nenhuma fonte conhece o avião: muitas vezes um avião militar, um jacto privado ou um aparelho demasiado recente para os registos. Preferimos deixar em branco a adivinhar.',
+    av_aq_s4_pill:'Em branco',
+    av_aq_leg_flag:'Bandeira do país: companhia confirmada por um indicativo de rádio',
+    av_aq_leg_plane:'Companhia deduzida de um registo, não confirmada',
+    av_aq_identified:'Voos com companhia identificada',
+    av_aq_unidentified:'Voos sem companhia',
+    av_aq_out_of:'em {n} voos',
+    av_aq_choices_h:'Companhias aéreas · escolhas editoriais',
+    av_aq_choices_em:'o que separamos, e porquê',
+    av_aq_c1_tag:'9H- · Malta',
+    av_aq_c1_t:'Malta Air e Lauda Europe separadas',
+    av_aq_c1_p:'Duas companhias reais do grupo Ryanair, ambas com matrícula maltesa e frotas diferentes: a Malta Air voa em Boeing 737, a Lauda Europe em Airbus A320/A321. Distinguimo-las pelo tipo de avião em vez de juntar tudo sob "Ryanair". Os jactos privados com matrícula maltesa nunca são atribuídos a este grupo.',
+    av_aq_c2_tag:'LN- / SE- · Noruega, Suécia',
+    av_aq_c2_t:'Norwegian e Norwegian Air Sweden separadas',
+    av_aq_c2_p:'O grupo Norwegian detém dois Certificados de Operador Aéreo distintos, um norueguês e um sueco. Em termos regulamentares são duas companhias: mantemo-las separadas, tal como a Malta Air e a Lauda Europe.',
+    av_aq_hist_h:'Companhias aéreas · histórico de correcções',
+    av_aq_hist_em:'da mais recente à mais antiga',
+    av_aq_col_date:'Data',
+    av_aq_col_fix:'Correcção',
+    av_aq_col_qty:'Voos afectados',
+    av_aq_k_merge:'Fusão',
+    av_aq_k_fix:'Corrigido',
+    av_aq_k_fill:'Completado',
+    av_aq_k_split:'Separação',
+    av_aq_foot:'Cada correcção aplica-se também aos voos já arquivados, e não apenas aos novos.',
     av_q_capped:'Leituras dB no limite de 100', av_q_types:'Modelos de aeronave (bruto → fundido)',
     av_q_military:'Etiquetas "militar" suspeitas de falso positivo', av_q_groups:'Grupos de modelos fundidos (duplicados de nomenclatura)',
     av_poll_intro:'Leituras do sensor de partículas captadas junto de cada voo detectado — uma referência temporal, não prova de que a aeronave causou a leitura (um churrasco ou cigarro na varanda afecta-a igualmente).',
@@ -1615,7 +1802,44 @@ const T = {
     av_anac_offenders:'Principales compagnies (alertes)', av_anac_infractions:'Alertes',
     av_rare_total:'Vols rares / militaires détectés', av_rare_bytype_title:'Par type', av_rare_clear_filter:'tout afficher',
     av_quality_intro:'Panneau de transparence — limites connues de ce jeu de données, avec des compteurs réels plutôt que des suppositions cachées.',
-    av_q_airline_methodology:'<b>Comment on identifie les compagnies aériennes.</b> Chaque avion est d\'abord rattaché à une compagnie grâce à son indicatif radio en direct — le signal le plus fiable dont on dispose. Sans indicatif, on s\'appuie sur des bases de registre externes, parfois inexactes ou obsolètes. Le 22 juillet 2026, on a audité tous les avions dont les étiquettes de compagnie variaient selon les vols et corrigé ~1 070 avions (~6 700 vols) lorsqu’un indicatif radio réel contredisait une estimation moins fiable. Un choix éditorial à signaler : les avions immatriculés à Malte (9H-) se répartissent entre deux entités du groupe Ryanair aux flottes différentes — Malta Air (Boeing 737) et Lauda Europe (Airbus A320/A321) — on les sépare désormais par type d\'avion plutôt que de tout regrouper sous "Ryanair". Le 19 septembre 2026, on a trouvé un cas similaire avec le groupe Norwegian : il détient deux véritables certificats de transporteur aérien (AOC) distincts — Norwegian (Norvège, immatriculations LN-) et Norwegian Air Sweden (Suède, immatriculations SE-) — qu\'on garde séparés pour la même raison que Malta Air/Lauda Europe ci-dessus. Notre base de registre externe renvoyait parfois la désignation officielle longue ("Norwegian Air Shuttle AOC", "Norwegian Air Sweden AOC"/"AOC AB") à côté du nom court déjà utilisé ailleurs sur le site pour cette même entité, créant des doublons artificiels. On a fusionné ces variantes verbeuses dans leur nom court correspondant (9 avions, 17 vols) sans fusionner les deux AOC entre eux.',
+    av_aq_method_h:'Compagnies aériennes · méthode',
+    av_aq_title:'Comment on identifie la compagnie d\'un avion',
+    av_aq_lede:'Pour chaque vol, on essaie ces sources dans l\'ordre et on s\'arrête à la première qui répond. Chaque avion émet une adresse radio unique et permanente (code hex) : c\'est elle qui permet de reconnaître le même appareil d\'un vol à l\'autre.',
+    av_aq_s1_t:'L\'indicatif radio du vol',
+    av_aq_s1_p:'Le code que l\'avion émet en vol, par exemple <code>TAP96AW</code> pour TAP Air Portugal. C\'est la compagnie qui exploite réellement ce vol.',
+    av_aq_s1_pill:'Le plus fiable',
+    av_aq_s2_t:'Le même avion, vu sur d\'autres vols',
+    av_aq_s2_p:'Certains avions arrivent au-dessus de la station avant d\'avoir émis leur indicatif. Si tous leurs autres passages désignent une seule et même compagnie, on la reprend.',
+    av_aq_s2_pill:'Fiable',
+    av_aq_s3_t:'Les registres d\'immatriculation',
+    av_aq_s3_p:'Bases publiques adsbdb.com, puis hexdb.io en secours. Elles donnent le propriétaire déclaré, qui peut être un loueur ou une information ancienne.',
+    av_aq_s3_pill:'Estimation',
+    av_aq_s4_t:'Non identifié',
+    av_aq_s4_p:'Aucune source ne connaît l\'avion : souvent un appareil militaire, un jet privé ou un avion trop récent pour les registres. On laisse vide plutôt que de deviner.',
+    av_aq_s4_pill:'Vide',
+    av_aq_leg_flag:'Drapeau du pays : compagnie confirmée par un indicatif radio',
+    av_aq_leg_plane:'Compagnie déduite d\'un registre, non confirmée',
+    av_aq_identified:'Vols avec compagnie identifiée',
+    av_aq_unidentified:'Vols sans compagnie',
+    av_aq_out_of:'sur {n} vols',
+    av_aq_choices_h:'Compagnies aériennes · choix éditoriaux',
+    av_aq_choices_em:'ce qu\'on sépare, et pourquoi',
+    av_aq_c1_tag:'9H- · Malte',
+    av_aq_c1_t:'Malta Air et Lauda Europe séparées',
+    av_aq_c1_p:'Deux compagnies réelles du groupe Ryanair, immatriculées à Malte, avec des flottes différentes : Malta Air vole en Boeing 737, Lauda Europe en Airbus A320/A321. On les distingue par type d\'avion plutôt que de tout ranger sous « Ryanair ». Les jets privés immatriculés à Malte ne sont jamais rattachés à ce groupe.',
+    av_aq_c2_tag:'LN- / SE- · Norvège, Suède',
+    av_aq_c2_t:'Norwegian et Norwegian Air Sweden séparées',
+    av_aq_c2_p:'Le groupe Norwegian détient deux certificats de transporteur aérien distincts, un norvégien et un suédois. Ce sont deux compagnies au sens réglementaire : on les garde séparées, comme Malta Air et Lauda Europe.',
+    av_aq_hist_h:'Compagnies aériennes · historique des corrections',
+    av_aq_hist_em:'du plus récent au plus ancien',
+    av_aq_col_date:'Date',
+    av_aq_col_fix:'Correction',
+    av_aq_col_qty:'Vols concernés',
+    av_aq_k_merge:'Fusion',
+    av_aq_k_fix:'Corrigé',
+    av_aq_k_fill:'Complété',
+    av_aq_k_split:'Séparation',
+    av_aq_foot:'Chaque correction s\'applique aussi aux vols déjà archivés, pas seulement aux nouveaux.',
     av_q_capped:'Relevés dB plafonnés à 100', av_q_types:'Modèles d\'avion (bruts → fusionnés)',
     av_q_military:'Étiquettes "militaire" suspectées de faux positif', av_q_groups:'Groupes de modèles fusionnés (doublons de nommage)',
     av_poll_intro:'Relevés du capteur de particules associés temporellement à chaque vol détecté — un repère chronologique, pas une preuve que l\'avion soit à l’origine de la mesure (un barbecue ou une cigarette sur la terrasse l\'affecte tout autant).',
