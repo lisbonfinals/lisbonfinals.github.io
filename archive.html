@@ -1276,6 +1276,10 @@ function avRenderRare() {
 // Ajouter une correction = ajouter une ligne EN TÊTE (plus récente d'abord).
 // kind : merge | fix | fill | split ; approx:true affiche « ≈ ».
 const AV_AIRLINE_HISTORY = [
+  { date:'2026-09-26', kind:'fill', qty:42,
+    en:'<b>Brand-new airliners</b> still missing from public registries (KLM A321neo PH-AX…, Iberia A321XLR, Delta A330-900neo, Wizz Air, Swiss, easyJet…): operator checked aircraft by aircraft on the web, 22 aircraft.',
+    pt:'<b>Aviões de linha novíssimos</b> ainda ausentes dos registos públicos (A321neo da KLM PH-AX…, A321XLR da Iberia, A330-900neo da Delta, Wizz Air, Swiss, easyJet…): operador verificado avião a avião na web, 22 aviões.',
+    fr:'<b>Avions de ligne tout neufs</b> encore absents des registres publics (A321neo KLM PH-AX…, A321XLR Iberia, A330-900neo Delta, Wizz Air, Swiss, easyJet…) : exploitant vérifié appareil par appareil sur le web, 22 avions.' },
   { date:'2026-09-26', kind:'fill', qty:22,
     en:'Callsign <b>OCEAN</b> recognised as the <b>Portuguese Air Force</b> maritime surveillance patrol (only for Portuguese radio addresses), plus the other passes of the same aircraft.',
     pt:'Indicativo <b>OCEAN</b> reconhecido como a patrulha de vigilância marítima da <b>Força Aérea Portuguesa</b> (apenas para endereços de rádio portugueses), bem como as outras passagens dos mesmos aviões.',
@@ -1316,6 +1320,10 @@ const AV_AIRLINE_HISTORY = [
 // Historique des corrections « Modèles d'avion » (même format que AV_AIRLINE_HISTORY ;
 // qtyText remplace qty quand la quantité n'est pas un nombre de vols).
 const AV_MODEL_HISTORY = [
+  { date:'2026-09-26', kind:'split', qty:3,
+    en:'<b>Airbus A321XLR</b> now separated from the A321neo. Both share the same ICAO code (A21N); only the manufacturer designation tells them apart (A321-253<b>NY</b>). First one seen: Iberia EC-ORZ, 8 May 2026.',
+    pt:'<b>Airbus A321XLR</b> passa a estar separado do A321neo. Os dois partilham o mesmo código OACI (A21N); só a designação do fabricante os distingue (A321-253<b>NY</b>). Primeiro visto: EC-ORZ da Iberia, 8 de Maio de 2026.',
+    fr:'<b>Airbus A321XLR</b> désormais séparé de l\'A321neo. Les deux partagent le même code OACI (A21N) ; seule la désignation constructeur les distingue (A321-253<b>NY</b>). Premier vu : EC-ORZ d\'Iberia, le 8 mai 2026.' },
   { date:'2026-09-26', kind:'merge', qty:73,
     en:'3 more documented renames, all official ICAO type codes: <b>CL35</b> = Challenger 350, <b>E390</b> = KC-390 (Embraer C-390), <b>Airbus A300-600</b> = A306. Each pair had two separate profiles in Compare.',
     pt:'Mais 3 mudanças de nome documentadas, todas códigos OACI oficiais: <b>CL35</b> = Challenger 350, <b>E390</b> = KC-390 (Embraer C-390), <b>Airbus A300-600</b> = A306. Cada par tinha duas fichas separadas no Compare.',

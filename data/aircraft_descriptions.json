@@ -828,5 +828,23 @@
     },
     "length_m": 13.6,
     "passenger_capacity": 9
+  },
+  {
+    "aircraft_type": "Airbus A321XLR",
+    "description": {
+      "en": "The Xtra Long Range version of the A321neo: a single-aisle jet able to cross the Atlantic. A permanent rear centre tank holds 12,900 litres of extra fuel, for a range of about 8,700 km.",
+      "pt": "A versão Xtra Long Range do A321neo: um avião de corredor único capaz de atravessar o Atlântico. Um depósito central traseiro permanente leva mais 12 900 litros de combustível, para um alcance de cerca de 8700 km.",
+      "fr": "La version Xtra Long Range de l’A321neo : un monocouloir capable de traverser l’Atlantique. Un réservoir central arrière permanent embarque 12 900 litres de carburant en plus, pour une autonomie d’environ 8 700 km."
+    },
+    "manufacturer": "Airbus",
+    "first_flight_year": 2022,
+    "entry_into_service_year": 2024,
+    "fun_fact": {
+      "en": "Iberia is its launch operator: first delivery on 30 October 2024, first transatlantic flight Madrid to Boston on 14 November 2024. The station first photographed one, EC-ORZ, on 8 May 2026.",
+      "pt": "A Iberia é a companhia de lançamento: primeira entrega a 30 de Outubro de 2024, primeiro voo transatlântico Madrid-Boston a 14 de Novembro de 2024. A estação fotografou o primeiro, o EC-ORZ, a 8 de Maio de 2026.",
+      "fr": "Iberia en est la compagnie de lancement : première livraison le 30 octobre 2024, premier vol transatlantique Madrid-Boston le 14 novembre 2024. La station a photographié le premier, EC-ORZ, le 8 mai 2026."
+    },
+    "length_m": 44.51,
+    "passenger_capacity": 244
   }
 ]
