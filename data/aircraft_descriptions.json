@@ -756,5 +756,77 @@
     },
     "length_m": 31.24,
     "passenger_capacity": 101
+  },
+  {
+    "aircraft_type": "CL35",
+    "description": {
+      "en": "The Bombardier Challenger 350 is a super-midsize business jet, an upgraded Challenger 300 with more powerful engines and canted winglets. It crosses a continent non-stop with a handful of passengers.",
+      "pt": "O Bombardier Challenger 350 é um jacto executivo super-médio, uma versão melhorada do Challenger 300 com motores mais potentes e winglets inclinados. Atravessa um continente sem escala com poucos passageiros.",
+      "fr": "Le Bombardier Challenger 350 est un jet d’affaires super-midsize, un Challenger 300 amélioré avec des moteurs plus puissants et des winglets inclinés. Il traverse un continent sans escale avec quelques passagers."
+    },
+    "manufacturer": "Bombardier",
+    "first_flight_year": 2013,
+    "entry_into_service_year": 2014,
+    "fun_fact": {
+      "en": "It reached 300 deliveries in about five years, which Bombardier described as faster than any other medium or large business jet.",
+      "pt": "Chegou às 300 entregas em cerca de cinco anos, o que a Bombardier descreveu como mais rápido do que qualquer outro jacto executivo médio ou grande.",
+      "fr": "Il a atteint 300 livraisons en cinq ans environ, plus vite que tout autre jet d’affaires moyen ou grand selon Bombardier."
+    },
+    "length_m": 20.92,
+    "passenger_capacity": 9
+  },
+  {
+    "aircraft_type": "Gulfstream G700",
+    "description": {
+      "en": "Gulfstream's flagship ultra-long-range business jet, a stretched development of the G650. It links cities such as Lisbon and Los Angeles non-stop.",
+      "pt": "O jacto executivo de muito longo alcance topo de gama da Gulfstream, uma versão alongada do G650. Liga sem escala cidades como Lisboa e Los Angeles.",
+      "fr": "Le jet d’affaires très long-courrier haut de gamme de Gulfstream, une version allongée du G650. Il relie sans escale des villes comme Lisbonne et Los Angeles."
+    },
+    "manufacturer": "Gulfstream Aerospace",
+    "first_flight_year": 2020,
+    "entry_into_service_year": 2024,
+    "fun_fact": {
+      "en": "Its cabin is split into up to five living areas, with ten windows on each side.",
+      "pt": "A cabine divide-se em até cinco áreas de estar, com dez janelas de cada lado.",
+      "fr": "Sa cabine se divise en cinq espaces de vie au maximum, avec dix hublots de chaque côté."
+    },
+    "length_m": 33.48,
+    "passenger_capacity": 19
+  },
+  {
+    "aircraft_type": "C130",
+    "description": {
+      "en": "The Lockheed C-130 Hercules is a four-engine turboprop military transport, built to carry troops and cargo and to operate from short, rough runways. Portugal bought the KC-390 to replace its Hercules.",
+      "pt": "O Lockheed C-130 Hercules é um avião de transporte militar quadrimotor turbo-hélice, concebido para levar tropas e carga e operar em pistas curtas e improvisadas. Portugal comprou o KC-390 para substituir os seus Hercules.",
+      "fr": "Le Lockheed C-130 Hercules est un avion de transport militaire quadrimoteur à turbopropulseurs, conçu pour emporter troupes et fret et se poser sur des pistes courtes et sommaires. Le Portugal a acheté le KC-390 pour remplacer ses Hercules."
+    },
+    "manufacturer": "Lockheed Martin",
+    "first_flight_year": 1954,
+    "entry_into_service_year": 1956,
+    "fun_fact": {
+      "en": "It is the longest continuously produced military aircraft: 70 years of production in 2024 and more than 2,700 built.",
+      "pt": "É o avião militar produzido continuamente há mais tempo: 70 anos de produção em 2024 e mais de 2700 construídos.",
+      "fr": "C’est l’avion militaire produit sans interruption depuis le plus longtemps : 70 ans de production en 2024 et plus de 2 700 exemplaires."
+    },
+    "length_m": 29.79,
+    "passenger_capacity": 92
+  },
+  {
+    "aircraft_type": "KC-390",
+    "description": {
+      "en": "Embraer's twin-jet military transport and air-to-air refuelling tanker, the heaviest aircraft the Brazilian manufacturer has ever built. It also carries troops, flies medical evacuations and fights forest fires.",
+      "pt": "O avião de transporte militar e reabastecimento em voo bimotor a jacto da Embraer, o mais pesado alguma vez construído pelo fabricante brasileiro. Também transporta tropas, faz evacuações médicas e combate incêndios florestais.",
+      "fr": "L’avion de transport militaire et ravitailleur biréacteur d’Embraer, le plus lourd jamais construit par le constructeur brésilien. Il transporte aussi des troupes, assure des évacuations sanitaires et lutte contre les feux de forêt."
+    },
+    "manufacturer": "Embraer",
+    "first_flight_year": 2015,
+    "entry_into_service_year": 2019,
+    "fun_fact": {
+      "en": "Portugal was the first NATO country to fly it: Squadron 506 \"Rinocerontes\" in Beja received its first aircraft in 2023, and OGMA in Alverca builds parts of its fuselage. Força!",
+      "pt": "Portugal foi o primeiro país da NATO a voá-lo: a Esquadra 506 \"Rinocerontes\", em Beja, recebeu o primeiro avião em 2023, e a OGMA, em Alverca, fabrica partes da fuselagem. Força!",
+      "fr": "Le Portugal a été le premier pays de l’OTAN à le faire voler : l’escadron 506 « Rinocerontes » de Beja a reçu son premier avion en 2023, et OGMA, à Alverca, fabrique des éléments de son fuselage. Força !"
+    },
+    "length_m": 35.2,
+    "passenger_capacity": 80
   }
 ]

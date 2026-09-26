@@ -800,7 +800,7 @@
     }
   },
   {
-    "airline": "Sky Express Greece",
+    "airline": "Sky Express",
     "description": {
       "en": "Sky Express is a Greek airline based in Heraklion, on Crete. It links Greek islands and the mainland with each other and with international destinations, mainly with Airbus A320neo jets.",
       "pt": "A Sky Express é uma companhia aérea grega sediada em Heraclião, em Creta. Liga ilhas e continente gregos entre si e a destinos internacionais, sobretudo com jatos Airbus A320neo.",
@@ -812,6 +812,66 @@
       "en": "It was founded in 2005 by two former Olympic Airlines executives.",
       "pt": "Foi fundada em 2005 por dois antigos dirigentes da Olympic Airlines.",
       "fr": "Elle a été fondée en 2005 par deux anciens dirigeants d’Olympic Airlines."
+    }
+  },
+  {
+    "airline": "European Air Transport (DHL)",
+    "description": {
+      "en": "DHL's European cargo airline, wholly owned by Deutsche Post. From its hub at Leipzig/Halle it carries DHL express parcels across Europe with Airbus A300, A330 and Boeing 757 freighters.",
+      "pt": "A companhia de carga europeia da DHL, detida a 100% pela Deutsche Post. A partir do seu hub em Leipzig/Halle, transporta as encomendas expresso da DHL por toda a Europa em cargueiros Airbus A300, A330 e Boeing 757.",
+      "fr": "La compagnie cargo européenne de DHL, détenue à 100 % par Deutsche Post. Depuis son hub de Leipzig/Halle, elle transporte les colis express DHL à travers l’Europe à bord de cargos Airbus A300, A330 et Boeing 757."
+    },
+    "founded_year": 2005,
+    "headquarters": { "en": "Schkeuditz (Leipzig/Halle Airport), Germany", "pt": "Schkeuditz (Aeroporto de Leipzig/Halle), Alemanha", "fr": "Schkeuditz (aéroport de Leipzig/Halle), Allemagne" },
+    "fun_fact": {
+      "en": "Its radio callsign is POSTMAN. The yellow A300 freighter D-AZML is one of its regular visitors over Lisbon.",
+      "pt": "O seu indicativo de rádio é POSTMAN. O cargueiro A300 amarelo D-AZML é um dos seus visitantes habituais nos céus de Lisboa.",
+      "fr": "Son indicatif radio est POSTMAN. L’A300 cargo jaune D-AZML fait partie de ses visiteurs réguliers au-dessus de Lisbonne."
+    }
+  },
+  {
+    "airline": "Portuguese Air Force",
+    "description": {
+      "en": "The Força Aérea Portuguesa became an independent branch of the armed forces in 1952. Its transport aircraft and official flights often use Figo Maduro, the military terminal of Lisbon Airport: they land on the very runway this station watches.",
+      "pt": "A Força Aérea Portuguesa tornou-se um ramo independente das Forças Armadas em 1952. Os seus aviões de transporte e voos oficiais usam muitas vezes Figo Maduro, o terminal militar do Aeroporto de Lisboa: aterram na mesma pista que esta estação observa.",
+      "fr": "La Força Aérea Portuguesa est devenue une branche indépendante des forces armées en 1952. Ses avions de transport et ses vols officiels passent souvent par Figo Maduro, le terminal militaire de l’aéroport de Lisbonne : ils se posent sur la piste même que cette station observe."
+    },
+    "founded_year": 1952,
+    "headquarters": { "en": "Alfragide, Amadora, Portugal", "pt": "Alfragide, Amadora, Portugal", "fr": "Alfragide, Amadora, Portugal" },
+    "fun_fact": {
+      "en": "Its motto is Ex Mero Motu, \"of one's own free will\". From our terrace: obrigado to the crews who keep watch over the sky we only photograph.",
+      "pt": "O seu lema é Ex Mero Motu, \"por sua livre vontade\". Do nosso terraço: obrigado às tripulações que guardam o céu que nós só fotografamos.",
+      "fr": "Sa devise est Ex Mero Motu, « de son plein gré ». Depuis notre terrasse : obrigado aux équipages qui veillent sur le ciel que nous nous contentons de photographier."
+    }
+  },
+  {
+    "airline": "Privilege Style",
+    "description": {
+      "en": "Spanish charter airline based in Palma de Mallorca. It flies charters for tour operators and companies, and leases aircraft with crew (ACMI) to other airlines.",
+      "pt": "Companhia charter espanhola sediada em Palma de Maiorca. Faz voos charter para operadores turísticos e empresas, e aluga aviões com tripulação (ACMI) a outras companhias.",
+      "fr": "Compagnie charter espagnole basée à Palma de Majorque. Elle assure des vols affrétés pour des voyagistes et des entreprises, et loue des avions avec équipage (ACMI) à d’autres compagnies."
+    },
+    "founded_year": 2003,
+    "headquarters": { "en": "Palma de Mallorca, Spain", "pt": "Palma de Maiorca, Espanha", "fr": "Palma de Majorque, Espagne" },
+    "fun_fact": {
+      "en": "According to the airline, its VIP clients include teams from Spain's top football league.",
+      "pt": "Segundo a companhia, entre os seus clientes VIP estão equipas da primeira liga espanhola de futebol.",
+      "fr": "Selon la compagnie, ses clients VIP comptent des équipes de la première division espagnole de football."
+    }
+  },
+  {
+    "airline": "Wizz Air Malta",
+    "description": {
+      "en": "Maltese subsidiary of the Hungarian Wizz Air group, created in 2022. It flies Airbus A320 and A321 aircraft registered in Malta (9H-) under the Wizz Air brand.",
+      "pt": "Filial maltesa do grupo húngaro Wizz Air, criada em 2022. Opera aviões Airbus A320 e A321 com matrícula maltesa (9H-) sob a marca Wizz Air.",
+      "fr": "Filiale maltaise du groupe hongrois Wizz Air, créée en 2022. Elle exploite des Airbus A320 et A321 immatriculés à Malte (9H-) sous la marque Wizz Air."
+    },
+    "founded_year": 2022,
+    "headquarters": { "en": "Malta", "pt": "Malta", "fr": "Malte" },
+    "fun_fact": {
+      "en": "Its first flight, on 27 September 2022, linked Rome Fiumicino to Malta.",
+      "pt": "O seu primeiro voo, a 27 de Setembro de 2022, ligou Roma Fiumicino a Malta.",
+      "fr": "Son premier vol, le 27 septembre 2022, a relié Rome-Fiumicino à Malte."
     }
   }
 ]
