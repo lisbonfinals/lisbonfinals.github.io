@@ -832,9 +832,9 @@
   {
     "airline": "Portuguese Air Force",
     "description": {
-      "en": "The Força Aérea Portuguesa became an independent branch of the armed forces in 1952. Its transport aircraft and official flights often use Figo Maduro, the military terminal of Lisbon Airport: they land on the very runway this station watches.",
-      "pt": "A Força Aérea Portuguesa tornou-se um ramo independente das Forças Armadas em 1952. Os seus aviões de transporte e voos oficiais usam muitas vezes Figo Maduro, o terminal militar do Aeroporto de Lisboa: aterram na mesma pista que esta estação observa.",
-      "fr": "La Força Aérea Portuguesa est devenue une branche indépendante des forces armées en 1952. Ses avions de transport et ses vols officiels passent souvent par Figo Maduro, le terminal militaire de l’aéroport de Lisbonne : ils se posent sur la piste même que cette station observe."
+      "en": "The Força Aérea Portuguesa became an independent branch of the armed forces in 1952. Its transport aircraft and official flights often use Figo Maduro, the military terminal of Lisbon Airport: they land on the very runway this station watches. Its maritime surveillance patrols fly under the callsign OCEAN.",
+      "pt": "A Força Aérea Portuguesa tornou-se um ramo independente das Forças Armadas em 1952. Os seus aviões de transporte e voos oficiais usam muitas vezes Figo Maduro, o terminal militar do Aeroporto de Lisboa: aterram na mesma pista que esta estação observa. As suas patrulhas de vigilância marítima voam com o indicativo OCEAN.",
+      "fr": "La Força Aérea Portuguesa est devenue une branche indépendante des forces armées en 1952. Ses avions de transport et ses vols officiels passent souvent par Figo Maduro, le terminal militaire de l’aéroport de Lisbonne : ils se posent sur la piste même que cette station observe. Ses patrouilles de surveillance maritime volent sous l’indicatif OCEAN."
     },
     "founded_year": 1952,
     "headquarters": { "en": "Alfragide, Amadora, Portugal", "pt": "Alfragide, Amadora, Portugal", "fr": "Alfragide, Amadora, Portugal" },
