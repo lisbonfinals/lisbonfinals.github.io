@@ -827,7 +827,13 @@
       "fr": "D’abord appelé EC145 T2, il a été rebaptisé H145 en 2015. Son rotor de queue est caréné (Fenestron) au lieu de tourner à l’air libre."
     },
     "length_m": 13.6,
-    "passenger_capacity": 9
+    "passenger_capacity": 9,
+    "photo": {
+      "src": "/ressources/compare/9h-gmf-carlos-miguel-seabra.jpg",
+      "credit": "Carlos Miguel Seabra",
+      "source": "JetPhotos",
+      "link": "https://www.jetphotos.com/photo/11930606"
+    }
   },
   {
     "aircraft_type": "Airbus A321XLR",

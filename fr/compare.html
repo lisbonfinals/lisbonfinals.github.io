@@ -113,6 +113,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cmp-photo{position:relative;background:var(--dark3);}
 .cmp-photo::before{content:'';display:block;padding-top:66%;}
 .cmp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.cmp-photo-credit{position:absolute;right:12px;top:12px;z-index:2;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:rgba(240,237,232,.9);background:rgba(10,13,18,.7);padding:4px 8px;border-radius:2px;text-decoration:none;}
+a.cmp-photo-credit:hover,a.cmp-photo-credit:focus-visible{color:var(--amber);}
+@media (max-width:600px){.cmp-photo-credit{top:auto;bottom:30px;right:10px;}}
 .cmp-photo-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.25);letter-spacing:.1em;text-transform:uppercase;}
 .cmp-rank{position:absolute;top:12px;left:12px;background:rgba(7,9,13,.75);color:var(--amber);font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:4px 9px;border-radius:3px;backdrop-filter:blur(4px);}
 .cmp-gauge{position:absolute;left:14px;right:14px;bottom:14px;height:7px;border-radius:4px;background:linear-gradient(90deg,#22c55e 0%,#f5a623 50%,#ef4444 100%);box-shadow:0 1px 6px rgba(0,0,0,.5);}
@@ -367,6 +370,7 @@ const T = {
     cmp_profile_founded:'Founded',
     cmp_profile_hq:'Headquarters',
     cmp_no_photo:'No photo yet',
+    cmp_photo_credit:'Photo:',
     cmp_share_label:'Share this comparison',
     cmp_share_text:'{a} vs {b} — noise & vibration compared, Lisbon Finals',
     cmp_share_copy:'Copy link',
@@ -430,6 +434,7 @@ const T = {
     cmp_profile_founded:'Fundação',
     cmp_profile_hq:'Sede',
     cmp_no_photo:'Ainda sem foto',
+    cmp_photo_credit:'Foto:',
     cmp_share_label:'Partilhar esta comparação',
     cmp_share_text:'{a} vs {b} — ruído e vibração comparados, Lisbon Finals',
     cmp_share_copy:'Copiar link',
@@ -493,6 +498,7 @@ const T = {
     cmp_profile_founded:'Fondation',
     cmp_profile_hq:'Siège',
     cmp_no_photo:'Pas encore de photo',
+    cmp_photo_credit:'Photo :',
     cmp_share_label:'Partager cette comparaison',
     cmp_share_text:'{a} vs {b} : bruit et vibration comparés, Lisbon Finals',
     cmp_share_copy:'Copier le lien',
@@ -622,8 +628,17 @@ function renderCard(item, other){
 
   const photo = document.createElement('div');
   photo.className = 'cmp-photo';
+  // Photo de la station en priorité ; sinon photo externe créditée déclarée dans la
+  // fiche (champ `photo` de data/*_descriptions.json, utilisée avec l'accord de son
+  // auteur, ex. l'hélico INEM 9H-GMF jamais dans le champ de la caméra, 26 sept 2026).
+  const extPhoto = (cmpDescriptions[cmpMode][item.name] || {}).photo;
   if (item.photoUrl) {
     photo.innerHTML = `<img src="${cmpCldThumb(item.photoUrl, 1100)}" alt="${item.name}" loading="lazy">`;
+  } else if (extPhoto && extPhoto.src) {
+    const credit = extPhoto.link
+      ? `<a class="cmp-photo-credit" href="${extPhoto.link}" target="_blank" rel="noopener">${t.cmp_photo_credit} ${extPhoto.credit}${extPhoto.source ? ' · ' + extPhoto.source : ''}</a>`
+      : `<span class="cmp-photo-credit">${t.cmp_photo_credit} ${extPhoto.credit}</span>`;
+    photo.innerHTML = `<img src="${extPhoto.src}" alt="${item.name}" loading="lazy">${credit}`;
   } else {
     photo.innerHTML = `<div class="cmp-photo-empty">${t.cmp_no_photo}</div>`;
   }
