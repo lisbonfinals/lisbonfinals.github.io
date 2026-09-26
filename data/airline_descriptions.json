@@ -903,5 +903,20 @@
       "pt": "O SU-RSC, o 737-800 visto nos céus de Lisboa, foi fotografado em Viena em Abril de 2026 com o nome Fly Aden pintado.",
       "fr": "SU-RSC, le 737-800 vu au-dessus de Lisbonne, a été photographié à Vienne en avril 2026 avec des inscriptions Fly Aden en plus."
     }
+  },
+  {
+    "airline": "Gulf Med Aviation Services",
+    "description": {
+      "en": "Maltese helicopter operator founded in 2016, part of the Medilink International group. Since 1 July 2025 it has flown Portugal's emergency medical helicopter service for INEM with Airbus H145s. Its helicopters 9H-GME and 9H-GMF regularly cross the station's sky.",
+      "pt": "Operador maltês de helicópteros fundado em 2016, do grupo Medilink International. Desde 1 de Julho de 2025 assegura o serviço de helicópteros de emergência médica do INEM em Portugal, com Airbus H145. Os seus helicópteros 9H-GME e 9H-GMF atravessam com frequência o céu da estação.",
+      "fr": "Opérateur maltais d’hélicoptères fondé en 2016, membre du groupe Medilink International. Depuis le 1er juillet 2025, il assure le service d’hélicoptères médicaux d’urgence de l’INEM au Portugal avec des Airbus H145. Ses hélicoptères 9H-GME et 9H-GMF traversent souvent le ciel de la station."
+    },
+    "founded_year": 2016,
+    "headquarters": { "en": "Malta", "pt": "Malta", "fr": "Malte" },
+    "fun_fact": {
+      "en": "In less than a year in Portugal, its crews flew their 1,000th mission and carried 644 patients.",
+      "pt": "Em menos de um ano em Portugal, as suas tripulações cumpriram a 1000.ª missão e transportaram 644 doentes.",
+      "fr": "En moins d’un an au Portugal, ses équipages ont effectué leur 1 000e mission et transporté 644 patients."
+    }
   }
 ]
