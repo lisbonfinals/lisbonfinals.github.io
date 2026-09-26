@@ -1304,6 +1304,10 @@ const AV_AIRLINE_HISTORY = [
 // Historique des corrections « Modèles d'avion » (même format que AV_AIRLINE_HISTORY ;
 // qtyText remplace qty quand la quantité n'est pas un nombre de vols).
 const AV_MODEL_HISTORY = [
+  { date:'2026-09-26', kind:'merge', qty:73,
+    en:'3 more documented renames, all official ICAO type codes: <b>CL35</b> = Challenger 350, <b>E390</b> = KC-390 (Embraer C-390), <b>Airbus A300-600</b> = A306. Each pair had two separate profiles in Compare.',
+    pt:'Mais 3 mudanças de nome documentadas, todas códigos OACI oficiais: <b>CL35</b> = Challenger 350, <b>E390</b> = KC-390 (Embraer C-390), <b>Airbus A300-600</b> = A306. Cada par tinha duas fichas separadas no Compare.',
+    fr:'3 renommages documentés de plus, tous des codes OACI officiels : <b>CL35</b> = Challenger 350, <b>E390</b> = KC-390 (Embraer C-390), <b>Airbus A300-600</b> = A306. Chaque paire avait deux fiches séparées dans Compare.' },
   { date:'2026-07-20', kind:'merge', qtyText:'150 → 139',
     unit:{ en:'models at the time', pt:'modelos na altura', fr:'modèles à l\'époque' },
     en:'Grouping rule introduced: spelling variants and 3 documented renames (<b>Bombardier CS300/CS100</b> became <b>Airbus A220</b>, <b>680A</b> = Citation Latitude, <b>BD-700</b> = Global 6500). The biggest hidden duplicate was the A220-300, split across 5 names.',
@@ -1311,12 +1315,15 @@ const AV_MODEL_HISTORY = [
     fr:'Règle de regroupement mise en place : variantes d\'écriture et 3 renommages documentés (<b>Bombardier CS300/CS100</b> devenus <b>Airbus A220</b>, <b>680A</b> = Citation Latitude, <b>BD-700</b> = Global 6500). Le plus gros doublon caché était l\'A220-300, éclaté en 5 noms.' },
 ];
 // Noms bruts fusionnés par renommage documenté (= MANUAL_ALIASES de offline_stats/aircraft_normalize.py)
-const AV_MODEL_RENAMED = new Set(['C Series 300','BD-500-1A11','C Series 100','BD-500-1A10','680A Citation Latitude','BD-700 Global 6500']);
+const AV_MODEL_RENAMED = new Set(['C Series 300','BD-500-1A11','C Series 100','BD-500-1A10','680A Citation Latitude','BD-700 Global 6500','CL35','BD-100 Challenger 350','E390','Airbus A300-600']);
 const AV_MODEL_NOTES = {
   'Airbus A220-300': { en:'Bombardier CS300, renamed in 2018', pt:'Bombardier CS300, rebaptizado em 2018', fr:'Bombardier CS300, renommé en 2018' },
   'Airbus A220-100': { en:'Bombardier CS100, renamed in 2018', pt:'Bombardier CS100, rebaptizado em 2018', fr:'Bombardier CS100, renommé en 2018' },
   'Citation Latitude': { en:'680A = FAA designation', pt:'680A = designação FAA', fr:'680A = désignation FAA' },
   'Global 6500': { en:'Bombardier designation', pt:'Designação Bombardier', fr:'Désignation Bombardier' },
+  'Challenger 350': { en:'CL35 = ICAO type code', pt:'CL35 = código OACI do tipo', fr:'CL35 = code OACI du type' },
+  'KC-390': { en:'E390 = ICAO code of the Embraer C-390', pt:'E390 = código OACI do Embraer C-390', fr:'E390 = code OACI de l\'Embraer C-390' },
+  'A306': { en:'ICAO code of the A300-600', pt:'Código OACI do A300-600', fr:'Code OACI de l\'A300-600' },
 };
 function avDqLoc() { return _lang === 'pt' ? 'pt-PT' : (_lang === 'fr' ? 'fr-FR' : 'en-GB'); }
 function avDqTimeline(elId, items) {

@@ -758,24 +758,6 @@
     "passenger_capacity": 101
   },
   {
-    "aircraft_type": "CL35",
-    "description": {
-      "en": "The Bombardier Challenger 350 is a super-midsize business jet, an upgraded Challenger 300 with more powerful engines and canted winglets. It crosses a continent non-stop with a handful of passengers.",
-      "pt": "O Bombardier Challenger 350 é um jacto executivo super-médio, uma versão melhorada do Challenger 300 com motores mais potentes e winglets inclinados. Atravessa um continente sem escala com poucos passageiros.",
-      "fr": "Le Bombardier Challenger 350 est un jet d’affaires super-midsize, un Challenger 300 amélioré avec des moteurs plus puissants et des winglets inclinés. Il traverse un continent sans escale avec quelques passagers."
-    },
-    "manufacturer": "Bombardier",
-    "first_flight_year": 2013,
-    "entry_into_service_year": 2014,
-    "fun_fact": {
-      "en": "It reached 300 deliveries in about five years, which Bombardier described as faster than any other medium or large business jet.",
-      "pt": "Chegou às 300 entregas em cerca de cinco anos, o que a Bombardier descreveu como mais rápido do que qualquer outro jacto executivo médio ou grande.",
-      "fr": "Il a atteint 300 livraisons en cinq ans environ, plus vite que tout autre jet d’affaires moyen ou grand selon Bombardier."
-    },
-    "length_m": 20.92,
-    "passenger_capacity": 9
-  },
-  {
     "aircraft_type": "Gulfstream G700",
     "description": {
       "en": "Gulfstream's flagship ultra-long-range business jet, a stretched development of the G650. It links cities such as Lisbon and Los Angeles non-stop.",
