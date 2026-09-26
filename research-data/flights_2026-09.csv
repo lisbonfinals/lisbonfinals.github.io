@@ -8559,3 +8559,6 @@ date,time,callsign,registration,aircraft_type,airline,phase,direction,altitude_f
 2026-09-26,14:11:39,TAP481,CS-TAY,Embraer E195,TAP Air Portugal,landing,arrivee,575,264.8,91.5,5.97,49.26,10.3,54
 2026-09-26,14:13:34,4b027c,HB-AYM,Airbus A320,easyJet Switzerland SA,landing,arrivee,725,261.5,93.2,5.81,41.11,10.3,54
 2026-09-26,14:16:55,TAP401P,CS-TTX,Embraer E195,TAP Air Portugal,landing,arrivee,600,243.2,95.7,6.41,63.0,10.3,54
+2026-09-26,14:22:49,495218,CS-TPX,Embraer E190,TAP Air Portugal,landing,arrivee,600,245.6,90.7,6.56,45.59,10.3,54
+2026-09-26,14:24:54,TAP869,CS-TPO,Embraer E190,TAP Air Portugal,landing,arrivee,600,244.8,89.1,6.73,40.84,10.3,54
+2026-09-26,14:28:41,4868bc,,,KLM,landing,arrivee,625,247.2,92.2,5.85,44.43,10.3,54
