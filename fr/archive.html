@@ -242,46 +242,116 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-note.warn{border-color:rgba(239,68,68,.25);}
 .archive-note.warn b{color:var(--red);}
 
-/* ── Qualité des données : bloc compagnies (26 sept 2026) ── */
-.av-aq-h{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);margin:8px 0 12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-.av-aq-h em{font-style:normal;opacity:.7;text-transform:none;letter-spacing:0;}
-.av-aq-title{font-family:var(--sans);font-size:20px;font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin-bottom:6px;color:var(--white);}
-.av-aq-lede{font-family:var(--sans);font-size:13px;line-height:1.7;color:rgba(240,237,232,.6);max-width:66ch;margin-bottom:18px;}
-.av-aq-cascade{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
-.av-aq-step{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:start;padding:16px 20px;border-bottom:1px solid var(--border);}
-.av-aq-step:last-child{border-bottom:none;}
-.av-aq-n{font-family:var(--mono);font-size:22px;font-weight:300;color:var(--blue);line-height:1;}
-.av-aq-step:last-child .av-aq-n{color:rgba(240,237,232,.38);}
-.av-aq-step h3{font-family:var(--sans);font-size:14px;font-weight:600;margin-bottom:4px;color:var(--white);}
-.av-aq-step p{font-family:var(--sans);font-size:12px;line-height:1.65;color:rgba(240,237,232,.6);max-width:62ch;}
-.av-aq-step code{font-family:var(--mono);font-size:11px;color:var(--white);background:var(--dark3);border:1px solid var(--border);padding:1px 5px;border-radius:2px;}
-.av-aq-pill{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:2px;white-space:nowrap;border:1px solid;}
-.av-aq-pill.hi{color:var(--green);border-color:rgba(34,197,94,.35);}
-.av-aq-pill.mid{color:var(--blue);border-color:rgba(96,165,250,.35);}
-.av-aq-pill.lo{color:var(--amber);border-color:rgba(245,166,35,.35);}
-.av-aq-pill.none{color:rgba(240,237,232,.38);border-color:var(--border2);}
-.av-aq-legend{display:flex;flex-wrap:wrap;gap:10px 28px;margin:12px 0 24px;font-family:var(--sans);font-size:12px;color:rgba(240,237,232,.6);line-height:1.6;}
-.av-aq-legend b{font-weight:400;margin-right:6px;}
-.av-aq-2col{grid-template-columns:repeat(2,1fr);}
-.av-aq-choices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px;}
-.av-aq-choice{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:18px 20px;}
-.av-aq-tag{font-family:var(--mono);font-size:10px;color:var(--amber);margin-bottom:8px;letter-spacing:.04em;}
-.av-aq-choice h3{font-family:var(--sans);font-size:14px;font-weight:600;margin-bottom:6px;color:var(--white);}
-.av-aq-choice p{font-family:var(--sans);font-size:12px;line-height:1.65;color:rgba(240,237,232,.6);}
-.archive-table td.av-aq-text{font-family:var(--sans);font-size:12px;line-height:1.6;white-space:normal;min-width:320px;vertical-align:top;}
-.archive-table td.av-aq-text b{color:var(--white);font-weight:600;}
-.archive-table td.av-aq-date{vertical-align:top;color:rgba(240,237,232,.6);font-variant-numeric:tabular-nums;}
-.archive-table td.av-aq-qty,.archive-table th.av-aq-qty{text-align:right;vertical-align:top;font-variant-numeric:tabular-nums;}
-.av-aq-kind{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:2px;margin-right:6px;vertical-align:1px;}
-.av-aq-kind.fix{color:var(--blue);background:rgba(96,165,250,.08);}
-.av-aq-kind.fill{color:var(--blue);background:rgba(96,165,250,.08);}
-.av-aq-kind.merge{color:var(--amber);background:rgba(245,166,35,.08);}
-.av-aq-kind.split{color:var(--green);background:rgba(34,197,94,.08);}
-.av-aq-foot{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin:-14px 0 32px;line-height:1.6;}
-@media (max-width:700px){
-  .av-aq-2col,.av-aq-choices{grid-template-columns:1fr;}
-  .av-aq-step{grid-template-columns:32px 1fr;}
-  .av-aq-step .av-aq-pill{grid-column:2;justify-self:start;}
+/* ── Qualité des données (refonte 26 sept 2026) ── */
+.av-dq-kpi{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:12px;}
+.av-dq-kpi > div{background:var(--dark2);padding:22px 24px;}
+.av-dq-kpi .v{font-family:var(--mono);font-size:34px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums;color:var(--white);}
+.av-dq-kpi .v.green{color:var(--green);} .av-dq-kpi .v.amber{color:var(--amber);}
+.av-dq-kpi .l{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:10px;line-height:1.5;}
+.av-dq-kpi .s{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin-top:4px;}
+.av-dq-kpi .av-dq-bar{grid-column:1/-1;padding:14px 24px 18px;}
+.av-dq-track{height:6px;border-radius:3px;background:rgba(245,166,35,.55);overflow:hidden;}
+.av-dq-track i{display:block;height:100%;background:var(--green);}
+.av-dq-cap{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:8px;}
+#av-view-quality .archive-note{margin-bottom:8px;}
+.av-dq-toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px;}
+.av-dq-toc button{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:rgba(240,237,232,.6);background:transparent;border:1px solid var(--border2);border-radius:2px;padding:6px 10px;cursor:pointer;}
+.av-dq-toc button b{color:var(--amber);font-weight:500;margin-right:6px;}
+.av-dq-toc button:hover{color:var(--white);border-color:var(--amber);}
+.av-dq-module{margin-top:64px;scroll-margin-top:90px;}
+.av-dq-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:28px;}
+.av-dq-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.av-dq-kicker::before{content:'';width:18px;height:1px;background:var(--amber);flex-shrink:0;}
+.av-dq-title{font-family:var(--sans);font-weight:800;font-size:clamp(30px,4.4vw,46px);line-height:1.02;letter-spacing:-.015em;color:var(--white);}
+.av-dq-title em{font-family:var(--serif);font-weight:400;font-style:italic;color:rgba(240,237,232,.38);letter-spacing:0;}
+.av-dq-aside{font-family:var(--sans);font-size:13px;line-height:1.65;color:rgba(240,237,232,.6);max-width:40ch;}
+.av-dq-sub{display:flex;align-items:center;gap:12px;margin:40px 0 16px;}
+.av-dq-head + .av-dq-sub{margin-top:0;}
+.av-dq-num{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;color:var(--amber);border:1px solid rgba(245,166,35,.4);border-radius:2px;padding:3px 6px;line-height:1;}
+.av-dq-sub h3{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--white);}
+.av-dq-sub em{font-style:normal;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.38);margin-left:auto;}
+.av-dq-lede{font-family:var(--sans);font-size:13px;line-height:1.7;color:rgba(240,237,232,.6);max-width:68ch;margin-bottom:20px;}
+.av-dq-cascade{position:relative;display:grid;gap:10px;padding-left:34px;}
+.av-dq-cascade::before{content:'';position:absolute;left:11px;top:14px;bottom:14px;width:1px;background:linear-gradient(var(--green),var(--blue),var(--amber),rgba(240,237,232,.12));}
+.av-dq-st{position:relative;display:grid;grid-template-columns:1fr auto;gap:8px 20px;align-items:start;background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:16px 20px;}
+.av-dq-dot{position:absolute;left:-34px;top:14px;width:23px;height:23px;border-radius:50%;background:var(--dark);border:1px solid currentColor;display:grid;place-items:center;font-family:var(--mono);font-size:10px;}
+.av-dq-st h4{font-family:var(--sans);font-size:15px;font-weight:600;margin-bottom:4px;color:var(--white);}
+.av-dq-st p{font-family:var(--sans);font-size:12px;line-height:1.65;color:rgba(240,237,232,.6);max-width:64ch;}
+.av-dq-st code{font-family:var(--mono);font-size:11px;color:var(--white);background:var(--dark3);border:1px solid var(--border);padding:1px 5px;border-radius:2px;}
+.av-dq-rel{display:flex;flex-direction:column;align-items:flex-end;}
+.av-dq-meter{display:flex;gap:3px;}
+.av-dq-meter i{width:14px;height:4px;border-radius:1px;background:rgba(240,237,232,.12);}
+.av-dq-rel span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;}
+.av-dq-c1{color:var(--green);} .av-dq-c2{color:var(--blue);} .av-dq-c3{color:var(--amber);} .av-dq-c4{color:rgba(240,237,232,.38);}
+.av-dq-c1 .av-dq-meter i{background:var(--green);}
+.av-dq-c2 .av-dq-meter i:nth-child(-n+3){background:var(--blue);}
+.av-dq-c3 .av-dq-meter i:nth-child(-n+2){background:var(--amber);}
+.av-dq-legend{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:14px;padding-left:34px;font-family:var(--sans);font-size:12px;color:rgba(240,237,232,.6);}
+.av-dq-legend b{font-weight:400;margin-right:6px;}
+.av-dq-choices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.av-dq-choice{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:20px 22px;display:grid;gap:10px;align-content:start;}
+.av-dq-plates{display:flex;gap:6px;flex-wrap:wrap;}
+.av-dq-plate{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--dark);background:var(--white);padding:3px 8px;border-radius:2px;}
+.av-dq-plate.o{background:transparent;color:var(--white);border:1px solid var(--border2);font-size:11px;}
+.av-dq-choice h4{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--white);}
+.av-dq-choice p{font-family:var(--sans);font-size:12px;line-height:1.65;color:rgba(240,237,232,.6);}
+.av-dq-split{display:flex;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;}
+.av-dq-split span{border:1px solid var(--border2);border-radius:2px;padding:4px 8px;color:rgba(240,237,232,.75);}
+.av-dq-split span i{font-style:normal;color:rgba(240,237,232,.38);margin-left:6px;}
+.av-dq-tl{display:grid;}
+.av-dq-ev{display:grid;grid-template-columns:110px 20px 1fr auto;gap:0 16px;align-items:start;padding:14px 0;border-bottom:1px solid rgba(30,37,48,.6);}
+.av-dq-ev:last-child{border-bottom:none;}
+.av-dq-ev .d{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.6);font-variant-numeric:tabular-nums;}
+.av-dq-ev .d b{display:block;font-weight:500;color:var(--white);font-size:13px;}
+.av-dq-ev .pin{position:relative;align-self:stretch;min-height:20px;}
+.av-dq-ev .pin::before{content:'';position:absolute;left:9px;top:-14px;bottom:-14px;width:1px;background:var(--border2);}
+.av-dq-ev:first-child .pin::before{top:6px;}
+.av-dq-ev:last-child .pin::before{bottom:auto;height:20px;}
+.av-dq-ev:only-child .pin::before{display:none;}
+.av-dq-ev .pin::after{content:'';position:absolute;left:5px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--dark);border:2px solid currentColor;}
+.av-dq-ev .t{font-family:var(--sans);font-size:13px;line-height:1.6;color:rgba(240,237,232,.75);}
+.av-dq-ev .t b{color:var(--white);font-weight:600;}
+.av-dq-ev .q{font-family:var(--mono);font-size:16px;font-weight:500;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--white);}
+.av-dq-ev .q small{display:block;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);font-weight:400;margin-top:2px;}
+.av-dq-kind{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:2px;margin-right:8px;vertical-align:2px;}
+.av-dq-ev.merge{color:var(--amber);} .av-dq-ev.merge .av-dq-kind{background:rgba(245,166,35,.1);color:var(--amber);}
+.av-dq-ev.fix,.av-dq-ev.fill{color:var(--blue);} .av-dq-ev.fix .av-dq-kind,.av-dq-ev.fill .av-dq-kind{background:rgba(96,165,250,.1);color:var(--blue);}
+.av-dq-ev.split{color:var(--green);} .av-dq-ev.split .av-dq-kind{background:rgba(34,197,94,.1);color:var(--green);}
+.av-dq-foot{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin-top:12px;line-height:1.6;}
+.av-dq-3{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px;}
+.av-dq-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.av-dq-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:20px 22px;}
+.av-dq-card .v{font-family:var(--mono);font-size:34px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums;color:var(--white);}
+.av-dq-card .v .from{color:rgba(240,237,232,.38);} .av-dq-card .v .arr{color:var(--amber);margin:0 6px;}
+.av-dq-card.red .v{color:var(--red);}
+.av-dq-card .l{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:10px;line-height:1.5;}
+.av-dq-card .s{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin-top:4px;line-height:1.5;}
+.av-dq-card p{font-family:var(--sans);font-size:12px;line-height:1.65;color:rgba(240,237,232,.6);margin-top:12px;}
+.av-dq-groups{display:grid;gap:8px;}
+.av-dq-grp{display:grid;grid-template-columns:1fr 28px minmax(170px,.55fr) 80px;gap:12px;align-items:center;background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:14px 18px;}
+.av-dq-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.av-dq-chip{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.6);border:1px dashed var(--border2);border-radius:2px;padding:3px 7px;white-space:nowrap;}
+.av-dq-chip i{font-style:normal;color:rgba(240,237,232,.38);margin-left:5px;}
+.av-dq-chip.ren{border-style:solid;border-color:rgba(245,166,35,.45);color:var(--amber);}
+.av-dq-grp .to{font-family:var(--mono);color:var(--amber);text-align:center;font-size:16px;}
+.av-dq-grp .canon{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--white);}
+.av-dq-grp .canon small{display:block;font-family:var(--mono);font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:3px;}
+.av-dq-grp .n{font-family:var(--mono);font-size:16px;text-align:right;font-variant-numeric:tabular-nums;color:var(--white);}
+.av-dq-grp .n small{display:block;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);}
+.av-dq-keyline{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin-top:12px;}
+.av-dq-keyline > span{display:flex;align-items:center;gap:8px;}
+@media (max-width:760px){
+  .av-dq-kpi{grid-template-columns:1fr 1fr;}
+  .av-dq-kpi > div:first-child{grid-column:1/-1;}
+  .av-dq-choices,.av-dq-3,.av-dq-2{grid-template-columns:1fr;}
+  .av-dq-grp{grid-template-columns:1fr auto;}
+  .av-dq-grp .to{display:none;}
+  .av-dq-grp .av-dq-chips{grid-column:1/-1;}
+  .av-dq-ev{grid-template-columns:20px 1fr;gap:4px 12px;}
+  .av-dq-ev .pin{grid-row:1/4;grid-column:1;}
+  .av-dq-ev .d,.av-dq-ev .t,.av-dq-ev .q{grid-column:2;text-align:left;}
+  .av-dq-st{grid-template-columns:1fr;}
+  .av-dq-rel{align-items:flex-start;}
 }
 
 /* mini bar chart */
@@ -615,40 +685,63 @@ table.archive-table{width:100%;border-collapse:collapse;}
 
   <!-- ── DATA QUALITY ── -->
   <div class="archive-view" id="av-view-quality">
-    <div class="archive-note" data-i18n="av_quality_intro">Transparency panel — known caveats in this dataset, with real counters rather than hidden assumptions.</div>
-    <div class="av-aq-h"><span data-i18n="av_aq_method_h">Airlines · method</span></div>
-    <h2 class="av-aq-title" data-i18n="av_aq_title">How we identify an aircraft's airline</h2>
-    <p class="av-aq-lede" data-i18n="av_aq_lede"></p>
-    <div class="av-aq-cascade">
-      <div class="av-aq-step"><div class="av-aq-n">1</div><div><h3 data-i18n="av_aq_s1_t"></h3><p data-i18n-html="av_aq_s1_p"></p></div><span class="av-aq-pill hi" data-i18n="av_aq_s1_pill"></span></div>
-      <div class="av-aq-step"><div class="av-aq-n">2</div><div><h3 data-i18n="av_aq_s2_t"></h3><p data-i18n="av_aq_s2_p"></p></div><span class="av-aq-pill mid" data-i18n="av_aq_s2_pill"></span></div>
-      <div class="av-aq-step"><div class="av-aq-n">3</div><div><h3 data-i18n="av_aq_s3_t"></h3><p data-i18n="av_aq_s3_p"></p></div><span class="av-aq-pill lo" data-i18n="av_aq_s3_pill"></span></div>
-      <div class="av-aq-step"><div class="av-aq-n">4</div><div><h3 data-i18n="av_aq_s4_t"></h3><p data-i18n="av_aq_s4_p"></p></div><span class="av-aq-pill none" data-i18n="av_aq_s4_pill"></span></div>
+    <div class="av-dq-kpi">
+      <div><div class="v green" id="av-aq-identified-pct">—</div><div class="l" data-i18n="av_aq_identified">Flights with an identified airline</div><div class="s" data-i18n="av_month_all">All time</div></div>
+      <div><div class="v amber" id="av-aq-unidentified">—</div><div class="l" data-i18n="av_aq_unidentified">Flights with no airline</div><div class="s" id="av-aq-unidentified-sub">—</div></div>
+      <div><div class="v" id="av-dq-models">—</div><div class="l" data-i18n="av_dq_models_kpi">Distinct aircraft models</div><div class="s" id="av-dq-models-sub">—</div></div>
+      <div class="av-dq-bar"><div class="av-dq-track"><i id="av-dq-track-fill" style="width:0"></i></div><div class="av-dq-cap"><span id="av-dq-cap-ok">—</span><span id="av-dq-cap-ko">—</span></div></div>
     </div>
-    <div class="av-aq-legend"><span><b>🇵🇹</b><span data-i18n="av_aq_leg_flag"></span></span><span><b>✈️</b><span data-i18n="av_aq_leg_plane"></span></span></div>
-    <div class="stat-grid av-aq-2col">
-      <div class="stat-card green"><div class="stat-val" id="av-aq-identified-pct">—</div><div class="stat-lbl" data-i18n="av_aq_identified">Flights with an identified airline</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
-      <div class="stat-card amber"><div class="stat-val" id="av-aq-unidentified">—</div><div class="stat-lbl" data-i18n="av_aq_unidentified">Flights with no airline</div><div class="stat-sub" id="av-aq-unidentified-sub">—</div></div>
+    <div class="archive-note" data-i18n-html="av_dq_intro"></div>
+    <div class="av-dq-toc" role="navigation">
+      <button type="button" onclick="document.getElementById('av-dq-m1').scrollIntoView({behavior:'smooth'})"><b>01</b><span data-i18n="av_dq_toc1"></span></button>
+      <button type="button" onclick="document.getElementById('av-dq-m2').scrollIntoView({behavior:'smooth'})"><b>02</b><span data-i18n="av_dq_toc2"></span></button>
+      <button type="button" onclick="document.getElementById('av-dq-m3').scrollIntoView({behavior:'smooth'})"><b>03</b><span data-i18n="av_dq_toc3"></span></button>
     </div>
-    <div class="av-aq-h"><span data-i18n="av_aq_choices_h"></span><em data-i18n="av_aq_choices_em"></em></div>
-    <div class="av-aq-choices">
-      <div class="av-aq-choice"><div class="av-aq-tag" data-i18n="av_aq_c1_tag"></div><h3 data-i18n="av_aq_c1_t"></h3><p data-i18n="av_aq_c1_p"></p></div>
-      <div class="av-aq-choice"><div class="av-aq-tag" data-i18n="av_aq_c2_tag"></div><h3 data-i18n="av_aq_c2_t"></h3><p data-i18n="av_aq_c2_p"></p></div>
+
+    <section class="av-dq-module" id="av-dq-m1">
+    <div class="av-dq-head"><div><div class="av-dq-kicker"><span data-i18n="av_dq_kicker">Data quality</span>&nbsp;· 01</div><div class="av-dq-title" data-i18n-html="av_dq_m1_title"></div></div><p class="av-dq-aside" data-i18n="av_dq_m1_aside"></p></div>
+    <div class="av-dq-sub"><span class="av-dq-num">1.1</span><h3 data-i18n="av_dq_s_method"></h3><em data-i18n="av_dq_s_method_em"></em></div>
+    <p class="av-dq-lede" data-i18n="av_aq_lede"></p>
+    <div class="av-dq-cascade">
+      <div class="av-dq-st"><span class="av-dq-dot av-dq-c1">1</span><div><h4 data-i18n="av_aq_s1_t"></h4><p data-i18n-html="av_aq_s1_p"></p></div><div class="av-dq-rel av-dq-c1"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s1_pill"></span></div></div>
+      <div class="av-dq-st"><span class="av-dq-dot av-dq-c2">2</span><div><h4 data-i18n="av_aq_s2_t"></h4><p data-i18n-html="av_aq_s2_p"></p></div><div class="av-dq-rel av-dq-c2"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s2_pill"></span></div></div>
+      <div class="av-dq-st"><span class="av-dq-dot av-dq-c3">3</span><div><h4 data-i18n="av_aq_s3_t"></h4><p data-i18n-html="av_aq_s3_p"></p></div><div class="av-dq-rel av-dq-c3"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s3_pill"></span></div></div>
+      <div class="av-dq-st"><span class="av-dq-dot av-dq-c4">4</span><div><h4 data-i18n="av_aq_s4_t"></h4><p data-i18n-html="av_aq_s4_p"></p></div><div class="av-dq-rel av-dq-c4"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s4_pill"></span></div></div>
     </div>
-    <div class="av-aq-h"><span data-i18n="av_aq_hist_h"></span><em data-i18n="av_aq_hist_em"></em></div>
-    <div class="archive-table-wrap">
-      <div class="archive-table-scroll"><table class="archive-table" id="av-aq-history"></table></div>
+    <div class="av-dq-legend"><span><b>🇵🇹</b><span data-i18n="av_aq_leg_flag"></span></span><span><b>✈️</b><span data-i18n="av_aq_leg_plane"></span></span></div>
+    <div class="av-dq-sub"><span class="av-dq-num">1.2</span><h3 data-i18n="av_dq_s_choices"></h3><em data-i18n="av_aq_choices_em"></em></div>
+    <div class="av-dq-choices">
+      <div class="av-dq-choice"><div class="av-dq-plates"><span class="av-dq-plate">9H-</span><span class="av-dq-plate o" data-i18n="av_dq_c1_country"></span></div><h4 data-i18n="av_aq_c1_t"></h4><div class="av-dq-split"><span>Malta Air<i>Boeing 737</i></span><span>Lauda Europe<i>Airbus A320/A321</i></span></div><p data-i18n="av_aq_c1_p"></p></div>
+      <div class="av-dq-choice"><div class="av-dq-plates"><span class="av-dq-plate">LN-</span><span class="av-dq-plate">SE-</span><span class="av-dq-plate o" data-i18n="av_dq_c2_country"></span></div><h4 data-i18n="av_aq_c2_t"></h4><div class="av-dq-split"><span>Norwegian<i data-i18n="av_dq_aoc_no"></i></span><span>Norwegian Air Sweden<i data-i18n="av_dq_aoc_se"></i></span></div><p data-i18n="av_aq_c2_p"></p></div>
     </div>
-    <p class="av-aq-foot" data-i18n="av_aq_foot"></p>
-    <div class="stat-grid">
-      <div class="stat-card"><div class="stat-val" id="av-q-capped-pct">—</div><div class="stat-lbl" data-i18n="av_q_capped">dB readings capped at 100</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
-      <div class="stat-card"><div class="stat-val" id="av-q-types">—</div><div class="stat-lbl" data-i18n="av_q_types">Aircraft models (raw → merged)</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
-      <div class="stat-card red"><div class="stat-val" id="av-q-military-pct">—</div><div class="stat-lbl" data-i18n="av_q_military">Suspected false-positive "military" tags</div><div class="stat-sub" data-i18n="av_month_all">All time</div></div>
+    <div class="av-dq-sub"><span class="av-dq-num">1.3</span><h3 data-i18n="av_dq_s_hist"></h3><em data-i18n="av_aq_hist_em"></em></div>
+    <div class="av-dq-tl" id="av-aq-history"></div>
+    <p class="av-dq-foot" data-i18n="av_aq_foot"></p>
+    </section>
+
+    <section class="av-dq-module" id="av-dq-m2">
+    <div class="av-dq-head"><div><div class="av-dq-kicker"><span data-i18n="av_dq_kicker">Data quality</span>&nbsp;· 02</div><div class="av-dq-title" data-i18n-html="av_dq_m2_title"></div></div><p class="av-dq-aside" data-i18n="av_dq_m2_aside"></p></div>
+    <div class="av-dq-sub"><span class="av-dq-num">2.1</span><h3 data-i18n="av_dq_s_figures"></h3><em data-i18n="av_dq_alltime"></em></div>
+    <div class="av-dq-3">
+      <div class="av-dq-card"><div class="v" id="av-q-types">—</div><div class="l" data-i18n="av_dq_raw_to_models"></div><div class="s" id="av-dq-absorbed">—</div></div>
+      <div class="av-dq-card"><div class="v" id="av-dq-ngroups">—</div><div class="l" data-i18n="av_dq_groups_n"></div><div class="s" data-i18n="av_dq_see_below"></div></div>
+      <div class="av-dq-card"><div class="v" id="av-dq-gflights">—</div><div class="l" data-i18n="av_dq_flights_aff"></div><div class="s" id="av-dq-biggest">—</div></div>
     </div>
-    <div class="archive-table-wrap">
-      <div class="archive-table-title" data-i18n="av_q_groups">Merged aircraft model groups (naming duplicates)</div>
-      <div class="archive-table-scroll"><table class="archive-table" id="av-quality-groups"></table></div>
+    <div class="av-dq-sub"><span class="av-dq-num">2.2</span><h3 data-i18n="av_dq_s_groups"></h3><em data-i18n="av_dq_s_groups_em"></em></div>
+    <p class="av-dq-lede" data-i18n="av_dq_groups_lede"></p>
+    <div class="av-dq-groups" id="av-quality-groups"></div>
+    <div class="av-dq-keyline"><span><span class="av-dq-chip" data-i18n="av_dq_chip_var"></span><span data-i18n="av_dq_key_var"></span></span><span><span class="av-dq-chip ren" data-i18n="av_dq_chip_ren"></span><span data-i18n="av_dq_key_ren"></span></span></div>
+    <div class="av-dq-sub"><span class="av-dq-num">2.3</span><h3 data-i18n="av_dq_s_hist"></h3><em data-i18n="av_aq_hist_em"></em></div>
+    <div class="av-dq-tl" id="av-dq-model-history"></div>
+    </section>
+
+    <section class="av-dq-module" id="av-dq-m3">
+    <div class="av-dq-head"><div><div class="av-dq-kicker"><span data-i18n="av_dq_kicker">Data quality</span>&nbsp;· 03</div><div class="av-dq-title" data-i18n-html="av_dq_m3_title"></div></div><p class="av-dq-aside" data-i18n="av_dq_m3_aside"></p></div>
+    <div class="av-dq-2">
+      <div class="av-dq-card"><div class="v" id="av-q-capped-pct">—</div><div class="l" data-i18n="av_q_capped">dB readings capped at 100</div><div class="s" id="av-dq-capped-sub">—</div><p data-i18n="av_dq_capped_p"></p></div>
+      <div class="av-dq-card red"><div class="v" id="av-q-military-pct">—</div><div class="l" data-i18n="av_q_military">Suspected false-positive "military" tags</div><div class="s" id="av-dq-mil-sub">—</div><p data-i18n="av_dq_mil_p"></p></div>
     </div>
+    </section>
   </div>
 
   <!-- ── AIR QUALITY / POLLUTION ── -->
@@ -1208,36 +1301,84 @@ const AV_AIRLINE_HISTORY = [
     pt:'Dois Airbus da <b>Delta Air Lines</b> apresentados como "Air Algérie": o seu código hex começava pelas letras do código dessa companhia.',
     fr:'Deux Airbus <b>Delta Air Lines</b> affichés « Air Algérie » : leur code hex commençait par les lettres du code de cette compagnie.' },
 ];
+// Historique des corrections « Modèles d'avion » (même format que AV_AIRLINE_HISTORY ;
+// qtyText remplace qty quand la quantité n'est pas un nombre de vols).
+const AV_MODEL_HISTORY = [
+  { date:'2026-07-20', kind:'merge', qtyText:'150 → 139',
+    unit:{ en:'models at the time', pt:'modelos na altura', fr:'modèles à l\'époque' },
+    en:'Grouping rule introduced: spelling variants and 3 documented renames (<b>Bombardier CS300/CS100</b> became <b>Airbus A220</b>, <b>680A</b> = Citation Latitude, <b>BD-700</b> = Global 6500). The biggest hidden duplicate was the A220-300, split across 5 names.',
+    pt:'Regra de agrupamento criada: variantes de grafia e 3 mudanças de nome documentadas (<b>Bombardier CS300/CS100</b> passaram a <b>Airbus A220</b>, <b>680A</b> = Citation Latitude, <b>BD-700</b> = Global 6500). O maior duplicado escondido era o A220-300, dividido em 5 nomes.',
+    fr:'Règle de regroupement mise en place : variantes d\'écriture et 3 renommages documentés (<b>Bombardier CS300/CS100</b> devenus <b>Airbus A220</b>, <b>680A</b> = Citation Latitude, <b>BD-700</b> = Global 6500). Le plus gros doublon caché était l\'A220-300, éclaté en 5 noms.' },
+];
+// Noms bruts fusionnés par renommage documenté (= MANUAL_ALIASES de offline_stats/aircraft_normalize.py)
+const AV_MODEL_RENAMED = new Set(['C Series 300','BD-500-1A11','C Series 100','BD-500-1A10','680A Citation Latitude','BD-700 Global 6500']);
+const AV_MODEL_NOTES = {
+  'Airbus A220-300': { en:'Bombardier CS300, renamed in 2018', pt:'Bombardier CS300, rebaptizado em 2018', fr:'Bombardier CS300, renommé en 2018' },
+  'Airbus A220-100': { en:'Bombardier CS100, renamed in 2018', pt:'Bombardier CS100, rebaptizado em 2018', fr:'Bombardier CS100, renommé en 2018' },
+  'Citation Latitude': { en:'680A = FAA designation', pt:'680A = designação FAA', fr:'680A = désignation FAA' },
+  'Global 6500': { en:'Bombardier designation', pt:'Designação Bombardier', fr:'Désignation Bombardier' },
+};
+function avDqLoc() { return _lang === 'pt' ? 'pt-PT' : (_lang === 'fr' ? 'fr-FR' : 'en-GB'); }
+function avDqTimeline(elId, items) {
+  const loc = avDqLoc();
+  document.getElementById(elId).innerHTML = items.map(h => {
+    const dt = new Date(h.date + 'T12:00:00');
+    const day = dt.toLocaleDateString(loc, {day:'numeric', month:'short'});
+    const q = h.qtyText || ((h.approx ? '≈ ' : '') + h.qty.toLocaleString(loc));
+    const unit = h.unit ? (h.unit[_lang] || h.unit.en) : avT('av_dq_flights', 'flights');
+    return `<div class="av-dq-ev ${h.kind}"><div class="d"><b>${day}</b>${dt.getFullYear()}</div><div class="pin"></div>`
+      + `<div class="t"><span class="av-dq-kind">${avT('av_aq_k_' + h.kind, h.kind)}</span>${h[_lang] || h.en}</div>`
+      + `<div class="q">${q}<small>${unit}</small></div></div>`;
+  }).join('');
+}
 function avRenderAirlineQuality() {
-  const loc = _lang === 'pt' ? 'pt-PT' : (_lang === 'fr' ? 'fr-FR' : 'en-GB');
-  const total = (archiveData.overview && archiveData.overview.total_flights) || archiveData.quality.total_flights || 0;
+  const loc = avDqLoc();
+  const fmt = n => n.toLocaleString(loc);
+  const tpl = (k, fb, n, m) => avT(k, fb).replace('{n}', n).replace('{m}', m);
+  const d = archiveData.quality;
+  // Bandeau : compagnies
+  const total = (archiveData.overview && archiveData.overview.total_flights) || d.total_flights || 0;
   const identified = Object.values(archiveData.by_airline || {}).reduce((s, a) => s + (a.total_flights || 0), 0);
   const missing = Math.max(0, total - identified);
-  const pct = total ? (100 * identified / total) : null;
-  document.getElementById('av-aq-identified-pct').textContent = pct == null ? '—' : pct.toLocaleString(loc, {minimumFractionDigits:1, maximumFractionDigits:1}) + ' %';
-  document.getElementById('av-aq-unidentified').textContent = missing.toLocaleString(loc);
-  document.getElementById('av-aq-unidentified-sub').textContent = avT('av_aq_out_of', 'out of {n} flights').replace('{n}', total.toLocaleString(loc));
-  const rows = AV_AIRLINE_HISTORY.map(h => {
-    const d = new Date(h.date + 'T12:00:00').toLocaleDateString(loc, {day:'numeric', month:'short', year:'numeric'});
-    const q = (h.approx ? '≈ ' : '') + h.qty.toLocaleString(loc);
-    return `<tr><td class="av-aq-date">${d}</td><td class="av-aq-text"><span class="av-aq-kind ${h.kind}">${avT('av_aq_k_' + h.kind, h.kind)}</span>${h[_lang] || h.en}</td><td class="av-aq-qty">${q}</td></tr>`;
+  const pct = total ? (100 * identified / total) : 0;
+  document.getElementById('av-aq-identified-pct').textContent = pct.toLocaleString(loc, {minimumFractionDigits:1, maximumFractionDigits:1}) + ' %';
+  document.getElementById('av-aq-unidentified').textContent = fmt(missing);
+  document.getElementById('av-aq-unidentified-sub').textContent = tpl('av_aq_out_of', 'out of {n} flights', fmt(total));
+  document.getElementById('av-dq-track-fill').style.width = pct.toFixed(2) + '%';
+  document.getElementById('av-dq-cap-ok').textContent = tpl('av_dq_bar_ok', '{n} flights identified', fmt(identified));
+  document.getElementById('av-dq-cap-ko').textContent = tpl('av_dq_bar_ko', '{n} with no airline', fmt(missing));
+  // Bandeau + 2.1 : modèles
+  const groups = d.aircraft_merged_groups || [];
+  document.getElementById('av-dq-models').textContent = fmt(d.aircraft_types_after);
+  document.getElementById('av-dq-models-sub').textContent = tpl('av_dq_models_kpi_sub', '{n} raw labels before merging', fmt(d.aircraft_types_before));
+  document.getElementById('av-q-types').innerHTML = `<span class="from">${fmt(d.aircraft_types_before)}</span><span class="arr">→</span>${fmt(d.aircraft_types_after)}`;
+  document.getElementById('av-dq-absorbed').textContent = tpl('av_dq_absorbed', '{n} duplicate labels absorbed', fmt(d.aircraft_types_before - d.aircraft_types_after));
+  document.getElementById('av-dq-ngroups').textContent = fmt(groups.length);
+  const gFlights = groups.reduce((s, g) => s + (g.total || 0), 0);
+  const big = groups.slice().sort((a, b) => b.total - a.total)[0];
+  document.getElementById('av-dq-gflights').textContent = fmt(gFlights);
+  document.getElementById('av-dq-biggest').textContent = big ? tpl('av_dq_biggest', 'including {n} for {m}', fmt(big.total), big.canonical) : '';
+  // 2.2 : groupes fusionnés
+  document.getElementById('av-quality-groups').innerHTML = groups.slice().sort((a, b) => b.total - a.total).map(g => {
+    const chips = g.variants.slice().sort((a, b) => b.n - a.n).map(v =>
+      `<span class="av-dq-chip${AV_MODEL_RENAMED.has(v.raw) ? ' ren' : ''}">${v.raw}<i>${fmt(v.n)}</i></span>`).join('');
+    const note = AV_MODEL_NOTES[g.canonical] ? (AV_MODEL_NOTES[g.canonical][_lang] || AV_MODEL_NOTES[g.canonical].en) : avT('av_dq_note_spelling', 'Spelling');
+    return `<div class="av-dq-grp"><div class="av-dq-chips">${chips}</div><div class="to">→</div>`
+      + `<div class="canon">${g.canonical}<small>${note}</small></div><div class="n">${fmt(g.total)}<small>${avT('av_dq_flights', 'flights')}</small></div></div>`;
   }).join('');
-  document.getElementById('av-aq-history').innerHTML =
-    `<thead><tr><th>${avT('av_aq_col_date','Date')}</th><th>${avT('av_aq_col_fix','Correction')}</th><th class="av-aq-qty">${avT('av_aq_col_qty','Flights affected')}</th></tr></thead><tbody>${rows}</tbody>`;
+  // 03 : mesures
+  document.getElementById('av-q-capped-pct').textContent = Number(d.db_capped_pct).toLocaleString(loc, {maximumFractionDigits:2}) + ' %';
+  document.getElementById('av-dq-capped-sub').textContent = tpl('av_dq_capped_sub', '{n} flights · all time', fmt(d.db_capped_count));
+  document.getElementById('av-q-military-pct').textContent = Number(d.military_suspect_pct).toLocaleString(loc, {maximumFractionDigits:1}) + ' %';
+  document.getElementById('av-dq-mil-sub').textContent = tpl('av_dq_mil_sub', '{n} of {m} military flights', fmt(d.military_suspect_count), fmt(d.military_total));
+  // Frises
+  avDqTimeline('av-aq-history', AV_AIRLINE_HISTORY);
+  avDqTimeline('av-dq-model-history', AV_MODEL_HISTORY);
 }
 
 // ── Data Quality ──
 function avRenderQuality() {
-  const d = archiveData.quality;
   avRenderAirlineQuality();
-  document.getElementById('av-q-capped-pct').textContent = d.db_capped_pct + '%';
-  document.getElementById('av-q-types').textContent = d.aircraft_types_before + ' → ' + d.aircraft_types_after;
-  document.getElementById('av-q-military-pct').textContent = d.military_suspect_pct + '%';
-
-  avInitSortableTable('av-quality-groups', d.aircraft_merged_groups,
-    [{key:'canonical',label:avT('av_col_canonical','Canonical name')}, {key:'variants',label:avT('av_col_variants','Merged variants')}, {key:'total',label:avT('av_col_total','Total'),type:'number'}],
-    g => `<tr><td class="name-cell">${g.canonical}</td><td>${g.variants.map(v => v.raw).join(', ')}</td><td>${avFmt(g.total)}</td></tr>`,
-    'total', 'desc');
 }
 
 // ── Air Quality / Pollution — 3 panneaux empilés (Vols / PM2.5 / Température), un axe par mesure ──
@@ -1654,6 +1795,50 @@ const T = {
     av_aq_k_fill:'Filled in',
     av_aq_k_split:'Split',
     av_aq_foot:'Each correction also applies to flights already archived, not just new ones.',
+    av_dq_intro:'<b>Transparency panel.</b> Known limits of this dataset, with real counters rather than hidden assumptions, and a dated list of every correction.',
+    av_dq_kicker:'Data quality',
+    av_dq_toc1:'Airlines',
+    av_dq_toc2:'Aircraft models',
+    av_dq_toc3:'Measurements and classification',
+    av_dq_m1_title:'Airlines<br><em>and operators</em>',
+    av_dq_m2_title:'Aircraft<br><em>models</em>',
+    av_dq_m3_title:'Measurements<br><em>and classification</em>',
+    av_dq_m1_aside:'Who operates each flight, and where that information comes from. We would rather leave a field blank than guess an airline.',
+    av_dq_m2_aside:'The same aircraft can arrive under several names depending on the source. We only group what is certain.',
+    av_dq_m3_aside:'Known limits of the sensors and of the automatic sorting of rare flights.',
+    av_dq_s_method:'Method',
+    av_dq_s_method_em:'4 sources, in order',
+    av_dq_s_choices:'Editorial choices',
+    av_dq_s_hist:'Correction history',
+    av_dq_s_figures:'Figures',
+    av_dq_alltime:'all time',
+    av_dq_s_groups:'Merged models',
+    av_dq_s_groups_em:'recalculated at every update',
+    av_dq_c1_country:'Malta',
+    av_dq_c2_country:'Norway · Sweden',
+    av_dq_aoc_no:'Norwegian certificate',
+    av_dq_aoc_se:'Swedish certificate',
+    av_dq_models_kpi:'Distinct aircraft models',
+    av_dq_models_kpi_sub:'{n} raw labels before merging',
+    av_dq_bar_ok:'{n} flights identified',
+    av_dq_bar_ko:'{n} with no airline',
+    av_dq_raw_to_models:'Raw labels → distinct models',
+    av_dq_absorbed:'{n} duplicate labels absorbed',
+    av_dq_groups_n:'Merged groups',
+    av_dq_see_below:'Details below',
+    av_dq_flights_aff:'Flights affected',
+    av_dq_biggest:'including {n} for {m}',
+    av_dq_groups_lede:'Two rules only: spelling variants of the same name (spaces, hyphens, manufacturer name), and documented name changes. Variants that are genuinely different, such as G650 and G650ER, stay separate.',
+    av_dq_chip_var:'variant',
+    av_dq_key_var:'same name, written differently',
+    av_dq_chip_ren:'rename',
+    av_dq_key_ren:'documented name change',
+    av_dq_note_spelling:'Spelling',
+    av_dq_flights:'flights',
+    av_dq_capped_sub:'{n} flights · all time',
+    av_dq_capped_p:'The earlier measuring chain topped out at 100 dB. These flights are counted at 100 dB: the real peak was at least that loud.',
+    av_dq_mil_sub:'{n} of {m} military flights',
+    av_dq_mil_p:'Automatic sorting relies on the radio address and the callsign. Some civil aircraft fall into address ranges reserved for the military.',
     av_q_capped:'dB readings capped at 100', av_q_types:'Aircraft models (raw → merged)',
     av_q_military:'Suspected false-positive "military" tags', av_q_groups:'Merged aircraft model groups (naming duplicates)',
     av_poll_intro:'Ambient PM sensor readings captured alongside each flight event — a timing reference, not proof that aircraft caused the reading (a barbecue or cigarette on the terrace affects it just as much).',
@@ -1747,6 +1932,50 @@ const T = {
     av_aq_k_fill:'Completado',
     av_aq_k_split:'Separação',
     av_aq_foot:'Cada correcção aplica-se também aos voos já arquivados, e não apenas aos novos.',
+    av_dq_intro:'<b>Painel de transparência.</b> As limitações conhecidas deste conjunto de dados, com contadores reais em vez de suposições ocultas, e a lista datada de cada correcção.',
+    av_dq_kicker:'Qualidade dos dados',
+    av_dq_toc1:'Companhias aéreas',
+    av_dq_toc2:'Modelos de avião',
+    av_dq_toc3:'Medições e classificação',
+    av_dq_m1_title:'Companhias<br><em>aéreas</em>',
+    av_dq_m2_title:'Modelos<br><em>de avião</em>',
+    av_dq_m3_title:'Medições<br><em>e classificação</em>',
+    av_dq_m1_aside:'Quem opera cada voo, e de onde vem essa informação. Preferimos deixar um campo em branco a adivinhar uma companhia.',
+    av_dq_m2_aside:'O mesmo avião pode chegar com vários nomes, consoante a fonte. Só agrupamos o que é certo.',
+    av_dq_m3_aside:'Limitações conhecidas dos sensores e da classificação automática dos voos raros.',
+    av_dq_s_method:'Método',
+    av_dq_s_method_em:'4 fontes, por ordem',
+    av_dq_s_choices:'Escolhas editoriais',
+    av_dq_s_hist:'Histórico de correcções',
+    av_dq_s_figures:'Números',
+    av_dq_alltime:'todo o histórico',
+    av_dq_s_groups:'Modelos fundidos',
+    av_dq_s_groups_em:'recalculados a cada actualização',
+    av_dq_c1_country:'Malta',
+    av_dq_c2_country:'Noruega · Suécia',
+    av_dq_aoc_no:'certificado norueguês',
+    av_dq_aoc_se:'certificado sueco',
+    av_dq_models_kpi:'Modelos de avião distintos',
+    av_dq_models_kpi_sub:'{n} nomes brutos antes da fusão',
+    av_dq_bar_ok:'{n} voos identificados',
+    av_dq_bar_ko:'{n} sem companhia',
+    av_dq_raw_to_models:'Nomes brutos → modelos distintos',
+    av_dq_absorbed:'{n} nomes duplicados absorvidos',
+    av_dq_groups_n:'Grupos fundidos',
+    av_dq_see_below:'Detalhe abaixo',
+    av_dq_flights_aff:'Voos afectados',
+    av_dq_biggest:'dos quais {n} para {m}',
+    av_dq_groups_lede:'Apenas duas regras: variantes de grafia do mesmo nome (espaços, hífenes, nome do fabricante) e mudanças de nome documentadas. As variantes realmente diferentes, como G650 e G650ER, ficam separadas.',
+    av_dq_chip_var:'variante',
+    av_dq_key_var:'o mesmo nome, escrito de outra forma',
+    av_dq_chip_ren:'mudança de nome',
+    av_dq_key_ren:'mudança de nome documentada',
+    av_dq_note_spelling:'Grafia',
+    av_dq_flights:'voos',
+    av_dq_capped_sub:'{n} voos · todo o histórico',
+    av_dq_capped_p:'A antiga cadeia de medição tinha um limite de 100 dB. Estes voos contam como 100 dB: o pico real foi pelo menos tão alto.',
+    av_dq_mil_sub:'{n} de {m} voos militares',
+    av_dq_mil_p:'A classificação automática baseia-se no endereço de rádio e no indicativo. Alguns aviões civis caem em gamas de endereços reservadas aos militares.',
     av_q_capped:'Leituras dB no limite de 100', av_q_types:'Modelos de aeronave (bruto → fundido)',
     av_q_military:'Etiquetas "militar" suspeitas de falso positivo', av_q_groups:'Grupos de modelos fundidos (duplicados de nomenclatura)',
     av_poll_intro:'Leituras do sensor de partículas captadas junto de cada voo detectado — uma referência temporal, não prova de que a aeronave causou a leitura (um churrasco ou cigarro na varanda afecta-a igualmente).',
@@ -1840,6 +2069,50 @@ const T = {
     av_aq_k_fill:'Complété',
     av_aq_k_split:'Séparation',
     av_aq_foot:'Chaque correction s\'applique aussi aux vols déjà archivés, pas seulement aux nouveaux.',
+    av_dq_intro:'<b>Panneau de transparence.</b> Les limites connues de ce jeu de données, avec des compteurs réels plutôt que des suppositions cachées, et la liste datée de chaque correction.',
+    av_dq_kicker:'Qualité des données',
+    av_dq_toc1:'Compagnies aériennes',
+    av_dq_toc2:'Modèles d\'avion',
+    av_dq_toc3:'Mesures et classement',
+    av_dq_m1_title:'Compagnies<br><em>aériennes</em>',
+    av_dq_m2_title:'Modèles<br><em>d\'avion</em>',
+    av_dq_m3_title:'Mesures<br><em>et classement</em>',
+    av_dq_m1_aside:'Qui exploite chaque vol, et d\'où vient cette information. On préfère un champ vide à une compagnie devinée.',
+    av_dq_m2_aside:'Un même avion peut arriver sous plusieurs noms selon la source. On regroupe seulement ce qui est certain.',
+    av_dq_m3_aside:'Les limites connues des capteurs et du tri automatique des vols rares.',
+    av_dq_s_method:'Méthode',
+    av_dq_s_method_em:'4 sources, dans l\'ordre',
+    av_dq_s_choices:'Choix éditoriaux',
+    av_dq_s_hist:'Historique des corrections',
+    av_dq_s_figures:'Chiffres',
+    av_dq_alltime:'tout l\'historique',
+    av_dq_s_groups:'Modèles fusionnés',
+    av_dq_s_groups_em:'recalculés à chaque mise à jour',
+    av_dq_c1_country:'Malte',
+    av_dq_c2_country:'Norvège · Suède',
+    av_dq_aoc_no:'certificat norvégien',
+    av_dq_aoc_se:'certificat suédois',
+    av_dq_models_kpi:'Modèles d\'avion distincts',
+    av_dq_models_kpi_sub:'{n} libellés bruts avant fusion',
+    av_dq_bar_ok:'{n} vols identifiés',
+    av_dq_bar_ko:'{n} sans compagnie',
+    av_dq_raw_to_models:'Libellés bruts → modèles distincts',
+    av_dq_absorbed:'{n} libellés en double absorbés',
+    av_dq_groups_n:'Groupes fusionnés',
+    av_dq_see_below:'Détail ci-dessous',
+    av_dq_flights_aff:'Vols concernés',
+    av_dq_biggest:'dont {n} pour {m}',
+    av_dq_groups_lede:'Deux règles seulement : les variantes d\'écriture d\'un même nom (espaces, tirets, nom du constructeur), et les changements de nom documentés. Les variantes réellement différentes, comme G650 et G650ER, restent séparées.',
+    av_dq_chip_var:'variante',
+    av_dq_key_var:'même nom, écrit autrement',
+    av_dq_chip_ren:'renommage',
+    av_dq_key_ren:'changement de nom documenté',
+    av_dq_note_spelling:'Écriture',
+    av_dq_flights:'vols',
+    av_dq_capped_sub:'{n} vols · tout l\'historique',
+    av_dq_capped_p:'L\'ancienne chaîne de mesure plafonnait à 100 dB. Ces vols sont comptés à 100 dB : le vrai pic était au moins aussi fort.',
+    av_dq_mil_sub:'{n} sur {m} vols militaires',
+    av_dq_mil_p:'Le tri automatique repose sur l\'adresse radio et l\'indicatif. Certains avions civils tombent dans des plages réservées aux militaires.',
     av_q_capped:'Relevés dB plafonnés à 100', av_q_types:'Modèles d\'avion (bruts → fusionnés)',
     av_q_military:'Étiquettes "militaire" suspectées de faux positif', av_q_groups:'Groupes de modèles fusionnés (doublons de nommage)',
     av_poll_intro:'Relevés du capteur de particules associés temporellement à chaque vol détecté — un repère chronologique, pas une preuve que l\'avion soit à l’origine de la mesure (un barbecue ou une cigarette sur la terrasse l\'affecte tout autant).',
