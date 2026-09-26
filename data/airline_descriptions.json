@@ -873,5 +873,35 @@
       "pt": "O seu primeiro voo, a 27 de Setembro de 2022, ligou Roma Fiumicino a Malta.",
       "fr": "Son premier vol, le 27 septembre 2022, a relié Rome-Fiumicino à Malte."
     }
+  },
+  {
+    "airline": "World2Fly Portugal",
+    "description": {
+      "en": "Lisbon-based charter airline created in 2021, a subsidiary of Spain's World2Fly (Iberostar group). Its Airbus A330-300 flies holidaymakers from Lisbon to the Caribbean and Brazil, including Punta Cana, Cancún and Montego Bay.",
+      "pt": "Companhia charter sediada em Lisboa, criada em 2021, filial da espanhola World2Fly (grupo Iberostar). O seu Airbus A330-300 leva turistas de Lisboa às Caraíbas e ao Brasil, incluindo Punta Cana, Cancún e Montego Bay.",
+      "fr": "Compagnie charter basée à Lisbonne, créée en 2021, filiale de l’espagnole World2Fly (groupe Iberostar). Son Airbus A330-300 emmène les vacanciers de Lisbonne vers les Caraïbes et le Brésil, dont Punta Cana, Cancún et Montego Bay."
+    },
+    "founded_year": 2021,
+    "headquarters": { "en": "Lisbon, Portugal", "pt": "Lisboa, Portugal", "fr": "Lisbonne, Portugal" },
+    "fun_fact": {
+      "en": "It has ordered three Airbus A350-1000s for 2027, each fitted with 608 economy seats.",
+      "pt": "Encomendou três Airbus A350-1000 para 2027, cada um com 608 lugares em classe económica.",
+      "fr": "Elle a commandé trois Airbus A350-1000 pour 2027, chacun équipé de 608 sièges en classe économique."
+    }
+  },
+  {
+    "airline": "Red Sea Airlines",
+    "description": {
+      "en": "Private Egyptian airline founded in 2021 and based in Cairo. It flies scheduled and charter services with Boeing 737-800s, with 737 MAX 8s on order.",
+      "pt": "Companhia aérea privada egípcia fundada em 2021 e sediada no Cairo. Opera voos regulares e charter em Boeing 737-800, com 737 MAX 8 encomendados.",
+      "fr": "Compagnie aérienne privée égyptienne fondée en 2021 et basée au Caire. Elle assure des vols réguliers et charters en Boeing 737-800, avec des 737 MAX 8 en commande."
+    },
+    "founded_year": 2021,
+    "headquarters": { "en": "Cairo, Egypt", "pt": "Cairo, Egipto", "fr": "Le Caire, Égypte" },
+    "fun_fact": {
+      "en": "SU-RSC, the 737-800 seen over Lisbon, was photographed in Vienna in April 2026 wearing additional Fly Aden titles.",
+      "pt": "O SU-RSC, o 737-800 visto nos céus de Lisboa, foi fotografado em Viena em Abril de 2026 com o nome Fly Aden pintado.",
+      "fr": "SU-RSC, le 737-800 vu au-dessus de Lisbonne, a été photographié à Vienne en avril 2026 avec des inscriptions Fly Aden en plus."
+    }
   }
 ]

@@ -1276,6 +1276,10 @@ function avRenderRare() {
 // Ajouter une correction = ajouter une ligne EN TÊTE (plus récente d'abord).
 // kind : merge | fix | fill | split ; approx:true affiche « ≈ ».
 const AV_AIRLINE_HISTORY = [
+  { date:'2026-09-26', kind:'fill', qty:315,
+    en:'Second pass on flights <b>without an airline</b>: codes <b>WPT</b> (World2Fly Portugal, based in Lisbon; one public registry wrongly lists a Canadian airline under it) and <b>RSX</b> (Red Sea Airlines) added, Portuguese Air Force serial numbers recognised (C-130H 168xx, KC-390 269xx), and flights recorded without a radio address in May now use their callsign.',
+    pt:'Segunda passagem pelos voos <b>sem companhia</b>: acrescentados os códigos <b>WPT</b> (World2Fly Portugal, sediada em Lisboa; um registo público atribui-o por engano a uma companhia canadiana) e <b>RSX</b> (Red Sea Airlines), reconhecidos os números de série da Força Aérea Portuguesa (C-130H 168xx, KC-390 269xx), e os voos gravados em Maio sem endereço de rádio passam a usar o indicativo.',
+    fr:'Deuxième passe sur les vols <b>sans compagnie</b> : ajout des codes <b>WPT</b> (World2Fly Portugal, basée à Lisbonne ; un registre public l\'attribue par erreur à une compagnie canadienne) et <b>RSX</b> (Red Sea Airlines), reconnaissance des numéros de série de la Força Aérea Portuguesa (C-130H 168xx, KC-390 269xx), et les vols enregistrés en mai sans adresse radio utilisent désormais leur indicatif.' },
   { date:'2026-09-26', kind:'merge', qty:21,
     en:'<b>Sky Express Greece</b> and <b>Sky Express</b> merged. Same airline, same fleet, two labels depending on the source.',
     pt:'<b>Sky Express Greece</b> e <b>Sky Express</b> reunidas. A mesma companhia e a mesma frota, com dois nomes consoante a fonte.',
