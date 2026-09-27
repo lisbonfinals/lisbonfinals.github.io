@@ -1278,7 +1278,7 @@ function avRenderRare() {
 // Ajouter une correction = ajouter une ligne EN TÊTE (plus récente d'abord).
 // kind : merge | fix | fill | split ; approx:true affiche « ≈ ».
 const AV_AIRLINE_HISTORY = [
-  { date:'2026-09-27', kind:'fill', qty:436,
+  { date:'2026-09-27', kind:'fill', qty:436, unit:{ en:'photos', pt:'fotos', fr:'photos' },
     en:'New mention in the photo galleries: <b>🔁 "X aircraft, leased with crew"</b> when a flight is operated with another airline\'s aircraft and crew (wet lease), for example airBaltic A220s flying for Swiss or EuroAtlantic 777s for Azul. Detected automatically from now on. Public registries sometimes keep a former operator, so an operator only counts if its country matches the aircraft registration.',
     pt:'Nova menção nas galerias de fotos: <b>🔁 "Avião X, alugado com tripulação"</b> quando um voo é operado com o avião e a tripulação de outra companhia (wet lease), por exemplo os A220 da airBaltic a voar para a Swiss ou os 777 da EuroAtlantic para a Azul. Detecção automática a partir de agora. Os registos públicos guardam por vezes um antigo operador, por isso um operador só conta se o seu país corresponder à matrícula do avião.',
     fr:'Nouvelle mention dans les galeries photo : <b>🔁 « Avion X, loué avec équipage »</b> quand un vol est opéré avec l\'avion et l\'équipage d\'une autre compagnie (wet lease), par exemple les A220 airBaltic qui volent pour Swiss ou les 777 EuroAtlantic pour Azul. Détection automatique désormais. Les registres publics gardent parfois un ancien exploitant : un exploitant ne compte donc que si son pays correspond à l\'immatriculation de l\'avion.' },
@@ -1838,7 +1838,7 @@ const T = {
     av_aq_choices_em:'what we keep apart, and why',
     av_aq_c1_tag:'9H- · Malta',
     av_aq_c1_t:'Malta Air and Lauda Europe kept apart',
-    av_aq_c1_p:'Two real Ryanair Group airlines, both registered in Malta, with different fleets: Malta Air flies Boeing 737s, Lauda Europe flies Airbus A320/A321s. We tell them apart by aircraft type rather than filing everything under "Ryanair". Private jets registered in Malta are never assigned to this group.',
+    av_aq_c1_p:'Two real Ryanair Group airlines, both registered in Malta, with different fleets: Malta Air flies Boeing 737s, Lauda Europe flies Airbus A320/A321s. We tell them apart by aircraft type rather than filing everything under "Ryanair". Private jets registered in Malta are never assigned to this group, nor are the Airbus jets of Wizz Air Malta (9H-W…).',
     av_aq_c2_tag:'LN- / SE- · Norway, Sweden',
     av_aq_c2_t:'Norwegian and Norwegian Air Sweden kept apart',
     av_aq_c2_p:'Norwegian Group holds two separate Air Operator Certificates, one Norwegian and one Swedish. In regulatory terms these are two airlines, so we keep them apart, as with Malta Air and Lauda Europe.',
@@ -1976,7 +1976,7 @@ const T = {
     av_aq_choices_em:'o que separamos, e porquê',
     av_aq_c1_tag:'9H- · Malta',
     av_aq_c1_t:'Malta Air e Lauda Europe separadas',
-    av_aq_c1_p:'Duas companhias reais do grupo Ryanair, ambas com matrícula maltesa e frotas diferentes: a Malta Air voa em Boeing 737, a Lauda Europe em Airbus A320/A321. Distinguimo-las pelo tipo de avião em vez de juntar tudo sob "Ryanair". Os jactos privados com matrícula maltesa nunca são atribuídos a este grupo.',
+    av_aq_c1_p:'Duas companhias reais do grupo Ryanair, ambas com matrícula maltesa e frotas diferentes: a Malta Air voa em Boeing 737, a Lauda Europe em Airbus A320/A321. Distinguimo-las pelo tipo de avião em vez de juntar tudo sob "Ryanair". Os jactos privados com matrícula maltesa nunca são atribuídos a este grupo, nem os Airbus da Wizz Air Malta (9H-W…).',
     av_aq_c2_tag:'LN- / SE- · Noruega, Suécia',
     av_aq_c2_t:'Norwegian e Norwegian Air Sweden separadas',
     av_aq_c2_p:'O grupo Norwegian detém dois Certificados de Operador Aéreo distintos, um norueguês e um sueco. Em termos regulamentares são duas companhias: mantemo-las separadas, tal como a Malta Air e a Lauda Europe.',
@@ -2114,7 +2114,7 @@ const T = {
     av_aq_choices_em:'ce qu\'on sépare, et pourquoi',
     av_aq_c1_tag:'9H- · Malte',
     av_aq_c1_t:'Malta Air et Lauda Europe séparées',
-    av_aq_c1_p:'Deux compagnies réelles du groupe Ryanair, immatriculées à Malte, avec des flottes différentes : Malta Air vole en Boeing 737, Lauda Europe en Airbus A320/A321. On les distingue par type d\'avion plutôt que de tout ranger sous « Ryanair ». Les jets privés immatriculés à Malte ne sont jamais rattachés à ce groupe.',
+    av_aq_c1_p:'Deux compagnies réelles du groupe Ryanair, immatriculées à Malte, avec des flottes différentes : Malta Air vole en Boeing 737, Lauda Europe en Airbus A320/A321. On les distingue par type d\'avion plutôt que de tout ranger sous « Ryanair ». Les jets privés immatriculés à Malte ne sont jamais rattachés à ce groupe, pas plus que les Airbus de Wizz Air Malta (9H-W…).',
     av_aq_c2_tag:'LN- / SE- · Norvège, Suède',
     av_aq_c2_t:'Norwegian et Norwegian Air Sweden séparées',
     av_aq_c2_p:'Le groupe Norwegian détient deux certificats de transporteur aérien distincts, un norvégien et un suédois. Ce sont deux compagnies au sens réglementaire : on les garde séparées, comme Malta Air et Lauda Europe.',
