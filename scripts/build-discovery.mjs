@@ -309,6 +309,14 @@ document.querySelector('.log-all-item.active')?.scrollIntoView({inline:'center',
 </body></html>`;
 }
 
+// Notes de correction par rapport (27 sept 2026 : audit des compagnies).
+const REPORT_NOTES_EN = {
+ "2026-05": "<b>Correction note (27 Sept 2026).</b> Airline attributions across the whole archive were audited against public aircraft registries and the callsigns each aircraft broadcast, and about 2,000 flights were reassigned to their real airline. The noise figures in this report are unaffected; only the airline rankings (and the airline table in the PDF) were computed before the fix. For example, TAP Air Portugal's count also included Azores Airlines flights, whose code was missing. In particular, \"Austrian Airlines\" on this month's quietest-airlines podium was in fact Swiss-registered aircraft (mostly easyJet Switzerland): no real Austrian Airlines flight was ever recorded. Details: Archive, Data Quality tab.",
+ "2026-06": "<b>Correction note (27 Sept 2026).</b> Airline attributions across the whole archive were audited against public aircraft registries and the callsigns each aircraft broadcast, and about 2,000 flights were reassigned to their real airline. The noise figures in this report are unaffected; only the airline rankings (and the airline table in the PDF) were computed before the fix. For example, TAP Air Portugal's count also included Azores Airlines flights, whose code was missing. Details: Archive, Data Quality tab.",
+ "2026-07": "<b>Correction note (27 Sept 2026).</b> Airline attributions across the whole archive were audited against public aircraft registries and the callsigns each aircraft broadcast, and about 2,000 flights were reassigned to their real airline. The noise figures in this report are unaffected; only the airline rankings (and the airline table in the PDF) were computed before the fix. For example, TAP Air Portugal's count also included Azores Airlines flights, whose code was missing. Details: Archive, Data Quality tab.",
+ "2026-08": "<b>Correction note (27 Sept 2026).</b> Airline attributions across the whole archive were audited against public aircraft registries and the callsigns each aircraft broadcast, and about 2,000 flights were reassigned to their real airline. The noise figures in this report are unaffected; only the airline rankings (and the airline table in the PDF) were computed before the fix. For example, TAP Air Portugal's count also included Azores Airlines flights, whose code was missing. Details: Archive, Data Quality tab.",
+ "2026-09": "<b>First report after the airline audit.</b> On 26–27 September 2026 about 2,000 flights across the archive were reassigned to their real airline (an old rule guessed the airline from the radio address, which is allocated by country, not by airline). This report uses the corrected data. Helicopters and military aircraft are now excluded from airline rankings. Details: Archive, Data Quality tab."
+};
 function reportTemplate(report, slug) {
   const url = `${base}/reports/${slug}.html`;
   const month = report.month_name || slug;
@@ -339,6 +347,7 @@ ${chromeNav('/noise-report.html', 'en')}
 <div class="article-rule"></div>
 <section class="metric-grid"><div><b>${Number(report.total_flights || 0).toLocaleString('en')}</b><span>Observed flights</span></div><div><b>${esc(report.avg_db)} dB</b><span>Average SPL reading</span></div><div><b>${esc(report.max_db)} dB</b><span>Highest reading</span></div><div><b>${Number(report.night_flights || 0).toLocaleString('en')}</b><span>Night operations</span></div></section>
 <article class="article-body"><p>${insight}</p></article>
+${REPORT_NOTES_EN[`${report.year}-${String(report.month).padStart(2,'0')}`] ? `<p class="method-note" style="border-left-color:#818cf8">${REPORT_NOTES_EN[`${report.year}-${String(report.month).padStart(2,'0')}`]}</p>` : ''}
 <p class="method-note">Independent observations from one fixed residential terrace. These figures are not official airport totals or certified airport noise mapping.</p>
 ${report.pdf_url ? `<a class="dl-btn" href="${esc(report.pdf_url)}" target="_blank" rel="noopener noreferrer">Download the complete PDF report →</a>` : ''}
 <div class="article-sig">Lisbon Finals · Local evidence · CC BY 4.0</div>
