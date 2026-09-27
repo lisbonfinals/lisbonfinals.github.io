@@ -919,5 +919,20 @@
       "fr": "En moins d’un an au Portugal, ses équipages ont effectué leur 1 000e mission et transporté 644 patients."
     },
     "photo": {"src": "/ressources/compare/9h-gmf-carlos-miguel-seabra.jpg", "credit": "Carlos Miguel Seabra", "source": "JetPhotos", "link": "https://www.jetphotos.com/photo/11930606"}
+  },
+  {
+    "airline": "HiFly Malta",
+    "description": {
+      "en": "Maltese subsidiary of Hi Fly, the Lisbon-based charter airline. It leases out wide-body Airbus aircraft with crew, maintenance and insurance (ACMI) to airlines and governments that need extra capacity.",
+      "pt": "Filial maltesa da Hi Fly, a companhia charter sediada em Lisboa. Aluga aviões Airbus de fuselagem larga com tripulação, manutenção e seguro (ACMI) a companhias e governos que precisam de capacidade adicional.",
+      "fr": "Filiale maltaise de Hi Fly, la compagnie charter basée à Lisbonne. Elle loue des gros-porteurs Airbus avec équipage, maintenance et assurance (ACMI) aux compagnies et aux gouvernements qui ont besoin de capacité supplémentaire."
+    },
+    "founded_year": 2013,
+    "headquarters": { "en": "Malta International Airport, Malta", "pt": "Aeroporto Internacional de Malta, Malta", "fr": "Aéroport international de Malte, Malte" },
+    "fun_fact": {
+      "en": "In 2018 it became the first airline to buy a second-hand Airbus A380, and in 2021 its Portuguese parent landed the first Airbus A340 on the blue ice of Antarctica.",
+      "pt": "Em 2018 tornou-se a primeira companhia a comprar um Airbus A380 em segunda mão, e em 2021 a casa-mãe portuguesa aterrou o primeiro Airbus A340 no gelo azul da Antárctida.",
+      "fr": "En 2018, elle est devenue la première compagnie à acheter un Airbus A380 d’occasion, et en 2021 sa maison mère portugaise a posé le premier Airbus A340 sur la glace bleue de l’Antarctique."
+    }
   }
 ]
