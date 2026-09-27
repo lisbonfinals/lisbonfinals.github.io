@@ -1276,6 +1276,10 @@ function avRenderRare() {
 // Ajouter une correction = ajouter une ligne EN TÊTE (plus récente d'abord).
 // kind : merge | fix | fill | split ; approx:true affiche « ≈ ».
 const AV_AIRLINE_HISTORY = [
+  { date:'2026-09-27', kind:'fix', qty:52,
+    en:'41 <b>Wizz Air</b> flights (Hungarian aircraft) were labelled <b>SAS</b> by an old rule that guessed the airline from the radio address, whereas those addresses are allocated by country, not by airline. Corrected against the public registry, and the rule is switched off for good. Also merged: <b>easyJet Switzerland SA</b> into <b>easyJet Switzerland</b>.',
+    pt:'41 voos da <b>Wizz Air</b> (aviões húngaros) estavam identificados como <b>SAS</b> por uma regra antiga que deduzia a companhia a partir do endereço de rádio, quando estes endereços são atribuídos por país e não por companhia. Corrigido com base no registo público, e a regra fica desactivada de vez. Também fundidos: <b>easyJet Switzerland SA</b> em <b>easyJet Switzerland</b>.',
+    fr:'41 vols <b>Wizz Air</b> (avions hongrois) étaient étiquetés <b>SAS</b> par une ancienne règle qui devinait la compagnie à partir de l\'adresse radio, alors que ces adresses sont attribuées par pays, pas par compagnie. Corrigé d\'après le registre public, et la règle est désactivée pour de bon. Également fusionnés : <b>easyJet Switzerland SA</b> dans <b>easyJet Switzerland</b>.' },
   { date:'2026-09-27', kind:'fill', qty:45,
     en:'30 more aircraft missing from public registries, operator checked one by one on the web: Nouvelair, Air France, Transavia France, SAS, Wizz Air Malta, Vueling, Swiss, LATAM, Icelandair, Bulgaria Air and others. One Jettime aircraft listed as a 737 MAX 8 is in fact a 2009 <b>Boeing 737-800</b>: corrected.',
     pt:'Mais 30 aviões ausentes dos registos públicos, operador verificado um a um na web: Nouvelair, Air France, Transavia France, SAS, Wizz Air Malta, Vueling, Swiss, LATAM, Icelandair, Bulgaria Air e outros. Um avião da Jettime indicado como 737 MAX 8 é na verdade um <b>Boeing 737-800</b> de 2009: corrigido.',
