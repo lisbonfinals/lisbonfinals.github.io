@@ -934,5 +934,20 @@
       "pt": "Em 2018 tornou-se a primeira companhia a comprar um Airbus A380 em segunda mão, e em 2021 a casa-mãe portuguesa aterrou o primeiro Airbus A340 no gelo azul da Antárctida.",
       "fr": "En 2018, elle est devenue la première compagnie à acheter un Airbus A380 d’occasion, et en 2021 sa maison mère portugaise a posé le premier Airbus A340 sur la glace bleue de l’Antarctique."
     }
+  },
+  {
+    "airline": "EuroAtlantic Airways",
+    "description": {
+      "en": "Portuguese charter and ACMI airline, founded in 1993 as Air Zarco. It leases wide-body aircraft with their crew to other airlines and flies charters, including for Azores Airlines through Lisbon.",
+      "pt": "Companhia portuguesa de charter e ACMI, fundada em 1993 como Air Zarco. Aluga aviões de fuselagem larga com tripulação a outras companhias e faz voos charter, incluindo para a Azores Airlines através de Lisboa.",
+      "fr": "Compagnie portugaise de charter et d’ACMI, fondée en 1993 sous le nom d’Air Zarco. Elle loue des gros-porteurs avec leur équipage à d’autres compagnies et assure des vols affrétés, notamment pour Azores Airlines via Lisbonne."
+    },
+    "founded_year": 1993,
+    "headquarters": { "en": "Carnaxide, Portugal", "pt": "Carnaxide, Portugal", "fr": "Carnaxide, Portugal" },
+    "fun_fact": {
+      "en": "In 2008 it flew 140 members of the Portuguese National Guard to East Timor, the first aircraft larger than a Boeing 737 ever to land at that airport.",
+      "pt": "Em 2008 levou 140 militares da GNR para Timor-Leste, no primeiro avião maior do que um Boeing 737 a aterrar nesse aeroporto.",
+      "fr": "En 2008, elle a emmené 140 gardes nationaux portugais au Timor oriental, dans le premier avion plus grand qu’un Boeing 737 à se poser sur cet aéroport."
+    }
   }
 ]
