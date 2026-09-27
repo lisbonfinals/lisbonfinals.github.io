@@ -1,39 +1,39 @@
 {
- "generated_at": "2026-09-26T13:28:52Z",
+ "generated_at": "2026-09-27T09:37:28Z",
  "flights": [
   {
    "file": "flights_2026-05.csv",
    "month": "2026-05",
    "rows": 9120,
-   "bytes": 895533,
+   "bytes": 896595,
    "in_progress": false
   },
   {
    "file": "flights_2026-06.csv",
    "month": "2026-06",
    "rows": 9634,
-   "bytes": 979235,
+   "bytes": 979551,
    "in_progress": false
   },
   {
    "file": "flights_2026-07.csv",
    "month": "2026-07",
    "rows": 10450,
-   "bytes": 1073386,
+   "bytes": 1073614,
    "in_progress": false
   },
   {
    "file": "flights_2026-08.csv",
    "month": "2026-08",
    "rows": 10549,
-   "bytes": 1089865,
+   "bytes": 1090220,
    "in_progress": false
   },
   {
    "file": "flights_2026-09.csv",
    "month": "2026-09",
-   "rows": 8563,
-   "bytes": 946824,
+   "rows": 8837,
+   "bytes": 977587,
    "in_progress": true
   }
  ],
@@ -68,11 +68,11 @@
     "start": "2026-09-21",
     "end": "2026-09-30",
     "first_day": "2026-09-21",
-    "last_day": "2026-09-26",
-    "days": 6,
-    "rows": 474333,
-    "bytes": 2194745,
-    "csv_bytes": 13755685,
+    "last_day": "2026-09-27",
+    "days": 7,
+    "rows": 545146,
+    "bytes": 2522051,
+    "csv_bytes": 15809262,
     "in_progress": true
    }
   ],
@@ -106,11 +106,11 @@
     "start": "2026-09-21",
     "end": "2026-09-30",
     "first_day": "2026-09-21",
-    "last_day": "2026-09-26",
-    "days": 6,
-    "rows": 478146,
-    "bytes": 2502272,
-    "csv_bytes": 14297393,
+    "last_day": "2026-09-27",
+    "days": 7,
+    "rows": 549611,
+    "bytes": 2875721,
+    "csv_bytes": 16433852,
     "in_progress": true
    }
   ]
