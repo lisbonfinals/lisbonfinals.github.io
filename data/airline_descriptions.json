@@ -949,5 +949,20 @@
       "pt": "Em 2008 levou 140 militares da GNR para Timor-Leste, no primeiro avião maior do que um Boeing 737 a aterrar nesse aeroporto.",
       "fr": "En 2008, elle a emmené 140 gardes nationaux portugais au Timor oriental, dans le premier avion plus grand qu’un Boeing 737 à se poser sur cet aéroport."
     }
+  },
+  {
+    "airline": "Iberojet",
+    "description": {
+      "en": "Lisbon-based charter airline, founded in 2007 as Orbest and flying under the Iberojet name since its merger with Spain's Evelop in 2020. It belongs to the Ávoris travel group and flies holidaymakers to the Caribbean and beyond with Airbus A330neo aircraft.",
+      "pt": "Companhia charter sediada em Lisboa, fundada em 2007 como Orbest e a voar com o nome Iberojet desde a fusão com a espanhola Evelop em 2020. Pertence ao grupo de viagens Ávoris e leva turistas às Caraíbas e mais longe em Airbus A330neo.",
+      "fr": "Compagnie charter basée à Lisbonne, fondée en 2007 sous le nom d’Orbest et exploitée sous la marque Iberojet depuis sa fusion avec l’espagnole Evelop en 2020. Elle appartient au groupe de voyages Ávoris et emmène les vacanciers vers les Caraïbes et au-delà en Airbus A330neo."
+    },
+    "founded_year": 2007,
+    "headquarters": { "en": "Lisbon, Portugal", "pt": "Lisboa, Portugal", "fr": "Lisbonne, Portugal" },
+    "fun_fact": {
+      "en": "Its radio callsign is still OBS, from its Orbest days. One public registry still lists its A330neo CS-TCF under another airline.",
+      "pt": "O seu indicativo de rádio continua a ser OBS, dos tempos da Orbest. Um registo público ainda atribui o seu A330neo CS-TCF a outra companhia.",
+      "fr": "Son indicatif radio reste OBS, héritage de l’époque Orbest. Un registre public attribue encore son A330neo CS-TCF à une autre compagnie."
+    }
   }
 ]
