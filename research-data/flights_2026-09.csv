@@ -8836,3 +8836,439 @@ date,time,callsign,registration,aircraft_type,airline,phase,direction,altitude_f
 2026-09-27,10:29:30,a1f557,N225UA,Boeing 777-200,United Airlines,landing,arrivee,650,247.1,95.8,8.25,90.86,7.6,355
 2026-09-27,10:32:20,344341,EC-LTM,Boeing 737-800,Air Europa,landing,arrivee,600,263.9,92.3,4.83,58.28,8.8,351
 2026-09-27,10:34:53,TAP088,CS-TUR,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,675,257.2,96.8,7.05,82.79,8.8,351
+2026-09-27,10:39:47,TAP68JP,CS-TVI,Airbus A320neo,TAP Air Portugal,landing,arrivee,650,259.7,91.1,6.36,40.53,8.8,351
+2026-09-27,10:43:13,TAP204A,CS-TUN,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,650,251.5,92.4,6.55,55.64,8.8,351
+2026-09-27,10:46:07,49521a,CS-TPZ,Embraer E190,TAP Air Portugal,landing,arrivee,600,233.2,90.2,6.36,39.67,8.8,351
+2026-09-27,10:53:52,495301,CS-TXA,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,240.8,93.6,6.56,45.02,8.0,350
+2026-09-27,10:56:20,EZY31FV,G-UZMC,Airbus A321neo,easyJet,landing,arrivee,625,265.6,91.7,5.68,40.32,8.0,350
+2026-09-27,10:58:40,4951d7,CS-TNW,Airbus A320,TAP Air Portugal,landing,arrivee,675,258.9,93.4,6.07,58.14,8.0,350
+2026-09-27,11:01:09,EJU74EF,OE-IDU,Airbus A320,easyJet Europe,landing,arrivee,725,258.9,92.5,5.96,66.45,8.0,350
+2026-09-27,11:04:04,44cdcf,OO-SNO,Airbus A320,Brussels Airlines,landing,arrivee,650,242.4,92.9,6.31,56.67,8.8,351
+2026-09-27,11:06:54,KLM1579,PH-AXD,Airbus A321neo,KLM,landing,arrivee,625,247.6,88.8,6.08,36.24,8.8,351
+2026-09-27,11:09:59,495150,CS-TJP,Airbus A321neo,TAP Air Portugal,landing,arrivee,625,264.8,93.2,5.65,37.71,8.8,351
+2026-09-27,11:12:39,AFR41GW,F-HPNL,Airbus A220-300,Air France,landing,arrivee,650,245.9,90.8,6.44,56.96,8.8,351
+2026-09-27,11:15:27,EJU15UG,OE-IBS,Airbus A320,easyJet Europe,landing,arrivee,600,258.4,90.2,6.21,50.75,8.8,351
+2026-09-27,11:27:19,440cbf,OE-LSO,Airbus A320,easyJet Europe,landing,arrivee,625,253.2,89.1,5.79,33.88,9.4,353
+2026-09-27,11:31:43,TAP11WQ,CS-TVH,Airbus A320neo,TAP Air Portugal,landing,arrivee,700,257.6,90.3,6.23,33.68,9.4,353
+2026-09-27,11:34:38,TAP4LA,CS-TUF,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,700,273.2,93.3,6.8,57.83,9.7,356
+2026-09-27,11:37:25,348342,EC-OND,Airbus A330-300,,landing,arrivee,600,243.2,96.6,6.85,45.86,9.7,356
+2026-09-27,11:40:16,49526d,CS-TSM,Airbus A320,Azores Airlines,landing,arrivee,625,261.5,92.3,5.79,49.9,9.7,356
+2026-09-27,11:43:06,DLH39X,D-AIED,Airbus A321neo,Lufthansa,landing,arrivee,600,249.8,95.0,5.96,48.36,9.7,356
+2026-09-27,11:46:02,49520f,CS-TPO,Embraer E190,TAP Air Portugal,landing,arrivee,625,240.6,91.4,6.75,41.94,9.7,356
+2026-09-27,11:48:42,IBE05FV,EC-KUB,Airbus A319,Iberia,landing,arrivee,750,233.2,91.2,6.44,63.25,10.1,358
+2026-09-27,11:51:22,4ca4ee,EI-DPJ,Boeing 737-800,Ryanair,landing,arrivee,650,271.3,94.1,6.33,66.02,10.1,358
+2026-09-27,11:54:31,39d314,F-HUYU,Boeing 737-800,Transavia France,cruise,,700,0.0,94.4,5.02,58.28,10.1,358
+2026-09-27,11:59:06,49529a,CS-TTZ,Embraer E195,TAP Air Portugal,landing,arrivee,600,260.4,91.6,7.3,56.74,10.1,358
+2026-09-27,12:03:54,RYR59QQ,9H-QCB,Boeing 737-800,Malta Air,landing,arrivee,575,279.7,92.2,5.95,50.38,10.4,360
+2026-09-27,12:07:22,49d1c6,OK-TVT,Boeing 737-800,Eurowings,landing,arrivee,600,280.6,91.1,5.96,57.32,10.4,360
+2026-09-27,12:10:27,4951cc,CS-TNL,Airbus A320,TAP Air Portugal,landing,arrivee,650,252.4,96.6,6.84,62.19,10.4,360
+2026-09-27,12:13:30,4400dc,OE-IDT,Airbus A320,easyJet Europe,cruise,,650,274.1,93.2,6.44,77.45,10.4,360
+2026-09-27,12:21:02,8963e2,A6-EPS,Boeing 777-300ER,Emirates,landing,arrivee,625,275.6,100.7,7.77,90.83,11.2,360
+2026-09-27,12:24:33,4952cb,CS-TVK,Airbus A320neo,TAP Air Portugal,landing,arrivee,575,267.2,88.1,6.29,35.76,11.2,360
+2026-09-27,12:26:39,4951ee,CS-TON,Airbus A330-200,TAP Air Portugal,cruise,,625,0.0,97.5,9.62,54.97,11.2,360
+2026-09-27,12:28:46,RYR14SC,EI-HMW,Boeing 737 MAX 8,Ryanair,landing,arrivee,600,268.9,95.0,4.92,41.0,11.2,360
+2026-09-27,12:31:36,440c33,OE-LSK,Airbus A320neo,easyJet Europe,landing,arrivee,625,267.2,89.2,5.45,45.18,11.2,360
+2026-09-27,12:34:06,TAP028,CS-TOO,Airbus A330-200,TAP Air Portugal,landing,arrivee,625,249.1,98.5,9.25,82.16,11.9,360
+2026-09-27,12:36:46,TAM8148,CC-BGU,Boeing 787-9,LATAM Airlines,landing,arrivee,650,269.7,94.1,7.04,53.73,11.9,360
+2026-09-27,12:39:31,4400f3,OE-IDO,Airbus A320,easyJet Europe,landing,arrivee,600,251.5,94.7,6.96,45.93,11.9,360
+2026-09-27,12:42:14,4cafc1,EI-GSJ,Boeing 737-800,Ryanair,landing,arrivee,575,267.2,95.4,7.09,83.24,11.9,360
+2026-09-27,12:44:51,EJU32WQ,OE-LSR,Airbus A320,easyJet Europe,landing,arrivee,625,259.7,92.8,6.72,37.04,11.9,360
+2026-09-27,12:48:04,495217,CS-TPW,Embraer E190,TAP Air Portugal,cruise,,650,0.0,92.2,5.56,37.01,12.2,358
+2026-09-27,12:52:37,495216,CS-TPV,Embraer E190,TAP Air Portugal,cruise,,625,0.0,94.9,7.08,43.33,12.2,358
+2026-09-27,12:59:16,4ba674,TC-IST,Airbus A319,Government of Turkey,landing,arrivee,750,233.2,93.3,7.06,44.63,13.7,355
+2026-09-27,13:01:55,RYR3RB,9H-QDX,Boeing 737-800,Malta Air,landing,arrivee,575,278.0,94.7,5.97,68.06,13.7,355
+2026-09-27,13:04:54,346691,EC-NLX,Airbus A321,Vueling,landing,arrivee,575,267.2,94.1,5.93,65.87,14.4,356
+2026-09-27,13:07:47,TAP143P,CS-TPQ,Embraer E190,TAP Air Portugal,landing,arrivee,625,246.7,94.5,6.05,38.03,14.4,356
+2026-09-27,13:11:09,49526a,CS-TSJ,Airbus A321neo,Azores Airlines,landing,arrivee,750,286.1,92.8,5.68,35.42,14.4,356
+2026-09-27,13:14:30,TAP831,CS-TVA,Airbus A320neo,TAP Air Portugal,approach,arrivee,625,275.6,93.6,5.69,40.26,14.4,356
+2026-09-27,13:17:21,ICE550,TF-ICR,Boeing 737 MAX 8,Icelandair,landing,arrivee,600,288.2,92.5,6.23,39.44,14.4,356
+2026-09-27,13:20:13,EJU38DF,OE-IWW,Airbus A320,easyJet Europe,landing,arrivee,700,260.8,95.1,6.04,47.15,14.8,354
+2026-09-27,13:26:58,9HGMF,9H-GMF,Airbus H145,Gulf Med Aviation Services,helicopter,helicopter,525,85.4,58.6,0.0,16.8,14.8,354
+2026-09-27,13:30:40,EJU98EV,OE-LOA,Airbus A320,easyJet Europe,landing,arrivee,725,265.6,94.4,6.44,67.93,14.8,354
+2026-09-27,13:33:09,495155,,,TAP Air Portugal,cruise,,850,0.0,90.2,5.72,39.67,15.3,352
+2026-09-27,13:35:57,DLH47T,D-AIEE,Airbus A321neo,Lufthansa,landing,arrivee,775,267.2,93.6,5.93,66.66,15.3,352
+2026-09-27,13:38:30,495290,CS-TTP,Airbus A319,TAP Air Portugal,landing,arrivee,650,263.9,93.8,6.53,43.38,15.3,352
+2026-09-27,13:41:12,TAP23V,CS-TPT,Embraer E190,TAP Air Portugal,landing,arrivee,600,250.8,94.2,6.91,49.53,15.3,352
+2026-09-27,13:43:50,4b17ff,HB-JCH,C Series 300,Swiss,landing,arrivee,625,264.8,89.5,5.67,48.0,15.3,352
+2026-09-27,13:46:34,495279,CS-TSY,Airbus A320,Azores Airlines,cruise,,825,0.0,91.2,6.55,37.32,15.3,352
+2026-09-27,13:49:32,4951d8,CS-TNX,Airbus A320,TAP Air Portugal,landing,arrivee,725,258.9,94.8,6.45,47.48,15.5,348
+2026-09-27,13:52:17,495171,CS-TKQ,Airbus A320,Azores Airlines,landing,arrivee,700,262.4,95.1,6.49,57.23,15.5,348
+2026-09-27,13:54:57,495145,CS-TJE,Airbus A321,TAP Air Portugal,landing,arrivee,650,278.2,98.8,6.96,66.94,15.5,348
+2026-09-27,13:57:37,TAP823,CS-TTS,Airbus A319,TAP Air Portugal,landing,arrivee,650,250.8,92.8,7.09,55.47,15.5,348
+2026-09-27,14:00:11,495292,CS-TTR,Airbus A319,TAP Air Portugal,cruise,,775,0.0,93.1,7.61,50.55,15.5,348
+2026-09-27,14:03:04,TAP1860,CS-TJO,Airbus A321neo,TAP Air Portugal,landing,arrivee,625,263.9,94.6,6.98,41.71,15.9,347
+2026-09-27,14:05:51,TAP10VL,CS-TPR,Embraer E190,TAP Air Portugal,landing,arrivee,600,249.3,95.0,7.33,55.33,15.9,347
+2026-09-27,14:08:43,495215,CS-TPU,Embraer E190,TAP Air Portugal,landing,arrivee,600,252.4,90.5,5.67,36.1,15.9,347
+2026-09-27,14:11:12,4952c7,CS-TVG,Airbus A320neo,TAP Air Portugal,landing,arrivee,750,253.9,92.8,4.92,36.72,15.9,347
+2026-09-27,14:14:08,495218,CS-TPX,Embraer E190,TAP Air Portugal,landing,arrivee,675,240.8,89.7,5.68,35.83,15.9,347
+2026-09-27,14:19:59,495148,CS-TJH,Airbus A321,TAP Air Portugal,landing,arrivee,675,271.3,95.8,6.94,52.97,16.2,347
+2026-09-27,14:22:47,4952d1,,,TAP Air Portugal,landing,arrivee,675,247.2,92.7,6.4,34.2,16.2,347
+2026-09-27,14:25:22,TAP23SL,CS-TUA,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,650,254.1,96.9,8.22,69.78,16.2,347
+2026-09-27,14:26:52,9HGMF,9H-GMF,Airbus H145,Gulf Med Aviation Services,helicopter,helicopter,950,200.8,62.0,0.0,16.54,16.2,347
+2026-09-27,14:28:18,KLM97N,PH-AXE,Airbus A321neo,KLM,landing,arrivee,525,280.6,55.5,0.0,16.69,16.2,347
+2026-09-27,14:31:06,TAP11EG,CS-TAW,Embraer E195,TAP Air Portugal,landing,arrivee,600,264.8,92.8,6.87,44.85,16.2,347
+2026-09-27,14:33:41,TAP471A,CS-TTY,Embraer E195,TAP Air Portugal,landing,arrivee,675,270.0,93.3,5.69,42.98,16.2,347
+2026-09-27,14:38:22,4952af,CS-TUO,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,650,270.0,95.3,7.08,62.58,16.2,347
+2026-09-27,14:41:02,4409c0,OE-IVA,Airbus A320,easyJet Europe,landing,arrivee,675,249.1,94.3,6.52,47.23,16.2,347
+2026-09-27,14:43:57,RYR55AR,EI-IFY,Boeing 737 MAX 8,Ryanair,landing,arrivee,575,284.1,93.0,5.68,42.22,16.2,347
+2026-09-27,14:49:27,440cc1,OE-LSP,Airbus A320,easyJet Europe,landing,arrivee,650,257.2,92.9,6.34,30.58,16.5,349
+2026-09-27,14:52:14,495149,CS-TJI,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,264.8,92.2,6.08,48.15,16.5,349
+2026-09-27,14:55:05,4b194a,HB-JPA,Airbus A321neo,Swiss,landing,arrivee,675,282.1,95.7,4.88,48.5,16.5,349
+2026-09-27,15:04:31,495219,CS-TPY,Embraer E190,TAP Air Portugal,landing,arrivee,675,250.0,93.0,5.73,46.04,16.5,349
+2026-09-27,15:07:57,TAP481,CS-TPP,Embraer E190,TAP Air Portugal,landing,arrivee,625,261.5,92.0,6.37,47.54,16.5,349
+2026-09-27,15:10:46,4ca702,EI-EBE,Boeing 737-800,Ryanair,landing,arrivee,625,280.4,95.6,6.41,89.51,16.5,349
+2026-09-27,15:13:39,345218,EC-MKL,Boeing 737-800,Air Europa,landing,arrivee,675,270.8,95.6,7.71,79.61,16.5,349
+2026-09-27,15:23:55,TAP27GC,CS-TNU,Airbus A320,TAP Air Portugal,landing,arrivee,650,256.5,91.9,6.28,37.85,16.5,349
+2026-09-27,15:26:56,3c64b1,D-AIEQ,Airbus A321,Lufthansa,landing,arrivee,675,249.1,96.6,8.38,48.22,16.5,349
+2026-09-27,15:29:49,TAP931L,CS-TVL,Airbus A320,TAP Air Portugal,landing,arrivee,650,257.6,94.5,5.48,37.74,16.5,349
+2026-09-27,15:32:34,495297,CS-TTW,Embraer E195,TAP Air Portugal,landing,arrivee,600,258.9,96.0,6.34,69.13,16.5,349
+2026-09-27,15:35:14,3985a9,F-HBNJ,Airbus A320,Air France,landing,arrivee,700,257.2,96.8,7.51,47.6,16.2,347
+2026-09-27,15:37:56,4952c6,CS-TVF,Airbus A320neo,TAP Air Portugal,cruise,,675,0.0,91.9,6.62,39.02,16.2,347
+2026-09-27,15:40:37,4bb272,TC-LSR,Airbus A321neo,Turkish Airlines,landing,arrivee,750,275.6,91.2,5.98,52.95,16.2,347
+2026-09-27,15:43:21,TAP118,CS-TUE,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,625,263.2,98.7,8.16,59.75,16.2,347
+2026-09-27,15:46:09,TAP17RA,,,TAP Air Portugal,landing,arrivee,700,235.6,92.1,6.77,34.62,16.2,347
+2026-09-27,15:48:51,4952ce,CS-TVN,Airbus A320neo,TAP Air Portugal,landing,arrivee,750,257.2,94.6,6.86,38.84,16.0,346
+2026-09-27,15:51:23,4952cf,CS-TVO,Airbus A320neo,TAP Air Portugal,landing,arrivee,775,226.7,88.5,6.35,29.61,16.0,346
+2026-09-27,15:54:14,FIN96W,OH-LZN,Airbus A321,Finnair,cruise,,625,0.0,96.1,6.5,47.86,16.0,346
+2026-09-27,15:57:08,48e9f3,SP-RNO,Boeing 737-800,Buzz,landing,arrivee,650,263.2,97.8,8.69,118.54,16.0,346
+2026-09-27,15:59:50,49530c,CS-TXL,Airbus A321neo,TAP Air Portugal,landing,arrivee,725,266.5,95.1,5.58,42.9,16.0,346
+2026-09-27,16:02:35,TAP763,EC-OCT,Airbus A321,TAP Air Portugal,landing,arrivee,650,281.3,93.6,6.95,53.45,16.0,346
+2026-09-27,16:05:43,TAP10NL,CS-TVM,Airbus A320neo,TAP Air Portugal,landing,arrivee,650,244.8,91.5,6.11,32.55,15.6,345
+2026-09-27,16:08:27,TAP120R,CS-TJR,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,284.8,94.7,6.98,38.12,15.6,345
+2026-09-27,16:11:10,ANE91TE,EC-MLO,Bombardier CRJ-1000,Air Nostrum,landing,arrivee,800,254.1,93.6,5.37,28.6,15.6,345
+2026-09-27,16:13:48,4951cb,CS-TNK,Airbus A320,TAP Air Portugal,landing,arrivee,750,265.8,93.9,6.51,46.87,15.6,345
+2026-09-27,16:16:36,TAP3185,CS-TUP,Airbus A330-900neo,TAP Air Portugal,approach,arrivee,775,0.0,97.3,10.07,83.51,15.6,345
+2026-09-27,16:19:25,TAP541W,CS-TNJ,Airbus A320,TAP Air Portugal,landing,arrivee,750,246.7,98.5,6.37,44.91,15.3,345
+2026-09-27,16:22:05,RYR5KT,EI-IKP,Boeing 737 MAX 8,Ryanair,landing,arrivee,650,278.2,93.6,5.94,44.97,15.3,345
+2026-09-27,16:24:46,TAP553R,,,TAP Air Portugal,landing,arrivee,750,263.2,91.7,5.33,36.18,15.3,345
+2026-09-27,16:27:30,4952d3,CS-TVS,Airbus A321neo,TAP Air Portugal,landing,arrivee,775,246.7,95.4,6.64,35.99,15.3,345
+2026-09-27,16:30:13,3451da,EC-MJQ,Bombardier CRJ-1000,Air Nostrum,landing,arrivee,825,252.1,93.1,6.33,36.11,15.3,345
+2026-09-27,16:31:57,RYR8HG,EI-IHN,Boeing 737 MAX 8,Ryanair,landing,arrivee,625,272.4,96.7,5.44,45.94,15.3,345
+2026-09-27,16:33:59,49529a,CS-TTZ,Embraer E195,TAP Air Portugal,landing,arrivee,625,263.2,94.5,5.56,48.32,15.4,344
+2026-09-27,16:35:43,EZY35DC,G-UZHD,Airbus A320neo,easyJet,landing,arrivee,625,253.2,92.4,6.03,47.68,15.4,344
+2026-09-27,16:38:36,BAW5DW,G-EUPR,Airbus A319,British Airways,landing,arrivee,700,232.2,92.1,6.96,48.93,15.4,344
+2026-09-27,16:41:22,440daf,OE-IDU,Airbus A320,easyJet Europe,landing,arrivee,775,256.5,95.6,6.93,51.44,15.4,344
+2026-09-27,16:44:14,495308,CS-TXH,Airbus A321neo,TAP Air Portugal,approach,arrivee,700,0.0,95.8,5.88,36.55,15.4,344
+2026-09-27,16:46:53,495153,,,TAP Air Portugal,landing,arrivee,750,264.8,96.4,5.95,42.23,15.4,344
+2026-09-27,16:49:55,49514b,CS-TJK,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,278.9,91.9,6.75,37.15,15.8,336
+2026-09-27,16:52:29,NSZ2WK,SE-RTE,Boeing 737 MAX 8,Norwegian Air Sweden,landing,arrivee,725,287.4,95.3,5.44,44.92,15.8,336
+2026-09-27,16:55:50,49514e,CS-TJN,Airbus A321neo,TAP Air Portugal,landing,arrivee,725,258.4,90.5,5.47,35.22,15.8,336
+2026-09-27,16:59:52,484f6d,PH-HSG,Boeing 737-800,Transavia,landing,arrivee,625,276.3,99.7,6.56,65.28,15.8,336
+2026-09-27,17:04:50,49514d,CS-TJM,Airbus A321neo,TAP Air Portugal,landing,arrivee,775,272.4,93.1,5.52,38.68,15.3,336
+2026-09-27,17:08:03,495303,CS-TXC,Airbus A321neo,TAP Air Portugal,landing,arrivee,650,258.9,92.6,5.6,43.19,15.3,336
+2026-09-27,17:11:19,342396,EC-JSY,Airbus A320,Vueling,landing,arrivee,725,254.8,94.8,6.45,53.94,15.3,336
+2026-09-27,17:21:11,4ca741,EI-EBZ,Boeing 737-800,Ryanair,landing,arrivee,725,288.9,95.4,5.84,83.44,14.8,337
+2026-09-27,17:26:06,RYR85MR,9H-LMI,Airbus A320,Lauda Europe,cruise,,750,0.0,94.1,6.29,56.59,14.8,337
+2026-09-27,17:29:08,3c6495,D-AIDU,Airbus A321,Eurowings,cruise,,650,0.0,93.9,5.92,49.03,14.8,337
+2026-09-27,17:33:01,4cafc1,EI-GSJ,Boeing 737-800,Ryanair,landing,arrivee,650,275.6,95.9,7.21,54.89,14.2,336
+2026-09-27,17:37:02,4d2262,9H-QAY,Boeing 737-800,Malta Air,landing,arrivee,675,277.2,96.0,7.09,70.77,14.2,336
+2026-09-27,17:39:50,RAM982,CN-RHO,Boeing 737 MAX 8,Royal Air Maroc,landing,arrivee,650,277.2,97.4,5.56,45.27,14.2,336
+2026-09-27,17:42:36,43e73d,M-RLIV,Challenger 605,Orion Aviation,landing,arrivee,700,251.5,87.5,4.91,48.47,14.2,336
+2026-09-27,17:45:21,4400dc,OE-IDT,Airbus A320,easyJet Europe,landing,arrivee,750,251.5,94.5,7.55,64.65,14.2,336
+2026-09-27,17:52:13,4d00f4,LX-LBA,Boeing 737-800,Luxair,landing,arrivee,675,278.9,94.0,5.45,65.74,13.4,336
+2026-09-27,17:59:31,3985a7,F-HBNH,Airbus A320,Air France,landing,arrivee,775,258.4,98.1,7.13,52.45,13.4,336
+2026-09-27,18:02:00,TRA9H,PH-HXG,Boeing 737-800,Transavia,landing,arrivee,675,274.8,91.6,5.93,70.93,13.4,336
+2026-09-27,18:05:10,TAP1558,CS-TVJ,Airbus A320neo,TAP Air Portugal,landing,arrivee,675,268.0,90.1,6.44,35.76,13.0,336
+2026-09-27,18:08:00,BAW506,G-TTNU,Airbus A320neo,British Airways,landing,arrivee,675,247.2,90.3,6.61,40.06,13.0,336
+2026-09-27,18:13:45,RZO124,CS-TSM,Airbus A320,Azores Airlines,landing,arrivee,675,248.4,91.4,7.08,43.88,13.0,336
+2026-09-27,18:16:09,TAP1929,CS-TVK,Airbus A320neo,TAP Air Portugal,landing,arrivee,650,266.3,92.5,4.56,44.98,13.0,336
+2026-09-27,18:19:14,495302,CS-TXB,Airbus A321neo,TAP Air Portugal,landing,arrivee,850,239.1,89.3,5.8,42.24,12.7,335
+2026-09-27,18:22:07,VLG7PA,EC-OGE,Airbus A320,Vueling,landing,arrivee,775,262.2,91.9,6.32,50.81,12.7,335
+2026-09-27,18:25:13,RAM996,CN-RGE,Boeing 737-800,Royal Air Maroc,landing,arrivee,675,258.9,91.7,6.16,60.54,12.7,335
+2026-09-27,18:27:43,344481,EC-LXQ,Airbus A320,Iberia,landing,arrivee,725,263.2,92.4,4.79,49.34,12.7,335
+2026-09-27,18:31:01,495215,CS-TPU,Embraer E190,TAP Air Portugal,landing,arrivee,725,243.2,92.1,6.5,43.75,12.7,335
+2026-09-27,18:34:24,440cbf,OE-LSO,Airbus A320,easyJet Europe,landing,arrivee,700,259.7,90.6,5.95,42.76,12.4,334
+2026-09-27,18:36:52,405f13,G-EZTC,Airbus A320,easyJet,landing,arrivee,700,257.2,89.9,5.68,60.33,12.4,334
+2026-09-27,18:39:56,QTR29C,A7-BDC,Boeing 787-8,Qatar Airways,landing,arrivee,600,268.9,94.1,5.52,64.97,12.4,334
+2026-09-27,18:42:30,TVF72AP,F-HUYS,Boeing 737-800,Transavia France,landing,arrivee,625,272.1,91.3,6.8,64.82,12.4,334
+2026-09-27,18:45:19,49514c,CS-TJL,Airbus A321neo,TAP Air Portugal,landing,arrivee,700,267.2,93.3,5.19,41.96,12.4,334
+2026-09-27,18:47:43,440d10,OE-IBS,Airbus A320,easyJet Europe,landing,arrivee,725,253.2,91.1,5.93,54.99,12.4,334
+2026-09-27,18:50:46,TAP10EV,CS-TPT,Embraer E190,TAP Air Portugal,landing,arrivee,600,244.3,89.9,6.44,39.06,11.9,335
+2026-09-27,18:55:12,44cdcd,OO-SNM,Airbus A320,Brussels Airlines,landing,arrivee,675,259.7,90.5,6.46,49.38,11.9,335
+2026-09-27,19:01:35,TAP1906,CS-TVL,Airbus A320,TAP Air Portugal,landing,arrivee,650,258.9,89.1,4.39,34.59,12.4,338
+2026-09-27,19:03:51,TAP1862,CS-TJP,Airbus A321neo,TAP Air Portugal,landing,arrivee,750,267.2,92.4,5.32,42.14,11.6,338
+2026-09-27,19:06:57,495037,CS-TAW,Embraer E195,TAP Air Portugal,cruise,,650,0.0,90.8,6.37,50.56,11.6,338
+2026-09-27,19:09:57,4951d8,CS-TNX,Airbus A320,TAP Air Portugal,landing,arrivee,750,258.9,91.7,6.19,61.58,11.6,338
+2026-09-27,19:14:41,a3d722,N34681,Global 6000,Jet Aviation Flight Services,landing,arrivee,750,219.1,85.6,3.04,39.33,11.6,338
+2026-09-27,19:17:04,4854cb,PH-HBL,Boeing 737-800,Transavia,landing,arrivee,750,271.3,94.8,6.19,89.67,11.6,338
+2026-09-27,19:20:20,WMT1489,HA-LZJ,Airbus A321neo,Wizz Air,landing,arrivee,625,241.5,92.8,6.34,56.05,10.5,338
+2026-09-27,19:22:25,4951d5,CS-TNU,Airbus A320,TAP Air Portugal,landing,arrivee,750,255.6,94.4,5.83,56.61,10.5,338
+2026-09-27,19:25:35,4952d0,,,TAP Air Portugal,landing,arrivee,625,233.2,91.6,6.4,32.94,10.5,338
+2026-09-27,19:28:04,TAP1852,CS-TPZ,Embraer E190,TAP Air Portugal,landing,arrivee,625,239.8,88.6,5.96,49.08,10.5,338
+2026-09-27,19:30:36,RYR9654,EI-IHX,Boeing 737 MAX 8,Ryanair,landing,arrivee,600,277.2,92.9,4.78,62.12,10.5,338
+2026-09-27,19:33:11,39ceac,F-HTVM,Boeing 737-800,Transavia France,cruise,,700,0.0,93.8,5.81,63.68,8.9,339
+2026-09-27,19:36:08,TVF35GD,F-HUYR,Boeing 737-800,Transavia France,landing,arrivee,625,264.8,93.4,5.99,56.02,8.9,339
+2026-09-27,19:38:53,4951d7,CS-TNW,Airbus A320,TAP Air Portugal,landing,arrivee,750,264.8,89.4,5.97,64.23,8.9,339
+2026-09-27,19:41:49,495212,CS-TPR,Embraer E190,TAP Air Portugal,landing,arrivee,650,237.4,89.4,6.61,44.23,8.9,339
+2026-09-27,19:44:28,3453c1,EC-MPS,Boeing 737-800,Air Europa,landing,arrivee,650,270.8,94.5,5.7,102.56,8.9,339
+2026-09-27,19:47:20,UAE5M,A6-EPA,Boeing 777-300ER,Emirates,landing,arrivee,675,282.4,103.1,8.42,113.82,8.9,339
+2026-09-27,19:49:56,486651,PH-AXA,Airbus A321neo,KLM,landing,arrivee,700,268.9,90.0,5.34,48.58,7.6,341
+2026-09-27,19:52:55,TAP403Z,CS-TPQ,Embraer E190,TAP Air Portugal,landing,arrivee,625,239.1,91.7,5.75,46.94,7.6,341
+2026-09-27,19:55:24,TAP671,CS-TVI,Airbus A320neo,TAP Air Portugal,cruise,,725,0.0,91.6,5.34,41.48,7.6,341
+2026-09-27,19:58:13,44064a,OE-LQL,Airbus A319,easyJet Europe,cruise,,750,0.0,91.1,6.6,51.92,7.6,341
+2026-09-27,20:00:17,RYR21UN,SP-RSC,Boeing 737-800,Buzz,landing,arrivee,625,276.5,93.0,6.08,77.67,7.6,341
+2026-09-27,20:02:14,4952c8,CS-TVH,Airbus A320neo,TAP Air Portugal,landing,arrivee,750,254.8,89.9,5.31,49.04,7.6,341
+2026-09-27,20:05:02,49520f,CS-TPO,Embraer E190,TAP Air Portugal,landing,arrivee,625,241.5,90.9,4.7,61.2,6.5,341
+2026-09-27,20:07:14,4952c4,CS-TVD,Airbus A320neo,TAP Air Portugal,landing,arrivee,725,268.2,91.0,4.82,50.75,6.5,341
+2026-09-27,20:10:19,344195,EC-LOJ,Bombardier CRJ-1000,Air Nostrum,landing,arrivee,650,250.8,91.2,4.82,34.34,6.5,341
+2026-09-27,20:12:58,71ba09,HL7209,Boeing 787-9,Korean Air,landing,arrivee,600,268.2,92.1,5.83,63.08,6.5,341
+2026-09-27,20:15:53,TAP1065,CS-TPX,Embraer E190,TAP Air Portugal,landing,arrivee,650,234.8,88.3,5.62,42.79,6.5,341
+2026-09-27,20:18:45,DTA652,D2-TEG,Boeing 777-300ER,TAAG Angola Airlines,landing,arrivee,700,275.6,98.1,8.14,86.36,6.3,336
+2026-09-27,20:21:37,TAP1455,CS-TPY,Embraer E190,TAP Air Portugal,landing,arrivee,675,244.8,88.4,5.1,36.7,6.3,336
+2026-09-27,20:24:33,EZY26YM,G-UZMM,Airbus A321neo,easyJet,landing,arrivee,675,239.8,90.6,5.91,60.43,6.3,336
+2026-09-27,20:27:46,347695,EC-OGD,Airbus A320,,landing,arrivee,700,242.4,89.9,6.28,44.22,6.3,336
+2026-09-27,20:30:28,TAP48M,CS-TTX,Embraer E195,TAP Air Portugal,landing,arrivee,625,253.2,90.7,6.22,45.16,6.3,336
+2026-09-27,20:33:06,TAP473H,CS-TAY,Embraer E195,TAP Air Portugal,landing,arrivee,625,260.8,90.7,5.84,56.1,6.1,332
+2026-09-27,20:35:59,WZZ477,HA-LGM,Airbus A321neo,Wizz Air,landing,arrivee,675,240.8,95.8,6.47,52.26,6.1,332
+2026-09-27,20:38:06,4952c1,CS-TVA,Airbus A320neo,TAP Air Portugal,landing,arrivee,725,258.0,88.0,6.25,39.84,6.1,332
+2026-09-27,20:41:12,AXY665M,9H-FAY,Embraer E190,Air X Charter,landing,arrivee,625,216.7,91.2,6.22,51.88,6.1,332
+2026-09-27,20:43:41,RYR647X,EI-EMD,Boeing 737-800,Ryanair,landing,arrivee,675,276.5,95.8,6.63,71.97,6.1,332
+2026-09-27,20:46:27,TAP93ZS,CS-TNL,Airbus A320,TAP Air Portugal,landing,arrivee,725,259.7,96.2,6.84,50.99,6.1,332
+2026-09-27,20:51:07,738068,4X-EKI,Boeing 737-800,El Al,landing,arrivee,600,273.9,98.2,6.94,73.68,6.5,326
+2026-09-27,20:57:28,WMT537,9H-WDH,Airbus A321,Lauda Europe,landing,arrivee,600,244.8,93.2,6.96,64.75,6.5,326
+2026-09-27,21:00:12,4ca25b,EI-DHF,Boeing 737-800,Ryanair,landing,arrivee,625,273.2,92.4,6.2,60.91,6.5,326
+2026-09-27,21:02:52,4d2246,9H-QEJ,Boeing 737-800,Malta Air,landing,arrivee,600,261.5,96.4,6.6,68.86,6.5,326
+2026-09-27,21:06:27,495217,CS-TPW,Embraer E190,TAP Air Portugal,landing,arrivee,600,234.8,91.5,7.0,60.37,6.4,322
+2026-09-27,21:11:33,VLG4JP,EC-MHA,Airbus A321,Vueling,landing,arrivee,600,251.7,89.6,6.44,53.7,6.4,322
+2026-09-27,21:14:10,344697,EC-MFN,Airbus A320,Vueling,landing,arrivee,700,244.8,94.8,6.72,55.3,6.4,322
+2026-09-27,21:17:10,RZO134,CS-TSK,Airbus A320,Azores Airlines,landing,arrivee,625,237.4,88.0,6.2,41.55,6.4,322
+2026-09-27,21:20:11,495216,CS-TPV,Embraer E190,TAP Air Portugal,landing,arrivee,625,233.9,93.1,5.03,48.32,6.1,320
+2026-09-27,21:22:49,TAP1155,,,TAP Air Portugal,cruise,,650,0.0,88.7,6.32,43.81,6.1,320
+2026-09-27,21:25:21,WJA32,CA-FQGG,Boeing 737 MAX 8,WestJet,landing,arrivee,625,271.3,91.3,5.4,56.36,6.1,320
+2026-09-27,21:28:39,RZO152,CS-TKQ,Airbus A320,Azores Airlines,landing,arrivee,650,249.1,92.1,6.29,54.27,6.1,320
+2026-09-27,21:31:31,EZY25BM,G-UZLY,Airbus A320neo,easyJet,landing,arrivee,600,238.4,90.2,5.6,38.88,6.1,320
+2026-09-27,21:34:00,TAP1692,CS-TTY,Embraer E195,TAP Air Portugal,landing,arrivee,625,255.9,92.5,5.2,42.27,5.9,317
+2026-09-27,21:36:47,TAP885,CS-TPS,Embraer E190,TAP Air Portugal,landing,arrivee,600,243.2,92.9,6.68,44.61,5.9,317
+2026-09-27,21:39:33,495154,,,TAP Air Portugal,landing,arrivee,750,258.9,92.0,6.04,51.58,5.9,317
+2026-09-27,21:41:42,TAP57W,CS-TVG,Airbus A320neo,TAP Air Portugal,landing,arrivee,625,257.1,88.9,4.8,44.43,5.9,317
+2026-09-27,21:44:53,49514f,CS-TJO,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,250.4,93.4,6.48,48.17,5.9,317
+2026-09-27,21:47:19,TAP67U,,,TAP Air Portugal,landing,arrivee,625,254.1,93.8,6.18,36.98,5.9,317
+2026-09-27,21:49:07,34714d,EC-NQM,Airbus A320,Volotea,landing,arrivee,625,239.1,92.3,7.49,69.43,5.4,318
+2026-09-27,21:50:47,4ca2d5,EI-DLI,Boeing 737-800,Ryanair,landing,arrivee,625,268.9,94.5,6.48,80.88,5.4,318
+2026-09-27,21:55:44,4951cd,CS-TNM,Airbus A320,TAP Air Portugal,landing,arrivee,625,241.7,96.5,7.69,65.41,5.4,318
+2026-09-27,21:57:39,RYR4XW,EI-EKJ,Boeing 737-800,Ryanair,landing,arrivee,625,273.2,94.8,5.94,94.16,5.4,318
+2026-09-27,21:59:51,4952c2,CS-TVB,Airbus A320neo,TAP Air Portugal,landing,arrivee,600,237.4,91.6,6.08,56.9,5.4,318
+2026-09-27,22:03:39,TAP783,CS-TVE,Airbus A320neo,TAP Air Portugal,landing,arrivee,700,259.7,90.2,6.16,51.53,4.8,318
+2026-09-27,22:06:21,4951ce,CS-TNN,Airbus A320,TAP Air Portugal,landing,arrivee,625,251.5,92.4,5.96,78.85,4.8,318
+2026-09-27,22:09:29,49529a,CS-TTZ,Embraer E195,TAP Air Portugal,landing,arrivee,625,251.5,90.2,6.32,50.3,4.8,318
+2026-09-27,22:12:15,RYR24SE,9H-QCB,Boeing 737-800,Malta Air,landing,arrivee,600,276.5,96.0,5.95,96.59,4.8,318
+2026-09-27,22:14:56,EIN4PT,EI-DEO,Airbus A320,Aer Lingus,landing,arrivee,625,244.8,93.3,6.97,83.28,4.8,318
+2026-09-27,22:18:46,46a5e7,SX-IOG,Airbus A320neo,Sky Express,landing,arrivee,625,241.5,89.3,4.79,32.97,4.3,318
+2026-09-27,22:21:09,440b1e,OE-IWW,Airbus A320,easyJet Europe,landing,arrivee,725,250.8,94.3,6.94,57.16,4.3,318
+2026-09-27,22:23:54,DLH34J,D-AINZ,Airbus A320neo,Lufthansa,landing,arrivee,600,243.5,88.8,4.68,48.56,4.3,318
+2026-09-27,22:26:27,495293,CS-TTS,Airbus A319,TAP Air Portugal,landing,arrivee,725,243.2,93.9,6.04,51.36,4.3,318
+2026-09-27,22:29:23,4d2232,9H-QBX,Boeing 737-800,Malta Air,landing,arrivee,600,268.2,93.2,6.08,67.13,4.3,318
+2026-09-27,22:32:13,TAP837,CS-TJH,Airbus A321,TAP Air Portugal,landing,arrivee,625,268.2,96.4,6.97,70.64,4.3,318
+2026-09-27,22:35:07,495215,CS-TPU,Embraer E190,TAP Air Portugal,cruise,,625,0.0,90.6,5.96,48.87,4.1,322
+2026-09-27,22:37:49,DLH64P,D-AIDW,Airbus A321,Lufthansa,landing,arrivee,625,269.7,93.4,6.16,63.84,4.1,322
+2026-09-27,22:39:31,495149,CS-TJI,Airbus A321neo,TAP Air Portugal,landing,arrivee,725,260.4,92.6,5.46,39.99,4.1,322
+2026-09-27,22:42:09,TVF34QV,F-HTVG,Boeing 737-800,Transavia France,landing,arrivee,625,280.6,94.5,6.96,68.32,4.1,322
+2026-09-27,22:50:39,5003bd,T7-CIPRI,Challenger 604,Cipriani Consulting LLC,landing,arrivee,650,233.9,86.4,3.79,30.58,3.8,319
+2026-09-27,22:53:24,EJU97VT,OE-IBS,Airbus A320,easyJet Europe,landing,arrivee,625,243.2,94.5,7.08,65.85,3.8,319
+2026-09-27,22:56:17,EJU56VP,OE-LSK,Airbus A320neo,easyJet Europe,landing,arrivee,625,262.8,90.3,5.36,42.22,3.8,319
+2026-09-27,22:59:10,TAP543W,CS-TTR,Airbus A319,TAP Air Portugal,landing,arrivee,600,229.8,89.9,6.96,50.46,3.8,319
+2026-09-27,23:01:59,495145,CS-TJE,Airbus A321,TAP Air Portugal,landing,arrivee,600,260.8,94.4,5.96,59.77,3.8,319
+2026-09-27,23:04:38,KLM35W,PH-AXE,Airbus A321neo,KLM,landing,arrivee,625,247.2,92.5,4.27,36.09,3.3,319
+2026-09-27,23:07:21,408229,G-TNEJ,Airbus A321neo,British Airways,landing,arrivee,725,232.4,89.9,6.57,39.71,3.3,319
+2026-09-27,23:10:26,4400dc,OE-IDT,Airbus A320,easyJet Europe,landing,arrivee,625,249.1,87.6,5.64,50.4,3.3,319
+2026-09-27,23:15:10,4bb266,TC-LSF,Airbus A321neo,Turkish Airlines,landing,arrivee,675,256.5,88.9,5.56,47.18,3.3,319
+2026-09-27,23:18:09,4951d2,CS-TNR,Airbus A320,TAP Air Portugal,landing,arrivee,600,271.3,92.4,5.44,67.66,3.3,319
+2026-09-27,23:20:44,4b194a,HB-JPA,Airbus A321neo,Swiss,landing,arrivee,725,285.6,93.7,5.79,57.09,2.9,330
+2026-09-27,23:23:37,495290,CS-TTP,Airbus A319,TAP Air Portugal,landing,arrivee,725,234.3,95.0,6.79,62.88,2.9,330
+2026-09-27,23:26:12,440d6f,OE-LSR,Airbus A320,easyJet Europe,landing,arrivee,725,260.8,89.6,5.27,38.8,2.9,330
+2026-09-27,23:29:12,440da5,OE-IDS,Airbus A320,easyJet Europe,cruise,,675,0.0,90.4,7.37,67.92,2.9,330
+2026-09-27,23:31:55,DLH23C,,,Lufthansa,landing,arrivee,650,262.2,94.5,5.31,56.53,2.9,330
+2026-09-27,23:34:43,TAP43RY,EC-OCT,Airbus A321,TAP Air Portugal,landing,arrivee,725,255.9,92.6,5.66,73.78,2.6,344
+2026-09-27,23:36:29,440daf,OE-IDU,Airbus A320,easyJet Europe,landing,arrivee,700,254.7,91.3,5.93,51.15,2.6,344
+2026-09-27,23:39:14,392af0,F-GKXQ,Airbus A320,Air France,landing,arrivee,675,249.1,93.0,6.56,67.25,2.6,344
+2026-09-27,23:41:14,TAP1325,CS-TPP,Embraer E190,TAP Air Portugal,landing,arrivee,650,242.4,89.4,5.67,36.96,2.6,344
+2026-09-27,23:42:49,TVF47RH,F-HTVH,Boeing 737-800,Transavia France,landing,arrivee,600,272.1,94.3,5.96,56.21,2.6,344
+2026-09-27,23:44:55,4951ca,CS-TNJ,Airbus A320,TAP Air Portugal,landing,arrivee,725,247.6,91.4,5.53,53.45,2.6,344
+2026-09-27,23:46:35,46b8b3,SX-NES,Airbus A320neo,Aegean Airlines,landing,arrivee,725,243.2,88.5,5.4,51.87,2.6,344
+2026-09-27,23:48:19,4cae98,EI-IKP,Boeing 737 MAX 8,Ryanair,landing,arrivee,700,273.9,90.9,4.83,47.76,2.2,9
+2026-09-27,23:51:03,IBE0539,EC-JEJ,Airbus A321,Iberia,landing,arrivee,600,259.7,95.4,5.45,83.13,2.2,9
+2026-09-27,23:52:54,440cc1,OE-LSP,Airbus A320,easyJet Europe,landing,arrivee,725,254.8,89.2,5.52,47.97,2.2,9
+2026-09-27,23:54:51,RYR12SN,EI-HMW,Boeing 737 MAX 8,Ryanair,landing,arrivee,575,258.7,93.5,5.19,46.68,2.2,9
+2026-09-27,23:57:44,TAP21MM,CS-TAW,Embraer E195,TAP Air Portugal,landing,arrivee,625,254.8,90.4,6.44,44.17,2.2,9
+2026-09-28,00:00:38,EJU74EP,OE-LSO,Airbus A320,easyJet Europe,landing,arrivee,600,261.7,90.2,4.91,43.99,2.2,9
+2026-09-28,00:02:08,RYR32KG,EI-GSJ,Boeing 737-800,Ryanair,landing,arrivee,575,268.9,96.7,5.95,66.73,2.2,9
+2026-09-28,00:04:00,49514d,CS-TJM,Airbus A321neo,TAP Air Portugal,landing,arrivee,750,263.2,89.2,6.48,51.56,2.3,18
+2026-09-28,00:06:24,4952c6,CS-TVF,Airbus A320neo,TAP Air Portugal,cruise,,725,0.0,88.6,4.92,37.34,2.3,18
+2026-09-28,00:13:08,49514b,CS-TJK,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,266.5,92.1,5.93,42.86,2.3,18
+2026-09-28,00:41:00,TAP35MT,CS-TNQ,Airbus A320,TAP Air Portugal,landing,arrivee,600,226.7,94.5,6.8,55.07,1.5,14
+2026-09-28,00:54:54,49526d,CS-TSM,Airbus A320,Azores Airlines,landing,arrivee,625,234.8,86.9,5.7,44.39,1.1,342
+2026-09-28,04:45:41,440107,OE-IBI,737 490SF,ASL Airlines Belgium,landing,arrivee,650,271.3,93.5,6.96,57.36,2.8,320
+2026-09-28,04:53:45,4952a3,CS-TUC,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,675,269.7,91.1,7.98,69.18,2.8,320
+2026-09-28,05:00:57,TAP082,CS-TUM,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,650,265.6,92.6,8.37,61.0,2.8,320
+2026-09-28,05:03:09,49530a,CS-TXJ,Airbus A321neo,TAP Air Portugal,landing,arrivee,650,269.7,91.8,5.56,41.58,2.8,320
+2026-09-28,05:05:28,4952a9,CS-TUI,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,700,262.4,93.8,7.86,62.12,2.8,320
+2026-09-28,05:10:04,TAP202A,CS-TXG,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,253.2,90.3,5.83,43.78,2.8,320
+2026-09-28,05:27:34,495309,CS-TXI,Airbus A321neo,TAP Air Portugal,landing,arrivee,650,273.9,87.6,5.56,45.06,2.8,320
+2026-09-28,05:43:24,495150,CS-TJP,Airbus A321neo,TAP Air Portugal,landing,arrivee,750,268.9,88.6,5.92,43.49,2.6,326
+2026-09-28,05:48:20,4952c8,CS-TVH,Airbus A320neo,TAP Air Portugal,landing,arrivee,775,249.1,89.2,5.42,40.35,2.6,326
+2026-09-28,05:52:12,BCS2FC,D-AEAM,A300 B4-622RF,European Air Transport (DHL),landing,arrivee,675,236.7,99.0,9.75,67.07,2.6,326
+2026-09-28,05:54:54,49530d,CS-TXM,Airbus A321,TAP Air Portugal,landing,arrivee,625,268.9,89.8,4.79,44.58,2.6,326
+2026-09-28,05:56:55,TAP96AW,CS-TNM,Airbus A320,TAP Air Portugal,landing,arrivee,700,252.2,92.5,7.62,58.96,2.6,326
+2026-09-28,06:00:19,TAP1544,CS-TVI,Airbus A320neo,TAP Air Portugal,landing,arrivee,625,240.8,89.3,6.15,35.23,2.6,326
+2026-09-28,06:02:05,TAP1937,CS-TNV,Airbus A320,TAP Air Portugal,landing,arrivee,675,253.2,94.3,7.98,62.9,2.6,326
+2026-09-28,06:05:03,49530b,CS-TXK,Airbus A321,TAP Air Portugal,landing,arrivee,675,275.8,89.2,5.67,41.31,2.4,333
+2026-09-28,06:09:53,TAP058,CS-TUH,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,650,256.5,93.8,7.28,60.61,2.4,333
+2026-09-28,06:18:54,TAP11VP,CS-TPX,Embraer E190,TAP Air Portugal,landing,arrivee,625,257.2,92.4,5.68,55.14,2.4,333
+2026-09-28,06:22:30,49520f,CS-TPO,Embraer E190,TAP Air Portugal,landing,arrivee,675,254.8,93.3,6.71,45.87,2.4,333
+2026-09-28,06:27:35,c07a14,C-GUFZ,Airbus A330-200,Air Transat,landing,arrivee,650,257.2,94.3,8.21,61.76,2.4,333
+2026-09-28,06:40:58,4951d7,CS-TNW,Airbus A320,TAP Air Portugal,landing,arrivee,725,268.9,95.4,6.22,52.27,2.3,342
+2026-09-28,06:43:46,3453c1,EC-MPS,Boeing 737-800,Air Europa,landing,arrivee,625,279.7,91.6,6.29,66.8,2.3,342
+2026-09-28,06:46:36,TAP1908,,,TAP Air Portugal,landing,arrivee,625,251.5,90.0,5.83,42.17,2.3,342
+2026-09-28,06:49:24,TAM8146,PT-MUJ,Boeing 777-300ER,LATAM Airlines,landing,arrivee,625,288.0,99.4,7.85,86.6,2.3,342
+2026-09-28,06:52:12,TAP41SN,CS-TTY,Embraer E195,TAP Air Portugal,landing,arrivee,625,271.3,93.6,5.81,48.42,2.3,342
+2026-09-28,06:55:07,TAP104,CS-TUK,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,700,263.9,93.8,7.85,63.09,2.3,342
+2026-09-28,06:57:56,45cf21,OY-SYA,767 3P6ERBDSF/W,Star Air,landing,arrivee,775,236.7,97.6,9.38,45.2,2.3,342
+2026-09-28,07:02:02,TAP1139,CS-TPZ,Embraer E190,TAP Air Portugal,landing,arrivee,650,245.6,92.2,6.69,58.21,2.6,326
+2026-09-28,07:05:24,896464,A6-BLF,Boeing 787-9,Etihad Airways,landing,arrivee,600,298.0,94.7,6.56,56.49,2.4,333
+2026-09-28,07:08:28,4952cb,CS-TVK,Airbus A320neo,TAP Air Portugal,landing,arrivee,675,267.2,91.4,5.32,48.8,2.4,333
+2026-09-28,07:12:44,DTA650,D2-TEK,Boeing 777-300ER,TAAG Angola Airlines,landing,arrivee,650,279.7,98.5,7.69,76.15,2.4,333
+2026-09-28,07:15:44,TAP40MR,CS-TTW,Embraer E195,TAP Air Portugal,landing,arrivee,625,258.0,91.1,5.68,40.98,2.4,333
+2026-09-28,07:18:50,TAP244,CS-TUR,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,625,254.8,93.3,8.95,54.41,2.4,333
+2026-09-28,07:23:43,IBE05TR,EC-NER,Airbus A320neo,Iberia,cruise,,650,0.0,90.9,6.56,40.84,2.4,333
+2026-09-28,07:26:44,495215,CS-TPU,Embraer E190,TAP Air Portugal,landing,arrivee,625,239.1,90.4,6.16,49.52,2.4,333
+2026-09-28,07:31:19,a05629,N12006,Boeing 787-10,United Airlines,cruise,,750,0.0,94.1,6.57,67.03,2.4,333
+2026-09-28,07:34:34,4951cc,CS-TNL,Airbus A320,TAP Air Portugal,landing,arrivee,750,251.5,95.0,7.97,59.15,2.4,333
+2026-09-28,07:37:29,TAP9021,CS-TVQ,Airbus A320neo,TAP Air Portugal,landing,arrivee,675,240.0,89.3,5.96,38.32,2.4,333
+2026-09-28,07:44:47,TAP441,CS-TJN,Airbus A321neo,TAP Air Portugal,landing,arrivee,750,248.4,91.6,5.28,39.52,2.4,333
+2026-09-28,07:47:39,TAP9ML,CS-TVA,Airbus A320neo,TAP Air Portugal,landing,arrivee,625,253.9,91.3,4.94,46.26,2.4,333
+2026-09-28,07:50:45,AZU8900,PR-AIW,Airbus A330-200,Azul,landing,arrivee,600,257.2,96.6,8.1,59.97,2.4,333
+2026-09-28,07:53:32,EZS79YP,HB-JXL,Airbus A320,easyJet Switzerland,landing,arrivee,675,258.9,91.6,6.72,53.4,2.4,333
+2026-09-28,07:57:42,4b1a2a,HB-JXQ,Airbus A320,easyJet Switzerland,landing,arrivee,625,258.4,92.5,7.05,56.11,2.4,333
+2026-09-28,08:00:35,4952cc,CS-TVL,Airbus A320,TAP Air Portugal,landing,arrivee,650,240.8,88.4,5.45,40.37,2.4,333
+2026-09-28,08:03:21,495154,,,TAP Air Portugal,landing,arrivee,675,272.4,90.2,5.41,48.05,2.4,333
+2026-09-28,08:06:26,TAP1939,CS-TPQ,Embraer E190,TAP Air Portugal,landing,arrivee,625,251.5,89.5,6.24,58.61,2.4,333
+2026-09-28,08:09:14,TAP575,CS-TVR,Airbus A320neo,TAP Air Portugal,landing,arrivee,650,249.1,88.6,6.32,42.49,2.4,333
+2026-09-28,08:12:10,4952ca,CS-TVJ,Airbus A320neo,TAP Air Portugal,landing,arrivee,650,247.2,89.0,5.92,34.77,2.4,333
+2026-09-28,08:13:41,VLG46AX,EC-MHS,Airbus A321,Vueling,landing,arrivee,625,268.9,92.9,7.58,59.02,2.4,333
+2026-09-28,08:16:35,AAL258,N835AN,Boeing 787-9,American Airlines,landing,arrivee,600,285.6,92.4,5.92,53.88,2.4,333
+2026-09-28,08:19:30,495039,CS-TAY,Embraer E195,TAP Air Portugal,landing,arrivee,600,268.9,93.7,5.92,50.66,1.9,338
+2026-09-28,08:22:15,4951d5,CS-TNU,Airbus A320,TAP Air Portugal,landing,arrivee,725,243.5,93.6,7.49,67.29,1.9,338
+2026-09-28,08:24:50,TAP557H,CS-TJR,Airbus A321neo,TAP Air Portugal,landing,arrivee,625,283.0,90.8,5.28,53.29,1.9,338
+2026-09-28,08:35:51,TAP56DP,CS-TNK,Airbus A320,TAP Air Portugal,landing,arrivee,675,264.8,95.2,7.08,69.31,1.5,346
+2026-09-28,08:41:05,39348e,F-GNEO,Airbus A320neo,Avolon Leasing Ireland 3 Limited,landing,arrivee,650,248.4,91.5,5.32,32.36,1.5,346
+2026-09-28,08:44:03,4952d0,CS-TVP,Airbus A320neo,TAP Air Portugal,landing,arrivee,750,278.9,85.2,5.67,39.96,1.5,346
+2026-09-28,08:46:28,TAP757P,CS-TNX,Airbus A320,TAP Air Portugal,landing,arrivee,650,268.9,97.7,6.69,63.34,1.5,346
+2026-09-28,08:48:37,4d2212,9H-QCB,Boeing 737-800,Malta Air,landing,arrivee,625,291.3,94.4,5.93,67.0,1.5,346
+2026-09-28,08:51:35,4cae9e,EI-IKX,Boeing 737 MAX 8,,landing,arrivee,600,288.9,96.1,5.68,52.77,0.8,27
+2026-09-28,08:54:26,392af2,F-GKXS,Airbus A320,Air France,landing,arrivee,725,283.7,93.6,6.85,87.27,0.8,27
+2026-09-28,08:57:38,4952d3,CS-TVS,Airbus A321neo,TAP Air Portugal,cruise,,675,0.0,91.3,5.67,41.56,0.8,27
+2026-09-28,09:00:16,RYR3RB,EI-EVL,Boeing 737-800,Ryanair,landing,arrivee,600,270.8,94.8,7.21,79.48,0.8,27
+2026-09-28,09:02:49,4d21ee,9H-QAF,Boeing 737-800,Malta Air,landing,arrivee,600,287.2,96.2,6.44,58.82,0.8,27
+2026-09-28,09:06:09,a51d6f,N429DX,Airbus A330-900neo,Delta Air Lines,landing,arrivee,625,278.0,96.1,8.37,79.69,0.8,63
+2026-09-28,09:09:20,TAP675,CS-TVN,Airbus A320neo,TAP Air Portugal,landing,arrivee,600,255.6,90.2,5.56,43.27,0.8,63
+2026-09-28,09:12:04,c07995,C-GUBC,Airbus A330-200,Air Transat,landing,arrivee,600,262.2,93.0,7.37,52.94,0.8,63
+2026-09-28,09:14:49,ACA812,C-GEFA,Airbus A330-300,Air Canada,landing,arrivee,600,265.6,94.9,7.49,56.96,0.8,63
+2026-09-28,09:17:22,502d5e,YL-ABM,A220-300,Swiss,landing,arrivee,650,267.2,89.1,5.8,44.71,0.8,63
+2026-09-28,09:22:05,49514f,CS-TJO,Airbus A321neo,TAP Air Portugal,landing,arrivee,650,283.7,89.8,6.33,37.38,1.5,104
+2026-09-28,09:24:41,TAP443,CS-TJS,Airbus A321neo,TAP Air Portugal,landing,arrivee,725,273.2,88.6,5.03,31.73,1.5,104
+2026-09-28,09:28:55,49530c,CS-TXL,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,280.6,89.6,6.05,43.26,1.5,104
+2026-09-28,09:32:01,4854c7,PH-HBJ,Boeing 737-800,Transavia,landing,arrivee,650,283.7,94.5,6.63,72.66,1.5,104
+2026-09-28,09:36:12,THY3WE,TC-LSC,Airbus A321neo,Turkish Airlines,landing,arrivee,825,258.4,92.6,6.88,48.95,1.9,112
+2026-09-28,09:38:55,TAP072,CS-TUQ,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,750,263.9,95.0,7.44,55.55,1.9,112
+2026-09-28,09:41:41,RZO330,CS-TSH,Airbus A321neo,Azores Airlines,landing,arrivee,650,251.5,92.8,6.97,43.49,1.9,112
+2026-09-28,09:44:09,495303,CS-TXC,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,273.2,92.0,5.8,46.57,1.9,112
+2026-09-28,09:48:45,3480ce,EC-OHV,Airbus A330-300,TAP Air Portugal,cruise,,625,0.0,96.6,7.6,83.17,2.9,120
+2026-09-28,09:51:12,40666d,G-EZUT,Airbus A320,easyJet,landing,arrivee,625,267.2,92.2,8.22,57.12,2.9,120
+2026-09-28,09:59:52,347645,EC-OEA,E195-E2,Binter Canarias,approach,arrivee,1975,311.0,62.1,0.0,18.09,2.9,120
+2026-09-28,10:03:51,aab001,N788UA,Boeing 777-200,United Airlines,landing,arrivee,650,281.3,97.5,7.73,120.29,3.4,122
+2026-09-28,10:06:40,TAP1826,CS-TVD,Airbus A320neo,TAP Air Portugal,landing,arrivee,625,237.4,88.3,6.68,35.57,3.4,122
+2026-09-28,10:09:46,EJU97VT,OE-LSK,Airbus A320neo,easyJet Europe,landing,arrivee,625,249.1,91.8,5.96,45.94,3.4,122
+2026-09-28,10:12:25,BAW50P,G-NEOV,Airbus A321neo,British Airways,landing,arrivee,625,255.6,93.1,6.44,38.51,3.4,122
+2026-09-28,10:14:54,TAP012,CS-TUN,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,600,279.7,96.0,6.93,86.34,3.4,122
+2026-09-28,10:17:55,4952a7,CS-TUG,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,625,274.8,94.3,7.85,69.58,3.4,122
+2026-09-28,10:20:34,TAP1921,CS-TVM,Airbus A320neo,TAP Air Portugal,landing,arrivee,625,270.8,91.4,5.04,36.92,3.7,119
+2026-09-28,10:23:16,TAP11SV,CS-TPX,Embraer E190,TAP Air Portugal,landing,arrivee,600,263.2,92.6,4.91,48.19,3.7,119
+2026-09-28,10:29:05,ACA810,C-FIVR,Boeing 777-300ER,Air Canada,landing,arrivee,725,277.2,100.4,8.97,87.5,3.7,119
+2026-09-28,10:31:42,TAP210,CS-TUB,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,675,261.5,92.1,8.44,58.34,3.7,119
+2026-09-28,10:34:33,EIN82T,EI-DES,Airbus A320,Aer Lingus,landing,arrivee,625,261.5,94.0,6.81,54.25,3.9,112
+2026-09-28,10:36:58,TAP11MG,CS-TPY,Embraer E190,TAP Air Portugal,landing,arrivee,575,250.8,94.1,6.06,58.43,3.9,112
+2026-09-28,10:39:11,495306,CS-TXF,Airbus A321neo,TAP Air Portugal,landing,arrivee,725,272.4,90.9,5.02,37.65,3.9,112
+2026-09-28,10:41:52,344216,EC-LPR,Boeing 737-800,Air Europa,landing,arrivee,650,288.2,89.5,7.08,69.1,3.9,112
+2026-09-28,10:44:05,4d00f4,LX-LBA,Boeing 737-800,Luxair,landing,arrivee,625,280.6,94.8,6.57,141.13,3.9,112
+2026-09-28,10:46:43,49514c,CS-TJL,Airbus A321neo,TAP Air Portugal,landing,arrivee,725,259.7,89.4,5.31,42.32,3.9,112
+2026-09-28,10:48:25,49514b,CS-TJK,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,278.2,92.0,5.69,44.67,3.9,112
+2026-09-28,10:50:19,TAP262M,CS-TXA,Airbus A321neo,TAP Air Portugal,landing,arrivee,725,255.6,90.5,4.42,39.0,3.1,111
+2026-09-28,10:52:33,TAP4LA,CS-TUD,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,650,259.7,93.0,8.63,65.1,3.1,111
+2026-09-28,10:54:57,4951ee,CS-TON,Airbus A330-200,TAP Air Portugal,landing,arrivee,725,258.4,97.8,9.53,83.35,3.1,111
+2026-09-28,10:59:24,4950e4,CS-TGD,Airbus A330-200,Azul,landing,arrivee,700,257.2,97.1,8.09,66.51,3.1,111
+2026-09-28,11:02:46,440cbf,OE-LSO,Airbus A320,easyJet Europe,landing,arrivee,700,243.2,89.1,5.08,38.98,3.1,111
+2026-09-28,11:04:56,485a32,PH-BCG,Boeing 737-800,KLM,landing,arrivee,675,277.6,97.5,7.57,66.69,3.5,114
+2026-09-28,11:07:46,49520f,CS-TPO,Embraer E190,TAP Air Portugal,landing,arrivee,650,248.4,92.7,6.44,51.49,3.5,114
+2026-09-28,11:10:32,44cdce,OO-SNN,Airbus A320,Brussels Airlines,landing,arrivee,750,263.2,94.6,6.08,58.86,3.5,114
+2026-09-28,11:13:37,VJH738,D-AJET,Legacy 650 E,Air Hamburg GmbH,landing,arrivee,625,261.1,86.2,3.78,31.54,3.5,114
+2026-09-28,11:19:06,AFR41GW,F-HZUJ,Airbus A220-300,Air France,landing,arrivee,625,244.8,94.4,7.05,48.74,4.0,117
+2026-09-28,11:22:00,4400dc,OE-IDT,Airbus A320,easyJet Europe,landing,arrivee,675,266.5,92.6,7.49,68.14,4.0,117
+2026-09-28,11:25:48,4951d7,CS-TNW,Airbus A320,TAP Air Portugal,landing,arrivee,675,253.2,95.2,6.6,64.68,4.0,117
+2026-09-28,11:34:11,02008b,CN-ROS,Boeing 737-800,Royal Air Maroc,takeoff,depart,1025,276.5,85.8,9.0,82.63,4.7,122
+2026-09-28,11:37:29,49526d,CS-TSM,Airbus A320,Azores Airlines,landing,arrivee,675,250.8,92.4,6.69,33.69,4.7,122
+2026-09-28,11:39:32,EJU15UG,OE-IDU,Airbus A320,easyJet Europe,landing,arrivee,650,270.8,96.2,6.97,54.64,4.7,122
+2026-09-28,11:44:08,346316,EC-NFZ,Airbus A320neo,Iberia,landing,arrivee,675,247.2,88.3,6.32,49.08,4.7,122
+2026-09-28,11:48:02,02008b,CN-ROS,Boeing 737-800,Royal Air Maroc,landing,arrivee,675,270.4,95.0,5.4,55.95,4.7,122
+2026-09-28,11:52:12,DLH39X,D-AIOA,Airbus A321neo,Lufthansa,landing,arrivee,750,265.6,93.5,7.09,47.15,5.2,124
+2026-09-28,11:56:25,495298,CS-TTX,Embraer E195,TAP Air Portugal,landing,arrivee,675,270.8,94.9,5.55,55.04,5.2,124
+2026-09-28,12:02:23,4952a1,CS-TUA,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,700,257.2,92.6,8.47,61.36,5.2,124
+2026-09-28,12:05:08,348342,EC-OND,Airbus A330-300,,landing,arrivee,625,258.9,98.4,7.45,76.23,5.7,125
+2026-09-28,12:10:42,a51d6f,N429DX,Airbus A330-900neo,Delta Air Lines,cruise,,725,0.0,98.6,7.24,94.84,5.7,125
+2026-09-28,12:27:38,NJE618N,CS-LTX,680A Citation Latitude,NetJets,landing,arrivee,800,225.0,81.9,1.09,20.42,6.2,126
+2026-09-28,12:31:07,TAP429,CS-TAW,Embraer E195,TAP Air Portugal,landing,arrivee,650,239.8,93.2,6.6,44.41,6.2,126
+2026-09-28,12:32:37,8963df,A6-EPP,Boeing 777-300ER,Emirates,cruise,,850,0.0,98.7,8.08,90.97,6.2,126
+2026-09-28,12:35:43,RYR7GJ,EI-GSJ,Boeing 737-800,Ryanair,landing,arrivee,575,278.2,92.8,6.04,56.41,6.7,126
+2026-09-28,12:38:37,EWG66L,9H-SWC,Airbus A320,Eurowings,landing,arrivee,700,254.8,91.1,7.2,66.56,6.7,126
+2026-09-28,12:40:45,EJU32WQ,OE-LSR,Airbus A320,easyJet Europe,landing,arrivee,700,260.8,90.7,4.27,41.32,6.7,126
+2026-09-28,12:43:01,EJU64TB,OE-IBS,Airbus A320,easyJet Europe,landing,arrivee,750,264.1,90.7,6.56,54.88,6.7,126
+2026-09-28,12:45:38,4d24cb,9H-VVJ,Boeing 737 MAX 8,Malta Air,landing,arrivee,600,287.2,93.8,5.44,41.75,6.7,126
+2026-09-28,12:48:27,495215,CS-TPU,Embraer E190,TAP Air Portugal,landing,arrivee,650,246.7,95.1,7.18,44.88,6.7,126
+2026-09-28,12:51:01,39d308,F-HUYI,Boeing 737-800,Transavia France,landing,arrivee,650,277.6,97.0,6.61,67.79,7.0,125
+2026-09-28,12:54:00,EJU16HG,OE-IDS,Airbus A320,easyJet Europe,landing,arrivee,675,253.2,94.5,6.96,75.71,7.0,125
+2026-09-28,12:57:01,TAP1151,CS-TPP,Embraer E190,TAP Air Portugal,landing,arrivee,625,257.2,92.5,7.1,46.3,7.0,125
+2026-09-28,12:59:28,4d240d,9H-EUV,Airbus A320,Lauda Europe,landing,arrivee,725,261.5,93.9,6.57,50.33,5.4,110
+2026-09-28,13:02:12,4951ef,CS-TOO,Airbus A330-200,TAP Air Portugal,landing,arrivee,675,252.4,98.7,8.24,106.99,5.4,110
+2026-09-28,13:04:58,EJU38DF,OE-LSP,Airbus A320,easyJet Europe,landing,arrivee,700,268.9,91.8,5.93,40.67,5.5,113
+2026-09-28,13:07:35,495211,CS-TPQ,Embraer E190,TAP Air Portugal,cruise,,750,0.0,96.5,5.03,49.56,5.5,113
+2026-09-28,13:10:22,440b1e,OE-IWW,Airbus A320,easyJet Europe,landing,arrivee,675,262.4,93.3,6.08,49.78,5.5,113
+2026-09-28,13:13:06,RZO122,CS-TSG,Airbus A321neo,Azores Airlines,landing,arrivee,650,265.6,94.4,6.19,38.9,5.5,113
+2026-09-28,13:15:56,495039,CS-TAY,Embraer E195,TAP Air Portugal,landing,arrivee,600,266.5,95.0,5.76,58.39,5.5,113
+2026-09-28,13:19:07,TAP831,CS-TNJ,Airbus A320,TAP Air Portugal,landing,arrivee,675,253.2,96.3,7.18,68.14,5.3,118
+2026-09-28,13:21:46,4951ce,CS-TNN,Airbus A320,TAP Air Portugal,landing,arrivee,675,258.7,96.2,6.5,67.78,5.3,118
+2026-09-28,13:24:34,495145,CS-TJE,Airbus A321,TAP Air Portugal,landing,arrivee,750,275.6,94.8,6.97,61.76,5.3,118
+2026-09-28,13:27:07,49529a,CS-TTZ,Embraer E195,TAP Air Portugal,landing,arrivee,625,266.5,93.2,7.22,37.62,5.3,118
+2026-09-28,13:29:43,TAP1736,CS-TVR,Airbus A320neo,TAP Air Portugal,landing,arrivee,750,260.4,92.4,5.67,32.22,5.3,118
+2026-09-28,13:32:38,DLH47T,D-AIEJ,Airbus A321neo,Lufthansa,landing,arrivee,650,263.2,93.2,6.33,37.82,5.3,118
+2026-09-28,13:35:18,495066,CS-TCF,Airbus A330-900neo,Iberojet,landing,arrivee,675,266.5,96.9,8.63,62.84,5.1,129
+2026-09-28,13:37:53,TAP11EG,CS-TPV,Embraer E190,TAP Air Portugal,landing,arrivee,625,253.2,90.8,7.1,41.18,5.1,129
+2026-09-28,13:40:17,4951d1,CS-TNQ,Airbus A320,TAP Air Portugal,landing,arrivee,700,275.6,92.5,6.97,51.25,5.1,129
+2026-09-28,13:44:29,4b1809,HB-JCR,A220 300,Swiss,cruise,,725,0.0,92.0,5.92,47.21,5.1,129
+2026-09-28,13:47:05,TAP1860,CS-TJP,Airbus A321neo,TAP Air Portugal,landing,arrivee,750,288.2,90.7,5.52,38.78,5.1,129
+2026-09-28,13:50:01,495213,CS-TPS,Embraer E190,TAP Air Portugal,landing,arrivee,675,251.5,96.2,5.96,59.82,4.8,138
+2026-09-28,13:52:31,495171,CS-TKQ,Airbus A320,Azores Airlines,landing,arrivee,750,263.9,97.5,7.84,58.9,4.8,138
+2026-09-28,13:55:52,TAP641,CS-TTP,Airbus A319,TAP Air Portugal,landing,arrivee,700,253.2,96.0,7.58,45.41,4.8,138
+2026-09-28,14:06:05,TAP1013,CS-TNX,Airbus A320,TAP Air Portugal,landing,arrivee,700,270.0,96.0,8.22,70.53,4.5,151
+2026-09-28,14:09:06,495297,CS-TTW,Embraer E195,TAP Air Portugal,landing,arrivee,675,273.2,98.5,6.2,62.88,4.5,151
+2026-09-28,14:11:44,TAP869,CS-TTS,Airbus A319,TAP Air Portugal,landing,arrivee,775,256.3,93.7,6.45,48.34,4.5,151
+2026-09-28,14:14:11,4402b9,OE-LOA,Airbus A320,easyJet Europe,landing,arrivee,750,284.8,89.9,5.07,41.17,4.5,151
+2026-09-28,14:17:01,4cae98,EI-IKP,Boeing 737 MAX 8,Ryanair,landing,arrivee,700,295.2,92.8,4.79,57.02,4.5,151
+2026-09-28,14:19:51,495217,CS-TPW,Embraer E190,TAP Air Portugal,landing,arrivee,750,258.9,93.0,8.25,41.03,4.2,160
+2026-09-28,14:22:48,TAP401P,CS-TPR,Embraer E190,TAP Air Portugal,landing,arrivee,650,268.9,93.1,7.46,43.8,4.2,160
+2026-09-28,14:25:17,TAP36GS,CS-TJI,Airbus A321neo,TAP Air Portugal,landing,arrivee,750,288.2,91.9,6.89,28.72,4.2,160
+2026-09-28,14:27:54,34538d,EC-MQL,Airbus A321,Vueling,landing,arrivee,725,287.2,94.6,5.68,45.65,4.2,160
+2026-09-28,14:30:31,TAP88TM,CS-TTR,Airbus A319,TAP Air Portugal,landing,arrivee,650,253.9,100.5,0.08,41.76,4.2,160
+2026-09-28,14:33:05,4951f0,CS-TOP,Airbus A330-200,TAP Air Portugal,landing,arrivee,625,262.2,99.4,9.99,66.1,4.2,160
+2026-09-28,14:36:10,4952a6,CS-TUF,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,725,274.8,95.9,6.71,51.64,3.6,174
+2026-09-28,14:39:08,TAP36GS,CS-TJI,Airbus A321neo,TAP Air Portugal,landing,arrivee,675,288.9,90.3,6.06,43.67,3.6,174
+2026-09-28,14:47:14,AFR37EQ,F-HEPK,Airbus A320,Air France,landing,arrivee,725,278.0,93.0,6.41,51.72,3.6,174
+2026-09-28,14:51:52,TAP823,CS-TJM,Airbus A321neo,TAP Air Portugal,landing,arrivee,800,264.8,97.0,6.47,38.1,3.7,191
+2026-09-28,14:56:35,SWR2BK,HB-IOO,Airbus A321,Swiss,landing,arrivee,775,287.2,94.1,6.57,62.52,3.7,191
+2026-09-28,14:59:43,KLM97N,PH-AXA,Airbus A321neo,KLM,landing,arrivee,750,293.7,90.5,5.85,34.49,3.7,191
+2026-09-28,15:12:06,4071d9,G-EZPX,Airbus A320,easyJet,cruise,,700,285.2,91.8,6.31,39.67,4.0,207
+2026-09-28,15:15:13,THY4GH,TC-LTG,Airbus A321neo,Turkish Airlines,landing,arrivee,750,280.4,92.9,6.33,53.65,4.0,207
+2026-09-28,15:19:00,DLH03H,D-AIEL,Airbus A321neo,Lufthansa,landing,arrivee,800,283.7,89.6,5.8,42.35,4.0,207
+2026-09-28,15:23:16,4951cc,CS-TNL,Airbus A320,TAP Air Portugal,landing,arrivee,800,284.5,94.0,6.44,56.35,5.4,217
+2026-09-28,15:24:53,345215,EC-MJU,Boeing 737-800,Air Europa,landing,arrivee,775,294.8,96.5,6.93,66.4,5.4,217
+2026-09-28,15:31:42,TAP72LP,CS-TTP,Airbus A319,TAP Air Portugal,takeoff,depart,1225,304.7,85.1,5.96,57.27,5.4,217
+2026-09-28,15:33:25,EJU62BF,OE-LOA,Airbus A320,easyJet Europe,takeoff,depart,1625,316.1,71.9,1.0,22.75,5.4,217
+2026-09-28,15:36:11,440cc1,OE-LSP,Airbus A320,easyJet Europe,takeoff,depart,1550,297.8,72.5,1.47,18.42,7.4,223
