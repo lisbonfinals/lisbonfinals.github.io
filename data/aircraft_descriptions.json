@@ -852,5 +852,23 @@
     },
     "length_m": 44.51,
     "passenger_capacity": 244
+  },
+  {
+    "aircraft_type": "Phenom 300",
+    "description": {
+      "en": "The Phenom 300 is a light business jet built by Embraer in Brazil. Fast and certified to be flown by a single pilot, it carries a small group over distances of around 3,700 km.",
+      "pt": "O Phenom 300 é um jacto executivo ligeiro construído pela Embraer, no Brasil. Rápido e certificado para ser pilotado por um único piloto, transporta um pequeno grupo em distâncias de cerca de 3.700 km.",
+      "fr": "Le Phenom 300 est un jet d’affaires léger construit par Embraer au Brésil. Rapide et certifié pour être piloté par un seul pilote, il transporte un petit groupe sur des distances d’environ 3 700 km."
+    },
+    "manufacturer": "Embraer",
+    "first_flight_year": 2008,
+    "entry_into_service_year": 2009,
+    "fun_fact": {
+      "en": "It has been the world’s best-selling light jet for 14 years in a row, with more than 900 in service.",
+      "pt": "É o jacto ligeiro mais vendido do mundo há 14 anos consecutivos, com mais de 900 aparelhos em serviço.",
+      "fr": "C’est le jet léger le plus vendu au monde depuis 14 années consécutives, avec plus de 900 exemplaires en service."
+    },
+    "length_m": 15.64,
+    "passenger_capacity": 10
   }
 ]
