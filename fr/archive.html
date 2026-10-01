@@ -1665,8 +1665,9 @@ function avRenderExpertTable(offset) {
 }
 
 function avRenderExpertCharts(gran) {
-  // Graphiques : officiel seul pour l'instant (estimations LF dans le tableau uniquement)
-  const series = ((archiveData.lva_daily && archiveData.lva_daily[gran]) || []).filter(s => !s.estimated);
+  // Vue Jour : les estimations LF (s.estimated) apparaissent sur le Lden en points
+  // creux lavande + pointillés ; Semaine/Mois = moyennes de jours officiels seulement.
+  const series = (archiveData.lva_daily && archiveData.lva_daily[gran]) || [];
   const shown = series.slice(-60);
   const n = shown.length;
   const xStep = Math.max(1, Math.round(n / 6));
@@ -1681,7 +1682,7 @@ function avRenderExpertCharts(gran) {
   // SVG de ce chart utilise preserveAspectRatio="none" (0-100 étiré pour
   // remplir la largeur dispo), ce qui déformerait tout texte dessiné dedans.
   // Même rendu que data.html (buildWeekCharts), demandé par Antonio le 16 sept.
-  const cardPanel = (vals, ticks, color, labelKey, labelFallback, extraSvg, fmt, windDirs) => {
+  const cardPanel = (vals, ticks, color, labelKey, labelFallback, extraSvg, fmt, windDirs, estFlags) => {
     fmt = fmt || ((v) => avFmt1(v));
     const ownXAxis = `<div class="mchart-xaxis">${shown.map((s, i) => `<span>${(i % xStep === 0 || i === n - 1) ? avShortXLabel(s.label, gran) : ''}</span>`).join('')}</div>`;
     if (vals.filter(v => v != null).length < 2) {
@@ -1692,13 +1693,28 @@ function avRenderExpertCharts(gran) {
     }
     const lo = ticks.ticks[0], hi = ticks.ticks[ticks.ticks.length - 1], range = (hi - lo) || 1;
     const points = vals.map((v, i) => v == null ? null : [(i + 0.5) / n * 100, 100 - (v - lo) / range * 100]);
-    const segments = [];
-    let current = [];
-    points.forEach(p => { if (p) current.push(p); else { if (current.length > 1) segments.push(current); current = []; } });
-    if (current.length > 1) segments.push(current);
-    const svgLines = segments.map(seg => `<polyline points="${seg.map(p => p.join(',')).join(' ')}" fill="none" stroke="${color}" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('')
-      + points.map(p => p ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="${color}"/>` : '').join('');
-    const valueLabels = points.map((p, i) => p ? `<span class="mchart-point-label" style="left:${p[0]}%;bottom:${100 - p[1]}%;color:${color}">${fmt(vals[i])}</span>` : '').join('');
+    const hasEst = !!(estFlags && estFlags.some(Boolean));
+    let svgLines;
+    if (hasEst) {
+      // segment par paire : plein si les deux jours sont officiels, pointillés lavande sinon
+      let segs = '';
+      for (let i = 1; i < points.length; i++) {
+        if (!points[i - 1] || !points[i]) continue;
+        const e = estFlags[i - 1] || estFlags[i];
+        segs += `<polyline points="${points[i - 1].join(',')} ${points[i].join(',')}" fill="none" stroke="${e ? '#c4b5fd' : color}" stroke-width="1.5"${e ? ' stroke-dasharray="4,4"' : ''} vector-effect="non-scaling-stroke"/>`;
+      }
+      svgLines = segs + points.map((p, i) => !p ? '' : (estFlags[i]
+        ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.6" fill="#0f141b" stroke="#c4b5fd" stroke-width="1.2" vector-effect="non-scaling-stroke"/>`
+        : `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="${color}"/>`)).join('');
+    } else {
+      const segments = [];
+      let current = [];
+      points.forEach(p => { if (p) current.push(p); else { if (current.length > 1) segments.push(current); current = []; } });
+      if (current.length > 1) segments.push(current);
+      svgLines = segments.map(seg => `<polyline points="${seg.map(p => p.join(',')).join(' ')}" fill="none" stroke="${color}" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('')
+        + points.map(p => p ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="${color}"/>` : '').join('');
+    }
+    const valueLabels = points.map((p, i) => p ? `<span class="mchart-point-label" style="left:${p[0]}%;bottom:${100 - p[1]}%;color:${hasEst && estFlags[i] ? '#c4b5fd' : color}${hasEst && estFlags[i] ? ';font-style:italic' : ''}">${fmt(vals[i])}${hasEst && estFlags[i] ? ' est.' : ''}</span>` : '').join('');
     const windDirLabels = windDirs ? points.map((p, i) => (p && windDirs[i]) ? `<span class="mchart-point-winddir" style="left:${p[0]}%;bottom:${100 - p[1]}%;">${windDirs[i]}</span>` : '').join('') : '';
     return `<div class="mchart-card">
       <div class="mchart-panel-label"><div class="legend-dot" style="background:${color};border-radius:50%;"></div><span>${avT(labelKey, labelFallback)}</span></div>
@@ -1720,7 +1736,7 @@ function avRenderExpertCharts(gran) {
     const y = 100 - (LDEN_LEGAL_LIMIT_DB - lo) / range * 100;
     return `<line x1="0" x2="100" y1="${y}" y2="${y}" stroke="var(--red)" stroke-width="0.6" stroke-dasharray="2,2" opacity=".7" vector-effect="non-scaling-stroke"/>`;
   };
-  const ldenHtml = cardPanel(ldenVals, ldenTicks, 'var(--blue)', 'av_expert_legend_lden', 'Lden (65dB limit dashed)', limitLine);
+  const ldenHtml = cardPanel(ldenVals, ldenTicks, 'var(--blue)', 'av_expert_legend_lden', 'Lden (65dB limit dashed)', limitLine, null, null, shown.map(s => !!s.estimated));
   const peakHtml = cardPanel(shown.map(s => s.avg_peak_db), avAxisTicks(shown.map(s => s.avg_peak_db), false), 'var(--amber)', 'av_expert_legend_peak', 'Peak avg');
   const windDirs = shown.map(s => s.dominant_wind_dir || null);
   const windHtml = cardPanel(shown.map(s => s.avg_wind_kmh), avAxisTicks(shown.map(s => s.avg_wind_kmh), true), 'var(--green)', 'av_expert_legend_wind', 'Wind avg (km/h)', null, null, windDirs);

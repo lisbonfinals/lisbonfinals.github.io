@@ -475,6 +475,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .lva-chart-val{font-family:var(--mono);font-size:9px;}
 .lva-chart-val.lden{fill:var(--blue);}
 .lva-chart-val.lf{fill:var(--amber);}
+.lva-chart-line.est{stroke:#c4b5fd;stroke-dasharray:4 4;}
+.lva-chart-dot.est{fill:var(--dark);stroke:#c4b5fd;stroke-width:1.5;}
+.lva-chart-val.est{fill:#c4b5fd;font-style:italic;}
 .lva-chart-val.wx{fill:var(--green);}
 .lva-chart-limitline{stroke:var(--red);stroke-width:1;stroke-dasharray:4,3;opacity:.7;}
 .lva-chart-limitlabel{font-family:var(--mono);font-size:9px;fill:var(--red);opacity:.85;}
@@ -1578,8 +1581,9 @@ function buildExpertMode(lvaDaily, s) {
     estNoteEl.hidden = !hasEst;
   }
 
-  // Graphiques : officiel seul pour l'instant (estimation dans le tableau uniquement)
-  buildWeekCharts(weekOfficialDates);
+  // Graphiques : mêmes 7 jours que le tableau ; points Lden estimés en creux
+  // lavande + pointillés (cf. buildLdenSeries), validé par Antonio le 1er oct.
+  buildWeekCharts(weekDates);
   loadWindDay(null);
 }
 
@@ -1614,6 +1618,25 @@ function buildWeekCharts(weekDates) {
     return `<polyline class="lva-chart-line ${cls}" points="${segments}"></polyline>${dots}`;
   }
 
+  // Lden : segment plein bleu entre deux jours officiels, pointillés lavande dès
+  // qu'un des deux jours est une estimation LF ; point estimé creux + « est. ».
+  function buildLdenSeries(values, est, yAt) {
+    if (!est.some(Boolean)) return buildSeries(values, 'lden', yAt);
+    let segs = '';
+    for (let i = 1; i < values.length; i++) {
+      if (values[i - 1] == null || values[i] == null) continue;
+      const e = est[i - 1] || est[i];
+      segs += `<line class="lva-chart-line ${e ? 'est' : 'lden'}" x1="${xAt(i - 1)}" y1="${yAt(values[i - 1])}" x2="${xAt(i)}" y2="${yAt(values[i])}"></line>`;
+    }
+    const dots = values.map((v, i) => v == null ? '' : (est[i]
+      ? `<circle class="lva-chart-dot est" cx="${xAt(i)}" cy="${yAt(v)}" r="3"></circle>
+         <text class="lva-chart-val est" x="${xAt(i)}" y="${yAt(v) - 7}" text-anchor="middle">${v.toFixed(1)} est.</text>`
+      : `<circle class="lva-chart-dot lden" cx="${xAt(i)}" cy="${yAt(v)}" r="2.5"></circle>
+         <text class="lva-chart-val lden" x="${xAt(i)}" y="${yAt(v) - 7}" text-anchor="middle">${v.toFixed(1)}</text>`
+    )).join('');
+    return segs + dots;
+  }
+
   // Variation jour-sur-jour en % — comparable même entre deux métriques
   // d'unités/échelles différentes (Leq_dn en dB vs Peak avg en dB mais avec
   // une plage très différente). Choix d'Antonio (vs % indexé sur le 1er
@@ -1631,9 +1654,14 @@ function buildWeekCharts(weekDates) {
   ).join('');
 
   const LDEN_LEGAL_LIMIT_DB = 65;
+  const ldenEst = weekDates.map(d => {
+    const e = lastGistData?.lva_daily?.[d];
+    return !(e?.official?.lden != null) && e?.leq_dn != null;
+  });
   const ldenVals = weekDates.map(d => {
-    const off = lastGistData?.lva_daily?.[d]?.official;
-    return off && off.lden != null ? off.lden : null;
+    const e = lastGistData?.lva_daily?.[d];
+    if (e?.official?.lden != null) return e.official.lden;
+    return e?.leq_dn ?? null;
   });
 
   const hasLden = ldenVals.some(v => v != null);
@@ -1643,7 +1671,7 @@ function buildWeekCharts(weekDates) {
       `<svg class="lva-chart-svg" viewBox="0 0 ${W} ${H}">
         <line class="lva-chart-limitline" x1="${padL}" x2="${W - padR}" y1="${ldenYAt(LDEN_LEGAL_LIMIT_DB)}" y2="${ldenYAt(LDEN_LEGAL_LIMIT_DB)}"></line>
         <text class="lva-chart-limitlabel" x="${padL + 2}" y="${ldenYAt(LDEN_LEGAL_LIMIT_DB) - 4}">65dB</text>
-        ${buildSeries(ldenVals, 'lden', ldenYAt)}
+        ${buildLdenSeries(ldenVals, ldenEst, ldenYAt)}
         ${dayLabels}
       </svg>`;
   } else {
@@ -1682,7 +1710,9 @@ function buildWeekCharts(weekDates) {
   }
 
   const peakVals = weekDates.map(d => lastGistData?.lva_daily?.[d]?.avg_peak_db ?? null);
-  const ldenPct = dayOverDayPct(ldenVals);
+  // Pas de % entre une valeur officielle et une estimation (deux méthodes) :
+  // masqué dès que le jour ou la veille est estimé.
+  const ldenPct = dayOverDayPct(ldenVals).map((p, i) => (ldenEst[i] || (i > 0 && ldenEst[i - 1])) ? null : p);
   const peakPct = dayOverDayPct(peakVals);
   const pctFmt = v => (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
   const hasPct = ldenPct.some(v => v != null) || peakPct.some(v => v != null);
