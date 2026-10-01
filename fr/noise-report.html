@@ -815,6 +815,47 @@ const GIST_URL = 'https://gist.githubusercontent.com/lisbonfinals/2edb053ac9f9c9
 
 const MONTHS = ['','January','February','March','April','May','June',
                 'July','August','September','October','November','December'];
+// Carte « Dernière analyse », archives et puces de mois en 3 langues (1er oct 2026 :
+// tout le rendu dynamique était resté en anglais sur /pt et /fr).
+const MONTHS_L = {
+  en: MONTHS,
+  pt: ['','Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+  fr: ['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
+};
+const MONTHS_S = {
+  en: ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  pt: ['','Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+  fr: ['','Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc']
+};
+const RL = {
+  en: { flights_month:'Flights This Month', avg_peak:'Avg Peak dB', per_flight_month:'per flight, this month', night_flights:'Night Flights',
+        night_alerts:'Night Alerts', red:'red', orange:'orange', yellow:'yellow', night_ops:'Night Operations', insight:'Expert Insight',
+        noisiest:'Noisiest Airlines — Avg Peak dB', quietest:'Quietest Airlines — Avg Peak dB', per_flight:'per flight',
+        mfr:'Manufacturers — Noise Ranking', mfr_sub:'avg. peak dB per flight', red_alerts:'Red Alerts', orange_alerts:'Orange Alerts', yellow_alerts:'Yellow Alerts',
+        anac_note:"🛈 Figures above use our extended 23:00–06:59 window. ANAC's official regulatory window (00:00–05:59):", night_flights_lc:'night flights',
+        download:'Download Full Report', dl_meta:'PDF · Includes full alert detail &amp; archive', no_pdf_yet:'PDF not yet available',
+        flights:'flights', fl:'fl.', no_data:'No data', a_flights:'Flights', a_avg:'Avg', a_ext:'Extended', a_alerts:'Alerts', a_night:'night operations',
+        web_report:'Web report →', no_pdf:'No PDF' },
+  pt: { flights_month:'Voos este mês', avg_peak:'Pico médio dB', per_flight_month:'por voo, este mês', night_flights:'Voos nocturnos',
+        night_alerts:'Alertas nocturnos', red:'vermelhos', orange:'laranja', yellow:'amarelos', night_ops:'Operações nocturnas', insight:'Leitura do especialista',
+        noisiest:'Companhias mais ruidosas — pico médio dB', quietest:'Companhias mais silenciosas — pico médio dB', per_flight:'por voo',
+        mfr:'Fabricantes — classificação de ruído', mfr_sub:'pico médio dB por voo', red_alerts:'Alertas vermelhos', orange_alerts:'Alertas laranja', yellow_alerts:'Alertas amarelos',
+        anac_note:'🛈 Os números acima usam a nossa janela alargada 23:00–06:59. Janela regulamentar oficial da ANAC (00:00–05:59):', night_flights_lc:'voos nocturnos',
+        download:'Descarregar o relatório completo', dl_meta:'PDF · Inclui o detalhe completo dos alertas e o arquivo', no_pdf_yet:'PDF ainda não disponível',
+        flights:'voos', fl:'voos', no_data:'Sem dados', a_flights:'Voos', a_avg:'Média', a_ext:'Alargada', a_alerts:'Alertas', a_night:'operações nocturnas',
+        web_report:'Relatório web →', no_pdf:'Sem PDF' },
+  fr: { flights_month:'Vols ce mois-ci', avg_peak:'Pic moyen dB', per_flight_month:'par vol, ce mois-ci', night_flights:'Vols de nuit',
+        night_alerts:'Alertes de nuit', red:'rouges', orange:'orange', yellow:'jaunes', night_ops:'Opérations de nuit', insight:"L'analyse de l'expert",
+        noisiest:'Compagnies les plus bruyantes — pic moyen dB', quietest:'Compagnies les plus silencieuses — pic moyen dB', per_flight:'par vol',
+        mfr:'Constructeurs — classement sonore', mfr_sub:'pic moyen dB par vol', red_alerts:'Alertes rouges', orange_alerts:'Alertes orange', yellow_alerts:'Alertes jaunes',
+        anac_note:"🛈 Les chiffres ci-dessus utilisent notre fenêtre étendue 23h00–06h59. Fenêtre réglementaire officielle de l'ANAC (00h00–05h59) :", night_flights_lc:'vols de nuit',
+        download:'Télécharger le rapport complet', dl_meta:"PDF · Inclut le détail complet des alertes et l'archive", no_pdf_yet:'PDF pas encore disponible',
+        flights:'vols', fl:'vols', no_data:'Pas de données', a_flights:'Vols', a_avg:'Moy.', a_ext:'Étendue', a_alerts:'Alertes', a_night:"d'opérations de nuit",
+        web_report:'Rapport web →', no_pdf:'Pas de PDF' }
+};
+function rl(k) { const t = RL[typeof currentLang !== 'undefined' ? currentLang : 'en'] || RL.en; return t[k] !== undefined ? t[k] : RL.en[k]; }
+function mName(m)  { return ((MONTHS_L[typeof currentLang !== 'undefined' ? currentLang : 'en'] || MONTHS)[m]) || `Month ${m}`; }
+function mShort(m) { return ((MONTHS_S[typeof currentLang !== 'undefined' ? currentLang : 'en'] || MONTHS_S.en)[m]) || ''; }
 
 // ── MANUFACTURER TABLE ───────────────────────────────────────────────────
 function buildMfrTable(items) {
@@ -832,7 +873,7 @@ function buildMfrTable(items) {
       + '<div style="flex:2;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">'
       + '<div style="height:100%;width:' + w + '%;background:' + c + ';border-radius:2px"></div></div>'
       + '<span style="font-family:var(--mono);font-size:11px;color:' + c + ';width:52px;text-align:right">' + m.avg_db + ' dB</span>'
-      + '<span style="font-family:var(--mono);font-size:9px;color:var(--gray);width:52px;text-align:right">' + m.count.toLocaleString() + ' fl.</span>'
+      + '<span style="font-family:var(--mono);font-size:9px;color:var(--gray);width:52px;text-align:right">' + m.count.toLocaleString() + ' ' + rl('fl') + '</span>'
       + '</div>';
   });
   html += '</div>';
@@ -842,7 +883,7 @@ function buildMfrTable(items) {
 // ── PODIUM BUILDER ───────────────────────────────────────────────────────
 function buildPodium(items, kind) {
   // kind = 'n' (noisy), 'q' (quiet), 'm' (manufacturer)
-  if (!items || !items.length) return '<p style="color:var(--gray);font-size:11px">No data</p>';
+  if (!items || !items.length) return '<p style="color:var(--gray);font-size:11px">' + rl('no_data') + '</p>';
   const ORDER = [1, 0, 2]; // 2nd left, 1st center, 3rd right
   const MEDALS = ['🥇','🥈','🥉'];
   const HEIGHTS = ['pod-h1','pod-h2','pod-h3'];
@@ -860,7 +901,7 @@ function buildPodium(items, kind) {
         <span class="pod-medal">${MEDALS[idx]}</span>
         <div class="pod-name">${item.name}</div>
         <div class="pod-db">${item.avg_db}<span> dB</span></div>
-        <div class="pod-sub">${item.count.toLocaleString()} flights</div>
+        <div class="pod-sub">${item.count.toLocaleString()} ${rl('flights')}</div>
         <div class="pod-bar" style="width:${barW}%;margin:8px auto 0"></div>
       </div>
     </div>`;
@@ -903,7 +944,7 @@ function renderReport(report) {
     return;
   }
 
-  const mn = MONTHS[report.month] || `Month ${report.month}`;
+  const mn = mName(report.month);
 
   const html = `
   <div class="report-featured">
@@ -919,33 +960,33 @@ function renderReport(report) {
       <div class="hero-stats" style="margin-bottom:32px">
         <div class="hero-stat amber">
           <div class="hero-stat-val">${(report.total_flights||0).toLocaleString()}</div>
-          <div class="hero-stat-lbl">Flights This Month</div>
+          <div class="hero-stat-lbl">${rl('flights_month')}</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-val">${report.avg_db||'—'}<span class="unit"> dB</span></div>
-          <div class="hero-stat-lbl">Avg Peak dB</div>
-          <div style="font-family:var(--mono);font-size:9px;color:var(--gray);margin-top:5px">per flight, this month</div>
+          <div class="hero-stat-lbl">${rl('avg_peak')}</div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--gray);margin-top:5px">${rl('per_flight_month')}</div>
         </div>
         <div class="hero-stat indigo">
           <div class="hero-stat-val">${(report.night_flights||0).toLocaleString()}</div>
-          <div class="hero-stat-lbl">Night Flights</div>
+          <div class="hero-stat-lbl">${rl('night_flights')}</div>
         </div>
         <div class="hero-stat red" style="min-width:160px">
           <div class="hero-stat-val">${(report.rouge_count||0) + (report.orange_count||0) + (report.jaune_count||0)}</div>
-          <div class="hero-stat-lbl">Night Alerts</div>
+          <div class="hero-stat-lbl">${rl('night_alerts')}</div>
           <div style="font-family:var(--mono);font-size:9px;color:rgba(239,68,68,0.5);margin-top:5px;line-height:1.5">
-            <div>🔴 ${report.rouge_count||0} red</div><div>🟠 ${report.orange_count||0} orange</div><div>🟡 ${report.jaune_count||0} yellow</div>
+            <div>🔴 ${report.rouge_count||0} ${rl('red')}</div><div>🟠 ${report.orange_count||0} ${rl('orange')}</div><div>🟡 ${report.jaune_count||0} ${rl('yellow')}</div>
           </div>
         </div>
         <div class="hero-stat indigo">
           <div class="hero-stat-val">${report.night_pct||0}<span class="unit">%</span></div>
-          <div class="hero-stat-lbl">Night Operations</div>
+          <div class="hero-stat-lbl">${rl('night_ops')}</div>
         </div>
       </div>
 
       ${reportNote(report)}
       <div class="insight-box">
-        <div class="insight-box-title">Expert Insight — ${mn} ${report.year}</div>
+        <div class="insight-box-title">${rl('insight')} — ${mn} ${report.year}</div>
         <div class="insight-box-text">${report.insight || '100% of night alerts are arrivals — runway 02 approach path crosses Lisbon at 160m altitude. Business jets exceeded commercial noise levels, a regulatory gap worth flagging.'}</div>
       </div>
 
@@ -953,14 +994,14 @@ function renderReport(report) {
         <div>
           <div class="podium-section-title noisy">
             <span class="dot"></span>
-            Noisiest Airlines — Avg Peak dB <span style="font-family:var(--mono);font-size:9px;text-transform:none;letter-spacing:0;color:var(--gray)">per flight</span>
+            ${rl('noisiest')} <span style="font-family:var(--mono);font-size:9px;text-transform:none;letter-spacing:0;color:var(--gray)">${rl('per_flight')}</span>
           </div>
           ${buildPodium(report.top_airlines_noisy, 'n')}
         </div>
         <div>
           <div class="podium-section-title quiet">
             <span class="dot"></span>
-            Quietest Airlines — Avg Peak dB <span style="font-family:var(--mono);font-size:9px;text-transform:none;letter-spacing:0;color:var(--gray)">per flight</span>
+            ${rl('quietest')} <span style="font-family:var(--mono);font-size:9px;text-transform:none;letter-spacing:0;color:var(--gray)">${rl('per_flight')}</span>
           </div>
           ${buildPodium(report.top_airlines_quiet, 'q')}
         </div>
@@ -968,42 +1009,42 @@ function renderReport(report) {
 
       <div class="podium-section-title noisy" style="margin-top:8px">
         <span class="dot"></span>
-        Manufacturers — Noise Ranking <span style="font-family:var(--mono);font-size:9px;text-transform:none;letter-spacing:0;color:var(--gray)">avg. peak dB per flight</span>
+        ${rl('mfr')} <span style="font-family:var(--mono);font-size:9px;text-transform:none;letter-spacing:0;color:var(--gray)">${rl('mfr_sub')}</span>
       </div>
       ${buildMfrTable(report.top_mfr_noisy)}
 
       <div class="podium-section-title night" style="margin-top:48px">
         <span class="dot"></span>
-        Night Alerts
+        ${rl('night_alerts')}
       </div>
       <div class="violations-row">
         <div class="vio-badge red">
           <span class="vio-badge-num">${report.rouge_count||0}</span>
-          <span>🔴 Red Alerts ≥ ${report.thresh_rouge||'—'} dB</span>
+          <span>🔴 ${rl('red_alerts')} ≥ ${report.thresh_rouge||'—'} dB</span>
         </div>
         <div class="vio-badge orange">
           <span class="vio-badge-num">${report.orange_count||0}</span>
-          <span>🟠 Orange Alerts ${report.thresh_orange_min||'—'}–${report.thresh_orange_max||'—'} dB</span>
+          <span>🟠 ${rl('orange_alerts')} ${report.thresh_orange_min||'—'}–${report.thresh_orange_max||'—'} dB</span>
         </div>
         <div class="vio-badge yellow">
           <span class="vio-badge-num">${report.jaune_count||0}</span>
-          <span>🟡 Yellow Alerts ${report.thresh_jaune||'—'}–${report.thresh_jaune_max||'—'} dB</span>
+          <span>🟡 ${rl('yellow_alerts')} ${report.thresh_jaune||'—'}–${report.thresh_jaune_max||'—'} dB</span>
         </div>
       </div>
 
       <div class="anac-note">
-        <span class="anac-note-label">🛈 Figures above use our extended 23:00–06:59 window. ANAC's official regulatory window (00:00–05:59):</span>
-        <span class="anac-note-vals">🔴 ${report.rouge_count_anac||0} · 🟠 ${report.orange_count_anac||0} · 🟡 ${report.jaune_count_anac||0}<span class="anac-note-dim"> — ${(report.night_flights_anac||0).toLocaleString()} night flights (${report.night_pct_anac||0}%)</span></span>
+        <span class="anac-note-label">${rl('anac_note')}</span>
+        <span class="anac-note-vals">🔴 ${report.rouge_count_anac||0} · 🟠 ${report.orange_count_anac||0} · 🟡 ${report.jaune_count_anac||0}<span class="anac-note-dim"> — ${(report.night_flights_anac||0).toLocaleString()} ${rl('night_flights_lc')} (${report.night_pct_anac||0}%)</span></span>
       </div>
 
       <div class="download-row">
         ${report.pdf_url
           ? `<a href="${report.pdf_url}" target="_blank" rel="noopener noreferrer" class="btn-download">
                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v13M5 15l7 7 7-7"/><path d="M3 20h18"/></svg>
-               Download Full Report — ${mn} ${report.year}
+               ${rl('download')} — ${mn} ${report.year}
              </a>
-             <div class="download-meta">PDF · 9 pages · Includes full alert detail &amp; archive</div>`
-          : `<div style="color:var(--gray);font-family:var(--mono);font-size:11px">PDF not yet available — generate from admin dashboard</div>`
+             <div class="download-meta">${rl('dl_meta')}</div>`
+          : `<div style="color:var(--gray);font-family:var(--mono);font-size:11px">${rl('no_pdf_yet')}</div>`
         }
       </div>
 
@@ -1027,7 +1068,7 @@ function renderArchive(reports, activeIdx) {
     return;
   }
   grid.innerHTML = reports.map((r, i) => {
-    const mn = MONTHS[r.month] || `Month ${r.month}`;
+    const mn = mName(r.month);
     const isActive = i === activeIdx;
     const webReport = `/reports/${r.year}-${String(r.month).padStart(2, '0')}.html`;
     return `
@@ -1038,26 +1079,26 @@ function renderArchive(reports, activeIdx) {
       <div class="archive-card-stats">
         <div>
           <div class="archive-stat-val">${(r.total_flights||0).toLocaleString()}</div>
-          <div class="archive-stat-lbl">Flights</div>
+          <div class="archive-stat-lbl">${rl('a_flights')}</div>
         </div>
         <div>
           <div class="archive-stat-val">${r.avg_db||'—'} dB</div>
-          <div class="archive-stat-lbl">Avg</div>
+          <div class="archive-stat-lbl">${rl('a_avg')}</div>
         </div>
         <div>
-          <div class="archive-stat-val" style="color:var(--red)">${(r.rouge_count||0)+(r.orange_count||0)+(r.jaune_count||0)}<span class="archive-stat-tag">Extended · <span style="white-space:nowrap">23h-07h</span></span></div>
+          <div class="archive-stat-val" style="color:var(--red)">${(r.rouge_count||0)+(r.orange_count||0)+(r.jaune_count||0)}<span class="archive-stat-tag">${rl('a_ext')} · <span style="white-space:nowrap">23h-07h</span></span></div>
           <div class="archive-stat-val" style="color:var(--amber);margin-top:2px">${(r.rouge_count_anac||0)+(r.orange_count_anac||0)+(r.jaune_count_anac||0)}<span class="archive-stat-tag">ANAC · <span style="white-space:nowrap">00h-06h</span></span></div>
-          <div class="archive-stat-lbl">Alerts</div>
+          <div class="archive-stat-lbl">${rl('a_alerts')}</div>
         </div>
       </div>
       <div class="archive-card-footer">
-        <span>${r.night_pct||0}% night operations</span>
-        <a href="${webReport}" class="archive-dl-btn" onclick="event.stopPropagation()">Web report →</a>
+        <span>${r.night_pct||0}% ${rl('a_night')}</span>
+        <a href="${webReport}" class="archive-dl-btn" onclick="event.stopPropagation()">${rl('web_report')}</a>
         ${r.pdf_url
           ? `<a href="${r.pdf_url}" target="_blank" rel="noopener noreferrer" class="archive-dl-btn" onclick="event.stopPropagation()">
                ↓ PDF
              </a>`
-          : '<span style="opacity:.4">No PDF</span>'
+          : `<span style="opacity:.4">${rl('no_pdf')}</span>`
         }
       </div>
     </div>`;
@@ -1068,7 +1109,7 @@ function renderArchive(reports, activeIdx) {
 function renderChips(reports, activeIdx) {
   const container = document.getElementById('month-chips');
   container.innerHTML = reports.map((r, i) => {
-    const mn = (MONTHS[r.month] || '').substring(0, 3);
+    const mn = mShort(r.month);
     return `<button class="month-chip${i===activeIdx?' active':''}" onclick="selectReport(${i})">${mn} ${r.year}</button>`;
   }).join('');
 }
@@ -1086,11 +1127,11 @@ function renderYearStrip(reports, activeIdx) {
   for (let m = 1; m <= 12; m++) {
     const idx = reports.findIndex(r => r.year === 2026 && r.month === m);
     const r = idx >= 0 ? reports[idx] : null;
-    const mn = (MONTHS[m] || '').substring(0, 3);
+    const mn = mShort(m);
     if (r) {
       const pct = Math.max(6, Math.round((r.total_flights || 0) / maxFlights * 100));
       const isActive = !!(activeReport && activeReport.year === r.year && activeReport.month === r.month);
-      html.push(`<div class="year-cell has-data${isActive ? ' active' : ''}" onclick="selectReport(${idx})" title="${mn} 2026 — ${(r.total_flights||0).toLocaleString()} flights">
+      html.push(`<div class="year-cell has-data${isActive ? ' active' : ''}" onclick="selectReport(${idx})" title="${mn} 2026 — ${(r.total_flights||0).toLocaleString()} ${rl('flights')}">
         <div class="year-cell-count">${(r.total_flights||0).toLocaleString()}</div>
         <div class="year-cell-bar" style="height:${pct}%"></div>
         <div class="year-cell-month">${mn}</div>
@@ -1113,8 +1154,10 @@ function renderYearStrip(reports, activeIdx) {
 
 // ── SELECT REPORT ─────────────────────────────────────────────────────────
 let _reports = [];
+let _activeIdx = 0;
 function selectReport(idx) {
   if (!_reports[idx]) return;
+  _activeIdx = idx;
   renderReport(_reports[idx]);
   renderChips(_reports, idx);
   renderArchive(_reports, idx);
@@ -1204,7 +1247,7 @@ const TRANSLATIONS = {
     method_title: 'How to read this report',
     method_copy: 'This is independent residential monitoring from one fixed terrace below the LPPT approach corridor. It is designed to show repeatable local exposure, not to replace certified airport noise mapping.',
     method_k1: 'Source', method_v1: 'ADS-B flight data paired with station SPL readings.',
-    method_k2: 'Limit', method_v2: 'May–June: sonometer capped at 100 dB. From July 2026: new sonometer, up to 130 dB. <a href="/journal/2026-09-06-fifteen-lines-across-three-reports-we-d-write-differently-now.html">A few June–August readings were later found to be sensor artifacts and corrected.</a>',
+    method_k2: 'Limit', method_v2: 'May–June: sonometer capped at 100 dB. From July 2026: new sonometer, up to 130 dB. <a href="/journal/2026-09-06-fifteen-lines-across-three-reports-we-d-write-differently-now.html">A few June–August readings were later found to be sensor artifacts</a>: some were corrected, while peaks above about 105 dB could not be verified (see each report\'s notes).',
     method_k3: 'Purpose', method_v3: 'A public record for patterns, outliers and night-time disturbance.',
     method_k4: 'Night Window', method_v4: "Alerts are scored over our own extended 23:00–06:59 tracking window (a full night's rest for residents) — wider than ANAC's official 00:00–05:59 regulatory window. Thresholds are ANAC's own fixed noise limits (98.9 dB critical / 93.0–95.9 dB level 2), applied consistently across all months. The ANAC-only breakdown is shown in the analysis below.",
     method_k5: '🟠 Orange Tier', method_v5: "Not an ANAC-defined level — the regulation only sets Yellow (Level 2) and Red (Critical), nothing in between. Orange tracks that gap on our own, so a loud flight at 97 dB is never silently dropped from the count.",
@@ -1249,7 +1292,7 @@ const TRANSLATIONS = {
     method_title: 'Como ler este relatório',
     method_copy: 'Esta é uma monitorização residencial independente a partir de uma varanda fixa sob o corredor de aproximação LPPT. Serve para mostrar uma exposição local observada de forma consistente, não para substituir cartografia de ruído aeroportuária certificada.',
     method_k1: 'Fonte', method_v1: 'Dados ADS-B de voo cruzados com leituras SPL da estação.',
-    method_k2: 'Limite', method_v2: 'Maio–junho: sonómetro limitado a 100 dB. A partir de julho de 2026: novo sonómetro, até 130 dB. <a href="/journal/2026-09-06-fifteen-lines-across-three-reports-we-d-write-differently-now.html">Algumas leituras de junho–agosto foram depois identificadas como artefactos do sensor e corrigidas.</a>',
+    method_k2: 'Limite', method_v2: 'Maio–junho: sonómetro limitado a 100 dB. A partir de julho de 2026: novo sonómetro, até 130 dB. <a href="/journal/2026-09-06-fifteen-lines-across-three-reports-we-d-write-differently-now.html">Algumas leituras de junho–agosto foram depois identificadas como artefactos do sensor</a>: umas foram corrigidas, mas os picos acima de cerca de 105 dB não puderam ser verificados (ver as notas de cada relatório).',
     method_k3: 'Objectivo', method_v3: 'Um registo público de padrões, anomalias e perturbação nocturna.',
     method_k4: 'Janela Nocturna', method_v4: 'Os alertas são contabilizados na nossa própria janela alargada de monitorização (23h00–06h59, uma noite de descanso completa para os residentes) — mais ampla do que a janela regulamentar oficial da ANAC (00h00–05h59). Os limiares são os valores fixos da própria ANAC (98,9 dB crítico / 93,0–95,9 dB nível 2), aplicados de forma consistente em todos os meses. A repartição exclusivamente ANAC está disponível na análise abaixo.',
     method_k5: '🟠 Nível Laranja', method_v5: 'Não é um nível definido pela ANAC — o regulamento define apenas Amarelo (Nível 2) e Vermelho (Crítico), sem nada entre os dois. O Laranja acompanha essa lacuna por conta própria, para que um voo ruidoso a 97 dB nunca desapareça silenciosamente da contagem.',
@@ -1292,7 +1335,7 @@ const TRANSLATIONS = {
     method_title: 'Comment lire ce rapport',
     method_copy: 'Il s’agit d’une surveillance résidentielle indépendante depuis une terrasse fixe sous le couloir d’approche LPPT. Elle documente une exposition locale mesurée de façon cohérente, sans remplacer une cartographie acoustique aéroportuaire certifiée.',
     method_k1: 'Source', method_v1: 'Données ADS-B des vols associées aux mesures SPL de la station.',
-    method_k2: 'Limite', method_v2: 'Mai–juin : sonomètre plafonné à 100 dB. À partir de juillet 2026 : nouveau sonomètre, jusqu\'à 130 dB. <a href="/journal/2026-09-06-fifteen-lines-across-three-reports-we-d-write-differently-now.html">Quelques relevés de juin à août se sont révélés être des artefacts du capteur, depuis corrigés.</a>',
+    method_k2: 'Limite', method_v2: 'Mai–juin : sonomètre plafonné à 100 dB. À partir de juillet 2026 : nouveau sonomètre, jusqu\'à 130 dB. <a href="/journal/2026-09-06-fifteen-lines-across-three-reports-we-d-write-differently-now.html">Quelques relevés de juin à août se sont révélés être des artefacts du capteur</a> : certains ont été corrigés, mais les pics au-dessus d\'environ 105 dB n\'ont pas pu être vérifiés (voir les notes de chaque rapport).',
     method_k3: 'But', method_v3: 'Un registre public des tendances, anomalies et nuisances nocturnes.',
     method_k4: 'Fenêtre Nocturne', method_v4: 'Les alertes sont comptabilisées sur notre propre fenêtre de suivi étendue (23h00–06h59, une nuit de repos complète pour les résidents) — plus large que la fenêtre réglementaire officielle de l\'ANAC (00h00–05h59). Les seuils sont les valeurs fixes propres à l\'ANAC (98,9 dB critique / 93,0–95,9 dB niveau 2), appliquées de façon cohérente sur tous les mois. Le détail exclusivement ANAC est disponible dans l\'analyse ci-dessous.',
     method_k5: '🟠 Niveau Orange', method_v5: 'Ce n\'est pas un niveau défini par l\'ANAC — la réglementation ne fixe que Jaune (Niveau 2) et Rouge (Critique), sans rien entre les deux. Orange suit cet écart de façon indépendante, pour qu\'un vol bruyant à 97 dB ne disparaisse jamais silencieusement du décompte.',
@@ -1326,6 +1369,10 @@ function applyLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
   localStorage.setItem('lf_lang', lang);
+  if (_reports && _reports.length) {  // rendu dynamique (carte, archives, puces) dans la nouvelle langue
+    const i = _reports[_activeIdx] ? _activeIdx : 0;
+    renderReport(_reports[i]); renderChips(_reports, i); renderArchive(_reports, i); renderYearStrip(_reports, i);
+  }
 }
 function toggleLang() { const c={en:'pt',pt:'fr',fr:'en'}; applyLang(c[currentLang]||'en'); }
 applyLang(currentLang);
