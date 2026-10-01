@@ -177,6 +177,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .archive-select:hover{border-color:rgba(245,166,35,.4);}
 .archive-select:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
 
+.archive-table tr.est td{background:rgba(196,181,253,.06);}
+.archive-table tr.est td:first-child{box-shadow:inset 3px 0 0 #c4b5fd;}
+.lva-est-v{color:#c4b5fd !important;font-style:italic;}
+.lva-est-lden{text-decoration:underline dashed rgba(196,181,253,.45);text-underline-offset:3px;cursor:help;}
+.lva-est-chip{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:#c4b5fd;border:1px dashed rgba(196,181,253,.45);border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:1px;white-space:nowrap;}
+.lva-est-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-left:5px;vertical-align:1px;}
+.lva-est-note{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.45);line-height:1.6;padding:12px 20px;margin:0;border-top:1px solid var(--border);max-width:900px;white-space:normal;}
+.lva-est-note b{color:#c4b5fd;font-weight:500;}
 .archive-table-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:24px;}
 .archive-table-title{padding:16px 20px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);display:flex;align-items:center;justify-content:space-between;}
 table.archive-table{width:100%;border-collapse:collapse;}
@@ -783,6 +791,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
         </div>
       </div>
       <div class="archive-table-scroll"><table class="archive-table" id="av-expert-table"></table></div>
+      <p class="lva-est-note" id="av-expert-estnote" hidden></p>
     </div>
 
     <div class="archive-chart-wrap">
@@ -1622,12 +1631,19 @@ function avRenderExpertTable(offset) {
 
   const rows = shown.slice().reverse().map(e => {
     const ldenOverLimit = e.lden != null && e.lden >= LDEN_LEGAL_LIMIT_DB;
-    return `<tr>
-      <td>${avShortXLabel(e.label, 'daily')}</td>
+    // 1er oct 2026 : jour sans Lden officiel = estimation LF (e.estimated, cf.
+    // offline_stats lva_daily_series), couleur propre + pastille, jamais le bleu officiel.
+    const ldenCells = e.estimated ? `
+      <td class="lva-est-v">${e.lden_day != null ? avFmt1(e.lden_day) : '—'}</td>
+      <td style="color:rgba(240,237,232,.25)">—</td>
+      <td class="lva-est-v">${e.lden_night != null ? avFmt1(e.lden_night) : '—'}</td>
+      <td title="${avT('av_expert_est_tip', '')}" style="white-space:nowrap"><span class="lva-est-v lva-est-lden">${e.lden != null ? avFmt1(e.lden) : '—'}</span>${ldenOverLimit ? '<span class="lva-est-dot"></span>' : ''}<span class="lva-est-chip">${avT('av_expert_est_chip', 'LF est.')}</span></td>` : `
       <td style="color:var(--blue)">${e.lden_day != null ? avFmt1(e.lden_day) : '—'}</td>
       <td style="color:var(--blue)">${e.lden_eve != null ? avFmt1(e.lden_eve) : '—'}</td>
       <td style="color:var(--blue)">${e.lden_night != null ? avFmt1(e.lden_night) : '—'}</td>
-      <td style="color:${ldenOverLimit ? 'var(--red)' : 'var(--blue)'};font-weight:${ldenOverLimit ? '700' : '400'}">${e.lden != null ? avFmt1(e.lden) : '—'}</td>
+      <td style="color:${ldenOverLimit ? 'var(--red)' : 'var(--blue)'};font-weight:${ldenOverLimit ? '700' : '400'}">${e.lden != null ? avFmt1(e.lden) : '—'}</td>`;
+    return `<tr${e.estimated ? ' class="est"' : ''}>
+      <td>${avShortXLabel(e.label, 'daily')}</td>${ldenCells}
       <td style="color:var(--amber)">${e.avg_peak_db != null ? avFmt1(e.avg_peak_db) : '—'}</td>
       <td style="color:var(--amber)">${e.n_flights_no_event != null ? avFmt(e.n_flights_no_event) : '—'}</td>
       <td style="color:var(--amber)">${e.total_duration_over_70_s != null ? (e.total_duration_over_70_s / 60).toFixed(1) + 'min' : '—'}</td>
@@ -1638,12 +1654,19 @@ function avRenderExpertTable(offset) {
   }).join('');
 
   document.getElementById('av-expert-table').innerHTML = head + `<tbody>${rows}</tbody>`;
+  const avEstNote = document.getElementById('av-expert-estnote');
+  if (avEstNote) {
+    const hasEst = shown.some(e => e.estimated);
+    avEstNote.innerHTML = hasEst ? avT('av_expert_est_note', '') : '';
+    avEstNote.hidden = !hasEst;
+  }
   document.getElementById('av-expert-week-prev').disabled = start <= 0;
   document.getElementById('av-expert-week-next').disabled = offset <= 0;
 }
 
 function avRenderExpertCharts(gran) {
-  const series = (archiveData.lva_daily && archiveData.lva_daily[gran]) || [];
+  // Graphiques : officiel seul pour l'instant (estimations LF dans le tableau uniquement)
+  const series = ((archiveData.lva_daily && archiveData.lva_daily[gran]) || []).filter(s => !s.estimated);
   const shown = series.slice(-60);
   const n = shown.length;
   const xStep = Math.max(1, Math.round(n / 6));
@@ -1907,7 +1930,7 @@ const T = {
     av_expert_intro:'Full history of the station\'s regulatory noise metric (Lden, EU/Portugal standard) and wind trend. "Peak avg" below is the average peak dB per flight for that day — for today\'s live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.',
     av_expert_week_title:'7-day table · Lden', av_expert_chart_title:'Lden, peak, wind & exposure over time',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Day', av_expert_th_lden_eve:'Evening', av_expert_th_lden_night:'Night', av_expert_th_lden:'Lden', av_expert_th_peak:'Peak avg', av_expert_th_silent:'Planes under 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp', av_expert_th_winddir:'Wind dir', av_expert_th_windspeed:'Wind',
-    av_expert_legend_lden:'Lden (65dB limit dashed)', av_expert_legend_peak:'Peak avg', av_expert_legend_wind:'Wind avg (km/h)', av_expert_legend_expo:'Exposure ≥70dB (min)', av_expert_chart_empty:'Not enough consecutive periods yet',
+    av_expert_legend_lden:'Lden (65dB limit dashed)', av_expert_legend_peak:'Peak avg', av_expert_legend_wind:'Wind avg (km/h)', av_expert_legend_expo:'Exposure ≥70dB (min)', av_expert_chart_empty:'Not enough consecutive periods yet', av_expert_est_chip:'LF est.', av_expert_est_tip:'No official SensorGrid value for this day yet. Lisbon Finals estimate (day and night Leq, no evening period), computed by the station. Usually 0.5 to 1 dB below the official value. Replaced automatically when the official value arrives.', av_expert_est_note:'<b>LF est.</b>: when the official Lden is not available, we show our own calculation (day and night Leq, without the evening period). On days where both exist, our estimate is usually 0.5 to 1 dB below the official value. It is replaced automatically once the official value arrives.',
     av_pic_open:'Open full resolution', av_gallery_badge:'gallery', av_instagram_badge:'instagram', av_no_photos:'No photos available for this selection.', av_expand_photos:'Best photos',
     av_freshness_note:'<b>Snapshot, not live.</b> This archive is republished periodically from the station\'s full database — not streamed in real time like the counters on Data — so totals here can lag the live ticker by a few hours or days. The photo galleries go further too, including shots never posted to Instagram.',
     av_prev:'← Previous', av_next:'Next →', av_page:'Page', av_photos_lower:'photo(s)', av_flights_lower:'flights',
@@ -2045,7 +2068,7 @@ const T = {
     av_expert_intro:'Histórico completo da métrica regulamentar de ruído da estação (Lden, norma UE/Portugal) e da tendência do vento. "Pico médio" abaixo é o pico médio em dB por voo nesse dia — para os valores em directo de hoje e a metodologia, ver <a href="data.html#expert-mode" class="av-link">Dados → Modo Perito</a>.',
     av_expert_week_title:'Tabela de 7 dias · Lden', av_expert_chart_title:'Lden, pico, vento e exposição ao longo do tempo',
     av_expert_th_date:'Data', av_expert_th_lden_day:'Dia', av_expert_th_lden_eve:'Entardecer', av_expert_th_lden_night:'Noite', av_expert_th_lden:'Lden', av_expert_th_peak:'Pico médio', av_expert_th_silent:'Aviões abaixo de 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direcção', av_expert_th_windspeed:'Vento',
-    av_expert_legend_lden:'Lden (limite 65dB tracejado)', av_expert_legend_peak:'Pico médio', av_expert_legend_wind:'Vento médio (km/h)', av_expert_legend_expo:'Exposição ≥70dB (min)', av_expert_chart_empty:'Ainda sem períodos consecutivos suficientes',
+    av_expert_legend_lden:'Lden (limite 65dB tracejado)', av_expert_legend_peak:'Pico médio', av_expert_legend_wind:'Vento médio (km/h)', av_expert_legend_expo:'Exposição ≥70dB (min)', av_expert_chart_empty:'Ainda sem períodos consecutivos suficientes', av_expert_est_chip:'estim. LF', av_expert_est_tip:'Ainda sem valor oficial SensorGrid para este dia. Estimativa Lisbon Finals (Leq de dia e de noite, sem período de entardecer), calculada pela estação. Em geral 0,5 a 1 dB abaixo do valor oficial. Substituída automaticamente quando o valor oficial chegar.', av_expert_est_note:'<b>Estim. LF</b>: quando o Lden oficial não está disponível, mostramos o nosso próprio cálculo (Leq de dia e de noite, sem o período de entardecer). Nos dias em que existem os dois, a nossa estimativa fica em geral 0,5 a 1 dB abaixo do valor oficial. É substituída automaticamente quando o valor oficial chegar.',
     av_pic_open:'Abrir em resolução total', av_gallery_badge:'galeria', av_instagram_badge:'instagram', av_no_photos:'Nenhuma foto disponível para esta selecção.', av_expand_photos:'Melhores fotos',
     av_freshness_note:'<b>Instantâneo, não em directo.</b> Este arquivo é republicado periodicamente a partir da base de dados completa da estação. Ao contrário dos contadores da página Dados, não é actualizado em tempo real: os totais podem, por isso, ter algumas horas ou alguns dias de atraso. As galerias de fotos são também mais completas e incluem imagens nunca publicadas no Instagram.',
     av_prev:'← Anterior', av_next:'Seguinte →', av_page:'Página', av_photos_lower:'foto(s)', av_flights_lower:'voos',
@@ -2183,7 +2206,7 @@ const T = {
     av_expert_intro:'Historique complet de la métrique réglementaire de bruit de la station (Lden, norme UE/Portugal) et de la tendance du vent. « Pic moyen » ci-dessous est le pic moyen en dB par vol ce jour-là — pour les chiffres en direct d\'aujourd\'hui et la méthodologie, voir <a href="data.html#expert-mode" class="av-link">Données → Mode Expert</a>.',
     av_expert_week_title:'Tableau 7 jours · Lden', av_expert_chart_title:'Lden, pic, vent et exposition dans le temps',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Jour', av_expert_th_lden_eve:'Soirée', av_expert_th_lden_night:'Nuit', av_expert_th_lden:'Lden', av_expert_th_peak:'Pic moyen', av_expert_th_silent:'Avions sous 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direction', av_expert_th_windspeed:'Vent',
-    av_expert_legend_lden:'Lden (limite 65dB en pointillés)', av_expert_legend_peak:'Pic moyen', av_expert_legend_wind:'Vent moyen (km/h)', av_expert_legend_expo:'Exposition ≥70dB (min)', av_expert_chart_empty:'Pas encore assez de périodes consécutives',
+    av_expert_legend_lden:'Lden (limite 65dB en pointillés)', av_expert_legend_peak:'Pic moyen', av_expert_legend_wind:'Vent moyen (km/h)', av_expert_legend_expo:'Exposition ≥70dB (min)', av_expert_chart_empty:'Pas encore assez de périodes consécutives', av_expert_est_chip:'estim. LF', av_expert_est_tip:'Pas encore de valeur officielle SensorGrid pour ce jour. Estimation Lisbon Finals (Leq jour et nuit, sans période soirée), calculée par la station. En général 0,5 à 1 dB sous la valeur officielle. Remplacée automatiquement dès que l\'officiel arrive.', av_expert_est_note:'<b>Estim. LF</b> : quand le Lden officiel n\'est pas disponible, nous affichons notre propre calcul (Leq jour et nuit, sans la période soirée). Sur les jours où les deux existent, notre estimation est en général 0,5 à 1 dB sous la valeur officielle. Elle est remplacée automatiquement dès que l\'officiel arrive.',
     av_pic_open:'Ouvrir en pleine résolution', av_gallery_badge:'galerie', av_instagram_badge:'instagram', av_no_photos:'Aucune photo disponible pour cette sélection.', av_expand_photos:'Meilleures photos',
     av_freshness_note:'<b>Instantané, pas en direct.</b> Ces archives sont republiées périodiquement depuis la base de données complète de la station. Contrairement aux compteurs de la page Data, elles ne sont pas diffusées en temps réel : les totaux peuvent donc accuser quelques heures ou quelques jours de retard. Les galeries photo sont aussi plus complètes et comprennent des clichés jamais publiés sur Instagram.',
     av_prev:'← Précédent', av_next:'Suivant →', av_page:'Page', av_photos_lower:'photo(s)', av_flights_lower:'vols',

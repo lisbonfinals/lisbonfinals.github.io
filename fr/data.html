@@ -434,8 +434,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .lva-week{background:var(--dark2);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:20px;}
 .lva-week-title{padding:14px 20px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,237,232,.38);}
 .lva-week-scroll{overflow-x:auto;}
-.lva-week-row{display:grid;grid-template-columns:100px 65px 65px 65px 70px 85px 130px 90px 65px 75px 150px;gap:0;padding:10px 20px;align-items:center;border-bottom:1px solid rgba(240,237,232,.04);width:max-content;min-width:100%;}
+.lva-week-row{display:grid;grid-template-columns:100px 65px 65px 65px 140px 85px 130px 90px 65px 75px 150px;gap:0;padding:10px 20px;align-items:center;border-bottom:1px solid rgba(240,237,232,.04);width:max-content;min-width:100%;}
 .lva-week-row:last-child{border-bottom:none;}
+.lva-week-row.est{background:rgba(196,181,253,.06);box-shadow:inset 3px 0 0 #c4b5fd;}
+.lva-est-v{color:#c4b5fd !important;font-style:italic;}
+.lva-est-lden{text-decoration:underline dashed rgba(196,181,253,.45);text-underline-offset:3px;cursor:help;}
+.lva-est-chip{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:#c4b5fd;border:1px dashed rgba(196,181,253,.45);border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:1px;white-space:nowrap;}
+.lva-est-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-left:5px;vertical-align:1px;}
+.lva-est-note{font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.45);line-height:1.6;padding:12px 20px;margin:0;border-top:1px solid var(--border);max-width:900px;white-space:normal;}
+.lva-est-note b{color:#c4b5fd;font-weight:500;}
 .lva-week-row.head{background:rgba(245,166,35,.04);border-bottom:1px solid var(--border);}
 .lva-week-head-cell{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.3);}
 .lva-week-head-cell.right{text-align:right;}
@@ -975,6 +982,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
         <div class="lva-week-head-cell right grp-wx" data-i18n="expert_th_windspeed">Wind</div>
       </div>
       <div id="et-week-rows"></div>
+      <p class="lva-est-note" id="et-week-estnote" hidden></p>
       </div>
     </div>
 
@@ -1496,7 +1504,14 @@ function buildExpertMode(lvaDaily, s) {
   // pagination/granularité vit sur archive.html → onglet Expert Mode (lien
   // "More data" plus bas), pas ici.
   const officialDates = dates.filter(d => lvaDaily[d]?.official?.lden != null);
-  const weekDates = officialDates.slice(-7);
+  // 1er oct 2026 (décision Antonio, revient sur celle des 11/14 sept) : un jour
+  // sans Lden officiel SensorGrid n'est plus caché ; il affiche notre estimation
+  // Leq_dn (lva_metrics.py), dans sa propre couleur avec la pastille « estim. LF »,
+  // jamais sous le bleu officiel (cf. feedback_source_coloring_consistency).
+  // Remplacée automatiquement au chargement suivant dès que l'officiel arrive.
+  const tableDates = dates.filter(d => lvaDaily[d]?.official?.lden != null || lvaDaily[d]?.leq_dn != null);
+  const weekDates = tableDates.slice(-7);
+  const weekOfficialDates = weekDates.filter(d => lvaDaily[d]?.official?.lden != null);
 
   // tableau 7 jours — ne montre que les jours avec Lden officiel Alessandro
   // (pas de repli LF ici, cf. décision du 11 sept, reconfirmée le 14 sept
@@ -1507,15 +1522,16 @@ function buildExpertMode(lvaDaily, s) {
   const weekRows = weekDates.slice().reverse().map(d => {
     const e = lvaDaily[d];
     const eOff = e.official;
-    // Lden = TOUJOURS la donnée officielle Alessandro (3 périodes UE, seuil
-    // légal 65dB, Art.11 RGR) — le filtre officialDates ci-dessus garantit
-    // déjà sa présence pour toute ligne affichée ici (aucun repli LF dans
-    // ce tableau, cf. décision du 11 sept).
+    // Lden officiel Alessandro (3 périodes UE, seuil légal 65dB, Art.11 RGR)
+    // quand il existe ; sinon estimation LF (Leq jour/nuit, pas de soirée).
+    const isEst = !(eOff && eOff.lden != null);
     const LDEN_LEGAL_LIMIT_DB = 65;
-    const dayVal = eOff.lden_day != null ? eOff.lden_day.toFixed(1) : '—';
-    const eveVal = eOff.lden_eve != null ? eOff.lden_eve.toFixed(1) : '—';
-    const nightVal = eOff.lden_night != null ? eOff.lden_night.toFixed(1) : '—';
-    const ldenNum = eOff.lden;
+    const dayVal = isEst ? (e.leq_day_period != null ? e.leq_day_period.toFixed(1) : '—')
+                         : (eOff.lden_day != null ? eOff.lden_day.toFixed(1) : '—');
+    const eveVal = (!isEst && eOff.lden_eve != null) ? eOff.lden_eve.toFixed(1) : '—';
+    const nightVal = isEst ? (e.leq_night_period != null ? e.leq_night_period.toFixed(1) : '—')
+                           : (eOff.lden_night != null ? eOff.lden_night.toFixed(1) : '—');
+    const ldenNum = isEst ? e.leq_dn : eOff.lden;
     const ldenVal = ldenNum.toFixed(1);
     const ldenOverLimit = ldenNum >= LDEN_LEGAL_LIMIT_DB;
     // Peak moyen + expo ≥70dB : toujours NOTRE mesure (pas de version "officielle"
@@ -1534,12 +1550,18 @@ function buildExpertMode(lvaDaily, s) {
     const tempVal = e.avg_temp_c != null ? e.avg_temp_c.toFixed(1) + '°C' : '—';
     const windDirVal = e.dominant_wind_dir || '—';
     const windSpeedVal = e.avg_wind_kmh != null ? e.avg_wind_kmh.toFixed(1) + ' km/h' : '—';
-    return `<div class="lva-week-row">
-      <div class="lva-week-date">${fmtShortDate(d)}</div>
+    const offCells = `
       <div class="lva-week-val" style="color:var(--blue)">${dayVal}</div>
       <div class="lva-week-val" style="color:var(--blue)">${eveVal}</div>
       <div class="lva-week-val" style="color:var(--blue)">${nightVal}</div>
-      <div class="lva-week-val lva-week-lden-group" style="color:${ldenOverLimit ? 'var(--red)' : 'var(--blue)'};font-weight:${ldenOverLimit ? '700' : '400'}" title="${ldenOverLimit ? 'Above the 65dB EU/Portugal legal limit (Lden)' : ''}">${ldenVal}</div>
+      <div class="lva-week-val lva-week-lden-group" style="color:${ldenOverLimit ? 'var(--red)' : 'var(--blue)'};font-weight:${ldenOverLimit ? '700' : '400'}" title="${ldenOverLimit ? 'Above the 65dB EU/Portugal legal limit (Lden)' : ''}">${ldenVal}</div>`;
+    const estCells = `
+      <div class="lva-week-val lva-est-v">${dayVal}</div>
+      <div class="lva-week-val" style="color:rgba(240,237,232,.25)">—</div>
+      <div class="lva-week-val lva-est-v">${nightVal}</div>
+      <div class="lva-week-val lva-week-lden-group" title="${tE.est_tip || ''}"><span class="lva-est-v lva-est-lden">${ldenVal}</span>${ldenOverLimit ? '<span class="lva-est-dot"></span>' : ''}<span class="lva-est-chip">${tE.est_chip || 'LF est.'}</span></div>`;
+    return `<div class="lva-week-row${isEst ? ' est' : ''}">
+      <div class="lva-week-date">${fmtShortDate(d)}</div>${isEst ? estCells : offCells}
       <div class="lva-week-val lva-week-lf-group" style="color:var(--amber)">${peakVal}</div>
       <div class="lva-week-val" style="color:var(--amber)">${silentVal}</div>
       <div class="lva-week-val" style="color:var(--amber)">${expoVal}</div>
@@ -1549,8 +1571,15 @@ function buildExpertMode(lvaDaily, s) {
     </div>`;
   }).join('');
   document.getElementById('et-week-rows').innerHTML = weekRows;
+  const estNoteEl = document.getElementById('et-week-estnote');
+  if (estNoteEl) {
+    const hasEst = weekDates.length !== weekOfficialDates.length;
+    estNoteEl.innerHTML = hasEst ? (tE.est_note || '') : '';
+    estNoteEl.hidden = !hasEst;
+  }
 
-  buildWeekCharts(weekDates);
+  // Graphiques : officiel seul pour l'instant (estimation dans le tableau uniquement)
+  buildWeekCharts(weekOfficialDates);
   loadWindDay(null);
 }
 
@@ -2103,7 +2132,7 @@ const T = {
     wind_desc:'Wind direction over the day, split into 8 fixed 3-hour slots (the same convention official weather stations report on), against the real average aircraft heading tracked that slot, so you can see whether the wind was roughly aligned with the approach path or crossing it, alongside the average peak dB for each slot. A steady spell of wind from the north, common here in summer, is what\'s locally known as the <em>Nortada</em>.',
     wind_speed_lbl:'Speed', wind_temp_lbl:'Temp', wind_press_lbl:'Pressure', wind_rwy_lbl:'vs heading', wind_spread_lbl:'Spread',
     wind_rwy_headwind:'headwind', wind_rwy_tailwind:'tailwind', wind_rwy_crosswind:'crosswind',
-    wind_arrivals_lbl:'Arrivals', wind_departures_lbl:'Departures', wind_view_btn:'View',
+    wind_arrivals_lbl:'Arrivals', wind_departures_lbl:'Departures', wind_view_btn:'View', est_chip:'LF est.', est_tip:'No official SensorGrid value for this day yet. Lisbon Finals estimate (day and night Leq, no evening period), computed by the station. Usually 0.5 to 1 dB below the official value. Replaced automatically when the official value arrives.', est_note:'<b>LF est.</b>: when the official Lden is not available, we show our own calculation (day and night Leq, without the evening period). On days where both exist, our estimate is usually 0.5 to 1 dB below the official value. It is replaced automatically once the official value arrives.',
     wind_method_title:'How to read this',
     wind_method_k1:'Needle', wind_method_v1:'Circular-mean wind direction per 3h slot, from the raw degree reading (not the 16-point label, which hides in-between values).',
     wind_method_k2:'Spread', wind_method_v2:'Circular standard deviation: small means steady wind, large means it was actively turning within that slot.',
@@ -2238,7 +2267,7 @@ const T = {
     wind_desc:'Direcção do vento ao longo do dia, dividida em 8 janelas fixas de 3 horas (a mesma convenção usada pelas estações meteorológicas oficiais), comparada com o rumo médio real dos aviões nessa janela — para ver se o vento estava alinhado com a trajectória de aproximação ou a atravessá-la, juntamente com o pico médio de dB em cada janela. Um período estável de vento de norte, comum aqui no verão, é o que localmente se chama a <em>Nortada</em>.',
     wind_speed_lbl:'Velocidade', wind_temp_lbl:'Temp.', wind_press_lbl:'Pressão', wind_rwy_lbl:'vs rumo', wind_spread_lbl:'Dispersão',
     wind_rwy_headwind:'vento de proa', wind_rwy_tailwind:'vento de cauda', wind_rwy_crosswind:'vento cruzado',
-    wind_arrivals_lbl:'Chegadas', wind_departures_lbl:'Partidas', wind_view_btn:'Ver',
+    wind_arrivals_lbl:'Chegadas', wind_departures_lbl:'Partidas', wind_view_btn:'Ver', est_chip:'estim. LF', est_tip:'Ainda sem valor oficial SensorGrid para este dia. Estimativa Lisbon Finals (Leq de dia e de noite, sem período de entardecer), calculada pela estação. Em geral 0,5 a 1 dB abaixo do valor oficial. Substituída automaticamente quando o valor oficial chegar.', est_note:'<b>Estim. LF</b>: quando o Lden oficial não está disponível, mostramos o nosso próprio cálculo (Leq de dia e de noite, sem o período de entardecer). Nos dias em que existem os dois, a nossa estimativa fica em geral 0,5 a 1 dB abaixo do valor oficial. É substituída automaticamente quando o valor oficial chegar.',
     wind_method_title:'Como ler isto',
     wind_method_k1:'Agulha', wind_method_v1:'Direcção média circular do vento por janela de 3h, a partir do valor bruto em graus (não a etiqueta de 16 pontos, que esconde os valores intermédios).',
     wind_method_k2:'Dispersão', wind_method_v2:'Desvio-padrão circular: pequeno significa vento estável, grande significa que estava a rodar activamente nessa janela.',
@@ -2375,7 +2404,7 @@ const T = {
     wind_desc:'Direction du vent au cours de la journée, découpée en 8 tranches fixes de 3 heures (la même convention utilisée par les stations météo officielles), comparée au cap réel moyen des avions sur cette tranche, pour voir si le vent était globalement aligné avec la trajectoire d\'approche ou la traversait, avec le pic dB moyen de chaque tranche. Une période stable de vent du nord, fréquente ici en été, est ce qu\'on appelle localement la <em>Nortada</em>.',
     wind_speed_lbl:'Vitesse', wind_temp_lbl:'Temp.', wind_press_lbl:'Pression', wind_rwy_lbl:'vs cap', wind_spread_lbl:'Dispersion',
     wind_rwy_headwind:'vent de face', wind_rwy_tailwind:'vent arrière', wind_rwy_crosswind:'traversier',
-    wind_arrivals_lbl:'Arrivées', wind_departures_lbl:'Départs', wind_view_btn:'Voir',
+    wind_arrivals_lbl:'Arrivées', wind_departures_lbl:'Départs', wind_view_btn:'Voir', est_chip:'estim. LF', est_tip:'Pas encore de valeur officielle SensorGrid pour ce jour. Estimation Lisbon Finals (Leq jour et nuit, sans période soirée), calculée par la station. En général 0,5 à 1 dB sous la valeur officielle. Remplacée automatiquement dès que l\'officiel arrive.', est_note:'<b>Estim. LF</b> : quand le Lden officiel n\'est pas disponible, nous affichons notre propre calcul (Leq jour et nuit, sans la période soirée). Sur les jours où les deux existent, notre estimation est en général 0,5 à 1 dB sous la valeur officielle. Elle est remplacée automatiquement dès que l\'officiel arrive.',
     wind_method_title:'Comment lire ceci',
     wind_method_k1:'Aiguille', wind_method_v1:'Direction moyenne circulaire du vent par tranche de 3h, calculée à partir du degré brut (pas de l\'étiquette à 16 points, qui masque les valeurs intermédiaires).',
     wind_method_k2:'Dispersion', wind_method_v2:'Écart-type circulaire : petit signifie un vent stable, grand signifie qu\'il tournait activement pendant cette tranche.',
