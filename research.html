@@ -351,6 +351,7 @@ main{padding-top:96px;}
       <div class="schema-item"><div class="schema-k">spl_db, spl_duration_above_s</div><div class="schema-v" data-i18n="sch_flight_spl">Peak sound level measured on the terrace, and seconds spent above the 70dB threshold during that single pass.</div></div>
       <div class="schema-item"><div class="schema-k">vibration_peak_mg</div><div class="schema-v" data-i18n="sch_flight_vib">Peak terrace vibration during the pass, in milli-g.</div></div>
       <div class="schema-item"><div class="schema-k">wind_speed_kmh, wind_dir_deg</div><div class="schema-v" data-i18n="sch_flight_wind">Ambient wind at the time of detection, when logged.</div></div>
+      <div class="schema-item"><div class="schema-k">data_quality</div><div class="schema-v" data-i18n-html="sch_flight_quality">Blank when nothing is known to be wrong with the row. Otherwise: <code>peak_corrected</code> (a sensor spike had been recorded as the peak; spl_db now holds the level measured as the plane passed), <code>peak_not_corroborated</code> (a peak of 85dB or more that the station's real-time check could not confirm, value kept), <code>spl_unverifiable</code> (sound value doubtful and impossible to check), <code>sensor_box_moved</code> (sound and vibration disturbed by handling of the sensor box), <code>capture_corrupted_by_restart</code> (capture cut short by a service restart). Values are always left as recorded: filter as your analysis requires.</div></div>
     </div>
   </section>
 
@@ -445,6 +446,7 @@ const T = {
     sch_flight_spl:'Peak sound level measured on the terrace, and seconds spent above the 70dB threshold during that single pass.',
     sch_flight_vib:'Peak terrace vibration during the pass, in milli-g.',
     sch_flight_wind:'Ambient wind at the time of detection, when logged.',
+    sch_flight_quality:'Blank when nothing is known to be wrong with the row. Otherwise: <code>peak_corrected</code> (a sensor spike had been recorded as the peak; spl_db now holds the level measured as the plane passed), <code>peak_not_corroborated</code> (a peak of 85dB or more that the station\'s real-time check could not confirm, value kept), <code>spl_unverifiable</code> (sound value doubtful and impossible to check), <code>sensor_box_moved</code> (sound and vibration disturbed by handling of the sensor box), <code>capture_corrupted_by_restart</code> (capture cut short by a service restart). Values are always left as recorded: filter as your analysis requires.',
     cont_label:'Continuous ambient data',
     cont_title:'The raw signal, not just the events',
     cont_desc:'Sound and vibration sampled roughly once per second, around the clock — not just when a flight is detected. This is the same continuous log the station uses internally to catch its own measurement glitches, so it\'s a genuine working dataset, not a demo export.',
@@ -502,6 +504,7 @@ const T = {
     sch_flight_spl:'Nível sonoro de pico medido na varanda, e segundos acima do limiar de 70dB durante essa passagem.',
     sch_flight_vib:'Vibração de pico na varanda durante a passagem, em mili-g.',
     sch_flight_wind:'Vento ambiente no momento da detecção, quando registado.',
+    sch_flight_quality:'Vazio quando não se conhece nenhum problema na linha. Caso contrário: <code>peak_corrected</code> (um pico eléctrico do sensor tinha sido registado como pico; spl_db contém agora o nível medido durante a passagem do avião), <code>peak_not_corroborated</code> (pico de 85dB ou mais que a verificação em tempo real da estação não conseguiu confirmar, valor mantido), <code>spl_unverifiable</code> (valor sonoro duvidoso e impossível de verificar), <code>sensor_box_moved</code> (som e vibração perturbados pelo manuseamento da caixa dos sensores), <code>capture_corrupted_by_restart</code> (captura interrompida por um reinício do serviço). Os valores ficam sempre como foram registados: filtre conforme a sua análise.',
     cont_label:'Dados ambientais contínuos',
     cont_title:'O sinal bruto, não apenas os eventos',
     cont_desc:'Som e vibração amostrados aproximadamente uma vez por segundo, 24 horas por dia — não apenas quando um voo é detectado. É o mesmo registo contínuo que a estação usa internamente para detectar as suas próprias falhas de medição — um conjunto de dados de trabalho real, não uma amostra de demonstração.',
@@ -559,6 +562,7 @@ const T = {
     sch_flight_spl:'Niveau sonore de pic mesuré sur la terrasse, et secondes passées au-dessus du seuil de 70dB durant ce passage.',
     sch_flight_vib:'Vibration de pic sur la terrasse durant le passage, en milli-g.',
     sch_flight_wind:'Vent ambiant au moment de la détection, quand il est enregistré.',
+    sch_flight_quality:'Vide quand aucun problème n\'est connu sur la ligne. Sinon : <code>peak_corrected</code> (un pic électrique du capteur avait été enregistré comme pic ; spl_db contient désormais le niveau mesuré au passage de l\'avion), <code>peak_not_corroborated</code> (pic de 85dB ou plus que la vérification en temps réel de la station n\'a pas pu confirmer, valeur conservée), <code>spl_unverifiable</code> (valeur sonore douteuse et impossible à vérifier), <code>sensor_box_moved</code> (son et vibration perturbés par une manipulation du boîtier des capteurs), <code>capture_corrupted_by_restart</code> (capture interrompue par un redémarrage du service). Les valeurs restent toujours telles qu\'enregistrées : filtrez selon votre analyse.',
     cont_label:'Données ambiantes continues',
     cont_title:'Le signal brut, pas seulement les événements',
     cont_desc:'Son et vibration échantillonnés environ une fois par seconde, en continu — pas seulement quand un vol est détecté. C\'est le même flux continu que la station utilise en interne pour repérer ses propres anomalies de mesure — un vrai jeu de données de travail, pas un export de démonstration.',
