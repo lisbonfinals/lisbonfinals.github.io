@@ -696,3 +696,5 @@ date,time,callsign,registration,aircraft_type,airline,phase,direction,altitude_f
 2026-10-03,07:23:54,e4a7ae,,,,landing,arrivee,675,245.6,96.7,7.93,75.31,3.4,32,
 2026-10-03,07:27:18,TAP441,CS-TVO,Airbus A320neo,TAP Air Portugal,landing,arrivee,675,273.2,88.7,4.42,44.97,3.4,32,
 2026-10-03,07:29:37,IBE05TR,EC-MXU,Airbus A320neo,Iberia,landing,arrivee,725,247.2,86.2,4.52,39.42,3.4,32,
+2026-10-03,07:36:39,4952a5,CS-TUE,Airbus A330-900neo,TAP Air Portugal,landing,arrivee,700,250.8,90.3,7.56,64.96,3.8,41,
+2026-10-03,07:39:15,TAP9ML,CS-TTS,Airbus A319,TAP Air Portugal,landing,arrivee,700,266.5,86.7,5.03,49.5,3.8,41,
