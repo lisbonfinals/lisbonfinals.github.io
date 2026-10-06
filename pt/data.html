@@ -484,6 +484,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .lva-chart-daylabel{font-family:var(--mono);font-size:9px;fill:rgba(240,237,232,.38);}
 .lva-chart-winddir{font-family:var(--mono);font-size:8px;letter-spacing:.05em;fill:rgba(34,197,94,.6);}
 .lva-chart-zeroline{stroke:rgba(240,237,232,.15);stroke-width:1;stroke-dasharray:3,3;}
+/* 6 oct 2026 : graphiques Expert à la taille réelle + vue agrandie (même méthode qu'archive.html) */
+.lva-chart-box{position:relative;}
+.xd-card{cursor:zoom-in;transition:border-color .2s;}
+.xd-card:hover{border-color:var(--border2);}
+.xd-card:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+.xd-zoom{position:absolute;top:14px;right:16px;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);opacity:.55;transition:opacity .2s;}
+.xd-card:hover .xd-zoom{opacity:1;}
+.xd-svg{display:block;width:100%;height:150px;}
+.xd-svg text,#xd-mbig svg text{font-family:var(--mono);}
+.xd-modal{position:fixed;inset:0;z-index:1000;background:rgba(3,4,7,.86);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px));}
+.xd-modal[hidden]{display:none;}
+.xd-box{background:var(--dark);border:1px solid var(--border2);border-radius:4px;width:min(1100px,100%);max-height:100%;display:flex;flex-direction:column;padding:18px 20px 14px;}
+.xd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px;}
+.xd-ttl{font-family:var(--sans);font-weight:700;font-size:18px;color:var(--white);}
+.xd-ttl small{display:block;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.06em;color:rgba(240,237,232,.45);margin-top:3px;}
+.xd-close{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(240,237,232,.18);background:transparent;color:rgba(240,237,232,.6);padding:5px 10px;cursor:pointer;border-radius:2px;}
+.xd-close:hover{color:var(--amber);border-color:rgba(245,166,35,.5);}
+#xd-mbig{position:relative;}
+#xd-mbig svg{display:block;width:100%;height:min(60vh,480px);}
+.xd-tip{position:absolute;pointer-events:none;background:var(--dark3,#111827);border:1px solid var(--border2);padding:8px 10px;font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--white);white-space:nowrap;transform:translate(-50%,calc(-100% - 12px));box-shadow:0 8px 24px rgba(0,0,0,.5);z-index:2;}
+.xd-tip[hidden]{display:none;}
+.xd-tip b{font-size:14px;font-weight:500;}
+.xd-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:rgba(240,237,232,.45);margin-top:6px;}
+.xd-lg{display:inline-flex;align-items:center;gap:6px;margin-right:14px;}
+.xd-lg i{display:inline-block;width:14px;border-top:2px solid;}
+@media(max-width:700px){.xd-box{padding:14px 12px 10px;}#xd-mbig svg{height:min(56vh,440px);}}
 .expert-more-data-link{display:block;text-align:center;margin:-4px 0 20px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);text-decoration:none;padding:10px;border:1px solid rgba(245,166,35,.25);border-radius:4px;transition:all .15s;}
 .expert-more-data-link:hover{background:rgba(245,166,35,.08);border-color:var(--amber);}
 
@@ -1016,6 +1042,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
           <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div><span data-i18n="expert_legend_wind">Wind avg</span></div>
         </div>
         <div id="et-chart-wind"></div>
+      </div>
+    </div>
+    <div class="xd-modal" id="xd-modal" hidden role="dialog" aria-modal="true" aria-labelledby="xd-mttl">
+      <div class="xd-box">
+        <div class="xd-top"><div class="xd-ttl" id="xd-mttl"></div><button type="button" class="xd-close" id="xd-mclose" data-i18n="expert_close">Close · Esc</button></div>
+        <div id="xd-mbig"></div>
+        <div class="xd-foot" id="xd-mfoot"></div>
       </div>
     </div>
     <a class="expert-more-data-link" href="archive.html#expertmode" data-i18n="expert_more_data_link">More data &amp; full history →</a>
@@ -1587,147 +1620,210 @@ function buildExpertMode(lvaDaily, s) {
   loadWindDay(null);
 }
 
+// 6 oct 2026 : graphiques dessinés à la taille réelle de leur cadre (même
+// méthode qu'archive.html) : les textes ne rétrécissent plus sur téléphone,
+// axe Y gradué, dates jj/mm, clic sur une carte = vue agrandie avec une bulle
+// par jour. Toujours les mêmes 7 jours que le tableau.
+const XD_C = { blue: '#60a5fa', amber: '#f5a623', green: '#22c55e', red: '#ef4444', est: '#c4b5fd', grid: 'rgba(240,237,232,.07)', mute: 'rgba(240,237,232,.45)' };
+const XD_LDEN_LIMIT_DB = 65;
+let _xdCharts = {}, _xdOpen = null, _xdLastFocus = null;
+
 function buildWeekCharts(weekDates) {
-  const W = 640, H = 130, padL = 28, padR = 24, padT = 16, padB = 22;
-  const plotW = W - padL - padR, plotH = H - padT - padB;
-  const n = weekDates.length;
-  const xAt = i => n > 1 ? padL + (i / (n - 1)) * plotW : padL + plotW / 2;
+  const tE = T[_lang] || T.en;
+  const labels = weekDates.map(d => d.slice(8, 10) + '/' + d.slice(5, 7));
+  const day = (d) => lastGistData?.lva_daily?.[d];
 
-  // échelle Y : calculée sur l'ensemble des valeurs passées (une ou plusieurs
-  // séries réunies) pour que deux séries sur le même graphique restent
-  // visuellement comparables — sinon une petite variation sur l'une peut
-  // paraître aussi dramatique qu'une grosse variation sur l'autre.
-  function yScale(...allValues) {
-    const defined = allValues.flat().filter(v => v != null);
-    const min = defined.length ? Math.min(...defined) : 0;
-    const max = defined.length ? Math.max(...defined) : 1;
-    const range = (max - min) || 1;
-    return v => padT + plotH - ((v - min) / range) * plotH * 0.82 - plotH * 0.09;
-  }
+  const ldenEst = weekDates.map(d => { const e = day(d); return !(e?.official?.lden != null) && e?.leq_dn != null; });
+  const ldenVals = weekDates.map(d => { const e = day(d); return e?.official?.lden != null ? e.official.lden : (e?.leq_dn ?? null); });
+  const expoVals = weekDates.map(d => { const s = day(d)?.total_duration_over_70_s; return s != null ? s / 60 : null; });
+  const windSpeedVals = weekDates.map(d => day(d)?.avg_wind_kmh ?? null);
+  const windDirVals = weekDates.map(d => day(d)?.dominant_wind_dir || null);
+  const peakVals = weekDates.map(d => day(d)?.avg_peak_db ?? null);
 
-  function buildSeries(values, cls, yAt, fmt, labelDy) {
-    fmt = fmt || (v => v.toFixed(1));
-    labelDy = labelDy != null ? labelDy : -7;
-    const pts = values.map((v, i) => v != null ? `${xAt(i)},${yAt(v)}` : null);
-    const segments = pts.filter(p => p).join(' ');
-    if (!segments) return '';
-    const dots = values.map((v, i) => v == null ? '' :
-      `<circle class="lva-chart-dot ${cls}" cx="${xAt(i)}" cy="${yAt(v)}" r="2.5"></circle>
-       <text class="lva-chart-val ${cls}" x="${xAt(i)}" y="${yAt(v) + labelDy}" text-anchor="middle">${fmt(v)}</text>`
-    ).join('');
-    return `<polyline class="lva-chart-line ${cls}" points="${segments}"></polyline>${dots}`;
-  }
-
-  // Lden : segment plein bleu entre deux jours officiels, pointillés lavande dès
-  // qu'un des deux jours est une estimation LF ; point estimé creux + « est. ».
-  function buildLdenSeries(values, est, yAt) {
-    if (!est.some(Boolean)) return buildSeries(values, 'lden', yAt);
-    let segs = '';
-    for (let i = 1; i < values.length; i++) {
-      if (values[i - 1] == null || values[i] == null) continue;
-      const e = est[i - 1] || est[i];
-      segs += `<line class="lva-chart-line ${e ? 'est' : 'lden'}" x1="${xAt(i - 1)}" y1="${yAt(values[i - 1])}" x2="${xAt(i)}" y2="${yAt(values[i])}"></line>`;
-    }
-    const dots = values.map((v, i) => v == null ? '' : (est[i]
-      ? `<circle class="lva-chart-dot est" cx="${xAt(i)}" cy="${yAt(v)}" r="3"></circle>
-         <text class="lva-chart-val est" x="${xAt(i)}" y="${yAt(v) - 7}" text-anchor="middle">${v.toFixed(1)} est.</text>`
-      : `<circle class="lva-chart-dot lden" cx="${xAt(i)}" cy="${yAt(v)}" r="2.5"></circle>
-         <text class="lva-chart-val lden" x="${xAt(i)}" y="${yAt(v) - 7}" text-anchor="middle">${v.toFixed(1)}</text>`
-    )).join('');
-    return segs + dots;
-  }
-
-  // Variation jour-sur-jour en % — comparable même entre deux métriques
-  // d'unités/échelles différentes (Leq_dn en dB vs Peak avg en dB mais avec
-  // une plage très différente). Choix d'Antonio (vs % indexé sur le 1er
-  // jour) : reste valable sur une fenêtre plus longue plus tard, pas besoin
-  // de choisir un jour de référence fixe.
-  function dayOverDayPct(values) {
-    return values.map((v, i) => {
-      if (i === 0 || v == null || values[i - 1] == null || values[i - 1] === 0) return null;
-      return (v - values[i - 1]) / values[i - 1] * 100;
-    });
-  }
-
-  const dayLabels = weekDates.map((d, i) =>
-    `<text class="lva-chart-daylabel" x="${xAt(i)}" y="${H - 4}" text-anchor="middle">${parseInt(d.slice(8, 10), 10)}</text>`
-  ).join('');
-
-  const LDEN_LEGAL_LIMIT_DB = 65;
-  const ldenEst = weekDates.map(d => {
-    const e = lastGistData?.lva_daily?.[d];
-    return !(e?.official?.lden != null) && e?.leq_dn != null;
-  });
-  const ldenVals = weekDates.map(d => {
-    const e = lastGistData?.lva_daily?.[d];
-    if (e?.official?.lden != null) return e.official.lden;
-    return e?.leq_dn ?? null;
-  });
-
-  const hasLden = ldenVals.some(v => v != null);
-  if (hasLden) {
-    const ldenYAt = yScale(ldenVals, [LDEN_LEGAL_LIMIT_DB]);
-    document.getElementById('et-chart-lden').innerHTML =
-      `<svg class="lva-chart-svg" viewBox="0 0 ${W} ${H}">
-        <line class="lva-chart-limitline" x1="${padL}" x2="${W - padR}" y1="${ldenYAt(LDEN_LEGAL_LIMIT_DB)}" y2="${ldenYAt(LDEN_LEGAL_LIMIT_DB)}"></line>
-        <text class="lva-chart-limitlabel" x="${padL + 2}" y="${ldenYAt(LDEN_LEGAL_LIMIT_DB) - 4}">65dB</text>
-        ${buildLdenSeries(ldenVals, ldenEst, ldenYAt)}
-        ${dayLabels}
-      </svg>`;
-  } else {
-    document.getElementById('et-chart-lden').innerHTML =
-      `<div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.3);padding:30px 0;text-align:center;">${tEChart('expert_chart_pct_empty', 'Not enough consecutive days yet')}</div>`;
-  }
-
-  const expoVals = weekDates.map(d => {
-    const s = lastGistData?.lva_daily?.[d]?.total_duration_over_70_s;
-    return s != null ? s / 60 : null;
-  });
-  const expoYAt = yScale(expoVals);
-  document.getElementById('et-chart-expo').innerHTML =
-    `<svg class="lva-chart-svg" viewBox="0 0 ${W} ${H}">
-      ${buildSeries(expoVals, 'lf', expoYAt)}
-      ${dayLabels}
-    </svg>`;
-
-  const windSpeedVals = weekDates.map(d => lastGistData?.lva_daily?.[d]?.avg_wind_kmh ?? null);
-  const windDirVals = weekDates.map(d => lastGistData?.lva_daily?.[d]?.dominant_wind_dir || null);
-  const hasWind = windSpeedVals.some(v => v != null);
-  if (hasWind) {
-    const windYAt = yScale(windSpeedVals);
-    const windDirLabels = windSpeedVals.map((v, i) => v == null || !windDirVals[i] ? '' :
-      `<text class="lva-chart-winddir" x="${xAt(i)}" y="${windYAt(v) + 13}" text-anchor="middle">${windDirVals[i]}</text>`
-    ).join('');
-    document.getElementById('et-chart-wind').innerHTML =
-      `<svg class="lva-chart-svg" viewBox="0 0 ${W} ${H}">
-        ${buildSeries(windSpeedVals, 'wx', windYAt)}
-        ${windDirLabels}
-        ${dayLabels}
-      </svg>`;
-  } else {
-    document.getElementById('et-chart-wind').innerHTML =
-      `<div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.3);padding:30px 0;text-align:center;">${tEChart('expert_chart_pct_empty', 'Not enough consecutive days yet')}</div>`;
-  }
-
-  const peakVals = weekDates.map(d => lastGistData?.lva_daily?.[d]?.avg_peak_db ?? null);
-  // Pas de % entre une valeur officielle et une estimation (deux méthodes) :
-  // masqué dès que le jour ou la veille est estimé.
+  // Variation jour-sur-jour en % (choix d'Antonio, vs % indexé sur le 1er jour) ;
+  // pas de % entre une valeur officielle et une estimation (deux méthodes).
+  const dayOverDayPct = (values) => values.map((v, i) => (i === 0 || v == null || values[i - 1] == null || values[i - 1] === 0) ? null : (v - values[i - 1]) / values[i - 1] * 100);
   const ldenPct = dayOverDayPct(ldenVals).map((p, i) => (ldenEst[i] || (i > 0 && ldenEst[i - 1])) ? null : p);
   const peakPct = dayOverDayPct(peakVals);
   const pctFmt = v => (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
-  const hasPct = ldenPct.some(v => v != null) || peakPct.some(v => v != null);
-  if (hasPct) {
-    const pctYAt = yScale(ldenPct, peakPct, [0]);
-    document.getElementById('et-chart-pct').innerHTML =
-      `<svg class="lva-chart-svg" viewBox="0 0 ${W} ${H}">
-        <line class="lva-chart-zeroline" x1="${padL}" x2="${W - padR}" y1="${pctYAt(0)}" y2="${pctYAt(0)}"></line>
-        ${buildSeries(ldenPct, 'lden', pctYAt, pctFmt, -7)}
-        ${buildSeries(peakPct, 'lf', pctYAt, pctFmt, 14)}
-        ${dayLabels}
-      </svg>`;
-  } else {
-    document.getElementById('et-chart-pct').innerHTML =
-      `<div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.3);padding:30px 0;text-align:center;">${tEChart('expert_chart_pct_empty', 'Not enough consecutive days yet')}</div>`;
+  const f1 = v => v.toFixed(1);
+
+  _xdCharts = {
+    pct: { el: 'et-chart-pct', titleKey: 'expert_chart_pct_title', titleFb: 'Day-over-day change · Lden & peak avg', dates: weekDates, labels, zeroLine: true,
+      series: [{ name: tE.expert_legend_lden || 'Lden', vals: ldenPct, color: XD_C.blue, fmt: pctFmt, unit: '' },
+               { name: tE.expert_legend_peakavg || 'Peak avg', vals: peakPct, color: XD_C.amber, fmt: pctFmt, unit: '', below: true }] },
+    lden: { el: 'et-chart-lden', titleKey: 'expert_chart_lden_title', titleFb: 'Lden vs the 65dB legal limit', dates: weekDates, labels, limit: XD_LDEN_LIMIT_DB,
+      series: [{ name: 'Lden', vals: ldenVals, color: XD_C.blue, est: ldenEst, fmt: f1, unit: ' dB' }] },
+    expo: { el: 'et-chart-expo', titleKey: 'expert_chart_expo_title', titleFb: 'Total exposure ≥70dB trend (minutes)', dates: weekDates, labels, zero: true,
+      series: [{ name: 'Expo ≥70dB', vals: expoVals, color: XD_C.amber, fmt: f1, unit: ' min' }] },
+    wind: { el: 'et-chart-wind', titleKey: 'expert_chart_wind_title', titleFb: 'Wind speed & dominant direction (km/h)', dates: weekDates, labels, zero: true, dirs: windDirVals,
+      series: [{ name: tE.expert_legend_wind || 'Wind avg', vals: windSpeedVals, color: XD_C.green, fmt: f1, unit: ' km/h' }] },
+  };
+  xdRenderCards();
+  xdBindOnce();
+}
+
+function xdHasData(cfg) { return cfg.series.some(s => s.vals.filter(v => v != null).length >= 1) && cfg.series.some(s => s.vals.some(v => v != null)); }
+
+function xdRenderCards() {
+  Object.entries(_xdCharts).forEach(([key, cfg]) => {
+    const box = document.getElementById(cfg.el);
+    if (!box) return;
+    const card = box.closest('.lva-chart-box');
+    if (!xdHasData(cfg)) {
+      box.innerHTML = `<div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.3);padding:30px 0;text-align:center;">${tEChart('expert_chart_pct_empty', 'Not enough consecutive days yet')}</div>`;
+      if (card) { card.classList.remove('xd-card'); card.removeAttribute('role'); card.removeAttribute('tabindex'); delete card.dataset.xd; }
+      return;
+    }
+    box.innerHTML = '<svg class="xd-svg" aria-hidden="true"></svg>';
+    if (card) {
+      card.classList.add('xd-card'); card.dataset.xd = key; card.setAttribute('role', 'button'); card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', tEChart('expert_enlarge', 'Enlarge') + ': ' + tEChart(cfg.titleKey, cfg.titleFb));
+      if (!card.querySelector('.xd-zoom')) card.insertAdjacentHTML('beforeend', '<span class="xd-zoom" aria-hidden="true"></span>');
+      card.querySelector('.xd-zoom').textContent = '⤢ ' + tEChart('expert_enlarge', 'Enlarge');
+    }
+    xdDraw(box.querySelector('svg'), cfg, false);
+  });
+  if (_xdOpen) xdRenderBig();
+}
+
+// Dessine un graphique dans un <svg> à sa taille réelle ; renvoie la position x
+// de chaque jour et le y de chaque série (pour la bulle de la vue agrandie).
+function xdDraw(svg, cfg, big) {
+  const W = svg.clientWidth || 600, H = svg.clientHeight || 150;
+  const pad = { l: big ? 52 : 34, r: big ? 22 : 14, t: big ? 26 : 18, b: big ? 34 : 22 };
+  const n = cfg.dates.length;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const all = cfg.series.flatMap(s => s.vals).filter(v => v != null);
+  let lo = Math.min(...all), hi = Math.max(...all);
+  if (cfg.limit != null) { lo = Math.min(lo, cfg.limit); hi = Math.max(hi, cfg.limit); }
+  if (cfg.zeroLine) { lo = Math.min(lo, 0); hi = Math.max(hi, 0); }
+  if (cfg.zero) lo = Math.min(lo, 0);
+  const span = (hi - lo) || 1;
+  const step = [0.5, 1, 2, 5, 10, 20, 50, 100].find(st => span / st <= 4) || 200;
+  lo = cfg.zero && lo >= 0 ? 0 : Math.floor((lo - span * 0.12) / step) * step;
+  hi = Math.ceil((hi + span * 0.2) / step) * step;
+  const X = (i) => pad.l + (n === 1 ? 0.5 : i / (n - 1)) * (W - pad.l - pad.r);
+  const Y = (v) => pad.t + (1 - (v - lo) / (hi - lo)) * (H - pad.t - pad.b);
+  const fs = big ? 11 : 9;
+  let s = '';
+  for (let v = lo; v <= hi + 1e-9; v += step) {
+    const t = Math.abs(step) < 1 ? v.toFixed(1) : Math.round(v);
+    s += `<line x1="${pad.l}" x2="${W - pad.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="${XD_C.grid}"/><text x="${pad.l - 7}" y="${Y(v) + 3.5}" text-anchor="end" fill="${XD_C.mute}" font-size="${fs}">${t}${cfg.zeroLine ? '%' : ''}</text>`;
+  }
+  if (cfg.zeroLine) s += `<line x1="${pad.l}" x2="${W - pad.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="rgba(240,237,232,.25)" stroke-dasharray="3 3"/>`;
+  if (cfg.limit != null) {
+    s += `<line x1="${pad.l}" x2="${W - pad.r}" y1="${Y(cfg.limit)}" y2="${Y(cfg.limit)}" stroke="${XD_C.red}" stroke-opacity=".7" stroke-dasharray="4 4"/>`;
+    s += `<text x="${W - pad.r}" y="${Y(cfg.limit) - 5}" text-anchor="end" fill="${XD_C.red}" font-size="${big ? 10 : 9}">${tEChart('expert_limit_short', '65 dB limit')}</text>`;
+  }
+  cfg.labels.forEach((l, i) => { s += `<text x="${X(i)}" y="${H - pad.b + (big ? 20 : 15)}" text-anchor="middle" fill="${XD_C.mute}" font-size="${fs}">${l}</text>`; });
+  const roomy = (W - pad.l - pad.r) / Math.max(1, n - 1) >= 38;
+  cfg.series.forEach(se => {
+    const pts = se.vals.map((v, i) => ({ v, i })).filter(p => p.v != null);
+    const estOf = (i) => !!(se.est && se.est[i]);
+    for (let k = 1; k < pts.length; k++) {
+      const a = pts[k - 1], b = pts[k];
+      if (b.i - a.i > 1) continue; // pas de trait par-dessus un jour sans valeur
+      const e = estOf(a.i) || estOf(b.i);
+      s += `<line x1="${X(a.i)}" y1="${Y(a.v)}" x2="${X(b.i)}" y2="${Y(b.v)}" stroke="${e ? XD_C.est : se.color}" stroke-width="${big ? 2 : 1.6}"${e ? ' stroke-dasharray="4 3"' : ''}/>`;
+    }
+    const vals = pts.map(p => p.v), vmin = Math.min(...vals), vmax = Math.max(...vals);
+    const iMax = pts.find(p => p.v === vmax)?.i, iMin = pts.find(p => p.v === vmin)?.i, iLast = pts.length ? pts[pts.length - 1].i : null;
+    pts.forEach(p => {
+      const e = estOf(p.i);
+      s += `<circle cx="${X(p.i)}" cy="${Y(p.v)}" r="${big ? 4 : 2.8}" fill="${e ? '#0d1117' : se.color}" stroke="${e ? XD_C.est : se.color}" stroke-width="1.4"/>`;
+      if (!(roomy || p.i === iMax || p.i === iMin || p.i === iLast)) return;
+      const px = X(p.i), anchor = px > W - pad.r - 24 ? 'end' : px < pad.l + 24 ? 'start' : 'middle';
+      const x = anchor === 'end' ? px + 4 : anchor === 'start' ? px - 4 : px;
+      s += `<text x="${x}" y="${se.below ? Y(p.v) + 15 : Y(p.v) - 8}" text-anchor="${anchor}" fill="${e ? XD_C.est : se.color}" font-size="${big ? 10.5 : 9}"${e ? ' font-style="italic"' : ''}>${se.fmt(p.v)}${e ? ' est.' : ''}</text>`;
+    });
+  });
+  if (cfg.dirs) {
+    const se = cfg.series[0];
+    se.vals.forEach((v, i) => { if (v != null && cfg.dirs[i]) s += `<text x="${X(i)}" y="${Y(v) + (big ? 18 : 14)}" text-anchor="middle" fill="rgba(34,197,94,.65)" font-size="${big ? 9.5 : 8}">${cfg.dirs[i]}</text>`; });
+  }
+  svg.innerHTML = s;
+  return cfg.dates.map((d, i) => ({ x: X(i), i, ys: cfg.series.map(se => se.vals[i] != null ? Y(se.vals[i]) : null) }));
+}
+
+function xdRenderBig() {
+  const cfg = _xdCharts[_xdOpen];
+  if (!cfg) return xdCloseBig();
+  const box = document.getElementById('xd-mbig');
+  box.innerHTML = '<svg role="img"></svg><div class="xd-tip" hidden></div>';
+  const svg = box.querySelector('svg'), tip = box.querySelector('.xd-tip');
+  svg.setAttribute('aria-label', tEChart(cfg.titleKey, cfg.titleFb));
+  const pos = xdDraw(svg, cfg, true);
+  document.getElementById('xd-mttl').innerHTML = `${tEChart(cfg.titleKey, cfg.titleFb)}<small>${cfg.labels[0]} → ${cfg.labels[cfg.labels.length - 1]}</small>`;
+  const legend = cfg.series.length > 1 || cfg.limit != null || (cfg.series[0].est && cfg.series[0].est.some(Boolean))
+    ? cfg.series.map(se => `<span class="xd-lg"><i style="border-color:${se.color}"></i>${se.name}</span>`).join('')
+      + ((cfg.series[0].est && cfg.series[0].est.some(Boolean)) ? `<span class="xd-lg"><i style="border-color:${XD_C.est};border-top-style:dashed"></i>${tEChart('est_chip', 'LF est.')}</span>` : '')
+      + (cfg.limit != null ? `<span class="xd-lg"><i style="border-color:${XD_C.red};border-top-style:dashed"></i>${tEChart('expert_limit_short', '65 dB limit')}</span>` : '')
+    : '';
+  document.getElementById('xd-mfoot').innerHTML = `<span>${legend}</span><span>${tEChart('expert_hover', 'Hover or tap a point for details')}</span>`;
+  const localeMap = { fr: 'fr-FR', pt: 'pt-PT', en: 'en-GB' };
+  const show = (clientX) => {
+    const r = svg.getBoundingClientRect(), x = clientX - r.left;
+    const best = pos.reduce((a, b) => (Math.abs(b.x - x) < Math.abs(a.x - x) ? b : a));
+    const i = best.i, ys = best.ys.filter(y => y != null);
+    if (!ys.length) { tip.hidden = true; return; }
+    const when = new Date(cfg.dates[i] + 'T12:00:00Z').toLocaleDateString(localeMap[_lang] || 'en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' });
+    let html = `<span style="color:${XD_C.mute}">${when}</span>`;
+    cfg.series.forEach(se => {
+      const v = se.vals[i]; if (v == null) return;
+      const e = se.est && se.est[i];
+      html += `<br>${cfg.series.length > 1 ? `<span style="color:${XD_C.mute}">${se.name} </span>` : ''}<b style="color:${e ? XD_C.est : se.color}">${se.fmt(v)}${se.unit}</b>${e ? `<span class="lva-est-chip">${tEChart('est_chip', 'LF est.')}</span>` : ''}`;
+      if (cfg.limit != null && v >= cfg.limit) html += `<br><span style="color:${XD_C.red}">+${(v - cfg.limit).toFixed(1)} ${tEChart('expert_over_limit', 'dB over the limit')}</span>`;
+    });
+    if (cfg.dirs && cfg.dirs[i]) html += '<br>' + tEChart('expert_wind_from', 'from {n}').replace('{n}', cfg.dirs[i]);
+    tip.innerHTML = html;
+    tip.hidden = false;
+    tip.style.left = Math.min(r.width - 80, Math.max(80, best.x)) + 'px';
+    tip.style.top = Math.min(...ys) + 'px';
+  };
+  svg.addEventListener('pointermove', (ev) => show(ev.clientX));
+  svg.addEventListener('pointerdown', (ev) => show(ev.clientX));
+  svg.addEventListener('pointerleave', (ev) => { if (ev.pointerType === 'mouse') tip.hidden = true; });
+}
+
+function xdOpenBig(key) {
+  if (!_xdCharts[key]) return;
+  _xdOpen = key;
+  _xdLastFocus = document.activeElement;
+  document.getElementById('xd-modal').hidden = false;
+  document.body.style.overflow = 'hidden';
+  xdRenderBig();
+  document.getElementById('xd-mclose').focus();
+}
+function xdCloseBig() {
+  if (!_xdOpen) return;
+  _xdOpen = null;
+  document.getElementById('xd-modal').hidden = true;
+  document.body.style.overflow = '';
+  if (_xdLastFocus) _xdLastFocus.focus();
+}
+
+// Écouteurs posés une seule fois (buildExpertMode est rappelée à chaque
+// changement de langue et à chaque rafraîchissement du Gist).
+function xdBindOnce() {
+  const grid = document.querySelector('.lva-charts');
+  if (!grid || grid.dataset.bound) return;
+  grid.dataset.bound = '1';
+  grid.addEventListener('click', (ev) => { const c = ev.target.closest('.xd-card'); if (c) xdOpenBig(c.dataset.xd); });
+  grid.addEventListener('keydown', (ev) => {
+    const c = ev.target.closest('.xd-card');
+    if (c && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); xdOpenBig(c.dataset.xd); }
+  });
+  document.getElementById('xd-mclose').addEventListener('click', xdCloseBig);
+  document.getElementById('xd-modal').addEventListener('click', (ev) => { if (ev.target.id === 'xd-modal') xdCloseBig(); });
+  document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') xdCloseBig(); });
+  // Redessine à la bonne largeur (section Expert ouverte après coup, rotation, fenêtre).
+  let lastW = 0;
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(() => {
+      const w = grid.clientWidth;
+      if (w && Math.abs(w - lastW) > 4) { lastW = w; xdRenderCards(); }
+    }).observe(grid);
   }
 }
 
@@ -2154,6 +2250,7 @@ const T = {
     expert_gap_copy:'A single loud pass barely moves a 24-hour Lden average — but it\'s very much part of the lived experience below the flight path. That\'s the point of showing both: <strong>Lden</strong> tells you what the regulator sees over a full day; <strong>peak + duration</strong> tells you what any single overflight actually sounded like.',
     expert_week_title:'Last 7 days · Lden', expert_th_date:'Date', expert_th_lden_day:'Day', expert_th_lden_eve:'Evening', expert_th_lden_night:'Night', expert_th_lden:'Lden', expert_th_peak:'Peak avg', expert_th_silent:'Planes under 70dB', expert_th_expo:'Expo ≥70dB', expert_th_temp:'Temp', expert_th_winddir:'Wind dir', expert_th_windspeed:'Wind',
     expert_chart_pct_title:'Day-over-day change · Lden & peak avg', expert_legend_lden:'Lden', expert_legend_limit:'65dB limit (Art. 11 RGR)', expert_legend_peakavg:'Peak avg', expert_chart_pct_empty:'Not enough consecutive days yet',
+    expert_enlarge:'Enlarge', expert_close:'Close · Esc', expert_hover:'Hover or tap a point for details', expert_limit_short:'65 dB limit', expert_over_limit:'dB over the limit', expert_wind_from:'from {n}',
     expert_chart_lden_title:'Lden vs the 65dB legal limit', expert_chart_expo_title:'Total exposure ≥70dB trend (minutes)',
     expert_chart_wind_title:'Wind speed & dominant direction (km/h)', expert_legend_wind:'Wind avg',
     expert_more_data_link:'More data & full history →',
@@ -2289,6 +2386,7 @@ const T = {
     expert_gap_copy:'Uma única passagem ruidosa dificilmente altera uma média Lden de 24 horas — mas faz muito parte da experiência vivida por quem está sob a rota de voo. É esse o objectivo de mostrar ambos: o <strong>Lden</strong> mostra o que o regulador vê ao longo de um dia inteiro; <strong>pico + duração</strong> mostra como soou realmente cada passagem individual.',
     expert_week_title:'Últimos 7 dias · Lden', expert_th_date:'Data', expert_th_lden_day:'Dia', expert_th_lden_eve:'Entardecer', expert_th_lden_night:'Noite', expert_th_lden:'Lden', expert_th_peak:'Pico médio', expert_th_silent:'Aviões abaixo de 70dB', expert_th_expo:'Expo ≥70dB', expert_th_temp:'Temp.', expert_th_winddir:'Direção', expert_th_windspeed:'Vento',
     expert_chart_pct_title:'Variação dia a dia · Lden e pico médio', expert_legend_lden:'Lden', expert_legend_limit:'limite de 65dB (Art. 11 RGR)', expert_legend_peakavg:'Pico médio', expert_chart_pct_empty:'Ainda sem dias consecutivos suficientes',
+    expert_enlarge:'Ampliar', expert_close:'Fechar · Esc', expert_hover:'Passe o rato ou toque num ponto para ver o detalhe', expert_limit_short:'limite 65 dB', expert_over_limit:'dB acima do limite', expert_wind_from:'vento de {n}',
     expert_chart_lden_title:'Lden vs o limite legal de 65dB', expert_chart_expo_title:'Tendência exposição total ≥70dB (minutos)',
     expert_chart_wind_title:'Velocidade e direcção dominante do vento (km/h)', expert_legend_wind:'Vento médio',
     expert_more_data_link:'Mais dados e histórico completo →',
@@ -2426,6 +2524,7 @@ const T = {
     expert_gap_copy:'Un seul passage bruyant fait à peine bouger une moyenne Lden sur 24h — mais ça fait bel et bien partie de l\'expérience vécue sous la trajectoire des avions. C\'est tout l\'intérêt de montrer les deux : le <strong>Lden</strong> montre ce que voit le régulateur sur une journée entière ; le <strong>pic + durée</strong> montre à quoi ressemblait vraiment un passage donné.',
     expert_week_title:'7 derniers jours · Lden', expert_th_date:'Date', expert_th_lden_day:'Jour', expert_th_lden_eve:'Soirée', expert_th_lden_night:'Nuit', expert_th_lden:'Lden', expert_th_peak:'Pic moyen', expert_th_silent:'Avions sous 70dB', expert_th_expo:'Expo ≥70dB', expert_th_temp:'Temp.', expert_th_winddir:'Direction', expert_th_windspeed:'Vent',
     expert_chart_pct_title:'Variation jour sur jour · Lden et pic moyen', expert_legend_lden:'Lden', expert_legend_limit:'limite de 65dB (Art. 11 RGR)', expert_legend_peakavg:'Pic moyen', expert_chart_pct_empty:'Pas encore assez de jours consécutifs',
+    expert_enlarge:'Agrandir', expert_close:'Fermer · Échap', expert_hover:'Survolez ou touchez un point pour le détail', expert_limit_short:'limite 65 dB', expert_over_limit:'dB au-dessus de la limite', expert_wind_from:'vent de {n}',
     expert_chart_lden_title:'Lden vs la limite légale de 65dB', expert_chart_expo_title:'Tendance exposition totale ≥70dB (minutes)',
     expert_chart_wind_title:'Vitesse et direction dominante du vent (km/h)', expert_legend_wind:'Vent moyen',
     expert_more_data_link:'Plus de données et historique complet →',
