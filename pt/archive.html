@@ -404,6 +404,31 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .mchart-2x2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .mchart-card{background:var(--dark3);border:1px solid var(--border);border-radius:4px;padding:16px 14px 12px;}
 .mchart-card .mchart-yaxis,.mchart-card .mchart-plot{height:150px;}
+/* Mode Expert (6 oct 2026) : cartes cliquables, SVG à la taille réelle, vue agrandie, bilan du mois */
+.xm-card{display:block;width:100%;text-align:left;color:inherit;font:inherit;cursor:zoom-in;position:relative;transition:border-color .2s;}
+.xm-card:hover{border-color:var(--border2);}
+.xm-card:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+.xm-zoom{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);opacity:.55;transition:opacity .2s;}
+.xm-card:hover .xm-zoom{opacity:1;}
+.xm-svg{display:block;width:100%;height:180px;}
+.xm-svg text,.xm-big svg text{font-family:var(--mono);}
+.xm-modal{position:fixed;inset:0;z-index:1000;background:rgba(3,4,7,.86);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px));}
+.xm-modal[hidden]{display:none;}
+.xm-box{background:var(--dark);border:1px solid var(--border2);border-radius:4px;width:min(1200px,100%);max-height:100%;display:flex;flex-direction:column;padding:18px 20px 14px;}
+.xm-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px;}
+.xm-ttl{font-family:var(--sans);font-weight:700;font-size:18px;color:var(--white);}
+.xm-ttl small{display:block;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.06em;color:rgba(240,237,232,.45);margin-top:3px;}
+.xm-big{position:relative;}
+.xm-big svg{display:block;width:100%;height:min(62vh,520px);}
+.xm-tip{position:absolute;pointer-events:none;background:var(--dark3);border:1px solid var(--border2);padding:8px 10px;font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--white);white-space:nowrap;transform:translate(-50%,calc(-100% - 12px));box-shadow:0 8px 24px rgba(0,0,0,.5);z-index:2;}
+.xm-tip[hidden]{display:none;}
+.xm-tip b{font-size:14px;font-weight:500;}
+.xm-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:rgba(240,237,232,.45);margin-top:6px;}
+.xm-lg{display:inline-flex;align-items:center;gap:6px;margin-right:14px;}
+.xm-lg i{display:inline-block;width:14px;border-top:2px solid;}
+.archive-table tfoot td{border-top:2px solid rgba(245,166,35,.6);border-bottom:none;padding-top:12px;font-weight:500;vertical-align:top;color:var(--white);}
+.archive-table tfoot small{display:block;font-size:8px;letter-spacing:.06em;color:rgba(240,237,232,.45);font-weight:400;margin-top:3px;white-space:normal;max-width:18ch;}
+@media(max-width:720px){.xm-box{padding:14px 12px 10px;}.xm-big svg{height:min(56vh,460px);}}
 @media(max-width:720px){.mchart-2x2{grid-template-columns:1fr;}}
 .mchart-point-label{position:absolute;transform:translate(-50%,calc(-100% - 6px));font-family:var(--mono);font-size:9px;font-variant-numeric:tabular-nums;white-space:nowrap;pointer-events:none;}
 .mchart-point-winddir{position:absolute;transform:translate(-50%,9px);font-family:var(--mono);font-size:8px;letter-spacing:.04em;color:rgba(34,197,94,.6);white-space:nowrap;pointer-events:none;}
@@ -784,11 +809,8 @@ table.archive-table{width:100%;border-collapse:collapse;}
 
     <div class="archive-table-wrap">
       <div class="archive-table-title">
-        <span data-i18n="av_expert_week_title">7-day table · Lden</span>
-        <div class="archive-gran-group" id="av-expert-week-nav">
-          <button class="archive-gran-btn" id="av-expert-week-prev" data-i18n="av_prev">← Previous</button>
-          <button class="archive-gran-btn" id="av-expert-week-next" data-i18n="av_next">Next →</button>
-        </div>
+        <span data-i18n="av_expert_month_title">Monthly table · Lden</span>
+        <div class="archive-gran-group" id="av-expert-months"></div>
       </div>
       <div class="archive-table-scroll"><table class="archive-table" id="av-expert-table"></table></div>
       <p class="lva-est-note" id="av-expert-estnote" hidden></p>
@@ -798,12 +820,20 @@ table.archive-table{width:100%;border-collapse:collapse;}
       <div class="archive-chart-title">
         <span data-i18n="av_expert_chart_title">Lden, peak, wind &amp; exposure over time</span>
         <div class="archive-gran-group" id="av-expert-gran">
-          <button class="archive-gran-btn" data-gran="daily" data-i18n="av_gran_day">Day</button>
-          <button class="archive-gran-btn active" data-gran="weekly" data-i18n="av_gran_week">Week</button>
+          <button class="archive-gran-btn active" data-gran="daily" data-i18n="av_gran_day">Day</button>
+          <button class="archive-gran-btn" data-gran="weekly" data-i18n="av_gran_week">Week</button>
           <button class="archive-gran-btn" data-gran="monthly" data-i18n="av_gran_month">Month</button>
         </div>
       </div>
       <div class="mchart-2x2" id="av-expert-multichart"></div>
+    </div>
+
+    <div class="xm-modal" id="av-expert-modal" hidden role="dialog" aria-modal="true" aria-labelledby="av-expert-mttl">
+      <div class="xm-box">
+        <div class="xm-top"><div class="xm-ttl" id="av-expert-mttl"></div><button type="button" class="archive-gran-btn" id="av-expert-mclose" data-i18n="av_expert_close">Close · Esc</button></div>
+        <div class="xm-big" id="av-expert-mbig"></div>
+        <div class="xm-foot" id="av-expert-mfoot"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1601,20 +1631,41 @@ function avRenderPollution() {
 }
 
 // ── Expert Mode (Lden / vent / exposition, historique complet) ──
-// Table paginée par fenêtres de 7 jours (offset=0 -> les 7 jours les plus
-// récents) et graphiques agrégés jour/semaine/mois — contrairement à la
-// version live de data.html (limitée à 7 jours glissants par le gist léger),
-// cette page lit tout l'historique via archiveData.lva_daily (cf. offline_stats).
-let _avExpertWeekOffset = 0;
+// 6 oct 2026 (demande Antonio, maquette validée) : tableau par MOIS (sélecteur +
+// ligne de bilan) au lieu de pages de 7 jours ; graphiques dessinés à la taille
+// réelle du cadre (texte jamais étiré, dates d'axe espacées au lieu de « 0… »
+// tronqués), libellés min / max / dernier seulement, clic = vue agrandie avec
+// bulle par point. Données : archiveData.lva_daily (offline_stats
+// lva_daily_series) : daily dès le 5 sept ; weekly/monthly = jours officiels,
+// Lden en moyenne énergétique, exposition en minutes par jour.
+let _avExpertMonth = null, _avExpertGran = 'daily', _avExpertOpen = null, _avExpertLastFocus = null;
+const AV_XC = { blue: '#60a5fa', amber: '#f5a623', green: '#22c55e', expo: '#ff6b6b', red: '#ef4444', est: '#c4b5fd', grid: 'rgba(240,237,232,.07)', mute: 'rgba(240,237,232,.45)' };
+const AV_LDEN_LIMIT_DB = 65;
+// Moyenne de décibels = moyenne des énergies (10^(L/10)), jamais des dB eux-mêmes.
+const avEnergyAvg = (a) => { a = a.filter(v => v != null); return a.length ? 10 * Math.log10(a.reduce((s, v) => s + Math.pow(10, v / 10), 0) / a.length) : null; };
+const avMean = (a) => { a = a.filter(v => v != null); return a.length ? a.reduce((s, v) => s + v, 0) / a.length : null; };
+const avModeOf = (a) => { const c = {}; a.filter(Boolean).forEach(v => { c[v] = (c[v] || 0) + 1; }); const top = Object.entries(c).sort((x, y) => y[1] - x[1])[0]; return top ? top[0] : null; };
+const avTpl = (s, n) => String(s).replace('{n}', n);
 
-function avRenderExpertTable(offset) {
+function avExpertMonthLabel(key) {
+  const localeMap = { fr: 'fr-FR', pt: 'pt-PT', en: 'en-GB' };
+  const [y, m] = key.split('-').map(Number);
+  // mois court + année séparément : pt-PT rendrait « 09/2026 » avec { month, year }
+  return new Date(y, m - 1, 1).toLocaleDateString(localeMap[_lang] || 'en-GB', { month: 'short' }).replace('.', '') + ' ' + y;
+}
+
+function avRenderExpertMonths() {
   const all = (archiveData.lva_daily && archiveData.lva_daily.daily) || [];
-  const end = all.length - offset * 7;
-  const start = Math.max(0, end - 7);
-  const shown = all.slice(start, end);
-  _avExpertWeekOffset = offset;
+  const keys = [...new Set(all.map(e => e.label.slice(0, 7)))];
+  if (!_avExpertMonth || !keys.includes(_avExpertMonth)) _avExpertMonth = keys[keys.length - 1] || null;
+  document.getElementById('av-expert-months').innerHTML = keys.map(k =>
+    `<button type="button" class="archive-gran-btn${k === _avExpertMonth ? ' active' : ''}" data-month="${k}">${avExpertMonthLabel(k)}</button>`).join('');
+}
 
-  const LDEN_LEGAL_LIMIT_DB = 65;
+function avRenderExpertTable() {
+  const all = (archiveData.lva_daily && archiveData.lva_daily.daily) || [];
+  const shown = all.filter(e => _avExpertMonth && e.label.startsWith(_avExpertMonth));
+
   const head = `<thead><tr>
     <th>${avT('av_expert_th_date', 'Date')}</th>
     <th>${avT('av_expert_th_lden_day', 'Day')}</th>
@@ -1630,7 +1681,7 @@ function avRenderExpertTable(offset) {
   </tr></thead>`;
 
   const rows = shown.slice().reverse().map(e => {
-    const ldenOverLimit = e.lden != null && e.lden >= LDEN_LEGAL_LIMIT_DB;
+    const ldenOverLimit = e.lden != null && e.lden >= AV_LDEN_LIMIT_DB;
     // 1er oct 2026 : jour sans Lden officiel = estimation LF (e.estimated, cf.
     // offline_stats lva_daily_series), couleur propre + pastille, jamais le bleu officiel.
     const ldenCells = e.estimated ? `
@@ -1653,124 +1704,229 @@ function avRenderExpertTable(offset) {
     </tr>`;
   }).join('');
 
-  document.getElementById('av-expert-table').innerHTML = head + `<tbody>${rows}</tbody>`;
+  // Ligne de bilan du mois : Lden et périodes = moyenne énergétique des jours
+  // OFFICIELS seulement (les estimations LF sont signalées, pas mélangées).
+  const off = shown.filter(e => !e.estimated), nEst = shown.length - off.length;
+  const L = avEnergyAvg(off.map(e => e.lden));
+  const expoDays = shown.filter(e => e.total_duration_over_70_s != null);
+  const expoS = expoDays.reduce((s, e) => s + e.total_duration_over_70_s, 0);
+  const quiet = shown.filter(e => e.n_flights_no_event != null);
+  const temp = avMean(shown.map(e => e.avg_temp_c)), wind = avMean(shown.map(e => e.avg_wind_kmh)), dir = avModeOf(shown.map(e => e.dominant_wind_dir));
+  const sm = (k, fb) => `<small>${avT(k, fb)}</small>`;
+  const foot = shown.length ? `<tfoot><tr>
+    <td>${avExpertMonthLabel(_avExpertMonth)}<small>${avTpl(avT('av_expert_sum_days', '{n} days'), shown.length)}</small></td>
+    <td style="color:var(--blue)">${avFmt1(avEnergyAvg(off.map(e => e.lden_day)))}</td>
+    <td style="color:var(--blue)">${avFmt1(avEnergyAvg(off.map(e => e.lden_eve)))}</td>
+    <td style="color:var(--blue)">${avFmt1(avEnergyAvg(off.map(e => e.lden_night)))}</td>
+    <td style="color:${L != null && L >= AV_LDEN_LIMIT_DB ? 'var(--red)' : 'var(--blue)'};font-weight:700">${avFmt1(L)}<small>${avTpl(avT('av_expert_sum_lden', 'energy avg · {n} official days'), off.length)}${nEst ? ' ' + avTpl(avT('av_expert_sum_est', '(+{n} est. excluded)'), nEst) : ''}</small></td>
+    <td style="color:var(--amber)">${avFmt1(avMean(shown.map(e => e.avg_peak_db)))}${sm('av_expert_sum_mean', 'mean')}</td>
+    <td style="color:var(--amber)">${quiet.length ? avFmt(quiet.reduce((s, e) => s + e.n_flights_no_event, 0)) : '—'}${sm('av_expert_sum_total', 'total')}</td>
+    <td style="color:var(--amber)">${expoDays.length ? (expoS / 3600).toFixed(1) + ' h' : '—'}<small>${expoDays.length ? (expoS / 60 / expoDays.length).toFixed(1) + ' ' + avT('av_expert_sum_perday', 'min/day') : ''}</small></td>
+    <td style="color:var(--green)">${temp != null ? avFmt1(temp) + '°C' : '—'}${sm('av_expert_sum_mean', 'mean')}</td>
+    <td style="color:var(--green)">${dir || '—'}${sm('av_expert_sum_mode', 'most frequent')}</td>
+    <td style="color:var(--green)">${wind != null ? avFmt1(wind) + ' km/h' : '—'}${sm('av_expert_sum_mean', 'mean')}</td>
+  </tr></tfoot>` : '';
+
+  document.getElementById('av-expert-table').innerHTML = head + `<tbody>${rows || avEmptyRow(11)}</tbody>` + foot;
   const avEstNote = document.getElementById('av-expert-estnote');
   if (avEstNote) {
-    const hasEst = shown.some(e => e.estimated);
-    avEstNote.innerHTML = hasEst ? avT('av_expert_est_note', '') : '';
-    avEstNote.hidden = !hasEst;
+    avEstNote.innerHTML = nEst ? avT('av_expert_est_note', '') + ' ' + avT('av_expert_est_month', '') : '';
+    avEstNote.hidden = !nEst;
   }
-  document.getElementById('av-expert-week-prev').disabled = start <= 0;
-  document.getElementById('av-expert-week-next').disabled = offset <= 0;
+}
+
+// ── Graphiques : une carte par métrique, SVG à la taille réelle ──
+const AV_XM = [
+  { key: 'lden', color: AV_XC.blue, lk: 'av_expert_legend_lden', lf: 'Lden (65dB limit dashed)', unit: ' dB', limit: AV_LDEN_LIMIT_DB },
+  { key: 'avg_peak_db', color: AV_XC.amber, lk: 'av_expert_legend_peak', lf: 'Peak avg', unit: ' dB' },
+  { key: 'avg_wind_kmh', color: AV_XC.green, lk: 'av_expert_legend_wind', lf: 'Wind avg (km/h)', unit: ' km/h', zero: true },
+  { key: 'expo', color: AV_XC.expo, lk: 'av_expert_legend_expo', lf: 'Exposure ≥70dB (min)', lkAgg: 'av_expert_legend_expo_day', lfAgg: 'Exposure ≥70dB (min/day)', unit: ' min', zero: true },
+];
+
+function avXmTitle(m) {
+  if (_avExpertGran === 'daily') return avT(m.lk, m.lf);
+  if (m.lkAgg) return avT(m.lkAgg, m.lfAgg);
+  return avT(m.lk, m.lf) + (m.key === 'lden' ? ' · ' + avT('av_expert_energy_avg', 'energy avg') : '');
+}
+
+function avExpertSeries() {
+  const src = (archiveData.lva_daily && archiveData.lva_daily[_avExpertGran]) || [];
+  return src.slice(-60).map(s => ({
+    label: s.label, x: avShortXLabel(s.label, _avExpertGran), est: !!s.estimated, dir: s.dominant_wind_dir || null, n: s.n_days || null,
+    v: { lden: s.lden, avg_peak_db: s.avg_peak_db, avg_wind_kmh: s.avg_wind_kmh, expo: s.total_duration_over_70_s != null ? s.total_duration_over_70_s / 60 : null },
+  }));
+}
+
+function avXmRange(vals, m) {
+  let lo = Math.min(...vals), hi = Math.max(...vals);
+  if (m.limit != null) { lo = Math.min(lo, m.limit); hi = Math.max(hi, m.limit); }
+  if (m.zero) lo = Math.min(lo, 0);
+  const span = (hi - lo) || 1;
+  const step = [1, 2, 5, 10, 20, 50, 100].find(s => span / s <= 5) || 200;
+  return { lo: m.zero && lo >= 0 ? 0 : Math.floor((lo - span * 0.08) / step) * step, hi: Math.ceil((hi + span * 0.15) / step) * step, step };
+}
+
+// Dessine une métrique dans un <svg> à sa taille réelle ; renvoie la position de
+// chaque point (pour la bulle de la vue agrandie).
+function avXmDraw(svg, data, m, big) {
+  const W = svg.clientWidth || 600, H = svg.clientHeight || 180;
+  const pad = { l: big ? 52 : 36, r: big ? 18 : 12, t: big ? 26 : 20, b: big ? 34 : 24 };
+  const pts = data.map((d, i) => ({ d, i, v: d.v[m.key] })).filter(p => p.v != null);
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  if (pts.length < 2) {
+    svg.innerHTML = `<text x="${W / 2}" y="${H / 2}" text-anchor="middle" fill="${AV_XC.mute}" font-size="10">${avT('av_expert_chart_empty', 'Not enough consecutive periods yet')}</text>`;
+    return [];
+  }
+  const { lo, hi, step } = avXmRange(pts.map(p => p.v), m);
+  const X = (i) => pad.l + (data.length === 1 ? 0.5 : i / (data.length - 1)) * (W - pad.l - pad.r);
+  const Y = (v) => pad.t + (1 - (v - lo) / (hi - lo)) * (H - pad.t - pad.b);
+  const fs = big ? 11 : 9;
+  let s = '';
+  for (let v = lo; v <= hi + 1e-9; v += step) {
+    s += `<line x1="${pad.l}" x2="${W - pad.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="${AV_XC.grid}"/><text x="${pad.l - 8}" y="${Y(v) + 3.5}" text-anchor="end" fill="${AV_XC.mute}" font-size="${fs}">${Math.round(v)}</text>`;
+  }
+  if (m.limit != null) {
+    s += `<line x1="${pad.l}" x2="${W - pad.r}" y1="${Y(m.limit)}" y2="${Y(m.limit)}" stroke="${AV_XC.red}" stroke-opacity=".7" stroke-dasharray="4 4"/>`;
+    if (big) s += `<text x="${W - pad.r}" y="${Y(m.limit) - 6}" text-anchor="end" fill="${AV_XC.red}" font-size="10">${avT('av_expert_limit', '65 dB limit')}</text>`;
+  }
+  // axe des dates : un libellé tous les N points selon la place, jamais tronqué
+  const every = Math.max(1, Math.ceil(data.length / Math.max(2, Math.floor((W - pad.l - pad.r) / (big ? 52 : 44)))));
+  const lastTick = Math.floor((data.length - 1) / every) * every;
+  data.forEach((d, i) => {
+    if (i % every === 0 || (i === data.length - 1 && i - lastTick >= every * 0.6)) {
+      s += `<text x="${X(i)}" y="${H - pad.b + (big ? 20 : 16)}" text-anchor="middle" fill="${AV_XC.mute}" font-size="${fs}">${d.x}</text>`;
+    }
+  });
+  // segments : pleins entre jours officiels, pointillés lavande autour d'une estimation LF
+  const estOf = (p) => p.d.est && m.key === 'lden';
+  for (let k = 1; k < pts.length; k++) {
+    const a = pts[k - 1], b = pts[k], e = estOf(a) || estOf(b);
+    s += `<line x1="${X(a.i)}" y1="${Y(a.v)}" x2="${X(b.i)}" y2="${Y(b.v)}" stroke="${e ? AV_XC.est : m.color}" stroke-width="${big ? 2 : 1.5}"${e ? ' stroke-dasharray="4 3"' : ''}/>`;
+  }
+  // libellés : tous dans la vue agrandie si la place le permet, sinon min / max / dernier
+  const vals = pts.map(p => p.v), vmin = Math.min(...vals), vmax = Math.max(...vals);
+  const showAll = big && (W - pad.l - pad.r) / pts.length >= 34;
+  const iMax = pts.find(p => p.v === vmax).i, iMin = pts.find(p => p.v === vmin).i, iLast = pts[pts.length - 1].i;
+  pts.forEach(p => {
+    const e = estOf(p);
+    s += `<circle cx="${X(p.i)}" cy="${Y(p.v)}" r="${big ? 4 : 2.6}" fill="${e ? '#0d1117' : m.color}" stroke="${e ? AV_XC.est : m.color}" stroke-width="1.4"/>`;
+    if (!(showAll || p.i === iMax || p.i === iMin || p.i === iLast)) return;
+    const below = !showAll && p.i === iMin && p.i !== iMax;
+    const tag = showAll ? '' : (p.i === iMax ? 'max ' : p.i === iMin ? 'min ' : '');
+    // près des bords : texte aligné à droite / à gauche pour ne pas sortir du cadre
+    const px = X(p.i), anchor = px > W - pad.r - 24 ? 'end' : px < pad.l + 24 ? 'start' : 'middle';
+    const x = anchor === 'end' ? px + 4 : anchor === 'start' ? px - 4 : px;
+    s += `<text x="${x}" y="${below ? Y(p.v) + 15 : Y(p.v) - 8}" text-anchor="${anchor}" fill="${e ? AV_XC.est : m.color}" font-size="${big ? 10.5 : 9.5}"${e ? ' font-style="italic"' : ''}>${tag}${avFmt1(p.v)}${e ? ' est.' : ''}</text>`;
+  });
+  svg.innerHTML = s;
+  return pts.map(p => ({ x: X(p.i), y: Y(p.v), p }));
 }
 
 function avRenderExpertCharts(gran) {
-  // Vue Jour : les estimations LF (s.estimated) apparaissent sur le Lden en points
-  // creux lavande + pointillés ; Semaine/Mois = moyennes de jours officiels seulement.
-  const series = (archiveData.lva_daily && archiveData.lva_daily[gran]) || [];
-  const shown = series.slice(-60);
-  const n = shown.length;
-  const xStep = Math.max(1, Math.round(n / 6));
-  const LDEN_LEGAL_LIMIT_DB = 65;
+  if (gran) _avExpertGran = gran;
+  const data = avExpertSeries();
+  const box = document.getElementById('av-expert-multichart');
+  box.innerHTML = AV_XM.map((m, k) => `<button type="button" class="mchart-card xm-card" data-xm="${k}" aria-label="${avAttr(avT('av_expert_enlarge', 'Enlarge') + ': ' + avXmTitle(m))}">
+      <span class="mchart-panel-label"><span class="legend-dot" style="background:${m.color};border-radius:50%;"></span><span>${avXmTitle(m)}</span></span>
+      <span class="xm-zoom" aria-hidden="true">⤢ ${avT('av_expert_enlarge', 'Enlarge')}</span>
+      <svg class="xm-svg" aria-hidden="true"></svg>
+    </button>`).join('');
+  box.querySelectorAll('.xm-svg').forEach((svg, k) => avXmDraw(svg, data, AV_XM[k], false));
+  if (_avExpertOpen != null) avRenderExpertBig();
+}
 
-  // Une card par métrique (grille 2x2) — chacune avec sa propre échelle Y et son
-  // propre axe X, plutôt que 4 lignes empilées de 64px partageant un seul axe
-  // (une variation de 40min d'exposition et une variation de 3dB de Lden étaient
-  // dessinées à la même hauteur visuelle). Cf. mockup validé le 15 sept 2026.
-  // Étiquettes par point (valeur, + direction du vent pour la carte Wind) en
-  // <span> HTML positionnés en % par-dessus le plot, pas en <text> SVG — le
-  // SVG de ce chart utilise preserveAspectRatio="none" (0-100 étiré pour
-  // remplir la largeur dispo), ce qui déformerait tout texte dessiné dedans.
-  // Même rendu que data.html (buildWeekCharts), demandé par Antonio le 16 sept.
-  const cardPanel = (vals, ticks, color, labelKey, labelFallback, extraSvg, fmt, windDirs, estFlags) => {
-    fmt = fmt || ((v) => avFmt1(v));
-    const ownXAxis = `<div class="mchart-xaxis">${shown.map((s, i) => `<span>${(i % xStep === 0 || i === n - 1) ? avShortXLabel(s.label, gran) : ''}</span>`).join('')}</div>`;
-    if (vals.filter(v => v != null).length < 2) {
-      return `<div class="mchart-card">
-        <div class="mchart-panel-label"><div class="legend-dot" style="background:${color};border-radius:50%;"></div><span>${avT(labelKey, labelFallback)}</span></div>
-        <div style="font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.3);padding:20px 0;text-align:center;">${avT('av_expert_chart_empty', 'Not enough consecutive periods yet')}</div>
-      </div>`;
-    }
-    const lo = ticks.ticks[0], hi = ticks.ticks[ticks.ticks.length - 1], range = (hi - lo) || 1;
-    const points = vals.map((v, i) => v == null ? null : [(i + 0.5) / n * 100, 100 - (v - lo) / range * 100]);
-    const hasEst = !!(estFlags && estFlags.some(Boolean));
-    let svgLines;
-    if (hasEst) {
-      // segment par paire : plein si les deux jours sont officiels, pointillés lavande sinon
-      let segs = '';
-      for (let i = 1; i < points.length; i++) {
-        if (!points[i - 1] || !points[i]) continue;
-        const e = estFlags[i - 1] || estFlags[i];
-        segs += `<polyline points="${points[i - 1].join(',')} ${points[i].join(',')}" fill="none" stroke="${e ? '#c4b5fd' : color}" stroke-width="1.5"${e ? ' stroke-dasharray="4,4"' : ''} vector-effect="non-scaling-stroke"/>`;
-      }
-      svgLines = segs + points.map((p, i) => !p ? '' : (estFlags[i]
-        ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.6" fill="#0f141b" stroke="#c4b5fd" stroke-width="1.2" vector-effect="non-scaling-stroke"/>`
-        : `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="${color}"/>`)).join('');
-    } else {
-      const segments = [];
-      let current = [];
-      points.forEach(p => { if (p) current.push(p); else { if (current.length > 1) segments.push(current); current = []; } });
-      if (current.length > 1) segments.push(current);
-      svgLines = segments.map(seg => `<polyline points="${seg.map(p => p.join(',')).join(' ')}" fill="none" stroke="${color}" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('')
-        + points.map(p => p ? `<circle cx="${p[0]}" cy="${p[1]}" r="1.3" fill="${color}"/>` : '').join('');
-    }
-    const valueLabels = points.map((p, i) => p ? `<span class="mchart-point-label" style="left:${p[0]}%;bottom:${100 - p[1]}%;color:${hasEst && estFlags[i] ? '#c4b5fd' : color}${hasEst && estFlags[i] ? ';font-style:italic' : ''}">${fmt(vals[i])}${hasEst && estFlags[i] ? ' est.' : ''}</span>` : '').join('');
-    const windDirLabels = windDirs ? points.map((p, i) => (p && windDirs[i]) ? `<span class="mchart-point-winddir" style="left:${p[0]}%;bottom:${100 - p[1]}%;">${windDirs[i]}</span>` : '').join('') : '';
-    return `<div class="mchart-card">
-      <div class="mchart-panel-label"><div class="legend-dot" style="background:${color};border-radius:50%;"></div><span>${avT(labelKey, labelFallback)}</span></div>
-      <div class="mchart-panel-body">
-        <div class="mchart-yaxis">${avYAxisHtml(ticks.ticks, (v) => Math.round(v))}</div>
-        <div class="mchart-plot">
-          ${avGridlinesHtml(ticks.ticks)}
-          <svg class="mchart-line-svg" preserveAspectRatio="none" viewBox="0 0 100 100">${svgLines}${extraSvg ? extraSvg(lo, range) : ''}</svg>
-          ${valueLabels}${windDirLabels}
-        </div>
-      </div>
-      ${ownXAxis}
-    </div>`;
+// ── Vue agrandie (clic sur une carte) ──
+function avRenderExpertBig() {
+  const m = AV_XM[_avExpertOpen], data = avExpertSeries(), box = document.getElementById('av-expert-mbig');
+  const localeMap = { fr: 'fr-FR', pt: 'pt-PT', en: 'en-GB' };
+  box.innerHTML = `<svg role="img" aria-label="${avAttr(avXmTitle(m))}"></svg><div class="xm-tip" hidden></div>`;
+  const svg = box.querySelector('svg'), tip = box.querySelector('.xm-tip');
+  const pos = avXmDraw(svg, data, m, true);
+  const granKey = { daily: 'av_gran_day', weekly: 'av_gran_week', monthly: 'av_gran_month' }[_avExpertGran];
+  document.getElementById('av-expert-mttl').innerHTML = `${avXmTitle(m)}<small>${avT(granKey, '')}${data.length ? ' · ' + data[0].x + ' → ' + data[data.length - 1].x : ''}</small>`;
+  const legend = m.key === 'lden'
+    ? `<span class="xm-lg"><i style="border-color:${AV_XC.blue}"></i>${avT('av_expert_official', 'official')}</span>${_avExpertGran === 'daily' ? `<span class="xm-lg"><i style="border-color:${AV_XC.est};border-top-style:dashed"></i>${avT('av_expert_lf_estimate', 'LF estimate')}</span>` : ''}<span class="xm-lg"><i style="border-color:${AV_XC.red};border-top-style:dashed"></i>${avT('av_expert_limit', '65 dB limit')}</span>`
+    : '';
+  document.getElementById('av-expert-mfoot').innerHTML = `<span>${legend}</span><span>${avT('av_expert_hover', 'Hover or tap a point for details')}</span>`;
+  if (!pos.length) return;
+  const show = (clientX) => {
+    const r = svg.getBoundingClientRect(), x = clientX - r.left;
+    const best = pos.reduce((a, b) => (Math.abs(b.x - x) < Math.abs(a.x - x) ? b : a));
+    const d = best.p.d, v = best.p.v, e = d.est && m.key === 'lden';
+    const when = _avExpertGran === 'daily'
+      ? new Date(d.label + 'T12:00:00Z').toLocaleDateString(localeMap[_lang] || 'en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' })
+      : d.x + (d.n ? ' · ' + avTpl(avT('av_expert_avg_days', 'average of {n} official days'), d.n) : '');
+    tip.innerHTML = `<span style="color:${AV_XC.mute}">${when}</span><br><b style="color:${e ? AV_XC.est : m.color}">${avFmt1(v)}${m.unit}</b>${e ? `<span class="lva-est-chip">${avT('av_expert_est_chip', 'LF est.')}</span>` : ''}`
+      + (m.key === 'lden' && v >= AV_LDEN_LIMIT_DB ? `<br><span style="color:${AV_XC.red}">+${(v - AV_LDEN_LIMIT_DB).toFixed(1)} ${avT('av_expert_over_limit', 'dB over the limit')}</span>` : '')
+      + (m.key === 'avg_wind_kmh' && d.dir ? '<br>' + avTpl(avT('av_expert_wind_from', 'from {n}'), d.dir) : '');
+    tip.hidden = false;
+    tip.style.left = Math.min(r.width - 80, Math.max(80, best.x)) + 'px';
+    tip.style.top = best.y + 'px';
   };
+  svg.addEventListener('pointermove', (ev) => show(ev.clientX));
+  svg.addEventListener('pointerdown', (ev) => show(ev.clientX));
+  svg.addEventListener('pointerleave', (ev) => { if (ev.pointerType === 'mouse') tip.hidden = true; });
+}
 
-  const ldenVals = shown.map(s => s.lden);
-  const ldenTicks = avAxisTicks(ldenVals, false);
-  const limitLine = (lo, range) => {
-    const y = 100 - (LDEN_LEGAL_LIMIT_DB - lo) / range * 100;
-    return `<line x1="0" x2="100" y1="${y}" y2="${y}" stroke="var(--red)" stroke-width="0.6" stroke-dasharray="2,2" opacity=".7" vector-effect="non-scaling-stroke"/>`;
-  };
-  const ldenHtml = cardPanel(ldenVals, ldenTicks, 'var(--blue)', 'av_expert_legend_lden', 'Lden (65dB limit dashed)', limitLine, null, null, shown.map(s => !!s.estimated));
-  const peakHtml = cardPanel(shown.map(s => s.avg_peak_db), avAxisTicks(shown.map(s => s.avg_peak_db), false), 'var(--amber)', 'av_expert_legend_peak', 'Peak avg');
-  const windDirs = shown.map(s => s.dominant_wind_dir || null);
-  const windHtml = cardPanel(shown.map(s => s.avg_wind_kmh), avAxisTicks(shown.map(s => s.avg_wind_kmh), true), 'var(--green)', 'av_expert_legend_wind', 'Wind avg (km/h)', null, null, windDirs);
-  const expoValsMin = shown.map(s => s.total_duration_over_70_s != null ? s.total_duration_over_70_s / 60 : null);
-  const expoHtml = cardPanel(expoValsMin, avAxisTicks(expoValsMin, true), '#ff6b6b', 'av_expert_legend_expo', 'Exposure ≥70dB (min)');
-
-  document.getElementById('av-expert-multichart').innerHTML = ldenHtml + peakHtml + windHtml + expoHtml;
+function avOpenExpertBig(k) {
+  _avExpertOpen = k;
+  _avExpertLastFocus = document.activeElement;
+  document.getElementById('av-expert-modal').hidden = false;
+  document.body.style.overflow = 'hidden';
+  avRenderExpertBig();
+  document.getElementById('av-expert-mclose').focus();
+}
+function avCloseExpertBig() {
+  if (_avExpertOpen == null) return;
+  _avExpertOpen = null;
+  document.getElementById('av-expert-modal').hidden = true;
+  document.body.style.overflow = '';
+  if (_avExpertLastFocus) _avExpertLastFocus.focus();
 }
 
 function avRenderExpertMode() {
   if (!archiveData.lva_daily) return;
-  avRenderExpertTable(0);
-  avRenderExpertCharts('weekly');
+  avRenderExpertMonths();
+  avRenderExpertTable();
+  document.querySelectorAll('#av-expert-gran .archive-gran-btn').forEach(b => b.classList.toggle('active', b.dataset.gran === _avExpertGran));
+  avRenderExpertCharts();
 
-  document.querySelectorAll('#av-expert-gran .archive-gran-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#av-expert-gran .archive-gran-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      avRenderExpertCharts(btn.dataset.gran);
+  // Liaisons uniques (dataset.bound) : avRenderExpertMode est rappelée à chaque
+  // changement de langue, il ne faut pas empiler les écouteurs.
+  const gran = document.getElementById('av-expert-gran');
+  if (!gran.dataset.bound) {
+    gran.dataset.bound = '1';
+    gran.addEventListener('click', (ev) => {
+      const b = ev.target.closest('.archive-gran-btn'); if (!b) return;
+      gran.querySelectorAll('.archive-gran-btn').forEach(x => x.classList.toggle('active', x === b));
+      avRenderExpertCharts(b.dataset.gran);
     });
-  });
-
-  // Boutons Previous/Next : liaison unique (dataset.bound), sinon un ré-appel
-  // de avRenderExpertMode (changement de langue) empilerait les listeners et
-  // ferait sauter l'offset de 2+ en 1 clic au lieu de 1.
-  const prevBtn = document.getElementById('av-expert-week-prev');
-  const nextBtn = document.getElementById('av-expert-week-next');
-  if (!prevBtn.dataset.bound) {
-    prevBtn.dataset.bound = '1';
-    prevBtn.addEventListener('click', () => avRenderExpertTable(_avExpertWeekOffset + 1));
   }
-  if (!nextBtn.dataset.bound) {
-    nextBtn.dataset.bound = '1';
-    nextBtn.addEventListener('click', () => avRenderExpertTable(Math.max(0, _avExpertWeekOffset - 1)));
+  const months = document.getElementById('av-expert-months');
+  if (!months.dataset.bound) {
+    months.dataset.bound = '1';
+    months.addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-month]'); if (!b) return;
+      _avExpertMonth = b.dataset.month;
+      avRenderExpertMonths();
+      avRenderExpertTable();
+    });
+  }
+  const cards = document.getElementById('av-expert-multichart');
+  if (!cards.dataset.bound) {
+    cards.dataset.bound = '1';
+    cards.addEventListener('click', (ev) => { const c = ev.target.closest('.xm-card'); if (c) avOpenExpertBig(Number(c.dataset.xm)); });
+    document.getElementById('av-expert-mclose').addEventListener('click', avCloseExpertBig);
+    document.getElementById('av-expert-modal').addEventListener('click', (ev) => { if (ev.target.id === 'av-expert-modal') avCloseExpertBig(); });
+    document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') avCloseExpertBig(); });
+    // Redessine à la bonne largeur : onglet Expert affiché après coup, rotation, fenêtre redimensionnée.
+    let lastW = 0;
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(() => {
+        const w = cards.clientWidth;
+        if (w && Math.abs(w - lastW) > 4) { lastW = w; avRenderExpertCharts(); }
+      }).observe(cards);
+    }
   }
 }
 
@@ -1946,6 +2102,7 @@ const T = {
     av_expert_intro:'Full history of the station\'s regulatory noise metric (Lden, EU/Portugal standard) and wind trend. "Peak avg" below is the average peak dB per flight for that day — for today\'s live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.',
     av_expert_week_title:'7-day table · Lden', av_expert_chart_title:'Lden, peak, wind & exposure over time',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Day', av_expert_th_lden_eve:'Evening', av_expert_th_lden_night:'Night', av_expert_th_lden:'Lden', av_expert_th_peak:'Peak avg', av_expert_th_silent:'Planes under 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp', av_expert_th_winddir:'Wind dir', av_expert_th_windspeed:'Wind',
+    av_expert_month_title:'Monthly table · Lden', av_expert_sum_days:'{n} days', av_expert_sum_lden:'energy avg · {n} official days', av_expert_sum_est:'(+{n} est. excluded)', av_expert_sum_mean:'mean', av_expert_sum_total:'total', av_expert_sum_perday:'min/day', av_expert_sum_mode:'most frequent', av_expert_est_month:'Estimated days are not included in the monthly Lden.', av_expert_enlarge:'Enlarge', av_expert_close:'Close · Esc', av_expert_hover:'Hover or tap a point for details', av_expert_official:'official', av_expert_lf_estimate:'LF estimate', av_expert_limit:'65 dB limit', av_expert_over_limit:'dB over the limit', av_expert_wind_from:'from {n}', av_expert_energy_avg:'energy avg', av_expert_legend_expo_day:'Exposure ≥70dB (min/day)', av_expert_avg_days:'average of {n} official days',
     av_expert_legend_lden:'Lden (65dB limit dashed)', av_expert_legend_peak:'Peak avg', av_expert_legend_wind:'Wind avg (km/h)', av_expert_legend_expo:'Exposure ≥70dB (min)', av_expert_chart_empty:'Not enough consecutive periods yet', av_expert_est_chip:'LF est.', av_expert_est_tip:'No official SensorGrid value for this day yet. Lisbon Finals estimate (day and night Leq, no evening period), computed by the station. Usually 0.5 to 1 dB below the official value. Replaced automatically when the official value arrives.', av_expert_est_note:'<b>LF est.</b>: when the official Lden is not available, we show our own calculation (day and night Leq, without the evening period). On days where both exist, our estimate is usually 0.5 to 1 dB below the official value. It is replaced automatically once the official value arrives.',
     av_pic_open:'Open full resolution', av_gallery_badge:'gallery', av_instagram_badge:'instagram', av_no_photos:'No photos available for this selection.', av_expand_photos:'Best photos',
     av_freshness_note:'<b>Snapshot, not live.</b> This archive is republished periodically from the station\'s full database — not streamed in real time like the counters on Data — so totals here can lag the live ticker by a few hours or days. The photo galleries go further too, including shots never posted to Instagram.',
@@ -2084,6 +2241,7 @@ const T = {
     av_expert_intro:'Histórico completo da métrica regulamentar de ruído da estação (Lden, norma UE/Portugal) e da tendência do vento. "Pico médio" abaixo é o pico médio em dB por voo nesse dia — para os valores em directo de hoje e a metodologia, ver <a href="data.html#expert-mode" class="av-link">Dados → Modo Perito</a>.',
     av_expert_week_title:'Tabela de 7 dias · Lden', av_expert_chart_title:'Lden, pico, vento e exposição ao longo do tempo',
     av_expert_th_date:'Data', av_expert_th_lden_day:'Dia', av_expert_th_lden_eve:'Entardecer', av_expert_th_lden_night:'Noite', av_expert_th_lden:'Lden', av_expert_th_peak:'Pico médio', av_expert_th_silent:'Aviões abaixo de 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direcção', av_expert_th_windspeed:'Vento',
+    av_expert_month_title:'Tabela mensal · Lden', av_expert_sum_days:'{n} dias', av_expert_sum_lden:'média energética · {n} dias oficiais', av_expert_sum_est:'(+{n} estim. excluídos)', av_expert_sum_mean:'média', av_expert_sum_total:'total', av_expert_sum_perday:'min/dia', av_expert_sum_mode:'mais frequente', av_expert_est_month:'Os dias estimados não entram no Lden do mês.', av_expert_enlarge:'Ampliar', av_expert_close:'Fechar · Esc', av_expert_hover:'Passe o rato ou toque num ponto para ver o detalhe', av_expert_official:'oficial', av_expert_lf_estimate:'estimativa LF', av_expert_limit:'limite 65 dB', av_expert_over_limit:'dB acima do limite', av_expert_wind_from:'vento de {n}', av_expert_energy_avg:'média energética', av_expert_legend_expo_day:'Exposição ≥70dB (min/dia)', av_expert_avg_days:'média de {n} dias oficiais',
     av_expert_legend_lden:'Lden (limite 65dB tracejado)', av_expert_legend_peak:'Pico médio', av_expert_legend_wind:'Vento médio (km/h)', av_expert_legend_expo:'Exposição ≥70dB (min)', av_expert_chart_empty:'Ainda sem períodos consecutivos suficientes', av_expert_est_chip:'estim. LF', av_expert_est_tip:'Ainda sem valor oficial SensorGrid para este dia. Estimativa Lisbon Finals (Leq de dia e de noite, sem período de entardecer), calculada pela estação. Em geral 0,5 a 1 dB abaixo do valor oficial. Substituída automaticamente quando o valor oficial chegar.', av_expert_est_note:'<b>Estim. LF</b>: quando o Lden oficial não está disponível, mostramos o nosso próprio cálculo (Leq de dia e de noite, sem o período de entardecer). Nos dias em que existem os dois, a nossa estimativa fica em geral 0,5 a 1 dB abaixo do valor oficial. É substituída automaticamente quando o valor oficial chegar.',
     av_pic_open:'Abrir em resolução total', av_gallery_badge:'galeria', av_instagram_badge:'instagram', av_no_photos:'Nenhuma foto disponível para esta selecção.', av_expand_photos:'Melhores fotos',
     av_freshness_note:'<b>Instantâneo, não em directo.</b> Este arquivo é republicado periodicamente a partir da base de dados completa da estação. Ao contrário dos contadores da página Dados, não é actualizado em tempo real: os totais podem, por isso, ter algumas horas ou alguns dias de atraso. As galerias de fotos são também mais completas e incluem imagens nunca publicadas no Instagram.',
@@ -2222,6 +2380,7 @@ const T = {
     av_expert_intro:'Historique complet de la métrique réglementaire de bruit de la station (Lden, norme UE/Portugal) et de la tendance du vent. « Pic moyen » ci-dessous est le pic moyen en dB par vol ce jour-là — pour les chiffres en direct d\'aujourd\'hui et la méthodologie, voir <a href="data.html#expert-mode" class="av-link">Données → Mode Expert</a>.',
     av_expert_week_title:'Tableau 7 jours · Lden', av_expert_chart_title:'Lden, pic, vent et exposition dans le temps',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Jour', av_expert_th_lden_eve:'Soirée', av_expert_th_lden_night:'Nuit', av_expert_th_lden:'Lden', av_expert_th_peak:'Pic moyen', av_expert_th_silent:'Avions sous 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direction', av_expert_th_windspeed:'Vent',
+    av_expert_month_title:'Tableau mensuel · Lden', av_expert_sum_days:'{n} jours', av_expert_sum_lden:'moy. énergétique · {n} j officiels', av_expert_sum_est:'(+{n} estim. exclus)', av_expert_sum_mean:'moyenne', av_expert_sum_total:'total', av_expert_sum_perday:'min/jour', av_expert_sum_mode:'la plus fréquente', av_expert_est_month:'Les jours estimés ne comptent pas dans le Lden du mois.', av_expert_enlarge:'Agrandir', av_expert_close:'Fermer · Échap', av_expert_hover:'Survolez ou touchez un point pour le détail', av_expert_official:'officiel', av_expert_lf_estimate:'estimation LF', av_expert_limit:'limite 65 dB', av_expert_over_limit:'dB au-dessus de la limite', av_expert_wind_from:'vent de {n}', av_expert_energy_avg:'moy. énergétique', av_expert_legend_expo_day:'Exposition ≥70dB (min/jour)', av_expert_avg_days:'moyenne de {n} jours officiels',
     av_expert_legend_lden:'Lden (limite 65dB en pointillés)', av_expert_legend_peak:'Pic moyen', av_expert_legend_wind:'Vent moyen (km/h)', av_expert_legend_expo:'Exposition ≥70dB (min)', av_expert_chart_empty:'Pas encore assez de périodes consécutives', av_expert_est_chip:'estim. LF', av_expert_est_tip:'Pas encore de valeur officielle SensorGrid pour ce jour. Estimation Lisbon Finals (Leq jour et nuit, sans période soirée), calculée par la station. En général 0,5 à 1 dB sous la valeur officielle. Remplacée automatiquement dès que l\'officiel arrive.', av_expert_est_note:'<b>Estim. LF</b> : quand le Lden officiel n\'est pas disponible, nous affichons notre propre calcul (Leq jour et nuit, sans la période soirée). Sur les jours où les deux existent, notre estimation est en général 0,5 à 1 dB sous la valeur officielle. Elle est remplacée automatiquement dès que l\'officiel arrive.',
     av_pic_open:'Ouvrir en pleine résolution', av_gallery_badge:'galerie', av_instagram_badge:'instagram', av_no_photos:'Aucune photo disponible pour cette sélection.', av_expand_photos:'Meilleures photos',
     av_freshness_note:'<b>Instantané, pas en direct.</b> Ces archives sont republiées périodiquement depuis la base de données complète de la station. Contrairement aux compteurs de la page Data, elles ne sont pas diffusées en temps réel : les totaux peuvent donc accuser quelques heures ou quelques jours de retard. Les galeries photo sont aussi plus complètes et comprennent des clichés jamais publiés sur Instagram.',
