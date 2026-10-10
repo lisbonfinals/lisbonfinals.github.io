@@ -561,6 +561,18 @@ main{padding-top:96px;}
       <div class="schema-item"><div class="schema-k">pressure_hpa, pressure_msl_hpa</div><div class="schema-v" data-i18n="sch_w_press"></div></div>
       <div class="schema-item"><div class="schema-k">precipitation_mm, cloud_cover_pct</div><div class="schema-v" data-i18n="sch_w_rain"></div></div>
     </div></details>
+    <div class="rx-kick" style="margin-top:40px;color:#c084fc" data-i18n="pm_h"></div>
+    <p class="section-desc" data-i18n="pm_desc"></p>
+    <div class="res-note" data-i18n="pm_warn"></div>
+    <div class="rx-files" id="res-pm-list"></div>
+    <details class="rx-dict"><summary data-i18n="dict_toggle"></summary>
+    <div class="schema-list">
+      <div class="schema-item"><div class="schema-k">date, timestamp</div><div class="schema-v" data-i18n="sch_pm_time"></div></div>
+      <div class="schema-item"><div class="schema-k">pm1, pm25, pm10</div><div class="schema-v" data-i18n="sch_pm_atm"></div></div>
+      <div class="schema-item"><div class="schema-k">pm1_std, pm25_std, pm10_std</div><div class="schema-v" data-i18n="sch_pm_std"></div></div>
+      <div class="schema-item"><div class="schema-k">p03, p05, p10, p25, p50, p100</div><div class="schema-v" data-i18n="sch_pm_counts"></div></div>
+      <div class="schema-item"><div class="schema-k">n_frames</div><div class="schema-v" data-i18n="sch_pm_n"></div></div>
+    </div></details>
   </section>
 
   </div>
@@ -655,6 +667,15 @@ const T = {
     sch_w_temp:'Air temperature at 2 m (°C) and relative humidity (%).',
     sch_w_press:'Surface pressure at the model cell elevation (106 m) and pressure reduced to mean sea level, in hPa. The sea-level value is the one to use to correct barometric aircraft altitudes.',
     sch_w_rain:'Precipitation over the preceding interval (mm) and total cloud cover (%).',
+    pm_h:'Fine particles (PMS5003 sensor)',
+    pm_desc:'PM1, PM2.5 and PM10 measured on the terrace, averaged per minute, since 10 October 2026. An ambient measurement: it cannot be tied to an individual aircraft, which is why it is not in the flight files.',
+    pm_warn:'Known issue: since 30 September 2026 the sensor often reads 0 to 1 µg/m³ while the CAMS model gives 5 to 13 µg/m³ for Lisbon, with unusually low particle counts. Reduced airflow or a sensor fault is suspected and is being checked. Until this note changes, treat these values as unreliable.',
+    minutes_word:'minutes',
+    sch_pm_time:'Local date of the file and start of the minute as Unix time (UTC).',
+    sch_pm_atm:'Mass concentrations in µg/m³, "atmospheric environment" values from the sensor (the ones shown on the website).',
+    sch_pm_std:'Same concentrations, "standard particle" (CF=1) values from the sensor.',
+    sch_pm_counts:'Number of particles per 0.1 litre of air larger than 0.3, 0.5, 1, 2.5, 5 and 10 µm. Useful to check the sensor itself.',
+    sch_pm_n:'Number of sensor readings averaged in that minute (normally about 60).',
     g_flights:'flights measured',
     g_flights_sub:'one row each, since 1 May 2026',
     g_readings:'1-second readings',
@@ -813,6 +834,15 @@ const T = {
     sch_w_temp:'Temperatura do ar a 2 m (°C) e humidade relativa (%).',
     sch_w_press:'Pressão à superfície à altitude da célula do modelo (106 m) e pressão reduzida ao nível médio do mar, em hPa. O valor ao nível do mar é o que deve ser usado para corrigir as altitudes barométricas dos aviões.',
     sch_w_rain:'Precipitação no intervalo anterior (mm) e nebulosidade total (%).',
+    pm_h:'Partículas finas (sensor PMS5003)',
+    pm_desc:'PM1, PM2,5 e PM10 medidas no terraço, em média por minuto, desde 10 de Outubro de 2026. É uma medição ambiente: não pode ser atribuída a um avião, por isso não consta dos ficheiros de voos.',
+    pm_warn:'Problema conhecido: desde 30 de Setembro de 2026 o sensor indica muitas vezes 0 a 1 µg/m³, quando o modelo CAMS dá 5 a 13 µg/m³ para Lisboa, com contagens de partículas invulgarmente baixas. Suspeita-se de um fluxo de ar reduzido ou de uma avaria do sensor, em verificação. Enquanto esta nota não mudar, considere estes valores pouco fiáveis.',
+    minutes_word:'minutos',
+    sch_pm_time:'Data local do ficheiro e início do minuto em tempo Unix (UTC).',
+    sch_pm_atm:'Concentrações em massa em µg/m³, valores "ambiente atmosférico" do sensor (os que aparecem no site).',
+    sch_pm_std:'As mesmas concentrações, valores "partícula padrão" (CF=1) do sensor.',
+    sch_pm_counts:'Número de partículas por 0,1 litro de ar maiores do que 0,3, 0,5, 1, 2,5, 5 e 10 µm. Úteis para verificar o próprio sensor.',
+    sch_pm_n:'Número de leituras do sensor incluídas na média desse minuto (normalmente cerca de 60).',
     g_flights:'voos medidos',
     g_flights_sub:'uma linha cada, desde 1 de Maio de 2026',
     g_readings:'leituras por segundo',
@@ -971,6 +1001,15 @@ const T = {
     sch_w_temp:'Température de l\'air à 2 m (°C) et humidité relative (%).',
     sch_w_press:'Pression en surface à l\'altitude de la maille (106 m) et pression ramenée au niveau de la mer, en hPa. C\'est la valeur au niveau de la mer qui sert à corriger les altitudes barométriques des avions.',
     sch_w_rain:'Précipitations sur l\'intervalle précédent (mm) et nébulosité totale (%).',
+    pm_h:'Particules fines (capteur PMS5003)',
+    pm_desc:'PM1, PM2,5 et PM10 mesurées sur la terrasse, en moyenne par minute, depuis le 10 octobre 2026. Une mesure d\'ambiance : elle ne peut pas être attribuée à un avion, c\'est pourquoi elle n\'est pas dans les fichiers de vols.',
+    pm_warn:'Problème connu : depuis le 30 septembre 2026, le capteur indique souvent 0 à 1 µg/m³ alors que le modèle CAMS donne 5 à 13 µg/m³ pour Lisbonne, avec des comptages de particules anormalement bas. Une arrivée d\'air réduite ou une panne du capteur est suspectée et en cours de vérification. Tant que cette note n\'a pas changé, considérez ces valeurs comme peu fiables.',
+    minutes_word:'minutes',
+    sch_pm_time:'Date locale du fichier et début de la minute en temps Unix (UTC).',
+    sch_pm_atm:'Concentrations massiques en µg/m³, valeurs « environnement atmosphérique » du capteur (celles affichées sur le site).',
+    sch_pm_std:'Les mêmes concentrations, valeurs « particule standard » (CF=1) du capteur.',
+    sch_pm_counts:'Nombre de particules par 0,1 litre d\'air de plus de 0,3, 0,5, 1, 2,5, 5 et 10 µm. Utile pour contrôler le capteur lui-même.',
+    sch_pm_n:'Nombre de lectures du capteur moyennées sur cette minute (normalement environ 60).',
     g_flights:'vols mesurés',
     g_flights_sub:'une ligne chacun, depuis le 1er mai 2026',
     g_readings:'relevés à la seconde',
@@ -1176,6 +1215,8 @@ function renderResearchLists(){
       const mo = resDay(e.month + '-15').toLocaleDateString(loc, {month:'short', year:'numeric'}), f5 = w5m[e.month];
       return `<div class="rx-tr"><span>${mo}${e.in_progress ? `<span class="rx-live">${t.live_word}</span>` : ''}</span><span>${num(e.rows)}</span><a href="/research-data/${e.file}" download>csv ↓</a>${f5 ? `<a class="r" href="/research-data/${f5.file}" download>${num(f5.rows)} · csv ↓</a>` : '<span class="r dim">–</span>'}</div>`;
     }).join(''));
+  const pmf = m.pm || [];
+  set('res-pm-list', pmf.slice().reverse().map(e => resCard(e.file, resRange(e.first_day, e.last_day) + (e.in_progress ? ' · ' + t.live_word : '') + ' · ' + num(e.rows) + ' ' + t.minutes_word + ' · ' + resSize(e.bytes), e.file, t.dl_zip)).join(''));
   const trk = m.tracks || [];
   set('res-tracks-list', trk.slice().reverse().map(e => resCard(e.file, resRange(e.first_day, e.last_day) + (e.in_progress ? ' · ' + t.live_word : '') + ' · ' + num(e.passes || 0) + ' ' + t.passes_word + ' · ' + num(e.rows) + ' ' + t.positions_word + ' · ' + resSize(e.bytes), e.file, t.dl_zip)).join(''));
   if (m.station) set('res-station-file', resCard(m.station.file, 'JSON · ' + resSize(m.station.bytes), m.station.file, t.dl_json));
