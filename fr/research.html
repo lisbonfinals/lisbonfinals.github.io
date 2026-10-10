@@ -528,8 +528,13 @@ main{padding-top:96px;}
       <div class="schema-item"><div class="schema-k">heading_deg, vertical_rate_fpm, speed_kts</div><div class="schema-v" data-i18n="sch_flight_track"></div></div>
       <div class="schema-item"><div class="schema-k">unix_time, spl_peak_unix_time</div><div class="schema-v" data-i18n="sch_flight_unix"></div></div>
       <div class="schema-item"><div class="schema-k">temperature_c, humidity_pct, pressure_hpa</div><div class="schema-v" data-i18n="sch_flight_weather"></div></div>
+      <div class="schema-item"><div class="schema-k">cpa_unix_time, cpa_lat, cpa_lon, cpa_dist_m, cpa_slant_m, cpa_alt_amsl_m</div><div class="schema-v" data-i18n="sch_flight_cpa"></div></div>
+      <div class="schema-item"><div class="schema-k">peak_lat, peak_lon, peak_dist_m, peak_slant_m, peak_alt_amsl_m</div><div class="schema-v" data-i18n="sch_flight_peakpos"></div></div>
+      <div class="schema-item"><div class="schema-k">cpa_alt_baro_ft, cpa_alt_geom_ft, peak_alt_baro_ft, cpa_nac_p</div><div class="schema-v" data-i18n="sch_flight_altsrc"></div></div>
+      <div class="schema-item"><div class="schema-k">tracks_*.zip</div><div class="schema-v" data-i18n="sch_tracks"></div></div>
     </div>
     </details>
+    <div class="rx-files" id="res-tracks-list"></div>
   </section>
 
   <!-- Continu -->
@@ -690,9 +695,14 @@ const T = {
     cont_title_html:'The raw signal, <em>not just the events</em>',
     dl_short:'↓',
     sch_flight_hex:'ICAO 24-bit transponder address of the aircraft.',
-    sch_flight_track:'Heading (degrees) and vertical rate (feet per minute, negative when descending) as broadcast at detection, and ground speed in knots. Aircraft position and full tracks are not stored.',
+    sch_flight_track:'Heading (degrees) and vertical rate (feet per minute, negative when descending) as broadcast at detection, and ground speed in knots. Since 10 October 2026 the aircraft position is also recorded (columns below).',
     sch_flight_unix:'Detection time and time of the sound peak, as Unix epoch (UTC). The direct way to match a flight with the 1-second continuous files.',
     sch_flight_weather:'Air temperature, relative humidity and surface pressure at the time of detection (Open-Meteo model). Air quality is measured on the terrace too, but is not in these files: it is an ambient reading that cannot be tied to one aircraft.',
+    sch_flight_cpa:'From 10 October 2026 (empty before): closest point of approach to the station, from the aircraft\'s own GNSS position broadcast in ADS-B. Time (Unix, UTC), latitude/longitude (WGS84), horizontal distance, slant distance (straight line from the microphone to the aircraft) in metres, and altitude above sea level in metres.',
+    sch_flight_peakpos:'Where the aircraft was at the moment of the sound peak (nearest position within 3 s of spl_peak_unix_time): latitude/longitude, horizontal and slant distance, altitude above sea level. The pair to use for level-versus-distance analyses.',
+    sch_flight_altsrc:'Raw altitudes as broadcast, in feet: barometric (1013.25 hPa reference, not corrected to the day\'s pressure) and GNSS (above the WGS84 ellipsoid). The *_alt_amsl_m columns use GNSS minus a 55 m geoid height for Lisbon. cpa_nac_p is the ADS-B position accuracy category (9 = better than 30 m, 10 = better than 10 m).',
+    sch_tracks:'Every position received while the aircraft was within 5 km of the station, about one per second; one row per position, grouped by pass (hex + cpa_unix_time). The antenna sits low on the terrace, so landing aircraft are received from about 1.6 km before the station to about 0.7 km after it: 20 to 30 seconds per pass, enough to cover the closest point and the noise peak.',
+    passes_word:'passes', positions_word:'positions', dl_zip:'Download ZIP',
     daily_label:'Daily noise indicators',
     daily_title:'Lden, day by day',
     daily_desc:'The table behind the Expert Mode of the archive page: one row per day since 5 September 2026. Each row puts two independent calculations side by side, both made from this terrace\'s measurements.',
@@ -834,9 +844,14 @@ const T = {
     cont_title_html:'O sinal bruto, <em>não só os eventos</em>',
     dl_short:'↓',
     sch_flight_hex:'Endereço ICAO de 24 bits do transponder do avião.',
-    sch_flight_track:'Rumo (graus) e razão vertical (pés por minuto, negativa em descida) transmitidos no momento da detecção, e velocidade em relação ao solo em nós. A posição do avião e as trajectórias completas não são guardadas.',
+    sch_flight_track:'Rumo (graus) e razão vertical (pés por minuto, negativa em descida) transmitidos no momento da detecção, e velocidade em relação ao solo em nós. Desde 10 de Outubro de 2026 a posição do avião também é registada (colunas abaixo).',
     sch_flight_unix:'Hora de detecção e hora do pico sonoro, em tempo Unix (UTC). A forma directa de fazer corresponder um voo aos ficheiros contínuos de 1 segundo.',
     sch_flight_weather:'Temperatura do ar, humidade relativa e pressão à superfície no momento da detecção (modelo Open-Meteo). A qualidade do ar também é medida no terraço, mas não consta destes ficheiros: é uma medição ambiente que não pode ser atribuída a um avião.',
+    sch_flight_cpa:'A partir de 10 de Outubro de 2026 (vazio antes): ponto de maior aproximação à estação, a partir da posição GNSS transmitida pelo próprio avião em ADS-B. Hora (Unix, UTC), latitude/longitude (WGS84), distância horizontal, distância oblíqua (linha recta do microfone ao avião) em metros, e altitude acima do nível do mar em metros.',
+    sch_flight_peakpos:'Onde estava o avião no momento do pico sonoro (posição mais próxima, a menos de 3 s de spl_peak_unix_time): latitude/longitude, distância horizontal e oblíqua, altitude acima do nível do mar. O par a usar para análises de nível em função da distância.',
+    sch_flight_altsrc:'Altitudes brutas tal como transmitidas, em pés: barométrica (referência 1013,25 hPa, não corrigida da pressão do dia) e GNSS (acima do elipsóide WGS84). As colunas *_alt_amsl_m usam a GNSS menos uma altura do geóide de 55 m para Lisboa. cpa_nac_p é a categoria de precisão da posição ADS-B (9 = melhor do que 30 m, 10 = melhor do que 10 m).',
+    sch_tracks:'Todas as posições recebidas enquanto o avião estava a menos de 5 km da estação, cerca de uma por segundo; uma linha por posição, agrupadas por passagem (hex + cpa_unix_time). A antena está baixa no terraço, por isso os aviões em aterragem são recebidos desde cerca de 1,6 km antes da estação até cerca de 0,7 km depois: 20 a 30 segundos por passagem, o suficiente para cobrir o ponto mais próximo e o pico sonoro.',
+    passes_word:'passagens', positions_word:'posições', dl_zip:'Descarregar ZIP',
     daily_label:'Indicadores diários de ruído',
     daily_title:'Lden, dia a dia',
     daily_desc:'A tabela por detrás do Modo Expert da página de arquivo: uma linha por dia desde 5 de Setembro de 2026. Cada linha põe lado a lado dois cálculos independentes, ambos feitos a partir das medições deste terraço.',
@@ -978,9 +993,14 @@ const T = {
     cont_title_html:'Le signal brut, <em>pas seulement les événements</em>',
     dl_short:'↓',
     sch_flight_hex:'Adresse ICAO 24 bits du transpondeur de l\'avion.',
-    sch_flight_track:'Cap (degrés) et vitesse verticale (pieds par minute, négative en descente) diffusés au moment de la détection, et vitesse sol en nœuds. La position de l\'avion et les trajectoires complètes ne sont pas enregistrées.',
+    sch_flight_track:'Cap (degrés) et vitesse verticale (pieds par minute, négative en descente) diffusés au moment de la détection, et vitesse sol en nœuds. Depuis le 10 octobre 2026, la position de l\'avion est aussi enregistrée (colonnes ci-dessous).',
     sch_flight_unix:'Heure de détection et heure du pic sonore, en temps Unix (UTC). Le moyen direct de faire correspondre un vol aux fichiers continus à la seconde.',
     sch_flight_weather:'Température de l\'air, humidité relative et pression au sol au moment de la détection (modèle Open-Meteo). La qualité de l\'air est aussi mesurée sur la terrasse, mais n\'est pas dans ces fichiers : c\'est une mesure d\'ambiance qu\'on ne peut pas attribuer à un avion.',
+    sch_flight_cpa:'Depuis le 10 octobre 2026 (vide avant) : point le plus proche de la station, d\'après la position GNSS diffusée par l\'avion lui-même en ADS-B. Heure (Unix, UTC), latitude/longitude (WGS84), distance horizontale, distance oblique (ligne droite du micro à l\'avion) en mètres, et altitude au-dessus du niveau de la mer en mètres.',
+    sch_flight_peakpos:'Position de l\'avion au moment du pic sonore (position la plus proche, à moins de 3 s de spl_peak_unix_time) : latitude/longitude, distances horizontale et oblique, altitude au-dessus du niveau de la mer. Le couple à utiliser pour étudier le niveau en fonction de la distance.',
+    sch_flight_altsrc:'Altitudes brutes telles que diffusées, en pieds : barométrique (référence 1013,25 hPa, non corrigée de la pression du jour) et GNSS (au-dessus de l\'ellipsoïde WGS84). Les colonnes *_alt_amsl_m utilisent la GNSS moins une hauteur de géoïde de 55 m pour Lisbonne. cpa_nac_p est la catégorie de précision de position ADS-B (9 = mieux que 30 m, 10 = mieux que 10 m).',
+    sch_tracks:'Toutes les positions reçues pendant que l\'avion était à moins de 5 km de la station, environ une par seconde ; une ligne par position, regroupées par passage (hex + cpa_unix_time). L\'antenne est basse sur la terrasse : les avions à l\'atterrissage sont reçus d\'environ 1,6 km avant la station à environ 0,7 km après, soit 20 à 30 secondes par passage, de quoi couvrir le point le plus proche et le pic sonore.',
+    passes_word:'passages', positions_word:'positions', dl_zip:'Télécharger le ZIP',
     daily_label:'Indicateurs quotidiens de bruit',
     daily_title:'Le Lden, jour par jour',
     daily_desc:'Le tableau derrière le Mode Expert de la page archive : une ligne par jour depuis le 5 septembre 2026. Chaque ligne met côte à côte deux calculs indépendants, tous deux faits à partir des mesures de cette terrasse.',
@@ -1109,6 +1129,8 @@ function renderResearchLists(){
   // quotidien + fiche station
   const span = (a, b) => { const o = {day:'numeric', month:'short', year:'numeric'}; return resDay(a).toLocaleDateString(loc, o) + ' – ' + resDay(b).toLocaleDateString(loc, o); };
   set('res-daily-list', daily.map(e => resCard(e.file, (e.first_day ? span(e.first_day, e.last_day) + ' · ' : '') + num(e.rows) + ' ' + (e.file.indexOf('lden') === 0 ? t.days_word : t.rows_word) + ' · ' + resSize(e.bytes), e.file, t.dl_btn)).join(''));
+  const trk = m.tracks || [];
+  set('res-tracks-list', trk.slice().reverse().map(e => resCard(e.file, resRange(e.first_day, e.last_day) + (e.in_progress ? ' · ' + t.live_word : '') + ' · ' + num(e.passes || 0) + ' ' + t.passes_word + ' · ' + num(e.rows) + ' ' + t.positions_word + ' · ' + resSize(e.bytes), e.file, t.dl_zip)).join(''));
   if (m.station) set('res-station-file', resCard(m.station.file, 'JSON · ' + resSize(m.station.bytes), m.station.file, t.dl_json));
   renderLdenChart();
 }
