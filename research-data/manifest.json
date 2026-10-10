@@ -1,46 +1,46 @@
 {
- "generated_at": "2026-10-10T08:04:45Z",
+ "generated_at": "2026-10-10T16:17:52Z",
  "flights": [
   {
    "file": "flights_2026-05.csv",
    "month": "2026-05",
    "rows": 9120,
-   "bytes": 1259459,
+   "bytes": 1396445,
    "in_progress": false
   },
   {
    "file": "flights_2026-06.csv",
    "month": "2026-06",
    "rows": 9634,
-   "bytes": 1361998,
+   "bytes": 1506694,
    "in_progress": false
   },
   {
    "file": "flights_2026-07.csv",
    "month": "2026-07",
    "rows": 10450,
-   "bytes": 1481989,
+   "bytes": 1638925,
    "in_progress": false
   },
   {
    "file": "flights_2026-08.csv",
    "month": "2026-08",
    "rows": 10549,
-   "bytes": 1507982,
+   "bytes": 1666403,
    "in_progress": false
   },
   {
    "file": "flights_2026-09.csv",
    "month": "2026-09",
    "rows": 10081,
-   "bytes": 1592773,
+   "bytes": 1744174,
    "in_progress": false
   },
   {
    "file": "flights_2026-10.csv",
    "month": "2026-10",
-   "rows": 2981,
-   "bytes": 522084,
+   "rows": 3123,
+   "bytes": 594435,
    "in_progress": true
   }
  ],
@@ -89,9 +89,9 @@
     "first_day": "2026-10-01",
     "last_day": "2026-10-10",
     "days": 10,
-    "rows": 791892,
-    "bytes": 3669292,
-    "csv_bytes": 22964893,
+    "rows": 820695,
+    "bytes": 3804822,
+    "csv_bytes": 23800181,
     "in_progress": true
    }
   ],
@@ -139,9 +139,9 @@
     "first_day": "2026-10-01",
     "last_day": "2026-10-10",
     "days": 10,
-    "rows": 800573,
-    "bytes": 4244639,
-    "csv_bytes": 23942744,
+    "rows": 829729,
+    "bytes": 4399883,
+    "csv_bytes": 24814808,
     "in_progress": true
    }
   ]
@@ -164,8 +164,23 @@
    "last_day": "2026-10-09"
   }
  ],
+ "tracks": [
+  {
+   "file": "tracks_2026-10-01_10.zip",
+   "start": "2026-10-01",
+   "end": "2026-10-10",
+   "first_day": "2026-10-10",
+   "last_day": "2026-10-10",
+   "days": 1,
+   "passes": 4,
+   "rows": 84,
+   "bytes": 1741,
+   "csv_bytes": 8400,
+   "in_progress": true
+  }
+ ],
  "station": {
   "file": "station_metadata.json",
-  "bytes": 4058
+  "bytes": 5449
  }
 }
