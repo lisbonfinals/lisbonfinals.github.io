@@ -185,6 +185,90 @@ main{padding-top:96px;}
 .unlock-banner .pip{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.2);flex-shrink:0;}
 .unlock-banner button{margin-left:auto;background:none;border:none;color:rgba(34,197,94,.6);font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;text-decoration:underline;cursor:pointer;}
 .unlock-banner button:hover{color:var(--green);}
+/* ── 10 oct 2026 : refonte research (maquette validée par Antonio) ── */
+.rx-wrap{max-width:1000px;margin:0 auto;padding:8px 48px 0;}
+.rx-glance{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.rx-tile{background:var(--dark2);padding:22px 22px 20px;min-width:0;}
+.rx-tile b{display:block;font-family:var(--mono);font-weight:500;font-size:28px;color:var(--white);font-variant-numeric:tabular-nums;}
+.rx-tile b small{font-size:14px;color:rgba(240,237,232,.45);font-weight:400;}
+.rx-tile b.amb{color:var(--amber);}
+.rx-tile .k{margin-top:8px;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.5);}
+.rx-tile .s{margin-top:4px;font-size:12px;color:rgba(240,237,232,.4);line-height:1.5;}
+.rx-h2{margin:12px 0 0;font-size:clamp(26px,3.2vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--white);}
+.rx-h2 em{font-family:var(--serif);font-weight:400;font-style:italic;color:rgba(240,237,232,.45);}
+.rx-ds{margin-top:26px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+.rx-card{text-decoration:none;color:inherit;background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:border-color .15s;min-width:0;}
+.rx-card:hover{border-color:rgba(245,166,35,.45);}
+.rx-card:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+.rx-chip{align-self:flex-start;font-family:var(--mono);font-size:9px;letter-spacing:.1em;border:1px solid currentColor;border-radius:3px;padding:3px 7px;}
+.rx-card strong{font-size:17px;color:var(--white);}
+.rx-card .d{font-size:12.5px;line-height:1.6;color:rgba(240,237,232,.55);}
+.rx-card .m{margin-top:auto;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.4);}
+.rx-box{background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:20px 24px 18px;}
+.rx-kick{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.45);}
+.rx-cov{display:grid;grid-template-columns:150px minmax(0,1fr);row-gap:10px;align-items:center;margin-top:14px;font-family:var(--mono);font-size:10.5px;color:rgba(240,237,232,.6);}
+.rx-bar{position:relative;height:10px;background:var(--dark3);border-radius:5px;}
+.rx-bar i{position:absolute;top:0;bottom:0;border-radius:5px;}
+.rx-months{position:relative;height:14px;font-family:var(--mono);font-size:9.5px;color:rgba(240,237,232,.35);}
+.rx-months span{position:absolute;top:0;white-space:nowrap;}
+.rx-legend{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:rgba(240,237,232,.65);margin-bottom:10px;}
+.rx-legend span{display:flex;align-items:center;gap:8px;}
+.rx-legend i{width:18px;height:0;border-top:2px solid #f5a623;}
+.rx-legend i.lf{border-top:2px dashed rgba(240,237,232,.6);}
+.rx-legend i.lim{border-top:1px dashed #f87171;}
+#res-lden-chart svg{width:100%;height:auto;display:block;}
+.rx-two{margin-top:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.rx-m{background:var(--dark2);border:1px solid var(--border);border-top:2px solid var(--amber);border-radius:10px;padding:20px 22px;}
+.rx-m.lf{border-top-color:rgba(240,237,232,.5);}
+.rx-m code{font-family:var(--mono);font-size:11px;color:var(--amber);}
+.rx-m.lf code{color:rgba(240,237,232,.75);}
+.rx-m strong{display:block;margin-top:8px;font-size:15px;color:var(--white);}
+.rx-m p{margin:8px 0 0;font-size:12.5px;line-height:1.7;color:rgba(240,237,232,.58);}
+.rx-files{margin-top:18px;display:flex;flex-direction:column;gap:10px;}
+.rx-dict{margin-top:16px;border-top:1px solid rgba(240,237,232,.06);padding-top:14px;}
+.rx-dict summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.55);}
+.rx-dict summary::-webkit-details-marker{display:none}
+.rx-dict summary::before{content:'+ ';color:var(--amber);}
+.rx-dict[open] summary::before{content:'− ';}
+.rx-dict summary:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+.rx-st{margin-top:26px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:18px;align-items:stretch;}
+.rx-plan{background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0;}
+.rx-plan svg{width:100%;max-width:460px;height:auto;display:block;margin:0 auto;}
+.rx-spec{background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:6px 22px;display:grid;grid-template-columns:118px minmax(0,1fr);column-gap:16px;min-width:0;}
+.rx-spec .k,.rx-spec .v{padding:13px 0;border-bottom:1px solid var(--border);}
+.rx-spec .k:nth-last-child(2),.rx-spec .v:last-child{border-bottom:0;}
+.rx-spec .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);}
+.rx-spec .v{font-size:13px;line-height:1.6;color:rgba(240,237,232,.72);}
+.rx-table{margin-top:24px;background:var(--dark2);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.rx-tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center;padding:11px 20px;border-top:1px solid var(--border);font-family:var(--mono);font-size:12px;color:var(--white);gap:10px;}
+.rx-tr.h{border-top:0;background:var(--dark3);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.45);}
+.rx-tr .r{text-align:right;}
+.rx-tr .dim{color:rgba(240,237,232,.5);}
+.rx-tr a{color:var(--amber);text-decoration:none;font-size:10.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rx-tr a:hover{text-decoration:underline;}
+.rx-live{color:#4ade80;font-size:9.5px;margin-left:6px;}
+.rx-cont{margin-top:24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.rx-col{background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;min-width:0;}
+.rx-col .rx-kick{color:#60b4ff;}
+.rx-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-top:1px solid rgba(240,237,232,.06);font-family:var(--mono);font-size:11.5px;color:var(--white);}
+.rx-row:first-of-type{border-top:0;}
+.rx-row .meta{display:block;font-size:9.5px;color:rgba(240,237,232,.4);margin-top:3px;}
+.rx-row a{color:var(--amber);text-decoration:none;font-size:10.5px;white-space:nowrap;}
+.rx-sec{margin-top:80px;padding-top:56px;border-top:1px solid var(--border);}
+.rx-sec .section-desc{max-width:640px;}
+@media (max-width:900px){
+  .rx-wrap{padding-left:20px;padding-right:20px;}
+  .rx-glance,.rx-ds{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .rx-two,.rx-st,.rx-cont{grid-template-columns:minmax(0,1fr);}
+  .rx-cov{grid-template-columns:96px minmax(0,1fr);}
+}
+@media (max-width:520px){
+  .rx-ds{grid-template-columns:minmax(0,1fr);}
+  .rx-tr{grid-template-columns:1.1fr .9fr .8fr;}
+  .rx-tr .sz{display:none;}
+  .rx-spec{grid-template-columns:minmax(0,1fr);}
+  .rx-spec .k{padding-bottom:0;border-bottom:0;}
+}
 .gated-content{max-height:0; opacity:0; filter:blur(4px); transform:translateY(6px); overflow:hidden; transition:max-height .6s ease, opacity .5s ease .1s, filter .5s ease .1s, transform .5s ease .1s;}
 .gated-content.show{max-height:30000px; /* 10 oct 2026 : 6000 px coupait le bas de page sur mobile avec les sections Lden + station */ opacity:1; filter:blur(0); transform:translateY(0);}
 
@@ -327,21 +411,109 @@ main{padding-top:96px;}
   </div>
 
   <div class="gated-content" id="gatedContent">
+  <div class="rx-wrap">
 
-  <section class="data-section">
-    <div class="section-label" data-i18n="flights_label">Flight events</div>
-    <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);" data-i18n="flights_title">One row per detected aircraft</h2>
-    <p class="section-desc" data-i18n="flights_desc">Every flight the station captured: callsign, aircraft type and airline when identified, flight phase, altitude and speed, plus the acoustic reading tied to that exact pass — peak level, time spent above 70dB, and peak vibration on the terrace. One CSV per month, since the station's first day.</p>
-    <div class="res-updated" data-i18n="flights_updated">Files current as of 26 Sept 2026, regenerated periodically, not live.</div>
+  <!-- Vue d'ensemble -->
+  <div class="rx-glance" id="rx-glance">
+    <div class="rx-tile"><b id="g-flights">·</b><div class="k" data-i18n="g_flights"></div><div class="s" data-i18n="g_flights_sub"></div></div>
+    <div class="rx-tile"><b id="g-readings">·</b><div class="k" data-i18n="g_readings"></div><div class="s" data-i18n="g_readings_sub"></div></div>
+    <div class="rx-tile"><b class="amb" id="g-lden">·</b><div class="k" id="g-lden-k"></div><div class="s" data-i18n="g_lden_sub"></div></div>
+    <div class="rx-tile"><b>1.37<small> km</small></b><div class="k" data-i18n="g_dist"></div><div class="s" data-i18n="g_dist_sub"></div></div>
+  </div>
 
-    <div id="res-flights-list">
-      <div class="res-card"><div><div class="res-card-name">flights_2026-05.csv</div><div class="res-card-meta">9,120 flights · 875 KB</div></div><a class="res-card-dl" href="/research-data/flights_2026-05.csv" download data-i18n="dl_btn">Download CSV</a></div>
-      <div class="res-card"><div><div class="res-card-name">flights_2026-06.csv</div><div class="res-card-meta">9,634 flights · 956 KB</div></div><a class="res-card-dl" href="/research-data/flights_2026-06.csv" download data-i18n="dl_btn">Download CSV</a></div>
-      <div class="res-card"><div><div class="res-card-name">flights_2026-07.csv</div><div class="res-card-meta">10,450 flights · 1.0 MB</div></div><a class="res-card-dl" href="/research-data/flights_2026-07.csv" download data-i18n="dl_btn">Download CSV</a></div>
-      <div class="res-card"><div><div class="res-card-name">flights_2026-08.csv</div><div class="res-card-meta">10,549 flights · 1.0 MB</div></div><a class="res-card-dl" href="/research-data/flights_2026-08.csv" download data-i18n="dl_btn">Download CSV</a></div>
-      <div class="res-card"><div><div class="res-card-name">flights_2026-09.csv</div><div class="res-card-meta"><span data-i18n="in_progress">in progress</span> · 8,560 <span data-i18n="flights_word">flights</span> · 924 KB</div></div><a class="res-card-dl" href="/research-data/flights_2026-09.csv" download data-i18n="dl_btn">Download CSV</a></div>
+  <div style="margin-top:64px;">
+    <div class="section-label" data-i18n="ds_label"></div>
+    <h2 class="rx-h2" data-i18n-html="ds_title"></h2>
+    <div class="rx-ds">
+      <a class="rx-card" href="#flights"><span class="rx-chip" style="color:#f5a623" data-i18n="ds_f_chip"></span><strong data-i18n="ds_f_t"></strong><span class="d" data-i18n="ds_f_d"></span><span class="m" id="ds-f-m"></span></a>
+      <a class="rx-card" href="#continuous"><span class="rx-chip" style="color:#60b4ff" data-i18n="ds_c_chip"></span><strong data-i18n="ds_c_t"></strong><span class="d" data-i18n="ds_c_d"></span><span class="m" id="ds-c-m"></span></a>
+      <a class="rx-card" href="#daily"><span class="rx-chip" style="color:#4ade80" data-i18n="ds_d_chip"></span><strong data-i18n="ds_d_t"></strong><span class="d" data-i18n="ds_d_d"></span><span class="m" id="ds-d-m"></span></a>
+      <a class="rx-card" href="#station"><span class="rx-chip" style="color:#a78bfa">JSON</span><strong data-i18n="ds_s_t"></strong><span class="d" data-i18n="ds_s_d"></span><span class="m" id="ds-s-m"></span></a>
     </div>
+    <div class="rx-box" style="margin-top:22px;">
+      <div class="rx-kick" data-i18n="cov_title"></div>
+      <div class="rx-cov" id="rx-cov"></div>
+    </div>
+    <div class="res-updated" data-i18n="flights_updated"></div>
+  </div>
 
+  <!-- Lden jour par jour -->
+  <section class="rx-sec" id="daily">
+    <div class="section-label" data-i18n="daily_label"></div>
+    <h2 class="rx-h2" data-i18n-html="daily_title_html"></h2>
+    <p class="section-desc" data-i18n="daily_desc"></p>
+    <div class="rx-box" style="margin-top:28px;">
+      <div class="rx-legend"><span><i></i>SensorGrid Lden</span><span><i class="lf"></i><span data-i18n="chart_lf"></span></span><span><i class="lim"></i><span data-i18n="chart_limit"></span></span></div>
+      <div id="res-lden-chart"></div>
+    </div>
+    <div class="rx-two">
+      <div class="rx-m"><code>sensorgrid_*</code><strong data-i18n="m_sg_t"></strong><p data-i18n="m_sg_d"></p></div>
+      <div class="rx-m lf"><code>lf_*_est</code><strong data-i18n="m_lf_t"></strong><p data-i18n="m_lf_d"></p></div>
+    </div>
+    <div class="rx-files" id="res-daily-list"></div>
+    <details class="rx-dict"><summary data-i18n="dict_toggle"></summary>
+    <div class="schema-list">
+      <div class="schema-item"><div class="schema-k">status</div><div class="schema-v" data-i18n-html="sch_daily_status"></div></div>
+      <div class="schema-item"><div class="schema-k">n_flights, n_events_over_70db, n_flights_no_event, n_flights_no_data</div><div class="schema-v" data-i18n="sch_daily_counts"></div></div>
+      <div class="schema-item"><div class="schema-k">avg_peak_db, avg_duration_over_70_s, total_duration_over_70_s</div><div class="schema-v" data-i18n="sch_daily_levels"></div></div>
+      <div class="schema-item"><div class="schema-k">avg_temp_c, avg_wind_kmh, dominant_wind_dir</div><div class="schema-v" data-i18n="sch_daily_weather"></div></div>
+      <div class="schema-item"><div class="schema-k">noise_weather_3h.csv</div><div class="schema-v" data-i18n="sch_daily_bins"></div></div>
+    </div></details>
+  </section>
+
+  <!-- Station -->
+  <section class="rx-sec" id="station">
+    <div class="section-label" data-i18n="station_label"></div>
+    <h2 class="rx-h2" data-i18n-html="station_title_html"></h2>
+    <p class="section-desc" data-i18n="station_desc"></p>
+    <div class="rx-st">
+      <div class="rx-plan">
+        <svg viewBox="0 0 400 380" role="img" aria-labelledby="plan-t">
+          <title id="plan-t" data-i18n="plan_aria"></title>
+          <g font-family="JetBrains Mono, monospace">
+            <text x="16" y="22" font-size="9" letter-spacing="1.6" fill="rgba(240,237,232,.45)" data-i18n="plan_kick"></text>
+            <text x="376" y="24" font-size="11" fill="rgba(240,237,232,.6)" text-anchor="middle">N</text>
+            <path d="M376 32 L376 52 M371 38 L376 32 L381 38" stroke="rgba(240,237,232,.6)" stroke-width="1.2" fill="none"/>
+            <!-- axe d'approche : une seule droite au cap 22,6° qui passe PAR la terrasse -->
+            <line x1="114.7" y1="361.7" x2="264.3" y2="2.0" stroke="#f5a623" stroke-width="1.4" stroke-dasharray="5 5" opacity=".75"/>
+            <!-- piste au-delà du seuil -->
+            <line x1="222.0" y1="103.6" x2="264.3" y2="2.0" stroke="#2a3544" stroke-width="9" stroke-linecap="butt"/>
+            <circle cx="222.0" cy="103.6" r="6" fill="#f0ede8"/>
+            <text x="236" y="100" font-size="10.5" fill="rgba(240,237,232,.8)" data-i18n="plan_thr"></text>
+            <text x="236" y="115" font-size="9.5" fill="rgba(240,237,232,.45)">100.6 m · AIP</text>
+            <!-- avion en finale, pile au-dessus de la terrasse -->
+            <g transform="translate(174.4 218.1) rotate(22.6)" fill="#f0ede8" opacity=".9">
+              <path d="M0 -15 L2.2 -6 L13 -1 L13 2 L2.2 0 L1.6 9 L5 12 L5 14 L0 12.5 L-5 14 L-5 12 L-1.6 9 L-2.2 0 L-13 2 L-13 -1 L-2.2 -6 Z"/>
+            </g>
+            <circle cx="149" cy="279" r="9" fill="#f5a623"/>
+            <circle cx="149" cy="279" r="17" fill="none" stroke="rgba(245,166,35,.3)" stroke-width="6"/>
+            <text x="174" y="283" font-size="10.5" fill="#f5a623">Lisbon Finals</text>
+            <text x="174" y="298" font-size="9.5" fill="rgba(240,237,232,.5)" data-i18n="plan_station_sub"></text>
+            <text x="168" y="190" font-size="20" fill="#f0ede8" text-anchor="end">1.37 km</text>
+            <text x="168" y="208" font-size="9.5" fill="rgba(240,237,232,.5)" text-anchor="end" data-i18n="plan_bearing"></text>
+            <text x="384" y="368" font-size="9.5" fill="rgba(240,237,232,.45)" text-anchor="end" data-i18n="plan_overhead"></text>
+          </g>
+        </svg>
+      </div>
+      <div class="rx-spec">
+        <div class="k" data-i18n="stk_position"></div><div class="v" data-i18n="st_position"></div>
+        <div class="k" data-i18n="stk_sound"></div><div class="v" data-i18n="st_sound"></div>
+        <div class="k" data-i18n="stk_mounting"></div><div class="v" data-i18n="st_mounting"></div>
+        <div class="k" data-i18n="stk_calib"></div><div class="v" data-i18n="st_calib"></div>
+        <div class="k" data-i18n="stk_aircraft"></div><div class="v" data-i18n="st_aircraft"></div>
+        <div class="k" data-i18n="stk_env"></div><div class="v" data-i18n="st_env"></div>
+      </div>
+    </div>
+    <div class="rx-files" id="res-station-file"></div>
+  </section>
+
+  <!-- Vols -->
+  <section class="rx-sec" id="flights">
+    <div class="section-label" data-i18n="flights_label"></div>
+    <h2 class="rx-h2" data-i18n-html="flights_title_html"></h2>
+    <p class="section-desc" data-i18n="flights_desc2"></p>
+    <div class="rx-table" id="res-flights-list"></div>
+    <details class="rx-dict"><summary data-i18n="dict_toggle"></summary>
     <div class="schema-list">
       <div class="schema-item"><div class="schema-k">date, time</div><div class="schema-v" data-i18n="sch_flight_datetime">Detection date/time, UTC.</div></div>
       <div class="schema-item"><div class="schema-k">callsign</div><div class="schema-v" data-i18n="sch_flight_callsign">ADS-B callsign, or the aircraft's ICAO hex code when no callsign was broadcast.</div></div>
@@ -357,58 +529,24 @@ main{padding-top:96px;}
       <div class="schema-item"><div class="schema-k">unix_time, spl_peak_unix_time</div><div class="schema-v" data-i18n="sch_flight_unix"></div></div>
       <div class="schema-item"><div class="schema-k">temperature_c, humidity_pct, pressure_hpa</div><div class="schema-v" data-i18n="sch_flight_weather"></div></div>
     </div>
+    </details>
   </section>
 
-  <section class="data-section">
-    <div class="section-label" data-i18n="cont_label">Continuous ambient data</div>
-    <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);" data-i18n="cont_title">The raw signal, not just the events</h2>
-    <p class="section-desc" data-i18n-html="cont_desc">Sound and vibration sampled roughly once per second, around the clock — not just when a flight is detected. This is the same continuous log the station uses internally to catch its own measurement glitches, so it's a genuine working dataset, not a demo export.</p>
-    <div class="res-note" data-i18n="cont_note">Shorter history than the flight tables: continuous logging only started once this need came up.</div>
-    <div class="res-updated" data-i18n="flights_updated">Files current as of 26 Sept 2026, regenerated periodically, not live.</div>
-
+  <!-- Continu -->
+  <section class="rx-sec" id="continuous">
+    <div class="section-label" data-i18n="cont_label"></div>
+    <h2 class="rx-h2" data-i18n-html="cont_title_html"></h2>
+    <p class="section-desc" data-i18n-html="cont_desc"></p>
     <div class="res-note" data-i18n="cont_split_note"></div>
-    <div id="res-continuous-list"></div>
-
+    <div class="rx-cont" id="res-continuous-list"></div>
+    <details class="rx-dict"><summary data-i18n="dict_toggle"></summary>
     <div class="schema-list">
-      <div class="schema-item"><div class="schema-k">date, timestamp</div><div class="schema-v" data-i18n="sch_cont_ts">Calendar day, and Unix epoch (UTC) for the individual reading.</div></div>
-      <div class="schema-item"><div class="schema-k">spl_db / vib_mg</div><div class="schema-v" data-i18n="sch_cont_val">Instantaneous sound level (dB) or vibration (milli-g) at that second — a sample, not a running average.</div></div>
-    </div>
+      <div class="schema-item"><div class="schema-k">date, timestamp</div><div class="schema-v" data-i18n="sch_cont_ts"></div></div>
+      <div class="schema-item"><div class="schema-k">spl_db / vib_mg</div><div class="schema-v" data-i18n="sch_cont_val"></div></div>
+    </div></details>
   </section>
 
-  <section class="data-section">
-    <div class="section-label" data-i18n="daily_label"></div>
-    <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);" data-i18n="daily_title"></h2>
-    <p class="section-desc" data-i18n="daily_desc"></p>
-    <div class="method-strip">
-      <div class="method-kicker" data-i18n="daily_method_kicker"></div>
-      <div class="method-copy" data-i18n-html="daily_method_copy"></div>
-    </div>
-    <div class="res-updated" data-i18n="flights_updated"></div>
-    <div id="res-daily-list"></div>
-    <div class="schema-list">
-      <div class="schema-item"><div class="schema-k">status</div><div class="schema-v" data-i18n-html="sch_daily_status"></div></div>
-      <div class="schema-item"><div class="schema-k">n_flights, n_events_over_70db, n_flights_no_event, n_flights_no_data</div><div class="schema-v" data-i18n="sch_daily_counts"></div></div>
-      <div class="schema-item"><div class="schema-k">avg_peak_db, avg_duration_over_70_s, total_duration_over_70_s</div><div class="schema-v" data-i18n="sch_daily_levels"></div></div>
-      <div class="schema-item"><div class="schema-k">avg_temp_c, avg_wind_kmh, dominant_wind_dir</div><div class="schema-v" data-i18n="sch_daily_weather"></div></div>
-      <div class="schema-item"><div class="schema-k">noise_weather_3h.csv</div><div class="schema-v" data-i18n="sch_daily_bins"></div></div>
-    </div>
-  </section>
-
-  <section class="data-section">
-    <div class="section-label" data-i18n="station_label"></div>
-    <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);" data-i18n="station_title"></h2>
-    <p class="section-desc" data-i18n="station_desc"></p>
-    <div id="res-station-file"></div>
-    <div class="schema-list">
-      <div class="schema-item"><div class="schema-k">position</div><div class="schema-v" data-i18n="st_position"></div></div>
-      <div class="schema-item"><div class="schema-k">mounting</div><div class="schema-v" data-i18n="st_mounting"></div></div>
-      <div class="schema-item"><div class="schema-k">sound</div><div class="schema-v" data-i18n="st_sound"></div></div>
-      <div class="schema-item"><div class="schema-k">calibration</div><div class="schema-v" data-i18n="st_calib"></div></div>
-      <div class="schema-item"><div class="schema-k">aircraft</div><div class="schema-v" data-i18n="st_aircraft"></div></div>
-      <div class="schema-item"><div class="schema-k">weather, air</div><div class="schema-v" data-i18n="st_env"></div></div>
-    </div>
-  </section>
-
+  </div>
   </div>
 
   <section class="data-section">
@@ -491,6 +629,66 @@ const T = {
     cont_note:'Shorter history than the flight tables: continuous logging only started once this need came up.',
     sch_cont_ts:'Calendar day, and Unix epoch (UTC) for the individual reading.',
     sch_cont_val:'Instantaneous sound level (dB) or vibration (milli-g) at that second — a sample, not a running average.',
+    g_flights:'flights measured',
+    g_flights_sub:'one row each, since 1 May 2026',
+    g_readings:'1-second readings',
+    g_readings_sub:'sound and vibration, round the clock',
+    g_lden_tpl:'Lden · {d}',
+    g_lden_sub:'SensorGrid, latest complete day',
+    g_dist:'from the RWY 02 threshold',
+    g_dist_sub:'right under the 22.7° approach axis',
+    ds_label:'What\'s inside',
+    ds_title:'Four datasets, <em>one sensor</em>',
+    ds_f_chip:'CSV · MONTHLY',
+    ds_f_t:'Flight events',
+    ds_f_d:'One row per aircraft: identity, phase, altitude, heading, peak level, seconds above 70 dB, vibration, weather.',
+    ds_c_chip:'ZIP · 10 DAYS',
+    ds_c_t:'Continuous signal',
+    ds_c_d:'Sound and vibration once per second, day and night, not only when a plane is detected.',
+    ds_d_chip:'CSV · DAILY',
+    ds_d_t:'Daily Lden',
+    ds_d_d:'Two independent day-by-day calculations side by side, plus 3-hour weather and noise bins.',
+    ds_s_t:'Station sheet',
+    ds_s_d:'Position, sensors, settings, time reference and known limitations, ready to cite.',
+    files_word:'files',
+    zipped_word:'zipped',
+    cov_title:'Coverage',
+    cov_f:'Flight events',
+    cov_spl:'Sound 1 Hz',
+    cov_vib:'Vibration 1 Hz',
+    cov_lden:'Daily Lden',
+    cov_today:'TODAY',
+    daily_title_html:'Lden, <em>day by day</em>',
+    chart_lf:'Lisbon Finals estimate',
+    chart_limit:'65 dB · PT limit, mixed zones',
+    chart_moved:'29 Sep · sensor box moved',
+    m_sg_t:'Standard Lden, computed independently',
+    m_sg_d:'By the SensorGrid platform (Alessandro Annunziato) from this station\'s live 1-second stream. EU Directive 2002/49/EC definition: day, evening +5 dB, night +10 dB, plus the Italian airport index LVA.',
+    m_lf_t:'Event-based estimate, Lisbon Finals',
+    m_lf_d:'The seconds above 70 dB of each detected flight are integrated into a sound exposure level, then combined into a day (16 h) and night (8 h, +10 dB) average. Aircraft only, no background noise, no evening band. Expect about one decibel of difference.',
+    dict_toggle:'Column dictionary',
+    station_title_html:'Where and how <em>it measures</em>',
+    plan_aria:'Plan: the station sits on the RWY 02 approach axis, 1.37 km before the threshold; aircraft on final pass directly overhead.',
+    plan_kick:'PLAN · SCHEMATIC',
+    plan_thr:'RWY 02 threshold',
+    plan_station_sub:'≈ 80 m · 1st floor',
+    plan_bearing:'bearing 22.6° · axis 22.7°',
+    plan_overhead:'Aircraft on final pass directly overhead.',
+    stk_position:'Position',
+    stk_sound:'Sound',
+    stk_mounting:'Mounting',
+    stk_calib:'Calibration',
+    stk_aircraft:'Aircraft',
+    stk_env:'Weather, air',
+    flights_title_html:'One row <em>per aircraft</em>',
+    flights_desc2:'Every pass the station captured, with the acoustic reading tied to it. Times are local Lisbon time; the Unix columns (UTC) line a flight up with the continuous files.',
+    th_month:'Month',
+    th_flights:'Flights',
+    th_size:'Size',
+    th_file:'File',
+    live_word:'LIVE',
+    cont_title_html:'The raw signal, <em>not just the events</em>',
+    dl_short:'↓',
     sch_flight_hex:'ICAO 24-bit transponder address of the aircraft.',
     sch_flight_track:'Heading (degrees) and vertical rate (feet per minute, negative when descending) as broadcast at detection, and ground speed in knots. Aircraft position and full tracks are not stored.',
     sch_flight_unix:'Detection time and time of the sound peak, as Unix epoch (UTC). The direct way to match a flight with the 1-second continuous files.',
@@ -575,6 +773,66 @@ const T = {
     cont_note:'Histórico mais curto do que as tabelas de voos: o registo contínuo só começou quando esta necessidade surgiu.',
     sch_cont_ts:'Dia do calendário, e epoch Unix (UTC) da leitura individual.',
     sch_cont_val:'Nível sonoro instantâneo (dB) ou vibração (mili-g) nesse segundo — uma amostra, não uma média corrida.',
+    g_flights:'voos medidos',
+    g_flights_sub:'uma linha cada, desde 1 de Maio de 2026',
+    g_readings:'leituras por segundo',
+    g_readings_sub:'som e vibração, dia e noite',
+    g_lden_tpl:'Lden · {d}',
+    g_lden_sub:'SensorGrid, último dia completo',
+    g_dist:'do limiar da pista 02',
+    g_dist_sub:'mesmo debaixo do eixo de aproximação a 22,7°',
+    ds_label:'O que contém',
+    ds_title:'Quatro conjuntos de dados, <em>um sensor</em>',
+    ds_f_chip:'CSV · MENSAL',
+    ds_f_t:'Eventos de voo',
+    ds_f_d:'Uma linha por avião: identificação, fase, altitude, rumo, pico sonoro, segundos acima de 70 dB, vibração, meteorologia.',
+    ds_c_chip:'ZIP · 10 DIAS',
+    ds_c_t:'Sinal contínuo',
+    ds_c_d:'Som e vibração a cada segundo, de dia e de noite, não só quando passa um avião.',
+    ds_d_chip:'CSV · DIÁRIO',
+    ds_d_t:'Lden diário',
+    ds_d_d:'Dois cálculos independentes dia a dia, lado a lado, e períodos de 3 horas de meteorologia e ruído.',
+    ds_s_t:'Ficha da estação',
+    ds_s_d:'Posição, sensores, configuração, referência horária e limitações conhecidas, pronta a citar.',
+    files_word:'ficheiros',
+    zipped_word:'comprimidos',
+    cov_title:'Cobertura',
+    cov_f:'Eventos de voo',
+    cov_spl:'Som 1 Hz',
+    cov_vib:'Vibração 1 Hz',
+    cov_lden:'Lden diário',
+    cov_today:'HOJE',
+    daily_title_html:'Lden, <em>dia a dia</em>',
+    chart_lf:'Estimativa Lisbon Finals',
+    chart_limit:'65 dB · limite PT, zonas mistas',
+    chart_moved:'29 Set · caixa dos sensores movida',
+    m_sg_t:'Lden padrão, calculado de forma independente',
+    m_sg_d:'Pela plataforma SensorGrid (Alessandro Annunziato) a partir do fluxo de 1 segundo desta estação. Definição da Directiva UE 2002/49/CE: dia, entardecer +5 dB, noite +10 dB, e o índice aeroportuário italiano LVA.',
+    m_lf_t:'Estimativa por eventos, Lisbon Finals',
+    m_lf_d:'Os segundos acima de 70 dB de cada voo detectado são integrados num nível de exposição sonora e depois combinados numa média de dia (16 h) e de noite (8 h, +10 dB). Só aviões, sem ruído de fundo, sem período de entardecer. É normal diferirem cerca de um decibel.',
+    dict_toggle:'Dicionário das colunas',
+    station_title_html:'Onde e como <em>mede</em>',
+    plan_aria:'Planta: a estação está no eixo de aproximação da pista 02, 1,37 km antes do limiar; os aviões em final passam mesmo por cima.',
+    plan_kick:'PLANTA · ESQUEMA',
+    plan_thr:'Limiar da pista 02',
+    plan_station_sub:'≈ 80 m · 1.º andar',
+    plan_bearing:'rumo 22,6° · eixo 22,7°',
+    plan_overhead:'Os aviões em final passam mesmo por cima.',
+    stk_position:'Posição',
+    stk_sound:'Som',
+    stk_mounting:'Instalação',
+    stk_calib:'Calibração',
+    stk_aircraft:'Aviões',
+    stk_env:'Meteo, ar',
+    flights_title_html:'Uma linha <em>por avião</em>',
+    flights_desc2:'Cada passagem captada pela estação, com a medição acústica associada. As horas estão na hora local de Lisboa; as colunas Unix (UTC) alinham um voo com os ficheiros contínuos.',
+    th_month:'Mês',
+    th_flights:'Voos',
+    th_size:'Tamanho',
+    th_file:'Ficheiro',
+    live_word:'EM CURSO',
+    cont_title_html:'O sinal bruto, <em>não só os eventos</em>',
+    dl_short:'↓',
     sch_flight_hex:'Endereço ICAO de 24 bits do transponder do avião.',
     sch_flight_track:'Rumo (graus) e razão vertical (pés por minuto, negativa em descida) transmitidos no momento da detecção, e velocidade em relação ao solo em nós. A posição do avião e as trajectórias completas não são guardadas.',
     sch_flight_unix:'Hora de detecção e hora do pico sonoro, em tempo Unix (UTC). A forma directa de fazer corresponder um voo aos ficheiros contínuos de 1 segundo.',
@@ -659,6 +917,66 @@ const T = {
     cont_note:'Historique plus court que les tableaux de vols : l\'enregistrement continu n\'a démarré que lorsque ce besoin est apparu.',
     sch_cont_ts:'Jour calendaire, et epoch Unix (UTC) du relevé individuel.',
     sch_cont_val:'Niveau sonore instantané (dB) ou vibration (milli-g) à cette seconde — un échantillon, pas une moyenne glissante.',
+    g_flights:'vols mesurés',
+    g_flights_sub:'une ligne chacun, depuis le 1er mai 2026',
+    g_readings:'relevés à la seconde',
+    g_readings_sub:'son et vibration, jour et nuit',
+    g_lden_tpl:'Lden · {d}',
+    g_lden_sub:'SensorGrid, dernier jour complet',
+    g_dist:'du seuil de la piste 02',
+    g_dist_sub:'pile sous l\'axe d\'approche à 22,7°',
+    ds_label:'Ce qu\'il y a dedans',
+    ds_title:'Quatre jeux de données, <em>un capteur</em>',
+    ds_f_chip:'CSV · MENSUEL',
+    ds_f_t:'Événements de vol',
+    ds_f_d:'Une ligne par avion : identité, phase, altitude, cap, pic sonore, secondes au-dessus de 70 dB, vibration, météo.',
+    ds_c_chip:'ZIP · 10 JOURS',
+    ds_c_t:'Signal continu',
+    ds_c_d:'Son et vibration chaque seconde, jour et nuit, pas seulement au passage d\'un avion.',
+    ds_d_chip:'CSV · QUOTIDIEN',
+    ds_d_t:'Lden quotidien',
+    ds_d_d:'Deux calculs indépendants jour par jour, côte à côte, et des tranches de 3 heures météo et bruit.',
+    ds_s_t:'Fiche station',
+    ds_s_d:'Position, capteurs, réglages, référence horaire et limites connues, prête à citer.',
+    files_word:'fichiers',
+    zipped_word:'compressés',
+    cov_title:'Couverture',
+    cov_f:'Événements de vol',
+    cov_spl:'Son 1 Hz',
+    cov_vib:'Vibration 1 Hz',
+    cov_lden:'Lden quotidien',
+    cov_today:'AUJ.',
+    daily_title_html:'Le Lden, <em>jour par jour</em>',
+    chart_lf:'Estimation Lisbon Finals',
+    chart_limit:'65 dB · limite PT, zones mixtes',
+    chart_moved:'29 sept · boîte des capteurs déplacée',
+    m_sg_t:'Lden standard, calculé de façon indépendante',
+    m_sg_d:'Par la plateforme SensorGrid (Alessandro Annunziato) à partir du flux à la seconde de cette station. Définition de la directive UE 2002/49/CE : jour, soirée +5 dB, nuit +10 dB, plus l\'indice aéroportuaire italien LVA.',
+    m_lf_t:'Estimation par événements, Lisbon Finals',
+    m_lf_d:'Les secondes au-dessus de 70 dB de chaque vol détecté sont intégrées en niveau d\'exposition sonore, puis combinées en moyenne de jour (16 h) et de nuit (8 h, +10 dB). Avions seulement, sans bruit de fond, sans période de soirée. Un écart d\'environ un décibel est normal.',
+    dict_toggle:'Dictionnaire des colonnes',
+    station_title_html:'Où et comment <em>elle mesure</em>',
+    plan_aria:'Plan : la station est sur l\'axe d\'approche de la piste 02, à 1,37 km avant le seuil ; les avions en finale passent juste au-dessus.',
+    plan_kick:'PLAN · SCHÉMA',
+    plan_thr:'Seuil piste 02',
+    plan_station_sub:'≈ 80 m · 1er étage',
+    plan_bearing:'cap 22,6° · axe 22,7°',
+    plan_overhead:'Les avions en finale passent juste au-dessus.',
+    stk_position:'Position',
+    stk_sound:'Son',
+    stk_mounting:'Installation',
+    stk_calib:'Étalonnage',
+    stk_aircraft:'Avions',
+    stk_env:'Météo, air',
+    flights_title_html:'Une ligne <em>par avion</em>',
+    flights_desc2:'Chaque passage capté par la station, avec la mesure acoustique qui lui correspond. Les heures sont en heure locale de Lisbonne ; les colonnes Unix (UTC) alignent un vol sur les fichiers continus.',
+    th_month:'Mois',
+    th_flights:'Vols',
+    th_size:'Taille',
+    th_file:'Fichier',
+    live_word:'EN COURS',
+    cont_title_html:'Le signal brut, <em>pas seulement les événements</em>',
+    dl_short:'↓',
     sch_flight_hex:'Adresse ICAO 24 bits du transpondeur de l\'avion.',
     sch_flight_track:'Cap (degrés) et vitesse verticale (pieds par minute, négative en descente) diffusés au moment de la détection, et vitesse sol en nœuds. La position de l\'avion et les trajectoires complètes ne sont pas enregistrées.',
     sch_flight_unix:'Heure de détection et heure du pic sonore, en temps Unix (UTC). Le moyen direct de faire correspondre un vol aux fichiers continus à la seconde.',
@@ -743,33 +1061,93 @@ function resCard(name, meta, href, btn){
   return `<div class="res-card"><div><div class="res-card-name">${name}</div><div class="res-card-meta">${meta}</div></div><a class="res-card-dl" href="/research-data/${href}" download>${btn}</a></div>`;
 }
 function renderResearchLists(){
+  // 10 oct 2026 : refonte (vue d'ensemble, frise de couverture, tableau des vols, colonnes continues)
   const t = T[_lang] || T.en, loc = resLoc();
   const upd = document.querySelectorAll('.res-updated');
   if (!resManifest) return;
-  const d = new Date(resManifest.generated_at).toLocaleDateString(loc, {day:'numeric', month:'long', year:'numeric'});
+  const m = resManifest, num = n => n.toLocaleString(loc);
+  const d = new Date(m.generated_at).toLocaleDateString(loc, {day:'numeric', month:'long', year:'numeric'});
   upd.forEach(el => { el.textContent = t.updated_tpl.replace('{d}', d); });
-  const fl = document.getElementById('res-flights-list');
-  if (fl && resManifest.flights) fl.innerHTML = resManifest.flights.map(f => {
-    const n = f.rows.toLocaleString(loc) + ' ' + t.flights_word;
-    return resCard(f.file, (f.in_progress ? t.in_progress + ' · ' : '') + n + ' · ' + resSize(f.bytes), f.file, t.dl_btn);
-  }).join('');
-  const cl = document.getElementById('res-continuous-list');
-  const c = resManifest.continuous || {};
-  const group = (items, title) => !items || !items.length ? '' : `<div class="res-sub">${title}</div>` + items.slice().reverse().map(e => {
-    const meta = (e.in_progress ? t.in_progress + ' · ' : '') + resRange(e.first_day, e.last_day) + ' · '
-      + e.rows.toLocaleString(loc) + ' ' + t.readings_word + ' (1/s) · ' + resSize(e.bytes)
-      + ' · ' + t.csv_unzipped.replace('{s}', resSize(e.csv_bytes));
-    return resCard(e.file, meta, e.file, t.dl_zip);
-  }).join('');
-  if (cl) cl.innerHTML = group(c.spl, t.cont_spl_h) + group(c.vibration, t.cont_vib_h);
-  // 10 oct 2026 : indicateurs quotidiens (export du Mode Expert) + fiche station
+  const fl = m.flights || [], c = m.continuous || {}, spl = c.spl || [], vib = c.vibration || [], daily = m.daily || [];
+  const sum = (a, k) => a.reduce((s, e) => s + (e[k] || 0), 0);
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.innerHTML = v; };
+  const millions = n => (n / 1e6).toLocaleString(loc, {maximumFractionDigits:1}) + ' M';
+  set('g-flights', num(sum(fl, 'rows')));
+  set('g-readings', millions(sum(spl, 'rows') + sum(vib, 'rows')));
+  set('ds-f-m', fl.length + ' ' + t.files_word + ' · ' + resSize(sum(fl, 'bytes')));
+  set('ds-c-m', (spl.length + vib.length) + ' ' + t.files_word + ' · ' + resSize(sum(spl, 'bytes') + sum(vib, 'bytes')) + ' ' + t.zipped_word);
+  set('ds-d-m', daily.length + ' ' + t.files_word + ' · ' + resSize(sum(daily, 'bytes')));
+  if (m.station) set('ds-s-m', '1 ' + t.files_word.replace(/s$/, '') + ' · ' + resSize(m.station.bytes));
+  // frise de couverture : du 1er mai à la fin du mois en cours
+  const D0 = new Date('2026-05-01T12:00:00'), today = new Date(m.generated_at);
+  const D1 = new Date(today.getFullYear(), today.getMonth() + 1, 0, 12);
+  const pos = s => Math.max(0, Math.min(100, (resDay(s) - D0) / (D1 - D0) * 100));
+  const todayIso = m.generated_at.slice(0, 10);
+  const bar = (a, b, col) => `<div class="rx-bar"><i style="left:${pos(a).toFixed(1)}%;right:${(100 - pos(b)).toFixed(1)}%;background:${col}"></i></div>`;
+  const first = (arr, k) => arr.length ? arr.map(e => e[k]).sort()[0] : null;
+  const fFirst = fl.length ? fl[0].month + '-01' : '2026-05-01';
+  let cov = `<span>${t.cov_f}</span>` + bar(fFirst, todayIso, '#f5a623');
+  if (spl.length) cov += `<span>${t.cov_spl}</span>` + bar(first(spl, 'first_day'), todayIso, '#60b4ff');
+  if (vib.length) cov += `<span>${t.cov_vib}</span>` + bar(first(vib, 'first_day'), todayIso, 'rgba(96,180,255,.6)');
+  if (daily.length) cov += `<span>${t.cov_lden}</span>` + bar(daily[0].first_day, daily[0].last_day, '#4ade80');
+  let months = '';
+  for (let dt = new Date(D0); dt <= D1; dt = new Date(dt.getFullYear(), dt.getMonth() + 1, 1, 12)) {
+    months += `<span style="left:${pos(dt.toISOString().slice(0, 10)).toFixed(1)}%">${dt.toLocaleDateString(loc, {month:'short'}).replace('.', '').toUpperCase()}</span>`;
+  }
+  months += `<span style="left:${pos(todayIso).toFixed(1)}%;transform:translateX(-50%);color:#4ade80;top:-1px">▲</span>`;
+  set('rx-cov', cov + `<span></span><div class="rx-months">${months}</div>`);
+  // vols : tableau compact, le plus récent en haut
+  set('res-flights-list', `<div class="rx-tr h"><span>${t.th_month}</span><span>${t.th_flights}</span><span class="sz">${t.th_size}</span><span class="r">${t.th_file}</span></div>` +
+    fl.slice().reverse().map(f => {
+      const mo = resDay(f.month + '-15').toLocaleDateString(loc, {month:'short', year:'numeric'});
+      return `<div class="rx-tr"><span>${mo}${f.in_progress ? `<span class="rx-live">${t.live_word}</span>` : ''}</span><span>${num(f.rows)}</span><span class="dim sz">${resSize(f.bytes)}</span><a class="r" href="/research-data/${f.file}" download>${f.file} ↓</a></div>`;
+    }).join(''));
+  // continu : deux colonnes, décennies récentes en haut
+  const col = (items, title) => !items.length ? '' : `<div class="rx-col"><div class="rx-kick">${title}</div>` + items.slice().reverse().map(e =>
+    `<div class="rx-row"><span>${resRange(e.first_day, e.last_day)}${e.in_progress ? `<span class="rx-live">${t.live_word}</span>` : ''}<span class="meta">${num(e.rows)} ${t.readings_word} · ${resSize(e.bytes)}</span></span><a href="/research-data/${e.file}" download>zip ↓</a></div>`).join('') + '</div>';
+  set('res-continuous-list', col(spl, t.cont_spl_h) + col(vib, t.cont_vib_h));
+  // quotidien + fiche station
   const span = (a, b) => { const o = {day:'numeric', month:'short', year:'numeric'}; return resDay(a).toLocaleDateString(loc, o) + ' – ' + resDay(b).toLocaleDateString(loc, o); };
-  const dl = document.getElementById('res-daily-list');
-  if (dl && resManifest.daily) dl.innerHTML = resManifest.daily.map(e =>
-    resCard(e.file, (e.first_day ? span(e.first_day, e.last_day) + ' · ' : '') + e.rows.toLocaleString(loc) + ' ' + (e.file.indexOf('lden') === 0 ? t.days_word : t.rows_word) + ' · ' + resSize(e.bytes), e.file, t.dl_btn)).join('');
-  const sf = document.getElementById('res-station-file');
-  if (sf && resManifest.station) sf.innerHTML = resCard(resManifest.station.file, 'JSON · ' + resSize(resManifest.station.bytes), resManifest.station.file, t.dl_json);
+  set('res-daily-list', daily.map(e => resCard(e.file, (e.first_day ? span(e.first_day, e.last_day) + ' · ' : '') + num(e.rows) + ' ' + (e.file.indexOf('lden') === 0 ? t.days_word : t.rows_word) + ' · ' + resSize(e.bytes), e.file, t.dl_btn)).join(''));
+  if (m.station) set('res-station-file', resCard(m.station.file, 'JSON · ' + resSize(m.station.bytes), m.station.file, t.dl_json));
+  renderLdenChart();
 }
+// ── Graphique Lden quotidien (lu depuis lden_daily.csv) ──
+let resLden = null;
+function renderLdenChart(){
+  const box = document.getElementById('res-lden-chart'), t = T[_lang] || T.en, loc = resLoc();
+  if (!box || !resLden || !resLden.length) return;
+  const rows = resLden, n = rows.length, W = 1000, H = 230, L = 40, R = 14, top = 14, bot = 28;
+  const vals = rows.flatMap(r => [r.sg, r.lf]).filter(v => v != null);
+  const ymin = Math.floor((Math.min(...vals, 65) - 1) / 5) * 5, ymax = Math.ceil((Math.max(...vals) + 1) / 5) * 5;
+  const X = i => L + (W - L - R) * (n > 1 ? i / (n - 1) : 0.5), Y = v => top + (H - top - bot) * (ymax - v) / (ymax - ymin);
+  const path = k => { let p = '', on = false; rows.forEach((r, i) => { if (r[k] == null) { on = false; return; } p += (on ? ' L' : ' M') + X(i).toFixed(1) + ',' + Y(r[k]).toFixed(1); on = true; }); return p; };
+  let g = '';
+  for (let v = ymin; v <= ymax; v += 5) g += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#1e2530"/><text x="${L - 8}" y="${Y(v) + 3}" text-anchor="end">${v}</text>`;
+  g += `<line x1="${L}" x2="${W - R}" y1="${Y(65)}" y2="${Y(65)}" stroke="#f87171" stroke-dasharray="3 4" opacity=".75"/>`;
+  const step = Math.max(1, Math.round(n / 6));
+  rows.forEach((r, i) => { if (i % step === 0 || i === n - 1) g += `<text x="${X(i)}" y="${H - 8}" text-anchor="${i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle'}">${resDay(r.date).toLocaleDateString(loc, {day:'numeric', month:'short'})}</text>`; });
+  const mv = rows.findIndex(r => r.date === '2026-09-29');
+  if (mv >= 0) g += `<text x="${X(mv)}" y="${Math.min(H - bot - 4, Y(Math.min(rows[mv].sg ?? 99, rows[mv].lf ?? 99)) + 16)}" text-anchor="middle" fill="rgba(240,237,232,.45)">${t.chart_moved}</text>`;
+  const last = rows.map((r, i) => [r, i]).filter(([r]) => r.sg != null).pop();
+  let dot = '';
+  if (last) dot = `<circle cx="${X(last[1])}" cy="${Y(last[0].sg)}" r="4" fill="#f5a623"/><text x="${X(last[1])}" y="${Math.max(12, Math.min(Y(last[0].sg), Y(last[0].lf ?? last[0].sg)) - 14)}" text-anchor="end" fill="#f5a623" font-size="11">${last[0].sg.toLocaleString(loc, {minimumFractionDigits:1, maximumFractionDigits:1})}</text>`;
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Lden"><g font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(240,237,232,.4)">${g}</g>` +
+    `<path d="${path('lf')}" fill="none" stroke="rgba(240,237,232,.6)" stroke-width="1.6" stroke-dasharray="4 4"/>` +
+    `<path d="${path('sg')}" fill="none" stroke="#f5a623" stroke-width="2.2" stroke-linejoin="round"/>` +
+    `<g font-family="JetBrains Mono, monospace">${dot}</g></svg>`;
+  if (last) {
+    const el = document.getElementById('g-lden'), k = document.getElementById('g-lden-k');
+    if (el) el.innerHTML = last[0].sg.toLocaleString(loc, {minimumFractionDigits:1, maximumFractionDigits:1}) + '<small> dB</small>';
+    if (k) k.textContent = t.g_lden_tpl.replace('{d}', resDay(last[0].date).toLocaleDateString(loc, {day:'numeric', month:'short'}));
+  }
+}
+fetch('/research-data/lden_daily.csv?t=' + Date.now()).then(r => r.ok ? r.text() : Promise.reject()).then(txt => {
+  const lines = txt.trim().split('\n'), h = lines[0].split(','), iD = h.indexOf('date'), iS = h.indexOf('sensorgrid_lden'), iL = h.indexOf('lf_leq_dn_est'), iSt = h.indexOf('status');
+  resLden = lines.slice(1).map(l => { const c = l.split(','); const v = x => x === '' || x == null ? null : parseFloat(x);
+    return {date: c[iD], sg: v(c[iS]), lf: c[iSt] === 'insufficient_coverage' ? null : v(c[iL])}; });
+  renderLdenChart();
+}).catch(() => {});
 fetch('/research-data/manifest.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject())
   .then(m => { resManifest = m; renderResearchLists(); })
   .catch(() => { const cl = document.getElementById('res-continuous-list'); if (cl) cl.innerHTML = `<div class="res-card-meta">${(T[_lang] || T.en).list_unavailable}</div>`; });
