@@ -549,6 +549,18 @@ main{padding-top:96px;}
       <div class="schema-item"><div class="schema-k">date, timestamp</div><div class="schema-v" data-i18n="sch_cont_ts"></div></div>
       <div class="schema-item"><div class="schema-k">spl_db / vib_mg</div><div class="schema-v" data-i18n="sch_cont_val"></div></div>
     </div></details>
+    <div class="rx-kick" style="margin-top:40px;color:#4ade80" data-i18n="weather_h"></div>
+    <p class="section-desc" data-i18n="weather_desc"></p>
+    <div class="rx-table" id="res-weather-list"></div>
+    <details class="rx-dict"><summary data-i18n="dict_toggle"></summary>
+    <div class="schema-list">
+      <div class="schema-item"><div class="schema-k">time_utc, unix_time / date, timestamp</div><div class="schema-v" data-i18n="sch_w_time"></div></div>
+      <div class="schema-item"><div class="schema-k">model_time_local</div><div class="schema-v" data-i18n="sch_w_model"></div></div>
+      <div class="schema-item"><div class="schema-k">wind_speed_kmh, wind_gust_kmh, wind_dir_deg</div><div class="schema-v" data-i18n="sch_w_wind"></div></div>
+      <div class="schema-item"><div class="schema-k">temperature_c, humidity_pct</div><div class="schema-v" data-i18n="sch_w_temp"></div></div>
+      <div class="schema-item"><div class="schema-k">pressure_hpa, pressure_msl_hpa</div><div class="schema-v" data-i18n="sch_w_press"></div></div>
+      <div class="schema-item"><div class="schema-k">precipitation_mm, cloud_cover_pct</div><div class="schema-v" data-i18n="sch_w_rain"></div></div>
+    </div></details>
   </section>
 
   </div>
@@ -634,6 +646,15 @@ const T = {
     cont_note:'Shorter history than the flight tables: continuous logging only started once this need came up.',
     sch_cont_ts:'Calendar day, and Unix epoch (UTC) for the individual reading.',
     sch_cont_val:'Instantaneous sound level (dB) or vibration (milli-g) at that second — a sample, not a running average.',
+    weather_h:'Weather (Open-Meteo model)',
+    weather_desc:'Wind, temperature, humidity, pressure, rain and cloud cover, continuously and not only at the moment of each flight. Hourly history since 1 May 2026, plus the station\'s own 5-minute log since 10 October 2026. These are model values for a grid cell about 2.4 km west-south-west of the station, not a sensor on the terrace.',
+    th_hours:'Hours', th_hourly:'Hourly', th_5min:'Every 5 min',
+    sch_w_time:'Hourly files: model hour in UTC and as Unix time. 5-minute files: local date of the file and Unix time (UTC) of the reading.',
+    sch_w_model:'5-minute files only: the model time step (local Lisbon time) the values belong to. Open-Meteo refreshes its current values every 15 minutes, so consecutive rows often repeat.',
+    sch_w_wind:'Wind speed and gusts at 10 m (km/h) and direction the wind comes from (degrees).',
+    sch_w_temp:'Air temperature at 2 m (°C) and relative humidity (%).',
+    sch_w_press:'Surface pressure at the model cell elevation (106 m) and pressure reduced to mean sea level, in hPa. The sea-level value is the one to use to correct barometric aircraft altitudes.',
+    sch_w_rain:'Precipitation over the preceding interval (mm) and total cloud cover (%).',
     g_flights:'flights measured',
     g_flights_sub:'one row each, since 1 May 2026',
     g_readings:'1-second readings',
@@ -783,6 +804,15 @@ const T = {
     cont_note:'Histórico mais curto do que as tabelas de voos: o registo contínuo só começou quando esta necessidade surgiu.',
     sch_cont_ts:'Dia do calendário, e epoch Unix (UTC) da leitura individual.',
     sch_cont_val:'Nível sonoro instantâneo (dB) ou vibração (mili-g) nesse segundo — uma amostra, não uma média corrida.',
+    weather_h:'Meteorologia (modelo Open-Meteo)',
+    weather_desc:'Vento, temperatura, humidade, pressão, chuva e nebulosidade, de forma contínua e não apenas no momento de cada voo. Histórico horário desde 1 de Maio de 2026, mais o registo próprio da estação a cada 5 minutos desde 10 de Outubro de 2026. São valores de modelo para uma célula da grelha a cerca de 2,4 km a oés-sudoeste da estação, não um sensor no terraço.',
+    th_hours:'Horas', th_hourly:'Horário', th_5min:'A cada 5 min',
+    sch_w_time:'Ficheiros horários: hora do modelo em UTC e em tempo Unix. Ficheiros de 5 minutos: data local do ficheiro e tempo Unix (UTC) da leitura.',
+    sch_w_model:'Apenas nos ficheiros de 5 minutos: o passo de tempo do modelo (hora local de Lisboa) a que os valores pertencem. A Open-Meteo actualiza os valores actuais a cada 15 minutos, por isso linhas consecutivas repetem-se muitas vezes.',
+    sch_w_wind:'Velocidade do vento e rajadas a 10 m (km/h) e direcção de onde sopra o vento (graus).',
+    sch_w_temp:'Temperatura do ar a 2 m (°C) e humidade relativa (%).',
+    sch_w_press:'Pressão à superfície à altitude da célula do modelo (106 m) e pressão reduzida ao nível médio do mar, em hPa. O valor ao nível do mar é o que deve ser usado para corrigir as altitudes barométricas dos aviões.',
+    sch_w_rain:'Precipitação no intervalo anterior (mm) e nebulosidade total (%).',
     g_flights:'voos medidos',
     g_flights_sub:'uma linha cada, desde 1 de Maio de 2026',
     g_readings:'leituras por segundo',
@@ -932,6 +962,15 @@ const T = {
     cont_note:'Historique plus court que les tableaux de vols : l\'enregistrement continu n\'a démarré que lorsque ce besoin est apparu.',
     sch_cont_ts:'Jour calendaire, et epoch Unix (UTC) du relevé individuel.',
     sch_cont_val:'Niveau sonore instantané (dB) ou vibration (milli-g) à cette seconde — un échantillon, pas une moyenne glissante.',
+    weather_h:'Météo (modèle Open-Meteo)',
+    weather_desc:'Vent, température, humidité, pression, pluie et nébulosité, en continu et pas seulement au moment de chaque vol. Historique horaire depuis le 1er mai 2026, plus le relevé de la station toutes les 5 minutes depuis le 10 octobre 2026. Ce sont des valeurs de modèle pour une maille située à environ 2,4 km à l\'ouest-sud-ouest de la station, pas un capteur sur la terrasse.',
+    th_hours:'Heures', th_hourly:'Horaire', th_5min:'Toutes les 5 min',
+    sch_w_time:'Fichiers horaires : heure du modèle en UTC et en temps Unix. Fichiers 5 minutes : date locale du fichier et temps Unix (UTC) du relevé.',
+    sch_w_model:'Fichiers 5 minutes seulement : le pas de temps du modèle (heure locale de Lisbonne) auquel appartiennent les valeurs. Open-Meteo ne rafraîchit ses valeurs actuelles que toutes les 15 minutes : des lignes consécutives se répètent souvent.',
+    sch_w_wind:'Vitesse du vent et rafales à 10 m (km/h), et direction d\'où vient le vent (degrés).',
+    sch_w_temp:'Température de l\'air à 2 m (°C) et humidité relative (%).',
+    sch_w_press:'Pression en surface à l\'altitude de la maille (106 m) et pression ramenée au niveau de la mer, en hPa. C\'est la valeur au niveau de la mer qui sert à corriger les altitudes barométriques des avions.',
+    sch_w_rain:'Précipitations sur l\'intervalle précédent (mm) et nébulosité totale (%).',
     g_flights:'vols mesurés',
     g_flights_sub:'une ligne chacun, depuis le 1er mai 2026',
     g_readings:'relevés à la seconde',
@@ -1129,6 +1168,14 @@ function renderResearchLists(){
   // quotidien + fiche station
   const span = (a, b) => { const o = {day:'numeric', month:'short', year:'numeric'}; return resDay(a).toLocaleDateString(loc, o) + ' – ' + resDay(b).toLocaleDateString(loc, o); };
   set('res-daily-list', daily.map(e => resCard(e.file, (e.first_day ? span(e.first_day, e.last_day) + ' · ' : '') + num(e.rows) + ' ' + (e.file.indexOf('lden') === 0 ? t.days_word : t.rows_word) + ' · ' + resSize(e.bytes), e.file, t.dl_btn)).join(''));
+  // météo modèle (10 oct 2026) : une ligne par mois, fichier horaire + fichier 5 min
+  const wx = m.weather || {}, wh = wx.hourly || [], w5 = wx.five_min || [];
+  const w5m = {}; w5.forEach(e => { w5m[e.month] = e; });
+  set('res-weather-list', !wh.length ? '' : `<div class="rx-tr h"><span>${t.th_month}</span><span>${t.th_hours}</span><span>${t.th_hourly}</span><span class="r">${t.th_5min}</span></div>` +
+    wh.slice().reverse().map(e => {
+      const mo = resDay(e.month + '-15').toLocaleDateString(loc, {month:'short', year:'numeric'}), f5 = w5m[e.month];
+      return `<div class="rx-tr"><span>${mo}${e.in_progress ? `<span class="rx-live">${t.live_word}</span>` : ''}</span><span>${num(e.rows)}</span><a href="/research-data/${e.file}" download>csv ↓</a>${f5 ? `<a class="r" href="/research-data/${f5.file}" download>${num(f5.rows)} · csv ↓</a>` : '<span class="r dim">–</span>'}</div>`;
+    }).join(''));
   const trk = m.tracks || [];
   set('res-tracks-list', trk.slice().reverse().map(e => resCard(e.file, resRange(e.first_day, e.last_day) + (e.in_progress ? ' · ' + t.live_word : '') + ' · ' + num(e.passes || 0) + ' ' + t.passes_word + ' · ' + num(e.rows) + ' ' + t.positions_word + ' · ' + resSize(e.bytes), e.file, t.dl_zip)).join(''));
   if (m.station) set('res-station-file', resCard(m.station.file, 'JSON · ' + resSize(m.station.bytes), m.station.file, t.dl_json));
