@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-10T07:30:40Z",
+ "generated_at": "2026-10-10T08:04:45Z",
  "flights": [
   {
    "file": "flights_2026-05.csv",
@@ -39,8 +39,8 @@
   {
    "file": "flights_2026-10.csv",
    "month": "2026-10",
-   "rows": 2968,
-   "bytes": 519801,
+   "rows": 2981,
+   "bytes": 522084,
    "in_progress": true
   }
  ],
@@ -89,9 +89,9 @@
     "first_day": "2026-10-01",
     "last_day": "2026-10-10",
     "days": 10,
-    "rows": 789894,
-    "bytes": 3659865,
-    "csv_bytes": 22906951,
+    "rows": 791892,
+    "bytes": 3669292,
+    "csv_bytes": 22964893,
     "in_progress": true
    }
   ],
@@ -139,9 +139,9 @@
     "first_day": "2026-10-01",
     "last_day": "2026-10-10",
     "days": 10,
-    "rows": 798552,
-    "bytes": 4233607,
-    "csv_bytes": 23882220,
+    "rows": 800573,
+    "bytes": 4244639,
+    "csv_bytes": 23942744,
     "in_progress": true
    }
   ]
@@ -166,6 +166,6 @@
  ],
  "station": {
   "file": "station_metadata.json",
-  "bytes": 3962
+  "bytes": 4058
  }
 }

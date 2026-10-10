@@ -17,7 +17,7 @@
     "frequency_weighting": "A (meter display reads dBA; checked on site 2026-10-10)",
     "time_weighting": "FAST (shown on the meter display; checked on site 2026-10-10)",
     "range": "30-130 dB",
-    "acoustic_calibration": "electronic chain checked against a reference meter in June 2026; no field calibration with a 94 dB acoustic calibrator confirmed",
+    "acoustic_calibration": "measurement chain validated on site against two independent meters at the same time, agreement within 1 to 2 dB (after the switch to 125 ms averaging); a check with a certified 94 dB acoustic calibrator has not been done yet",
     "continuous_log": "1 sample per second, Unix time (UTC), since 2026-09-03 15:10 local time",
     "per_flight": "peak level in the pass window and seconds above 70 dB"
   },
