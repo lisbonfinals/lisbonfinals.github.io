@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-10T16:17:52Z",
+ "generated_at": "2026-10-10T17:08:31Z",
  "flights": [
   {
    "file": "flights_2026-05.csv",
@@ -39,8 +39,8 @@
   {
    "file": "flights_2026-10.csv",
    "month": "2026-10",
-   "rows": 3123,
-   "bytes": 594435,
+   "rows": 3132,
+   "bytes": 596813,
    "in_progress": true
   }
  ],
@@ -89,9 +89,9 @@
     "first_day": "2026-10-01",
     "last_day": "2026-10-10",
     "days": 10,
-    "rows": 820695,
-    "bytes": 3804822,
-    "csv_bytes": 23800181,
+    "rows": 823662,
+    "bytes": 3818669,
+    "csv_bytes": 23886224,
     "in_progress": true
    }
   ],
@@ -139,9 +139,9 @@
     "first_day": "2026-10-01",
     "last_day": "2026-10-10",
     "days": 10,
-    "rows": 829729,
-    "bytes": 4399883,
-    "csv_bytes": 24814808,
+    "rows": 832723,
+    "bytes": 4415548,
+    "csv_bytes": 24903896,
     "in_progress": true
    }
   ]
@@ -172,15 +172,84 @@
    "first_day": "2026-10-10",
    "last_day": "2026-10-10",
    "days": 1,
-   "passes": 4,
-   "rows": 84,
-   "bytes": 1741,
-   "csv_bytes": 8400,
+   "passes": 13,
+   "rows": 293,
+   "bytes": 4839,
+   "csv_bytes": 29110,
    "in_progress": true
   }
  ],
+ "weather": {
+  "hourly": [
+   {
+    "file": "weather_hourly_2026-05.csv",
+    "month": "2026-05",
+    "first_day": "2026-05-01",
+    "last_day": "2026-05-31",
+    "rows": 744,
+    "bytes": 52331,
+    "in_progress": false
+   },
+   {
+    "file": "weather_hourly_2026-06.csv",
+    "month": "2026-06",
+    "first_day": "2026-06-01",
+    "last_day": "2026-06-30",
+    "rows": 720,
+    "bytes": 50697,
+    "in_progress": false
+   },
+   {
+    "file": "weather_hourly_2026-07.csv",
+    "month": "2026-07",
+    "first_day": "2026-07-01",
+    "last_day": "2026-07-31",
+    "rows": 744,
+    "bytes": 52126,
+    "in_progress": false
+   },
+   {
+    "file": "weather_hourly_2026-08.csv",
+    "month": "2026-08",
+    "first_day": "2026-08-01",
+    "last_day": "2026-08-31",
+    "rows": 744,
+    "bytes": 52370,
+    "in_progress": false
+   },
+   {
+    "file": "weather_hourly_2026-09.csv",
+    "month": "2026-09",
+    "first_day": "2026-09-01",
+    "last_day": "2026-09-30",
+    "rows": 720,
+    "bytes": 50195,
+    "in_progress": false
+   },
+   {
+    "file": "weather_hourly_2026-10.csv",
+    "month": "2026-10",
+    "first_day": "2026-10-01",
+    "last_day": "2026-10-10",
+    "rows": 234,
+    "bytes": 16471,
+    "in_progress": true
+   }
+  ],
+  "five_min": [
+   {
+    "file": "weather_5min_2026-10.csv",
+    "month": "2026-10",
+    "first_day": "2026-10-10",
+    "last_day": "2026-10-10",
+    "rows": 1,
+    "bytes": 246,
+    "in_progress": true
+   }
+  ]
+ },
  "station": {
   "file": "station_metadata.json",
-  "bytes": 5449
+  "bytes": 6351
  }
 }

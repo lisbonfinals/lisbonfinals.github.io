@@ -35,8 +35,11 @@
     "tracks": "tracks_*.zip: every position received while the aircraft was within 5 km of the station and between 200 and 5000 ft, about one point per second; one row per position, grouped by pass (hex + cpa_unix_time). In practice the receiving antenna (low on the terrace, buildings around) picks up landing aircraft from about 1.6 km before the station to about 0.7 km after it, i.e. roughly 20 to 30 s per pass, which covers the closest point of approach and the noise peak"
   },
   "weather": {
-    "source": "Open-Meteo model (wind, temperature, humidity, pressure) polled every 5 min at grid point 38.7749, -9.1397 (airport area, about 2.4 km north of the station); NOT a sensor on the terrace",
-    "stored": "value at the moment of each flight only; no continuous weather history"
+    "source": "Open-Meteo weather model, NOT a sensor on the terrace. Requested for 38.7749, -9.1397; Open-Meteo answers with its model grid cell centred on 38.746, -9.176 (cell elevation 106 m), about 2.4 km west-south-west of the station (corrected 2026-10-10; earlier versions of this file gave the requested point as the grid point)",
+    "variables": "wind speed, gusts and direction at 10 m; air temperature and relative humidity at 2 m; surface pressure and pressure reduced to mean sea level; precipitation; cloud cover",
+    "per_flight": "values at the moment of each flight (temperature_c, humidity_pct, pressure_hpa, wind_* columns of the flight files)",
+    "hourly_history": "weather_hourly_YYYY-MM.csv: hourly values from 2026-05-01, retrieved from the Open-Meteo historical forecast API (same model and grid cell), times in UTC; previous and current month refreshed daily",
+    "five_minute_log": "weather_5min_YYYY-MM.csv: the station's own polling of the current model values every 5 minutes, from 2026-10-10 evening; model_time_local is the model time step the values belong to. Open-Meteo refreshes these current values every 15 minutes, so consecutive rows often repeat"
   },
   "air_quality": {
     "sensor": "Plantower PMS5003 (PM1, PM2.5, PM10)",
