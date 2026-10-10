@@ -42,8 +42,10 @@
     "five_minute_log": "weather_5min_YYYY-MM.csv: the station's own polling of the current model values every 5 minutes, from 2026-10-10 evening; model_time_local is the model time step the values belong to. Open-Meteo refreshes these current values every 15 minutes, so consecutive rows often repeat"
   },
   "air_quality": {
-    "sensor": "Plantower PMS5003 (PM1, PM2.5, PM10)",
-    "note": "ambient measurement; cannot be attributed to an individual flight, therefore not included in the flight files"
+    "sensor": "Plantower PMS5003 (laser particle counter): PM1, PM2.5, PM10 in ug/m3, inside the same ventilated box as the other sensors",
+    "per_flight": "not included in the flight files: an ambient measurement that cannot be attributed to an individual aircraft",
+    "continuous_log": "pm_YYYY-MM.zip, from 2026-10-10 evening: one row per minute, mean of the frames received during that minute (n_frames, about 60). pm1/pm25/pm10 = 'atmospheric environment' values (the ones shown on the website), *_std = 'standard particle' CF=1 values, p03...p100 = particle counts per 0.1 L of air above 0.3, 0.5, 1, 2.5, 5 and 10 um",
+    "known_issue": "Since 2026-09-30 (the day after the sensor box was moved) the sensor often reads 0 to 1 ug/m3 while the CAMS model gives 5 to 13 ug/m3 for Lisbon, with unusually low particle counts (about 200 per 0.1 L above 0.3 um). Reduced airflow or a sensor fault is suspected and is being checked; until this note is updated, treat the PM values as unreliable."
   },
   "time_reference": {
     "flight_files": "date and time columns are local Lisbon time (Europe/Lisbon: WEST UTC+1 in summer, WET UTC+0 in winter); unix_time columns are UTC",
