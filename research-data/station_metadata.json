@@ -1,0 +1,56 @@
+{
+  "station": "Lisbon Finals, citizen-science station under the LPPT (Lisbon Humberto Delgado) RWY 02 approach",
+  "location": {
+    "latitude": 38.755039,
+    "longitude": -9.149986,
+    "coordinates_note": "terrace position from Google Earth, corrected on 2026-10-10 (value published before: 38.754483, -9.149978, about 62 m further south)",
+    "distance_to_rwy02_threshold_km": 1.37,
+    "rwy02_threshold_reference": "AIP Portugal LPPT AD 2.12: RWY 02 THR 38 45 59.14 N, 009 08 38.05 W, elevation 100.6 m (threshold permanently displaced 90 m); distance 1372 m, bearing 22.6 deg from the station, in line with the 22.7 deg final approach track",
+    "elevation_m_amsl": "approx. 80 (Google Earth terrain at the building, first-floor terrace + ~3 m; not surveyed)",
+    "setting": "south-facing first-floor terrace of a residential building, Avenida do Brasil area, Lisbon",
+    "mounting": "all sensors in a clear acrylic box with two rows of holes drilled directly in front of the microphone (foam windscreen fitted); the box sits inside a slatted wooden cabinet that lets sound and wind through while shading it from sun and heat. The effect of the enclosure on measured levels has not been quantified."
+  },
+  "sound": {
+    "sensor": "Gain Express SLM-25 sound level meter, IEC 651 type 2 (manufacturer tolerance +/-1.5 dB at 94 dB / 1 kHz), analogue output read by an ADS1115 ADC",
+    "conversion": "dB = 30 + V / 0.033 (33 mV per dB, 30 dB floor), per manufacturer datasheet",
+    "time_averaging": "125 ms, aligned on the standard FAST time constant",
+    "frequency_weighting": "A (meter display reads dBA; checked on site 2026-10-10)",
+    "time_weighting": "FAST (shown on the meter display; checked on site 2026-10-10)",
+    "range": "30-130 dB",
+    "acoustic_calibration": "electronic chain checked against a reference meter in June 2026; no field calibration with a 94 dB acoustic calibrator confirmed",
+    "continuous_log": "1 sample per second, Unix time (UTC), since 2026-09-03 15:10 local time",
+    "per_flight": "peak level in the pass window and seconds above 70 dB"
+  },
+  "vibration": {
+    "sensor": "MPU-6050 accelerometer on the terrace",
+    "unit": "milli-g",
+    "continuous_log": "1 sample per second since 2026-09-07"
+  },
+  "aircraft": {
+    "source": "own ADS-B receiver (RTL-SDR, 1090 MHz)",
+    "altitude": "barometric altitude as broadcast (alt_baro, standard 1013.25 hPa reference, feet), GNSS altitude as fallback; not corrected to local QNH",
+    "speed": "ground speed",
+    "heading": "track/heading as broadcast, degrees",
+    "not_recorded": "aircraft position (lat/lon) and full tracks are not stored"
+  },
+  "weather": {
+    "source": "Open-Meteo model (wind, temperature, humidity, pressure) polled every 5 min at grid point 38.7749, -9.1397 (airport area, about 2.4 km north of the station); NOT a sensor on the terrace",
+    "stored": "value at the moment of each flight only; no continuous weather history"
+  },
+  "air_quality": {
+    "sensor": "Plantower PMS5003 (PM1, PM2.5, PM10)",
+    "note": "ambient measurement; cannot be attributed to an individual flight, therefore not included in the flight files"
+  },
+  "time_reference": {
+    "flight_files": "date and time columns are local Lisbon time (Europe/Lisbon: WEST UTC+1 in summer, WET UTC+0 in winter); unix_time columns are UTC",
+    "continuous_files": "Unix epoch, UTC"
+  },
+  "known_limitations": [
+    "June 2026: some peak values from the earlier ADC setup are not reliable (kept, see data_quality where flagged)",
+    "2026-09-03/04: continuous log incomplete and a duration bug; daily indicators start on 2026-09-05",
+    "2026-09-29: sensor box moved during maintenance; affected flights flagged sensor_box_moved",
+    "Single consumer-grade sensor on one terrace: local, independent evidence, not a reference network"
+  ],
+  "license": "CC BY 4.0, credit: Data: Lisbon Finals (lisbonfinals.com)",
+  "contact": "chronos@lisbonfinals.com"
+}

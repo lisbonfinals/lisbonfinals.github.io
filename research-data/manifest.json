@@ -1,46 +1,46 @@
 {
- "generated_at": "2026-10-07T05:15:05Z",
+ "generated_at": "2026-10-10T07:27:14Z",
  "flights": [
   {
    "file": "flights_2026-05.csv",
    "month": "2026-05",
    "rows": 9120,
-   "bytes": 905728,
+   "bytes": 1259459,
    "in_progress": false
   },
   {
    "file": "flights_2026-06.csv",
    "month": "2026-06",
    "rows": 9634,
-   "bytes": 989198,
+   "bytes": 1361998,
    "in_progress": false
   },
   {
    "file": "flights_2026-07.csv",
    "month": "2026-07",
    "rows": 10450,
-   "bytes": 1084077,
+   "bytes": 1481989,
    "in_progress": false
   },
   {
    "file": "flights_2026-08.csv",
    "month": "2026-08",
    "rows": 10549,
-   "bytes": 1100782,
+   "bytes": 1507982,
    "in_progress": false
   },
   {
    "file": "flights_2026-09.csv",
    "month": "2026-09",
    "rows": 10081,
-   "bytes": 1128245,
+   "bytes": 1592773,
    "in_progress": false
   },
   {
    "file": "flights_2026-10.csv",
    "month": "2026-10",
-   "rows": 1942,
-   "bytes": 219717,
+   "rows": 2967,
+   "bytes": 519620,
    "in_progress": true
   }
  ],
@@ -87,11 +87,11 @@
     "start": "2026-10-01",
     "end": "2026-10-10",
     "first_day": "2026-10-01",
-    "last_day": "2026-10-07",
-    "days": 7,
-    "rows": 528535,
-    "bytes": 2441482,
-    "csv_bytes": 15327539,
+    "last_day": "2026-10-10",
+    "days": 10,
+    "rows": 789690,
+    "bytes": 3658871,
+    "csv_bytes": 22901035,
     "in_progress": true
    }
   ],
@@ -137,13 +137,33 @@
     "start": "2026-10-01",
     "end": "2026-10-10",
     "first_day": "2026-10-01",
-    "last_day": "2026-10-07",
-    "days": 7,
-    "rows": 534500,
-    "bytes": 2826736,
-    "csv_bytes": 15993967,
+    "last_day": "2026-10-10",
+    "days": 10,
+    "rows": 798343,
+    "bytes": 4232446,
+    "csv_bytes": 23875956,
     "in_progress": true
    }
   ]
+ },
+ "daily": [
+  {
+   "file": "lden_daily.csv",
+   "rows": 35,
+   "bytes": 4746,
+   "first_day": "2026-09-05",
+   "last_day": "2026-10-09"
+  },
+  {
+   "file": "noise_weather_3h.csv",
+   "rows": 256,
+   "bytes": 19266,
+   "first_day": "2026-09-08",
+   "last_day": "2026-10-09"
+  }
+ ],
+ "station": {
+  "file": "station_metadata.json",
+  "bytes": 3962
  }
 }

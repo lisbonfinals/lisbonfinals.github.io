@@ -186,7 +186,7 @@ main{padding-top:96px;}
 .unlock-banner button{margin-left:auto;background:none;border:none;color:rgba(34,197,94,.6);font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;text-decoration:underline;cursor:pointer;}
 .unlock-banner button:hover{color:var(--green);}
 .gated-content{max-height:0; opacity:0; filter:blur(4px); transform:translateY(6px); overflow:hidden; transition:max-height .6s ease, opacity .5s ease .1s, filter .5s ease .1s, transform .5s ease .1s;}
-.gated-content.show{max-height:6000px; opacity:1; filter:blur(0); transform:translateY(0);}
+.gated-content.show{max-height:30000px; /* 10 oct 2026 : 6000 px coupait le bas de page sur mobile avec les sections Lden + station */ opacity:1; filter:blur(0); transform:translateY(0);}
 
 @media (max-width:820px){
   .res-hero,.data-section,.gate-wrap{padding-left:20px;padding-right:20px;}
@@ -352,6 +352,10 @@ main{padding-top:96px;}
       <div class="schema-item"><div class="schema-k">vibration_peak_mg</div><div class="schema-v" data-i18n="sch_flight_vib">Peak terrace vibration during the pass, in milli-g.</div></div>
       <div class="schema-item"><div class="schema-k">wind_speed_kmh, wind_dir_deg</div><div class="schema-v" data-i18n="sch_flight_wind">Ambient wind at the time of detection, when logged.</div></div>
       <div class="schema-item"><div class="schema-k">data_quality</div><div class="schema-v" data-i18n-html="sch_flight_quality">Blank when nothing is known to be wrong with the row. Otherwise: <code>peak_corrected</code> (a sensor spike had been recorded as the peak; spl_db now holds the level measured as the plane passed), <code>peak_not_corroborated</code> (a peak of 85dB or more that the station's real-time check could not confirm, value kept), <code>spl_unverifiable</code> (sound value doubtful and impossible to check), <code>sensor_box_moved</code> (sound and vibration disturbed by handling of the sensor box), <code>capture_corrupted_by_restart</code> (capture cut short by a service restart). Values are always left as recorded: filter as your analysis requires.</div></div>
+      <div class="schema-item"><div class="schema-k">hex</div><div class="schema-v" data-i18n="sch_flight_hex"></div></div>
+      <div class="schema-item"><div class="schema-k">heading_deg, vertical_rate_fpm, speed_kts</div><div class="schema-v" data-i18n="sch_flight_track"></div></div>
+      <div class="schema-item"><div class="schema-k">unix_time, spl_peak_unix_time</div><div class="schema-v" data-i18n="sch_flight_unix"></div></div>
+      <div class="schema-item"><div class="schema-k">temperature_c, humidity_pct, pressure_hpa</div><div class="schema-v" data-i18n="sch_flight_weather"></div></div>
     </div>
   </section>
 
@@ -368,6 +372,40 @@ main{padding-top:96px;}
     <div class="schema-list">
       <div class="schema-item"><div class="schema-k">date, timestamp</div><div class="schema-v" data-i18n="sch_cont_ts">Calendar day, and Unix epoch (UTC) for the individual reading.</div></div>
       <div class="schema-item"><div class="schema-k">spl_db / vib_mg</div><div class="schema-v" data-i18n="sch_cont_val">Instantaneous sound level (dB) or vibration (milli-g) at that second — a sample, not a running average.</div></div>
+    </div>
+  </section>
+
+  <section class="data-section">
+    <div class="section-label" data-i18n="daily_label"></div>
+    <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);" data-i18n="daily_title"></h2>
+    <p class="section-desc" data-i18n="daily_desc"></p>
+    <div class="method-strip">
+      <div class="method-kicker" data-i18n="daily_method_kicker"></div>
+      <div class="method-copy" data-i18n-html="daily_method_copy"></div>
+    </div>
+    <div class="res-updated" data-i18n="flights_updated"></div>
+    <div id="res-daily-list"></div>
+    <div class="schema-list">
+      <div class="schema-item"><div class="schema-k">status</div><div class="schema-v" data-i18n-html="sch_daily_status"></div></div>
+      <div class="schema-item"><div class="schema-k">n_flights, n_events_over_70db, n_flights_no_event, n_flights_no_data</div><div class="schema-v" data-i18n="sch_daily_counts"></div></div>
+      <div class="schema-item"><div class="schema-k">avg_peak_db, avg_duration_over_70_s, total_duration_over_70_s</div><div class="schema-v" data-i18n="sch_daily_levels"></div></div>
+      <div class="schema-item"><div class="schema-k">avg_temp_c, avg_wind_kmh, dominant_wind_dir</div><div class="schema-v" data-i18n="sch_daily_weather"></div></div>
+      <div class="schema-item"><div class="schema-k">noise_weather_3h.csv</div><div class="schema-v" data-i18n="sch_daily_bins"></div></div>
+    </div>
+  </section>
+
+  <section class="data-section">
+    <div class="section-label" data-i18n="station_label"></div>
+    <h2 class="section-title" style="font-size:clamp(24px,3vw,32px);" data-i18n="station_title"></h2>
+    <p class="section-desc" data-i18n="station_desc"></p>
+    <div id="res-station-file"></div>
+    <div class="schema-list">
+      <div class="schema-item"><div class="schema-k">position</div><div class="schema-v" data-i18n="st_position"></div></div>
+      <div class="schema-item"><div class="schema-k">mounting</div><div class="schema-v" data-i18n="st_mounting"></div></div>
+      <div class="schema-item"><div class="schema-k">sound</div><div class="schema-v" data-i18n="st_sound"></div></div>
+      <div class="schema-item"><div class="schema-k">calibration</div><div class="schema-v" data-i18n="st_calib"></div></div>
+      <div class="schema-item"><div class="schema-k">aircraft</div><div class="schema-v" data-i18n="st_aircraft"></div></div>
+      <div class="schema-item"><div class="schema-k">weather, air</div><div class="schema-v" data-i18n="st_env"></div></div>
     </div>
   </section>
 
@@ -438,14 +476,14 @@ const T = {
     csv_unzipped:'CSV {s} unzipped',
     updated_tpl:'Files current as of {d}, regenerated periodically, not live.',
     list_unavailable:'File list unavailable right now: please try again later.',
-    sch_flight_datetime:'Detection date/time, UTC.',
+    sch_flight_datetime:'Detection date and time in local Lisbon time (Europe/Lisbon: UTC+1 in summer, UTC+0 in winter). Use unix_time (UTC) to line a flight up with the continuous files.',
     sch_flight_callsign:'ADS-B callsign, or the aircraft\'s ICAO hex code when no callsign was broadcast.',
     sch_flight_id:'Identified when the aircraft\'s transponder data resolves to a known registration — left blank otherwise.',
     sch_flight_phase:'Landing / takeoff / cruise, and arrival/departure.',
-    sch_flight_alt:'Altitude and ground speed at closest point to the station.',
+    sch_flight_alt:'Barometric altitude as broadcast by the aircraft (standard 1013 hPa reference, not corrected to local pressure) and ground speed, at the moment of detection.',
     sch_flight_spl:'Peak sound level measured on the terrace, and seconds spent above the 70dB threshold during that single pass.',
     sch_flight_vib:'Peak terrace vibration during the pass, in milli-g.',
-    sch_flight_wind:'Ambient wind at the time of detection, when logged.',
+    sch_flight_wind:'Ambient wind at the time of detection, when logged. Weather values come from the Open-Meteo model, not from a sensor on the terrace.',
     sch_flight_quality:'Blank when nothing is known to be wrong with the row. Otherwise: <code>peak_corrected</code> (a sensor spike had been recorded as the peak; spl_db now holds the level measured as the plane passed), <code>peak_not_corroborated</code> (a peak of 85dB or more that the station\'s real-time check could not confirm, value kept), <code>spl_unverifiable</code> (sound value doubtful and impossible to check), <code>sensor_box_moved</code> (sound and vibration disturbed by handling of the sensor box), <code>capture_corrupted_by_restart</code> (capture cut short by a service restart). Values are always left as recorded: filter as your analysis requires.',
     cont_label:'Continuous ambient data',
     cont_title:'The raw signal, not just the events',
@@ -453,6 +491,32 @@ const T = {
     cont_note:'Shorter history than the flight tables: continuous logging only started once this need came up.',
     sch_cont_ts:'Calendar day, and Unix epoch (UTC) for the individual reading.',
     sch_cont_val:'Instantaneous sound level (dB) or vibration (milli-g) at that second — a sample, not a running average.',
+    sch_flight_hex:'ICAO 24-bit transponder address of the aircraft.',
+    sch_flight_track:'Heading (degrees) and vertical rate (feet per minute, negative when descending) as broadcast at detection, and ground speed in knots. Aircraft position and full tracks are not stored.',
+    sch_flight_unix:'Detection time and time of the sound peak, as Unix epoch (UTC). The direct way to match a flight with the 1-second continuous files.',
+    sch_flight_weather:'Air temperature, relative humidity and surface pressure at the time of detection (Open-Meteo model). Air quality is measured on the terrace too, but is not in these files: it is an ambient reading that cannot be tied to one aircraft.',
+    daily_label:'Daily noise indicators',
+    daily_title:'Lden, day by day',
+    daily_desc:'The table behind the Expert Mode of the archive page: one row per day since 5 September 2026. Each row puts two independent calculations side by side, both made from this terrace\'s measurements.',
+    daily_method_kicker:'Two methods, one sensor',
+    daily_method_copy:'<b>sensorgrid_*</b>: computed by the independent SensorGrid platform (Alessandro Annunziato) from this station\'s live 1-second stream, with the standard Lden definition (EU Directive 2002/49/EC: day, evening +5 dB, night +10 dB) and the Italian airport index LVA. <b>lf_*_est</b>: Lisbon Finals\' own event-based estimate. For each detected flight, the seconds above 70 dB are integrated into a sound exposure level, then combined into a day (16 h) and night (8 h, +10 dB) average over 24 hours. It counts aircraft events only, not background noise, and has no evening band. Expect the two to differ by about one decibel.',
+    sch_daily_status:'<code>sensorgrid</code>: SensorGrid values available. <code>lf_estimate_only</code>: no SensorGrid value that day, only the Lisbon Finals estimate. <code>insufficient_coverage</code>: more than 10% of the day\'s flights had no continuous recording, so the estimate is too low; leave the day out.',
+    sch_daily_counts:'Flights detected that day, flights found above 70 dB in the continuous log, flights that stayed below 70 dB, and flights with no continuous recording around their pass.',
+    sch_daily_levels:'Average peak level, and average and total seconds above 70 dB.',
+    sch_daily_weather:'Daily averages of the per-flight weather values (Open-Meteo model) and the most frequent wind direction.',
+    sch_daily_bins:'The same days split into eight 3-hour bins: flights, arrivals and departures, average and maximum peak, mean wind direction with its circular spread, wind speed, temperature, pressure and mean aircraft heading. Made to study how weather shapes what the terrace hears.',
+    station_label:'The station',
+    station_title:'Where and how it measures',
+    station_desc:'What you need to cite or reproduce the measurements, in one machine-readable file: position, sensors, settings, time reference and known limitations.',
+    st_position:'38.755039, -9.149986 · 1.37 km from the RWY 02 threshold (AIP coordinates), right under the 22.7° approach axis · about 80 m above sea level, first-floor terrace.',
+    st_mounting:'South-facing first-floor terrace. All sensors sit in a clear acrylic box, with two rows of holes drilled right in front of the microphone (foam windscreen fitted). The box stands inside a slatted wooden cabinet that lets sound and wind through and shades it from sun and heat. The effect of the enclosure on measured levels has not been quantified.',
+    st_sound:'Gain Express SLM-25, IEC 651 type 2 (±1.5 dB), A-weighting, FAST time weighting (125 ms), range 30 to 130 dB, logged once per second.',
+    st_calib:'Electronic chain checked against a reference meter in June 2026. No field check with an acoustic calibrator yet.',
+    st_aircraft:'Own ADS-B receiver (1090 MHz) on the same terrace.',
+    st_env:'Weather: Open-Meteo model at a grid point in the airport area, about 2.4 km north. Air quality: Plantower PMS5003 (PM1, PM2.5, PM10), ambient only.',
+    days_word:'days',
+    rows_word:'rows',
+    dl_json:'Download JSON',
     license_label:'Using this data', license_title:'License & attribution',
     license_copy:'Released under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--amber)">CC BY 4.0</a> — reuse, adapt and redistribute freely, with credit. A line like <code>Data: Lisbon Finals (lisbonfinals.com)</code> in your methodology section or references is enough.',
     caveat_kicker:'Worth knowing before you crunch the numbers',
@@ -496,14 +560,14 @@ const T = {
     csv_unzipped:'CSV de {s} descomprimido',
     updated_tpl:'Ficheiros actualizados a {d}, regenerados periodicamente, não em tempo real.',
     list_unavailable:'Lista de ficheiros indisponível de momento: tente mais tarde.',
-    sch_flight_datetime:'Data/hora de detecção, UTC.',
+    sch_flight_datetime:'Data e hora de detecção na hora local de Lisboa (Europe/Lisbon: UTC+1 no Verão, UTC+0 no Inverno). Use unix_time (UTC) para alinhar um voo com os ficheiros contínuos.',
     sch_flight_callsign:'Indicativo ADS-B, ou o código hexadecimal ICAO quando nenhum indicativo foi transmitido.',
     sch_flight_id:'Identificados quando os dados do transponder correspondem a um registo conhecido — em branco caso contrário.',
     sch_flight_phase:'Aterragem / descolagem / cruzeiro, e chegada/partida.',
-    sch_flight_alt:'Altitude e velocidade no ponto mais próximo da estação.',
+    sch_flight_alt:'Altitude barométrica transmitida pelo avião (referência padrão 1013 hPa, não corrigida para a pressão local) e velocidade em relação ao solo, no momento da detecção.',
     sch_flight_spl:'Nível sonoro de pico medido na varanda, e segundos acima do limiar de 70dB durante essa passagem.',
     sch_flight_vib:'Vibração de pico na varanda durante a passagem, em mili-g.',
-    sch_flight_wind:'Vento ambiente no momento da detecção, quando registado.',
+    sch_flight_wind:'Vento ambiente no momento da detecção, quando registado. Os valores meteorológicos vêm do modelo Open-Meteo, não de um sensor no terraço.',
     sch_flight_quality:'Vazio quando não se conhece nenhum problema na linha. Caso contrário: <code>peak_corrected</code> (um pico eléctrico do sensor tinha sido registado como pico; spl_db contém agora o nível medido durante a passagem do avião), <code>peak_not_corroborated</code> (pico de 85dB ou mais que a verificação em tempo real da estação não conseguiu confirmar, valor mantido), <code>spl_unverifiable</code> (valor sonoro duvidoso e impossível de verificar), <code>sensor_box_moved</code> (som e vibração perturbados pelo manuseamento da caixa dos sensores), <code>capture_corrupted_by_restart</code> (captura interrompida por um reinício do serviço). Os valores ficam sempre como foram registados: filtre conforme a sua análise.',
     cont_label:'Dados ambientais contínuos',
     cont_title:'O sinal bruto, não apenas os eventos',
@@ -511,6 +575,32 @@ const T = {
     cont_note:'Histórico mais curto do que as tabelas de voos: o registo contínuo só começou quando esta necessidade surgiu.',
     sch_cont_ts:'Dia do calendário, e epoch Unix (UTC) da leitura individual.',
     sch_cont_val:'Nível sonoro instantâneo (dB) ou vibração (mili-g) nesse segundo — uma amostra, não uma média corrida.',
+    sch_flight_hex:'Endereço ICAO de 24 bits do transponder do avião.',
+    sch_flight_track:'Rumo (graus) e razão vertical (pés por minuto, negativa em descida) transmitidos no momento da detecção, e velocidade em relação ao solo em nós. A posição do avião e as trajectórias completas não são guardadas.',
+    sch_flight_unix:'Hora de detecção e hora do pico sonoro, em tempo Unix (UTC). A forma directa de fazer corresponder um voo aos ficheiros contínuos de 1 segundo.',
+    sch_flight_weather:'Temperatura do ar, humidade relativa e pressão à superfície no momento da detecção (modelo Open-Meteo). A qualidade do ar também é medida no terraço, mas não consta destes ficheiros: é uma medição ambiente que não pode ser atribuída a um avião.',
+    daily_label:'Indicadores diários de ruído',
+    daily_title:'Lden, dia a dia',
+    daily_desc:'A tabela por detrás do Modo Expert da página de arquivo: uma linha por dia desde 5 de Setembro de 2026. Cada linha põe lado a lado dois cálculos independentes, ambos feitos a partir das medições deste terraço.',
+    daily_method_kicker:'Dois métodos, um sensor',
+    daily_method_copy:'<b>sensorgrid_*</b>: calculado pela plataforma independente SensorGrid (Alessandro Annunziato) a partir do fluxo de 1 segundo desta estação, com a definição padrão do Lden (Directiva UE 2002/49/CE: dia, entardecer +5 dB, noite +10 dB) e o índice aeroportuário italiano LVA. <b>lf_*_est</b>: estimativa própria da Lisbon Finals, baseada em eventos. Para cada voo detectado, os segundos acima de 70 dB são integrados num nível de exposição sonora e depois combinados numa média de dia (16 h) e de noite (8 h, +10 dB) sobre 24 horas. Conta apenas os eventos de aviões, não o ruído de fundo, e não tem período de entardecer. É normal os dois diferirem cerca de um decibel.',
+    sch_daily_status:'<code>sensorgrid</code>: valores SensorGrid disponíveis. <code>lf_estimate_only</code>: sem valor SensorGrid nesse dia, apenas a estimativa da Lisbon Finals. <code>insufficient_coverage</code>: mais de 10% dos voos do dia sem gravação contínua, a estimativa fica demasiado baixa; deixe o dia de fora.',
+    sch_daily_counts:'Voos detectados nesse dia, voos encontrados acima de 70 dB no registo contínuo, voos que ficaram abaixo de 70 dB e voos sem gravação contínua à sua passagem.',
+    sch_daily_levels:'Pico médio e segundos acima de 70 dB, em média e no total.',
+    sch_daily_weather:'Médias diárias dos valores meteorológicos por voo (modelo Open-Meteo) e direcção do vento mais frequente.',
+    sch_daily_bins:'Os mesmos dias divididos em oito períodos de 3 horas: voos, chegadas e partidas, pico médio e máximo, direcção média do vento com a sua dispersão circular, velocidade do vento, temperatura, pressão e rumo médio dos aviões. Feito para estudar como a meteorologia muda o que o terraço ouve.',
+    station_label:'A estação',
+    station_title:'Onde e como mede',
+    station_desc:'O necessário para citar ou reproduzir as medições, num único ficheiro legível por máquina: posição, sensores, configuração, referência horária e limitações conhecidas.',
+    st_position:'38.755039, -9.149986 · 1,37 km do limiar da pista 02 (coordenadas AIP), mesmo debaixo do eixo de aproximação a 22,7° · cerca de 80 m acima do nível do mar, terraço do primeiro andar.',
+    st_mounting:'Terraço do primeiro andar virado a sul. Todos os sensores estão numa caixa de acrílico transparente, com duas filas de furos mesmo em frente ao microfone (com protecção de espuma). A caixa fica dentro de um móvel de madeira com ripas, que deixa passar o som e o vento e a protege do sol e do calor. O efeito da caixa nos níveis medidos não foi quantificado.',
+    st_sound:'Gain Express SLM-25, IEC 651 tipo 2 (±1,5 dB), ponderação A, ponderação temporal FAST (125 ms), gama de 30 a 130 dB, registo a cada segundo.',
+    st_calib:'Cadeia electrónica verificada com um sonómetro de referência em Junho de 2026. Ainda sem verificação no local com um calibrador acústico.',
+    st_aircraft:'Receptor ADS-B próprio (1090 MHz) no mesmo terraço.',
+    st_env:'Meteorologia: modelo Open-Meteo num ponto da grelha na zona do aeroporto, cerca de 2,4 km a norte. Qualidade do ar: Plantower PMS5003 (PM1, PM2,5, PM10), apenas ambiente.',
+    days_word:'dias',
+    rows_word:'linhas',
+    dl_json:'Descarregar JSON',
     license_label:'Utilizar estes dados', license_title:'Licença e atribuição',
     license_copy:'Disponibilizado sob <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--amber)">CC BY 4.0</a> — reutiliza, adapta e redistribui livremente, com crédito. Uma linha como <code>Dados: Lisbon Finals (lisbonfinals.com)</code> na secção de metodologia ou referências é suficiente.',
     caveat_kicker:'Vale a pena saber antes de analisar os números',
@@ -554,14 +644,14 @@ const T = {
     csv_unzipped:'CSV de {s} décompressé',
     updated_tpl:'Fichiers à jour au {d}, régénérés périodiquement, pas en direct.',
     list_unavailable:'Liste des fichiers indisponible pour le moment : réessayez plus tard.',
-    sch_flight_datetime:'Date/heure de détection, UTC.',
+    sch_flight_datetime:'Date et heure de détection en heure locale de Lisbonne (Europe/Lisbon : UTC+1 en été, UTC+0 en hiver). Utilisez unix_time (UTC) pour aligner un vol sur les fichiers continus.',
     sch_flight_callsign:'Indicatif ADS-B, ou le code hexadécimal ICAO de l\'appareil quand aucun indicatif n\'a été diffusé.',
     sch_flight_id:'Identifiés quand les données du transpondeur correspondent à une immatriculation connue — laissé vide sinon.',
     sch_flight_phase:'Atterrissage / décollage / croisière, et arrivée/départ.',
-    sch_flight_alt:'Altitude et vitesse sol au point le plus proche de la station.',
+    sch_flight_alt:'Altitude barométrique diffusée par l\'avion (référence standard 1013 hPa, non corrigée de la pression locale) et vitesse sol, au moment de la détection.',
     sch_flight_spl:'Niveau sonore de pic mesuré sur la terrasse, et secondes passées au-dessus du seuil de 70dB durant ce passage.',
     sch_flight_vib:'Vibration de pic sur la terrasse durant le passage, en milli-g.',
-    sch_flight_wind:'Vent ambiant au moment de la détection, quand il est enregistré.',
+    sch_flight_wind:'Vent ambiant au moment de la détection, quand il est enregistré. Les valeurs météo viennent du modèle Open-Meteo, pas d\'un capteur sur la terrasse.',
     sch_flight_quality:'Vide quand aucun problème n\'est connu sur la ligne. Sinon : <code>peak_corrected</code> (un pic électrique du capteur avait été enregistré comme pic ; spl_db contient désormais le niveau mesuré au passage de l\'avion), <code>peak_not_corroborated</code> (pic de 85dB ou plus que la vérification en temps réel de la station n\'a pas pu confirmer, valeur conservée), <code>spl_unverifiable</code> (valeur sonore douteuse et impossible à vérifier), <code>sensor_box_moved</code> (son et vibration perturbés par une manipulation du boîtier des capteurs), <code>capture_corrupted_by_restart</code> (capture interrompue par un redémarrage du service). Les valeurs restent toujours telles qu\'enregistrées : filtrez selon votre analyse.',
     cont_label:'Données ambiantes continues',
     cont_title:'Le signal brut, pas seulement les événements',
@@ -569,6 +659,32 @@ const T = {
     cont_note:'Historique plus court que les tableaux de vols : l\'enregistrement continu n\'a démarré que lorsque ce besoin est apparu.',
     sch_cont_ts:'Jour calendaire, et epoch Unix (UTC) du relevé individuel.',
     sch_cont_val:'Niveau sonore instantané (dB) ou vibration (milli-g) à cette seconde — un échantillon, pas une moyenne glissante.',
+    sch_flight_hex:'Adresse ICAO 24 bits du transpondeur de l\'avion.',
+    sch_flight_track:'Cap (degrés) et vitesse verticale (pieds par minute, négative en descente) diffusés au moment de la détection, et vitesse sol en nœuds. La position de l\'avion et les trajectoires complètes ne sont pas enregistrées.',
+    sch_flight_unix:'Heure de détection et heure du pic sonore, en temps Unix (UTC). Le moyen direct de faire correspondre un vol aux fichiers continus à la seconde.',
+    sch_flight_weather:'Température de l\'air, humidité relative et pression au sol au moment de la détection (modèle Open-Meteo). La qualité de l\'air est aussi mesurée sur la terrasse, mais n\'est pas dans ces fichiers : c\'est une mesure d\'ambiance qu\'on ne peut pas attribuer à un avion.',
+    daily_label:'Indicateurs quotidiens de bruit',
+    daily_title:'Le Lden, jour par jour',
+    daily_desc:'Le tableau derrière le Mode Expert de la page archive : une ligne par jour depuis le 5 septembre 2026. Chaque ligne met côte à côte deux calculs indépendants, tous deux faits à partir des mesures de cette terrasse.',
+    daily_method_kicker:'Deux méthodes, un capteur',
+    daily_method_copy:'<b>sensorgrid_*</b> : calculé par la plateforme indépendante SensorGrid (Alessandro Annunziato) à partir du flux à la seconde de cette station, selon la définition standard du Lden (directive UE 2002/49/CE : jour, soirée +5 dB, nuit +10 dB) et l\'indice aéroportuaire italien LVA. <b>lf_*_est</b> : estimation propre à Lisbon Finals, fondée sur les événements. Pour chaque vol détecté, les secondes au-dessus de 70 dB sont intégrées en niveau d\'exposition sonore, puis combinées en moyenne de jour (16 h) et de nuit (8 h, +10 dB) sur 24 heures. Elle ne compte que les passages d\'avions, pas le bruit de fond, et n\'a pas de période de soirée. Un écart d\'environ un décibel entre les deux est normal.',
+    sch_daily_status:'<code>sensorgrid</code> : valeurs SensorGrid disponibles. <code>lf_estimate_only</code> : pas de valeur SensorGrid ce jour-là, seulement l\'estimation Lisbon Finals. <code>insufficient_coverage</code> : plus de 10 % des vols du jour sans enregistrement continu, l\'estimation est trop basse ; écartez ce jour.',
+    sch_daily_counts:'Vols détectés ce jour-là, vols retrouvés au-dessus de 70 dB dans l\'enregistrement continu, vols restés sous 70 dB, et vols sans enregistrement continu à leur passage.',
+    sch_daily_levels:'Pic moyen, et secondes au-dessus de 70 dB en moyenne et au total.',
+    sch_daily_weather:'Moyennes du jour des valeurs météo relevées à chaque vol (modèle Open-Meteo) et direction du vent la plus fréquente.',
+    sch_daily_bins:'Les mêmes jours découpés en huit tranches de 3 heures : vols, arrivées et départs, pic moyen et maximum, direction moyenne du vent avec sa dispersion circulaire, vitesse du vent, température, pression et cap moyen des avions. Fait pour étudier comment la météo change ce que la terrasse entend.',
+    station_label:'La station',
+    station_title:'Où et comment elle mesure',
+    station_desc:'Ce qu\'il faut pour citer ou reproduire les mesures, dans un seul fichier lisible par machine : position, capteurs, réglages, référence horaire et limites connues.',
+    st_position:'38.755039, -9.149986 · 1,37 km du seuil de la piste 02 (coordonnées AIP), pile sous l\'axe d\'approche à 22,7° · environ 80 m au-dessus du niveau de la mer, terrasse du premier étage.',
+    st_mounting:'Terrasse du premier étage orientée plein sud. Tous les capteurs sont dans une boîte en plexiglas transparent, avec deux rangées de trous percés juste devant le micro (bonnette en mousse). La boîte est placée dans un meuble en bois à lattes ajourées, qui laisse passer le son et le vent et la protège du soleil et de la chaleur. L\'effet de la boîte sur les niveaux mesurés n\'a pas été quantifié.',
+    st_sound:'Gain Express SLM-25, IEC 651 classe 2 (±1,5 dB), pondération A, pondération temporelle FAST (125 ms), plage de 30 à 130 dB, enregistré chaque seconde.',
+    st_calib:'Chaîne électronique vérifiée avec un sonomètre de référence en juin 2026. Pas encore de vérification sur place avec un calibrateur acoustique.',
+    st_aircraft:'Récepteur ADS-B propre (1090 MHz) sur la même terrasse.',
+    st_env:'Météo : modèle Open-Meteo, en un point de grille dans la zone de l\'aéroport, à environ 2,4 km au nord. Qualité de l\'air : Plantower PMS5003 (PM1, PM2,5, PM10), ambiance seulement.',
+    days_word:'jours',
+    rows_word:'lignes',
+    dl_json:'Télécharger le JSON',
     license_label:'Utiliser ces données', license_title:'Licence et attribution',
     license_copy:'Publié sous <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--amber)">CC BY 4.0</a> — réutilisez, adaptez et redistribuez librement, avec attribution. Une ligne du type <code>Données : Lisbon Finals (lisbonfinals.com)</code> dans votre méthodologie ou vos références suffit.',
     caveat_kicker:'À savoir avant d\'exploiter les chiffres',
@@ -646,6 +762,13 @@ function renderResearchLists(){
     return resCard(e.file, meta, e.file, t.dl_zip);
   }).join('');
   if (cl) cl.innerHTML = group(c.spl, t.cont_spl_h) + group(c.vibration, t.cont_vib_h);
+  // 10 oct 2026 : indicateurs quotidiens (export du Mode Expert) + fiche station
+  const span = (a, b) => { const o = {day:'numeric', month:'short', year:'numeric'}; return resDay(a).toLocaleDateString(loc, o) + ' – ' + resDay(b).toLocaleDateString(loc, o); };
+  const dl = document.getElementById('res-daily-list');
+  if (dl && resManifest.daily) dl.innerHTML = resManifest.daily.map(e =>
+    resCard(e.file, (e.first_day ? span(e.first_day, e.last_day) + ' · ' : '') + e.rows.toLocaleString(loc) + ' ' + (e.file.indexOf('lden') === 0 ? t.days_word : t.rows_word) + ' · ' + resSize(e.bytes), e.file, t.dl_btn)).join('');
+  const sf = document.getElementById('res-station-file');
+  if (sf && resManifest.station) sf.innerHTML = resCard(resManifest.station.file, 'JSON · ' + resSize(resManifest.station.bytes), resManifest.station.file, t.dl_json);
 }
 fetch('/research-data/manifest.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject())
   .then(m => { resManifest = m; renderResearchLists(); })
