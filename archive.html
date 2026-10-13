@@ -518,6 +518,8 @@ table.archive-table{width:100%;border-collapse:collapse;}
 }
 /* ── Module Wind (13 oct 2026) ── */
 .avw-view-btn{display:inline-flex;align-items:center;gap:3px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.25);border-radius:10px;color:var(--amber);cursor:pointer;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;margin-left:10px;transition:all .15s;line-height:1;vertical-align:middle;}
+.avw-wind-cell{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.avw-wind-cell .avw-view-btn{margin-left:0;}
 .avw-view-btn:hover{background:rgba(245,166,35,.18);border-color:var(--amber);}
 .avw-view-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
 .avw-pad{padding:20px;display:grid;gap:18px;min-width:0;}
@@ -1832,7 +1834,7 @@ function avRenderExpertTable() {
       <td style="color:var(--amber)">${e.total_duration_over_70_s != null ? (e.total_duration_over_70_s / 60).toFixed(1) + 'min' : '—'}</td>
       <td style="color:var(--green)">${e.avg_temp_c != null ? avFmt1(e.avg_temp_c) + '°C' : '—'}</td>
       <td style="color:var(--green)">${e.dominant_wind_dir || '—'}</td>
-      <td style="color:var(--green);white-space:nowrap">${e.avg_wind_kmh != null ? avFmt1(e.avg_wind_kmh) + ' km/h' : '—'}${avwHasDay(e.label) ? `<button type="button" class="avw-view-btn" onclick="avwOpenDay('${e.label}')" aria-label="${avT('avw_view_tip', 'Open this day in Wind')} (${e.label})" title="${avT('avw_view_tip', 'Open this day in Wind')}">${avT('avw_view', 'View')} →</button>` : ''}</td>
+      <td style="color:var(--green);white-space:nowrap"><div class="avw-wind-cell"><span>${e.avg_wind_kmh != null ? avFmt1(e.avg_wind_kmh) + ' km/h' : '—'}</span>${avwHasDay(e.label) ? `<button type="button" class="avw-view-btn" onclick="avwOpenDay('${e.label}')" aria-label="${avT('avw_view_tip', 'Open this day in Wind')} (${e.label})" title="${avT('avw_view_tip', 'Open this day in Wind')}">${avT('avw_view', 'View')} →</button>` : ''}</div></td>
     </tr>`;
   }).join('');
 
