@@ -870,5 +870,23 @@
     },
     "length_m": 15.64,
     "passenger_capacity": 10
+  },
+  {
+    "aircraft_type": "Citation XLS",
+    "description": {
+      "en": "The Citation XLS is a mid-size business jet built by Cessna in the United States, an upgraded version (2004) of the Citation Excel. Its cabin is tall enough for most passengers to stand almost upright, rare for a jet this size.",
+      "pt": "O Citation XLS é um jacto executivo de porte médio construído pela Cessna, nos Estados Unidos, versão melhorada (2004) do Citation Excel. A cabine é alta o suficiente para quase todos os passageiros ficarem praticamente de pé, algo raro num jacto deste tamanho.",
+      "fr": "Le Citation XLS est un jet d’affaires de taille moyenne construit par Cessna aux États-Unis, version améliorée (2004) du Citation Excel. Sa cabine est assez haute pour que la plupart des passagers s’y tiennent presque debout, chose rare pour un jet de cette taille."
+    },
+    "manufacturer": "Cessna (Textron Aviation)",
+    "first_flight_year": 1996,
+    "entry_into_service_year": 2004,
+    "fun_fact": {
+      "en": "Most of the ones we see belong to NetJets Europe, whose airline is based in Portugal: that is why they wear Portuguese CS- registrations.",
+      "pt": "A maioria dos que vemos pertence à NetJets Europe, cuja companhia está sediada em Portugal: é por isso que têm matrícula portuguesa CS-.",
+      "fr": "La plupart de ceux que nous voyons appartiennent à NetJets Europe, dont la compagnie est basée au Portugal : d’où leurs immatriculations portugaises CS-."
+    },
+    "length_m": 16.0,
+    "passenger_capacity": 9
   }
 ]

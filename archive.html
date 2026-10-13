@@ -1317,6 +1317,10 @@ function avRenderRare() {
 // Ajouter une correction = ajouter une ligne EN TÊTE (plus récente d'abord).
 // kind : merge | fix | fill | split ; approx:true affiche « ≈ ».
 const AV_AIRLINE_HISTORY = [
+  { date:'2026-10-13', kind:'fix', qty:16,
+    en:'The Airbus A330-200 <b>EC-MAJ</b> was shown as "Jet2" by an out-of-date public registry. It actually flies <b>GOL Linhas Aéreas</b>\' new Lisbon to Rio de Janeiro route (radio callsign GLO), leased with its crew from Spain\'s Wamos Air: its flights now count for GOL, with the "leased aircraft" badge.',
+    pt:'O Airbus A330-200 <b>EC-MAJ</b> aparecia como "Jet2" por causa de um registo público desactualizado. Na verdade, faz a nova ligação Lisboa-Rio de Janeiro da <b>GOL Linhas Aéreas</b> (indicativo rádio GLO), alugado com tripulação à espanhola Wamos Air: os seus voos passam a contar para a GOL, com o selo "avião alugado".',
+    fr:'L\'Airbus A330-200 <b>EC-MAJ</b> apparaissait comme « Jet2 » à cause d\'un registre public périmé. Il assure en réalité la nouvelle ligne Lisbonne-Rio de Janeiro de <b>GOL Linhas Aéreas</b> (indicatif radio GLO), loué avec son équipage à l\'espagnole Wamos Air : ses vols comptent désormais pour GOL, avec le badge « avion loué ».' },
   { date:'2026-10-12', kind:'fix', qty:102,
     en:'Flights with the radio callsign <b>WMT</b> are now credited to <b>Wizz Air Malta</b>, the airline that operates them, as we already do for Malta Air or Lauda Europe within the Ryanair group. Until now they were split between "Wizz Air" (Hungarian-registered aircraft flown by Wizz Air Malta), "Lauda Europe" (Maltese 9H-W aircraft mistaken for Lauda), seven small Maltese operators taken from outdated registries, and blank entries.',
     pt:'Os voos com o indicativo rádio <b>WMT</b> passam a contar para a <b>Wizz Air Malta</b>, a companhia que os opera, como já fazemos com a Malta Air ou a Lauda Europe dentro do grupo Ryanair. Até agora estavam repartidos entre "Wizz Air" (aviões com matrícula húngara operados pela Wizz Air Malta), "Lauda Europe" (aviões malteses 9H-W confundidos com a Lauda), sete pequenos operadores malteses vindos de registos desactualizados e entradas em branco.',
@@ -1393,6 +1397,10 @@ const AV_AIRLINE_HISTORY = [
 // Historique des corrections « Modèles d'avion » (même format que AV_AIRLINE_HISTORY ;
 // qtyText remplace qty quand la quantité n'est pas un nombre de vols).
 const AV_MODEL_HISTORY = [
+  { date:'2026-10-13', kind:'fix', qty:15,
+    en:'Two <b>Swiftair</b> ATR 72s (EC-MKE and EC-MIY) were listed as passenger "ATR 72 500" by the registry. They are cargo aircraft, like the rest of Swiftair\'s ATR fleet at Lisbon: moved to <b>ATR 72 500F</b>.',
+    pt:'Dois ATR 72 da <b>Swiftair</b> (EC-MKE e EC-MIY) apareciam no registo como "ATR 72 500" de passageiros. São aviões de carga, como o resto da frota ATR da Swiftair em Lisboa: passam para <b>ATR 72 500F</b>.',
+    fr:'Deux ATR 72 de <b>Swiftair</b> (EC-MKE et EC-MIY) figuraient au registre comme « ATR 72 500 » passagers. Ce sont des avions cargo, comme le reste de la flotte ATR de Swiftair à Lisbonne : passés en <b>ATR 72 500F</b>.' },
   { date:'2026-10-12', kind:'fix', qty:16,
     en:'Eight more <b>reassigned</b> Maltese radio addresses: registries still list them as business jets or other aircraft (Challenger 604 and 601, Citation VII, Falcon 50EX, Hawker 750, CRJ-1000, Boeing 737-400, Beech Baron), while they fly as Wizz Air Malta airliners. Wrong type and registration removed.',
     pt:'Mais oito endereços rádio malteses <b>reatribuídos</b>: os registos ainda os indicam como jactos executivos ou outros aviões (Challenger 604 e 601, Citation VII, Falcon 50EX, Hawker 750, CRJ-1000, Boeing 737-400, Beech Baron), quando voam como aviões de linha da Wizz Air Malta. Tipo e matrícula errados retirados.',

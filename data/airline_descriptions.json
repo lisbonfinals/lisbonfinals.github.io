@@ -964,5 +964,35 @@
       "pt": "O seu indicativo de rádio continua a ser OBS, dos tempos da Orbest. Um registo público ainda atribui o seu A330neo CS-TCF a outra companhia.",
       "fr": "Son indicatif radio reste OBS, héritage de l’époque Orbest. Un registre public attribue encore son A330neo CS-TCF à une autre compagnie."
     }
+  },
+  {
+    "airline": "GOL Linhas Aéreas",
+    "description": {
+      "en": "Brazilian low-cost airline based in São Paulo, one of the largest in the country, flying an all-Boeing 737 fleet at home. Its Lisbon to Rio de Janeiro route, opened in September 2026, is its first to Europe, flown with an Airbus A330 leased with crew from Spain's Wamos Air.",
+      "pt": "Companhia brasileira de baixo custo sediada em São Paulo, uma das maiores do país, que voa só com Boeing 737 no Brasil. A ligação Lisboa-Rio de Janeiro, aberta em Setembro de 2026, é a sua primeira para a Europa, operada com um Airbus A330 alugado com tripulação à espanhola Wamos Air.",
+      "fr": "Compagnie brésilienne à bas coûts basée à São Paulo, l’une des plus grandes du pays, qui vole uniquement en Boeing 737 au Brésil. Sa ligne Lisbonne-Rio de Janeiro, ouverte en septembre 2026, est sa première vers l’Europe, assurée par un Airbus A330 loué avec équipage à l’espagnole Wamos Air."
+    },
+    "founded_year": 2000,
+    "headquarters": { "en": "São Paulo, Brazil", "pt": "São Paulo, Brasil", "fr": "São Paulo, Brésil" },
+    "fun_fact": {
+      "en": "Its very first flight, on 15 January 2001, was a Boeing 737-700 from Brasília to São Paulo-Congonhas. It started with just three leased jets.",
+      "pt": "O seu primeiro voo, a 15 de Janeiro de 2001, foi um Boeing 737-700 de Brasília para São Paulo-Congonhas. Começou com apenas três aviões alugados.",
+      "fr": "Son tout premier vol, le 15 janvier 2001, était un Boeing 737-700 de Brasília à São Paulo-Congonhas. Elle a débuté avec seulement trois avions loués."
+    }
+  },
+  {
+    "airline": "Tunisair",
+    "description": {
+      "en": "Tunisia's national airline, based in Tunis. It flies mostly Airbus A320 family aircraft and links Tunisia with Europe, Africa and the Middle East.",
+      "pt": "A companhia aérea nacional da Tunísia, sediada em Tunes. Opera sobretudo aviões da família Airbus A320 e liga a Tunísia à Europa, à África e ao Médio Oriente.",
+      "fr": "La compagnie nationale tunisienne, basée à Tunis. Elle exploite surtout des avions de la famille Airbus A320 et relie la Tunisie à l’Europe, à l’Afrique et au Moyen-Orient."
+    },
+    "founded_year": 1948,
+    "headquarters": { "en": "Tunis, Tunisia", "pt": "Tunes, Tunísia", "fr": "Tunis, Tunisie" },
+    "fun_fact": {
+      "en": "It was created in 1948 with Air France, which handed over DC-3s and routes so it could start flying on 1 April 1949.",
+      "pt": "Foi criada em 1948 com a Air France, que lhe cedeu DC-3 e rotas para poder começar a voar a 1 de Abril de 1949.",
+      "fr": "Elle a été créée en 1948 avec Air France, qui lui a cédé des DC-3 et des lignes pour qu’elle puisse commencer à voler le 1er avril 1949."
+    }
   }
 ]
