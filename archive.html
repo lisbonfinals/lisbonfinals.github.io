@@ -516,6 +516,60 @@ table.archive-table{width:100%;border-collapse:collapse;}
     transition-duration:.001ms!important;
   }
 }
+/* ── Module Wind (13 oct 2026) ── */
+.avw-pad{padding:20px;display:grid;gap:18px;min-width:0;}
+.avw-months{display:flex;gap:4px;text-transform:none;letter-spacing:.06em;}
+.avw-picker{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;}
+.avw-nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.avw-btn,.avw-date{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--white);border:1px solid var(--border2);border-radius:4px;padding:8px 12px;cursor:pointer;}
+.avw-date{text-transform:none;letter-spacing:0;color-scheme:dark;}
+.avw-btn:hover:not(:disabled){border-color:var(--amber);color:var(--amber);}
+.avw-btn:disabled{opacity:.3;cursor:default;}
+.avw-btn:focus-visible,.avw-date:focus-visible,.avw-cell:focus-visible,.avw-slot:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+.avw-bigdate{font-family:var(--sans);font-weight:700;font-size:20px;color:var(--white);}
+.avw-bigdate span{color:var(--amber);}
+.avw-hm-wrap{overflow-x:auto;}
+.avw-hm{display:grid;grid-template-columns:62px repeat(8,minmax(34px,1fr)) 56px;gap:3px;min-width:500px;font-family:var(--mono);font-variant-numeric:tabular-nums;}
+.avw-hm .h{font-size:9px;color:rgba(240,237,232,.4);text-align:center;padding-bottom:4px;}
+.avw-hm .dl{font-size:10.5px;color:rgba(240,237,232,.5);display:flex;align-items:center;cursor:pointer;}
+.avw-hm .dl.we{color:rgba(240,237,232,.75);}
+.avw-hm .tot{font-size:10px;color:rgba(240,237,232,.4);display:flex;align-items:center;justify-content:flex-end;}
+.avw-cell{height:18px;border-radius:2px;border:0;padding:0;position:relative;cursor:pointer;}
+.avw-cell:hover{filter:brightness(1.25);}
+.avw-cell.r20::after{content:"";position:absolute;right:3px;top:50%;margin-top:-2px;width:4px;height:4px;border-radius:50%;background:var(--blue);}
+.avw-hm .sel.dl{color:var(--amber);}
+.avw-cell.sel{outline:1px solid var(--amber);}
+.avw-legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-family:var(--mono);font-size:9.5px;color:rgba(240,237,232,.45);}
+.avw-ramp{display:flex;flex-wrap:wrap;align-items:center;gap:6px;}
+.avw-steps{display:flex;gap:2px;}
+.avw-steps i{display:block;width:20px;height:8px;border-radius:2px;}
+.avw-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--blue);margin-right:6px;}
+.avw-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+.avw-chip{border:1px solid var(--border);border-radius:4px;padding:10px 12px;display:grid;gap:3px;background:var(--dark3);}
+.avw-chip .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,237,232,.45);}
+.avw-chip .v{font-family:var(--sans);font-weight:700;font-size:19px;color:var(--white);font-variant-numeric:tabular-nums;}
+.avw-chip .v small{font-family:var(--mono);font-size:10px;font-weight:400;color:rgba(240,237,232,.45);}
+.avw-day{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:26px;align-items:start;}
+@media (max-width:820px){.avw-day{grid-template-columns:1fr;}}
+.avw-compass svg{width:100%;max-width:320px;height:auto;display:block;margin:0 auto;}
+.avw-axis{font-family:var(--mono);font-size:9.5px;fill:rgba(240,237,232,.45);}
+.avw-dir{text-align:center;font-family:var(--sans);font-weight:800;font-size:40px;color:var(--amber);line-height:1;}
+.avw-dir small{display:block;font-family:var(--mono);font-weight:400;font-size:10px;color:rgba(240,237,232,.45);letter-spacing:.08em;margin-top:6px;}
+.avw-slots{display:grid;gap:4px;font-family:var(--mono);font-variant-numeric:tabular-nums;}
+.avw-slot{display:grid;grid-template-columns:62px 42px minmax(0,1fr) 60px 70px;gap:10px;align-items:center;padding:8px 10px;border-radius:4px;border:1px solid transparent;background:transparent;color:var(--white);font-family:var(--mono);font-size:11.5px;text-align:left;cursor:pointer;}
+.avw-slot:hover{background:rgba(255,255,255,.03);}
+.avw-slot[aria-pressed="true"]{border-color:rgba(245,166,35,.5);background:var(--amber-dim);}
+.avw-slot .deg{color:rgba(240,237,232,.45);}
+.avw-slot .bar{height:4px;background:var(--border);border-radius:2px;position:relative;}
+.avw-slot .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:2px;}
+.avw-slot .db{text-align:right;}
+.avw-slot .rw{font-size:9.5px;text-align:right;color:rgba(240,237,232,.45);}
+.avw-slot .rw.b{color:var(--blue);}
+.avw-slot.empty{opacity:.4;cursor:default;}
+.avw-strips{display:grid;gap:4px;}
+.avw-strips svg{width:100%;height:auto;display:block;}
+@media (max-width:560px){.avw-slot{grid-template-columns:54px 38px minmax(0,1fr) 54px;}.avw-slot .rw{display:none;}}
+@media (prefers-reduced-motion:no-preference){.avw-needle{transition:transform .5s cubic-bezier(.3,.7,.2,1);}}
 </style>
 </head>
 <body>
@@ -602,6 +656,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
     <button class="archive-subtab" data-view="anac" data-i18n="av_tab_anac">Night · ANAC</button>
     <button class="archive-subtab" data-view="rare" data-i18n="av_tab_rare">Rare · Military</button>
     <button class="archive-subtab" data-view="expertmode" data-i18n="av_tab_expertmode">Expert Mode</button>
+    <button class="archive-subtab" data-view="wind" data-i18n="av_tab_wind">Wind</button>
     <button class="archive-subtab" data-view="quality" data-i18n="av_tab_quality">Data Quality</button>
     <button class="archive-subtab" data-view="pollution" data-i18n="av_tab_pollution">Air Quality</button>
   </div>
@@ -804,6 +859,56 @@ table.archive-table{width:100%;border-collapse:collapse;}
   </div>
 
   <!-- ── EXPERT MODE (Lden / vent / exposition) ── -->
+  <!-- ── WIND (13 oct 2026) : rejouer un jour, carte mois × créneaux de 3 h ── -->
+  <div class="archive-view" id="av-view-wind">
+    <div class="archive-note" data-i18n-html="avw_intro"><b>Replay any day.</b> Wind direction, the runway in use over the terrace, aircraft noise and the weather, slot by slot since 8 September. The month view shows the patterns that only appear over weeks. For the last 7 days, see <a href="data.html#wind-module" class="av-link">Data → Wind rotation</a>.</div>
+
+    <div class="archive-table-wrap">
+      <div class="archive-table-title"><span data-i18n="avw_month_title">Month view · 3-hour slots</span><span class="avw-months" id="avw-months"></span></div>
+      <div class="avw-pad">
+        <div class="avw-picker">
+          <div class="avw-nav">
+            <button type="button" class="avw-btn" id="avw-prev" data-i18n="avw_prev">‹ Previous day</button>
+            <input type="date" class="avw-date" id="avw-date" aria-label="Day">
+            <button type="button" class="avw-btn" id="avw-next" data-i18n="avw_next">Next day ›</button>
+          </div>
+          <div class="avw-bigdate" id="avw-bigdate"></div>
+        </div>
+        <div class="avw-hm-wrap"><div class="avw-hm" id="avw-hm"></div></div>
+        <div class="avw-legend">
+          <span class="avw-ramp"><span data-i18n="avw_legend_db">Average peak over the terrace</span> <span>&lt; 86 dB</span><span class="avw-steps" id="avw-steps"></span><span>≥ 92 dB</span></span>
+          <span><span class="avw-dot"></span><span data-i18n="avw_legend_r20">Runway 20 slot: departures climb over the terrace, arrivals land from the north</span></span>
+          <span data-i18n="avw_legend_click">Click a day or a slot</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="archive-table-wrap">
+      <div class="archive-table-title"><span data-i18n="avw_day_title">Day detail</span></div>
+      <div class="avw-pad">
+        <div class="avw-summary" id="avw-summary"></div>
+        <div class="avw-day">
+          <div class="avw-compass">
+            <svg viewBox="0 0 340 340" role="img" aria-label="Wind direction">
+              <circle cx="170" cy="170" r="140" fill="none" stroke="var(--border2)"/>
+              <circle cx="170" cy="170" r="98" fill="none" stroke="var(--border)"/>
+              <g class="avw-axis" text-anchor="middle"><text x="170" y="20">N</text><text x="170" y="332">S</text><text x="14" y="174">W</text><text x="326" y="174">E</text></g>
+              <g stroke="var(--border2)"><line x1="170" y1="26" x2="170" y2="40"/><line x1="170" y1="300" x2="170" y2="314"/><line x1="26" y1="170" x2="40" y2="170"/><line x1="300" y1="170" x2="314" y2="170"/></g>
+              <g transform="rotate(22.6 170 170)"><line x1="170" y1="62" x2="170" y2="278" stroke="var(--blue)" stroke-width="5" stroke-dasharray="7 5" stroke-linecap="round" opacity=".85"/></g>
+              <text class="avw-axis" x="232" y="76" style="fill:var(--blue)">RWY 02</text>
+              <text class="avw-axis" x="72" y="282" style="fill:var(--blue)">RWY 20</text>
+              <g class="avw-needle" id="avw-needle" transform="rotate(0 170 170)"><line x1="170" y1="170" x2="170" y2="52" stroke="var(--amber)" stroke-width="4" stroke-linecap="round"/><path d="M170 36 L181 60 L159 60 Z" fill="var(--amber)"/></g>
+              <circle cx="170" cy="170" r="9" fill="var(--dark2)" stroke="var(--amber)" stroke-width="3"/>
+            </svg>
+            <div class="avw-dir" id="avw-dir"></div>
+          </div>
+          <div class="avw-slots" id="avw-slots"></div>
+        </div>
+        <div class="avw-strips" id="avw-strips"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="archive-view" id="av-view-expertmode">
     <div class="archive-note" data-i18n-html="av_expert_intro">Full history of the station's regulatory noise metric (Lden, EU/Portugal standard) and wind trend. "Peak avg" below is the average peak dB per flight for that day — for today's live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.</div>
 
@@ -1961,6 +2066,126 @@ function avRenderUpdated() {
   document.getElementById('av-updated').textContent = avT('av_updated', 'Updated') + ': ' + _archiveGenDate.toLocaleDateString(localeMap[_lang] || 'en-GB');
 }
 
+// ── Module Wind (13 oct 2026) ──
+// archiveData.wind_days = [{d, s:[8 tranches]}] (offline_stats/export_public._wind_days,
+// = wind_bins de lva_daily.json + humidité moyenne des vols). Rejouer un jour + carte du mois.
+const AVW_SL = ['00–03','03–06','06–09','09–12','12–15','15–18','18–21','21–24'];
+const AVW_STEPS = ['#1c232e','#3a3424','#6b5426','#a8792a','#e09a2c'];
+const AVW_EDGES = [86, 88, 90, 92];
+let _avwDi = null, _avwSi = null, _avwMonth = null;
+function avwCol(db) { if (db == null) return '#11161d'; let k = 0; while (k < AVW_EDGES.length && db >= AVW_EDGES[k]) k++; return AVW_STEPS[k]; }
+function avwIsR20(s) { return !!(s && s.hd != null && s.hd > 100 && s.hd < 300); }
+// Bruit « au-dessus de la terrasse » : arrivées en RWY 02, départs en RWY 20.
+function avwDb(s) { if (!s) return null; return avwIsR20(s) ? (s.dbd ?? s.db) : (s.dba ?? s.db); }
+function avwLoc() { return _lang === 'pt' ? 'pt-PT' : _lang === 'fr' ? 'fr-FR' : 'en-GB'; }
+function avwDate(d, opts) { return new Date(d + 'T12:00:00').toLocaleDateString(avwLoc(), opts); }
+function avwCirc(arr) { let x = 0, y = 0; arr.forEach(([d, w]) => { x += Math.cos(d * Math.PI / 180) * w; y += Math.sin(d * Math.PI / 180) * w; }); return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360; }
+
+function avRenderWind() {
+  const days = archiveData.wind_days || [];
+  const view = document.getElementById('av-view-wind');
+  if (!days.length) return;
+  if (_avwDi == null || _avwDi >= days.length) { _avwDi = days.length - 1; _avwSi = null; }
+  if (_avwMonth == null) _avwMonth = days[_avwDi].d.slice(0, 7);
+  document.getElementById('avw-steps').innerHTML = AVW_STEPS.map(c => `<i style="background:${c}"></i>`).join('');
+  avwRenderMonths(days); avwRenderHeat(days); avwRenderDay(days);
+  const bind = (id, ev, fn) => { const el = document.getElementById(id); if (!el.dataset.bound) { el.dataset.bound = '1'; el.addEventListener(ev, fn); } };
+  bind('avw-prev', 'click', () => { if (_avwDi > 0) avwSelect(_avwDi - 1, null); });
+  bind('avw-next', 'click', () => { if (_avwDi < days.length - 1) avwSelect(_avwDi + 1, null); });
+  bind('avw-date', 'change', (e) => { const i = (archiveData.wind_days || []).findIndex(x => x.d === e.target.value); if (i >= 0) avwSelect(i, null); });
+  const di = document.getElementById('avw-date'); di.min = days[0].d; di.max = days[days.length - 1].d;
+}
+function avwSelect(i, j) { _avwDi = i; _avwSi = j; _avwMonth = archiveData.wind_days[i].d.slice(0, 7); avRenderWind(); }
+
+function avwRenderMonths(days) {
+  const months = [...new Set(days.map(d => d.d.slice(0, 7)))];
+  const el = document.getElementById('avw-months');
+  el.innerHTML = months.map(m => `<button type="button" class="archive-gran-btn${m === _avwMonth ? ' active' : ''}" data-m="${m}">${new Date(m + '-15T12:00:00').toLocaleDateString(avwLoc(), { month: 'short', year: '2-digit' })}</button>`).join('');
+  el.querySelectorAll('button').forEach(b => b.onclick = () => { _avwMonth = b.dataset.m; avwRenderMonths(days); avwRenderHeat(days); });
+}
+
+function avwRenderHeat(days) {
+  const hm = document.getElementById('avw-hm');
+  let h = `<div class="h"></div>${AVW_SL.map(s => `<div class="h">${s}</div>`).join('')}<div class="h" style="text-align:right">${avT('avw_flights', 'flights')}</div>`;
+  days.forEach((d, i) => {
+    if (d.d.slice(0, 7) !== _avwMonth) return;
+    const dt = new Date(d.d + 'T12:00:00'), we = dt.getDay() % 6 === 0, sel = i === _avwDi;
+    const tot = d.s.reduce((a, s) => a + (s ? s.n : 0), 0);
+    h += `<div class="dl${we ? ' we' : ''}${sel ? ' sel' : ''}" data-i="${i}">${avwDate(d.d, { weekday: 'short' }).slice(0, 3)} ${dt.getDate()}</div>`;
+    h += d.s.map((s, j) => { const v = avwDb(s); return `<button type="button" class="avw-cell${avwIsR20(s) ? ' r20' : ''}${sel ? ' sel' : ''}" data-i="${i}" data-j="${j}" style="background:${avwCol(v)}" title="${AVW_SL[j]} · ${v ?? '–'} dB · ${s ? s.n : 0} ${avT('avw_flights', 'flights')}" aria-label="${avwDate(d.d, { day: 'numeric', month: 'short' })} ${AVW_SL[j]}: ${v ?? '–'} dB"></button>`; }).join('');
+    h += `<div class="tot">${tot}</div>`;
+  });
+  hm.innerHTML = h;
+  hm.querySelectorAll('.avw-cell').forEach(b => b.onclick = () => avwSelect(+b.dataset.i, +b.dataset.j));
+  hm.querySelectorAll('.dl').forEach(b => b.onclick = () => avwSelect(+b.dataset.i, null));
+}
+
+function avwRenderDay(days) {
+  const d = days[_avwDi], S = d.s, si = _avwSi;
+  document.getElementById('avw-bigdate').innerHTML = `${avT('avw_showing', 'Showing')} <span>${avwDate(d.d, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}</span>`;
+  document.getElementById('avw-date').value = d.d;
+  document.getElementById('avw-prev').disabled = _avwDi === 0;
+  document.getElementById('avw-next').disabled = _avwDi === days.length - 1;
+  const live = S.filter(s => s && s.n);
+  const tot = live.reduce((a, s) => a + s.n, 0);
+  const r20n = live.filter(avwIsR20).reduce((a, s) => a + s.n, 0);
+  const withDb = S.map((s, j) => [j, avwDb(s), s]).filter(x => x[1] != null && x[2].n >= 4);
+  const loud = withDb.length ? withDb.reduce((a, b) => b[1] > a[1] ? b : a) : null;
+  const quiet = withDb.length ? withDb.reduce((a, b) => b[1] < a[1] ? b : a) : null;
+  const cfg = r20n > tot / 2 ? 'RWY 20' : (r20n > 0 ? avT('avw_mostly02', 'Mostly RWY 02') : 'RWY 02');
+  document.getElementById('avw-summary').innerHTML = [
+    [avT('avw_k_flights', 'Flights recorded'), tot, ''],
+    [avT('avw_k_rwy', 'Runway over the terrace'), cfg, r20n > 0 && r20n < tot ? `<small> · ${r20n} ${avT('avw_on20', 'on 20')}</small>` : ''],
+    [avT('avw_k_loud', 'Loudest slot'), loud ? loud[1].toFixed(1) : '–', loud ? `<small> dB · ${AVW_SL[loud[0]]}</small>` : ''],
+    [avT('avw_k_quiet', 'Quietest slot'), quiet ? quiet[1].toFixed(1) : '–', quiet ? `<small> dB · ${AVW_SL[quiet[0]]}</small>` : ''],
+  ].map(([l, v, x]) => `<div class="avw-chip"><span class="l">${l}</span><span class="v">${v}${x}</span></div>`).join('');
+
+  const sel = si == null ? null : S[si];
+  const wdList = live.filter(s => s.wd != null).map(s => [s.wd, s.n]);
+  const wd = sel && sel.wd != null ? sel.wd : (wdList.length ? avwCirc(wdList) : null);
+  document.getElementById('avw-needle').setAttribute('transform', `rotate(${wd ?? 0} 170 170)`);
+  document.getElementById('avw-dir').innerHTML = wd == null ? '–' : `${Math.round(wd)}°<small>${si == null ? avT('avw_dayavg', 'day average · wind from') : avT('avw_windfrom', 'wind from') + ' · ' + AVW_SL[si] + (sel && sel.wk != null ? ` · ${sel.wk} km/h` : '')}</small>`;
+
+  const slots = document.getElementById('avw-slots');
+  slots.innerHTML = S.map((s, j) => {
+    const v = avwDb(s);
+    if (!s || !s.n) return `<div class="avw-slot empty"><span>${AVW_SL[j]}</span><span class="deg">–</span><span class="bar"></span><span class="db">–</span><span class="rw">${avT('avw_noflights', 'no flights')}</span></div>`;
+    const w = v == null ? 0 : Math.max(4, Math.min(100, (v - 80) / 15 * 100));
+    return `<button type="button" class="avw-slot" data-j="${j}" aria-pressed="${si === j}"><span>${AVW_SL[j]}</span><span class="deg">${s.wd != null ? Math.round(s.wd) + '°' : '–'}</span><span class="bar"><i style="width:${w}%;background:${avwCol(v)}"></i></span><span class="db">${v != null ? v.toFixed(1) + ' dB' : '–'}</span><span class="rw${avwIsR20(s) ? ' b' : ''}">${avwIsR20(s) ? 'RWY 20' : 'RWY 02'} · ${s.n}</span></button>`;
+  }).join('');
+  slots.querySelectorAll('.avw-slot[data-j]').forEach(b => b.onclick = () => { _avwSi = _avwSi === +b.dataset.j ? null : +b.dataset.j; avwRenderDay(archiveData.wind_days); avwRenderHeat(archiveData.wind_days); });
+  avwRenderStrips(S, si);
+}
+
+function avwRenderStrips(S, si) {
+  const W = 760, L = 92, R = 14, cw = (W - L - R) / 8, x = j => L + cw * j + cw / 2;
+  const strip = (label, unit, vals, lo, hi, color, kind, fmt) => {
+    const H = 72, top = 12, bot = H - 16, y = v => bot - (v - lo) / (hi - lo || 1) * (bot - top);
+    const pts = vals.map((v, j) => v != null ? [x(j), y(v), v] : null);
+    let g = `<text class="avw-axis" x="0" y="${top + 12}" style="fill:var(--white)">${label}</text><text class="avw-axis" x="0" y="${top + 26}">${unit}</text>`;
+    g += `<line x1="${L}" x2="${W - R}" y1="${bot}" y2="${bot}" stroke="var(--border)"/>`;
+    if (si != null) g += `<rect x="${L + cw * si}" y="0" width="${cw}" height="${H}" fill="rgba(245,166,35,.07)"/>`;
+    if (kind === 'bar') pts.forEach(p => { if (p) g += `<rect x="${p[0] - cw * .22}" y="${p[1]}" width="${cw * .44}" height="${Math.max(0, bot - p[1])}" rx="2" fill="${color}" opacity=".7"/>`; });
+    else {
+      const seg = pts.filter(Boolean);
+      if (seg.length > 1) g += `<polyline points="${seg.map(p => p[0] + ',' + p[1]).join(' ')}" fill="none" stroke="${color}" stroke-width="2"/>`;
+      seg.forEach(p => g += `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="${color}"/>`);
+    }
+    pts.forEach(p => { if (p) g += `<text class="avw-axis" x="${p[0]}" y="${Math.max(p[1] - 6, 9)}" text-anchor="middle" style="fill:${color}">${fmt(p[2])}</text>`; });
+    return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label}">${g}</svg>`;
+  };
+  const rng = (a, pad, lo, hi) => { const v = a.filter(z => z != null); return v.length ? [Math.max(lo, Math.min(...v) - pad), Math.min(hi, Math.max(...v) + pad)] : [lo, hi]; };
+  const db = S.map(avwDb), t = S.map(s => s && s.t), hu = S.map(s => s && s.hu), wk = S.map(s => s && s.wk);
+  const [tl, th] = rng(t, 1.5, -10, 50), [hl, hh] = rng(hu, 6, 0, 100);
+  const wmax = Math.max(15, ...wk.filter(v => v != null)) + 2;
+  document.getElementById('avw-strips').innerHTML =
+    strip(avT('avw_s_db', 'Avg peak'), 'dB', db, 80, 95, 'var(--amber)', 'line', v => v.toFixed(1)) +
+    strip(avT('avw_s_t', 'Temperature'), '°C', t, tl, th, '#ef6b5b', 'line', v => v.toFixed(1)) +
+    strip(avT('avw_s_hu', 'Humidity'), '%', hu, hl, hh, '#7dd3c0', 'line', v => Math.round(v)) +
+    strip(avT('avw_s_wk', 'Wind speed'), 'km/h', wk, 0, wmax, 'var(--blue)', 'bar', v => v.toFixed(0)) +
+    `<svg viewBox="0 0 ${W} 16">${AVW_SL.map((s, j) => `<text class="avw-axis" x="${x(j)}" y="12" text-anchor="middle">${s}</text>`).join('')}</svg>`;
+}
+
 function avRefreshAll() {
   if (!archiveData) return;
   avRenderUpdated();
@@ -1976,6 +2201,7 @@ function avRefreshAll() {
   avRenderQuality();
   avRenderPollution();
   avRenderExpertMode();
+  avRenderWind();
 }
 
 fetch(ARCHIVE_URL + '?t=' + Date.now())
@@ -1993,6 +2219,7 @@ fetch(ARCHIVE_URL + '?t=' + Date.now())
     avRenderQuality();
     avRenderPollution();
     avRenderExpertMode();
+    avRenderWind();
   })
   .catch(err => {
     console.error('Archive load error:', err);
@@ -2123,6 +2350,12 @@ const T = {
     av_poll_dist:'Air quality distribution', av_poll_chart_title:'Traffic × PM2.5 over time',
     av_gran_day:'Day', av_gran_week:'Week', av_gran_month:'Month',
     av_poll_legend_flights:'Flights', av_poll_legend_pm:'Avg. PM2.5', av_poll_legend_temp:'Outside temperature', av_poll_flights_note:'for context only, barely varies',
+    av_tab_wind:'Wind',
+    avw_intro:'<b>Replay any day.</b> Wind direction, the runway in use over the terrace, aircraft noise and the weather, slot by slot since 8 September. The month view shows the patterns that only appear over weeks. For the last 7 days, see <a href="data.html#wind-module" class="av-link">Data → Wind rotation</a>.',
+    avw_month_title:'Month view · 3-hour slots', avw_day_title:'Day detail', avw_prev:'‹ Previous day', avw_next:'Next day ›', avw_showing:'Showing', avw_flights:'flights',
+    avw_legend_db:'Average peak over the terrace', avw_legend_r20:'Runway 20 slot: departures climb over the terrace, arrivals land from the north', avw_legend_click:'Click a day or a slot',
+    avw_k_flights:'Flights recorded', avw_k_rwy:'Runway over the terrace', avw_k_loud:'Loudest slot', avw_k_quiet:'Quietest slot', avw_mostly02:'Mostly RWY 02', avw_on20:'on 20',
+    avw_dayavg:'day average · wind from', avw_windfrom:'wind from', avw_noflights:'no flights', avw_s_db:'Avg peak', avw_s_t:'Temperature', avw_s_hu:'Humidity', avw_s_wk:'Wind speed',
     av_expert_intro:'Full history of the station\'s regulatory noise metric (Lden, EU/Portugal standard) and wind trend. "Peak avg" below is the average peak dB per flight for that day — for today\'s live figures and methodology, see <a href="data.html#expert-mode" class="av-link">Data → Expert Mode</a>.',
     av_expert_week_title:'7-day table · Lden', av_expert_chart_title:'Lden, peak, wind & exposure over time',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Day', av_expert_th_lden_eve:'Evening', av_expert_th_lden_night:'Night', av_expert_th_lden:'Lden', av_expert_th_peak:'Peak avg', av_expert_th_silent:'Planes under 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp', av_expert_th_winddir:'Wind dir', av_expert_th_windspeed:'Wind',
@@ -2262,6 +2495,12 @@ const T = {
     av_poll_dist:'Distribuição da qualidade do ar', av_poll_chart_title:'Tráfego × PM2.5 ao longo do tempo',
     av_gran_day:'Dia', av_gran_week:'Semana', av_gran_month:'Mês',
     av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_legend_temp:'Temperatura exterior', av_poll_flights_note:'apenas contexto, varia pouco',
+    av_tab_wind:'Vento',
+    avw_intro:'<b>Reveja qualquer dia.</b> Direcção do vento, pista em uso sobre o terraço, ruído dos aviões e meteorologia, faixa a faixa desde 8 de Setembro. A vista mensal mostra os padrões que só aparecem ao fim de semanas. Para os últimos 7 dias, veja <a href="data.html#wind-module" class="av-link">Dados → Rotação do vento</a>.',
+    avw_month_title:'Vista mensal · faixas de 3 h', avw_day_title:'Detalhe do dia', avw_prev:'‹ Dia anterior', avw_next:'Dia seguinte ›', avw_showing:'A mostrar', avw_flights:'voos',
+    avw_legend_db:'Pico médio sobre o terraço', avw_legend_r20:'Faixa em pista 20: as descolagens sobem por cima do terraço, as aterragens chegam pelo norte', avw_legend_click:'Clique num dia ou numa faixa',
+    avw_k_flights:'Voos registados', avw_k_rwy:'Pista sobre o terraço', avw_k_loud:'Faixa mais ruidosa', avw_k_quiet:'Faixa mais calma', avw_mostly02:'Sobretudo RWY 02', avw_on20:'na 20',
+    avw_dayavg:'média do dia · vento de', avw_windfrom:'vento de', avw_noflights:'sem voos', avw_s_db:'Pico médio', avw_s_t:'Temperatura', avw_s_hu:'Humidade', avw_s_wk:'Vento',
     av_expert_intro:'Histórico completo da métrica regulamentar de ruído da estação (Lden, norma UE/Portugal) e da tendência do vento. "Pico médio" abaixo é o pico médio em dB por voo nesse dia — para os valores em directo de hoje e a metodologia, ver <a href="data.html#expert-mode" class="av-link">Dados → Modo Perito</a>.',
     av_expert_week_title:'Tabela de 7 dias · Lden', av_expert_chart_title:'Lden, pico, vento e exposição ao longo do tempo',
     av_expert_th_date:'Data', av_expert_th_lden_day:'Dia', av_expert_th_lden_eve:'Entardecer', av_expert_th_lden_night:'Noite', av_expert_th_lden:'Lden', av_expert_th_peak:'Pico médio', av_expert_th_silent:'Aviões abaixo de 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direcção', av_expert_th_windspeed:'Vento',
@@ -2401,6 +2640,12 @@ const T = {
     av_poll_dist:'Répartition de la qualité de l\'air', av_poll_chart_title:'Trafic × PM2.5 dans le temps',
     av_gran_day:'Jour', av_gran_week:'Semaine', av_gran_month:'Mois',
     av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_legend_temp:'Température extérieure', av_poll_flights_note:'contexte uniquement, varie peu',
+    av_tab_wind:'Vent',
+    avw_intro:'<b>Rejouez n\'importe quelle journée.</b> Direction du vent, piste en service au-dessus de la terrasse, bruit des avions et météo, créneau par créneau depuis le 8 septembre. La vue mensuelle montre les tendances qui n\'apparaissent qu\'au fil des semaines. Pour les 7 derniers jours, voir <a href="data.html#wind-module" class="av-link">Data → Rotation du vent</a>.',
+    avw_month_title:'Vue mensuelle · créneaux de 3 h', avw_day_title:'Détail du jour', avw_prev:'‹ Jour précédent', avw_next:'Jour suivant ›', avw_showing:'Affichage du', avw_flights:'vols',
+    avw_legend_db:'Pic moyen au-dessus de la terrasse', avw_legend_r20:'Créneau en piste 20 : les décollages montent au-dessus de la terrasse, les atterrissages arrivent par le nord', avw_legend_click:'Cliquez sur un jour ou un créneau',
+    avw_k_flights:'Vols enregistrés', avw_k_rwy:'Piste au-dessus de la terrasse', avw_k_loud:'Créneau le plus bruyant', avw_k_quiet:'Créneau le plus calme', avw_mostly02:'Surtout RWY 02', avw_on20:'en 20',
+    avw_dayavg:'moyenne du jour · vent du', avw_windfrom:'vent du', avw_noflights:'aucun vol', avw_s_db:'Pic moyen', avw_s_t:'Température', avw_s_hu:'Humidité', avw_s_wk:'Vent',
     av_expert_intro:'Historique complet de la métrique réglementaire de bruit de la station (Lden, norme UE/Portugal) et de la tendance du vent. « Pic moyen » ci-dessous est le pic moyen en dB par vol ce jour-là — pour les chiffres en direct d\'aujourd\'hui et la méthodologie, voir <a href="data.html#expert-mode" class="av-link">Données → Mode Expert</a>.',
     av_expert_week_title:'Tableau 7 jours · Lden', av_expert_chart_title:'Lden, pic, vent et exposition dans le temps',
     av_expert_th_date:'Date', av_expert_th_lden_day:'Jour', av_expert_th_lden_eve:'Soirée', av_expert_th_lden_night:'Nuit', av_expert_th_lden:'Lden', av_expert_th_peak:'Pic moyen', av_expert_th_silent:'Avions sous 70dB', av_expert_th_expo:'Expo ≥70dB', av_expert_th_temp:'Temp.', av_expert_th_winddir:'Direction', av_expert_th_windspeed:'Vent',
