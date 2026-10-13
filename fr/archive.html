@@ -517,6 +517,9 @@ table.archive-table{width:100%;border-collapse:collapse;}
   }
 }
 /* ── Module Wind (13 oct 2026) ── */
+.avw-view-btn{display:inline-flex;align-items:center;gap:3px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.25);border-radius:10px;color:var(--amber);cursor:pointer;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;margin-left:10px;transition:all .15s;line-height:1;vertical-align:middle;}
+.avw-view-btn:hover{background:rgba(245,166,35,.18);border-color:var(--amber);}
+.avw-view-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
 .avw-pad{padding:20px;display:grid;gap:18px;min-width:0;}
 .avw-months{display:flex;gap:4px;text-transform:none;letter-spacing:.06em;}
 .avw-picker{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;}
@@ -1829,7 +1832,7 @@ function avRenderExpertTable() {
       <td style="color:var(--amber)">${e.total_duration_over_70_s != null ? (e.total_duration_over_70_s / 60).toFixed(1) + 'min' : '—'}</td>
       <td style="color:var(--green)">${e.avg_temp_c != null ? avFmt1(e.avg_temp_c) + '°C' : '—'}</td>
       <td style="color:var(--green)">${e.dominant_wind_dir || '—'}</td>
-      <td style="color:var(--green)">${e.avg_wind_kmh != null ? avFmt1(e.avg_wind_kmh) + ' km/h' : '—'}</td>
+      <td style="color:var(--green);white-space:nowrap">${e.avg_wind_kmh != null ? avFmt1(e.avg_wind_kmh) + ' km/h' : '—'}${avwHasDay(e.label) ? `<button type="button" class="avw-view-btn" onclick="avwOpenDay('${e.label}')" aria-label="${avT('avw_view_tip', 'Open this day in Wind')} (${e.label})" title="${avT('avw_view_tip', 'Open this day in Wind')}">${avT('avw_view', 'View')} →</button>` : ''}</td>
     </tr>`;
   }).join('');
 
@@ -2080,6 +2083,18 @@ function avwDb(s) { if (!s) return null; return avwIsR20(s) ? (s.dbd ?? s.db) : 
 function avwLoc() { return _lang === 'pt' ? 'pt-PT' : _lang === 'fr' ? 'fr-FR' : 'en-GB'; }
 function avwDate(d, opts) { return new Date(d + 'T12:00:00').toLocaleDateString(avwLoc(), opts); }
 function avwCirc(arr) { let x = 0, y = 0; arr.forEach(([d, w]) => { x += Math.cos(d * Math.PI / 180) * w; y += Math.sin(d * Math.PI / 180) * w; }); return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360; }
+
+// Lien Expert Mode → Wind (13 oct 2026) : bouton « View » par jour, ouvre l'onglet Wind sur ce jour.
+function avwHasDay(d) { return !!(archiveData && archiveData.wind_days && archiveData.wind_days.some(x => x.d === d)); }
+function avwOpenDay(d) {
+  const i = (archiveData.wind_days || []).findIndex(x => x.d === d); if (i < 0) return;
+  _avwDi = i; _avwSi = null; _avwMonth = d.slice(0, 7);
+  avRenderWind();
+  document.querySelector('.archive-subtab[data-view="wind"]').click();
+  history.replaceState(null, '', '#wind');
+  const v = document.getElementById('av-view-wind');
+  window.scrollTo({ top: v.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
+}
 
 function avRenderWind() {
   const days = archiveData.wind_days || [];
@@ -2351,6 +2366,7 @@ const T = {
     av_gran_day:'Day', av_gran_week:'Week', av_gran_month:'Month',
     av_poll_legend_flights:'Flights', av_poll_legend_pm:'Avg. PM2.5', av_poll_legend_temp:'Outside temperature', av_poll_flights_note:'for context only, barely varies',
     av_tab_wind:'Wind',
+    avw_view:'View', avw_view_tip:'Open this day in Wind',
     avw_intro:'<b>Replay any day.</b> Wind direction, the runway in use over the terrace, aircraft noise and the weather, slot by slot since 8 September. The month view shows the patterns that only appear over weeks. For the last 7 days, see <a href="data.html#wind-module" class="av-link">Data → Wind rotation</a>.',
     avw_month_title:'Month view · 3-hour slots', avw_day_title:'Day detail', avw_prev:'‹ Previous day', avw_next:'Next day ›', avw_showing:'Showing', avw_flights:'flights',
     avw_legend_db:'Average peak over the terrace', avw_legend_r20:'Runway 20 slot: departures climb over the terrace, arrivals land from the north', avw_legend_click:'Click a day or a slot',
@@ -2496,6 +2512,7 @@ const T = {
     av_gran_day:'Dia', av_gran_week:'Semana', av_gran_month:'Mês',
     av_poll_legend_flights:'Voos', av_poll_legend_pm:'PM2.5 médio', av_poll_legend_temp:'Temperatura exterior', av_poll_flights_note:'apenas contexto, varia pouco',
     av_tab_wind:'Vento',
+    avw_view:'Ver', avw_view_tip:'Abrir este dia em Vento',
     avw_intro:'<b>Reveja qualquer dia.</b> Direcção do vento, pista em uso sobre o terraço, ruído dos aviões e meteorologia, faixa a faixa desde 8 de Setembro. A vista mensal mostra os padrões que só aparecem ao fim de semanas. Para os últimos 7 dias, veja <a href="data.html#wind-module" class="av-link">Dados → Rotação do vento</a>.',
     avw_month_title:'Vista mensal · faixas de 3 h', avw_day_title:'Detalhe do dia', avw_prev:'‹ Dia anterior', avw_next:'Dia seguinte ›', avw_showing:'A mostrar', avw_flights:'voos',
     avw_legend_db:'Pico médio sobre o terraço', avw_legend_r20:'Faixa em pista 20: as descolagens sobem por cima do terraço, as aterragens chegam pelo norte', avw_legend_click:'Clique num dia ou numa faixa',
@@ -2641,6 +2658,7 @@ const T = {
     av_gran_day:'Jour', av_gran_week:'Semaine', av_gran_month:'Mois',
     av_poll_legend_flights:'Vols', av_poll_legend_pm:'PM2.5 moyen', av_poll_legend_temp:'Température extérieure', av_poll_flights_note:'contexte uniquement, varie peu',
     av_tab_wind:'Vent',
+    avw_view:'Voir', avw_view_tip:'Ouvrir ce jour dans Vent',
     avw_intro:'<b>Rejouez n\'importe quelle journée.</b> Direction du vent, piste en service au-dessus de la terrasse, bruit des avions et météo, créneau par créneau depuis le 8 septembre. La vue mensuelle montre les tendances qui n\'apparaissent qu\'au fil des semaines. Pour les 7 derniers jours, voir <a href="data.html#wind-module" class="av-link">Data → Rotation du vent</a>.',
     avw_month_title:'Vue mensuelle · créneaux de 3 h', avw_day_title:'Détail du jour', avw_prev:'‹ Jour précédent', avw_next:'Jour suivant ›', avw_showing:'Affichage du', avw_flights:'vols',
     avw_legend_db:'Pic moyen au-dessus de la terrasse', avw_legend_r20:'Créneau en piste 20 : les décollages montent au-dessus de la terrasse, les atterrissages arrivent par le nord', avw_legend_click:'Cliquez sur un jour ou un créneau',
