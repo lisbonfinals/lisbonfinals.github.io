@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T07:12:50Z",
+ "generated_at": "2026-10-15T07:30:05Z",
  "flights": [
   {
    "file": "flights_2026-05.csv",
@@ -39,8 +39,8 @@
   {
    "file": "flights_2026-10.csv",
    "month": "2026-10",
-   "rows": 4618,
-   "bytes": 988973,
+   "rows": 4624,
+   "bytes": 990558,
    "in_progress": true
   }
  ],
@@ -101,9 +101,9 @@
     "first_day": "2026-10-11",
     "last_day": "2026-10-15",
     "days": 5,
-    "rows": 366614,
-    "bytes": 1705015,
-    "csv_bytes": 10632081,
+    "rows": 367607,
+    "bytes": 1709774,
+    "csv_bytes": 10660878,
     "in_progress": true
    }
   ],
@@ -163,9 +163,9 @@
     "first_day": "2026-10-11",
     "last_day": "2026-10-15",
     "days": 5,
-    "rows": 365316,
-    "bytes": 1943079,
-    "csv_bytes": 10915117,
+    "rows": 366324,
+    "bytes": 1948466,
+    "csv_bytes": 10944907,
     "in_progress": true
    }
   ]
@@ -209,10 +209,10 @@
    "first_day": "2026-10-11",
    "last_day": "2026-10-15",
    "days": 5,
-   "passes": 1389,
-   "rows": 33444,
-   "bytes": 461161,
-   "csv_bytes": 3295488,
+   "passes": 1395,
+   "rows": 33602,
+   "bytes": 463111,
+   "csv_bytes": 3311030,
    "in_progress": true
   }
  ],
@@ -279,8 +279,8 @@
     "month": "2026-10",
     "first_day": "2026-10-10",
     "last_day": "2026-10-15",
-    "rows": 1180,
-    "bytes": 95309,
+    "rows": 1223,
+    "bytes": 98711,
     "in_progress": true
    }
   ]
@@ -291,10 +291,10 @@
    "month": "2026-10",
    "first_day": "2026-10-10",
    "last_day": "2026-10-15",
-   "rows": 6600,
-   "bytes": 93167,
+   "rows": 6617,
+   "bytes": 93497,
    "in_progress": true,
-   "csv_bytes": 510486
+   "csv_bytes": 511826
   }
  ],
  "station": {
