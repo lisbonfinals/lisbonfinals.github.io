@@ -325,6 +325,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .av-dq-kind{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:2px;margin-right:8px;vertical-align:2px;}
 .av-dq-ev.merge{color:var(--amber);} .av-dq-ev.merge .av-dq-kind{background:rgba(245,166,35,.1);color:var(--amber);}
 .av-dq-ev.fix,.av-dq-ev.fill{color:var(--blue);} .av-dq-ev.fix .av-dq-kind,.av-dq-ev.fill .av-dq-kind{background:rgba(96,165,250,.1);color:var(--blue);}
+.av-dq-ev.excl{color:var(--red);} .av-dq-ev.excl .av-dq-kind{background:rgba(239,68,68,.1);color:var(--red);}
 .av-dq-ev.split{color:var(--green);} .av-dq-ev.split .av-dq-kind{background:rgba(34,197,94,.1);color:var(--green);}
 .av-dq-foot{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin-top:12px;line-height:1.6;}
 .av-dq-3{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px;}
@@ -835,6 +836,8 @@ table.archive-table{width:100%;border-collapse:collapse;}
       <div class="av-dq-card"><div class="v" id="av-q-capped-pct">—</div><div class="l" data-i18n="av_q_capped">dB readings capped at 100</div><div class="s" id="av-dq-capped-sub">—</div><p data-i18n="av_dq_capped_p"></p></div>
       <div class="av-dq-card red"><div class="v" id="av-q-military-pct">—</div><div class="l" data-i18n="av_q_military">Suspected false-positive "military" tags</div><div class="s" id="av-dq-mil-sub">—</div><p data-i18n="av_dq_mil_p"></p></div>
     </div>
+    <div class="av-dq-sub"><span class="av-dq-num">3.1</span><h3 data-i18n="av_dq_s_hist"></h3><em data-i18n="av_aq_hist_em"></em></div>
+    <div class="av-dq-tl" id="av-dq-measure-history"></div>
     </section>
   </div>
 
@@ -1504,6 +1507,13 @@ const AV_AIRLINE_HISTORY = [
     pt:'Dois Airbus da <b>Delta Air Lines</b> apresentados como "Air Algérie": o seu código hex começava pelas letras do código dessa companhia.',
     fr:'Deux Airbus <b>Delta Air Lines</b> affichés « Air Algérie » : leur code hex commençait par les lettres du code de cette compagnie.' },
 ];
+// Historique des corrections « Mesures » (même format ; 17 oct 2026).
+const AV_MEASURE_HISTORY = [
+  { date:'2026-10-17', kind:'excl', qty:7,
+    en:'Seven flights (3, 16 and 17 October) passed while the station\'s <b>main microphone had gone silent</b> because of a loose cable. Their noise level came from the backup <b>camera microphone</b>, which is not calibrated and reads several decibels too high (94 to 100 dB, against 84 to 89 dB measured for comparable aircraft). The flights stay in the archive with this estimate, but their decibels no longer count in records, averages or reports.',
+    pt:'Sete voos (3, 16 e 17 de Outubro) passaram enquanto o <b>microfone principal</b> da estação estava <b>mudo</b>, por causa de um cabo com mau contacto. O seu nível de ruído veio do <b>microfone da câmara</b>, de reserva, que não está calibrado e lê vários decibéis acima (94 a 100 dB, contra 84 a 89 dB medidos em aviões comparáveis). Os voos continuam no arquivo com esta estimativa, mas os seus decibéis deixam de contar nos recordes, médias e relatórios.',
+    fr:'Sept vols (3, 16 et 17 octobre) sont passés alors que le <b>micro principal</b> de la station était <b>muet</b>, à cause d\'un faux contact. Leur niveau sonore vient du <b>micro de la caméra</b>, de secours, non étalonné, qui lit plusieurs décibels trop haut (94 à 100 dB, contre 84 à 89 dB mesurés pour des avions comparables). Les vols restent dans l\'archive avec cette estimation, mais leurs décibels ne comptent plus dans les records, les moyennes ni les rapports.' },
+];
 // Historique des corrections « Modèles d'avion » (même format que AV_AIRLINE_HISTORY ;
 // qtyText remplace qty quand la quantité n'est pas un nombre de vols).
 const AV_MODEL_HISTORY = [
@@ -1604,6 +1614,7 @@ function avRenderAirlineQuality() {
   // Frises
   avDqTimeline('av-aq-history', AV_AIRLINE_HISTORY);
   avDqTimeline('av-dq-model-history', AV_MODEL_HISTORY);
+  avDqTimeline('av-dq-measure-history', AV_MEASURE_HISTORY);
 }
 
 // ── Data Quality ──
@@ -2314,6 +2325,7 @@ const T = {
     av_aq_k_fix:'Fixed',
     av_aq_k_fill:'Filled in',
     av_aq_k_split:'Split',
+    av_aq_k_excl:'Excluded',
     av_aq_foot:'Each correction also applies to flights already archived, not just new ones.',
     av_lease_tpl:'{o} aircraft, leased with crew',
     av_dq_intro:'<b>Transparency panel.</b> Known limits of this dataset, with real counters rather than hidden assumptions, and a dated list of every correction.',
@@ -2460,6 +2472,7 @@ const T = {
     av_aq_k_fix:'Corrigido',
     av_aq_k_fill:'Completado',
     av_aq_k_split:'Separação',
+    av_aq_k_excl:'Excluído',
     av_aq_foot:'Cada correcção aplica-se também aos voos já arquivados, e não apenas aos novos.',
     av_lease_tpl:'Avião {o}, alugado com tripulação',
     av_dq_intro:'<b>Painel de transparência.</b> As limitações conhecidas deste conjunto de dados, com contadores reais em vez de suposições ocultas, e a lista datada de cada correcção.',
@@ -2606,6 +2619,7 @@ const T = {
     av_aq_k_fix:'Corrigé',
     av_aq_k_fill:'Complété',
     av_aq_k_split:'Séparation',
+    av_aq_k_excl:'Exclu',
     av_aq_foot:'Chaque correction s\'applique aussi aux vols déjà archivés, pas seulement aux nouveaux.',
     av_lease_tpl:'Avion {o}, loué avec équipage',
     av_dq_intro:'<b>Panneau de transparence.</b> Les limites connues de ce jeu de données, avec des compteurs réels plutôt que des suppositions cachées, et la liste datée de chaque correction.',
