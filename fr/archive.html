@@ -251,35 +251,7 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .archive-note.warn{border-color:rgba(239,68,68,.25);}
 .archive-note.warn b{color:var(--red);}
 
-/* ── Qualité des données (refonte 26 sept 2026) ── */
-.av-dq-kpi{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:12px;}
-.av-dq-kpi > div{background:var(--dark2);padding:22px 24px;}
-.av-dq-kpi .v{font-family:var(--mono);font-size:34px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums;color:var(--white);}
-.av-dq-kpi .v.green{color:var(--green);} .av-dq-kpi .v.amber{color:var(--amber);}
-.av-dq-kpi .l{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:10px;line-height:1.5;}
-.av-dq-kpi .s{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin-top:4px;}
-.av-dq-kpi .av-dq-bar{grid-column:1/-1;padding:14px 24px 18px;}
-.av-dq-track{height:6px;border-radius:3px;background:rgba(245,166,35,.55);overflow:hidden;}
-.av-dq-track i{display:block;height:100%;background:var(--green);}
-.av-dq-cap{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);margin-top:8px;}
-#av-view-quality .archive-note{margin-bottom:8px;}
-.av-dq-toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px;}
-.av-dq-toc button{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:rgba(240,237,232,.6);background:transparent;border:1px solid var(--border2);border-radius:2px;padding:6px 10px;cursor:pointer;}
-.av-dq-toc button b{color:var(--amber);font-weight:500;margin-right:6px;}
-.av-dq-toc button:hover{color:var(--white);border-color:var(--amber);}
-.av-dq-module{margin-top:64px;scroll-margin-top:90px;}
-.av-dq-head{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-bottom:24px;border-bottom:1px solid var(--border);margin-bottom:28px;}
-.av-dq-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
-.av-dq-kicker::before{content:'';width:18px;height:1px;background:var(--amber);flex-shrink:0;}
-.av-dq-title{font-family:var(--sans);font-weight:800;font-size:clamp(30px,4.4vw,46px);line-height:1.02;letter-spacing:-.015em;color:var(--white);}
-.av-dq-title em{font-family:var(--serif);font-weight:400;font-style:italic;color:rgba(240,237,232,.38);letter-spacing:0;}
-.av-dq-aside{font-family:var(--sans);font-size:14px;line-height:1.7;color:rgba(240,237,232,.6);max-width:62ch;margin:0;}
-.av-dq-sub{display:flex;align-items:center;gap:12px;margin:40px 0 16px;}
-.av-dq-head + .av-dq-sub{margin-top:0;}
-.av-dq-num{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;color:var(--amber);border:1px solid rgba(245,166,35,.4);border-radius:2px;padding:3px 6px;line-height:1;}
-.av-dq-sub h3{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--white);}
-.av-dq-sub em{font-style:normal;font-family:var(--mono);font-size:10px;color:rgba(240,237,232,.38);margin-left:auto;}
-.av-dq-lede{font-family:var(--sans);font-size:13px;line-height:1.7;color:rgba(240,237,232,.6);max-width:68ch;margin-bottom:20px;}
+/* ── Fiabilité des données : blocs repris de la refonte du 26 sept 2026 ── */
 .av-dq-cascade{position:relative;display:grid;gap:10px;padding-left:34px;}
 .av-dq-cascade::before{content:'';position:absolute;left:11px;top:14px;bottom:14px;width:1px;background:linear-gradient(var(--green),var(--blue),var(--amber),rgba(240,237,232,.12));}
 .av-dq-st{position:relative;display:grid;grid-template-columns:1fr auto;gap:8px 20px;align-items:start;background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:16px 20px;}
@@ -307,27 +279,6 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .av-dq-split{display:flex;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;}
 .av-dq-split span{border:1px solid var(--border2);border-radius:2px;padding:4px 8px;color:rgba(240,237,232,.75);}
 .av-dq-split span i{font-style:normal;color:rgba(240,237,232,.38);margin-left:6px;}
-.av-dq-tl{display:grid;}
-.av-dq-ev{display:grid;grid-template-columns:110px 20px 1fr auto;gap:0 16px;align-items:start;padding:14px 0;border-bottom:1px solid rgba(30,37,48,.6);}
-.av-dq-ev:last-child{border-bottom:none;}
-.av-dq-ev .d{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.6);font-variant-numeric:tabular-nums;}
-.av-dq-ev .d b{display:block;font-weight:500;color:var(--white);font-size:13px;}
-.av-dq-ev .pin{position:relative;align-self:stretch;min-height:20px;}
-.av-dq-ev .pin::before{content:'';position:absolute;left:9px;top:-14px;bottom:-14px;width:1px;background:var(--border2);}
-.av-dq-ev:first-child .pin::before{top:6px;}
-.av-dq-ev:last-child .pin::before{bottom:auto;height:20px;}
-.av-dq-ev:only-child .pin::before{display:none;}
-.av-dq-ev .pin::after{content:'';position:absolute;left:5px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--dark);border:2px solid currentColor;}
-.av-dq-ev .t{font-family:var(--sans);font-size:13px;line-height:1.6;color:rgba(240,237,232,.75);}
-.av-dq-ev .t b{color:var(--white);font-weight:600;}
-.av-dq-ev .q{font-family:var(--mono);font-size:16px;font-weight:500;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--white);}
-.av-dq-ev .q small{display:block;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,237,232,.38);font-weight:400;margin-top:2px;}
-.av-dq-kind{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:2px;margin-right:8px;vertical-align:2px;}
-.av-dq-ev.merge{color:var(--amber);} .av-dq-ev.merge .av-dq-kind{background:rgba(245,166,35,.1);color:var(--amber);}
-.av-dq-ev.fix,.av-dq-ev.fill{color:var(--blue);} .av-dq-ev.fix .av-dq-kind,.av-dq-ev.fill .av-dq-kind{background:rgba(96,165,250,.1);color:var(--blue);}
-.av-dq-ev.excl{color:var(--red);} .av-dq-ev.excl .av-dq-kind{background:rgba(239,68,68,.1);color:var(--red);}
-.av-dq-ev.split{color:var(--green);} .av-dq-ev.split .av-dq-kind{background:rgba(34,197,94,.1);color:var(--green);}
-.av-dq-foot{font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin-top:12px;line-height:1.6;}
 .av-dq-3{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px;}
 .av-dq-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
 .av-dq-card{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:20px 22px;}
@@ -351,18 +302,108 @@ table.archive-table{width:100%;border-collapse:collapse;}
 .av-dq-keyline{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--sans);font-size:11px;color:rgba(240,237,232,.38);margin-top:12px;}
 .av-dq-keyline > span{display:flex;align-items:center;gap:8px;}
 @media (max-width:760px){
-  .av-dq-kpi{grid-template-columns:1fr 1fr;}
-  .av-dq-kpi > div:first-child{grid-column:1/-1;}
   .av-dq-choices,.av-dq-3,.av-dq-2{grid-template-columns:1fr;}
   .av-dq-grp{grid-template-columns:1fr auto;}
   .av-dq-grp .to{display:none;}
   .av-dq-grp .av-dq-chips{grid-column:1/-1;}
-  .av-dq-ev{grid-template-columns:20px 1fr;gap:4px 12px;}
-  .av-dq-ev .pin{grid-row:1/4;grid-column:1;}
-  .av-dq-ev .d,.av-dq-ev .t,.av-dq-ev .q{grid-column:2;text-align:left;}
   .av-dq-st{grid-template-columns:1fr;}
   .av-dq-rel{align-items:flex-start;}
 }
+
+/* ── Data reliability (refonte 17 oct 2026) : bilan → règles → méthodes → journal → chercheurs ── */
+#av-view-quality.active{display:flex;flex-direction:column;gap:64px;}
+.av-rel-top,.av-rel-sec{display:flex;flex-direction:column;gap:14px;min-width:0;}
+.av-rel-eyebrow{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:10px;}
+.av-rel-eyebrow::before{content:'';width:18px;height:1px;background:var(--amber);flex-shrink:0;}
+.av-rel-h{font-family:var(--sans);font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.02;letter-spacing:-.015em;color:var(--white);text-wrap:balance;}
+.av-rel-h em{font-family:var(--serif);font-weight:400;font-style:italic;color:rgba(240,237,232,.38);letter-spacing:0;}
+.av-rel-lede{font-family:var(--sans);font-size:15px;line-height:1.7;color:rgba(240,237,232,.6);max-width:62ch;}
+.av-rel-h3{font-family:var(--sans);font-weight:700;font-size:clamp(20px,2.6vw,26px);line-height:1.2;color:var(--white);text-wrap:balance;}
+.av-rel-h4{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--white);margin-top:10px;}
+.av-rel-h4 em{font-style:normal;color:rgba(240,237,232,.38);margin-left:8px;letter-spacing:.08em;}
+.av-rel-sub{font-family:var(--sans);font-size:14px;line-height:1.7;color:rgba(240,237,232,.6);max-width:66ch;}
+/* 1. Bilan */
+.av-rel-bilan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:6px;}
+.av-rel-card{all:unset;box-sizing:border-box;cursor:pointer;background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;min-width:0;transition:border-color .2s;}
+.av-rel-card:hover{border-color:var(--border2);}
+.av-rel-card:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+.av-rel-card .dom{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.6);}
+.av-rel-state{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap;}
+.av-rel-state.ok{color:var(--green);background:rgba(34,197,94,.1);}
+.av-rel-state.watch{color:var(--amber);background:rgba(245,166,35,.1);}
+.av-rel-card .big{font-family:var(--mono);font-size:34px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums;color:var(--white);}
+.av-rel-card .what{font-family:var(--sans);font-size:13px;line-height:1.55;color:rgba(240,237,232,.75);}
+.av-rel-card .foot{font-family:var(--mono);font-size:10px;line-height:1.5;color:rgba(240,237,232,.38);margin-top:auto;padding-top:10px;border-top:1px solid var(--border);}
+/* 2. Règles */
+.av-rel-table{overflow-x:auto;border:1px solid var(--border);border-radius:4px;background:var(--dark2);margin-top:6px;}
+.av-rel-table table{width:100%;min-width:640px;border-collapse:collapse;font-family:var(--sans);font-size:13px;color:rgba(240,237,232,.75);}
+.av-rel-table th,.av-rel-table td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
+.av-rel-table th{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,237,232,.38);}
+.av-rel-table tr:last-child td{border-bottom:0;}
+.av-rel-table .n{text-align:right;white-space:nowrap;font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--white);}
+.av-rel-field{font-family:var(--mono);font-size:11px;color:var(--blue);}
+.av-rel-rule{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:2px;white-space:nowrap;}
+.av-rel-rule.x{color:var(--red);background:rgba(239,68,68,.1);}
+.av-rel-rule.c{color:var(--blue);background:rgba(96,165,250,.1);}
+.av-rel-rule.b{color:rgba(240,237,232,.6);background:rgba(240,237,232,.06);}
+/* 3. Méthodes */
+.av-rel-methods{display:flex;flex-direction:column;border-top:1px solid var(--border);margin-top:6px;}
+.av-rel-methods details{border-bottom:1px solid var(--border);scroll-margin-top:90px;}
+.av-rel-methods summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:170px minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:18px 4px;}
+.av-rel-methods summary::-webkit-details-marker{display:none;}
+.av-rel-methods summary:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+.av-rel-methods summary .dom{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);}
+.av-rel-methods summary .res{font-family:var(--sans);font-size:14px;line-height:1.5;color:var(--white);}
+.av-rel-methods summary .plus{font-family:var(--mono);font-size:18px;color:rgba(240,237,232,.38);transition:transform .2s;}
+.av-rel-methods details[open] summary .plus{transform:rotate(45deg);}
+.av-rel-body{padding:0 4px 26px 190px;display:flex;flex-direction:column;gap:14px;font-family:var(--sans);font-size:13px;line-height:1.7;color:rgba(240,237,232,.6);min-width:0;}
+.av-rel-body > p{max-width:70ch;}
+.av-rel-body b{color:var(--white);font-weight:600;}
+/* 4. Journal */
+.av-rel-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:6px;}
+.av-rel-filters{display:flex;flex-wrap:wrap;gap:6px;}
+.av-rel-filters button{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.6);background:transparent;border:1px solid var(--border2);border-radius:999px;padding:6px 12px;cursor:pointer;}
+.av-rel-filters button:hover{color:var(--white);}
+.av-rel-filters button[aria-pressed="true"]{color:var(--dark);background:var(--amber);border-color:var(--amber);}
+.av-rel-filters button:focus-visible,.av-rel-search:focus-visible,.av-rel-row > button:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+.av-rel-search{flex:1 1 220px;min-width:0;font-family:var(--mono);font-size:12px;color:var(--white);background:var(--dark2);border:1px solid var(--border2);border-radius:4px;padding:8px 12px;}
+.av-rel-search::placeholder{color:rgba(240,237,232,.38);}
+.av-rel-count{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.38);}
+.av-rel-log{display:flex;flex-direction:column;border-top:1px solid var(--border);}
+.av-rel-row{border-bottom:1px solid var(--border);}
+.av-rel-row > button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:96px 112px minmax(0,1fr) 92px;gap:14px;align-items:baseline;padding:14px 4px;}
+.av-rel-row > button:hover .ttl{color:var(--amber);}
+.av-rel-row .date{font-family:var(--mono);font-size:11px;color:rgba(240,237,232,.38);font-variant-numeric:tabular-nums;}
+.av-rel-row .tags{display:flex;flex-direction:column;gap:4px;align-items:flex-start;}
+.av-rel-tag{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:2px;}
+.av-rel-tag.son{color:var(--amber);background:rgba(245,166,35,.1);}
+.av-rel-tag.air,.av-rel-tag.mod{color:var(--blue);background:rgba(96,165,250,.1);}
+.av-rel-kind{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:rgba(240,237,232,.6);}
+.av-rel-kind.excl{color:var(--red);}
+.av-rel-row .ttl{font-family:var(--sans);font-size:14px;line-height:1.5;color:var(--white);transition:color .15s;}
+.av-rel-row .qty{font-family:var(--mono);font-size:14px;font-weight:500;text-align:right;font-variant-numeric:tabular-nums;color:var(--white);white-space:nowrap;}
+.av-rel-row .qty small{display:block;font-size:9px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,237,232,.38);}
+.av-rel-row .detail{padding:0 4px 18px 240px;font-family:var(--sans);font-size:13px;line-height:1.7;color:rgba(240,237,232,.6);max-width:900px;}
+.av-rel-row .detail b{color:var(--white);font-weight:600;}
+.av-rel-empty{padding:18px 4px;font-family:var(--mono);font-size:12px;color:rgba(240,237,232,.38);}
+/* 5. Chercheurs */
+.av-rel-research{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;border:1px solid var(--border2);border-radius:4px;padding:24px;background:var(--dark3);}
+.av-rel-research-l{display:flex;flex-direction:column;gap:12px;}
+.av-rel-research ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-family:var(--sans);font-size:13px;line-height:1.65;color:rgba(240,237,232,.6);}
+.av-rel-research code{font-family:var(--mono);font-size:11px;color:var(--blue);}
+.av-rel-research a{color:var(--amber);text-underline-offset:2px;}
+@media (max-width:900px){.av-rel-bilan{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:720px){
+  .av-rel-research{grid-template-columns:1fr;padding:20px;}
+  .av-rel-methods summary{grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;}
+  .av-rel-methods summary .dom{grid-column:1/-1;}
+  .av-rel-body{padding-left:4px;}
+  .av-rel-row > button{grid-template-columns:minmax(0,1fr) auto;gap:8px 14px;}
+  .av-rel-row .date{grid-column:1/-1;}
+  .av-rel-row .tags{flex-direction:row;align-items:center;grid-column:1/-1;}
+  .av-rel-row .detail{padding-left:4px;}
+}
+@media (max-width:520px){.av-rel-bilan{grid-template-columns:1fr;}}
 
 /* mini bar chart */
 .archive-chart-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:4px;padding:24px 20px 14px;margin-bottom:24px;}
@@ -663,8 +704,8 @@ table.archive-table{width:100%;border-collapse:collapse;}
     <button class="archive-subtab" data-view="rare" data-i18n="av_tab_rare">Rare · Military</button>
     <button class="archive-subtab" data-view="expertmode" data-i18n="av_tab_expertmode">Expert Mode</button>
     <button class="archive-subtab" data-view="wind" data-i18n="av_tab_wind">Wind</button>
-    <button class="archive-subtab" data-view="quality" data-i18n="av_tab_quality">Data Quality</button>
-    <button class="archive-subtab" data-view="pollution" data-i18n="av_tab_pollution">Air Quality</button>
+    <button class="archive-subtab" data-view="pollution" data-i18n="av_tab_pollution">Air · PM2.5</button>
+    <button class="archive-subtab" data-view="quality" data-i18n="av_tab_quality">Data reliability</button>
   </div>
 
   <!-- ── OVERVIEW ── -->
@@ -778,66 +819,113 @@ table.archive-table{width:100%;border-collapse:collapse;}
     <div class="archive-pics-pagination" id="av-rare-pics-pagination"></div>
   </div>
 
-  <!-- ── DATA QUALITY ── -->
+  <!-- ── DATA RELIABILITY (refonte 17 oct 2026) : bilan, règles, méthodes repliables, journal unique, chercheurs ── -->
   <div class="archive-view" id="av-view-quality">
-    <div class="av-dq-kpi">
-      <div><div class="v green" id="av-aq-identified-pct">—</div><div class="l" data-i18n="av_aq_identified">Flights with an identified airline</div><div class="s" data-i18n="av_month_all">All time</div></div>
-      <div><div class="v amber" id="av-aq-unidentified">—</div><div class="l" data-i18n="av_aq_unidentified">Flights with no airline</div><div class="s" id="av-aq-unidentified-sub">—</div></div>
-      <div><div class="v" id="av-dq-models">—</div><div class="l" data-i18n="av_dq_models_kpi">Distinct aircraft models</div><div class="s" id="av-dq-models-sub">—</div></div>
-      <div class="av-dq-bar"><div class="av-dq-track"><i id="av-dq-track-fill" style="width:0"></i></div><div class="av-dq-cap"><span id="av-dq-cap-ok">—</span><span id="av-dq-cap-ko">—</span></div></div>
-    </div>
-    <div class="archive-note" data-i18n-html="av_dq_intro"></div>
-    <div class="av-dq-toc" role="navigation">
-      <button type="button" onclick="document.getElementById('av-dq-m1').scrollIntoView({behavior:'smooth'})"><b>01</b><span data-i18n="av_dq_toc1"></span></button>
-      <button type="button" onclick="document.getElementById('av-dq-m2').scrollIntoView({behavior:'smooth'})"><b>02</b><span data-i18n="av_dq_toc2"></span></button>
-      <button type="button" onclick="document.getElementById('av-dq-m3').scrollIntoView({behavior:'smooth'})"><b>03</b><span data-i18n="av_dq_toc3"></span></button>
-    </div>
+    <header class="av-rel-top">
+      <div class="av-rel-eyebrow" id="av-rel-updated">—</div>
+      <h2 class="av-rel-h" data-i18n-html="av_rel_h">Can you trust <em>these figures?</em></h2>
+      <p class="av-rel-lede" id="av-rel-lede"></p>
+    </header>
 
-    <section class="av-dq-module" id="av-dq-m1">
-    <div class="av-dq-head"><div><div class="av-dq-kicker"><span data-i18n="av_dq_kicker">Data quality</span>&nbsp;· 01</div><div class="av-dq-title" data-i18n-html="av_dq_m1_title"></div></div><p class="av-dq-aside" data-i18n="av_dq_m1_aside"></p></div>
-    <div class="av-dq-sub"><span class="av-dq-num">1.1</span><h3 data-i18n="av_dq_s_method"></h3><em data-i18n="av_dq_s_method_em"></em></div>
-    <p class="av-dq-lede" data-i18n="av_aq_lede"></p>
-    <div class="av-dq-cascade">
-      <div class="av-dq-st"><span class="av-dq-dot av-dq-c1">1</span><div><h4 data-i18n="av_aq_s1_t"></h4><p data-i18n-html="av_aq_s1_p"></p></div><div class="av-dq-rel av-dq-c1"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s1_pill"></span></div></div>
-      <div class="av-dq-st"><span class="av-dq-dot av-dq-c2">2</span><div><h4 data-i18n="av_aq_s2_t"></h4><p data-i18n-html="av_aq_s2_p"></p></div><div class="av-dq-rel av-dq-c2"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s2_pill"></span></div></div>
-      <div class="av-dq-st"><span class="av-dq-dot av-dq-c3">3</span><div><h4 data-i18n="av_aq_s3_t"></h4><p data-i18n-html="av_aq_s3_p"></p></div><div class="av-dq-rel av-dq-c3"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s3_pill"></span></div></div>
-      <div class="av-dq-st"><span class="av-dq-dot av-dq-c4">4</span><div><h4 data-i18n="av_aq_s4_t"></h4><p data-i18n-html="av_aq_s4_p"></p></div><div class="av-dq-rel av-dq-c4"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s4_pill"></span></div></div>
-    </div>
-    <div class="av-dq-legend"><span><b>🇵🇹</b><span data-i18n="av_aq_leg_flag"></span></span><span><b>✈️</b><span data-i18n="av_aq_leg_plane"></span></span></div>
-    <div class="av-dq-sub"><span class="av-dq-num">1.2</span><h3 data-i18n="av_dq_s_choices"></h3><em data-i18n="av_aq_choices_em"></em></div>
-    <div class="av-dq-choices">
-      <div class="av-dq-choice"><div class="av-dq-plates"><span class="av-dq-plate">9H-</span><span class="av-dq-plate o" data-i18n="av_dq_c1_country"></span></div><h4 data-i18n="av_aq_c1_t"></h4><div class="av-dq-split"><span>Malta Air<i>Boeing 737</i></span><span>Lauda Europe<i>Airbus A320/A321</i></span></div><p data-i18n="av_aq_c1_p"></p></div>
-      <div class="av-dq-choice"><div class="av-dq-plates"><span class="av-dq-plate">LN-</span><span class="av-dq-plate">SE-</span><span class="av-dq-plate o" data-i18n="av_dq_c2_country"></span></div><h4 data-i18n="av_aq_c2_t"></h4><div class="av-dq-split"><span>Norwegian<i data-i18n="av_dq_aoc_no"></i></span><span>Norwegian Air Sweden<i data-i18n="av_dq_aoc_se"></i></span></div><p data-i18n="av_aq_c2_p"></p></div>
-    </div>
-    <div class="av-dq-sub"><span class="av-dq-num">1.3</span><h3 data-i18n="av_dq_s_hist"></h3><em data-i18n="av_aq_hist_em"></em></div>
-    <div class="av-dq-tl" id="av-aq-history"></div>
-    <p class="av-dq-foot" data-i18n="av_aq_foot"></p>
+    <section class="av-rel-sec" aria-labelledby="av-rel-t1">
+      <div class="av-rel-eyebrow" data-i18n="av_rel_s1_k">1 · The summary</div>
+      <h3 class="av-rel-h3" id="av-rel-t1" data-i18n="av_rel_s1_h">Four areas, four answers</h3>
+      <div class="av-rel-bilan" id="av-rel-bilan"></div>
     </section>
 
-    <section class="av-dq-module" id="av-dq-m2">
-    <div class="av-dq-head"><div><div class="av-dq-kicker"><span data-i18n="av_dq_kicker">Data quality</span>&nbsp;· 02</div><div class="av-dq-title" data-i18n-html="av_dq_m2_title"></div></div><p class="av-dq-aside" data-i18n="av_dq_m2_aside"></p></div>
-    <div class="av-dq-sub"><span class="av-dq-num">2.1</span><h3 data-i18n="av_dq_s_figures"></h3><em data-i18n="av_dq_alltime"></em></div>
-    <div class="av-dq-3">
-      <div class="av-dq-card"><div class="v" id="av-q-types">—</div><div class="l" data-i18n="av_dq_raw_to_models"></div><div class="s" id="av-dq-absorbed">—</div></div>
-      <div class="av-dq-card"><div class="v" id="av-dq-ngroups">—</div><div class="l" data-i18n="av_dq_groups_n"></div><div class="s" data-i18n="av_dq_see_below"></div></div>
-      <div class="av-dq-card"><div class="v" id="av-dq-gflights">—</div><div class="l" data-i18n="av_dq_flights_aff"></div><div class="s" id="av-dq-biggest">—</div></div>
-    </div>
-    <div class="av-dq-sub"><span class="av-dq-num">2.2</span><h3 data-i18n="av_dq_s_groups"></h3><em data-i18n="av_dq_s_groups_em"></em></div>
-    <p class="av-dq-lede" data-i18n="av_dq_groups_lede"></p>
-    <div class="av-dq-groups" id="av-quality-groups"></div>
-    <div class="av-dq-keyline"><span><span class="av-dq-chip" data-i18n="av_dq_chip_var"></span><span data-i18n="av_dq_key_var"></span></span><span><span class="av-dq-chip ren" data-i18n="av_dq_chip_ren"></span><span data-i18n="av_dq_key_ren"></span></span></div>
-    <div class="av-dq-sub"><span class="av-dq-num">2.3</span><h3 data-i18n="av_dq_s_hist"></h3><em data-i18n="av_aq_hist_em"></em></div>
-    <div class="av-dq-tl" id="av-dq-model-history"></div>
+    <section class="av-rel-sec" aria-labelledby="av-rel-t2">
+      <div class="av-rel-eyebrow" data-i18n="av_rel_s2_k">2 · The rules</div>
+      <h3 class="av-rel-h3" id="av-rel-t2" data-i18n="av_rel_s2_h">What does not count in the statistics</h3>
+      <p class="av-rel-sub" data-i18n="av_rel_s2_p"></p>
+      <div class="av-rel-table"><table>
+        <thead><tr><th data-i18n="av_rel_th_sit">Situation</th><th data-i18n="av_rel_th_do">What we do</th><th data-i18n="av_rel_th_field">In the data</th><th class="n" data-i18n="av_rel_th_n">Flights</th></tr></thead>
+        <tbody id="av-rel-rules"></tbody>
+      </table></div>
     </section>
 
-    <section class="av-dq-module" id="av-dq-m3">
-    <div class="av-dq-head"><div><div class="av-dq-kicker"><span data-i18n="av_dq_kicker">Data quality</span>&nbsp;· 03</div><div class="av-dq-title" data-i18n-html="av_dq_m3_title"></div></div><p class="av-dq-aside" data-i18n="av_dq_m3_aside"></p></div>
-    <div class="av-dq-2">
-      <div class="av-dq-card"><div class="v" id="av-q-capped-pct">—</div><div class="l" data-i18n="av_q_capped">dB readings capped at 100</div><div class="s" id="av-dq-capped-sub">—</div><p data-i18n="av_dq_capped_p"></p></div>
-      <div class="av-dq-card red"><div class="v" id="av-q-military-pct">—</div><div class="l" data-i18n="av_q_military">Suspected false-positive "military" tags</div><div class="s" id="av-dq-mil-sub">—</div><p data-i18n="av_dq_mil_p"></p></div>
-    </div>
-    <div class="av-dq-sub"><span class="av-dq-num">3.1</span><h3 data-i18n="av_dq_s_hist"></h3><em data-i18n="av_aq_hist_em"></em></div>
-    <div class="av-dq-tl" id="av-dq-measure-history"></div>
+    <section class="av-rel-sec" aria-labelledby="av-rel-t3">
+      <div class="av-rel-eyebrow" data-i18n="av_rel_s3_k">3 · The methods</div>
+      <h3 class="av-rel-h3" id="av-rel-t3" data-i18n="av_rel_s3_h">How each figure is obtained</h3>
+      <div class="av-rel-methods">
+        <details id="av-rel-m-son" open>
+          <summary><span class="dom" data-i18n="av_rel_d_son">Sound</span><span class="res" data-i18n="av_rel_m_son_r"></span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="av-rel-body">
+            <p data-i18n-html="av_rel_m_son_p1"></p>
+            <p data-i18n-html="av_rel_m_son_p2"></p>
+            <p data-i18n-html="av_rel_m_son_p3"></p>
+            <div class="av-dq-card"><div class="v" id="av-q-capped-pct">—</div><div class="l" data-i18n="av_q_capped">dB readings capped at 100</div><div class="s" id="av-dq-capped-sub">—</div><p data-i18n="av_dq_capped_p"></p></div>
+          </div>
+        </details>
+        <details id="av-rel-m-air">
+          <summary><span class="dom" data-i18n="av_rel_d_air">Airlines</span><span class="res" data-i18n="av_rel_m_air_r"></span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="av-rel-body">
+            <p data-i18n="av_aq_lede"></p>
+            <div class="av-dq-cascade">
+              <div class="av-dq-st"><span class="av-dq-dot av-dq-c1">1</span><div><h4 data-i18n="av_aq_s1_t"></h4><p data-i18n-html="av_aq_s1_p"></p></div><div class="av-dq-rel av-dq-c1"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s1_pill"></span></div></div>
+              <div class="av-dq-st"><span class="av-dq-dot av-dq-c2">2</span><div><h4 data-i18n="av_aq_s2_t"></h4><p data-i18n-html="av_aq_s2_p"></p></div><div class="av-dq-rel av-dq-c2"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s2_pill"></span></div></div>
+              <div class="av-dq-st"><span class="av-dq-dot av-dq-c3">3</span><div><h4 data-i18n="av_aq_s3_t"></h4><p data-i18n-html="av_aq_s3_p"></p></div><div class="av-dq-rel av-dq-c3"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s3_pill"></span></div></div>
+              <div class="av-dq-st"><span class="av-dq-dot av-dq-c4">4</span><div><h4 data-i18n="av_aq_s4_t"></h4><p data-i18n-html="av_aq_s4_p"></p></div><div class="av-dq-rel av-dq-c4"><div class="av-dq-meter"><i></i><i></i><i></i><i></i></div><span data-i18n="av_aq_s4_pill"></span></div></div>
+            </div>
+            <div class="av-dq-legend"><span><b>🇵🇹</b><span data-i18n="av_aq_leg_flag"></span></span><span><b>✈️</b><span data-i18n="av_aq_leg_plane"></span></span></div>
+            <h4 class="av-rel-h4"><span data-i18n="av_dq_s_choices">Editorial choices</span> <em data-i18n="av_aq_choices_em"></em></h4>
+            <div class="av-dq-choices">
+              <div class="av-dq-choice"><div class="av-dq-plates"><span class="av-dq-plate">9H-</span><span class="av-dq-plate o" data-i18n="av_dq_c1_country"></span></div><h4 data-i18n="av_aq_c1_t"></h4><div class="av-dq-split"><span>Malta Air<i>Boeing 737</i></span><span>Lauda Europe<i>Airbus A320/A321</i></span></div><p data-i18n="av_aq_c1_p"></p></div>
+              <div class="av-dq-choice"><div class="av-dq-plates"><span class="av-dq-plate">LN-</span><span class="av-dq-plate">SE-</span><span class="av-dq-plate o" data-i18n="av_dq_c2_country"></span></div><h4 data-i18n="av_aq_c2_t"></h4><div class="av-dq-split"><span>Norwegian<i data-i18n="av_dq_aoc_no"></i></span><span>Norwegian Air Sweden<i data-i18n="av_dq_aoc_se"></i></span></div><p data-i18n="av_aq_c2_p"></p></div>
+            </div>
+          </div>
+        </details>
+        <details id="av-rel-m-mod">
+          <summary><span class="dom" data-i18n="av_rel_d_mod">Aircraft models</span><span class="res" data-i18n="av_rel_m_mod_r"></span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="av-rel-body">
+            <div class="av-dq-3">
+              <div class="av-dq-card"><div class="v" id="av-q-types">—</div><div class="l" data-i18n="av_dq_raw_to_models"></div><div class="s" id="av-dq-absorbed">—</div></div>
+              <div class="av-dq-card"><div class="v" id="av-dq-ngroups">—</div><div class="l" data-i18n="av_dq_groups_n"></div><div class="s" data-i18n="av_dq_see_below"></div></div>
+              <div class="av-dq-card"><div class="v" id="av-dq-gflights">—</div><div class="l" data-i18n="av_dq_flights_aff"></div><div class="s" id="av-dq-biggest">—</div></div>
+            </div>
+            <p data-i18n="av_dq_groups_lede"></p>
+            <div class="av-dq-groups" id="av-quality-groups"></div>
+            <div class="av-dq-keyline"><span><span class="av-dq-chip" data-i18n="av_dq_chip_var"></span><span data-i18n="av_dq_key_var"></span></span><span><span class="av-dq-chip ren" data-i18n="av_dq_chip_ren"></span><span data-i18n="av_dq_key_ren"></span></span></div>
+          </div>
+        </details>
+        <details id="av-rel-m-rare">
+          <summary><span class="dom" data-i18n="av_rel_d_rare">Rare flights</span><span class="res" data-i18n="av_rel_m_rare_r"></span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="av-rel-body">
+            <div class="av-dq-card red"><div class="v" id="av-q-military-pct">—</div><div class="l" data-i18n="av_q_military">Suspected false-positive "military" tags</div><div class="s" id="av-dq-mil-sub">—</div><p data-i18n="av_dq_mil_p"></p></div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="av-rel-sec" aria-labelledby="av-rel-t4">
+      <div class="av-rel-eyebrow" data-i18n="av_rel_s4_k">4 · The log</div>
+      <h3 class="av-rel-h3" id="av-rel-t4" data-i18n="av_rel_s4_h">Every correction, dated</h3>
+      <p class="av-rel-sub" data-i18n="av_rel_s4_p"></p>
+      <div class="av-rel-tools">
+        <div class="av-rel-filters" id="av-rel-filters" role="group" aria-label="Filter">
+          <button type="button" data-dom="all" aria-pressed="true" data-i18n="av_rel_f_all">All</button>
+          <button type="button" data-dom="son" aria-pressed="false" data-i18n="av_rel_d_son">Sound</button>
+          <button type="button" data-dom="air" aria-pressed="false" data-i18n="av_rel_d_air">Airlines</button>
+          <button type="button" data-dom="mod" aria-pressed="false" data-i18n="av_rel_f_mod">Models</button>
+        </div>
+        <input class="av-rel-search" id="av-rel-search" type="search" autocomplete="off">
+      </div>
+      <div class="av-rel-count" id="av-rel-count" aria-live="polite"></div>
+      <div class="av-rel-log" id="av-rel-log"></div>
+    </section>
+
+    <section class="av-rel-sec av-rel-research" aria-labelledby="av-rel-t5">
+      <div class="av-rel-research-l">
+        <div class="av-rel-eyebrow" data-i18n="av_rel_s5_k">5 · For researchers</div>
+        <h3 class="av-rel-h3" id="av-rel-t5" data-i18n="av_rel_s5_h">Find these flags in the files</h3>
+        <p class="av-rel-sub" data-i18n="av_rel_s5_p"></p>
+      </div>
+      <ul>
+        <li data-i18n-html="av_rel_s5_li1"></li>
+        <li data-i18n-html="av_rel_s5_li2"></li>
+        <li data-i18n-html="av_rel_s5_li3"></li>
+        <li id="av-rel-flights"></li>
+        <li><a href="research.html" data-i18n="av_rel_s5_link">Open the Research page</a></li>
+      </ul>
     </section>
   </div>
 
@@ -1406,7 +1494,7 @@ function avRenderRare() {
   const caveatEl = document.getElementById('av-rare-caveat');
   if (militarySuspectCount > 0) {
     caveatEl.style.display = '';
-    caveatEl.innerHTML = `<b>${avT('av_rare_caveat_title','⚠ Suspected false positives')}</b> — ${avT('av_rare_caveat_desc','some flights tagged "military" resolve to a known commercial airline — most likely a hex-range classification overlap, not an actual military aircraft. See Data Quality for exact counts.')}`;
+    caveatEl.innerHTML = `<b>${avT('av_rare_caveat_title','⚠ Suspected false positives')}</b>: ${avT('av_rare_caveat_desc','some flights tagged "military" resolve to a known commercial airline: most likely a hex-range classification overlap, not an actual military aircraft. See Data reliability for exact counts.')}`;
   } else {
     caveatEl.style.display = 'none';
   }
@@ -1426,122 +1514,194 @@ function avRenderRare() {
   paginate(avPicsPage.rare);
 }
 
-// ── Historique des corrections compagnies (onglet Qualité des données) ──
+// ── Historique des corrections compagnies (onglet Fiabilité des données, journal unique) ──
 // Ajouter une correction = ajouter une ligne EN TÊTE (plus récente d'abord).
 // kind : merge | fix | fill | split ; approx:true affiche « ≈ ».
 const AV_AIRLINE_HISTORY = [
   { date:'2026-10-13', kind:'fix', qty:16,
+    t:{ en:'Airbus A330 EC-MAJ now counts for GOL, not Jet2', pt:'O Airbus A330 EC-MAJ passa a contar para a GOL, e não para a Jet2', fr:'L\'Airbus A330 EC-MAJ compte pour GOL, et non plus pour Jet2' },
     en:'The Airbus A330-200 <b>EC-MAJ</b> was shown as "Jet2" by an out-of-date public registry. It actually flies <b>GOL Linhas Aéreas</b>\' new Lisbon to Rio de Janeiro route (radio callsign GLO), leased with its crew from Spain\'s Wamos Air: its flights now count for GOL, with the "leased aircraft" badge.',
     pt:'O Airbus A330-200 <b>EC-MAJ</b> aparecia como "Jet2" por causa de um registo público desactualizado. Na verdade, faz a nova ligação Lisboa-Rio de Janeiro da <b>GOL Linhas Aéreas</b> (indicativo rádio GLO), alugado com tripulação à espanhola Wamos Air: os seus voos passam a contar para a GOL, com o selo "avião alugado".',
     fr:'L\'Airbus A330-200 <b>EC-MAJ</b> apparaissait comme « Jet2 » à cause d\'un registre public périmé. Il assure en réalité la nouvelle ligne Lisbonne-Rio de Janeiro de <b>GOL Linhas Aéreas</b> (indicatif radio GLO), loué avec son équipage à l\'espagnole Wamos Air : ses vols comptent désormais pour GOL, avec le badge « avion loué ».' },
   { date:'2026-10-12', kind:'fix', qty:102,
+    t:{ en:'WMT flights credited to Wizz Air Malta, which operates them', pt:'Os voos WMT passam a contar para a Wizz Air Malta, que os opera', fr:'Les vols WMT comptent pour Wizz Air Malta, qui les exploite' },
     en:'Flights with the radio callsign <b>WMT</b> are now credited to <b>Wizz Air Malta</b>, the airline that operates them, as we already do for Malta Air or Lauda Europe within the Ryanair group. Until now they were split between "Wizz Air" (Hungarian-registered aircraft flown by Wizz Air Malta), "Lauda Europe" (Maltese 9H-W aircraft mistaken for Lauda), seven small Maltese operators taken from outdated registries, and blank entries.',
     pt:'Os voos com o indicativo rádio <b>WMT</b> passam a contar para a <b>Wizz Air Malta</b>, a companhia que os opera, como já fazemos com a Malta Air ou a Lauda Europe dentro do grupo Ryanair. Até agora estavam repartidos entre "Wizz Air" (aviões com matrícula húngara operados pela Wizz Air Malta), "Lauda Europe" (aviões malteses 9H-W confundidos com a Lauda), sete pequenos operadores malteses vindos de registos desactualizados e entradas em branco.',
     fr:'Les vols à l\'indicatif radio <b>WMT</b> comptent désormais pour <b>Wizz Air Malta</b>, la compagnie qui les exploite, comme nous le faisons déjà pour Malta Air ou Lauda Europe au sein du groupe Ryanair. Ils étaient jusqu\'ici répartis entre « Wizz Air » (avions immatriculés en Hongrie exploités par Wizz Air Malta), « Lauda Europe » (avions maltais 9H-W pris pour Lauda), sept petits exploitants maltais tirés de registres périmés, et des cases vides.' },
   { date:'2026-09-27', kind:'fill', qty:436, unit:{ en:'photos', pt:'fotos', fr:'photos' },
+    t:{ en:'New "leased with crew" mention in the photo galleries', pt:'Nova menção "alugado com tripulação" nas galerias de fotos', fr:'Nouvelle mention « avion loué avec équipage » dans les galeries' },
     en:'New mention in the photo galleries: <b>🔁 "X aircraft, leased with crew"</b> when a flight is operated with another airline\'s aircraft and crew (wet lease), for example airBaltic A220s flying for Swiss or EuroAtlantic 777s for Azul. Detected automatically from now on. Public registries sometimes keep a former operator, so an operator only counts if its country matches the aircraft registration.',
     pt:'Nova menção nas galerias de fotos: <b>🔁 "Avião X, alugado com tripulação"</b> quando um voo é operado com o avião e a tripulação de outra companhia (wet lease), por exemplo os A220 da airBaltic a voar para a Swiss ou os 777 da EuroAtlantic para a Azul. Detecção automática a partir de agora. Os registos públicos guardam por vezes um antigo operador, por isso um operador só conta se o seu país corresponder à matrícula do avião.',
     fr:'Nouvelle mention dans les galeries photo : <b>🔁 « Avion X, loué avec équipage »</b> quand un vol est opéré avec l\'avion et l\'équipage d\'une autre compagnie (wet lease), par exemple les A220 airBaltic qui volent pour Swiss ou les 777 EuroAtlantic pour Azul. Détection automatique désormais. Les registres publics gardent parfois un ancien exploitant : un exploitant ne compte donc que si son pays correspond à l\'immatriculation de l\'avion.' },
   { date:'2026-09-27', kind:'fix', qty:104,
+    t:{ en:'Wizz Air Malta jets no longer labelled Lauda Europe', pt:'Os aviões da Wizz Air Malta deixam de aparecer como Lauda Europe', fr:'Les avions Wizz Air Malta ne sont plus étiquetés Lauda Europe' },
     en:'<b>Wizz Air Malta</b> aircraft (9H-W…) labelled <b>Lauda Europe</b> by the old radio-address rule, although they never used a Lauda callsign. Plus two Polish aircraft labelled Buzz: a <b>LOT</b> 737 and an <b>Enter Air</b> 737.',
     pt:'Aviões da <b>Wizz Air Malta</b> (9H-W…) identificados como <b>Lauda Europe</b> pela antiga regra do endereço de rádio, embora nunca tenham usado um indicativo da Lauda. E dois aviões polacos identificados como Buzz: um 737 da <b>LOT</b> e um 737 da <b>Enter Air</b>.',
     fr:'Avions <b>Wizz Air Malta</b> (9H-W…) étiquetés <b>Lauda Europe</b> par l\'ancienne règle de l\'adresse radio, alors qu\'ils n\'ont jamais utilisé d\'indicatif Lauda. Plus deux avions polonais étiquetés Buzz : un 737 <b>LOT</b> et un 737 <b>Enter Air</b>.' },
   { date:'2026-09-27', kind:'fix', qty:332,
+    t:{ en:'Second clean-up of airlines guessed from the radio address', pt:'Segunda limpeza das companhias deduzidas do endereço de rádio', fr:'Deuxième nettoyage des compagnies devinées à partir de l\'adresse radio' },
     en:'Second clean-up of labels from the old radio-address rule, this time also in the cache that labels future passes. Among them: <b>Swiss-registered easyJet Switzerland and Swiss jets</b> counted as Austrian Airlines (not one real Austrian Airlines flight was in the data), and an <b>Iberojet A330neo</b> (callsign OBS) counted as TAP. When no source could confirm the old guess, the flight is now marked unidentified.',
     pt:'Segunda limpeza das identificações da antiga regra do endereço de rádio, desta vez também na cache que identifica as próximas passagens. Entre elas: <b>aviões suíços da easyJet Switzerland e da Swiss</b> contados como Austrian Airlines (não havia um único voo real da Austrian nos dados), e um <b>A330neo da Iberojet</b> (indicativo OBS) contado como TAP. Quando nenhuma fonte confirmava a antiga suposição, o voo passa a não identificado.',
     fr:'Deuxième nettoyage des étiquettes de l\'ancienne règle de l\'adresse radio, cette fois aussi dans le cache qui étiquette les prochains passages. Parmi elles : des <b>avions suisses d\'easyJet Switzerland et de Swiss</b> comptés comme Austrian Airlines (pas un seul vrai vol Austrian dans les données), et un <b>A330neo d\'Iberojet</b> (indicatif OBS) compté comme TAP. Quand aucune source ne confirmait l\'ancienne supposition, le vol est désormais non identifié.' },
   { date:'2026-09-27', kind:'fix', qty:1583,
+    t:{ en:'Large clean-up of airlines guessed from the radio address', pt:'Grande limpeza das companhias deduzidas do endereço de rádio', fr:'Grand nettoyage des compagnies devinées à partir de l\'adresse radio' },
     en:'Large clean-up of labels inherited from an old rule that guessed the airline from the radio address, whereas those addresses are allocated by country. Each case checked against public registries and the callsigns the aircraft broadcast. The biggest: <b>Azores Airlines</b>, whose own code (RZO) was missing, so about 1,000 of its flights were counted as TAP; ASL Belgium cargo jets counted as Iberia; easyJet Europe as Vueling; Transavia as Turkish Airlines; DHL\'s European Air Transport as Lufthansa. Aircraft leased with their crew keep their owner\'s name.',
     pt:'Grande limpeza de identificações herdadas de uma regra antiga que deduzia a companhia a partir do endereço de rádio, quando estes endereços são atribuídos por país. Cada caso verificado nos registos públicos e nos indicativos emitidos pelo avião. Os maiores: a <b>Azores Airlines</b>, cujo código (RZO) faltava, pelo que cerca de 1000 dos seus voos contavam como TAP; cargueiros da ASL Belgium contados como Iberia; easyJet Europe como Vueling; Transavia como Turkish Airlines; a European Air Transport da DHL como Lufthansa. Os aviões alugados com tripulação mantêm o nome do proprietário.',
     fr:'Grand nettoyage des étiquettes héritées d\'une ancienne règle qui devinait la compagnie à partir de l\'adresse radio, alors que ces adresses sont attribuées par pays. Chaque cas vérifié dans les registres publics et les indicatifs émis par l\'avion. Les plus gros : <b>Azores Airlines</b>, dont le code (RZO) manquait, si bien qu\'environ 1 000 de ses vols comptaient comme TAP ; des cargos d\'ASL Belgium comptés comme Iberia ; easyJet Europe comme Vueling ; Transavia comme Turkish Airlines ; European Air Transport (DHL) comme Lufthansa. Les avions loués avec leur équipage gardent le nom de leur propriétaire.' },
   { date:'2026-09-27', kind:'fix', qty:52,
+    t:{ en:'41 Wizz Air flights labelled SAS: corrected', pt:'41 voos da Wizz Air identificados como SAS: corrigido', fr:'41 vols Wizz Air étiquetés SAS : corrigé' },
     en:'41 <b>Wizz Air</b> flights (Hungarian aircraft) were labelled <b>SAS</b> by an old rule that guessed the airline from the radio address, whereas those addresses are allocated by country, not by airline. Corrected against the public registry, and the rule is switched off for good. Also merged: <b>easyJet Switzerland SA</b> into <b>easyJet Switzerland</b>.',
     pt:'41 voos da <b>Wizz Air</b> (aviões húngaros) estavam identificados como <b>SAS</b> por uma regra antiga que deduzia a companhia a partir do endereço de rádio, quando estes endereços são atribuídos por país e não por companhia. Corrigido com base no registo público, e a regra fica desactivada de vez. Também fundidos: <b>easyJet Switzerland SA</b> em <b>easyJet Switzerland</b>.',
     fr:'41 vols <b>Wizz Air</b> (avions hongrois) étaient étiquetés <b>SAS</b> par une ancienne règle qui devinait la compagnie à partir de l\'adresse radio, alors que ces adresses sont attribuées par pays, pas par compagnie. Corrigé d\'après le registre public, et la règle est désactivée pour de bon. Également fusionnés : <b>easyJet Switzerland SA</b> dans <b>easyJet Switzerland</b>.' },
   { date:'2026-09-27', kind:'fill', qty:45,
+    t:{ en:'30 more aircraft missing from registries, checked one by one', pt:'Mais 30 aviões ausentes dos registos, verificados um a um', fr:'30 avions de plus absents des registres, vérifiés un par un' },
     en:'30 more aircraft missing from public registries, operator checked one by one on the web: Nouvelair, Air France, Transavia France, SAS, Wizz Air Malta, Vueling, Swiss, LATAM, Icelandair, Bulgaria Air and others. One Jettime aircraft listed as a 737 MAX 8 is in fact a 2009 <b>Boeing 737-800</b>: corrected.',
     pt:'Mais 30 aviões ausentes dos registos públicos, operador verificado um a um na web: Nouvelair, Air France, Transavia France, SAS, Wizz Air Malta, Vueling, Swiss, LATAM, Icelandair, Bulgaria Air e outros. Um avião da Jettime indicado como 737 MAX 8 é na verdade um <b>Boeing 737-800</b> de 2009: corrigido.',
     fr:'30 avions de plus absents des registres publics, exploitant vérifié un par un sur le web : Nouvelair, Air France, Transavia France, SAS, Wizz Air Malta, Vueling, Swiss, LATAM, Icelandair, Bulgaria Air et d\'autres. Un avion de Jettime indiqué comme 737 MAX 8 est en réalité un <b>Boeing 737-800</b> de 2009 : corrigé.' },
   { date:'2026-09-26', kind:'merge', qty:14,
+    t:{ en:'FAP Força Aérea Portuguesa and Portuguese Air Force merged', pt:'FAP Força Aérea Portuguesa e Portuguese Air Force reunidas', fr:'FAP Força Aérea Portuguesa et Portuguese Air Force réunies' },
     en:'<b>FAP Força Aérea Portuguesa</b> and <b>Portuguese Air Force</b> merged: same air force, the first label came raw from a public registry for one KC-390. The official ICAO code <b>AFP</b> is now recognised too.',
     pt:'<b>FAP Força Aérea Portuguesa</b> e <b>Portuguese Air Force</b> reunidas: a mesma força aérea, o primeiro nome vinha tal e qual de um registo público para um KC-390. O código OACI oficial <b>AFP</b> passa também a ser reconhecido.',
     fr:'<b>FAP Força Aérea Portuguesa</b> et <b>Portuguese Air Force</b> réunies : même armée de l\'air, le premier libellé venait tel quel d\'un registre public pour un KC-390. Le code OACI officiel <b>AFP</b> est désormais reconnu aussi.' },
   { date:'2026-09-26', kind:'fill', qty:42,
+    t:{ en:'Brand-new airliners missing from registries identified', pt:'Aviões de linha novíssimos ausentes dos registos identificados', fr:'Avions de ligne tout neufs absents des registres identifiés' },
     en:'<b>Brand-new airliners</b> still missing from public registries (KLM A321neo PH-AX…, Iberia A321XLR, Delta A330-900neo, Wizz Air, Swiss, easyJet…): operator checked aircraft by aircraft on the web, 22 aircraft.',
     pt:'<b>Aviões de linha novíssimos</b> ainda ausentes dos registos públicos (A321neo da KLM PH-AX…, A321XLR da Iberia, A330-900neo da Delta, Wizz Air, Swiss, easyJet…): operador verificado avião a avião na web, 22 aviões.',
     fr:'<b>Avions de ligne tout neufs</b> encore absents des registres publics (A321neo KLM PH-AX…, A321XLR Iberia, A330-900neo Delta, Wizz Air, Swiss, easyJet…) : exploitant vérifié appareil par appareil sur le web, 22 avions.' },
   { date:'2026-09-26', kind:'fill', qty:22,
+    t:{ en:'Callsign OCEAN recognised as a Portuguese Air Force patrol', pt:'Indicativo OCEAN reconhecido como patrulha da Força Aérea Portuguesa', fr:'Indicatif OCEAN reconnu comme patrouille de la Força Aérea Portuguesa' },
     en:'Callsign <b>OCEAN</b> recognised as the <b>Portuguese Air Force</b> maritime surveillance patrol (only for Portuguese radio addresses), plus the other passes of the same aircraft.',
     pt:'Indicativo <b>OCEAN</b> reconhecido como a patrulha de vigilância marítima da <b>Força Aérea Portuguesa</b> (apenas para endereços de rádio portugueses), bem como as outras passagens dos mesmos aviões.',
     fr:'Indicatif <b>OCEAN</b> reconnu comme la patrouille de surveillance maritime de la <b>Força Aérea Portuguesa</b> (uniquement pour les adresses radio portugaises), ainsi que les autres passages des mêmes avions.' },
   { date:'2026-09-26', kind:'fix', qty:140,
+    t:{ en:'Medical helicopters 9H-GME and 9H-GMF recognised', pt:'Helicópteros médicos 9H-GME e 9H-GMF reconhecidos', fr:'Hélicoptères médicaux 9H-GME et 9H-GMF reconnus' },
     en:'Medical helicopters <b>9H-GME</b> and <b>9H-GMF</b> (Gulf Med, INEM emergency service) now recognised with a cautious rule: a clear descent, or a return within the hour after a confirmed pass. Records with a photo are never relabelled: under these radio addresses, some photos actually show an airliner passing at the same time.',
     pt:'Os helicópteros médicos <b>9H-GME</b> e <b>9H-GMF</b> (Gulf Med, serviço de emergência do INEM) passam a ser reconhecidos com uma regra prudente: descida franca, ou regresso na hora seguinte a uma passagem confirmada. Os registos com fotografia nunca são reclassificados: sob estes endereços de rádio, algumas fotos mostram na verdade um avião de linha a passar ao mesmo tempo.',
     fr:'Les hélicoptères médicaux <b>9H-GME</b> et <b>9H-GMF</b> (Gulf Med, service d\'urgence de l\'INEM) sont désormais reconnus avec une règle prudente : descente franche, ou retour dans l\'heure qui suit un passage confirmé. Les enregistrements avec photo ne sont jamais reclassés : sous ces adresses radio, certaines photos montrent en réalité un avion de ligne passant au même moment.' },
   { date:'2026-09-26', kind:'fill', qty:315,
+    t:{ en:'Second pass on flights without an airline (WPT, RSX, Air Force serials)', pt:'Segunda passagem pelos voos sem companhia (WPT, RSX, Força Aérea)', fr:'Deuxième passe sur les vols sans compagnie (WPT, RSX, Força Aérea)' },
     en:'Second pass on flights <b>without an airline</b>: codes <b>WPT</b> (World2Fly Portugal, based in Lisbon; one public registry wrongly lists a Canadian airline under it) and <b>RSX</b> (Red Sea Airlines) added, Portuguese Air Force serial numbers recognised (C-130H 168xx, KC-390 269xx), and flights recorded without a radio address in May now use their callsign.',
     pt:'Segunda passagem pelos voos <b>sem companhia</b>: acrescentados os códigos <b>WPT</b> (World2Fly Portugal, sediada em Lisboa; um registo público atribui-o por engano a uma companhia canadiana) e <b>RSX</b> (Red Sea Airlines), reconhecidos os números de série da Força Aérea Portuguesa (C-130H 168xx, KC-390 269xx), e os voos gravados em Maio sem endereço de rádio passam a usar o indicativo.',
     fr:'Deuxième passe sur les vols <b>sans compagnie</b> : ajout des codes <b>WPT</b> (World2Fly Portugal, basée à Lisbonne ; un registre public l\'attribue par erreur à une compagnie canadienne) et <b>RSX</b> (Red Sea Airlines), reconnaissance des numéros de série de la Força Aérea Portuguesa (C-130H 168xx, KC-390 269xx), et les vols enregistrés en mai sans adresse radio utilisent désormais leur indicatif.' },
   { date:'2026-09-26', kind:'merge', qty:21,
+    t:{ en:'Sky Express Greece and Sky Express merged', pt:'Sky Express Greece e Sky Express reunidas', fr:'Sky Express Greece et Sky Express réunies' },
     en:'<b>Sky Express Greece</b> and <b>Sky Express</b> merged. Same airline, same fleet, two labels depending on the source.',
     pt:'<b>Sky Express Greece</b> e <b>Sky Express</b> reunidas. A mesma companhia e a mesma frota, com dois nomes consoante a fonte.',
     fr:'<b>Sky Express Greece</b> et <b>Sky Express</b> réunies. Même compagnie, même flotte, deux libellés différents selon la source.' },
   { date:'2026-09-26', kind:'fill', qty:1100, approx:true,
+    t:{ en:'Flights without an airline although the aircraft was known', pt:'Voos sem companhia embora o avião fosse conhecido', fr:'Vols sans compagnie alors que l\'avion était connu' },
     en:'Flights left <b>without an airline</b> although the aircraft was known. Added step 2 (same aircraft seen elsewhere), a second registry (hexdb.io) and 9 missing airline codes, including Transavia and DHL (European Air Transport).',
     pt:'Voos que ficaram <b>sem companhia</b> embora o avião fosse conhecido. Acrescentámos a etapa 2 (o mesmo avião visto noutros voos), um segundo registo (hexdb.io) e 9 códigos de companhias em falta, incluindo a Transavia e a DHL (European Air Transport).',
     fr:'Vols restés <b>sans compagnie</b> alors que l\'avion était connu. Ajout de l\'étape 2 (même avion vu ailleurs), d\'un second registre (hexdb.io) et de 9 codes de compagnies manquants, dont Transavia et DHL (European Air Transport).' },
   { date:'2026-09-19', kind:'merge', qty:74,
+    t:{ en:'Duplicate labels merged: Norwegian, TAAG, Cabo Verde Airlines', pt:'Nomes em duplicado reunidos: Norwegian, TAAG, Cabo Verde Airlines', fr:'Libellés en double réunis : Norwegian, TAAG, Cabo Verde Airlines' },
     en:'Duplicate labels: <b>Norwegian</b> ("AOC" variants), <b>TAAG Angola Airlines</b>, <b>Cabo Verde Airlines</b>.',
     pt:'Nomes em duplicado: <b>Norwegian</b> (variantes "AOC"), <b>TAAG Angola Airlines</b>, <b>Cabo Verde Airlines</b>.',
     fr:'Libellés en double : <b>Norwegian</b> (variantes « AOC »), <b>TAAG Angola Airlines</b>, <b>Cabo Verde Airlines</b>.' },
   { date:'2026-07-22', kind:'split', qty:460, approx:true,
-    en:'Ryanair Group: <b>Malta Air</b> and <b>Lauda Europe</b> told apart (see above). Genuine Eurowings, Wizz Air and LOT flights that had been overwritten by mistake got their airline back.',
-    pt:'Grupo Ryanair: <b>Malta Air</b> e <b>Lauda Europe</b> distinguidas (ver acima). Os voos verdadeiros da Eurowings, Wizz Air e LOT, sobrescritos por engano, recuperaram a sua companhia.',
-    fr:'Groupe Ryanair : <b>Malta Air</b> et <b>Lauda Europe</b> distinguées (voir plus haut). Les vrais vols Eurowings, Wizz Air et LOT, écrasés par erreur, ont retrouvé leur compagnie.' },
+    t:{ en:'Malta Air and Lauda Europe told apart within the Ryanair Group', pt:'Malta Air e Lauda Europe distinguidas dentro do grupo Ryanair', fr:'Malta Air et Lauda Europe distinguées au sein du groupe Ryanair' },
+    en:'Ryanair Group: <b>Malta Air</b> and <b>Lauda Europe</b> told apart (see Methods). Genuine Eurowings, Wizz Air and LOT flights that had been overwritten by mistake got their airline back.',
+    pt:'Grupo Ryanair: <b>Malta Air</b> e <b>Lauda Europe</b> distinguidas (ver Métodos). Os voos verdadeiros da Eurowings, Wizz Air e LOT, sobrescritos por engano, recuperaram a sua companhia.',
+    fr:'Groupe Ryanair : <b>Malta Air</b> et <b>Lauda Europe</b> distinguées (voir Méthodes). Les vrais vols Eurowings, Wizz Air et LOT, écrasés par erreur, ont retrouvé leur compagnie.' },
   { date:'2026-07-22', kind:'fix', qty:6700, approx:true,
+    t:{ en:'Full audit: the radio callsign now beats the registry', pt:'Auditoria completa: o indicativo de rádio prevalece sobre o registo', fr:'Audit complet : l\'indicatif radio l\'emporte sur le registre' },
     en:'Full audit: when a real radio callsign contradicted a registry estimate, the callsign now wins, past flights included.',
     pt:'Auditoria completa: quando um indicativo de rádio real contradizia uma estimativa do registo, o indicativo passa a prevalecer, incluindo nos voos passados.',
     fr:'Audit complet : quand un indicatif radio réel contredisait une estimation du registre, l\'indicatif l\'emporte désormais, y compris pour les vols passés.' },
   { date:'2026-07-16', kind:'fix', qty:2,
+    t:{ en:'Two Delta Air Lines Airbus shown as Air Algérie', pt:'Dois Airbus da Delta Air Lines apresentados como Air Algérie', fr:'Deux Airbus Delta Air Lines affichés Air Algérie' },
     en:'Two <b>Delta Air Lines</b> Airbus shown as "Air Algérie": their hex code started with that airline\'s code letters.',
     pt:'Dois Airbus da <b>Delta Air Lines</b> apresentados como "Air Algérie": o seu código hex começava pelas letras do código dessa companhia.',
     fr:'Deux Airbus <b>Delta Air Lines</b> affichés « Air Algérie » : leur code hex commençait par les lettres du code de cette compagnie.' },
 ];
-// Historique des corrections « Mesures » (même format ; 17 oct 2026).
+// Historique des corrections « Son » (même format ; refondu le 17 oct 2026 avec les corrections du 29 sept, 1er et 12 oct).
 const AV_MEASURE_HISTORY = [
   { date:'2026-10-17', kind:'excl', qty:7,
+    t:{ en:'Main microphone silent: 7 flights measured by the camera left out', pt:'Microfone principal mudo: 7 voos medidos pela câmara fora das estatísticas', fr:'Micro principal muet : 7 vols mesurés par la caméra sortis des statistiques' },
     en:'Seven flights (3, 16 and 17 October) passed while the station\'s <b>main microphone had gone silent</b> because of a loose cable. Their noise level came from the backup <b>camera microphone</b>, which is not calibrated and reads several decibels too high (94 to 100 dB, against 84 to 89 dB measured for comparable aircraft). The flights stay in the archive with this estimate, but their decibels no longer count in records, averages or reports.',
     pt:'Sete voos (3, 16 e 17 de Outubro) passaram enquanto o <b>microfone principal</b> da estação estava <b>mudo</b>, por causa de um cabo com mau contacto. O seu nível de ruído veio do <b>microfone da câmara</b>, de reserva, que não está calibrado e lê vários decibéis acima (94 a 100 dB, contra 84 a 89 dB medidos em aviões comparáveis). Os voos continuam no arquivo com esta estimativa, mas os seus decibéis deixam de contar nos recordes, médias e relatórios.',
     fr:'Sept vols (3, 16 et 17 octobre) sont passés alors que le <b>micro principal</b> de la station était <b>muet</b>, à cause d\'un faux contact. Leur niveau sonore vient du <b>micro de la caméra</b>, de secours, non étalonné, qui lit plusieurs décibels trop haut (94 à 100 dB, contre 84 à 89 dB mesurés pour des avions comparables). Les vols restent dans l\'archive avec cette estimation, mais leurs décibels ne comptent plus dans les records, les moyennes ni les rapports.' },
+  { date:'2026-10-12', kind:'excl', qty:1,
+    t:{ en:'Sensor box opened during the pass of TAP68JP', pt:'Caixa dos sensores aberta durante a passagem do TAP68JP', fr:'Boîte de capteurs ouverte pendant le passage de TAP68JP' },
+    en:'The sensor box was opened around 10:47 for a comparison with a phone: isolated jumps to 97.4 and 100.8 dB. The <b>sound and vibration</b> of this pass are not representative: they are left out of the statistics, and the original values stay in the data.',
+    pt:'A caixa dos sensores foi aberta por volta das 10h47 para uma comparação com um telemóvel: saltos isolados a 97,4 e 100,8 dB. O <b>som e a vibração</b> desta passagem não são representativos: ficam fora das estatísticas, e os valores originais continuam nos dados.',
+    fr:'La boîte de capteurs a été ouverte vers 10 h 47 pour une comparaison avec un téléphone : sauts isolés à 97,4 et 100,8 dB. Le <b>son et la vibration</b> de ce passage ne sont pas représentatifs : ils sortent des statistiques, et les valeurs d\'origine restent dans les données.' },
+  { date:'2026-10-12', kind:'fix', qty:1,
+    t:{ en:'TAP234Y\'s peak recovered from the continuous recording', pt:'Pico do TAP234Y recuperado da gravação contínua', fr:'Pic de TAP234Y retrouvé dans le flux continu' },
+    en:'The flight was renamed by the timetable cross-check while its listening window was still open, so its peak and vibration were never written (59.5 dB shown). Rebuilt from the microphone\'s <b>continuous second-by-second recording</b>: 82.5 dB and 19.2 mg. A safeguard now leaves each flight untouched for 5 minutes after it is recorded.',
+    pt:'O voo foi renomeado pelo cruzamento com os horários enquanto a sua janela de escuta ainda estava aberta, pelo que o pico e a vibração nunca foram gravados (aparecia 59,5 dB). Reconstituído a partir da <b>gravação contínua do microfone, segundo a segundo</b>: 82,5 dB e 19,2 mg. Uma salvaguarda deixa agora cada voo intocado durante 5 minutos após o registo.',
+    fr:'Le vol a été renommé par le recoupement avec les horaires alors que sa fenêtre d\'écoute était encore ouverte : son pic et sa vibration n\'ont jamais été écrits (59,5 dB affichés). Reconstitué depuis le <b>flux continu du micro, seconde par seconde</b> : 82,5 dB et 19,2 mg. Un garde-fou laisse désormais chaque vol intact pendant 5 minutes après son enregistrement.' },
+  { date:'2026-10-01', kind:'fix', qty:10,
+    t:{ en:'False end-of-window peaks corrected on 10 September flights', pt:'Falsos picos em fim de janela corrigidos em 10 voos de Setembro', fr:'Faux pics de fin de fenêtre corrigés sur 10 vols de septembre' },
+    en:'Between 8 and 29 September, ten flights showed peaks of 95 to 109 dB caused by <b>a single spurious sensor reading at the end of the listening window</b>, about 75 seconds after the detection, when the aircraft had already passed. Each peak was replaced by the maximum of the continuous recording during the pass (77 to 94 dB); the original value stays in the data. The station\'s safeguard was strengthened the same day.',
+    pt:'Entre 8 e 29 de Setembro, dez voos mostravam picos de 95 a 109 dB causados por <b>uma única leitura parasita do sensor no fim da janela de escuta</b>, cerca de 75 segundos após a detecção, quando o avião já tinha passado. Cada pico foi substituído pelo máximo da gravação contínua durante a passagem (77 a 94 dB); o valor original fica nos dados. A salvaguarda da estação foi reforçada no mesmo dia.',
+    fr:'Entre le 8 et le 29 septembre, dix vols affichaient des pics de 95 à 109 dB dus à <b>une seule lecture parasite du capteur en fin de fenêtre d\'écoute</b>, environ 75 secondes après la détection, l\'avion déjà passé. Chaque pic est remplacé par le maximum du flux continu pendant le passage (77 à 94 dB) ; la valeur d\'origine reste dans les données. Le garde-fou de la station a été renforcé le jour même.' },
+  { date:'2026-10-01', kind:'excl', qty:1,
+    t:{ en:'RYR14SC\'s 110.2 dB peak cannot be checked: left out', pt:'O pico de 110,2 dB do RYR14SC não é verificável: fica de fora', fr:'Le pic de 110,2 dB de RYR14SC, invérifiable, est exclu' },
+    en:'Flight of 1 September 2026 at 20:15. Its time above 70 dB (69 seconds) points to an <b>old bug that merged two passes into one</b>, and the continuous recording did not exist yet to confirm the peak. The flight stays in the archive, but its decibels no longer count in records, averages or reports.',
+    pt:'Voo de 1 de Setembro de 2026, às 20h15. O seu tempo acima de 70 dB (69 segundos) aponta para um <b>antigo erro que fundia duas passagens numa só</b>, e a gravação contínua ainda não existia para confirmar o pico. O voo continua no arquivo, mas os seus decibéis deixam de contar nos recordes, médias e relatórios.',
+    fr:'Vol du 1er septembre 2026 à 20 h 15. Sa durée au-dessus de 70 dB (69 secondes) trahit un <b>ancien bug qui fusionnait deux passages en un</b>, et le flux continu n\'existait pas encore pour confirmer le pic. Le vol reste dans l\'archive, mais ses décibels ne comptent plus dans les records, les moyennes ni les rapports.' },
+  { date:'2026-09-29', kind:'excl', qty:4,
+    t:{ en:'Sensor box moved: 4 flights left out of the statistics', pt:'Caixa dos sensores deslocada: 4 voos fora das estatísticas', fr:'Boîte de capteurs déplacée : 4 vols sortis des statistiques' },
+    en:'The sensor box was taken out of its wooden housing around 14:28, then put back between 16:14 and 16:21. The <b>sound and vibration</b> of the four flights that passed during these moves (ACA811 and three aircraft without a callsign) are not representative: left out of the statistics, original values kept in the data.',
+    pt:'A caixa dos sensores foi retirada do seu móvel de madeira por volta das 14h28 e recolocada entre as 16h14 e as 16h21. O <b>som e a vibração</b> dos quatro voos que passaram durante estas manobras (ACA811 e três aviões sem indicativo) não são representativos: ficam fora das estatísticas, com os valores originais guardados nos dados.',
+    fr:'La boîte de capteurs a été sortie de son meuble en bois vers 14 h 28, puis remise en place entre 16 h 14 et 16 h 21. Le <b>son et la vibration</b> des quatre vols passés pendant ces manipulations (ACA811 et trois avions sans indicatif) ne sont pas représentatifs : sortis des statistiques, valeurs d\'origine gardées dans les données.' },
 ];
+// Vols dont le son est sorti des statistiques (data_quality_issue dans flights_db, compté sur le Pi le 17 oct 2026).
+// cause : cam = micro principal muet, niveau du micro de la caméra ; old = ancien défaut de mesure ; box = boîte de capteurs manipulée.
+// Ajouter une ligne à chaque nouveau marquage, en même temps que l'entrée de AV_MEASURE_HISTORY.
+const AV_SOUND_EXCLUDED = [
+  { d:'2026-10-17', cs:'TAP11WQ', cause:'cam' },
+  { d:'2026-10-16', cs:'TAP1692', cause:'cam' },
+  { d:'2026-10-16', cs:'EJU5619', cause:'cam' },
+  { d:'2026-10-16', cs:'RZO152', cause:'cam' },
+  { d:'2026-10-16', cs:'AFR24MF', cause:'cam' },
+  { d:'2026-10-12', cs:'TAP68JP', cause:'box' },
+  { d:'2026-10-03', cs:'4d227f', cause:'cam' },
+  { d:'2026-10-03', cs:'TAP1241', cause:'cam' },
+  { d:'2026-09-29', cs:'4aca0a', cause:'box' },
+  { d:'2026-09-29', cs:'4952c8', cause:'box' },
+  { d:'2026-09-29', cs:'4cae98', cause:'box' },
+  { d:'2026-09-29', cs:'ACA811', cause:'box' },
+  { d:'2026-09-01', cs:'RYR14SC', cause:'old' },
+];
+// État de la carte Son du bilan : 'watch' tant que le câble du micro n'est pas changé (texte av_rel_son_note), puis 'ok'.
+const AV_REL_SOUND_STATE = 'watch';
 // Historique des corrections « Modèles d'avion » (même format que AV_AIRLINE_HISTORY ;
 // qtyText remplace qty quand la quantité n'est pas un nombre de vols).
 const AV_MODEL_HISTORY = [
   { date:'2026-10-13', kind:'fix', qty:15,
+    t:{ en:'Two Swiftair ATR 72s moved to the cargo version (ATR 72 500F)', pt:'Dois ATR 72 da Swiftair passam para a versão de carga (ATR 72 500F)', fr:'Deux ATR 72 de Swiftair passent en version cargo (ATR 72 500F)' },
     en:'Two <b>Swiftair</b> ATR 72s (EC-MKE and EC-MIY) were listed as passenger "ATR 72 500" by the registry. They are cargo aircraft, like the rest of Swiftair\'s ATR fleet at Lisbon: moved to <b>ATR 72 500F</b>.',
     pt:'Dois ATR 72 da <b>Swiftair</b> (EC-MKE e EC-MIY) apareciam no registo como "ATR 72 500" de passageiros. São aviões de carga, como o resto da frota ATR da Swiftair em Lisboa: passam para <b>ATR 72 500F</b>.',
     fr:'Deux ATR 72 de <b>Swiftair</b> (EC-MKE et EC-MIY) figuraient au registre comme « ATR 72 500 » passagers. Ce sont des avions cargo, comme le reste de la flotte ATR de Swiftair à Lisbonne : passés en <b>ATR 72 500F</b>.' },
   { date:'2026-10-12', kind:'fix', qty:16,
+    t:{ en:'Eight more reassigned Maltese radio addresses cleaned up', pt:'Mais oito endereços rádio malteses reatribuídos corrigidos', fr:'Huit autres adresses radio maltaises réattribuées corrigées' },
     en:'Eight more <b>reassigned</b> Maltese radio addresses: registries still list them as business jets or other aircraft (Challenger 604 and 601, Citation VII, Falcon 50EX, Hawker 750, CRJ-1000, Boeing 737-400, Beech Baron), while they fly as Wizz Air Malta airliners. Wrong type and registration removed.',
     pt:'Mais oito endereços rádio malteses <b>reatribuídos</b>: os registos ainda os indicam como jactos executivos ou outros aviões (Challenger 604 e 601, Citation VII, Falcon 50EX, Hawker 750, CRJ-1000, Boeing 737-400, Beech Baron), quando voam como aviões de linha da Wizz Air Malta. Tipo e matrícula errados retirados.',
     fr:'Huit autres adresses radio maltaises <b>réattribuées</b> : les registres les donnent encore comme jets d\'affaires ou autres appareils (Challenger 604 et 601, Citation VII, Falcon 50EX, Hawker 750, CRJ-1000, Boeing 737-400, Beech Baron), alors qu\'elles volent comme avions de ligne Wizz Air Malta. Type et immatriculation faux retirés.' },
   { date:'2026-10-07', kind:'fill', qty:27,
+    t:{ en:'Reassigned addresses identified on Flightradar24', pt:'Endereços reatribuídos identificados no Flightradar24', fr:'Adresses réattribuées identifiées sur Flightradar24' },
     en:'Three of these reassigned addresses identified on Flightradar24 by matching the exact times of our captures: <b>OE-LUI</b> (Airbus A320neo, easyJet Europe), <b>OE-IUL</b> (Airbus A321neo, easyJet Europe) and <b>OE-IXW</b> (Boeing 737-800 converted to a freighter, ASL Airlines Belgium), plus a fifth case found the same day: <b>C-GWJN</b> (Boeing 737 MAX 8, WestJet), listed by the registry as a Cessna 177B. The one flying under Maltese callsigns is still unidentified.',
     pt:'Três destes endereços reatribuídos identificados no Flightradar24, cruzando as horas exactas das nossas capturas: <b>OE-LUI</b> (Airbus A320neo, easyJet Europe), <b>OE-IUL</b> (Airbus A321neo, easyJet Europe) e <b>OE-IXW</b> (Boeing 737-800 convertido em cargueiro, ASL Airlines Belgium), e um quinto caso encontrado no mesmo dia: <b>C-GWJN</b> (Boeing 737 MAX 8, WestJet), que o registo dava como um Cessna 177B. O que voa com indicativos malteses continua por identificar.',
     fr:'Trois de ces adresses réattribuées identifiées sur Flightradar24 en recoupant les heures exactes de nos captures : <b>OE-LUI</b> (Airbus A320neo, easyJet Europe), <b>OE-IUL</b> (Airbus A321neo, easyJet Europe) et <b>OE-IXW</b> (Boeing 737-800 converti en cargo, ASL Airlines Belgium), plus un cinquième cas trouvé le même jour : <b>C-GWJN</b> (Boeing 737 MAX 8, WestJet), que le registre donnait comme un Cessna 177B. Celui qui vole sous indicatifs maltais reste à identifier.' },
   { date:'2026-10-07', kind:'fix', qty:27,
+    t:{ en:'Reassigned radio addresses: false "Cessna 172" and "DA42" removed', pt:'Endereços rádio reatribuídos: falsos "Cessna 172" e "DA42" retirados', fr:'Adresses radio réattribuées : faux « Cessna 172 » et « DA42 » retirés' },
     en:'Radio addresses <b>reassigned</b>: public registries still list four addresses as small private aircraft (a <b>Cessna 172</b>, a EuroFox microlight, two Diamond DA42), while they now fly on airliners (easyJet Europe, ASL Airlines Belgium, and one airliner using Maltese callsigns), at about 140 kt on final and 88 to 99 dB, confirmed on our photos. Wrong type and registration removed: better a blank model than a wrong one. The rule now catches the next cases automatically.',
     pt:'Endereços rádio <b>reatribuídos</b>: os registos públicos ainda indicam quatro endereços como pequenos aviões privados (um <b>Cessna 172</b>, um ultraleve EuroFox, dois Diamond DA42), quando agora voam em aviões de linha (easyJet Europe, ASL Airlines Belgium e um avião de linha com indicativos malteses), a cerca de 140 nós na final e 88 a 99 dB, confirmado nas nossas fotos. Tipo e matrícula errados retirados: mais vale um modelo em branco do que um errado. A regra passa a detectar sozinha os próximos casos.',
     fr:'Adresses radio <b>réattribuées</b> : les registres publics donnent encore quatre adresses comme petits avions privés (un <b>Cessna 172</b>, un ULM EuroFox, deux Diamond DA42), alors qu\'elles volent désormais sur des avions de ligne (easyJet Europe, ASL Airlines Belgium et un avion de ligne sous indicatifs maltais), à environ 140 nœuds en finale et 88 à 99 dB, confirmé sur nos photos. Type et immatriculation faux retirés : mieux vaut un modèle vide qu\'un modèle faux. La règle repère désormais seule les prochains cas.' },
   { date:'2026-09-26', kind:'split', qty:3,
+    t:{ en:'Airbus A321XLR separated from the A321neo', pt:'Airbus A321XLR separado do A321neo', fr:'L\'Airbus A321XLR séparé de l\'A321neo' },
     en:'<b>Airbus A321XLR</b> now separated from the A321neo. Both share the same ICAO code (A21N); only the manufacturer designation tells them apart (A321-253<b>NY</b>). First one seen: Iberia EC-ORZ, 8 May 2026.',
     pt:'<b>Airbus A321XLR</b> passa a estar separado do A321neo. Os dois partilham o mesmo código OACI (A21N); só a designação do fabricante os distingue (A321-253<b>NY</b>). Primeiro visto: EC-ORZ da Iberia, 8 de Maio de 2026.',
     fr:'<b>Airbus A321XLR</b> désormais séparé de l\'A321neo. Les deux partagent le même code OACI (A21N) ; seule la désignation constructeur les distingue (A321-253<b>NY</b>). Premier vu : EC-ORZ d\'Iberia, le 8 mai 2026.' },
   { date:'2026-09-26', kind:'merge', qty:73,
+    t:{ en:'Three more documented renames (CL35, E390, A300-600)', pt:'Mais três mudanças de nome documentadas (CL35, E390, A300-600)', fr:'Trois renommages documentés de plus (CL35, E390, A300-600)' },
     en:'3 more documented renames, all official ICAO type codes: <b>CL35</b> = Challenger 350, <b>E390</b> = KC-390 (Embraer C-390), <b>Airbus A300-600</b> = A306. Each pair had two separate profiles in Compare.',
     pt:'Mais 3 mudanças de nome documentadas, todas códigos OACI oficiais: <b>CL35</b> = Challenger 350, <b>E390</b> = KC-390 (Embraer C-390), <b>Airbus A300-600</b> = A306. Cada par tinha duas fichas separadas no Compare.',
     fr:'3 renommages documentés de plus, tous des codes OACI officiels : <b>CL35</b> = Challenger 350, <b>E390</b> = KC-390 (Embraer C-390), <b>Airbus A300-600</b> = A306. Chaque paire avait deux fiches séparées dans Compare.' },
   { date:'2026-07-20', kind:'merge', qtyText:'150 → 139',
+    t:{ en:'Aircraft model grouping rule introduced', pt:'Criada a regra de agrupamento dos modelos', fr:'Règle de regroupement des modèles mise en place' },
     unit:{ en:'models at the time', pt:'modelos na altura', fr:'modèles à l\'époque' },
     en:'Grouping rule introduced: spelling variants and 3 documented renames (<b>Bombardier CS300/CS100</b> became <b>Airbus A220</b>, <b>680A</b> = Citation Latitude, <b>BD-700</b> = Global 6500). The biggest hidden duplicate was the A220-300, split across 5 names.',
     pt:'Regra de agrupamento criada: variantes de grafia e 3 mudanças de nome documentadas (<b>Bombardier CS300/CS100</b> passaram a <b>Airbus A220</b>, <b>680A</b> = Citation Latitude, <b>BD-700</b> = Global 6500). O maior duplicado escondido era o A220-300, dividido em 5 nomes.',
@@ -1559,38 +1719,121 @@ const AV_MODEL_NOTES = {
   'A306': { en:'ICAO code of the A300-600', pt:'Código OACI do A300-600', fr:'Code OACI de l\'A300-600' },
 };
 function avDqLoc() { return _lang === 'pt' ? 'pt-PT' : (_lang === 'fr' ? 'fr-FR' : 'en-GB'); }
-function avDqTimeline(elId, items) {
-  const loc = avDqLoc();
-  document.getElementById(elId).innerHTML = items.map(h => {
-    const dt = new Date(h.date + 'T12:00:00');
-    const day = dt.toLocaleDateString(loc, {day:'numeric', month:'short'});
-    const q = h.qtyText || ((h.approx ? '≈ ' : '') + h.qty.toLocaleString(loc));
-    const unit = h.unit ? (h.unit[_lang] || h.unit.en) : avT('av_dq_flights', 'flights');
-    return `<div class="av-dq-ev ${h.kind}"><div class="d"><b>${day}</b>${dt.getFullYear()}</div><div class="pin"></div>`
-      + `<div class="t"><span class="av-dq-kind">${avT('av_aq_k_' + h.kind, h.kind)}</span>${h[_lang] || h.en}</div>`
-      + `<div class="q">${q}<small>${unit}</small></div></div>`;
-  }).join('');
+// pt-PT abrège les mois en chiffres (« 13/10 ») et en minuscules : on garde la graphie pré-AO90 (« 13 Out. »)
+const AV_REL_PT_MONTHS = ['Jan.','Fev.','Mar.','Abr.','Maio','Jun.','Jul.','Ago.','Set.','Out.','Nov.','Dez.'];
+function avRelDate(iso, withYear) {
+  if (_lang === 'pt') { const [y, m, d] = iso.split('-').map(Number); return d + ' ' + AV_REL_PT_MONTHS[m - 1] + (withYear ? ' ' + y : ''); }
+  return new Date(iso + 'T12:00:00').toLocaleDateString(avDqLoc(), withYear ? {day:'numeric', month:'short', year:'numeric'} : {day:'numeric', month:'short'});
 }
+function avRelQty(h) {
+  const q = h.qtyText || ((h.approx ? '≈ ' : '') + h.qty.toLocaleString(avDqLoc()));
+  const unit = h.unit ? (h.unit[_lang] || h.unit.en) : (h.qty === 1 ? avT('av_dq_flight', 'flight') : avT('av_dq_flights', 'flights'));
+  return { q, unit };
+}
+function avRelLast(arr) {
+  const h = arr.slice().sort((a, b) => b.date.localeCompare(a.date))[0];
+  if (!h) return '';
+  const { q, unit } = avRelQty(h);
+  return avT('av_rel_last', 'Last correction: {d} · {n}').replace('{d}', avRelDate(h.date)).replace('{n}', q + ' ' + unit);
+}
+
+// ── Journal unique : les trois historiques fusionnés, plus récent d'abord ──
+const AV_REL_DOMS = ['all', 'son', 'air', 'mod'];
+let avRelDom = 'all';
+try { const s = localStorage.getItem('lf-dq-dom'); if (AV_REL_DOMS.includes(s)) avRelDom = s; } catch (e) {}
+function avRelFold(s) { return String(s).replace(/<[^>]+>/g, '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+function avRelRenderLog() {
+  const search = document.getElementById('av-rel-search');
+  search.placeholder = avT('av_rel_search_ph', 'Search a flight, an airline, an aircraft…');
+  search.setAttribute('aria-label', search.placeholder);
+  const q = avRelFold(search.value.trim());
+  const tag = (arr, dom) => arr.map(h => Object.assign({ dom }, h));
+  const all = tag(AV_MEASURE_HISTORY, 'son').concat(tag(AV_AIRLINE_HISTORY, 'air'), tag(AV_MODEL_HISTORY, 'mod'))
+    .sort((a, b) => b.date.localeCompare(a.date));
+  const rows = all.filter(h => (avRelDom === 'all' || h.dom === avRelDom)
+    && (!q || avRelFold((h.t[_lang] || h.t.en) + ' ' + (h[_lang] || h.en)).includes(q)));
+  const domLbl = { son: avT('av_rel_d_son', 'Sound'), air: avT('av_rel_d_air', 'Airlines'), mod: avT('av_rel_f_mod', 'Models') };
+  document.getElementById('av-rel-count').textContent =
+    (rows.length === 1 ? avT('av_rel_count1', '1 correction') : avT('av_rel_count', '{n} corrections').replace('{n}', rows.length))
+    + (avRelDom === 'all' ? '' : ' · ' + domLbl[avRelDom]);
+  document.getElementById('av-rel-log').innerHTML = rows.length ? rows.map(h => {
+    const { q: qty, unit } = avRelQty(h);
+    return `<div class="av-rel-row"><button type="button" aria-expanded="false"><span class="date">${avRelDate(h.date, true)}</span>`
+      + `<span class="tags"><span class="av-rel-tag ${h.dom}">${domLbl[h.dom]}</span><span class="av-rel-kind ${h.kind}">${avT('av_aq_k_' + h.kind, h.kind)}</span></span>`
+      + `<span class="ttl">${h.t[_lang] || h.t.en}</span><span class="qty">${qty}<small>${unit}</small></span></button>`
+      + `<div class="detail" hidden>${h[_lang] || h.en}</div></div>`;
+  }).join('') : `<div class="av-rel-empty">${avT('av_rel_none', 'No correction matches this search.')}</div>`;
+  document.querySelectorAll('#av-rel-filters button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.dom === avRelDom)));
+}
+document.getElementById('av-rel-log').addEventListener('click', e => {
+  const b = e.target.closest('.av-rel-row > button'); if (!b) return;
+  const open = b.getAttribute('aria-expanded') === 'true';
+  b.setAttribute('aria-expanded', String(!open));
+  b.nextElementSibling.hidden = open;
+});
+document.getElementById('av-rel-filters').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  avRelDom = b.dataset.dom;
+  try { localStorage.setItem('lf-dq-dom', avRelDom); } catch (err) {}
+  avRelRenderLog();
+});
+document.getElementById('av-rel-search').addEventListener('input', avRelRenderLog);
+// Carte du bilan → ouvre la méthode du domaine
+document.getElementById('av-rel-bilan').addEventListener('click', e => {
+  const c = e.target.closest('[data-target]'); if (!c) return;
+  const det = document.getElementById(c.dataset.target);
+  det.open = true;
+  det.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
 function avRenderAirlineQuality() {
   const loc = avDqLoc();
   const fmt = n => n.toLocaleString(loc);
+  const pct1 = v => v.toLocaleString(loc, {minimumFractionDigits:1, maximumFractionDigits:1}) + ' %';
   const tpl = (k, fb, n, m) => avT(k, fb).replace('{n}', n).replace('{m}', m);
   const d = archiveData.quality;
-  // Bandeau : compagnies
   const total = (archiveData.overview && archiveData.overview.total_flights) || d.total_flights || 0;
   const identified = Object.values(archiveData.by_airline || {}).reduce((s, a) => s + (a.total_flights || 0), 0);
   const missing = Math.max(0, total - identified);
   const pct = total ? (100 * identified / total) : 0;
-  document.getElementById('av-aq-identified-pct').textContent = pct.toLocaleString(loc, {minimumFractionDigits:1, maximumFractionDigits:1}) + ' %';
-  document.getElementById('av-aq-unidentified').textContent = fmt(missing);
-  document.getElementById('av-aq-unidentified-sub').textContent = tpl('av_aq_out_of', 'out of {n} flights', fmt(total));
-  document.getElementById('av-dq-track-fill').style.width = pct.toFixed(2) + '%';
-  document.getElementById('av-dq-cap-ok').textContent = tpl('av_dq_bar_ok', '{n} flights identified', fmt(identified));
-  document.getElementById('av-dq-cap-ko').textContent = tpl('av_dq_bar_ko', '{n} with no airline', fmt(missing));
-  // Bandeau + 2.1 : modèles
+  const gen = archiveData.generated_at ? new Date(archiveData.generated_at) : new Date();
+  // En-tête
+  document.getElementById('av-rel-updated').textContent = avT('av_rel_eyebrow', 'Archive · data reliability · updated {d}')
+    .replace('{d}', avRelDate(gen.toISOString().slice(0, 10), true));
+  document.getElementById('av-rel-lede').textContent = tpl('av_rel_lede', '', fmt(total));
+  // 1. Bilan
+  const genMonth = gen.toISOString().slice(0, 7);
+  const sonMonth = AV_SOUND_EXCLUDED.filter(f => f.d.slice(0, 7) === genMonth).length;
+  let monthName = gen.toLocaleDateString(loc, {month:'long'});
+  if (_lang === 'pt') monthName = monthName.charAt(0).toUpperCase() + monthName.slice(1);  // pré-AO90 : Outubro
+  const card = (target, domK, state, big, what, foot) =>
+    `<button type="button" class="av-rel-card" data-target="${target}"><span class="dom"><span>${avT(domK)}</span>`
+    + `<span class="av-rel-state ${state}">${avT(state === 'ok' ? 'av_rel_ok' : 'av_rel_watch')}</span></span>`
+    + `<span class="big">${big}</span><span class="what">${what}</span><span class="foot">${foot}</span></button>`;
   const groups = d.aircraft_merged_groups || [];
-  document.getElementById('av-dq-models').textContent = fmt(d.aircraft_types_after);
-  document.getElementById('av-dq-models-sub').textContent = tpl('av_dq_models_kpi_sub', '{n} raw labels before merging', fmt(d.aircraft_types_before));
+  document.getElementById('av-rel-bilan').innerHTML = [
+    card('av-rel-m-son', 'av_rel_d_son', AV_REL_SOUND_STATE, fmt(sonMonth),
+      tpl('av_rel_son_what', '', monthName, fmt(AV_SOUND_EXCLUDED.length)),
+      AV_REL_SOUND_STATE === 'ok' ? avRelLast(AV_MEASURE_HISTORY) : avT('av_rel_son_note')),
+    card('av-rel-m-air', 'av_rel_d_air', pct >= 98 ? 'ok' : 'watch', pct1(pct),
+      tpl('av_rel_air_what', '', fmt(missing)), avRelLast(AV_AIRLINE_HISTORY)),
+    card('av-rel-m-mod', 'av_rel_d_mod', 'ok', fmt(d.aircraft_types_after),
+      tpl('av_rel_mod_what', '', fmt(d.aircraft_types_before)), avRelLast(AV_MODEL_HISTORY)),
+    card('av-rel-m-rare', 'av_rel_d_rare', d.military_suspect_pct < 10 ? 'ok' : 'watch', pct1(Number(d.military_suspect_pct)),
+      tpl('av_rel_rare_what', '', fmt(d.military_suspect_count), fmt(d.military_total)), avT('av_rel_rare_note')),
+  ].join('');
+  // 2. Règles
+  const nCause = c => AV_SOUND_EXCLUDED.filter(f => f.cause === c).length;
+  const rules = [
+    ['av_rel_r1', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('cam')],
+    ['av_rel_r2', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('old')],
+    ['av_rel_r3', 'x', 'av_rel_x_sv', 'data_quality_issue = sensor_box_moved', nCause('box')],
+    ['av_rel_r4', 'c', 'av_rel_x_min', 'spl_db = 100', d.db_capped_count],
+    ['av_rel_r5', 'b', 'av_rel_x_blank', avT('av_rel_f_blank', 'airline = blank'), missing],
+  ];
+  document.getElementById('av-rel-rules').innerHTML = rules.map(([sit, cls, ruleK, field, n]) =>
+    `<tr><td>${avT(sit)}</td><td><span class="av-rel-rule ${cls}">${avT(ruleK)}</span></td><td><span class="av-rel-field">${field}</span></td><td class="n">${fmt(n)}</td></tr>`).join('');
+  // 3. Méthodes : modèles
   document.getElementById('av-q-types').innerHTML = `<span class="from">${fmt(d.aircraft_types_before)}</span><span class="arr">→</span>${fmt(d.aircraft_types_after)}`;
   document.getElementById('av-dq-absorbed').textContent = tpl('av_dq_absorbed', '{n} duplicate labels absorbed', fmt(d.aircraft_types_before - d.aircraft_types_after));
   document.getElementById('av-dq-ngroups').textContent = fmt(groups.length);
@@ -1598,7 +1841,6 @@ function avRenderAirlineQuality() {
   const big = groups.slice().sort((a, b) => b.total - a.total)[0];
   document.getElementById('av-dq-gflights').textContent = fmt(gFlights);
   document.getElementById('av-dq-biggest').textContent = big ? tpl('av_dq_biggest', 'including {n} for {m}', fmt(big.total), big.canonical) : '';
-  // 2.2 : groupes fusionnés
   document.getElementById('av-quality-groups').innerHTML = groups.slice().sort((a, b) => b.total - a.total).map(g => {
     const chips = g.variants.slice().sort((a, b) => b.n - a.n).map(v =>
       `<span class="av-dq-chip${AV_MODEL_RENAMED.has(v.raw) ? ' ren' : ''}">${v.raw}<i>${fmt(v.n)}</i></span>`).join('');
@@ -1606,18 +1848,19 @@ function avRenderAirlineQuality() {
     return `<div class="av-dq-grp"><div class="av-dq-chips">${chips}</div><div class="to">→</div>`
       + `<div class="canon">${g.canonical}<small>${note}</small></div><div class="n">${fmt(g.total)}<small>${avT('av_dq_flights', 'flights')}</small></div></div>`;
   }).join('');
-  // 03 : mesures
+  // 3. Méthodes : son et vols rares
   document.getElementById('av-q-capped-pct').textContent = Number(d.db_capped_pct).toLocaleString(loc, {maximumFractionDigits:2}) + ' %';
   document.getElementById('av-dq-capped-sub').textContent = tpl('av_dq_capped_sub', '{n} flights · all time', fmt(d.db_capped_count));
   document.getElementById('av-q-military-pct').textContent = Number(d.military_suspect_pct).toLocaleString(loc, {maximumFractionDigits:1}) + ' %';
   document.getElementById('av-dq-mil-sub').textContent = tpl('av_dq_mil_sub', '{n} of {m} military flights', fmt(d.military_suspect_count), fmt(d.military_total));
-  // Frises
-  avDqTimeline('av-aq-history', AV_AIRLINE_HISTORY);
-  avDqTimeline('av-dq-model-history', AV_MODEL_HISTORY);
-  avDqTimeline('av-dq-measure-history', AV_MEASURE_HISTORY);
+  // 4. Journal
+  avRelRenderLog();
+  // 5. Chercheurs : la liste des vols dont le son est exclu
+  document.getElementById('av-rel-flights').innerHTML = tpl('av_rel_s5_flights', '', fmt(AV_SOUND_EXCLUDED.length))
+    + AV_SOUND_EXCLUDED.map(f => `<code>${f.cs}</code> (${avRelDate(f.d)})`).join(', ') + '.';
 }
 
-// ── Data Quality ──
+// ── Data reliability ──
 function avRenderQuality() {
   avRenderAirlineQuality();
 }
@@ -2279,7 +2522,7 @@ const T = {
     s4_label:'Full history', s4_title:'The archive<br><em>every flight, since day one</em>',
     s4_desc:'The station\'s complete dataset since day one — cross-referenced by aircraft model, airline, night regulation, and air quality, with full photo galleries for each.',
     av_tab_overview:'Overview', av_tab_aircraft:'By Aircraft', av_tab_airline:'By Airline',
-    av_tab_anac:'Night · ANAC', av_tab_rare:'Rare · Military', av_tab_quality:'Data Quality', av_tab_pollution:'Air Quality', av_tab_expertmode:'Expert Mode',
+    av_tab_anac:'Night · ANAC', av_tab_rare:'Rare · Military', av_tab_quality:'Data reliability', av_tab_pollution:'Air · PM2.5', av_tab_expertmode:'Expert Mode',
     av_lbl_total:'Total flights', av_lbl_avgdb:'Avg. peak dB per flight', av_lbl_maxdb:'Peak dB', av_lbl_avgvib:'Avg. vibration (mg)',
     av_col_avgdb_tip:'Average peak dB per flight', av_expert_th_peak_tip:'Average peak dB per flight',
     av_top_airlines:'Top airlines', av_top_aircraft:'Top aircraft models', av_click_hint:'click to explore', av_month_all:'All time',
@@ -2288,8 +2531,6 @@ const T = {
     av_anac_offenders:'Top companies (by alerts)', av_anac_infractions:'Alerts',
     av_rare_total:'Rare / military flights detected', av_rare_bytype_title:'By type', av_rare_clear_filter:'show all',
     av_quality_intro:'Transparency panel — known caveats in this dataset, with real counters rather than hidden assumptions.',
-    av_aq_method_h:'Airlines · method',
-    av_aq_title:'How we identify an aircraft\'s airline',
     av_aq_lede:'For each flight we try these sources in order and stop at the first one that answers. Every aircraft broadcasts a unique, permanent radio address (hex code): that is what lets us recognise the same airframe from one flight to the next.',
     av_aq_s1_t:'The flight\'s radio callsign',
     av_aq_s1_p:'The code the aircraft broadcasts in flight, e.g. <code>TAP96AW</code> for TAP Air Portugal. It names the airline actually operating that flight.',
@@ -2305,56 +2546,67 @@ const T = {
     av_aq_s4_pill:'Blank',
     av_aq_leg_flag:'Country flag: airline confirmed by a radio callsign',
     av_aq_leg_plane:'Airline inferred from a registry, not confirmed',
-    av_aq_identified:'Flights with an identified airline',
-    av_aq_unidentified:'Flights with no airline',
-    av_aq_out_of:'out of {n} flights',
-    av_aq_choices_h:'Airlines · editorial choices',
     av_aq_choices_em:'what we keep apart, and why',
-    av_aq_c1_tag:'9H- · Malta',
     av_aq_c1_t:'Malta Air and Lauda Europe kept apart',
     av_aq_c1_p:'Two real Ryanair Group airlines, both registered in Malta, with different fleets: Malta Air flies Boeing 737s, Lauda Europe flies Airbus A320/A321s. We tell them apart by aircraft type rather than filing everything under "Ryanair". Private jets registered in Malta are never assigned to this group, nor are the Airbus jets of Wizz Air Malta (9H-W…).',
-    av_aq_c2_tag:'LN- / SE- · Norway, Sweden',
     av_aq_c2_t:'Norwegian and Norwegian Air Sweden kept apart',
     av_aq_c2_p:'Norwegian Group holds two separate Air Operator Certificates, one Norwegian and one Swedish. In regulatory terms these are two airlines, so we keep them apart, as with Malta Air and Lauda Europe.',
-    av_aq_hist_h:'Airlines · correction history',
-    av_aq_hist_em:'most recent first',
-    av_aq_col_date:'Date',
-    av_aq_col_fix:'Correction',
-    av_aq_col_qty:'Flights affected',
     av_aq_k_merge:'Merge',
     av_aq_k_fix:'Fixed',
     av_aq_k_fill:'Filled in',
     av_aq_k_split:'Split',
     av_aq_k_excl:'Excluded',
-    av_aq_foot:'Each correction also applies to flights already archived, not just new ones.',
+    av_rel_eyebrow:'Archive · data reliability · updated {d}',
+    av_rel_h:'Can you trust <em>these figures?</em>',
+    av_rel_lede:'What the station measures well, what it measures badly, and every correction made since day one. The counters come straight from the database of {n} flights.',
+    av_rel_s1_k:'1 · The summary', av_rel_s1_h:'Four areas, four answers',
+    av_rel_d_son:'Sound', av_rel_d_air:'Airlines', av_rel_d_mod:'Aircraft models', av_rel_d_rare:'Rare flights',
+    av_rel_ok:'Good', av_rel_watch:'Watch',
+    av_rel_son_what:'flights in {n} with their noise level left out of the statistics ({m} since day one).',
+    av_rel_son_note:'Main microphone unstable since 16 Oct · cable to be replaced',
+    av_rel_air_what:'of flights have an identified airline. {n} stay blank rather than guessed.',
+    av_rel_mod_what:'distinct models, after merging {n} raw labels written differently.',
+    av_rel_rare_what:'of "military" flights are probably misfiled civil aircraft ({n} of {m}).',
+    av_rel_rare_note:'Automatic sorting, checked by hand',
+    av_rel_last:'Last correction: {d} · {n}',
+    av_rel_s2_k:'2 · The rules', av_rel_s2_h:'What does not count in the statistics',
+    av_rel_s2_p:'No flight is deleted. When a measurement is unreliable, the flight stays visible in the archive, but the doubtful value is left out of records, averages and reports.',
+    av_rel_th_sit:'Situation', av_rel_th_do:'What we do', av_rel_th_field:'In the data', av_rel_th_n:'Flights',
+    av_rel_r1:'Main microphone silent, level estimated by the camera',
+    av_rel_r2:'Peak impossible to check (old measuring fault)',
+    av_rel_r3:'Sensor box opened or moved during the pass',
+    av_rel_r4:'Reading capped at 100 dB by the old measuring chain',
+    av_rel_r5:'No source knows the airline',
+    av_rel_x_db:'dB excluded', av_rel_x_sv:'sound and vibration excluded', av_rel_x_min:'counted at 100 dB, a minimum', av_rel_x_blank:'left blank',
+    av_rel_f_blank:'airline = blank',
+    av_rel_s3_k:'3 · The methods', av_rel_s3_h:'How each figure is obtained',
+    av_rel_m_son_r:'A calibrated microphone, the camera as a backup, and a continuous recording to check every peak.',
+    av_rel_m_son_p1:'The level of each pass is the <b>peak measured by the station\'s microphone</b>, in dB SPL, during a listening window of a little over a minute. A <b>continuous recording</b> also logs the noise every second: it is used to confirm each peak, and to rebuild it when the measurement of the pass failed.',
+    av_rel_m_son_p2:'If the main microphone stops responding, the <b>camera microphone</b> takes over. It is not calibrated and reads several decibels too high: its value is shown as an estimate and never counts in the statistics.',
+    av_rel_m_son_p3:'<b>Known limits</b>: before 22 June 2026, the first measuring chain topped out at 100 dB (see below), and in June the camera microphone sometimes replaced it; these older values are kept as they are, since no better measurement exists. Main microphone cut-outs on 3, 16 and 17 October 2026.',
+    av_rel_m_air_r:'Four sources, in order, and a blank field rather than a guessed airline.',
+    av_rel_m_mod_r:'We only group what is certain: spelling and documented name changes.',
+    av_rel_m_rare_r:'Automatic sorting by radio address and callsign, checked by hand.',
+    av_rel_s4_k:'4 · The log', av_rel_s4_h:'Every correction, dated',
+    av_rel_s4_p:'Every correction also applies to flights already archived, not just new ones. Click a line to read the details.',
+    av_rel_f_all:'All', av_rel_f_mod:'Models',
+    av_rel_search_ph:'Search a flight, an airline, an aircraft…',
+    av_rel_count:'{n} corrections', av_rel_count1:'1 correction',
+    av_rel_none:'No correction matches this search.',
+    av_dq_flight:'flight',
+    av_rel_s5_k:'5 · For researchers', av_rel_s5_h:'Find these flags in the files',
+    av_rel_s5_p:'The Research page exports keep every flight. Filter on these fields to reproduce our statistics.',
+    av_rel_s5_li1:'In the monthly CSV files, the <code>data_quality</code> column gives the reason: <code>spl_unverifiable</code> and <code>sensor_box_moved</code> (left out of our statistics), <code>peak_corrected</code> (peak rebuilt from the continuous recording), <code>peak_not_corroborated</code>, <code>capture_corrupted_by_restart</code> (for information, values still counted).',
+    av_rel_s5_li2:'In the station database, the same reason is stored in <code>data_quality_issue</code>, with <code>data_quality_note</code>: the explanation in plain words, with the date of the decision.',
+    av_rel_s5_li3:'<code>spl_source</code> says where the noise level comes from: <code>ads1115</code> the microphone, <code>continuous_1hz</code> the continuous recording, <code>camera_fallback</code> the camera.',
+    av_rel_s5_flights:'The {n} flights whose sound is left out: ',
+    av_rel_s5_link:'Open the Research page',
     av_lease_tpl:'{o} aircraft, leased with crew',
-    av_dq_intro:'<b>Transparency panel.</b> Known limits of this dataset, with real counters rather than hidden assumptions, and a dated list of every correction.',
-    av_dq_kicker:'Data quality',
-    av_dq_toc1:'Airlines',
-    av_dq_toc2:'Aircraft models',
-    av_dq_toc3:'Measurements and classification',
-    av_dq_m1_title:'Airlines<br><em>and operators</em>',
-    av_dq_m2_title:'Aircraft<br><em>models</em>',
-    av_dq_m3_title:'Measurements<br><em>and classification</em>',
-    av_dq_m1_aside:'Who operates each flight, and where that information comes from. We would rather leave a field blank than guess an airline.',
-    av_dq_m2_aside:'The same aircraft can arrive under several names depending on the source. We only group what is certain.',
-    av_dq_m3_aside:'Known limits of the sensors and of the automatic sorting of rare flights.',
-    av_dq_s_method:'Method',
-    av_dq_s_method_em:'4 sources, in order',
     av_dq_s_choices:'Editorial choices',
-    av_dq_s_hist:'Correction history',
-    av_dq_s_figures:'Figures',
-    av_dq_alltime:'all time',
-    av_dq_s_groups:'Merged models',
-    av_dq_s_groups_em:'recalculated at every update',
     av_dq_c1_country:'Malta',
     av_dq_c2_country:'Norway · Sweden',
     av_dq_aoc_no:'Norwegian certificate',
     av_dq_aoc_se:'Swedish certificate',
-    av_dq_models_kpi:'Distinct aircraft models',
-    av_dq_models_kpi_sub:'{n} raw labels before merging',
-    av_dq_bar_ok:'{n} flights identified',
-    av_dq_bar_ko:'{n} with no airline',
     av_dq_raw_to_models:'Raw labels → distinct models',
     av_dq_absorbed:'{n} duplicate labels absorbed',
     av_dq_groups_n:'Merged groups',
@@ -2372,8 +2624,8 @@ const T = {
     av_dq_capped_p:'The earlier measuring chain topped out at 100 dB. These flights are counted at 100 dB: the real peak was at least that loud.',
     av_dq_mil_sub:'{n} of {m} military flights',
     av_dq_mil_p:'Automatic sorting relies on the radio address and the callsign. Some civil aircraft fall into address ranges reserved for the military.',
-    av_q_capped:'dB readings capped at 100', av_q_types:'Aircraft models (raw → merged)',
-    av_q_military:'Suspected false-positive "military" tags', av_q_groups:'Merged aircraft model groups (naming duplicates)',
+    av_q_capped:'dB readings capped at 100',
+    av_q_military:'Suspected false-positive "military" tags',
     av_poll_intro:'Ambient PM sensor readings captured alongside each flight event — a timing reference, not proof that aircraft caused the reading (a barbecue or cigarette on the terrace affects it just as much).',
     av_poll_avg:'Average PM2.5', av_poll_max:'Peak PM2.5', av_poll_coverage:'Sensor coverage', av_poll_coverage_since:'sensor installed 12 May 2026',
     av_poll_dist:'Air quality distribution', av_poll_chart_title:'Traffic × PM2.5 over time',
@@ -2399,7 +2651,7 @@ const T = {
     av_col_total:'Total', av_col_critical:'Critical', av_col_orange:'Orange', av_col_l2:'Level 2', av_anac_orange_note:'Orange is not an ANAC-defined tier — the regulation only sets Critical (>98.9 dB) and Level 2 (93.0–95.9 dB), with nothing in between. Orange tracks that gap on our own, so a loud flight at 97 dB is never silently dropped from the count.',
     av_total_lower:'total', av_showing_first:'showing first', av_col_datetime:'Date / Time', av_col_flight:'Flight', av_col_type:'Type',
     av_rare_caveat_title:'⚠ Suspected false positives',
-    av_rare_caveat_desc:'a few flights tagged "military" resolve to a private/charter operator rather than a government or armed-forces owner — likely a hex-range classification overlap catching civil traffic in a broad country-level block, not necessarily an actual military aircraft. See <span class="av-link" onclick="avGotoQuality()">Data Quality</span> for exact counts.',
+    av_rare_caveat_desc:'a few flights tagged "military" resolve to a private/charter operator rather than a government or armed-forces owner: likely a hex-range classification overlap catching civil traffic in a broad country-level block, not necessarily an actual military aircraft. See <span class="av-link" onclick="avGotoQuality()">Data reliability</span> for exact counts.',
     av_col_canonical:'Canonical name', av_col_variants:'Merged variants',
     av_updated:'Updated', av_error:'Archive data unavailable — check back shortly.'
   },
@@ -2426,7 +2678,7 @@ const T = {
     s4_label:'Histórico completo', s4_title:'O arquivo<br><em>cada voo, desde o primeiro dia</em>',
     s4_desc:'O conjunto de dados completo da estação desde o primeiro dia — cruzado por modelo de aeronave, companhia aérea, regulamentação nocturna e qualidade do ar, com galerias de fotos completas para cada um.',
     av_tab_overview:'Visão geral', av_tab_aircraft:'Por Aeronave', av_tab_airline:'Por Companhia',
-    av_tab_anac:'Noite · ANAC', av_tab_rare:'Raros · Militares', av_tab_quality:'Qualidade dos Dados', av_tab_pollution:'Qualidade do Ar', av_tab_expertmode:'Modo Perito',
+    av_tab_anac:'Noite · ANAC', av_tab_rare:'Raros · Militares', av_tab_quality:'Fiabilidade dos dados', av_tab_pollution:'Ar · PM2.5', av_tab_expertmode:'Modo Perito',
     av_lbl_total:'Voos totais', av_lbl_avgdb:'Pico médio dB por voo', av_lbl_maxdb:'Pico dB', av_lbl_avgvib:'Vibração média (mg)',
     av_col_avgdb_tip:'Pico médio dB por voo', av_expert_th_peak_tip:'Pico médio dB por voo',
     av_top_airlines:'Principais companhias', av_top_aircraft:'Principais modelos', av_click_hint:'clique para explorar', av_month_all:'Todo o período',
@@ -2435,8 +2687,6 @@ const T = {
     av_anac_offenders:'Principais companhias (por alertas)', av_anac_infractions:'Alertas',
     av_rare_total:'Voos raros / militares detectados', av_rare_bytype_title:'Por tipo', av_rare_clear_filter:'mostrar tudo',
     av_quality_intro:'Painel de transparência — limitações conhecidas neste conjunto de dados, com contadores reais em vez de suposições ocultas.',
-    av_aq_method_h:'Companhias aéreas · método',
-    av_aq_title:'Como identificamos a companhia de um avião',
     av_aq_lede:'Para cada voo, consultamos estas fontes por ordem e paramos na primeira que responde. Cada avião emite um endereço de rádio único e permanente (código hex): é isso que nos permite reconhecer o mesmo aparelho de um voo para o outro.',
     av_aq_s1_t:'O indicativo de rádio do voo',
     av_aq_s1_p:'O código que o avião emite em voo, por exemplo <code>TAP96AW</code> para a TAP Air Portugal. Indica a companhia que opera efectivamente esse voo.',
@@ -2452,56 +2702,67 @@ const T = {
     av_aq_s4_pill:'Em branco',
     av_aq_leg_flag:'Bandeira do país: companhia confirmada por um indicativo de rádio',
     av_aq_leg_plane:'Companhia deduzida de um registo, não confirmada',
-    av_aq_identified:'Voos com companhia identificada',
-    av_aq_unidentified:'Voos sem companhia',
-    av_aq_out_of:'em {n} voos',
-    av_aq_choices_h:'Companhias aéreas · escolhas editoriais',
     av_aq_choices_em:'o que separamos, e porquê',
-    av_aq_c1_tag:'9H- · Malta',
     av_aq_c1_t:'Malta Air e Lauda Europe separadas',
     av_aq_c1_p:'Duas companhias reais do grupo Ryanair, ambas com matrícula maltesa e frotas diferentes: a Malta Air voa em Boeing 737, a Lauda Europe em Airbus A320/A321. Distinguimo-las pelo tipo de avião em vez de juntar tudo sob "Ryanair". Os jactos privados com matrícula maltesa nunca são atribuídos a este grupo, nem os Airbus da Wizz Air Malta (9H-W…).',
-    av_aq_c2_tag:'LN- / SE- · Noruega, Suécia',
     av_aq_c2_t:'Norwegian e Norwegian Air Sweden separadas',
     av_aq_c2_p:'O grupo Norwegian detém dois Certificados de Operador Aéreo distintos, um norueguês e um sueco. Em termos regulamentares são duas companhias: mantemo-las separadas, tal como a Malta Air e a Lauda Europe.',
-    av_aq_hist_h:'Companhias aéreas · histórico de correcções',
-    av_aq_hist_em:'da mais recente à mais antiga',
-    av_aq_col_date:'Data',
-    av_aq_col_fix:'Correcção',
-    av_aq_col_qty:'Voos afectados',
     av_aq_k_merge:'Fusão',
     av_aq_k_fix:'Corrigido',
     av_aq_k_fill:'Completado',
     av_aq_k_split:'Separação',
     av_aq_k_excl:'Excluído',
-    av_aq_foot:'Cada correcção aplica-se também aos voos já arquivados, e não apenas aos novos.',
+    av_rel_eyebrow:'Arquivo · fiabilidade dos dados · actualizado a {d}',
+    av_rel_h:'Podemos confiar <em>nestes números?</em>',
+    av_rel_lede:'O que a estação mede bem, o que mede mal, e cada correcção feita desde o primeiro dia. Os contadores vêm directamente da base de dados de {n} voos.',
+    av_rel_s1_k:'1 · O balanço', av_rel_s1_h:'Quatro domínios, quatro respostas',
+    av_rel_d_son:'Som', av_rel_d_air:'Companhias', av_rel_d_mod:'Modelos de avião', av_rel_d_rare:'Voos raros',
+    av_rel_ok:'Bom', av_rel_watch:'A vigiar',
+    av_rel_son_what:'voos em {n} com o nível sonoro fora das estatísticas ({m} desde o início).',
+    av_rel_son_note:'Microfone principal instável desde 16 Out. · cabo a substituir',
+    av_rel_air_what:'dos voos têm companhia identificada. {n} ficam em branco em vez de adivinhados.',
+    av_rel_mod_what:'modelos distintos, após a fusão de {n} nomes brutos escritos de formas diferentes.',
+    av_rel_rare_what:'dos voos "militares" são provavelmente aviões civis mal classificados ({n} de {m}).',
+    av_rel_rare_note:'Classificação automática, verificada à mão',
+    av_rel_last:'Última correcção: {d} · {n}',
+    av_rel_s2_k:'2 · As regras', av_rel_s2_h:'O que não conta nas estatísticas',
+    av_rel_s2_p:'Nenhum voo é apagado. Quando uma medição não é fiável, o voo continua visível no arquivo, mas o valor duvidoso sai dos recordes, médias e relatórios.',
+    av_rel_th_sit:'Situação', av_rel_th_do:'O que fazemos', av_rel_th_field:'Nos dados', av_rel_th_n:'Voos',
+    av_rel_r1:'Microfone principal mudo, nível estimado pela câmara',
+    av_rel_r2:'Pico impossível de verificar (antigo defeito de medição)',
+    av_rel_r3:'Caixa dos sensores aberta ou deslocada durante a passagem',
+    av_rel_r4:'Leitura limitada a 100 dB pela antiga cadeia de medição',
+    av_rel_r5:'Nenhuma fonte conhece a companhia',
+    av_rel_x_db:'dB excluídos', av_rel_x_sv:'som e vibração excluídos', av_rel_x_min:'conta como 100 dB, um mínimo', av_rel_x_blank:'fica em branco',
+    av_rel_f_blank:'airline = vazio',
+    av_rel_s3_k:'3 · Os métodos', av_rel_s3_h:'Como se obtém cada número',
+    av_rel_m_son_r:'Um microfone calibrado, a câmara de reserva, e uma gravação contínua para verificar cada pico.',
+    av_rel_m_son_p1:'O nível de cada passagem é o <b>pico medido pelo microfone da estação</b>, em dB SPL, durante uma janela de escuta de pouco mais de um minuto. Uma <b>gravação contínua</b> regista também o ruído a cada segundo: serve para confirmar cada pico, e para o reconstituir quando a medição da passagem falhou.',
+    av_rel_m_son_p2:'Se o microfone principal deixar de responder, o <b>microfone da câmara</b> assume. Não está calibrado e lê vários decibéis acima: o seu valor aparece como estimativa e nunca conta nas estatísticas.',
+    av_rel_m_son_p3:'<b>Limitações conhecidas</b>: antes de 22 de Junho de 2026, a primeira cadeia de medição tinha um limite de 100 dB (ver abaixo), e em Junho o microfone da câmara substituiu-a por vezes; estes valores antigos ficam como estão, porque não existe medição melhor. Cortes do microfone principal a 3, 16 e 17 de Outubro de 2026.',
+    av_rel_m_air_r:'Quatro fontes, por ordem, e um campo em branco em vez de uma companhia adivinhada.',
+    av_rel_m_mod_r:'Só agrupamos o que é certo: grafia e mudanças de nome documentadas.',
+    av_rel_m_rare_r:'Classificação automática pelo endereço de rádio e pelo indicativo, verificada à mão.',
+    av_rel_s4_k:'4 · O registo', av_rel_s4_h:'Cada correcção, com data',
+    av_rel_s4_p:'Cada correcção aplica-se também aos voos já arquivados, e não apenas aos novos. Clique numa linha para ler o detalhe.',
+    av_rel_f_all:'Tudo', av_rel_f_mod:'Modelos',
+    av_rel_search_ph:'Procurar um voo, uma companhia, um avião…',
+    av_rel_count:'{n} correcções', av_rel_count1:'1 correcção',
+    av_rel_none:'Nenhuma correcção corresponde a esta pesquisa.',
+    av_dq_flight:'voo',
+    av_rel_s5_k:'5 · Para investigadores', av_rel_s5_h:'Encontrar estas marcações nos ficheiros',
+    av_rel_s5_p:'As exportações da página Research guardam todos os voos. Filtre por estes campos para reproduzir as nossas estatísticas.',
+    av_rel_s5_li1:'Nos ficheiros CSV mensais, a coluna <code>data_quality</code> indica a razão: <code>spl_unverifiable</code> e <code>sensor_box_moved</code> (fora das nossas estatísticas), <code>peak_corrected</code> (pico reconstituído a partir da gravação contínua), <code>peak_not_corroborated</code>, <code>capture_corrupted_by_restart</code> (a título informativo, valores contados).',
+    av_rel_s5_li2:'Na base de dados da estação, a mesma razão fica em <code>data_quality_issue</code>, com <code>data_quality_note</code>: a explicação por extenso, com a data da decisão.',
+    av_rel_s5_li3:'<code>spl_source</code> indica de onde vem o nível sonoro: <code>ads1115</code> o microfone, <code>continuous_1hz</code> a gravação contínua, <code>camera_fallback</code> a câmara.',
+    av_rel_s5_flights:'Os {n} voos com o som excluído: ',
+    av_rel_s5_link:'Abrir a página Research',
     av_lease_tpl:'Avião {o}, alugado com tripulação',
-    av_dq_intro:'<b>Painel de transparência.</b> As limitações conhecidas deste conjunto de dados, com contadores reais em vez de suposições ocultas, e a lista datada de cada correcção.',
-    av_dq_kicker:'Qualidade dos dados',
-    av_dq_toc1:'Companhias aéreas',
-    av_dq_toc2:'Modelos de avião',
-    av_dq_toc3:'Medições e classificação',
-    av_dq_m1_title:'Companhias<br><em>aéreas</em>',
-    av_dq_m2_title:'Modelos<br><em>de avião</em>',
-    av_dq_m3_title:'Medições<br><em>e classificação</em>',
-    av_dq_m1_aside:'Quem opera cada voo, e de onde vem essa informação. Preferimos deixar um campo em branco a adivinhar uma companhia.',
-    av_dq_m2_aside:'O mesmo avião pode chegar com vários nomes, consoante a fonte. Só agrupamos o que é certo.',
-    av_dq_m3_aside:'Limitações conhecidas dos sensores e da classificação automática dos voos raros.',
-    av_dq_s_method:'Método',
-    av_dq_s_method_em:'4 fontes, por ordem',
     av_dq_s_choices:'Escolhas editoriais',
-    av_dq_s_hist:'Histórico de correcções',
-    av_dq_s_figures:'Números',
-    av_dq_alltime:'todo o histórico',
-    av_dq_s_groups:'Modelos fundidos',
-    av_dq_s_groups_em:'recalculados a cada actualização',
     av_dq_c1_country:'Malta',
     av_dq_c2_country:'Noruega · Suécia',
     av_dq_aoc_no:'certificado norueguês',
     av_dq_aoc_se:'certificado sueco',
-    av_dq_models_kpi:'Modelos de avião distintos',
-    av_dq_models_kpi_sub:'{n} nomes brutos antes da fusão',
-    av_dq_bar_ok:'{n} voos identificados',
-    av_dq_bar_ko:'{n} sem companhia',
     av_dq_raw_to_models:'Nomes brutos → modelos distintos',
     av_dq_absorbed:'{n} nomes duplicados absorvidos',
     av_dq_groups_n:'Grupos fundidos',
@@ -2519,8 +2780,8 @@ const T = {
     av_dq_capped_p:'A antiga cadeia de medição tinha um limite de 100 dB. Estes voos contam como 100 dB: o pico real foi pelo menos tão alto.',
     av_dq_mil_sub:'{n} de {m} voos militares',
     av_dq_mil_p:'A classificação automática baseia-se no endereço de rádio e no indicativo. Alguns aviões civis caem em gamas de endereços reservadas aos militares.',
-    av_q_capped:'Leituras dB no limite de 100', av_q_types:'Modelos de aeronave (bruto → fundido)',
-    av_q_military:'Etiquetas "militar" suspeitas de falso positivo', av_q_groups:'Grupos de modelos fundidos (duplicados de nomenclatura)',
+    av_q_capped:'Leituras dB no limite de 100',
+    av_q_military:'Etiquetas "militar" suspeitas de falso positivo',
     av_poll_intro:'Leituras do sensor de partículas captadas junto de cada voo detectado — uma referência temporal, não prova de que a aeronave causou a leitura (um churrasco ou cigarro na varanda afecta-a igualmente).',
     av_poll_avg:'PM2.5 médio', av_poll_max:'Pico PM2.5', av_poll_coverage:'Cobertura do sensor', av_poll_coverage_since:'sensor instalado a 12 de maio de 2026',
     av_poll_dist:'Distribuição da qualidade do ar', av_poll_chart_title:'Tráfego × PM2.5 ao longo do tempo',
@@ -2546,7 +2807,7 @@ const T = {
     av_col_total:'Total', av_col_critical:'Crítica', av_col_orange:'Laranja', av_col_l2:'Nível 2', av_anac_orange_note:'Laranja não é um nível definido pela ANAC — o regulamento define apenas Crítico (>98,9 dB) e Nível 2 (93,0–95,9 dB), sem nada entre os dois. O Laranja acompanha essa lacuna por conta própria, para que um voo ruidoso a 97 dB nunca desapareça silenciosamente da contagem.',
     av_total_lower:'total', av_showing_first:'a mostrar os primeiros', av_col_datetime:'Data / Hora', av_col_flight:'Voo', av_col_type:'Tipo',
     av_rare_caveat_title:'⚠ Suspeita de falsos positivos',
-    av_rare_caveat_desc:'alguns voos etiquetados como "militar" correspondem a um operador privado/charter em vez de um proprietário governamental ou militar — provavelmente uma sobreposição na classificação por intervalo hex, que capta tráfico civil num bloco de país demasiado amplo, não necessariamente uma aeronave militar real. Ver <span class="av-link" onclick="avGotoQuality()">Qualidade dos Dados</span> para contagens exactas.',
+    av_rare_caveat_desc:'alguns voos etiquetados como "militar" correspondem a um operador privado/charter em vez de um proprietário governamental ou militar: provavelmente uma sobreposição na classificação por intervalo hex, que capta tráfico civil num bloco de país demasiado amplo, não necessariamente uma aeronave militar real. Ver <span class="av-link" onclick="avGotoQuality()">Fiabilidade dos dados</span> para contagens exactas.',
     av_col_canonical:'Nome canónico', av_col_variants:'Variantes fundidas',
     av_updated:'Actualizado', av_error:'Dados do arquivo indisponíveis — tente novamente em breve.'
   },
@@ -2573,7 +2834,7 @@ const T = {
     s4_label:'Historique complet', s4_title:'Les archives<br><em>chaque vol, depuis le premier jour</em>',
     s4_desc:'L\'ensemble des observations de la station depuis le premier jour — recoupées par modèle d\'avion, compagnie, réglementation nocturne et qualité de l\'air, avec les galeries photo correspondant à chaque sélection.',
     av_tab_overview:'Vue d\'ensemble', av_tab_aircraft:'Par modèle d\'avion', av_tab_airline:'Par compagnie',
-    av_tab_anac:'Nuit · ANAC', av_tab_rare:'Rares · Militaires', av_tab_quality:'Qualité des données', av_tab_pollution:'Qualité de l\'air', av_tab_expertmode:'Mode Expert',
+    av_tab_anac:'Nuit · ANAC', av_tab_rare:'Rares · Militaires', av_tab_quality:'Fiabilité des données', av_tab_pollution:'Air · PM2.5', av_tab_expertmode:'Mode Expert',
     av_lbl_total:'Vols totaux', av_lbl_avgdb:'Pic moyen dB par vol', av_lbl_maxdb:'Pic dB', av_lbl_avgvib:'Vibration moyenne (mg)',
     av_col_avgdb_tip:'Pic moyen dB par vol', av_expert_th_peak_tip:'Pic moyen dB par vol',
     av_top_airlines:'Top compagnies', av_top_aircraft:'Top modèles d\'avion', av_click_hint:'cliquer pour explorer', av_month_all:'Tout l\'historique',
@@ -2582,8 +2843,6 @@ const T = {
     av_anac_offenders:'Principales compagnies (alertes)', av_anac_infractions:'Alertes',
     av_rare_total:'Vols rares / militaires détectés', av_rare_bytype_title:'Par type', av_rare_clear_filter:'tout afficher',
     av_quality_intro:'Panneau de transparence — limites connues de ce jeu de données, avec des compteurs réels plutôt que des suppositions cachées.',
-    av_aq_method_h:'Compagnies aériennes · méthode',
-    av_aq_title:'Comment on identifie la compagnie d\'un avion',
     av_aq_lede:'Pour chaque vol, on essaie ces sources dans l\'ordre et on s\'arrête à la première qui répond. Chaque avion émet une adresse radio unique et permanente (code hex) : c\'est elle qui permet de reconnaître le même appareil d\'un vol à l\'autre.',
     av_aq_s1_t:'L\'indicatif radio du vol',
     av_aq_s1_p:'Le code que l\'avion émet en vol, par exemple <code>TAP96AW</code> pour TAP Air Portugal. C\'est la compagnie qui exploite réellement ce vol.',
@@ -2599,56 +2858,67 @@ const T = {
     av_aq_s4_pill:'Vide',
     av_aq_leg_flag:'Drapeau du pays : compagnie confirmée par un indicatif radio',
     av_aq_leg_plane:'Compagnie déduite d\'un registre, non confirmée',
-    av_aq_identified:'Vols avec compagnie identifiée',
-    av_aq_unidentified:'Vols sans compagnie',
-    av_aq_out_of:'sur {n} vols',
-    av_aq_choices_h:'Compagnies aériennes · choix éditoriaux',
     av_aq_choices_em:'ce qu\'on sépare, et pourquoi',
-    av_aq_c1_tag:'9H- · Malte',
     av_aq_c1_t:'Malta Air et Lauda Europe séparées',
     av_aq_c1_p:'Deux compagnies réelles du groupe Ryanair, immatriculées à Malte, avec des flottes différentes : Malta Air vole en Boeing 737, Lauda Europe en Airbus A320/A321. On les distingue par type d\'avion plutôt que de tout ranger sous « Ryanair ». Les jets privés immatriculés à Malte ne sont jamais rattachés à ce groupe, pas plus que les Airbus de Wizz Air Malta (9H-W…).',
-    av_aq_c2_tag:'LN- / SE- · Norvège, Suède',
     av_aq_c2_t:'Norwegian et Norwegian Air Sweden séparées',
     av_aq_c2_p:'Le groupe Norwegian détient deux certificats de transporteur aérien distincts, un norvégien et un suédois. Ce sont deux compagnies au sens réglementaire : on les garde séparées, comme Malta Air et Lauda Europe.',
-    av_aq_hist_h:'Compagnies aériennes · historique des corrections',
-    av_aq_hist_em:'du plus récent au plus ancien',
-    av_aq_col_date:'Date',
-    av_aq_col_fix:'Correction',
-    av_aq_col_qty:'Vols concernés',
     av_aq_k_merge:'Fusion',
     av_aq_k_fix:'Corrigé',
     av_aq_k_fill:'Complété',
     av_aq_k_split:'Séparation',
     av_aq_k_excl:'Exclu',
-    av_aq_foot:'Chaque correction s\'applique aussi aux vols déjà archivés, pas seulement aux nouveaux.',
+    av_rel_eyebrow:'Archive · fiabilité des données · mise à jour le {d}',
+    av_rel_h:'Peut-on se fier <em>à ces chiffres&nbsp;?</em>',
+    av_rel_lede:'Ce que la station mesure bien, ce qu\'elle mesure mal, et chaque correction apportée depuis le premier jour. Les compteurs viennent directement de la base de {n} vols.',
+    av_rel_s1_k:'1 · Le bilan', av_rel_s1_h:'Quatre domaines, quatre réponses',
+    av_rel_d_son:'Son', av_rel_d_air:'Compagnies', av_rel_d_mod:'Modèles d\'avion', av_rel_d_rare:'Vols rares',
+    av_rel_ok:'Bon', av_rel_watch:'À surveiller',
+    av_rel_son_what:'vols en {n} dont le niveau sonore est sorti des statistiques ({m} depuis le début).',
+    av_rel_son_note:'Micro principal instable depuis le 16 oct. · câble à remplacer',
+    av_rel_air_what:'des vols ont une compagnie identifiée. {n} restent vides plutôt que devinés.',
+    av_rel_mod_what:'modèles distincts, après fusion de {n} libellés bruts écrits différemment.',
+    av_rel_rare_what:'des vols « militaires » sont probablement des avions civils mal classés ({n} sur {m}).',
+    av_rel_rare_note:'Tri automatique, vérifié à la main',
+    av_rel_last:'Dernière correction : {d} · {n}',
+    av_rel_s2_k:'2 · Les règles', av_rel_s2_h:'Ce qui ne compte pas dans les statistiques',
+    av_rel_s2_p:'Aucun vol n\'est supprimé. Quand une mesure n\'est pas fiable, le vol reste visible dans l\'archive, mais la valeur douteuse sort des records, des moyennes et des rapports.',
+    av_rel_th_sit:'Situation', av_rel_th_do:'Ce qu\'on en fait', av_rel_th_field:'Dans les données', av_rel_th_n:'Vols',
+    av_rel_r1:'Micro principal muet, niveau estimé par la caméra',
+    av_rel_r2:'Pic impossible à vérifier (ancien défaut de mesure)',
+    av_rel_r3:'Boîte de capteurs ouverte ou déplacée pendant le passage',
+    av_rel_r4:'Relevé plafonné à 100 dB par l\'ancienne chaîne de mesure',
+    av_rel_r5:'Aucune source ne connaît la compagnie',
+    av_rel_x_db:'dB exclus', av_rel_x_sv:'son et vibration exclus', av_rel_x_min:'compté à 100 dB, un minimum', av_rel_x_blank:'laissé vide',
+    av_rel_f_blank:'airline = vide',
+    av_rel_s3_k:'3 · Les méthodes', av_rel_s3_h:'Comment chaque donnée est obtenue',
+    av_rel_m_son_r:'Un micro étalonné, la caméra en secours, et un flux continu pour vérifier chaque pic.',
+    av_rel_m_son_p1:'Le niveau de chaque passage est le <b>pic mesuré par le micro de la station</b>, en dB SPL, pendant une fenêtre d\'écoute d\'un peu plus d\'une minute. Un <b>flux continu</b> enregistre aussi le bruit chaque seconde : il sert à confirmer chaque pic, et à le reconstituer si la mesure du passage a échoué.',
+    av_rel_m_son_p2:'Si le micro principal ne répond plus, le <b>micro de la caméra</b> prend le relais. Il n\'est pas étalonné et lit plusieurs décibels trop haut : sa valeur est montrée comme une estimation et ne compte jamais dans les statistiques.',
+    av_rel_m_son_p3:'<b>Limites connues</b> : avant le 22 juin 2026, la première chaîne de mesure plafonnait à 100 dB (voir ci-dessous), et en juin le micro de la caméra l\'a parfois remplacée ; ces anciennes valeurs restent telles quelles, faute de meilleure mesure. Coupures du micro principal les 3, 16 et 17 octobre 2026.',
+    av_rel_m_air_r:'Quatre sources, dans l\'ordre, et un champ vide plutôt qu\'une compagnie devinée.',
+    av_rel_m_mod_r:'On ne regroupe que ce qui est certain : orthographe et changements de nom documentés.',
+    av_rel_m_rare_r:'Un tri automatique par adresse radio et indicatif, vérifié à la main.',
+    av_rel_s4_k:'4 · Le journal', av_rel_s4_h:'Chaque correction, datée',
+    av_rel_s4_p:'Chaque correction s\'applique aussi aux vols déjà archivés, pas seulement aux nouveaux. Cliquez sur une ligne pour lire le détail.',
+    av_rel_f_all:'Tout', av_rel_f_mod:'Modèles',
+    av_rel_search_ph:'Chercher un vol, une compagnie, un avion…',
+    av_rel_count:'{n} corrections', av_rel_count1:'1 correction',
+    av_rel_none:'Aucune correction ne correspond à cette recherche.',
+    av_dq_flight:'vol',
+    av_rel_s5_k:'5 · Pour les chercheurs', av_rel_s5_h:'Retrouver ces marquages dans les fichiers',
+    av_rel_s5_p:'Les exports de la page Research gardent tous les vols. Filtrez sur ces champs pour reproduire nos statistiques.',
+    av_rel_s5_li1:'Dans les fichiers CSV mensuels, la colonne <code>data_quality</code> donne la raison : <code>spl_unverifiable</code> et <code>sensor_box_moved</code> (sortis de nos statistiques), <code>peak_corrected</code> (pic reconstitué depuis le flux continu), <code>peak_not_corroborated</code>, <code>capture_corrupted_by_restart</code> (pour information, valeurs comptées).',
+    av_rel_s5_li2:'Dans la base de la station, la même raison est rangée dans <code>data_quality_issue</code>, avec <code>data_quality_note</code> : l\'explication en clair, avec la date de la décision.',
+    av_rel_s5_li3:'<code>spl_source</code> dit d\'où vient le niveau sonore : <code>ads1115</code> le micro, <code>continuous_1hz</code> le flux continu, <code>camera_fallback</code> la caméra.',
+    av_rel_s5_flights:'Les {n} vols dont le son est exclu : ',
+    av_rel_s5_link:'Ouvrir la page Research',
     av_lease_tpl:'Avion {o}, loué avec équipage',
-    av_dq_intro:'<b>Panneau de transparence.</b> Les limites connues de ce jeu de données, avec des compteurs réels plutôt que des suppositions cachées, et la liste datée de chaque correction.',
-    av_dq_kicker:'Qualité des données',
-    av_dq_toc1:'Compagnies aériennes',
-    av_dq_toc2:'Modèles d\'avion',
-    av_dq_toc3:'Mesures et classement',
-    av_dq_m1_title:'Compagnies<br><em>aériennes</em>',
-    av_dq_m2_title:'Modèles<br><em>d\'avion</em>',
-    av_dq_m3_title:'Mesures<br><em>et classement</em>',
-    av_dq_m1_aside:'Qui exploite chaque vol, et d\'où vient cette information. On préfère un champ vide à une compagnie devinée.',
-    av_dq_m2_aside:'Un même avion peut arriver sous plusieurs noms selon la source. On regroupe seulement ce qui est certain.',
-    av_dq_m3_aside:'Les limites connues des capteurs et du tri automatique des vols rares.',
-    av_dq_s_method:'Méthode',
-    av_dq_s_method_em:'4 sources, dans l\'ordre',
     av_dq_s_choices:'Choix éditoriaux',
-    av_dq_s_hist:'Historique des corrections',
-    av_dq_s_figures:'Chiffres',
-    av_dq_alltime:'tout l\'historique',
-    av_dq_s_groups:'Modèles fusionnés',
-    av_dq_s_groups_em:'recalculés à chaque mise à jour',
     av_dq_c1_country:'Malte',
     av_dq_c2_country:'Norvège · Suède',
     av_dq_aoc_no:'certificat norvégien',
     av_dq_aoc_se:'certificat suédois',
-    av_dq_models_kpi:'Modèles d\'avion distincts',
-    av_dq_models_kpi_sub:'{n} libellés bruts avant fusion',
-    av_dq_bar_ok:'{n} vols identifiés',
-    av_dq_bar_ko:'{n} sans compagnie',
     av_dq_raw_to_models:'Libellés bruts → modèles distincts',
     av_dq_absorbed:'{n} libellés en double absorbés',
     av_dq_groups_n:'Groupes fusionnés',
@@ -2666,8 +2936,8 @@ const T = {
     av_dq_capped_p:'L\'ancienne chaîne de mesure plafonnait à 100 dB. Ces vols sont comptés à 100 dB : le vrai pic était au moins aussi fort.',
     av_dq_mil_sub:'{n} sur {m} vols militaires',
     av_dq_mil_p:'Le tri automatique repose sur l\'adresse radio et l\'indicatif. Certains avions civils tombent dans des plages réservées aux militaires.',
-    av_q_capped:'Relevés dB plafonnés à 100', av_q_types:'Modèles d\'avion (bruts → fusionnés)',
-    av_q_military:'Étiquettes "militaire" suspectées de faux positif', av_q_groups:'Groupes de modèles fusionnés (doublons de nommage)',
+    av_q_capped:'Relevés dB plafonnés à 100',
+    av_q_military:'Étiquettes "militaire" suspectées de faux positif',
     av_poll_intro:'Relevés du capteur de particules associés temporellement à chaque vol détecté — un repère chronologique, pas une preuve que l\'avion soit à l’origine de la mesure (un barbecue ou une cigarette sur la terrasse l\'affecte tout autant).',
     av_poll_avg:'PM2.5 moyen', av_poll_max:'Pic PM2.5', av_poll_coverage:'Couverture du capteur', av_poll_coverage_since:'capteur installé le 12 mai 2026',
     av_poll_dist:'Répartition de la qualité de l\'air', av_poll_chart_title:'Trafic × PM2.5 dans le temps',
@@ -2693,7 +2963,7 @@ const T = {
     av_col_total:'Total', av_col_critical:'Critique', av_col_orange:'Orange', av_col_l2:'Niveau 2', av_anac_orange_note:'Orange n\'est pas un palier défini par l\'ANAC — la réglementation ne fixe que Critique (>98,9 dB) et Niveau 2 (93,0–95,9 dB), sans rien entre les deux. Orange suit cet écart de façon indépendante, pour qu\'un vol bruyant à 97 dB ne disparaisse jamais silencieusement du décompte.',
     av_total_lower:'total', av_showing_first:'affichage des', av_col_datetime:'Date / Heure', av_col_flight:'Vol', av_col_type:'Type',
     av_rare_caveat_title:'⚠ Suspicion de faux positifs',
-    av_rare_caveat_desc:'quelques vols étiquetés "militaire" correspondent à un opérateur privé/charter plutôt qu\'à un propriétaire gouvernemental ou militaire — probablement un chevauchement de classification par plage hex, qui capte du trafic civil dans un bloc pays trop large, pas forcément un vrai avion militaire. Voir <span class="av-link" onclick="avGotoQuality()">Qualité des données</span> pour les chiffres exacts.',
+    av_rare_caveat_desc:'quelques vols étiquetés "militaire" correspondent à un opérateur privé/charter plutôt qu\'à un propriétaire gouvernemental ou militaire : probablement un chevauchement de classification par plage hex, qui capte du trafic civil dans un bloc pays trop large, pas forcément un vrai avion militaire. Voir <span class="av-link" onclick="avGotoQuality()">Fiabilité des données</span> pour les chiffres exacts.',
     av_col_canonical:'Nom canonique', av_col_variants:'Variantes fusionnées',
     av_updated:'Mis à jour', av_error:'Données d\'archive indisponibles — réessayez sous peu.'
   }
