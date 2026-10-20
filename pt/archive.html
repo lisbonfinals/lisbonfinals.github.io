@@ -1616,6 +1616,11 @@ const AV_AIRLINE_HISTORY = [
 ];
 // Historique des corrections « Son » (même format ; refondu le 17 oct 2026 avec les corrections du 29 sept, 1er et 12 oct).
 const AV_MEASURE_HISTORY = [
+  { date:'2026-10-20', kind:'fix', qty:3,
+    t:{ en:'Three airliner peaks given back after a helicopter took them', pt:'Três picos de aviões de linha devolvidos depois de um helicóptero os ter apanhado', fr:'Trois pics d\'avions de ligne rendus après avoir été pris par un hélicoptère' },
+    en:'When the station starts listening to a <b>helicopter or a distant aircraft</b>, it is busy for about 90 seconds. Three times (13 and 19 October), an <b>airliner passed right over the station during that time</b>: its noise was recorded for the helicopter, and the airliner, picked up once it had already passed, showed about 55 dB. The peak was found in the continuous second-by-second recording and given back to TAP94KM (82.1 dB), TAP008 (84.3 dB) and IBE0537 (86.4 dB); the three helicopter peaks no longer count in the statistics. The station now makes this check by itself every 10 minutes.',
+    pt:'Quando a estação começa a ouvir um <b>helicóptero ou um avião distante</b>, fica ocupada durante cerca de 90 segundos. Três vezes (13 e 19 de Outubro), um <b>avião de linha passou mesmo por cima da estação nesse intervalo</b>: o seu ruído foi registado para o helicóptero, e o avião de linha, apanhado quando já tinha passado, mostrava cerca de 55 dB. O pico foi encontrado na gravação contínua, segundo a segundo, e devolvido ao TAP94KM (82,1 dB), ao TAP008 (84,3 dB) e ao IBE0537 (86,4 dB); os três picos dos helicópteros deixam de contar nas estatísticas. A estação faz agora esta verificação sozinha a cada 10 minutos.',
+    fr:'Quand la station se met à écouter un <b>hélicoptère ou un appareil lointain</b>, elle est occupée environ 90 secondes. À trois reprises (13 et 19 octobre), un <b>avion de ligne est passé juste au-dessus de la station pendant ce temps</b> : son bruit a été enregistré pour l\'hélicoptère, et l\'avion de ligne, capté une fois passé, affichait environ 55 dB. Le pic a été retrouvé dans le flux continu, seconde par seconde, et rendu à TAP94KM (82,1 dB), TAP008 (84,3 dB) et IBE0537 (86,4 dB) ; les trois pics des hélicoptères ne comptent plus dans les statistiques. La station fait désormais cette vérification toute seule toutes les 10 minutes.' },
   { date:'2026-10-18', kind:'excl', qty:21,
     t:{ en:'Station maintenance: 21 flights left out of the sound statistics', pt:'Manutenção da estação: 21 voos fora das estatísticas de som', fr:'Maintenance de la station : 21 vols sortis des statistiques de son' },
     en:'On 18 October the microphone cable was replaced and the station was <b>tested with a 94/114 dB reference calibrator</b>. Between about 11:41 and 12:57, while parts were being measured for the future enclosure, <b>the ground pin of the new cable came partly loose</b>: peaks were read several decibels too low (RZO122: 88.3 dB on the sound level meter, 81.9 dB recorded). Two more flights passed during the calibrator tests, so their peak is the calibrator, not the aircraft, and one passed while the cable was unplugged. These 21 flights stay in the archive, but their decibels no longer count in records, averages or reports.',
@@ -1653,9 +1658,12 @@ const AV_MEASURE_HISTORY = [
     fr:'La boîte de capteurs a été sortie de son meuble en bois vers 14 h 28, puis remise en place entre 16 h 14 et 16 h 21. Le <b>son et la vibration</b> des quatre vols passés pendant ces manipulations (ACA811 et trois avions sans indicatif) ne sont pas représentatifs : sortis des statistiques, valeurs d\'origine gardées dans les données.' },
 ];
 // Vols dont le son est sorti des statistiques (data_quality_issue dans flights_db, compté sur le Pi le 17 oct 2026).
-// cause : cam = micro principal muet, niveau du micro de la caméra ; old = ancien défaut de mesure ; box = boîte de capteurs manipulée ; mnt = maintenance (câble, calibrateur).
+// cause : cam = micro principal muet, niveau du micro de la caméra ; old = ancien défaut de mesure ; box = boîte de capteurs manipulée ; mnt = maintenance (câble, calibrateur) ; stl = pic d'un avion de ligne pris par un hélico capté juste avant.
 // Ajouter une ligne à chaque nouveau marquage, en même temps que l'entrée de AV_MEASURE_HISTORY.
 const AV_SOUND_EXCLUDED = [
+  { d:'2026-10-19', cs:'497fa7', cause:'stl' },
+  { d:'2026-10-19', cs:'4d211c', cause:'stl' },
+  { d:'2026-10-13', cs:'9HGMF', cause:'stl' },
   { d:'2026-10-18', cs:'49521a', cause:'mnt' },
   { d:'2026-10-18', cs:'RYR16GW', cause:'mnt' },
   { d:'2026-10-18', cs:'IFA6509', cause:'mnt' },
@@ -1855,6 +1863,7 @@ function avRenderAirlineQuality() {
     ['av_rel_r2', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('old')],
     ['av_rel_r3', 'x', 'av_rel_x_sv', 'data_quality_issue = sensor_box_moved', nCause('box')],
     ['av_rel_r6', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('mnt')],
+    ['av_rel_r7', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('stl')],
     ['av_rel_r4', 'c', 'av_rel_x_min', 'spl_db = 100', d.db_capped_count],
     ['av_rel_r5', 'b', 'av_rel_x_blank', avT('av_rel_f_blank', 'airline = blank'), missing],
   ];
@@ -2603,6 +2612,7 @@ const T = {
     av_rel_r2:'Peak impossible to check (old measuring fault)',
     av_rel_r3:'Sensor box opened or moved during the pass',
     av_rel_r6:'Station maintenance (cable, calibrator test)',
+    av_rel_r7:'Airliner peak taken by a helicopter captured just before',
     av_rel_r4:'Reading capped at 100 dB by the old measuring chain',
     av_rel_r5:'No source knows the airline',
     av_rel_x_db:'dB excluded', av_rel_x_sv:'sound and vibration excluded', av_rel_x_min:'counted at 100 dB, a minimum', av_rel_x_blank:'left blank',
@@ -2760,6 +2770,7 @@ const T = {
     av_rel_r2:'Pico impossível de verificar (antigo defeito de medição)',
     av_rel_r3:'Caixa dos sensores aberta ou deslocada durante a passagem',
     av_rel_r6:'Manutenção da estação (cabo, teste com calibrador)',
+    av_rel_r7:'Pico de avião de linha apanhado por um helicóptero captado mesmo antes',
     av_rel_r4:'Leitura limitada a 100 dB pela antiga cadeia de medição',
     av_rel_r5:'Nenhuma fonte conhece a companhia',
     av_rel_x_db:'dB excluídos', av_rel_x_sv:'som e vibração excluídos', av_rel_x_min:'conta como 100 dB, um mínimo', av_rel_x_blank:'fica em branco',
@@ -2917,6 +2928,7 @@ const T = {
     av_rel_r2:'Pic impossible à vérifier (ancien défaut de mesure)',
     av_rel_r3:'Boîte de capteurs ouverte ou déplacée pendant le passage',
     av_rel_r6:'Maintenance de la station (câble, test au calibrateur)',
+    av_rel_r7:'Pic d\'un avion de ligne pris par un hélicoptère capté juste avant',
     av_rel_r4:'Relevé plafonné à 100 dB par l\'ancienne chaîne de mesure',
     av_rel_r5:'Aucune source ne connaît la compagnie',
     av_rel_x_db:'dB exclus', av_rel_x_sv:'son et vibration exclus', av_rel_x_min:'compté à 100 dB, un minimum', av_rel_x_blank:'laissé vide',
