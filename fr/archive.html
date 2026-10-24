@@ -1616,6 +1616,11 @@ const AV_AIRLINE_HISTORY = [
 ];
 // Historique des corrections « Son » (même format ; refondu le 17 oct 2026 avec les corrections du 29 sept, 1er et 12 oct).
 const AV_MEASURE_HISTORY = [
+  { date:'2026-10-24', kind:'excl', qty:2,
+    t:{ en:'New station enclosure, calibration in 2 points, 2 flights left out', pt:'Nova caixa da estação, calibração em 2 pontos, 2 voos fora das estatísticas', fr:'Nouvelle boîte de la station, étalonnage en 2 points, 2 vols sortis des statistiques' },
+    en:'On the night of 24 October the station moved into its new 3D-printed enclosure, with the microphone now outside under a small rain hood. Before that, all sensors were tested indoors: the cause of the slightly low peaks seen since 18 October was found, a <b>faulty earth wire in the new microphone cable</b>; the previous cable is back in use. In its final position, the measuring chain was then <b>checked against a 94/114 dB reference calibrator: the station read 94.0 and 113.8 dB</b>. The night background level dropped by about 10 dB, as the fans no longer sit next to the microphone. The 2 flights recorded while the sensors were indoors (RZO128 and WZZ84UJ) stay in the archive, but their decibels no longer count in records, averages or reports.',
+    pt:'Na noite de 24 de Outubro, a estação mudou-se para a sua nova caixa impressa em 3D, com o microfone agora do lado de fora, debaixo de uma pequena pala contra a chuva. Antes disso, todos os sensores foram testados dentro de casa: foi encontrada a causa dos picos ligeiramente baixos desde 18 de Outubro, um <b>fio de massa defeituoso no novo cabo do microfone</b>; o cabo anterior voltou a ser usado. Na posição final, a cadeia de medição foi depois <b>verificada com um calibrador de referência de 94/114 dB: a estação leu 94,0 e 113,8 dB</b>. O ruído de fundo nocturno baixou cerca de 10 dB, porque as ventoinhas já não ficam ao lado do microfone. Os 2 voos registados enquanto os sensores estavam dentro de casa (RZO128 e WZZ84UJ) continuam no arquivo, mas os seus decibéis deixam de contar nos recordes, médias e relatórios.',
+    fr:'Dans la nuit du 24 octobre, la station a emménagé dans sa nouvelle boîte imprimée en 3D, avec le micro désormais dehors, sous un petit auvent. Avant cela, tous les capteurs ont été testés à l\'intérieur : la cause des pics légèrement bas observés depuis le 18 octobre a été trouvée, un <b>fil de masse défaillant dans le nouveau câble du micro</b> ; l\'ancien câble est remis en service. En position finale, la chaîne de mesure a ensuite été <b>vérifiée avec un calibrateur de référence 94/114 dB : la station a lu 94,0 et 113,8 dB</b>. Le bruit de fond de nuit a baissé d\'environ 10 dB, les ventilateurs n\'étant plus collés au micro. Les 2 vols enregistrés pendant que les capteurs étaient à l\'intérieur (RZO128 et WZZ84UJ) restent dans l\'archive, mais leurs décibels ne comptent plus dans les records, les moyennes ni les rapports.' },
   { date:'2026-10-20', kind:'fix', qty:3,
     t:{ en:'Three airliner peaks given back after a helicopter took them', pt:'Três picos de aviões de linha devolvidos depois de um helicóptero os ter apanhado', fr:'Trois pics d\'avions de ligne rendus après avoir été pris par un hélicoptère' },
     en:'When the station starts listening to a <b>helicopter or a distant aircraft</b>, it is busy for about 90 seconds. Three times (13 and 19 October), an <b>airliner passed right over the station during that time</b>: its noise was recorded for the helicopter, and the airliner, picked up once it had already passed, showed about 55 dB. The peak was found in the continuous second-by-second recording and given back to TAP94KM (82.1 dB), TAP008 (84.3 dB) and IBE0537 (86.4 dB); the three helicopter peaks no longer count in the statistics. The station now makes this check by itself every 10 minutes.',
@@ -1661,6 +1666,8 @@ const AV_MEASURE_HISTORY = [
 // cause : cam = micro principal muet, niveau du micro de la caméra ; old = ancien défaut de mesure ; box = boîte de capteurs manipulée ; mnt = maintenance (câble, calibrateur) ; stl = pic d'un avion de ligne pris par un hélico capté juste avant.
 // Ajouter une ligne à chaque nouveau marquage, en même temps que l'entrée de AV_MEASURE_HISTORY.
 const AV_SOUND_EXCLUDED = [
+  { d:'2026-10-24', cs:'WZZ84UJ', cause:'mnt' },
+  { d:'2026-10-24', cs:'RZO128', cause:'mnt' },
   { d:'2026-10-19', cs:'497fa7', cause:'stl' },
   { d:'2026-10-19', cs:'4d211c', cause:'stl' },
   { d:'2026-10-13', cs:'9HGMF', cause:'stl' },
@@ -1700,7 +1707,7 @@ const AV_SOUND_EXCLUDED = [
   { d:'2026-09-01', cs:'RYR14SC', cause:'old' },
 ];
 // État de la carte Son du bilan : 'watch' tant que le câble du micro n'est pas changé (texte av_rel_son_note), puis 'ok'.
-const AV_REL_SOUND_STATE = 'watch';
+const AV_REL_SOUND_STATE = 'ok';
 // Historique des corrections « Modèles d'avion » (même format que AV_AIRLINE_HISTORY ;
 // qtyText remplace qty quand la quantité n'est pas un nombre de vols).
 const AV_MODEL_HISTORY = [
@@ -2599,7 +2606,7 @@ const T = {
     av_rel_d_son:'Sound', av_rel_d_air:'Airlines', av_rel_d_mod:'Aircraft models', av_rel_d_rare:'Rare flights',
     av_rel_ok:'Good', av_rel_watch:'Watch',
     av_rel_son_what:'flights in {n} with their noise level left out of the statistics ({m} since day one).',
-    av_rel_son_note:'Microphone cable replaced on 18 Oct · under watch',
+    av_rel_son_note:'New enclosure 24 Oct · calibrated 94/114 dB',
     av_rel_air_what:'of flights have an identified airline. {n} stay blank rather than guessed.',
     av_rel_mod_what:'distinct models, after merging {n} raw labels written differently.',
     av_rel_rare_what:'of "military" flights are probably misfiled civil aircraft ({n} of {m}).',
@@ -2757,7 +2764,7 @@ const T = {
     av_rel_d_son:'Som', av_rel_d_air:'Companhias', av_rel_d_mod:'Modelos de avião', av_rel_d_rare:'Voos raros',
     av_rel_ok:'Bom', av_rel_watch:'A vigiar',
     av_rel_son_what:'voos em {n} com o nível sonoro fora das estatísticas ({m} desde o início).',
-    av_rel_son_note:'Cabo do microfone substituído a 18 Out. · em observação',
+    av_rel_son_note:'Nova caixa a 24 Out. · calibrada 94/114 dB',
     av_rel_air_what:'dos voos têm companhia identificada. {n} ficam em branco em vez de adivinhados.',
     av_rel_mod_what:'modelos distintos, após a fusão de {n} nomes brutos escritos de formas diferentes.',
     av_rel_rare_what:'dos voos "militares" são provavelmente aviões civis mal classificados ({n} de {m}).',
@@ -2915,7 +2922,7 @@ const T = {
     av_rel_d_son:'Son', av_rel_d_air:'Compagnies', av_rel_d_mod:'Modèles d\'avion', av_rel_d_rare:'Vols rares',
     av_rel_ok:'Bon', av_rel_watch:'À surveiller',
     av_rel_son_what:'vols en {n} dont le niveau sonore est sorti des statistiques ({m} depuis le début).',
-    av_rel_son_note:'Câble du micro remplacé le 18 oct. · sous surveillance',
+    av_rel_son_note:'Nouvelle boîte le 24 oct. · étalonnée 94/114 dB',
     av_rel_air_what:'des vols ont une compagnie identifiée. {n} restent vides plutôt que devinés.',
     av_rel_mod_what:'modèles distincts, après fusion de {n} libellés bruts écrits différemment.',
     av_rel_rare_what:'des vols « militaires » sont probablement des avions civils mal classés ({n} sur {m}).',
