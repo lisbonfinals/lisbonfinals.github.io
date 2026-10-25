@@ -8,7 +8,7 @@
     "rwy02_threshold_reference": "AIP Portugal LPPT AD 2.12: RWY 02 THR 38 45 59.14 N, 009 08 38.05 W, elevation 100.6 m (threshold permanently displaced 90 m); distance 1372 m, bearing 22.6 deg from the station, in line with the 22.7 deg final approach track",
     "elevation_m_amsl": "approx. 80 (Google Earth terrain at the building, first-floor terrace + ~3 m; not surveyed)",
     "setting": "south-facing first-floor terrace of a residential building, Avenida do Brasil area, Lisbon",
-    "mounting": "all sensors in a clear acrylic box with two rows of holes drilled directly in front of the microphone (foam windscreen fitted); the box sits inside a slatted wooden cabinet that lets sound and wind through while shading it from sun and heat. The effect of the enclosure on measured levels has not been quantified."
+    "mounting": "since 2026-10-24: custom 3D-printed PETG enclosure, two levels; the microphone pokes outside under a small rain hood (foam windscreen fitted); enclosure inside a slatted wooden cabinet under a stone top. Until 2026-10-23: clear acrylic box, microphone listening through holes drilled in front of it. Since the move the night background level is about 10 dB lower (fans no longer next to the microphone)."
   },
   "sound": {
     "sensor": "Gain Express SLM-25 sound level meter, IEC 651 type 2 (manufacturer tolerance +/-1.5 dB at 94 dB / 1 kHz), analogue output read by an ADS1115 ADC",
@@ -17,7 +17,7 @@
     "frequency_weighting": "A (meter display reads dBA; checked on site 2026-10-10)",
     "time_weighting": "FAST (shown on the meter display; checked on site 2026-10-10)",
     "range": "30-130 dB",
-    "acoustic_calibration": "measurement chain validated on site against two independent meters at the same time, agreement within 1 to 2 dB (after the switch to 125 ms averaging); a check with a certified 94 dB acoustic calibrator has not been done yet",
+    "acoustic_calibration": "2026-10-24, final position: 94/114 dB reference acoustic calibrator (1 kHz) on the microphone; whole chain (microphone to database) read 94.0 and 113.8 dB. Earlier: validated on site against two independent meters (agreement 1 to 2 dB). 2026-10-18 to 2026-10-24: faulty earth wire in the microphone cable, some peaks a few dB too low (worst cases flagged in data_quality).",
     "continuous_log": "1 sample per second, Unix time (UTC), since 2026-09-03 15:10 local time",
     "per_flight": "peak level in the pass window and seconds above 70 dB"
   },
