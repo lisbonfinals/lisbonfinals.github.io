@@ -1699,7 +1699,7 @@ const AV_MEASURE_HISTORY = [
 ];
 // Vols dont le son est sorti des statistiques (data_quality_issue dans flights_db, compté sur le Pi le 17 oct 2026).
 // cause : cam = micro principal muet, niveau du micro de la caméra ; old = ancien défaut de mesure ; box = boîte de capteurs manipulée ; mnt = maintenance (câble, calibrateur) ; stl = pic d'un avion de ligne pris par un hélico capté juste avant.
-// Ajouter une ligne à chaque nouveau marquage, en même temps que l'entrée de AV_MEASURE_HISTORY.
+// Secours seulement (voir avSoundExcluded) : la page lit la liste produite par le pipeline.
 const AV_SOUND_EXCLUDED = [
   { d:'2026-10-24', cs:'WZZ84UJ', cause:'mnt' },
   { d:'2026-10-24', cs:'RZO128', cause:'mnt' },
@@ -1745,6 +1745,35 @@ const AV_SOUND_EXCLUDED = [
 ];
 // État de la carte Son du bilan : 'watch' tant que le câble du micro n'est pas changé (texte av_rel_son_note), puis 'ok'.
 const AV_REL_SOUND_STATE = 'ok';
+// 26 oct 2026 : la liste des vols exclus et les pics rendus par la station viennent du pipeline
+// (archive.json → quality.sound_excluded / quality.peak_repairs, lus dans flights_db sur le Mac).
+// AV_SOUND_EXCLUDED ne sert plus que de secours si le JSON n'a pas ces champs. Les pics rendus
+// tout seuls par stolen_peak_repair.py après AV_AUTO_REPAIR_FROM ont leur ligne de journal générée
+// ici (une par jour) ; ceux d'avant sont déjà racontés à la main dans AV_MEASURE_HISTORY.
+const AV_AUTO_REPAIR_FROM = '2026-10-22';
+function avSoundExcluded() {
+  const q = archiveData && archiveData.quality;
+  return (q && Array.isArray(q.sound_excluded)) ? q.sound_excluded : AV_SOUND_EXCLUDED;
+}
+function avMeasureHistory() {
+  const reps = ((archiveData && archiveData.quality && archiveData.quality.peak_repairs) || [])
+    .filter(r => r.d >= AV_AUTO_REPAIR_FROM);
+  const byDay = {};
+  reps.forEach(r => { (byDay[r.d] = byDay[r.d] || []).push(r); });
+  const auto = Object.keys(byDay).map(d => {
+    const rs = byDay[d], n = rs.length, one = n === 1;
+    const list = sep => rs.map(r => `${r.cs} (${String(r.db).replace('.', sep)} dB)`).join(', ');
+    const from = [...new Set(rs.map(r => r.from).filter(Boolean))].join(', ');
+    return { date: d, kind: 'fix', qty: n,
+      t: { en: one ? 'An airliner peak given back automatically' : `${n} airliner peaks given back automatically`,
+           pt: one ? 'Um pico de avião de linha devolvido automaticamente' : `${n} picos de aviões de linha devolvidos automaticamente`,
+           fr: one ? 'Un pic d\'avion de ligne rendu automatiquement' : `${n} pics d'avions de ligne rendus automatiquement` },
+      en: `While the station was recording ${from}, ${one ? 'an airliner' : 'airliners'} passed over it and ${from} took ${one ? 'its' : 'their'} noise. The automatic check found ${one ? 'the peak' : 'the peaks'} in the continuous recording and gave ${one ? 'it' : 'them'} back: ${list('.')}. The peak${one ? '' : 's'} of ${from} no longer count${one ? 's' : ''} in the statistics. Line written by the station itself.`,
+      pt: `Enquanto a estação registava ${from}, ${one ? 'um avião de linha passou' : 'aviões de linha passaram'} por cima e ${from} ficou com o seu ruído. A verificação automática encontrou ${one ? 'o pico' : 'os picos'} na gravação contínua e ${one ? 'devolveu-o' : 'devolveu-os'}: ${list(',')}. ${one ? 'O pico' : 'Os picos'} de ${from} ${one ? 'deixa' : 'deixam'} de contar nas estatísticas. Linha escrita pela própria estação.`,
+      fr: `Pendant que la station enregistrait ${from}, ${one ? 'un avion de ligne est passé' : 'des avions de ligne sont passés'} au-dessus et ${from} a pris ${one ? 'son' : 'leur'} bruit. La vérification automatique a retrouvé ${one ? 'le pic' : 'les pics'} dans le flux continu et ${one ? 'l\'a rendu' : 'les a rendus'} : ${list(',')}. ${one ? 'Le pic' : 'Les pics'} de ${from} ne ${one ? 'compte' : 'comptent'} plus dans les statistiques. Ligne écrite par la station elle-même.` };
+  });
+  return AV_MEASURE_HISTORY.concat(auto);
+}
 // Historique des corrections « Modèles d'avion » (même format que AV_AIRLINE_HISTORY ;
 // qtyText remplace qty quand la quantité n'est pas un nombre de vols).
 const AV_MODEL_HISTORY = [
@@ -1836,7 +1865,7 @@ function avRelRenderLog() {
   search.setAttribute('aria-label', search.placeholder);
   const q = avRelFold(search.value.trim());
   const tag = (arr, dom) => arr.map(h => Object.assign({ dom }, h));
-  const all = tag(AV_MEASURE_HISTORY, 'son').concat(tag(AV_AIRLINE_HISTORY, 'air'), tag(AV_MODEL_HISTORY, 'mod'))
+  const all = tag(avMeasureHistory(), 'son').concat(tag(AV_AIRLINE_HISTORY, 'air'), tag(AV_MODEL_HISTORY, 'mod'))
     .sort((a, b) => b.date.localeCompare(a.date));
   const rows = all.filter(h => (avRelDom === 'all' || h.dom === avRelDom)
     && (!q || avRelFold((h.t[_lang] || h.t.en) + ' ' + (h[_lang] || h.en)).includes(q)));
@@ -1891,7 +1920,8 @@ function avRenderAirlineQuality() {
   document.getElementById('av-rel-lede').textContent = tpl('av_rel_lede', '', fmt(total));
   // 1. Bilan
   const genMonth = gen.toISOString().slice(0, 7);
-  const sonMonth = AV_SOUND_EXCLUDED.filter(f => f.d.slice(0, 7) === genMonth).length;
+  const soundExcl = avSoundExcluded();
+  const sonMonth = soundExcl.filter(f => f.d.slice(0, 7) === genMonth).length;
   let monthName = gen.toLocaleDateString(loc, {month:'long'});
   if (_lang === 'pt') monthName = monthName.charAt(0).toUpperCase() + monthName.slice(1);  // pré-AO90 : Outubro
   const card = (target, domK, state, big, what, foot) =>
@@ -1901,8 +1931,8 @@ function avRenderAirlineQuality() {
   const groups = d.aircraft_merged_groups || [];
   document.getElementById('av-rel-bilan').innerHTML = [
     card('av-rel-m-son', 'av_rel_d_son', AV_REL_SOUND_STATE, fmt(sonMonth),
-      tpl('av_rel_son_what', '', monthName, fmt(AV_SOUND_EXCLUDED.length)),
-      AV_REL_SOUND_STATE === 'ok' ? avRelLast(AV_MEASURE_HISTORY) : avT('av_rel_son_note')),
+      tpl('av_rel_son_what', '', monthName, fmt(soundExcl.length)),
+      AV_REL_SOUND_STATE === 'ok' ? avRelLast(avMeasureHistory()) : avT('av_rel_son_note')),
     card('av-rel-m-air', 'av_rel_d_air', pct >= 98 ? 'ok' : 'watch', pct1(pct),
       tpl('av_rel_air_what', '', fmt(missing)), avRelLast(AV_AIRLINE_HISTORY)),
     card('av-rel-m-mod', 'av_rel_d_mod', 'ok', fmt(d.aircraft_types_after),
@@ -1911,7 +1941,7 @@ function avRenderAirlineQuality() {
       tpl('av_rel_rare_what', '', fmt(d.military_suspect_count), fmt(d.military_total)), avT('av_rel_rare_note')),
   ].join('');
   // 2. Règles
-  const nCause = c => AV_SOUND_EXCLUDED.filter(f => f.cause === c).length;
+  const nCause = c => soundExcl.filter(f => f.cause === c).length;
   const rules = [
     ['av_rel_r1', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('cam')],
     ['av_rel_r2', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('old')],
@@ -1946,8 +1976,8 @@ function avRenderAirlineQuality() {
   // 4. Journal
   avRelRenderLog();
   // 5. Chercheurs : la liste des vols dont le son est exclu
-  document.getElementById('av-rel-flights').innerHTML = tpl('av_rel_s5_flights', '', fmt(AV_SOUND_EXCLUDED.length))
-    + AV_SOUND_EXCLUDED.map(f => `<code>${f.cs}</code> (${avRelDate(f.d)})`).join(', ') + '.';
+  document.getElementById('av-rel-flights').innerHTML = tpl('av_rel_s5_flights', '', fmt(soundExcl.length))
+    + soundExcl.map(f => `<code>${f.cs}</code> (${avRelDate(f.d)})`).join(', ') + '.';
 }
 
 // ── Data reliability ──
