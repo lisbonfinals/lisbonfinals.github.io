@@ -520,6 +520,24 @@
     "passenger_capacity": 132
   },
   {
+    "aircraft_type": "Global 5000",
+    "description": {
+      "en": "The Global 5000 is a long-range business jet from Bombardier's Global family. It is a shortened version of the Global Express, with the same wing and Rolls-Royce engines, designed to cross an ocean or a continent non-stop with a large cabin.",
+      "pt": "O Global 5000 é um jacto executivo de longo alcance da família Global da Bombardier. É uma versão encurtada do Global Express, com a mesma asa e os mesmos motores Rolls-Royce, concebida para atravessar um oceano ou um continente sem escalas, com uma cabine ampla.",
+      "fr": "Le Global 5000 est un jet d’affaires long-courrier de la famille Global de Bombardier. C’est une version raccourcie du Global Express, avec la même aile et les mêmes moteurs Rolls-Royce, conçue pour traverser un océan ou un continent sans escale avec une grande cabine."
+    },
+    "manufacturer": "Bombardier Aerospace",
+    "first_flight_year": 2003,
+    "entry_into_service_year": 2005,
+    "fun_fact": {
+      "en": "To create it, Bombardier cut 81 cm from the Global Express fuselage and removed its tail fuel tank: about 2,200 km less range, in exchange for a lighter, more economical jet.",
+      "pt": "Para o criar, a Bombardier retirou 81 cm à fuselagem do Global Express e suprimiu o depósito de combustível da cauda: cerca de 2200 km de autonomia a menos, em troca de um jacto mais leve e mais económico.",
+      "fr": "Pour le créer, Bombardier a retiré 81 cm au fuselage du Global Express et supprimé son réservoir de queue : environ 2 200 km d’autonomie en moins, en échange d’un jet plus léger et plus économique."
+    },
+    "length_m": 29.5,
+    "passenger_capacity": 17
+  },
+  {
     "aircraft_type": "Global 6000",
     "description": {
       "en": "The Global 6000 is an intercontinental business jet with a large cabin, derived from the Global Express XRS. It is designed to link distant major cities while offering several living spaces on board.",
