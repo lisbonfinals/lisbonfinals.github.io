@@ -1518,6 +1518,11 @@ function avRenderRare() {
 // Ajouter une correction = ajouter une ligne EN TÊTE (plus récente d'abord).
 // kind : merge | fix | fill | split ; approx:true affiche « ≈ ».
 const AV_AIRLINE_HISTORY = [
+  { date:'2026-10-27', kind:'fix', qty:1,
+    t:{ en:'One easyJet Switzerland flight without an airline', pt:'Um voo da easyJet Switzerland sem companhia', fr:'Un vol easyJet Switzerland sans compagnie' },
+    en:'The aircraft register gives no operator for the A320 HB-JXV, so its landing on 27 October (EZS13ZL) was saved without an airline. It now counts for <b>easyJet Switzerland</b>, like the rest of its fleet, and the aircraft is recorded so that its next flights are named correctly.',
+    pt:'O registo de aeronaves não indica operador para o A320 HB-JXV, por isso a sua aterragem de 27 de Outubro (EZS13ZL) ficou gravada sem companhia. Passa a contar para a <b>easyJet Switzerland</b>, como o resto da frota, e o avião fica registado para que os próximos voos tenham o nome correcto.',
+    fr:'Le registre des avions ne donne pas d\'exploitant pour l\'A320 HB-JXV : son atterrissage du 27 octobre (EZS13ZL) a donc été enregistré sans compagnie. Il compte désormais pour <b>easyJet Switzerland</b>, comme le reste de sa flotte, et l\'avion est mémorisé pour que ses prochains vols soient bien nommés.' },
   { date:'2026-10-26', kind:'fix', qty:101,
     t:{ en:'Older flights realigned with their radio callsign', pt:'Voos mais antigos realinhados com o seu indicativo rádio', fr:'Vols plus anciens réalignés sur leur indicatif radio' },
     en:'An audit of every flight captured with a real radio callsign found 101 flights, from May to September, whose airline contradicted that callsign. Most predate our Ryanair group rule: Maltese Boeing 9H-Q…/9H-V… now count for <b>Malta Air</b> (47) and Polish SP-RZ… for <b>Buzz</b> (27), as already done for recent flights. EuroAtlantic\'s own 767s and 777 (callsign MMZ) were shown as Azul (9). Wet-leased aircraft now count for the airline whose callsign they fly, with their real operator in the "leased aircraft" badge: <b>Transavia</b> (7), <b>EuroAtlantic Airways</b> (4), <b>World2Fly Portugal</b>, <b>Norwegian Air Sweden</b>, <b>VistaJet</b> (2 each), plus 1 <b>Azul</b> flight with no airline.',
