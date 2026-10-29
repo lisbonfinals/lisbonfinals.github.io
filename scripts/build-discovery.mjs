@@ -1,9 +1,20 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const base = 'https://www.lisbonfinals.com';
+// Date du dernier commit qui a touché la page source (EN) : sert de lastmod pour EN/PT/FR.
+// Le workflow doit faire un checkout avec l'historique (fetch-depth: 0), sinon toutes les pages auraient la date du jour.
+function gitDate(file) {
+  try {
+    return execFileSync('git', ['log', '-1', '--format=%cs', '--', file], { cwd: root, encoding: 'utf8' }).trim() || '2026-08-16';
+  } catch {
+    return '2026-08-16';
+  }
+}
+
 const pages = ['index.html', 'data.html', 'archive.html', 'noise-report.html', 'log.html', 'about.html', 'host-a-node.html'];
 
 const localizedMeta = {
@@ -398,10 +409,15 @@ async function buildContent() {
     reportPages.push({ loc: `${base}/reports/${slug}.html`, lastmod: String(report.generated_at || '').slice(0, 10) || `${report.year}-${String(report.month).padStart(2, '0')}-01` });
   }
 
-  const mainUrls = pages.flatMap(file => [
-    { loc: base + (file === 'index.html' ? '/' : `/${file}`), lastmod: '2026-08-16' },
-    ...['pt', 'fr'].map(lang => ({ loc: base + pagePath(lang, file), lastmod: '2026-08-16' }))
-  ]);
+  const latestEntry = entries.reduce((max, e) => (e.date > max ? e.date : max), '');
+  const mainUrls = pages.flatMap(file => {
+    let lastmod = gitDate(file);
+    if (file === 'log.html' && latestEntry > lastmod) lastmod = latestEntry;
+    return [
+      { loc: base + (file === 'index.html' ? '/' : `/${file}`), lastmod },
+      ...['pt', 'fr'].map(lang => ({ loc: base + pagePath(lang, file), lastmod }))
+    ];
+  });
   const allUrls = [...mainUrls, ...journalPages, ...reportPages];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${allUrls.map(item => `  <url><loc>${esc(item.loc)}</loc><lastmod>${item.lastmod}</lastmod></url>`).join('\n')}\n</urlset>\n`;
   await fs.writeFile(path.join(root, 'sitemap.xml'), sitemap);
