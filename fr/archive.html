@@ -1646,6 +1646,11 @@ const AV_AIRLINE_HISTORY = [
 ];
 // Historique des corrections « Son » (même format ; refondu le 17 oct 2026 avec les corrections du 29 sept, 1er et 12 oct).
 const AV_MEASURE_HISTORY = [
+  { date:'2026-11-01', kind:'excl', qty:2,
+    t:{ en:'Two isolated spurious peaks left out (October report check)', pt:'Dois picos parasitas isolados fora das estatísticas (verificação do relatório de Outubro)', fr:'Deux pics parasites isolés sortis des statistiques (relecture du rapport d\'octobre)' },
+    en:'While checking the October report, two peaks stood far above the continuous recording of the same pass: <b>TAP074</b> on 5 October at 05:00 (105.2 dB, while the continuous recording peaks at 93.8 dB) and an easyJet A320 (440b1e) on 7 October at 23:00 (99.3 dB against 85.7 dB). The usual gap between the two is about 3 dB. These are most likely <b>spurious sensor readings</b>. Both flights stay in the archive, but their decibels no longer count in records, averages or reports.',
+    pt:'Ao verificar o relatório de Outubro, dois picos estavam muito acima da gravação contínua da mesma passagem: <b>TAP074</b> a 5 de Outubro às 05h00 (105,2 dB, quando a gravação contínua chega a 93,8 dB) e um A320 da easyJet (440b1e) a 7 de Outubro às 23h00 (99,3 dB contra 85,7 dB). A diferença habitual entre os dois é de cerca de 3 dB. Trata-se muito provavelmente de <b>leituras parasitas do sensor</b>. Os dois voos ficam no arquivo, mas os seus decibéis deixam de contar nos recordes, médias e relatórios.',
+    fr:'En relisant le rapport d\'octobre, deux pics se détachaient très au-dessus de l\'enregistrement continu du même passage : <b>TAP074</b> le 5 octobre à 05 h 00 (105,2 dB, alors que l\'enregistrement continu plafonne à 93,8 dB) et un A320 easyJet (440b1e) le 7 octobre à 23 h 00 (99,3 dB contre 85,7 dB). L\'écart habituel entre les deux est d\'environ 3 dB. Il s\'agit très probablement de <b>lectures parasites du capteur</b>. Les deux vols restent dans l\'archive, mais leurs décibels ne comptent plus dans les records, moyennes et rapports.' },
   { date:'2026-10-25', kind:'fix', qty:1, unit:{ en:'photo', pt:'foto', fr:'photo' },
     t:{ en:'An airliner photo given back from the helicopter to TAP008', pt:'Uma foto de avião de linha devolvida do helicóptero ao TAP008', fr:'Une photo d\'avion de ligne rendue de l\'hélicoptère à TAP008' },
     en:'Same situation as on 20 October: on 19 October at 15:16, while the station was capturing the INEM helicopter <b>9H-GME</b> 1.1 km away, the TAP A321neo <b>TAP008</b> passed right overhead and it is the airliner that the camera photographed. The photo was filed under the helicopter, which is why it appeared on the Airbus H145 card in Compare. It is now given back to TAP008, and the H145 card shows Carlos Miguel Seabra\'s photo again. From now on, the automatic repair that gives back a stolen peak also gives back the photo.',
@@ -1703,7 +1708,7 @@ const AV_MEASURE_HISTORY = [
     fr:'La boîte de capteurs a été sortie de son meuble en bois vers 14 h 28, puis remise en place entre 16 h 14 et 16 h 21. Le <b>son et la vibration</b> des quatre vols passés pendant ces manipulations (ACA811 et trois avions sans indicatif) ne sont pas représentatifs : sortis des statistiques, valeurs d\'origine gardées dans les données.' },
 ];
 // Vols dont le son est sorti des statistiques (data_quality_issue dans flights_db, compté sur le Pi le 17 oct 2026).
-// cause : cam = micro principal muet, niveau du micro de la caméra ; old = ancien défaut de mesure ; box = boîte de capteurs manipulée ; mnt = maintenance (câble, calibrateur) ; stl = pic d'un avion de ligne pris par un hélico capté juste avant.
+// cause : cam = micro principal muet, niveau du micro de la caméra ; old = ancien défaut de mesure ; box = boîte de capteurs manipulée ; mnt = maintenance (câble, calibrateur) ; stl = pic d'un avion de ligne pris par un hélico capté juste avant. spk = pic parasite isolé, très au-dessus du flux continu (1er nov 2026).
 // Secours seulement (voir avSoundExcluded) : la page lit la liste produite par le pipeline.
 const AV_SOUND_EXCLUDED = [
   { d:'2026-10-24', cs:'WZZ84UJ', cause:'mnt' },
@@ -1740,6 +1745,8 @@ const AV_SOUND_EXCLUDED = [
   { d:'2026-10-16', cs:'RZO152', cause:'cam' },
   { d:'2026-10-16', cs:'AFR24MF', cause:'cam' },
   { d:'2026-10-12', cs:'TAP68JP', cause:'box' },
+  { d:'2026-10-07', cs:'440b1e', cause:'spk' },
+  { d:'2026-10-05', cs:'TAP074', cause:'spk' },
   { d:'2026-10-03', cs:'4d227f', cause:'cam' },
   { d:'2026-10-03', cs:'TAP1241', cause:'cam' },
   { d:'2026-09-29', cs:'4aca0a', cause:'box' },
@@ -1953,6 +1960,7 @@ function avRenderAirlineQuality() {
     ['av_rel_r3', 'x', 'av_rel_x_sv', 'data_quality_issue = sensor_box_moved', nCause('box')],
     ['av_rel_r6', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('mnt')],
     ['av_rel_r7', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('stl')],
+    ['av_rel_r8', 'x', 'av_rel_x_db', 'data_quality_issue = spl_unverifiable', nCause('spk')],
     ['av_rel_r4', 'c', 'av_rel_x_min', 'spl_db = 100', d.db_capped_count],
     ['av_rel_r5', 'b', 'av_rel_x_blank', avT('av_rel_f_blank', 'airline = blank'), missing],
   ];
@@ -2702,6 +2710,7 @@ const T = {
     av_rel_r3:'Sensor box opened or moved during the pass',
     av_rel_r6:'Station maintenance (cable, calibrator test)',
     av_rel_r7:'Airliner peak taken by a helicopter captured just before',
+    av_rel_r8:'Isolated spurious peak, far above the continuous recording',
     av_rel_r4:'Reading capped at 100 dB by the old measuring chain',
     av_rel_r5:'No source knows the airline',
     av_rel_x_db:'dB excluded', av_rel_x_sv:'sound and vibration excluded', av_rel_x_min:'counted at 100 dB, a minimum', av_rel_x_blank:'left blank',
@@ -2860,6 +2869,7 @@ const T = {
     av_rel_r3:'Caixa dos sensores aberta ou deslocada durante a passagem',
     av_rel_r6:'Manutenção da estação (cabo, teste com calibrador)',
     av_rel_r7:'Pico de avião de linha apanhado por um helicóptero captado mesmo antes',
+    av_rel_r8:'Pico parasita isolado, muito acima da gravação contínua',
     av_rel_r4:'Leitura limitada a 100 dB pela antiga cadeia de medição',
     av_rel_r5:'Nenhuma fonte conhece a companhia',
     av_rel_x_db:'dB excluídos', av_rel_x_sv:'som e vibração excluídos', av_rel_x_min:'conta como 100 dB, um mínimo', av_rel_x_blank:'fica em branco',
@@ -3018,6 +3028,7 @@ const T = {
     av_rel_r3:'Boîte de capteurs ouverte ou déplacée pendant le passage',
     av_rel_r6:'Maintenance de la station (câble, test au calibrateur)',
     av_rel_r7:'Pic d\'un avion de ligne pris par un hélicoptère capté juste avant',
+    av_rel_r8:'Pic parasite isolé, très au-dessus de l\'enregistrement continu',
     av_rel_r4:'Relevé plafonné à 100 dB par l\'ancienne chaîne de mesure',
     av_rel_r5:'Aucune source ne connaît la compagnie',
     av_rel_x_db:'dB exclus', av_rel_x_sv:'son et vibration exclus', av_rel_x_min:'compté à 100 dB, un minimum', av_rel_x_blank:'laissé vide',
