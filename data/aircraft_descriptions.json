@@ -295,7 +295,7 @@
     "aircraft_type": "Bombardier CRJ-1000",
     "description": {
       "en": "The CRJ-1000 is the longest version of the CRJ regional jet family. It carries around 100 passengers on short and medium routes.",
-      "pt": "O CRJ-1000 é a versão mais longa da família de jatos regionais CRJ. Transporta cerca de 100 passageiros em ligações curtas e médias.",
+      "pt": "O CRJ-1000 é a versão mais longa da família de jactos regionais CRJ. Transporta cerca de 100 passageiros em ligações curtas e médias.",
       "fr": "Le CRJ-1000 est la version la plus longue de la famille de jets régionaux CRJ. Il transporte autour de 100 passagers sur des liaisons courtes et moyennes."
     },
     "manufacturer": "Bombardier Aerospace",
@@ -303,7 +303,7 @@
     "entry_into_service_year": 2010,
     "fun_fact": {
       "en": "It descends from a lineage that began with the Challenger business jet.",
-      "pt": "Deriva de uma linhagem iniciada com o jato executivo Challenger.",
+      "pt": "Deriva de uma linhagem iniciada com o jacto executivo Challenger.",
       "fr": "Il dérive d’une lignée commencée avec le jet d’affaires Challenger."
     },
     "length_m": 39.13,
@@ -451,7 +451,7 @@
     "aircraft_type": "GL5T",
     "description": {
       "en": "GL5T is the ICAO code for the Bombardier Global 5000, a large intercontinental business jet. Its spacious cabin and range allow long nonstop flights.",
-      "pt": "GL5T é o código OACI do Bombardier Global 5000, um grande jato executivo intercontinental. A sua cabine espaçosa e a sua autonomia permitem ligações longas sem escalas.",
+      "pt": "GL5T é o código OACI do Bombardier Global 5000, um grande jacto executivo intercontinental. A sua cabine espaçosa e a sua autonomia permitem ligações longas sem escalas.",
       "fr": "GL5T est le code OACI du Bombardier Global 5000, un grand jet d’affaires intercontinental. Sa cabine spacieuse et son autonomie permettent de longues liaisons sans escale."
     },
     "manufacturer": "Bombardier Aerospace",
@@ -487,7 +487,7 @@
     "aircraft_type": "C56X",
     "description": {
       "en": "C56X is the ICAO code for the Cessna Citation Excel/XLS family, a mid-size business jet. It combines a relatively generous cabin with the ability to use shorter runways than many comparable aircraft.",
-      "pt": "C56X é o código OACI da família Cessna Citation Excel/XLS, um jato executivo de porte médio. Combina uma cabine relativamente generosa com a capacidade de utilizar pistas mais curtas do que muitos aparelhos comparáveis.",
+      "pt": "C56X é o código OACI da família Cessna Citation Excel/XLS, um jacto executivo de porte médio. Combina uma cabine relativamente generosa com a capacidade de utilizar pistas mais curtas do que muitos aparelhos comparáveis.",
       "fr": "C56X est le code OACI de la famille Cessna Citation Excel/XLS, un jet d’affaires de taille moyenne. Il combine une cabine relativement généreuse avec la capacité d’utiliser des pistes plus courtes que de nombreux appareils comparables."
     },
     "manufacturer": "Cessna (Textron Aviation)",
@@ -541,7 +541,7 @@
     "aircraft_type": "Global 6000",
     "description": {
       "en": "The Global 6000 is an intercontinental business jet with a large cabin, derived from the Global Express XRS. It is designed to link distant major cities while offering several living spaces on board.",
-      "pt": "O Global 6000 é um jato executivo intercontinental de cabine ampla, derivado do Global Express XRS. Foi concebido para ligar grandes cidades distantes, oferecendo vários espaços de convívio a bordo.",
+      "pt": "O Global 6000 é um jacto executivo intercontinental de cabine ampla, derivado do Global Express XRS. Foi concebido para ligar grandes cidades distantes, oferecendo vários espaços de convívio a bordo.",
       "fr": "Le Global 6000 est un jet d’affaires intercontinental à grande cabine, issu du Global Express XRS. Il est conçu pour relier de grandes villes éloignées tout en offrant plusieurs espaces de vie à bord."
     },
     "manufacturer": "Bombardier Aerospace",
@@ -559,7 +559,7 @@
     "aircraft_type": "Citation Latitude",
     "description": {
       "en": "The Citation Latitude is a mid-size business jet with a stand-up cabin. It aims for a balance of comfort, range and access to a large number of airports.",
-      "pt": "O Citation Latitude é um jato executivo de porte médio com uma cabine em que é possível estar de pé. Procura um equilíbrio entre conforto, autonomia e acesso a um grande número de aeroportos.",
+      "pt": "O Citation Latitude é um jacto executivo de porte médio com uma cabine em que é possível estar de pé. Procura um equilíbrio entre conforto, autonomia e acesso a um grande número de aeroportos.",
       "fr": "Le Citation Latitude est un jet d’affaires de taille moyenne doté d’une cabine où l’on peut se tenir debout. Il vise un équilibre entre confort, autonomie et accès à un grand nombre d’aéroports."
     },
     "manufacturer": "Cessna (Textron Aviation)",
@@ -595,7 +595,7 @@
     "aircraft_type": "E390",
     "description": {
       "en": "E390 is the code for the C-390 Millennium, a jet-powered military transport aircraft designed in Brazil. It can carry troops, heavy freight, or perform aerial refueling missions.",
-      "pt": "E390 é o código do C-390 Millennium, um avião de transporte militar a jato concebido no Brasil. Pode transportar tropas, carga pesada ou realizar missões de reabastecimento em voo.",
+      "pt": "E390 é o código do C-390 Millennium, um avião de transporte militar a jacto concebido no Brasil. Pode transportar tropas, carga pesada ou realizar missões de reabastecimento em voo.",
       "fr": "E390 est le code du C-390 Millennium, un avion de transport militaire à réaction conçu au Brésil. Il peut transporter des troupes, du fret lourd ou effectuer des missions de ravitaillement en vol."
     },
     "manufacturer": "Embraer",
@@ -613,7 +613,7 @@
     "aircraft_type": "Challenger 350",
     "description": {
       "en": "The Challenger 350 is a super mid-size business jet designed for transcontinental travel. It combines a flat-floor cabin, modern avionics and strong takeoff performance.",
-      "pt": "O Challenger 350 é um jato executivo super-intermédio, pensado para viagens transcontinentais. Combina uma cabine de piso plano, aviónica moderna e um bom desempenho na descolagem.",
+      "pt": "O Challenger 350 é um jacto executivo super-intermédio, pensado para viagens transcontinentais. Combina uma cabine de piso plano, aviónica moderna e um bom desempenho na descolagem.",
       "fr": "Le Challenger 350 est un jet d’affaires super-intermédiaire, pensé pour les voyages transcontinentaux. Il combine une cabine à plancher plat, une avionique moderne et de bonnes performances au décollage."
     },
     "manufacturer": "Bombardier Aerospace",
@@ -631,7 +631,7 @@
     "aircraft_type": "Challenger 604",
     "description": {
       "en": "The Challenger 604 is a large business jet derived from a family launched by Canadair. It improved on the 601 with more fuel capacity, updated avionics and modernized engines.",
-      "pt": "O Challenger 604 é um grande jato executivo derivado de uma família lançada pela Canadair. Melhorou o modelo 601 com mais combustível, aviónica renovada e motores modernizados.",
+      "pt": "O Challenger 604 é um grande jacto executivo derivado de uma família lançada pela Canadair. Melhorou o modelo 601 com mais combustível, aviónica renovada e motores modernizados.",
       "fr": "Le Challenger 604 est un grand jet d’affaires dérivé d’une famille lancée par Canadair. Il a amélioré le modèle 601 avec plus de carburant, une avionique renouvelée et des moteurs modernisés."
     },
     "manufacturer": "Bombardier Aerospace",
@@ -689,7 +689,7 @@
     "aircraft_type": "Challenger 850",
     "description": {
       "en": "The Challenger 850 is a large business jet derived from the CRJ200 regional twinjet. It offers a particularly spacious cabin for its category, at the cost of more modest range than the Global jets.",
-      "pt": "O Challenger 850 é um grande jato executivo derivado do bireactor regional CRJ200. Oferece uma cabine particularmente ampla para a sua categoria, ao custo de uma autonomia mais modesta do que a dos Global.",
+      "pt": "O Challenger 850 é um grande jacto executivo derivado do bireactor regional CRJ200. Oferece uma cabine particularmente ampla para a sua categoria, ao custo de uma autonomia mais modesta do que a dos Global.",
       "fr": "Le Challenger 850 est un grand jet d’affaires dérivé du biréacteur régional CRJ200. Il offre une cabine particulièrement vaste pour sa catégorie, au prix d’une autonomie plus modérée que celle des Global."
     },
     "manufacturer": "Bombardier Aerospace",
@@ -707,7 +707,7 @@
     "aircraft_type": "CL60",
     "description": {
       "en": "CL60 is the ICAO type code of the Challenger 600 family (600, 601, 604 and later variants), large business jets originally launched by Canadair. It was one of the first wide-cabin business jets, and several versions still fly today.",
-      "pt": "CL60 é o código OACI da família Challenger 600 (600, 601, 604 e variantes posteriores), grandes jatos executivos lançados originalmente pela Canadair. Foi um dos primeiros jatos executivos de cabine larga, e várias versões ainda voam hoje.",
+      "pt": "CL60 é o código OACI da família Challenger 600 (600, 601, 604 e variantes posteriores), grandes jactos executivos lançados originalmente pela Canadair. Foi um dos primeiros jactos executivos de cabine larga, e várias versões ainda voam hoje.",
       "fr": "CL60 est le code OACI de la famille Challenger 600 (600, 601, 604 et variantes ultérieures), de grands jets d’affaires lancés à l’origine par Canadair. Ce fut l’un des premiers jets d’affaires à cabine large, et plusieurs versions volent encore aujourd’hui."
     },
     "manufacturer": "Bombardier Aerospace",
@@ -715,7 +715,7 @@
     "entry_into_service_year": 1980,
     "fun_fact": {
       "en": "Its airframe was the starting point for the CRJ regional jet family.",
-      "pt": "A sua fuselagem serviu de ponto de partida para a família de jatos regionais CRJ.",
+      "pt": "A sua fuselagem serviu de ponto de partida para a família de jactos regionais CRJ.",
       "fr": "Sa cellule a servi de point de départ à la famille de jets régionaux CRJ."
     },
     "length_m": 20.85,
@@ -906,5 +906,59 @@
     },
     "length_m": 16.0,
     "passenger_capacity": 9
+  },
+  {
+    "aircraft_type": "767 3P6ERBDSF/W",
+    "description": {
+      "en": "A Boeing 767-300ER airliner converted into a freighter. The code 3P6 is Boeing's customer code for Gulf Air, which ordered it new, and /W means it carries winglets. At Lisbon it flies for Star Air (Maersk Air Cargo).",
+      "pt": "Um Boeing 767-300ER de passageiros convertido em avião de carga. O código 3P6 é o código de cliente da Boeing para a Gulf Air, que o encomendou novo, e /W indica que tem winglets. Em Lisboa voa para a Star Air (Maersk Air Cargo).",
+      "fr": "Un Boeing 767-300ER de ligne transformé en avion cargo. Le code 3P6 est le code client Boeing de Gulf Air, qui l’a commandé neuf, et /W indique qu’il porte des winglets. À Lisbonne, il vole pour Star Air (Maersk Air Cargo)."
+    },
+    "manufacturer": "Boeing",
+    "first_flight_year": 1986,
+    "entry_into_service_year": 1988,
+    "fun_fact": {
+      "en": "BDSF stands for Bedek Special Freighter: the conversion is done by Israel Aerospace Industries, which adds a large cargo door on the left side.",
+      "pt": "BDSF significa Bedek Special Freighter: a conversão é feita pela Israel Aerospace Industries, que acrescenta uma grande porta de carga do lado esquerdo.",
+      "fr": "BDSF signifie Bedek Special Freighter : la conversion est réalisée par Israel Aerospace Industries, qui ajoute une grande porte cargo sur le côté gauche."
+    },
+    "length_m": 54.94,
+    "passenger_capacity": 0
+  },
+  {
+    "aircraft_type": "767 432ER",
+    "description": {
+      "en": "This code designates a Boeing 767-400ER built for Delta Air Lines (customer code 32). It is the longest version of the 767, a long-haul widebody twinjet that links Lisbon with the United States.",
+      "pt": "Este código designa um Boeing 767-400ER construído para a Delta Air Lines (código de cliente 32). É a versão mais comprida do 767, um bireactor de grande capacidade e longo curso que liga Lisboa aos Estados Unidos.",
+      "fr": "Ce code désigne un Boeing 767-400ER construit pour Delta Air Lines (code client 32). C’est la version la plus longue du 767, un gros-porteur biréacteur long-courrier qui relie Lisbonne aux États-Unis."
+    },
+    "manufacturer": "Boeing",
+    "first_flight_year": 1999,
+    "entry_into_service_year": 2000,
+    "fun_fact": {
+      "en": "Only two airlines flew it in scheduled service: Delta and Continental (now United). It is 6.43 m longer than the 767-300.",
+      "pt": "Só duas companhias o operaram em voos regulares: a Delta e a Continental (hoje United). É 6,43 m mais comprido do que o 767-300.",
+      "fr": "Seules deux compagnies l’ont exploité en ligne régulière : Delta et Continental (aujourd’hui United). Il mesure 6,43 m de plus que le 767-300."
+    },
+    "length_m": 61.37,
+    "passenger_capacity": 304
+  },
+  {
+    "aircraft_type": "G550",
+    "description": {
+      "en": "The Gulfstream G550, a large long-range business jet derived from the Gulfstream V. It can fly non-stop from Lisbon to the US West Coast or the Middle East.",
+      "pt": "O Gulfstream G550, um grande jacto executivo de longo alcance derivado do Gulfstream V. Pode voar sem escala de Lisboa à costa oeste dos Estados Unidos ou ao Médio Oriente.",
+      "fr": "Le Gulfstream G550, un grand jet d’affaires long-courrier dérivé du Gulfstream V. Il peut relier sans escale Lisbonne à la côte ouest des États-Unis ou au Moyen-Orient."
+    },
+    "manufacturer": "Gulfstream Aerospace",
+    "first_flight_year": 2002,
+    "entry_into_service_year": 2003,
+    "fun_fact": {
+      "en": "It won the 2003 Collier Trophy, one of the top prizes in American aviation. More than 600 were built until 2021, and the US military flies it as the C-37B.",
+      "pt": "Ganhou o Collier Trophy de 2003, um dos maiores prémios da aviação americana. Foram construídos mais de 600 até 2021, e as forças armadas americanas usam-no como C-37B.",
+      "fr": "Il a reçu le Collier Trophy 2003, l’un des grands prix de l’aviation américaine. Plus de 600 exemplaires ont été construits jusqu’en 2021, et l’armée américaine l’utilise sous le nom de C-37B."
+    },
+    "length_m": 29.4,
+    "passenger_capacity": 19
   }
 ]

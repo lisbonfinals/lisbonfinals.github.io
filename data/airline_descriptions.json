@@ -530,7 +530,7 @@
     "headquarters": { "en": "Columbus, United States", "pt": "Columbus, Estados Unidos", "fr": "Columbus, États-Unis" },
     "fun_fact": {
       "en": "The company presents itself as the world's first private jet charter and management company.",
-      "pt": "A empresa apresenta-se como a primeira sociedade de charter e gestão de jatos privados do mundo.",
+      "pt": "A empresa apresenta-se como a primeira sociedade de charter e gestão de jactos privados do mundo.",
       "fr": "L’entreprise se présente comme la première société de charter et de gestion de jets privés au monde."
     }
   },
@@ -713,7 +713,7 @@
     "airline": "Bulgaria Air",
     "description": {
       "en": "Bulgaria Air is the flag carrier of Bulgaria, founded in 2002 as the successor to the insolvent Balkan Bulgarian Airlines. Based in Sofia, it operates Airbus and Embraer jets on short- and medium-haul routes.",
-      "pt": "A Bulgaria Air é a companhia de bandeira da Bulgária, fundada em 2002 como sucessora da falida Balkan Bulgarian Airlines. Sediada em Sófia, opera jatos Airbus e Embraer em rotas de curto e médio curso.",
+      "pt": "A Bulgaria Air é a companhia de bandeira da Bulgária, fundada em 2002 como sucessora da falida Balkan Bulgarian Airlines. Sediada em Sófia, opera jactos Airbus e Embraer em rotas de curto e médio curso.",
       "fr": "Bulgaria Air est la compagnie nationale de la Bulgarie, fondée en 2002 pour succéder à Balkan Bulgarian Airlines, en faillite. Basée à Sofia, elle exploite des Airbus et des Embraer sur des lignes court et moyen-courriers."
     },
     "founded_year": 2002,
@@ -773,7 +773,7 @@
     "airline": "VistaJet",
     "description": {
       "en": "VistaJet is a Malta-based private aviation company that operates a large fleet of business jets. Customers pay for the hours they fly instead of buying an aircraft.",
-      "pt": "A VistaJet é uma empresa de aviação privada sediada em Malta, que opera uma grande frota de jatos executivos. Os clientes pagam as horas de voo em vez de comprarem uma aeronave.",
+      "pt": "A VistaJet é uma empresa de aviação privada sediada em Malta, que opera uma grande frota de jactos executivos. Os clientes pagam as horas de voo em vez de comprarem uma aeronave.",
       "fr": "VistaJet est une société d’aviation privée basée à Malte, qui exploite une grande flotte de jets d’affaires. Les clients paient les heures volées au lieu d’acheter un avion."
     },
     "founded_year": 2004,
@@ -788,14 +788,14 @@
     "airline": "Air X Charter",
     "description": {
       "en": "Air X Charter, known as AirX, is a Malta-based private jet operator and one of the largest in Europe. It offers charters, aircraft management and leasing.",
-      "pt": "A Air X Charter, conhecida como AirX, é um operador de jatos privados sediado em Malta e um dos maiores da Europa. Oferece voos fretados, gestão e leasing de aeronaves.",
+      "pt": "A Air X Charter, conhecida como AirX, é um operador de jactos privados sediado em Malta e um dos maiores da Europa. Oferece voos fretados, gestão e leasing de aeronaves.",
       "fr": "Air X Charter, connue sous le nom d’AirX, est un opérateur de jets privés basé à Malte et l’un des plus importants d’Europe. Elle propose des vols affrétés, la gestion et la location d’avions."
     },
     "founded_year": 2011,
     "headquarters": { "en": "Kalkara, Malta", "pt": "Kalkara, Malta", "fr": "Kalkara, Malte" },
     "fun_fact": {
       "en": "Its fleet ranges from Challenger 850 business jets to an Airbus A340.",
-      "pt": "A sua frota vai de jatos executivos Challenger 850 a um Airbus A340.",
+      "pt": "A sua frota vai de jactos executivos Challenger 850 a um Airbus A340.",
       "fr": "Sa flotte va des jets d’affaires Challenger 850 à un Airbus A340."
     }
   },
@@ -803,7 +803,7 @@
     "airline": "Sky Express",
     "description": {
       "en": "Sky Express is a Greek airline based in Heraklion, on Crete. It links Greek islands and the mainland with each other and with international destinations, mainly with Airbus A320neo jets.",
-      "pt": "A Sky Express é uma companhia aérea grega sediada em Heraclião, em Creta. Liga ilhas e continente gregos entre si e a destinos internacionais, sobretudo com jatos Airbus A320neo.",
+      "pt": "A Sky Express é uma companhia aérea grega sediada em Heraclião, em Creta. Liga ilhas e continente gregos entre si e a destinos internacionais, sobretudo com jactos Airbus A320neo.",
       "fr": "Sky Express est une compagnie aérienne grecque basée à Héraklion, en Crète. Elle relie les îles et le continent grecs entre eux et à des destinations internationales, surtout avec des Airbus A320neo."
     },
     "founded_year": 2005,
@@ -993,6 +993,21 @@
       "en": "It was created in 1948 with Air France, which handed over DC-3s and routes so it could start flying on 1 April 1949.",
       "pt": "Foi criada em 1948 com a Air France, que lhe cedeu DC-3 e rotas para poder começar a voar a 1 de Abril de 1949.",
       "fr": "Elle a été créée en 1948 avec Air France, qui lui a cédé des DC-3 et des lignes pour qu’elle puisse commencer à voler le 1er avril 1949."
+    }
+  },
+  {
+    "airline": "Smartwings",
+    "description": {
+      "en": "Smartwings is the largest Czech airline, based in Prague. It flies Boeing 737s on charter and scheduled routes, often for tour operators, to holiday destinations around Europe and beyond.",
+      "pt": "A Smartwings é a maior companhia aérea checa, sediada em Praga. Opera Boeing 737 em voos charter e regulares, muitas vezes para operadores turísticos, para destinos de férias na Europa e mais além.",
+      "fr": "Smartwings est la plus grande compagnie aérienne tchèque, basée à Prague. Elle exploite des Boeing 737 en vols charters et réguliers, souvent pour des voyagistes, vers des destinations de vacances en Europe et au-delà."
+    },
+    "founded_year": 1997,
+    "headquarters": { "en": "Prague, Czech Republic", "pt": "Praga, República Checa", "fr": "Prague, République tchèque" },
+    "fun_fact": {
+      "en": "Until December 2018 the company was called Travel Service; it then took the name of Smartwings, its low-cost brand launched in 2004.",
+      "pt": "Até Dezembro de 2018 a empresa chamava-se Travel Service; adoptou então o nome Smartwings, a sua marca de baixo custo lançada em 2004.",
+      "fr": "Jusqu’en décembre 2018, la compagnie s’appelait Travel Service ; elle a alors pris le nom de Smartwings, sa marque low cost lancée en 2004."
     }
   }
 ]
