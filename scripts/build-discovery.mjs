@@ -221,6 +221,18 @@ function entryBody(entry, lang) {
   return entry.body;
 }
 
+// hreflang alternates for a journal article: English plus every language that
+// really has a translation (an untranslated pt/fr copy falls back to English
+// text, so it is not announced as a translation).
+function journalAlternates(entry, slug) {
+  const langs = [['en', 'en']];
+  if (entry.body_pt) langs.push(['pt', 'pt-PT']);
+  if (entry.body_fr) langs.push(['fr', 'fr']);
+  if (langs.length < 2) return '';
+  return langs.map(([lang, code]) => `<link rel="alternate" hreflang="${code}" href="${base}${journalHref(lang, slug)}">`).join('\n')
+    + `\n<link rel="alternate" hreflang="x-default" href="${base}${journalHref('en', slug)}">\n`;
+}
+
 function entriesStrip(entriesWithSlug, activeSlug, lang) {
   const chrome = JOURNAL_CHROME[lang];
   const items = entriesWithSlug.map(({ entry, slug }) =>
@@ -299,7 +311,7 @@ function articleTemplate(entry, slug, entriesWithSlug, lang) {
 <html lang="${lang === 'pt' ? 'pt-PT' : lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)} — Lisbon Finals</title><meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${url}">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+${journalAlternates(entry, slug)}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site-core.css"><script src="/site-core.js"><\/script>
 <meta property="og:type" content="article"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}">
