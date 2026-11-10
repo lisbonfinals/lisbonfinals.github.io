@@ -776,21 +776,21 @@
     "passenger_capacity": 101
   },
   {
-    "aircraft_type": "Gulfstream G700",
+    "aircraft_type": "Bombardier Global 7500",
     "description": {
-      "en": "Gulfstream's flagship ultra-long-range business jet, a stretched development of the G650. It links cities such as Lisbon and Los Angeles non-stop.",
-      "pt": "O jacto executivo de muito longo alcance topo de gama da Gulfstream, uma versão alongada do G650. Liga sem escala cidades como Lisboa e Los Angeles.",
-      "fr": "Le jet d’affaires très long-courrier haut de gamme de Gulfstream, une version allongée du G650. Il relie sans escale des villes comme Lisbonne et Los Angeles."
+      "en": "Bombardier's largest and longest-range business jet, at the top of the Global family. With a range of about 14,000 km, it links cities such as Lisbon and Tokyo non-stop.",
+      "pt": "O maior jacto executivo da Bombardier e o de maior alcance, no topo da família Global. Com um alcance de cerca de 14 000 km, liga sem escala cidades como Lisboa e Tóquio.",
+      "fr": "Le plus grand jet d’affaires de Bombardier et celui qui va le plus loin, en haut de la famille Global. Avec environ 14 000 km d’autonomie, il relie sans escale des villes comme Lisbonne et Tokyo."
     },
-    "manufacturer": "Gulfstream Aerospace",
-    "first_flight_year": 2020,
-    "entry_into_service_year": 2024,
+    "manufacturer": "Bombardier Aerospace",
+    "first_flight_year": 2016,
+    "entry_into_service_year": 2018,
     "fun_fact": {
-      "en": "Its cabin is split into up to five living areas, with ten windows on each side.",
-      "pt": "A cabine divide-se em até cinco áreas de estar, com dez janelas de cada lado.",
-      "fr": "Sa cabine se divise en cinq espaces de vie au maximum, avec dix hublots de chaque côté."
+      "en": "Its cabin is split into four living spaces, plus a separate rest area for the crew.",
+      "pt": "A cabine divide-se em quatro espaços de estar, mais uma zona de descanso separada para a tripulação.",
+      "fr": "Sa cabine se divise en quatre espaces de vie, plus un coin repos séparé pour l’équipage."
     },
-    "length_m": 33.48,
+    "length_m": 33.8,
     "passenger_capacity": 19
   },
   {
