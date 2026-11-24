@@ -1615,7 +1615,9 @@ function calcRunway(deg,spd){
   // Sous 10kt, le vent est trop faible pour imposer un sens de piste fiable
   // (observé le 1er juillet : 8kt WNW affiché "takeoff" alors que la station
   // enregistrait des atterrissages sur RWY 02) — on reste non-committal.
-  if(spd<10) return {rwy:'—',conf:'Calm / variable winds'};
+  // spd arrive en km/h : on convertit en noeuds avant le seuil (bug du 24 nov :
+  // 15 km/h = 8 kt passait le seuil et affichait RWY 20 sous vent variable).
+  if(spd*.539957<10) return {rwy:'—',conf:'Calm / variable winds'};
   if(deg>=315||deg<135) return {rwy:'02',conf:'NNE config — landing over terrace'};
   return {rwy:'20',conf:'SSW config — takeoff over terrace'};
 }
