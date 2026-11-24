@@ -1617,9 +1617,9 @@ function calcRunway(deg,spd){
   // enregistrait des atterrissages sur RWY 02) — on reste non-committal.
   // spd arrive en km/h : on convertit en noeuds avant le seuil (bug du 24 nov :
   // 15 km/h = 8 kt passait le seuil et affichait RWY 20 sous vent variable).
-  if(spd*.539957<10) return {rwy:'—',conf:'Calm / variable winds'};
-  if(deg>=315||deg<135) return {rwy:'02',conf:'NNE config — landing over terrace'};
-  return {rwy:'20',conf:'SSW config — takeoff over terrace'};
+  if(spd*.539957<10) return {rwy:'—',conf:'Calm / variable winds',key:'rwy_conf_calm'};
+  if(deg>=315||deg<135) return {rwy:'02',conf:'NNE config — landing over terrace',key:'rwy_conf_02'};
+  return {rwy:'20',conf:'SSW config — takeoff over terrace',key:'rwy_conf_20'};
 }
 function cldThumb(url, w){
   /* Insère une transformation Cloudinary (taille+format+qualité auto) dans une
@@ -2061,7 +2061,10 @@ function applyWeather(temp,windKmh,dir,visKm,icon,desc){
   var wcWindEl=el('wc-wind'); if(wcWindEl) wcWindEl.innerHTML=windKmh+' km/h<span class="ti-unit">/ '+kt+' kt</span>';
   set('wc-wdir',  dir+'° '+card);
   set('wc-runway','RWY '+rwy.rwy);
-  set('wc-rwyconf',rwy.conf);
+  /* texte traduit selon la langue ; gardé pour le changement de langue */
+  window._lfRwy=rwy;
+  var _rt=(typeof INDEX_TRANSLATIONS!=='undefined'&&INDEX_TRANSLATIONS[_lang])||{};
+  set('wc-rwyconf',_rt[rwy.key]||rwy.conf);
   set('wc-wdir-deg', dir+'°');
   set('wc-wdir-card', card);
   set('wc-vis',   visKm);
@@ -2225,6 +2228,9 @@ var INDEX_TRANSLATIONS = {
     wlive_footer: 'Source: {src} · LPPT (38.78°N, 9.14°W) · Updates every 5 min',
     wlive_wind: 'Wind',
     wlive_runway: 'Active runway',
+    rwy_conf_calm: 'Calm / variable winds',
+    rwy_conf_02: 'NNE config — landing over terrace',
+    rwy_conf_20: 'SSW config — takeoff over terrace',
     wlive_wdir: 'Wind direction',
     wlive_vis: 'Visibility',
     ec1_lbl: 'The data',
@@ -2351,6 +2357,9 @@ var INDEX_TRANSLATIONS = {
     wlive_footer: 'Fonte: {src} · LPPT (38.78°N, 9.14°W) · Actualizado a cada 5 min',
     wlive_wind: 'Vento',
     wlive_runway: 'Pista activa',
+    rwy_conf_calm: 'Vento calmo / variável',
+    rwy_conf_02: 'Configuração NNE · aterragens sobre a varanda',
+    rwy_conf_20: 'Configuração SSW · descolagens sobre a varanda',
     wlive_wdir: 'Direcção do vento',
     wlive_vis: 'Visibilidade',
     ec1_lbl: 'Os dados',
@@ -2476,6 +2485,9 @@ var INDEX_TRANSLATIONS = {
     wlive_footer: 'Source : {src} · LPPT (38.78°N, 9.14°W) · Mise à jour toutes les 5 min',
     wlive_wind: 'Vent',
     wlive_runway: 'Piste active',
+    rwy_conf_calm: 'Vent calme / variable',
+    rwy_conf_02: 'Config. NNE · atterrissages au-dessus de la terrasse',
+    rwy_conf_20: 'Config. SSW · décollages au-dessus de la terrasse',
     wlive_wdir: 'Direction du vent',
     wlive_vis: 'Visibilité',
     ec1_lbl: 'Les données',
@@ -2657,6 +2669,7 @@ function applyLang(lang) {
   var wlLbls = qa('.wlive-item-lbl');
   if (wlLbls[0]) wlLbls[0].textContent = t.wlive_wind;
   if (wlLbls[1]) wlLbls[1].textContent = t.wlive_runway;
+  var rwyConf = q('#wc-rwyconf'); if (rwyConf && window._lfRwy) rwyConf.textContent = t[window._lfRwy.key] || window._lfRwy.conf;
   if (wlLbls[2]) wlLbls[2].textContent = t.wlive_wdir;
   if (wlLbls[3]) wlLbls[3].textContent = t.wlive_vis;
   // Air quality section
